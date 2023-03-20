@@ -26,7 +26,8 @@ export default function Layout({ children }: layout) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={roboto.className}>
-        <div className="flex flex-col justify-between text-white/90">
+        <div className="flex flex-col justify-between text-white/90 relative">
+          <div className="bg-gradient-to-br from-red-900 via-transparent to-transparent opacity-70 w-[600px] h-[500px] absolute top-0 left-0" />
           <Nav />
           {children}
           <Footer />

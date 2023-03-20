@@ -14,14 +14,14 @@ export default function Footer() {
           >
             <Image
               src="/logo.svg"
-              width={300}
+              width={200}
               height={100}
               alt="logo"
-              className="mr-10"
+              className="mr-10 my-6"
             />
           </Link>
 
-          <div className="flex items-center gap-8 ml-12 mt-[-10px]">
+          <div className="flex items-center gap-6 ml-3 mt-[-10px]">
             {SOCIALS.map((item, index) => (
               <Link
                 key={index}
@@ -33,7 +33,7 @@ export default function Footer() {
               </Link>
             ))}
           </div>
-          <span className="ml-12 mt-20 font-thin text-sm">
+          <span className="ml-3 mt-20 font-thin text-sm">
             © 2023 Samurai Starter
           </span>
         </div>

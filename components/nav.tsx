@@ -6,7 +6,7 @@ export default function Nav() {
   const [active, setActive] = useState("");
   console.log(active);
   return (
-    <div className="h-20 px-8 flex items-center justify-between">
+    <div className="h-20 px-8 flex items-center justify-between mt-10">
       <div className="flex items-center w-full gap-9 font-light">
         <Link
           href="/"
@@ -15,10 +15,10 @@ export default function Nav() {
         >
           <Image
             src="/logo.svg"
-            width={300}
+            width={320}
             height={100}
             alt="logo"
-            className="mr-10"
+            className="mr-10 mt-[-5px] drop-shadow-xl"
           />
         </Link>
         {NAV.map((item, index) => (
@@ -34,7 +34,7 @@ export default function Nav() {
           </Link>
         ))}
       </div>
-      <button className="border rounded-[8px] border-red-500 px-8 py-2 font-light transition-all hover:scale-105 hover:bg-red-500 hover:text-black hover:font-medium">
+      <button className="border rounded-[8px] border-red-500 px-8 py-2 text-sm font-light transition-all hover:scale-105 hover:bg-red-500 hover:text-black hover:font-medium">
         V1(Old)
       </button>
     </div>
