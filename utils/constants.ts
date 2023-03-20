@@ -1,4 +1,4 @@
-import { medium, twitter, telegram, discord } from '@/utils/svgs'
+import { medium, twitter, telegram, discord, linkedin } from '@/utils/svgs'
 
 export const NAV = [
   {
@@ -24,8 +24,8 @@ export const NAV = [
 ]
 
 export const SOCIALS = [
-  { svg: twitter, href: '#' },
-  { svg: telegram, href: '#' },
-  { svg: discord, href: '#' },
-  { svg: medium, href: '#' },
+  { svg: twitter, href: 'https://twitter.com/cyberfi_tech' },
+  { svg: telegram, href: 'https://t.me/SamuraiLaunchpad' },
+  { svg: medium, href: 'https://medium.com/samurai-starter' },
+  { svg: linkedin, href: 'https://www.linkedin.com/company/samurai-starter/' },
 ]

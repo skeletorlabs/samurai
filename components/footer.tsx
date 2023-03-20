@@ -27,7 +27,7 @@ export default function Footer() {
                 key={index}
                 href={item.href}
                 className="transition-all hover:opacity-75"
-                onClick={() => {}}
+                target="_blank"
               >
                 {item.svg}
               </Link>

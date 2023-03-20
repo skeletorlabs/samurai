@@ -32,7 +32,7 @@ export default function Home() {
                 key={index}
                 href={item.href}
                 className="scale-150 transition-all hover:opacity-70"
-                onClick={() => {}}
+                target="_blank"
               >
                 {item.svg}
               </Link>
