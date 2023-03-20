@@ -1,13 +1,15 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import Layout from "@/components/layout";
+import { SOCIALS } from "@/utils/constants";
 
 export default function Home() {
   return (
     <Layout>
       <div className="h-[1020px] bg-art bg-no-repeat bg-[center_top_-3rem]">
         <div className="px-20 pt-24 max-w-[850px]">
-          <h1 className="text-[58px] font-black leading-[56px] tracking-wide">
+          <h1 className="text-[58px] font-black leading-[62px] tracking-wide">
             Invest and participate in the most innovative cryptocurrency
             projects.
           </h1>
@@ -23,6 +25,18 @@ export default function Home() {
             <button className="border rounded-[8px] border-red-500 px-8 py-2 font-light transition-all hover:scale-105 hover:bg-red-500 hover:text-black hover:font-medium">
               Incubation
             </button>
+          </div>
+          <div className="flex items-center gap-16 ml-2 mt-14">
+            {SOCIALS.map((item, index) => (
+              <Link
+                key={index}
+                href={item.href}
+                className="scale-150 transition-all hover:opacity-70"
+                onClick={() => {}}
+              >
+                {item.svg}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

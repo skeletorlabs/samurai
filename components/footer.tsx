@@ -1,14 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { medium, twitter, telegram, discord } from "@/utils/svgs";
+import { SOCIALS } from "@/utils/constants";
 
 export default function Footer() {
-  const items = [
-    { svg: twitter, href: "#" },
-    { svg: telegram, href: "#" },
-    { svg: discord, href: "#" },
-    { svg: medium, href: "#" },
-  ];
   return (
     <div className="h-60 bg-black px-8 border-t-[0.5px] border-red-500">
       <div className="flex items-center">
@@ -28,7 +22,7 @@ export default function Footer() {
           </Link>
 
           <div className="flex items-center gap-8 ml-12 mt-[-10px]">
-            {items.map((item, index) => (
+            {SOCIALS.map((item, index) => (
               <Link
                 key={index}
                 href={item.href}
