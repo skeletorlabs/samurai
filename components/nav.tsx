@@ -6,9 +6,13 @@ export default function Nav() {
   const [active, setActive] = useState("");
   console.log(active);
   return (
-    <div className="h-20 px-4 flex items-center justify-between">
+    <div className="h-20 px-8 flex items-center justify-between">
       <div className="flex items-center w-full gap-9 font-light">
-        <Link href="/" className="transition-all hover:opacity-75">
+        <Link
+          href="/"
+          className="transition-all hover:opacity-75"
+          onClick={() => setActive("")}
+        >
           <Image
             src="/logo.svg"
             width={300}
