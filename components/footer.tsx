@@ -4,7 +4,7 @@ import { SOCIALS } from "@/utils/constants";
 
 export default function Footer() {
   return (
-    <div className="h-60 bg-black px-8 border-t-[0.5px] border-red-500">
+    <div className="h-80 bg-black px-8 bg-gradient-to-t from-red-900 via-transparent to-transparent opacity-70 border-t border-zinc-800">
       <div className="flex items-center">
         <div className="flex flex-col">
           <Link
@@ -17,7 +17,7 @@ export default function Footer() {
               width={200}
               height={100}
               alt="logo"
-              className="mr-10 my-6"
+              className="mr-10 mt-12 mb-6"
             />
           </Link>
 
@@ -33,7 +33,7 @@ export default function Footer() {
               </Link>
             ))}
           </div>
-          <span className="ml-3 mt-20 font-thin text-sm">
+          <span className="ml-3 mt-40 font-thin text-sm">
             © 2023 Samurai Starter
           </span>
         </div>

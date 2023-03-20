@@ -34,7 +34,7 @@ export default function Nav() {
           </Link>
         ))}
       </div>
-      <button className="border rounded-[8px] border-red-500 px-8 py-2 text-sm font-light transition-all hover:scale-105 hover:bg-red-500 hover:text-black hover:font-medium">
+      <button className="border rounded-[8px] border-red-500 px-4 py-1 text-sm transition-all hover:bg-[#FF4E6B] hover:text-black text-red-500 hover:font-medium">
         V1(Old)
       </button>
     </div>

@@ -19,10 +19,10 @@ export default function Home() {
             novel projects in the crypto space
           </p>
           <div className="flex flex-row items-center pt-10 gap-5">
-            <button className="border rounded-[8px] border-red-500 px-8 py-2 font-light transition-all hover:bg-red-500 hover:text-black hover:font-medium w-[160px]">
+            <button className="bg-[#FF284C] border rounded-[8px] border-[#FF284C] px-8 py-2 font-light transition-all hover:bg-[#FF4E6B] hover:text-black hover:font-medium w-[160px]">
               Launchpad
             </button>
-            <button className="border rounded-[8px] border-red-500 px-8 py-2 font-light transition-all hover:bg-red-500 hover:text-black hover:font-medium w-[160px]">
+            <button className="border rounded-[8px] border-red-500 px-8 py-2 font-light transition-all hover:bg-[#FF4E6B] hover:text-black hover:font-medium w-[160px]">
               Incubation
             </button>
           </div>
