@@ -11,6 +11,9 @@ module.exports = {
         "light-100": "#B2B8FF",
         "highlight-100": "#0AC6E5",
       },
+      backgroundImage: {
+        art: "url('/art.svg')",
+      },
     },
   },
   plugins: [],

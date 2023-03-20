@@ -28,7 +28,7 @@ export default function Layout({ children }: layout) {
       <main className={roboto.className}>
         <div className="flex flex-col justify-between text-white/90">
           <Nav />
-          <div>{children}</div>
+          {children}
           <Footer />
         </div>
       </main>
