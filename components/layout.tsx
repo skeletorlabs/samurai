@@ -26,11 +26,19 @@ export default function Layout({ children }: layout) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={roboto.className}>
-        <div className="flex flex-col justify-between text-white/90 relative">
-          <div className="bg-gradient-to-br from-red-900 via-transparent to-transparent opacity-70 w-[600px] h-[500px] absolute top-0 left-0" />
-          <Nav />
-          {children}
-          <Footer />
+        <div className="flex flex-col w-full h-full items-center">
+          <div className="flex flex-col jutify-between w-full max-w-[1515px] h-full relative bg-art bg-no-repeat bg-[center_top_0rem] text-white/90">
+            <div className="bg-gradient-to-br from-red-900 via-transparent to-transparent opacity-70 w-[600px] h-[500px] absolute top-0 left-0" />
+            <Nav />
+            {children}
+            <Footer />
+          </div>
+          {/* <div className="flex flex-col justify-between text-white/90 relative  self-center bg-red-200 h-screen bg-art bg-no-repeat bg-[center_top_-3rem]"> */}
+          {/* <div className="bg-gradient-to-br from-red-900 via-transparent to-transparent opacity-70 w-[600px] h-[500px] absolute top-0 left-0" />
+            <Nav />
+            {children}
+            <Footer /> */}
+          {/* </div> */}
         </div>
       </main>
     </>

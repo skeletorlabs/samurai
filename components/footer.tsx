@@ -4,7 +4,7 @@ import { SOCIALS } from "@/utils/constants";
 
 export default function Footer() {
   return (
-    <div className="h-80 bg-black px-8 bg-gradient-to-t from-red-900 via-transparent to-transparent opacity-70 border-t border-zinc-800">
+    <div className="h-80 bg-black px-8 bg-gradient-to-t from-samurai-red via-transparent to-transparent opacity-70 border-t border-zinc-800">
       <div className="flex items-center">
         <div className="flex flex-col">
           <Link
@@ -21,7 +21,7 @@ export default function Footer() {
             />
           </Link>
 
-          <div className="flex items-center gap-6 ml-3 mt-[-10px]">
+          <div className="flex items-center gap-6 ml-3 mt-[0px]">
             {SOCIALS.map((item, index) => (
               <Link
                 key={index}
@@ -33,7 +33,7 @@ export default function Footer() {
               </Link>
             ))}
           </div>
-          <span className="ml-3 mt-40 font-thin text-sm">
+          <span className="ml-3 mt-[100px] mb-10 font-thin text-sm">
             © 2023 Samurai Starter
           </span>
         </div>
