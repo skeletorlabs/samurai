@@ -82,7 +82,7 @@ export default function Home() {
             ))}
           </div>
           <Link
-            href="#"
+            href="https://link.medium.com/rG6nyCtMlyb"
             className="flex self-end mt-5 font-thin hover:border-b"
           >
             More +
