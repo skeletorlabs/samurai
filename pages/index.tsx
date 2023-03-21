@@ -74,6 +74,7 @@ export default function Home() {
               <Link
                 key={index}
                 href={item.href}
+                target="_blank"
                 className="flex flex-col justify-center w-[300px] h-[160px] border border-neutral-700 rounded-xl p-4 bg-gradient-to-tr from-transparent via-transparent odd:to-neutral-900 even:to-samurai-red/30 transition-all hover:scale-[1.02] hover:border-samurai-red"
               >
                 <h3 className="text-xl font-semibold">{item.title}</h3>
@@ -82,7 +83,8 @@ export default function Home() {
             ))}
           </div>
           <Link
-            href="https://link.medium.com/rG6nyCtMlyb"
+            href="https://medium.com/samurai-starter"
+            target="_blank"
             className="flex self-end mt-5 font-thin hover:border-b"
           >
             More +
