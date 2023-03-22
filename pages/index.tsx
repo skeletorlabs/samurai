@@ -143,7 +143,7 @@ export default function Home() {
           </div>
           <div className="flex flex-row gap-9 flex-wrap mt-10">
             {featured.map((item, index) => (
-              <Card project={item} />
+              <Card key={index} project={item} />
             ))}
             <Link
               href="https://medium.com/samurai-starter"
