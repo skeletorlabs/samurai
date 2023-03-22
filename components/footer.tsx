@@ -14,10 +14,10 @@ export default function Footer() {
           >
             <Image
               src="/logo.svg"
-              width={200}
-              height={100}
+              width={0}
+              height={0}
               alt="logo"
-              className="mr-10 mt-12 mb-6"
+              className="mr-10 mt-12 mb-6 w-[200px] h-[50px]"
             />
           </Link>
 

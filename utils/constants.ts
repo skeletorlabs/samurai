@@ -29,3 +29,5 @@ export const SOCIALS = [
   { svg: medium, href: 'https://medium.com/samurai-starter' },
   { svg: linkedin, href: 'https://www.linkedin.com/company/samurai-starter/' },
 ]
+
+export const BASE_API_URL = 'https://samuraistarter.com/api/v1'

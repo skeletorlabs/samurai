@@ -4,9 +4,8 @@ import { NAV } from "@/utils/constants";
 import { useState } from "react";
 export default function Nav() {
   const [active, setActive] = useState("");
-  console.log(active);
   return (
-    <div className="h-20 px-8 flex items-center justify-between mt-10">
+    <div className="h-20 px-8 flex items-center justify-between mt-10 z-10">
       <div className="flex items-center w-full gap-9 font-light">
         <Link
           href="/"
@@ -15,10 +14,10 @@ export default function Nav() {
         >
           <Image
             src="/logo.svg"
-            width={320}
-            height={100}
+            width={0}
+            height={0}
             alt="logo"
-            className="mr-10 mt-[-5px] drop-shadow-xl"
+            className="mr-10 mt-[-5px] drop-shadow-xl w-[320px] h-[100px]"
           />
         </Link>
         {NAV.map((item, index) => (
