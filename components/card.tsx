@@ -41,6 +41,13 @@ export default function Card({ project }: Card) {
         alt=""
         className="absolute top-0 left-0 z-0 rounded-t-xl max-h-[190px]"
       />
+      <Image
+        src={`/chain-logos/${project.network}.svg`}
+        width={20}
+        height={20}
+        alt=""
+        className="absolute top-2 right-2 max-h-[20px]"
+      />
     </Link>
   );
 }

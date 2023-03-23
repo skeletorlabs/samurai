@@ -2,10 +2,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { SOCIALS } from "@/utils/constants";
 
+const links = [
+  { title: "Launchpad", href: "#" },
+  { title: "Sanka", href: "#" },
+  { title: "SamNFT", href: "#" },
+  { title: "Tokens", href: "#" },
+  { title: "$SAM Liquidity", href: "#" },
+  { title: "Incubation", href: "#" },
+];
+
 export default function Footer() {
   return (
-    <div className="h-80 bg-black px-8 bg-gradient-to-t from-samurai-red via-transparent to-transparent opacity-70 border-t border-zinc-800">
-      <div className="flex items-center">
+    <div className="h-60 bg-black px-8 bg-gradient-to-t from-gray-500 via-transparent to-transparent opacity-70 border-t border-zinc-800">
+      <div className="flex gap-10">
         <div className="flex flex-col">
           <Link
             href="/"
@@ -33,7 +42,16 @@ export default function Footer() {
               </Link>
             ))}
           </div>
-          <span className="ml-3 mt-[100px] mb-10 font-thin text-sm">
+        </div>
+        <div className="flex flex-col h-full w-full mt-[62px] gap-10 text-white">
+          <div className="flex h-full justify-end w-full gap-4 font-light flex-wrap">
+            {links.map((item, index) => (
+              <Link key={index} href={item.href} className="hover:border-b">
+                {item.title}
+              </Link>
+            ))}
+          </div>
+          <span className="flex ml-3 font-thin text-sm justify-end">
             © 2023 Samurai Starter
           </span>
         </div>
