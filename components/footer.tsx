@@ -44,7 +44,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex flex-col h-full w-full mt-[62px] gap-10 text-white">
-          <div className="flex h-full justify-end w-full gap-4 font-light flex-wrap">
+          <div className="flex h-full justify-end w-full gap-4 font-light text-sm flex-wrap">
             {links.map((item, index) => (
               <Link key={index} href={item.href} className="hover:border-b">
                 {item.title}
