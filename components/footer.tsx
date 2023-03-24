@@ -13,7 +13,7 @@ const links = [
 
 export default function Footer() {
   return (
-    <div className="h-60 bg-black px-8 bg-gradient-to-t from-gray-500 via-transparent to-transparent opacity-70 border-t border-zinc-800">
+    <div className="h-60 bg-neutral-900 px-8 to-transparent opacity-70 border-t border-zinc-800">
       <div className="flex gap-10">
         <div className="flex flex-col">
           <Link

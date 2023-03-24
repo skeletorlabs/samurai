@@ -31,6 +31,39 @@ const latestupdates = [
   },
 ];
 
+const edge = [
+  {
+    title: "High Quality Projects",
+    description:
+      "Our projects are vetted with the highest standard due diligence processes that are backed by some of the leading verification services in the crypto industry.",
+    image: "/quality.png",
+  },
+  {
+    title: "Equal investment opportunities for all",
+    description:
+      "No more investment tiers! Every SamNFT holder has the opportunity to participate in crowdfunding rounds with max allocation regardless of whale status.",
+    image: "/investment.png",
+  },
+  {
+    title: "Cashback rewards",
+    description:
+      "SamuraiStarter is the first launchpad to offer cashback rewards for participating in token offerings through our $SAM token.",
+    image: "/rewards.png",
+  },
+  {
+    title: "DeFi yield farming mechanisms",
+    description:
+      "Use earned $SAM tokens to provide $SAM-$ETH  liquidity on https://www.ramses.exchange for outstanding ve(3,3) powered yield farming opportunities.",
+    image: "/farm.png",
+  },
+  {
+    title: "Samurai Sanka community interaction platform",
+    description:
+      "Participate in entertaining games and contests through SamuraiStarter and interact with our partner’s platforms to earn partner native tokens and even more $SAM rewards.",
+    image: "/people.png",
+  },
+];
+
 export default function Home() {
   const [featured, setFeatured] = useState<Project[] | []>([]);
   const getInfos = useCallback(async () => {
@@ -54,6 +87,7 @@ export default function Home() {
   return (
     <Layout>
       <div className="px-20">
+        {/* TOP CONTENT */}
         <div className="pt-24 max-w-[850px]">
           <h1 className="text-[58px] font-black leading-[62px] tracking-wide">
             Invest and participate in the most innovative cryptocurrency
@@ -86,6 +120,7 @@ export default function Home() {
           </div>
         </div>
 
+        {/* LATEST UPDATES */}
         <div className="flex flex-col mt-52 mb-24 w-full">
           <h2 className="text-4xl">
             Latest <span className="text-samurai-red">Updates</span>
@@ -127,7 +162,8 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex flex-col mb-52 w-full">
+        {/* FEATURED PROJECTS */}
+        <div className="flex flex-col mt-52 mb-52 w-full">
           <h2 className="text-4xl">
             Featured <span className="text-samurai-red">Projects</span>
           </h2>
@@ -152,6 +188,38 @@ export default function Home() {
             >
               More +
             </Link>
+          </div>
+        </div>
+
+        {/* SAMURAI EDGE */}
+        <div className="flex flex-col mt-52 mb-24 w-full">
+          <h2 className="text-4xl">
+            The <span className="text-samurai-red">SAMURAI</span> Edge
+          </h2>
+          <div className="flex flex-wrap mt-10 bg-edge w-full h-[650px] relative gap-10 pl-10 pt-8 pb-32">
+            {edge.map((item, index) => (
+              <div
+                key={index}
+                className="flex items-center w-[600px] h-[140px] bg-black bg-opacity-10 backdrop-blur-[8px] rounded-xl px-5 gap-3 shadow-lg z-10"
+              >
+                <div className="relative min-w-[68px] min-h-[68px] max-w-[68px] max-h-[68px] w-full opacity-80">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    sizes="68px"
+                    className="drop-shadow-xl"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="font-bold text-xl">{item.title}</span>
+                  <p className="font-light text-[16px] leading-tight">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
