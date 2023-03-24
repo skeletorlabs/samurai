@@ -23,7 +23,7 @@ export default function Card({ project }: Card) {
   return (
     <Link
       href="#"
-      className="flex flex-col justify-end w-[280px] h-[380px] rounded-xl border border-neutral-700 relative transition-all hover:scale-[1.03] hover:border-samurai-red hover:shadow-xl hover:shadow-white/10 bg-neutral-800 hover:bg-samurai-red"
+      className="flex flex-col justify-end w-[280px] h-[380px] rounded-xl border border-neutral-700 relative transition-all hover:scale-[1.03] hover:border-samurai-red hover:shadow-xl hover:shadow-samurai-red/20 bg-neutral-800 hover:bg-samurai-red"
     >
       <div className="flex flex-col justify-center items-center w-full h-[190px] rounded-b-xl text-center px-4 z-10">
         <h1 className="font-bold text-xl">{project.name}</h1>

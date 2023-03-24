@@ -88,7 +88,7 @@ export default function Home() {
     <Layout>
       <div className="px-20">
         {/* TOP CONTENT */}
-        <div className="pt-24 max-w-[850px]">
+        <div className="pt-24 max-w-[750px]">
           <h1 className="text-[58px] font-black leading-[62px] tracking-wide">
             Invest and participate in the most innovative cryptocurrency
             projects.
@@ -131,7 +131,7 @@ export default function Home() {
                 key={index}
                 href={item.href}
                 target="_blank"
-                className="rounded-xl border border-neutral-700  hover:border-samurai-red hover:shadow-xl hover:shadow-white/10 max-w-[382px] transition-all hover:scale-[1.03]"
+                className="rounded-xl border border-neutral-700  hover:border-samurai-red hover:shadow-lg hover:shadow-samurai-red/20 max-w-[382px] transition-all hover:scale-[1.03]"
               >
                 <div className="w-[380px] h-[130px] relative">
                   <Image
@@ -144,11 +144,11 @@ export default function Home() {
                     alt=""
                   />
                 </div>
-                <div className="w-full h-[116px] bg-neutral-900 rounded-b-xl px-3 pt-4 text-white">
-                  <h3 className="text-xl font-semibold text-red-400">
+                <div className="w-full h-[106px] bg-[#12162D] rounded-b-xl px-3 pt-4 text-white">
+                  <h3 className="text-xl font-semibold tracking-wide text-white">
                     {item.title}
                   </h3>
-                  <p className="text-md font-thin mt-2">{item.description}</p>
+                  <p className="text-sm font-thin">{item.description}</p>
                 </div>
               </Link>
             ))}
@@ -191,16 +191,51 @@ export default function Home() {
           </div>
         </div>
 
+        {/* COMMUNITY */}
+        <div className="flex flex-col mt-52 mb-52 w-full">
+          <h2 className="text-4xl">
+            Samurai <span className="text-samurai-red">Sanka</span>
+            <p className="font-light text-[26px] text-white/70">
+              Community interaction platform
+            </p>
+          </h2>
+          <div className="font-light text-[16px] mt-2 inline-flex max-w-[600px]">
+            Begin your Web3 journey with Samurai Sanka! Join thousands of people
+            who are participating in fun, interactive games and contests and
+            earn rewards for participating on our partners' platforms.
+            {/* <Link
+              href="https://medium.com/samurai-starter"
+              target="_blank"
+              className="text-samurai-red text-2xl ml-3 mt-[-7px] transition-all hover:scale-125"
+            >
+              →
+            </Link> */}
+          </div>
+          <div className="flex flex-row gap-9 flex-wrap mt-10">
+            in progress...
+            {/* {featured.map((item, index) => (
+              <Card key={index} project={item} />
+            ))}
+            <Link
+              href="https://medium.com/samurai-starter"
+              target="_blank"
+              className="flex items-center text-lg font-thin hover:underline"
+            >
+              More +
+            </Link> */}
+          </div>
+        </div>
+
         {/* SAMURAI EDGE */}
         <div className="flex flex-col mt-52 mb-24 w-full">
           <h2 className="text-4xl">
             The <span className="text-samurai-red">SAMURAI</span> Edge
           </h2>
-          <div className="flex flex-wrap mt-10 bg-edge w-full h-[650px] relative gap-10 pl-10 pt-8 pb-32">
+          <div className="flex flex-wrap mt-10 bg-edge bg-cover bg-no-repeat h-[650px] relative gap-10 pt-8 pb-32">
             {edge.map((item, index) => (
               <div
                 key={index}
-                className="flex items-center w-[600px] h-[140px] bg-black bg-opacity-10 backdrop-blur-[8px] rounded-xl px-5 gap-3 shadow-lg z-10"
+                className="flex items-center w-[600px] h-[140px] bg-neutral-900 bg-opacity-30 backdrop-blur-[8px] rounded-xl px-5 gap-3 shadow-lg z-10"
               >
                 <div className="relative min-w-[68px] min-h-[68px] max-w-[68px] max-h-[68px] w-full opacity-80">
                   <Image
@@ -214,7 +249,7 @@ export default function Home() {
 
                 <div className="flex flex-col">
                   <span className="font-bold text-xl">{item.title}</span>
-                  <p className="font-light text-[16px] leading-tight">
+                  <p className="font-light text-[16px] leading-tight text-white/50">
                     {item.description}
                   </p>
                 </div>

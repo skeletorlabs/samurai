@@ -14,7 +14,7 @@ module.exports = {
       },
       backgroundImage: {
         art: "url('/art.svg')",
-        edge: "url('/bg-edge.svg')",
+        edge: "url('/edge.svg')",
       },
     },
   },
