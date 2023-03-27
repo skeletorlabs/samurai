@@ -106,17 +106,17 @@ export default function Home() {
             novel projects in the crypto space
           </p>
           <div className="flex flex-row items-center pt-10 gap-5 z-20">
-            <button className="bg-[#FF284C] border rounded-[16px] border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white  w-[190px]">
+            <button className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white  w-[190px]">
               Launchpad
             </button>
-            <button className="bg-[#f6eded] border rounded-[16px] px-8 h-14 text-lg transition-all hover:bg-black/90 text-black hover:text-white hover:border-white  w-[190px]">
+            <button className="bg-[#f6eded] border border-samurai-red rounded-2xl px-8 h-14 text-lg transition-all hover:bg-black/90 text-black hover:text-white hover:border-white  w-[190px]">
               Sanka
             </button>
-            <button className="bg-[#000000] border rounded-[16px] text-samurai-red  border-samurai-red px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white  w-[190px]">
+            <button className="bg-[#000000] border rounded-2xl text-samurai-red  border-samurai-red px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white  w-[190px]">
               For projects
             </button>
           </div>
-          <div className="flex items-center gap-16 ml-2 mt-14">
+          <div className="flex items-center gap-16 ml-2 mt-32">
             {SOCIALS.map((item, index) => (
               <Link
                 key={index}
@@ -204,7 +204,7 @@ export default function Home() {
       </div>
 
       {/* COMMUNITY */}
-      <div className="flex flex-col pt-20 bg-[#F91100] pb-10 w-full px-20  bg-sanka bg-contain bg-no-repeat bg-[right_-5rem_top_2rem] bg-opacity-75">
+      <div className="flex flex-col pt-20 bg-[#F91100] pb-10 w-full px-20  bg-sanka bg-contain bg-no-repeat bg-[right_-2rem_top_2rem] bg-opacity-75">
         <h2 className="text-6xl font-bold">
           Samurai <span className="text-black">Sanka</span>
           <p
@@ -214,7 +214,7 @@ export default function Home() {
           </p>
         </h2>
         <div
-          className={`text-[20px] mt-5 inline-flex max-w-[600px] ${inter.className}`}
+          className={`text-[20px] mt-5 inline-flex max-w-[800px] ${inter.className}`}
         >
           Begin your Web3 journey with Samurai Sanka! Join thousands of people
           who are participating in fun, interactive games and contests and earn
@@ -224,7 +224,7 @@ export default function Home() {
         <Link
           href="https://medium.com/samurai-starter"
           target="_blank"
-          className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black transition-all hover:scale-105 hover:opacity-90 w-full max-w-[830px] mt-10"
+          className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black transition-all hover:scale-105 hover:opacity-90 w-full max-w-[830px] mt-10 border  shadow-xl"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -242,11 +242,11 @@ export default function Home() {
           <span className="text-4xl">Partner Quests</span>
         </Link>
 
-        <div className="flex flex-row gap-9 flex-wrap mt-8">
+        <div className="flex flex-row gap-7 flex-wrap mt-8">
           <Link
             href="https://medium.com/samurai-starter"
             target="_blank"
-            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black transition-all hover:scale-105 hover:opacity-90"
+            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black/90 border border-white/50 transition-all hover:scale-105 hover:opacity-90 shadow-xl"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -267,7 +267,7 @@ export default function Home() {
           <Link
             href="https://medium.com/samurai-starter"
             target="_blank"
-            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black transition-all hover:scale-105 hover:opacity-90"
+            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black/90 border border-white/50 transition-all hover:scale-105 hover:opacity-90  shadow-xl"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -294,9 +294,9 @@ export default function Home() {
           {edge.map((item, index) => (
             <div
               key={index}
-              className="flex items-center w-[650px] h-[140px] bg-neutral-900 bg-opacity-30 backdrop-blur-[8px] rounded-xl px-5 gap-3 shadow-lg z-10"
+              className="flex items-center w-[650px] h-[140px] bg-neutral-600 bg-opacity-30 backdrop-blur-[8px] rounded-xl px-5 gap-5 shadow-lg z-10"
             >
-              <div className="relative min-w-[68px] min-h-[68px] max-w-[68px] max-h-[68px] w-full opacity-80">
+              <div className="relative min-w-[98px] min-h-[98px] max-w-[68px] max-h-[68px] w-full opacity-80">
                 <Image
                   src={item.image}
                   alt={item.title}
@@ -308,7 +308,9 @@ export default function Home() {
 
               <div className="flex flex-col">
                 <span className="font-bold text-xl">{item.title}</span>
-                <p className="font-light text-[16px] leading-tight text-white/50">
+                <p
+                  className={`font-normal text-[16px] leading-tight text-white/70 ${inter.className}`}
+                >
                   {item.description}
                 </p>
               </div>
