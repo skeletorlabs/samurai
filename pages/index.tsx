@@ -7,6 +7,11 @@ import { useCallback, useEffect, useState } from "react";
 import fetchProjects from "./api/projects";
 import Card from "@/components/card";
 import { Project } from "@/utils/interfaces";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+});
 
 const latestupdates = [
   {
@@ -89,21 +94,23 @@ export default function Home() {
       <div className="px-20">
         {/* TOP CONTENT */}
         <div className="pt-24 max-w-[750px]">
-          <h1 className="text-[58px] font-black leading-[62px] tracking-wide">
-            Invest and participate in the most innovative cryptocurrency
-            projects.
+          <h1 className="text-[68px] font-black leading-[62px] tracking-wide">
+            Invest. Interact. Earn.
           </h1>
-          <p className="leading-relaxed pt-4 font-thin text-[18px]">
+          <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
             SamuraiStarter is the leading early-stage crowdfunding platform that
             incentivizes community members to invest and participate in the most
             novel projects in the crypto space
           </p>
-          <div className="flex flex-row items-center pt-10 gap-5">
-            <button className="bg-[#FF284C] border rounded-[8px] border-[#FF284C] px-8 py-2 font-light transition-all hover:bg-[#FF4E6B] hover:text-black hover:font-medium w-[160px]">
+          <div className="flex flex-row items-center pt-10 gap-5 z-20">
+            <button className="bg-[#FF284C] border rounded-[16px] border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white  w-[190px]">
               Launchpad
             </button>
-            <button className="border rounded-[8px] border-red-500 px-8 py-2 font-light transition-all hover:bg-[#FF4E6B] hover:text-black hover:font-medium w-[160px]">
-              Incubation
+            <button className="bg-[#f6eded] border rounded-[16px] px-8 h-14 text-lg transition-all hover:bg-black/90 text-black hover:text-white hover:border-white  w-[190px]">
+              Sanka
+            </button>
+            <button className="bg-[#000000] border rounded-[16px] text-samurai-red  border-samurai-red px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white  w-[190px]">
+              For projects
             </button>
           </div>
           <div className="flex items-center gap-16 ml-2 mt-14">
@@ -111,7 +118,7 @@ export default function Home() {
               <Link
                 key={index}
                 href={item.href}
-                className="scale-150 transition-all hover:opacity-70"
+                className="scale-[2] transition-all hover:opacity-70"
                 target="_blank"
               >
                 {item.svg}
@@ -264,7 +271,7 @@ export default function Home() {
                 viewBox="0 0 16 16"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M0 10.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H3V1.5a.5.5 0 0 0-1 0V10H.5a.5.5 0 0 0-.5.5ZM2.5 12a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Zm3-6.5A.5.5 0 0 0 6 6h1.5v8.5a.5.5 0 0 0 1 0V6H10a.5.5 0 0 0 0-1H6a.5.5 0 0 0-.5.5ZM8 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2A.5.5 0 0 0 8 1Zm3 9.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H14V1.5a.5.5 0 0 0-1 0V10h-1.5a.5.5 0 0 0-.5.5Zm2.5 1.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Z"
                 />
               </svg>

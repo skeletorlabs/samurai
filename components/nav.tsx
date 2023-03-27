@@ -2,11 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { NAV } from "@/utils/constants";
 import { useState } from "react";
+import { Inter } from "next/font/google";
+const inter = Inter({
+  subsets: ["latin"],
+});
 export default function Nav() {
   const [active, setActive] = useState("");
   return (
     <div className="h-20 px-8 flex items-center justify-between mt-10 z-10">
-      <div className="flex items-center w-full gap-9 font-light">
+      <div className="flex items-center w-full gap-9 font-bold text-xl">
         <Link
           href="/"
           className="transition-all hover:opacity-75"
@@ -24,9 +28,10 @@ export default function Nav() {
           <Link
             key={index}
             href={item.href}
-            className={`hover:border-b hover:border-red-500 h-7 ${
-              active === item.title && "text-red-500 border-b border-red-500"
-            }`}
+            className={`hover:border-b hover:border-samurai-red h-8 ${
+              active === item.title &&
+              "text-samurai-red border-b border-samurai-red"
+            } ${inter.className}`}
             onClick={() => setActive(item.title)}
           >
             {item.title}

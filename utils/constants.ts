@@ -6,7 +6,7 @@ export const NAV = [
     href: '#',
   },
   {
-    title: 'LaunchPad',
+    title: 'Launchpad',
     href: '#',
   },
   {
