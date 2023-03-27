@@ -204,7 +204,7 @@ export default function Home() {
       </div>
 
       {/* COMMUNITY */}
-      <div className="flex flex-col pt-20 bg-[#F91100] pb-10 w-full px-20  bg-sanka bg-contain bg-no-repeat bg-[right_-2rem_top_2rem] bg-opacity-75">
+      <div className="flex flex-col pt-20 bg-[#F91100] pb-20 w-full px-20  bg-sanka bg-contain bg-no-repeat bg-[right_-2rem_top_2rem] bg-opacity-75">
         <h2 className="text-6xl font-bold">
           Samurai <span className="text-black">Sanka</span>
           <p

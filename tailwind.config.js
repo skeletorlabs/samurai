@@ -13,7 +13,7 @@ module.exports = {
         "samurai-red": "#FF284C",
       },
       backgroundImage: {
-        art: "url('/art2.svg')",
+        art: "url('/art5.svg')",
         edge: "url('/edge.svg')",
         sanka: "url('/bg-sanka.svg')",
       },
