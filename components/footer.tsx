@@ -26,16 +26,16 @@ export default function Footer() {
               width={0}
               height={0}
               alt="logo"
-              className="mr-10 mt-[30px] mb-6 w-[200px] h-[50px]"
+              className="mr-10 mt-[12px] mb-2 w-[400px] h-[100px]"
             />
           </Link>
 
-          <div className="flex items-center gap-6 ml-3">
+          <div className="flex items-center gap-10 ml-5">
             {SOCIALS.map((item, index) => (
               <Link
                 key={index}
                 href={item.href}
-                className="transition-all hover:opacity-75"
+                className="transition-all hover:opacity-75 scale-[1.5]"
                 target="_blank"
               >
                 {item.svg}
@@ -43,8 +43,8 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col h-full w-full mt-[42px] gap-10 text-white">
-          <div className="flex h-full justify-end w-full gap-4 font-light text-sm flex-wrap">
+        <div className="flex flex-col h-full w-full mt-[42px] gap-14 text-white">
+          <div className="flex h-full justify-end w-full gap-4 font-light text-lg flex-wrap">
             {links.map((item, index) => (
               <Link
                 key={index}
@@ -55,7 +55,7 @@ export default function Footer() {
               </Link>
             ))}
           </div>
-          <span className="flex ml-3 font-thin text-sm justify-end">
+          <span className="flex ml-3 font-light text-md justify-end">
             © 2023 Samurai Starter
           </span>
         </div>

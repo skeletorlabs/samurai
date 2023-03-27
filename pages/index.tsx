@@ -242,11 +242,11 @@ export default function Home() {
           <span className="text-4xl">Partner Quests</span>
         </Link>
 
-        <div className="flex flex-row gap-7 flex-wrap mt-8">
+        <div className="flex flex-row gap-7 flex-wrap mt-6">
           <Link
             href="https://medium.com/samurai-starter"
             target="_blank"
-            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black/90 border border-white/50 transition-all hover:scale-105 hover:opacity-90 shadow-xl"
+            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black border border-white transition-all hover:scale-105 hover:opacity-90 shadow-xl"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -267,7 +267,7 @@ export default function Home() {
           <Link
             href="https://medium.com/samurai-starter"
             target="_blank"
-            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black/90 border border-white/50 transition-all hover:scale-105 hover:opacity-90  shadow-xl"
+            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black border border-white transition-all hover:scale-105 hover:opacity-90  shadow-xl"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
