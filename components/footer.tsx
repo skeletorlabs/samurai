@@ -43,7 +43,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col h-full w-full mt-[42px] gap-[54px] text-white">
+        <div className="flex flex-col h-full w-full mt-[50px] gap-[47px] text-white">
           <div className="flex h-full justify-end w-full gap-4 font-light text-lg flex-wrap">
             {links.map((item, index) => (
               <Link
