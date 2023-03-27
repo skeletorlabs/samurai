@@ -10,7 +10,7 @@ const roboto = Roboto({
 });
 
 interface layout {
-  children: ReactElement;
+  children: ReactElement | ReactElement[];
 }
 
 export default function Layout({ children }: layout) {
