@@ -6,7 +6,7 @@ export default function Nav() {
   const [active, setActive] = useState("");
   return (
     <div className="h-20 px-8 flex items-center justify-between mt-10 z-10">
-      <div className="flex items-center w-full gap-9 font-light">
+      <div className="flex items-center w-full gap-9 font">
         <Link
           href="/"
           className="transition-all hover:opacity-75"
@@ -17,7 +17,7 @@ export default function Nav() {
             width={0}
             height={0}
             alt="logo"
-            className="mr-10 mt-[-5px] drop-shadow-xl w-[320px] h-[100px]"
+            className="mr-10 mt-[-5px]  w-[320px] h-[100px]"
           />
         </Link>
         {NAV.map((item, index) => (

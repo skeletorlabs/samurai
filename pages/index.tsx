@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "@/components/layout";
@@ -7,6 +6,11 @@ import { useCallback, useEffect, useState } from "react";
 import fetchProjects from "./api/projects";
 import Card from "@/components/card";
 import { Project } from "@/utils/interfaces";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+});
 
 const latestupdates = [
   {
@@ -72,14 +76,12 @@ export default function Home() {
       projects.filter(
         (project) =>
           project.key === "maya" ||
-          project.key === "d-etf-second" ||
+          // project.key === "d-etf-second" ||
           project.key === "devvio" ||
           project.key === "onering"
       )
     );
   }, []);
-
-  console.log(featured);
 
   useEffect(() => {
     getInfos();
@@ -93,20 +95,20 @@ export default function Home() {
             Invest and participate in the most innovative cryptocurrency
             projects.
           </h1>
-          <p className="leading-relaxed pt-4 font-thin text-[18px]">
+          <p className={`leading-relaxed pt-4 text-[16px] ${inter.className}`}>
             SamuraiStarter is the leading early-stage crowdfunding platform that
             incentivizes community members to invest and participate in the most
             novel projects in the crypto space
           </p>
           <div className="flex flex-row items-center pt-10 gap-5">
-            <button className="bg-[#FF284C] border rounded-[8px] border-[#FF284C] px-8 py-2 font-light transition-all hover:bg-[#FF4E6B] hover:text-black hover:font-medium w-[160px]">
+            <button className="bg-[#FF284C] border rounded-[8px] text-white border-[#FF284C] px-8 py-2 transition-all hover:bg-[#FF4E6B] hover:font-medium w-[160px]">
               Launchpad
             </button>
-            <button className="border rounded-[8px] border-red-500 px-8 py-2 font-light transition-all hover:bg-[#FF4E6B] hover:text-black hover:font-medium w-[160px]">
+            <button className="border rounded-[8px] border-red-500 px-8 py-2 transition-all text-[#FF4E6B] hover:opacity-80 w-[160px]">
               Incubation
             </button>
           </div>
-          <div className="flex items-center gap-16 ml-2 mt-14">
+          <div className="flex items-center gap-16 ml-2 mt-14 text-gray-500">
             {SOCIALS.map((item, index) => (
               <Link
                 key={index}
@@ -121,7 +123,7 @@ export default function Home() {
         </div>
 
         {/* LATEST UPDATES */}
-        <div className="flex flex-col mt-52 mb-24 w-full">
+        <div className="flex flex-col mt-24 mb-24 w-full">
           <h2 className="text-4xl">
             Latest <span className="text-samurai-red">Updates</span>
           </h2>
@@ -131,7 +133,7 @@ export default function Home() {
                 key={index}
                 href={item.href}
                 target="_blank"
-                className="rounded-xl border border-neutral-700  hover:border-samurai-red hover:shadow-lg hover:shadow-samurai-red/20 max-w-[382px] transition-all hover:scale-[1.03]"
+                className="rounded-xl border border-samurai-red/80 shadow-lg shadow-samurai-red/20 hover:shadow-samurai-red/40 max-w-[382px] transition-all hover:scale-[1.03]"
               >
                 <div className="w-[380px] h-[130px] relative">
                   <Image
@@ -144,18 +146,20 @@ export default function Home() {
                     alt=""
                   />
                 </div>
-                <div className="w-full h-[106px] bg-[#12162D] rounded-b-xl px-3 pt-4 text-white">
-                  <h3 className="text-xl font-semibold tracking-wide text-white">
+                <div className="w-full h-[106px] rounded-b-xl px-3 pt-4 text-black">
+                  <h3 className="text-xl font-semibold tracking-wide text-black/80">
                     {item.title}
                   </h3>
-                  <p className="text-sm font-thin">{item.description}</p>
+                  <p className={`text-sm ${inter.className}`}>
+                    {item.description}
+                  </p>
                 </div>
               </Link>
             ))}
             <Link
               href="https://medium.com/samurai-starter"
               target="_blank"
-              className="flex items-center text-lg font-thin hover:underline"
+              className="flex items-center text-samurai-red text-lg font-light hover:underline"
             >
               More +
             </Link>
@@ -163,11 +167,13 @@ export default function Home() {
         </div>
 
         {/* FEATURED PROJECTS */}
-        <div className="flex flex-col mt-52 mb-52 w-full">
+        <div className="flex flex-col mt-32 w-full">
           <h2 className="text-4xl">
             Featured <span className="text-samurai-red">Projects</span>
           </h2>
-          <div className="font-thin text-sm mt-2 inline-flex">
+          <div
+            className={`font-light text-sm mt-2 inline-flex ${inter.className}`}
+          >
             Learn how to participate{" "}
             <Link
               href="https://medium.com/samurai-starter"
@@ -184,7 +190,7 @@ export default function Home() {
             <Link
               href="https://medium.com/samurai-starter"
               target="_blank"
-              className="flex items-center text-lg font-thin hover:underline"
+              className="flex items-center text-samurai-red text-lg font-light hover:underline"
             >
               More +
             </Link>
@@ -192,14 +198,16 @@ export default function Home() {
         </div>
 
         {/* COMMUNITY */}
-        <div className="flex flex-col mt-52 mb-52 w-full">
+        <div className="flex flex-col mt-32 w-full">
           <h2 className="text-4xl">
             Samurai <span className="text-samurai-red">Sanka</span>
             <p className="font-light text-[26px] text-white/70">
               Community interaction platform
             </p>
           </h2>
-          <div className="font-light text-[16px] mt-2 inline-flex max-w-[600px]">
+          <div
+            className={` text-[16px] mt-2 inline-flex max-w-[600px] ${inter.className}`}
+          >
             Begin your Web3 journey with Samurai Sanka! Join thousands of people
             who are participating in fun, interactive games and contests and
             earn rewards for participating on our partners' platforms.
@@ -264,7 +272,7 @@ export default function Home() {
                 viewBox="0 0 16 16"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M0 10.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H3V1.5a.5.5 0 0 0-1 0V10H.5a.5.5 0 0 0-.5.5ZM2.5 12a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Zm3-6.5A.5.5 0 0 0 6 6h1.5v8.5a.5.5 0 0 0 1 0V6H10a.5.5 0 0 0 0-1H6a.5.5 0 0 0-.5.5ZM8 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2A.5.5 0 0 0 8 1Zm3 9.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H14V1.5a.5.5 0 0 0-1 0V10h-1.5a.5.5 0 0 0-.5.5Zm2.5 1.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Z"
                 />
               </svg>
@@ -275,7 +283,7 @@ export default function Home() {
         </div>
 
         {/* SAMURAI EDGE */}
-        <div className="flex flex-col mt-52 mb-24 w-full">
+        <div className="flex flex-col mt-32 mb-24 w-full">
           <h2 className="text-4xl">
             The <span className="text-samurai-red">SAMURAI</span> Edge
           </h2>
@@ -283,7 +291,7 @@ export default function Home() {
             {edge.map((item, index) => (
               <div
                 key={index}
-                className="flex items-center w-[600px] h-[140px] bg-neutral-900 bg-opacity-30 backdrop-blur-[8px] rounded-xl px-5 gap-3 shadow-lg z-10"
+                className="flex items-center w-[600px] h-[140px] bg-samurai-red  backdrop-blur-[8px] rounded-xl px-5 gap-3 shadow-lg z-10"
               >
                 <div className="relative min-w-[68px] min-h-[68px] max-w-[68px] max-h-[68px] w-full opacity-80">
                   <Image
@@ -297,7 +305,9 @@ export default function Home() {
 
                 <div className="flex flex-col">
                   <span className="font-bold text-xl">{item.title}</span>
-                  <p className="font-light text-[16px] leading-tight text-white/50">
+                  <p
+                    className={`text-[16px] leading-tight text-white/70 ${inter.className}`}
+                  >
                     {item.description}
                   </p>
                 </div>

@@ -14,6 +14,10 @@ module.exports = {
       },
       backgroundImage: {
         art: "url('/art.svg')",
+        art2: "url('/art2.png')",
+        art3: "url('/art3.svg')",
+        art4: "url('/art4.svg')",
+        art5: "url('/art5.svg')",
         edge: "url('/edge.svg')",
       },
     },
