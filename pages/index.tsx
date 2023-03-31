@@ -94,10 +94,10 @@ export default function Home() {
   }, []);
   return (
     <Layout>
-      <div className="px-20">
+      <div className="px-6 lg:px-8 xl:px-20">
         {/* TOP CONTENT */}
-        <div className="pt-24 max-w-[750px] h-[630px]">
-          <h1 className="text-[68px] font-black leading-[62px] tracking-wide">
+        <div className="pt-10 lg:pt-24 lg:max-w-[750px] lg:h-[630px]">
+          <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
             Invest. Interact. Earn.
           </h1>
           <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
@@ -105,18 +105,18 @@ export default function Home() {
             incentivizes community members to invest and participate in the most
             novel projects in the crypto space
           </p>
-          <div className="flex flex-row items-center pt-10 gap-5 z-20">
-            <button className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white  w-[190px]">
+          <div className="flex flex-col lg:flex-row items-center pt-10 gap-5 z-20">
+            <button className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]">
               Launchpad
             </button>
-            <button className="bg-[#f6eded] border border-samurai-red rounded-2xl px-8 h-14 text-lg transition-all hover:bg-black/90 text-black hover:text-white hover:border-white  w-[190px]">
+            <button className="bg-white/90 border border-samurai-red rounded-2xl px-8 h-14 text-lg transition-all hover:bg-black/90 text-samurai-red hover:text-white hover:border-white w-full lg:w-[190px]">
               Sanka
             </button>
-            <button className="bg-[#000000] border rounded-2xl text-samurai-red  border-samurai-red px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white  w-[190px]">
+            <button className="bg-[#000000] border rounded-2xl text-samurai-red  border-samurai-red px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]">
               For projects
             </button>
           </div>
-          <div className="flex items-center gap-16 ml-2 mt-32">
+          <div className="hidden lg:flex items-center gap-16 ml-2 mt-32">
             {SOCIALS.map((item, index) => (
               <Link
                 key={index}
@@ -131,19 +131,26 @@ export default function Home() {
         </div>
       </div>
       {/* LATEST UPDATES */}
-      <div className="flex flex-col pt-20 pb-10 w-full px-20 bg-neutral-900/50">
+      <div className="flex flex-col pt-20 pb-10 w-full px-6 lg:px-8 xl:px-20 bg-neutral-900/50">
         <h2 className="text-6xl font-bold">
           Latest <span className="text-samurai-red">Updates</span>
         </h2>
-        <div className="flex flex-row gap-9 flex-wrap mt-10">
+        <div className="grid lg:grid-cols-3 gap-9 flex-wrap mt-10">
           {latestupdates.map((item, index) => (
             <Link
               key={index}
               href={item.href}
               target="_blank"
-              className="rounded-2xl border-2  border-samurai-red shadow-lg hover:shadow-2xl hover:shadow-samurai-red shadow-samurai-red/20 max-w-[426px] transition-all hover:scale-[1.03]"
+              className="rounded-2xl border-2  border-samurai-red shadow-lg hover:shadow-2xl hover:shadow-samurai-red shadow-samurai-red/20 w-full lg:max-w-[426px] transition-all hover:scale-[1.03]"
             >
-              <div className="w-[422px] h-[200px] relative">
+              <Image
+                src={item.image}
+                width={426}
+                height={0}
+                alt=""
+                className="rounded-t-2xl w-full lg:w-[426px] lg:h-[200px]"
+              />
+              {/* <div className="w-full h-full lg:w-[422px] lg:h-[200px] relative">
                 <Image
                   src={item.image}
                   fill
@@ -153,7 +160,7 @@ export default function Home() {
                   className="rounded-t-2xl border-b border-white/20"
                   alt=""
                 />
-              </div>
+              </div> */}
               <div className="w-full h-[106px] bg-black rounded-b-2xl px-3 pt-4 text-white">
                 <h3 className="text-xl font-semibold tracking-wide text-white">
                   {item.title}
@@ -175,7 +182,7 @@ export default function Home() {
       </div>
 
       {/* FEATURED PROJECTS */}
-      <div className="flex flex-col pt-20 pb-10 w-full bg-white to-transparent px-20 text-black">
+      <div className="flex flex-col pt-20 pb-10 w-full bg-white to-transparent px-6 lg:px-8 xl:px-20 text-black">
         <h2 className="text-6xl font-bold">
           Featured <span className="text-samurai-red">Projects</span>
         </h2>
@@ -189,7 +196,7 @@ export default function Home() {
             →
           </Link>
         </div>
-        <div className="flex flex-row gap-9 flex-wrap mt-10">
+        <div className="grid lg:grid-cols-3 gap-12 lg:gap-9 flex-wrap mt-10">
           {featured.map((item, index) => (
             <Card key={index} project={item} />
           ))}
@@ -204,7 +211,7 @@ export default function Home() {
       </div>
 
       {/* COMMUNITY */}
-      <div className="flex flex-col pt-20 bg-[#F91100] pb-20 w-full px-20  bg-sanka bg-contain bg-no-repeat bg-[right_-2rem_top_2rem] bg-opacity-75">
+      <div className="flex flex-col pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20  lg:bg-sanka bg-contain bg-no-repeat bg-[right_-4rem_top_2rem] xl:bg-[right_-2rem_top_2rem] bg-opacity-75">
         <h2 className="text-6xl font-bold">
           Samurai <span className="text-black">Sanka</span>
           <p
@@ -224,14 +231,12 @@ export default function Home() {
         <Link
           href="https://medium.com/samurai-starter"
           target="_blank"
-          className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black transition-all hover:scale-105 hover:opacity-90 w-full max-w-[830px] mt-10 border  shadow-xl"
+          className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black transition-all hover:scale-105 hover:opacity-90 w-full lg:max-w-[830px] xl:max-w-[700px] mt-10 border shadow-xl"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="46"
-            height="46"
             fill="currentColor"
-            className="bi bi-rocket-takeoff"
+            className="bi bi-rocket-takeoff w-8 lg:w-[46px] h-8 lg:h-[46px]"
             viewBox="0 0 16 16"
           >
             <path d="M9.752 6.193c.599.6 1.73.437 2.528-.362.798-.799.96-1.932.362-2.531-.599-.6-1.73-.438-2.528.361-.798.8-.96 1.933-.362 2.532Z" />
@@ -239,21 +244,19 @@ export default function Home() {
             <path d="M7.009 12.139a7.632 7.632 0 0 1-1.804-1.352A7.568 7.568 0 0 1 3.794 8.86c-1.102.992-1.965 5.054-1.839 5.18.125.126 3.936-.896 5.054-1.902Z" />
           </svg>
 
-          <span className="text-4xl">Partner Quests</span>
+          <span className="text-xl lg:text-4xl">Partner Quests</span>
         </Link>
 
         <div className="flex flex-row gap-7 flex-wrap mt-6">
           <Link
             href="https://medium.com/samurai-starter"
             target="_blank"
-            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black border border-white transition-all hover:scale-105 hover:opacity-90 shadow-xl"
+            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black border border-white transition-all hover:scale-105 hover:opacity-90 shadow-xl w-full lg:w-auto"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="46"
-              height="46"
               fill="currentColor"
-              className="bi bi-sliders2-vertical"
+              className="bi bi-sliders2-vertical w-8 lg:w-[46px] xl:w-[36px] h-8 lg:h-[46px] xl:h-[36px]"
               viewBox="0 0 16 16"
             >
               <path
@@ -262,41 +265,52 @@ export default function Home() {
               />
             </svg>
 
-            <span className="text-3xl">$SAM Prediction Markets</span>
+            <span className="text-lg lg:text-3xl xl:text-2xl">
+              $SAM Prediction Markets
+            </span>
           </Link>
           <Link
             href="https://medium.com/samurai-starter"
             target="_blank"
-            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black border border-white transition-all hover:scale-105 hover:opacity-90  shadow-xl"
+            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black border border-white transition-all hover:scale-105 hover:opacity-90  shadow-xl  w-full lg:w-auto"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="46"
-              height="46"
               fill="currentColor"
-              className="bi bi-x-diamond"
+              className="bi bi-x-diamond w-8 lg:w-[46px] xl:w-[36px] h-8 lg:h-[46px] xl:h-[36px]"
               viewBox="0 0 16 16"
             >
               <path d="M7.987 16a1.526 1.526 0 0 1-1.07-.448L.45 9.082a1.531 1.531 0 0 1 0-2.165L6.917.45a1.531 1.531 0 0 1 2.166 0l6.469 6.468A1.526 1.526 0 0 1 16 8.013a1.526 1.526 0 0 1-.448 1.07l-6.47 6.469A1.526 1.526 0 0 1 7.988 16zM7.639 1.17 4.766 4.044 8 7.278l3.234-3.234L8.361 1.17a.51.51 0 0 0-.722 0zM8.722 8l3.234 3.234 2.873-2.873c.2-.2.2-.523 0-.722l-2.873-2.873L8.722 8zM8 8.722l-3.234 3.234 2.873 2.873c.2.2.523.2.722 0l2.873-2.873L8 8.722zM7.278 8 4.044 4.766 1.17 7.639a.511.511 0 0 0 0 .722l2.874 2.873L7.278 8z" />
             </svg>
 
-            <span className="text-3xl">$SAM Lottery</span>
+            <span className="text-xl lg:text-3xl xl:text-2xl">
+              $SAM Lottery
+            </span>
           </Link>
         </div>
       </div>
 
       {/* SAMURAI EDGE */}
-      <div className="flex flex-col pt-20 w-full px-20 bg-neutral-900/50">
+      <div className="flex flex-col pt-20 w-full px-6 lg:px-8 xl:px-20 bg-neutral-900/50">
         <h2 className="text-6xl font-bold">
           The <span className="text-samurai-red">SAMURAI</span> Edge
         </h2>
-        <div className="flex flex-wrap mt-10 relative gap-10 pt-8 pb-20">
+        <div className="grid lg:grid-cols-2 mt-10 relative gap-5 2xl:gap-10 pt-8 pb-20">
           {edge.map((item, index) => (
             <div
               key={index}
-              className="flex items-center w-[650px] h-[140px] bg-neutral-600 bg-opacity-30 backdrop-blur-[8px] rounded-xl px-5 gap-5 shadow-lg z-10"
+              className="flex items-center w-full min-h-[160px] md:bg-neutral-600 bg-opacity-30 backdrop-blur-[8px] rounded-xl md:px-5 lg:px-3 gap-5 shadow-lg z-10"
             >
-              <div className="relative min-w-[98px] min-h-[98px] max-w-[68px] max-h-[68px] w-full opacity-80">
+              <div
+                className="
+                  flex relative 
+                  w-full opacity-80
+                  min-w-[68px] max-w-[38px]
+                  min-h-[68px]  max-h-[38px]
+                  md:min-w-[98px] md:max-w-[68px]
+                  md:min-h-[98px]  md:max-h-[68px]
+                "
+              >
                 <Image
                   src={item.image}
                   alt={item.title}

@@ -54,13 +54,13 @@ export default function Card({ project }: Card) {
     //     className="absolute top-2 right-2 max-h-[20px]"
     //   />
     // </Link>
-    <Link href="#" className="flex flex-col w-[426px]">
+    <Link href="#" className="flex flex-col w-full">
       <Image
         src={`/ethereum.png`}
         width={426}
         height={0}
         alt=""
-        className="rounded-2xl border-2 hover:border-samurai-red transition-all"
+        className="rounded-2xl border-2 hover:border-samurai-red transition-all w-full lg:w-[426px]"
       />
 
       <div className="flex flex-col w-full z-10 mt-4">

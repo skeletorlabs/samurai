@@ -13,9 +13,9 @@ const links = [
 
 export default function Footer() {
   return (
-    <div className="h-60 px-8 border-t-[0.5px] border-zinc-800">
-      <div className="flex gap-10">
-        <div className="flex flex-col">
+    <div className="h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-800">
+      <div className="flex flex-col lg:flex-row gap-10">
+        <div className="flex flex-col items-center lg:items-start">
           <Link
             href="/"
             className="transition-all hover:opacity-75"
@@ -30,7 +30,7 @@ export default function Footer() {
             />
           </Link>
 
-          <div className="flex items-center gap-10 ml-5">
+          <div className="flex items-center justify-center w-full lg:justify-start gap-10 px-24 lg:px-6">
             {SOCIALS.map((item, index) => (
               <Link
                 key={index}
@@ -43,7 +43,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col h-full w-full mt-[50px] gap-[47px] text-white">
+        <div className="hidden lg:flex flex-col h-full w-full mt-[50px] gap-[47px] text-white">
           <div className="flex h-full justify-end w-full gap-4 font-light text-lg flex-wrap">
             {links.map((item, index) => (
               <Link

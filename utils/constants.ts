@@ -1,25 +1,37 @@
-import { medium, twitter, telegram, discord, linkedin } from '@/utils/svgs'
+import {
+  medium,
+  twitter,
+  telegram,
+  discord,
+  linkedin,
+  home,
+} from '@/utils/svgs'
 
 export const NAV = [
   {
     title: 'SamNFT',
     href: '#',
+    icon: home,
   },
   {
     title: 'Launchpad',
     href: '#',
+    icon: home,
   },
   {
     title: 'Sanka',
     href: '#',
+    icon: home,
   },
   {
     title: 'Tokens',
     href: '#',
+    icon: home,
   },
   {
     title: 'Incubation',
     href: '#',
+    icon: home,
   },
 ]
 
