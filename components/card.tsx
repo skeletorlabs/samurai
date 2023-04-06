@@ -56,7 +56,7 @@ export default function Card({ project }: Card) {
     // </Link>
     <Link href="#" className="flex flex-col w-full">
       <Image
-        src={`/ethereum.png`}
+        src={`/projects/${project.name}.svg`}
         width={426}
         height={0}
         alt=""
