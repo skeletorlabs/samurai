@@ -11,27 +11,27 @@ export const NAV = [
   {
     title: 'SamNFT',
     href: '#',
-    icon: home,
+    iconHref: '/nft-icon.svg',
   },
   {
     title: 'Launchpad',
     href: '#',
-    icon: home,
+    iconHref: '/rocketship-icon.svg',
   },
   {
     title: 'Sanka',
     href: '#',
-    icon: home,
+    iconHref: '/knife-icon.svg',
   },
   {
     title: 'Tokens',
     href: '#',
-    icon: home,
+    iconHref: '/coin-icon.svg',
   },
   {
     title: 'Incubation',
     href: '#',
-    icon: home,
+    iconHref: '/incubation-icon.svg',
   },
 ]
 

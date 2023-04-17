@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { NAV } from "@/utils/constants";
+import Image from "next/image";
 
 export default function BottomNav() {
   return (
@@ -13,7 +14,12 @@ export default function BottomNav() {
               }`}
           >
             <div className="flex flex-col items-center text-white">
-              <span className="w-8 h-8">{item.icon}</span>
+              <Image
+                src={item.iconHref}
+                width={24}
+                height={24}
+                alt={item.title}
+              />
               <span>{item.title.toUpperCase()}</span>
             </div>
           </Link>
