@@ -15,7 +15,7 @@ export const NAV = [
   },
   {
     title: 'Launchpad',
-    href: '#',
+    href: 'launchpad',
     iconHref: '/rocketship-icon.svg',
   },
   {
@@ -30,7 +30,7 @@ export const NAV = [
   },
   {
     title: 'Incubation',
-    href: '#',
+    href: '/incubation',
     iconHref: '/incubation-icon.svg',
   },
 ]
