@@ -287,6 +287,77 @@ export default function Incubation() {
           </Link>
         </div>
       </div>
+
+      {/* CONTACT */}
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-black border-t border-black/20">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20">
+          <h2 className="text-4xl lg:text-5xl font-bold">
+            <span className="text-samurai-red">Contact</span> Us
+          </h2>
+          <div
+            className={`flex items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+          >
+            <div className="flex flex-col p-10 gap-5  bg-slate-300 w-[600px] rounded-2xl relative">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                className="hidden xl:block absolute right-[-600px] top-24 w-[400px]"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 001.183 1.981l6.478 3.488m8.839 2.51l-4.66-2.51m0 0l-1.023-.55a2.25 2.25 0 00-2.134 0l-1.022.55m0 0l-4.661 2.51m16.5 1.615a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V8.844a2.25 2.25 0 011.183-1.98l7.5-4.04a2.25 2.25 0 012.134 0l7.5 4.04a2.25 2.25 0 011.183 1.98V19.5z"
+                ></path>
+              </svg>
+              <p className="flex flex-col text-black text-sm gap-2 font-bold">
+                <span>Name:</span>
+                <input
+                  type="text"
+                  className="bg-white p-4 text-xl outline-none"
+                />
+              </p>
+              <p className="flex flex-col text-black text-sm gap-2 font-bold">
+                <span>Email:</span>
+                <input
+                  type="text"
+                  className="bg-white p-4 text-xl outline-none"
+                />
+              </p>
+              <p className="flex flex-col text-black text-sm gap-2 font-bold">
+                <span>Subject:</span>
+                <input
+                  type="text"
+                  className="bg-white p-4 text-xl outline-none"
+                />
+              </p>
+              <p className="flex flex-col text-black text-sm gap-2 font-bold">
+                <span>Message:</span>
+                <textarea className="bg-white p-4 text-xl h-[200px] outline-none" />
+              </p>
+              <div className="h-[0.5px] w-full px-5">
+                <div className="w-full h-full  bg-black" />
+              </div>
+              <button className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full">
+                Send
+              </button>
+            </div>
+          </div>
+
+          <Link
+            href="https://medium.com/samurai-starter"
+            target="_blank"
+            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
+          >
+            Apply to launchpad →
+          </Link>
+        </div>
+      </div>
     </LayoutClean>
   );
 }
+
+// paul@samuraistarter.com, projects@samuraistarter.com
