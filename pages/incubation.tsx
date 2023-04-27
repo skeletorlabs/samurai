@@ -110,6 +110,19 @@ export default function Incubation() {
       color: bg.light,
     },
   ];
+
+  const partners = [
+    { title: "Polygon", color: "bg-purple-700" },
+    { title: "OKX Chain", color: "bg-black/70" },
+    { title: "BNB Chain", color: "bg-yellow-600" },
+    { title: "Avalanche", color: "bg-red-500" },
+    { title: "Fantom", color: "bg-blue-500" },
+    { title: "SupraOracles", color: "bg-red-600" },
+    { title: "Syscoin", color: "bg-blue-600" },
+    { title: "Cherry Network", color: "bg-red-600" },
+    { title: "Boba Network", color: "bg-green-400" },
+    { title: "Gate Labs", color: "bg-black" },
+  ];
   return (
     <LayoutClean>
       <div className="px-6 lg:px-8 xl:px-20">
@@ -212,6 +225,55 @@ export default function Incubation() {
                   height={item.height}
                   alt=""
                 />
+              </div>
+            ))}
+          </div>
+
+          <Link
+            href="https://medium.com/samurai-starter"
+            target="_blank"
+            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
+          >
+            Apply to launchpad →
+          </Link>
+        </div>
+      </div>
+
+      {/* TEAM */}
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-black border-t border-black/20">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20">
+          <h2 className="text-4xl lg:text-5xl font-bold">
+            <span className="text-samurai-red">T</span>eam
+          </h2>
+          <div
+            className={`flex md:justify-center items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+          ></div>
+
+          <Link
+            href="https://medium.com/samurai-starter"
+            target="_blank"
+            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
+          >
+            Apply to launchpad →
+          </Link>
+        </div>
+      </div>
+
+      {/* PARTNERS */}
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-300 border-t border-black/20">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
+          <h2 className="text-4xl lg:text-5xl font-bold">
+            Our <span className="text-samurai-red">Partners</span>
+          </h2>
+          <div
+            className={`flex items-center flex-wrap gap-5 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+          >
+            {partners.map((item, index) => (
+              <div
+                key={index}
+                className={`flex justify-center items-center bg-black py-5 px-10 rounded-[8px] text-white text-2xl ${item.color}`}
+              >
+                {item.title}
               </div>
             ))}
           </div>
