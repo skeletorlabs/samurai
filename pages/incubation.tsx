@@ -191,7 +191,7 @@ export default function Incubation() {
       </div>
 
       {/* PORTFOLIO */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-200 border-t border-black/20">
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-300 border-t border-black/20">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">P</span>ortfolio
