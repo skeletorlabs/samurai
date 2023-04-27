@@ -64,7 +64,7 @@ export default function Incubation() {
       {/* TOKEN LAUNCH */}
       <div className="flex flex-col pt-20 pb-10 w-full bg-white border-t border-b border-samurai-red mt-20">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
-          <h2 className="text-6xl font-bold">
+          <h2 className="text-5xl font-bold">
             Token <span className="text-samurai-red">Launch</span>
           </h2>
           <div
@@ -89,14 +89,19 @@ export default function Incubation() {
       {/* SERVICES */}
       <div className="flex flex-col pt-20 pb-10 w-full bg-slate-200">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
-          <h2 className="text-6xl font-bold text-samurai-red">Services</h2>
+          <h2 className="text-5xl font-bold">
+            <span className="text-samurai-red">Samurai</span> Services
+          </h2>
           <div
-            className={`grid grid-cols-3 gap-10 leading-normal pt-10 text-xl ${inter.className}`}
+            className={`grid grid-cols-3 gap-10 leading-normal pt-16 text-xl ${inter.className}`}
           >
             {services.map((service, index) => (
-              <div key={index} className="flex flex-col gap-2">
+              <div
+                key={index}
+                className="flex flex-col gap-2 border border-samurai-red p-5 rounded-xl"
+              >
                 <span className="font-bold text-2xl">{service.title}</span>
-                <p>{service.description}</p>
+                <p className="text-[16px]">{service.description}</p>
               </div>
             ))}
           </div>
