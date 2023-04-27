@@ -183,16 +183,38 @@ export default function Incubation() {
     <LayoutClean>
       <div className="px-6 lg:px-8 xl:px-20">
         {/* TOP CONTENT */}
-        <div className="pt-10 lg:pt-24">
-          <h1 className="text-[38px] lg:text-[58px] font-black leading-[48px] lg:leading-[68px]">
+        <div className="pt-10 lg:pt-24 relative">
+          <svg
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            className="absolute top-12 right-0 w-[400px]"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+            {/* <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+            ></path> */}
+          </svg>
+          <h1 className="text-[38px] lg:text-[58px] font-black leading-[48px] lg:leading-[68px] max-w-[900px]">
             Accelerating your project from ideation to token launch and beyond.
           </h1>
-          <p className={`leading-normal pt-4 lg:text-xl ${inter.className}`}>
+          <p
+            className={`leading-normal pt-6 lg:text-xl max-w-[900px] ${inter.className}`}
+          >
             Committed to advising, guiding and incubating the most novel and
             innovative platforms in the Web3 space no matter which stage of
             platform launch you have reached.
           </p>
-          <div className="flex flex-col lg:flex-row items-center pt-10 gap-5 z-20">
+          <div className="flex flex-col lg:flex-row items-center pt-16 gap-5 z-20">
             <Link
               href="#contact"
               className="flex justify-center items-center bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]"
@@ -204,33 +226,47 @@ export default function Incubation() {
       </div>
 
       {/* TOKEN LAUNCH */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white border-t border-b border-samurai-red mt-20">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
+      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 md:py-20 w-full bg-white border-t border-samurai-red mt-20">
+        <svg
+          fill="none"
+          stroke="black"
+          strokeWidth="1"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          className="w-[200px]"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+          ></path>
+        </svg>
+        <div className="flex flex-col text-black relative">
           <h2 className="text-4xl lg:text-5xl font-bold">
             Token <span className="text-samurai-red">Launch</span>
           </h2>
           <div
-            className={`mt-3 leading-normal pt-4 text-xl ${inter.className}`}
+            className={`relative mt-3 leading-normal pt-4 text-xl max-w-[1000px] ${inter.className}`}
           >
             Having supported over 60 projects with their token launches, Samurai
             Launchpad is well-positioned to support your token launch. Whether
             you are raising on seed, private, or public rounds, our vibrant
-            community is eager to accelerate your project.
+            community is eager to accelerate your project.{" "}
+            <Link
+              href="https://medium.com/samurai-starter"
+              target="_blank"
+              className={`absolute bottom-[-10px] right-8 items-center text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
+            >
+              Apply to launchpad →
+            </Link>
           </div>
-
-          <Link
-            href="https://medium.com/samurai-starter"
-            target="_blank"
-            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
-          >
-            Apply to launchpad →
-          </Link>
         </div>
       </div>
 
       {/* SERVICES */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-200">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-800">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Samurai</span> Services
           </h2>
@@ -240,9 +276,9 @@ export default function Incubation() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="flex flex-col gap-2 bg-white/50 border border-samurai-red/50 p-5 rounded-xl shadow-lg"
+                className="flex flex-col gap-2 bg-white border border-black p-8 rounded-xl shadow-lg"
               >
-                <span className="font-bold text-2xl text-black/70">
+                <span className="font-bold text-2xl text-black">
                   {service.title}
                 </span>
                 <p className="text-[16px] text-neutral-800">
@@ -263,7 +299,7 @@ export default function Incubation() {
       </div>
 
       {/* PORTFOLIO */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-300 border-t border-black/20">
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-300 border-t">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">P</span>ortfolio
@@ -287,14 +323,6 @@ export default function Incubation() {
               </div>
             ))}
           </div>
-
-          <Link
-            href="https://medium.com/samurai-starter"
-            target="_blank"
-            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
-          >
-            Apply to launchpad →
-          </Link>
         </div>
       </div>
 
@@ -307,14 +335,6 @@ export default function Incubation() {
           <div
             className={`flex md:justify-center items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
           ></div>
-
-          <Link
-            href="https://medium.com/samurai-starter"
-            target="_blank"
-            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
-          >
-            Apply to launchpad →
-          </Link>
         </div>
       </div>
 
