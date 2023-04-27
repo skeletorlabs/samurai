@@ -98,10 +98,14 @@ export default function Incubation() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="flex flex-col gap-2 border border-samurai-red p-5 rounded-xl"
+                className="flex flex-col gap-2 bg-white/50 border border-samurai-red/50 p-5 rounded-xl shadow-lg"
               >
-                <span className="font-bold text-2xl">{service.title}</span>
-                <p className="text-[16px]">{service.description}</p>
+                <span className="font-bold text-2xl text-black/70">
+                  {service.title}
+                </span>
+                <p className="text-[16px] text-neutral-800">
+                  {service.description}
+                </p>
               </div>
             ))}
           </div>
