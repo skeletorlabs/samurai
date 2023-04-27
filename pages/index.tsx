@@ -130,7 +130,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
+
       {/* LATEST UPDATES */}
       <div className="flex flex-col pt-20 pb-10 w-full px-6 lg:px-8 xl:px-20 bg-neutral-900/50">
         <h2 className="text-6xl font-bold">

@@ -3,12 +3,23 @@ import Image from "next/image";
 import LayoutClean from "@/components/layoutClean";
 import { SOCIALS } from "@/utils/constants";
 import { Inter } from "next/font/google";
+import { useCallback, useState } from "react";
 
 const inter = Inter({
   subsets: ["latin"],
 });
 
+enum bg {
+  light,
+  dark,
+}
+
 export default function Incubation() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
   const services = [
     {
       title: "Fundraising",
@@ -41,11 +52,6 @@ export default function Incubation() {
         "Need a cutting edge designs to attract attention to your project or long-form articles to keep your audience engaged? Our team of graphic design and writing professionals leverage their expertise to suit your needs.",
     },
   ];
-
-  enum bg {
-    light,
-    dark,
-  }
 
   const portfolio = [
     {
@@ -123,6 +129,26 @@ export default function Incubation() {
     { title: "Boba Network", color: "bg-green-400" },
     { title: "Gate Labs", color: "bg-black" },
   ];
+
+  const handleSubmit = useCallback(
+    async (e: any) => {
+      e.preventDefault();
+      const data = {
+        name,
+        email,
+        subject,
+        message,
+      };
+
+      fetch("/api/mail", {
+        method: "post",
+        body: JSON.stringify(data),
+      });
+    },
+    [name, email, subject, message]
+  );
+
+  console.log(name, email, subject, message);
   return (
     <LayoutClean>
       <div className="px-6 lg:px-8 xl:px-20">
@@ -297,7 +323,10 @@ export default function Incubation() {
           <div
             className={`flex items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
           >
-            <div className="flex flex-col p-10 gap-5  bg-slate-300 w-[600px] rounded-2xl relative">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col p-10 gap-5  bg-slate-300 w-[600px] rounded-2xl relative"
+            >
               <svg
                 fill="none"
                 stroke="currentColor"
@@ -313,38 +342,56 @@ export default function Incubation() {
                   d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 001.183 1.981l6.478 3.488m8.839 2.51l-4.66-2.51m0 0l-1.023-.55a2.25 2.25 0 00-2.134 0l-1.022.55m0 0l-4.661 2.51m16.5 1.615a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V8.844a2.25 2.25 0 011.183-1.98l7.5-4.04a2.25 2.25 0 012.134 0l7.5 4.04a2.25 2.25 0 011.183 1.98V19.5z"
                 ></path>
               </svg>
+
               <p className="flex flex-col text-black text-sm gap-2 font-bold">
                 <span>Name:</span>
                 <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   type="text"
                   className="bg-white p-4 text-xl outline-none"
+                  required
                 />
               </p>
               <p className="flex flex-col text-black text-sm gap-2 font-bold">
                 <span>Email:</span>
                 <input
-                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="email"
                   className="bg-white p-4 text-xl outline-none"
+                  required
                 />
               </p>
               <p className="flex flex-col text-black text-sm gap-2 font-bold">
                 <span>Subject:</span>
                 <input
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
                   type="text"
                   className="bg-white p-4 text-xl outline-none"
+                  required
                 />
               </p>
               <p className="flex flex-col text-black text-sm gap-2 font-bold">
                 <span>Message:</span>
-                <textarea className="bg-white p-4 text-xl h-[200px] outline-none" />
+                <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className="bg-white p-4 text-xl h-[200px] outline-none"
+                  required
+                />
               </p>
               <div className="h-[0.5px] w-full px-5">
                 <div className="w-full h-full  bg-black" />
               </div>
-              <button className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full">
+              <button
+                type="submit"
+                className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full"
+              >
                 Send
               </button>
-            </div>
+            </form>
           </div>
 
           <Link
