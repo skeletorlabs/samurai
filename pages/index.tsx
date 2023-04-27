@@ -9,9 +9,9 @@ import Card from "@/components/card";
 import { Project } from "@/utils/interfaces";
 import { Inter } from "next/font/google";
 
-const inter = Inter({
-  subsets: ["latin"],
-});
+// const inter = Inter({
+//   subsets: ["latin"],
+// });
 
 const latestupdates = [
   {

@@ -2,9 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const body = JSON.parse(req.body)
-  // console.log(body)
-
   const mail = require('@sendgrid/mail')
+
   mail.setApiKey(process.env.NEXT_PUBLIC_SEND_GRID_API_KEY)
 
   const message = `
