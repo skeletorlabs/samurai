@@ -191,7 +191,7 @@ export default function Incubation() {
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
-            className="absolute top-12 right-0 w-[400px]"
+            className="hidden xl:block absolute top-12 right-[-20px] w-[350px]"
           >
             <path
               strokeLinecap="round"
@@ -204,11 +204,11 @@ export default function Incubation() {
               d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
             ></path> */}
           </svg>
-          <h1 className="text-[38px] lg:text-[58px] font-black leading-[48px] lg:leading-[68px] max-w-[900px]">
+          <h1 className="text-[38px] lg:text-[58px] font-black leading-[48px] lg:leading-[68px] xl:max-w-[900px]">
             Accelerating your project from ideation to token launch and beyond.
           </h1>
           <p
-            className={`leading-normal pt-6 lg:text-xl max-w-[900px] ${inter.className}`}
+            className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px] ${inter.className}`}
           >
             Committed to advising, guiding and incubating the most novel and
             innovative platforms in the Web3 space no matter which stage of
@@ -226,7 +226,7 @@ export default function Incubation() {
       </div>
 
       {/* TOKEN LAUNCH */}
-      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 md:py-20 w-full bg-white border-t border-samurai-red mt-20">
+      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-white border-t border-samurai-red mt-20">
         <svg
           fill="none"
           stroke="black"
@@ -234,7 +234,7 @@ export default function Incubation() {
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
-          className="w-[200px]"
+          className="hidden xl:block w-[200px]"
         >
           <path
             strokeLinecap="round"
@@ -256,7 +256,7 @@ export default function Incubation() {
             <Link
               href="https://medium.com/samurai-starter"
               target="_blank"
-              className={`absolute bottom-[-10px] right-8 items-center text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
+              className={`absolute bottom-[-40px] right-8 items-center text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
             >
               Apply to launchpad →
             </Link>
