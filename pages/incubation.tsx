@@ -201,6 +201,7 @@ export default function Incubation() {
           >
             {portfolio.map((item, index) => (
               <div
+                key={index}
                 className={`flex justify-center items-center rounded-full w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] p-10 transition-all hover:scale-105 ${
                   item.color === bg.dark ? "bg-black" : "bg-white"
                 } hover:shadow-xl`}
