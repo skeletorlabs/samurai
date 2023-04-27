@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function BottomNav() {
   return (
-    <nav className="fixed lg:hidden bottom-0 w-full h-[80px] bg-samurai-red z-50 pb-2">
+    <nav className="fixed lg:hidden bottom-0 w-full h-[80px] bg-[#FF284C] z-50 pb-2">
       <div className="flex justify-around items-center w-full h-full px-4">
         {NAV.map((item, index) => (
           <Link
