@@ -119,17 +119,30 @@ export default function Incubation() {
     },
   ];
 
-  const partners = [
-    { title: "Polygon", color: "bg-purple-700" },
-    { title: "OKX Chain", color: "bg-black/70" },
-    { title: "BNB Chain", color: "bg-yellow-600" },
-    { title: "Avalanche", color: "bg-red-500" },
-    { title: "Fantom", color: "bg-blue-500" },
-    { title: "SupraOracles", color: "bg-red-600" },
-    { title: "Syscoin", color: "bg-blue-600" },
-    { title: "Cherry Network", color: "bg-red-600" },
-    { title: "Boba Network", color: "bg-green-400" },
-    { title: "Gate Labs", color: "bg-black" },
+  // const partners = [
+  //   { title: "Polygon", color: "bg-purple-700" },
+  //   { title: "OKX Chain", color: "bg-black/70" },
+  //   { title: "BNB Chain", color: "bg-yellow-600" },
+  //   { title: "Avalanche", color: "bg-red-500" },
+  //   { title: "Fantom", color: "bg-blue-500" },
+  //   { title: "SupraOracles", color: "bg-red-600" },
+  //   { title: "Syscoin", color: "bg-blue-600" },
+  //   { title: "Cherry Network", color: "bg-red-600" },
+  //   { title: "Boba Network", color: "bg-green-400" },
+  //   { title: "Gate Labs", color: "bg-black" },
+  // ];
+
+  const partnersLogos = [
+    { src: "/partners/polygon.svg", color: bg.light },
+    { src: "/partners/okx.svg", color: bg.dark },
+    { src: "/partners/bsc.svg", color: bg.light },
+    { src: "/partners/avalanche.svg", color: bg.light },
+    { src: "/partners/fantom.svg", color: bg.light },
+    { src: "/partners/supra.svg", color: bg.light },
+    { src: "/partners/syscoin.svg", color: bg.light },
+    { src: "/partners/cherry.svg", color: bg.light },
+    { src: "/partners/boba.svg", color: bg.dark },
+    { src: "/partners/gatelabs.svg", color: bg.light },
   ];
 
   const handleSubmit = useCallback(
@@ -180,9 +193,12 @@ export default function Incubation() {
             platform launch you have reached.
           </p>
           <div className="flex flex-col lg:flex-row items-center pt-10 gap-5 z-20">
-            <button className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]">
+            <Link
+              href="#contact"
+              className="flex justify-center items-center bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]"
+            >
               Get Started
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -303,7 +319,7 @@ export default function Incubation() {
       </div>
 
       {/* PARTNERS */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-300 border-t border-black/20">
+      {/* <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-300 border-t border-black/20">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
           <h2 className="text-4xl lg:text-5xl font-bold">
             Our <span className="text-samurai-red">Partners</span>
@@ -329,10 +345,46 @@ export default function Incubation() {
             Apply to launchpad →
           </Link>
         </div>
+      </div> */}
+
+      {/* PARTNERS */}
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-300 border-t border-black/20">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
+          <h2 className="text-4xl lg:text-5xl font-bold">
+            Our <span className="text-samurai-red">Partners</span>
+          </h2>
+          <div
+            className={`flex items-center flex-wrap gap-5 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+          >
+            {partnersLogos.map((item, index) => (
+              <Image
+                key={index}
+                src={item.src}
+                width={300}
+                height={300}
+                alt=""
+                className={`flex justify-center items-center ${
+                  item.color === bg.dark ? "bg-black" : "bg-white"
+                } py-5 px-10 rounded-[8px] min-h-[200px]`}
+              />
+            ))}
+          </div>
+
+          <Link
+            href="https://medium.com/samurai-starter"
+            target="_blank"
+            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
+          >
+            Apply to launchpad →
+          </Link>
+        </div>
       </div>
 
       {/* CONTACT */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-black border-t border-black/20">
+      <div
+        id="contact"
+        className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-black border-t border-black/20"
+      >
         <div className="flex flex-col px-6 lg:px-8 xl:px-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Contact</span> Us

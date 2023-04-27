@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  /* background: #010102; */
-  background-color: black;
+@layer base {
+  html {
+    background-color: black;
+    scroll-behavior: smooth;
+  }
 }
