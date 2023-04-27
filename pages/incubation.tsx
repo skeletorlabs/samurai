@@ -93,7 +93,7 @@ export default function Incubation() {
             <span className="text-samurai-red">Samurai</span> Services
           </h2>
           <div
-            className={`grid lg:grid-cols-3 gap-10 leading-normal pt-16 text-xl ${inter.className}`}
+            className={`grid lg:grid-cols-3 gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
           >
             {services.map((service, index) => (
               <div
