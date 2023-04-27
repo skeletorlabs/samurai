@@ -19,6 +19,8 @@ export default function Incubation() {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [mailSent, setMailSent] = useState(false);
 
   const services = [
     {
@@ -133,6 +135,8 @@ export default function Incubation() {
   const handleSubmit = useCallback(
     async (e: any) => {
       e.preventDefault();
+      setLoading(true);
+
       const data = {
         name,
         email,
@@ -140,15 +144,28 @@ export default function Incubation() {
         message,
       };
 
-      fetch("/api/mail", {
+      const result = await fetch("/api/mail", {
         method: "post",
         body: JSON.stringify(data),
       });
+
+      setLoading(false);
+      if (result.ok) {
+        setMailSent(true);
+        setName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
+
+        const interval = setInterval(() => {
+          setMailSent(false);
+          clearInterval(interval);
+        }, 4000);
+      }
     },
     [name, email, subject, message]
   );
 
-  console.log(name, email, subject, message);
   return (
     <LayoutClean>
       <div className="px-6 lg:px-8 xl:px-20">
@@ -342,7 +359,14 @@ export default function Incubation() {
                   d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 001.183 1.981l6.478 3.488m8.839 2.51l-4.66-2.51m0 0l-1.023-.55a2.25 2.25 0 00-2.134 0l-1.022.55m0 0l-4.661 2.51m16.5 1.615a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V8.844a2.25 2.25 0 011.183-1.98l7.5-4.04a2.25 2.25 0 012.134 0l7.5 4.04a2.25 2.25 0 011.183 1.98V19.5z"
                 ></path>
               </svg>
-
+              <div
+                className={`
+                    text-md rounded-full w-max mb-5 text-black
+                    ${!loading && mailSent && "text-samurai-red"}
+                  `}
+              >
+                {mailSent ? "Message successfully sent!" : "Send a message"}
+              </div>
               <p className="flex flex-col text-black text-sm gap-2 font-bold">
                 <span>Name:</span>
                 <input
@@ -386,10 +410,15 @@ export default function Incubation() {
                 <div className="w-full h-full  bg-black" />
               </div>
               <button
+                disabled={loading}
                 type="submit"
-                className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full"
+                className={`${
+                  loading
+                    ? "bg-slate-400"
+                    : "bg-[#FF284C] hover:bg-black/90 hover:text-white hover:border-white"
+                } border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all  w-full`}
               >
-                Send
+                {loading ? "Loading..." : "Send"}
               </button>
             </form>
           </div>
