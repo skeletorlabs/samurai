@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Layout from "@/components/layout";
+import LayoutClean from "@/components/layoutClean";
 import { SOCIALS } from "@/utils/constants";
 import { Inter } from "next/font/google";
 
@@ -8,15 +8,47 @@ const inter = Inter({
 });
 
 export default function Incubation() {
+  const services = [
+    {
+      title: "Fundraising",
+      description:
+        "We leverage our ever-growing network of well-established venture capital firms and launchpads to help our partners raise the funds necessary to get their projects off the ground in a strong financial position.",
+    },
+    {
+      title: "Strategy",
+      description:
+        "We apply our expertise in advising projects on step-by-step strategies for growing their business. From project ideation, through fundraising and platform launch, our partners leverage our expertise to develop global strategies.",
+    },
+    {
+      title: "Business Development",
+      description:
+        "We connect you to the highest value-add partners in the web3 space. If you need developers, market makers, CEX listings, auditors and other strategic partners, we connect you to the best in the business.",
+    },
+    {
+      title: "Marketing",
+      description:
+        "Spreading the word to reach new audiences is critical in the web3 space. We help deliver your marketing communications to a global audience through our in-house socials, our PR branch, and other marketing partners.",
+    },
+    {
+      title: "Community Building",
+      description:
+        "Samurai Starter investors are incentivized to not only invest money, but also time into early-stage web3 projects. Our Samurai Sanka platform incentivizes active platform participation.",
+    },
+    {
+      title: "Content Creation",
+      description:
+        "Need a cutting edge designs to attract attention to your project or long-form articles to keep your audience engaged? Our team of graphic design and writing professionals leverage their expertise to suit your needs.",
+    },
+  ];
   return (
-    <Layout>
+    <LayoutClean>
       <div className="px-6 lg:px-8 xl:px-20">
         {/* TOP CONTENT */}
-        <div className="pt-10 lg:pt-24 lg:max-w-[750px] lg:h-[630px]">
-          <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
+        <div className="pt-10 lg:pt-24">
+          <h1 className="text-[58px] font-black leading-[68px]">
             Accelerating your project from ideation to token launch and beyond.
           </h1>
-          <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
+          <p className={`leading-normal pt-4 text-xl ${inter.className}`}>
             Committed to advising, guiding and incubating the most novel and
             innovative platforms in the Web3 space no matter which stage of
             platform launch you have reached.
@@ -27,14 +59,16 @@ export default function Incubation() {
             </button>
           </div>
         </div>
+      </div>
 
-        {/* LATEST UPDATES */}
-        <div className="flex flex-col pt-20 pb-10 w-full bg-neutral-900/50">
+      {/* TOKEN LAUNCH */}
+      <div className="flex flex-col pt-20 pb-10 w-full bg-white border-t border-b border-samurai-red mt-20">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
           <h2 className="text-6xl font-bold">
             Token <span className="text-samurai-red">Launch</span>
           </h2>
           <div
-            className={`mt-3 leading-normal pt-4 text-2xl ${inter.className}`}
+            className={`mt-3 leading-normal pt-4 text-xl ${inter.className}`}
           >
             Having supported over 60 projects with their token launches, Samurai
             Launchpad is well-positioned to support your token launch. Whether
@@ -43,13 +77,39 @@ export default function Incubation() {
           </div>
 
           <Link
-            href="/launchpad"
-            className="flex items-center self-end bg-white text-samurai-red border rounded-2xl border-samurai-red px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[230px]"
+            href="https://medium.com/samurai-starter"
+            target="_blank"
+            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
           >
-            Apply to Launchpad
+            Apply to launchpad →
           </Link>
         </div>
       </div>
-    </Layout>
+
+      {/* SERVICES */}
+      <div className="flex flex-col pt-20 pb-10 w-full bg-slate-200">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
+          <h2 className="text-6xl font-bold text-samurai-red">Services</h2>
+          <div
+            className={`grid grid-cols-3 gap-10 leading-normal pt-10 text-xl ${inter.className}`}
+          >
+            {services.map((service, index) => (
+              <div key={index} className="flex flex-col gap-2">
+                <span className="font-bold text-2xl">{service.title}</span>
+                <p>{service.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <Link
+            href="https://medium.com/samurai-starter"
+            target="_blank"
+            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
+          >
+            Apply to launchpad →
+          </Link>
+        </div>
+      </div>
+    </LayoutClean>
   );
 }
