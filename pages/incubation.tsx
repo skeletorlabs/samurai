@@ -45,10 +45,10 @@ export default function Incubation() {
       <div className="px-6 lg:px-8 xl:px-20">
         {/* TOP CONTENT */}
         <div className="pt-10 lg:pt-24">
-          <h1 className="text-[58px] font-black leading-[68px]">
+          <h1 className="text-[38px] lg:text-[58px] font-black leading-[48px] lg:leading-[68px]">
             Accelerating your project from ideation to token launch and beyond.
           </h1>
-          <p className={`leading-normal pt-4 text-xl ${inter.className}`}>
+          <p className={`leading-normal pt-4 lg:text-xl ${inter.className}`}>
             Committed to advising, guiding and incubating the most novel and
             innovative platforms in the Web3 space no matter which stage of
             platform launch you have reached.
@@ -62,9 +62,9 @@ export default function Incubation() {
       </div>
 
       {/* TOKEN LAUNCH */}
-      <div className="flex flex-col pt-20 pb-10 w-full bg-white border-t border-b border-samurai-red mt-20">
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white border-t border-b border-samurai-red mt-20">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
-          <h2 className="text-5xl font-bold">
+          <h2 className="text-4xl lg:text-5xl font-bold">
             Token <span className="text-samurai-red">Launch</span>
           </h2>
           <div
@@ -87,9 +87,9 @@ export default function Incubation() {
       </div>
 
       {/* SERVICES */}
-      <div className="flex flex-col pt-20 pb-10 w-full bg-slate-200">
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-200">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
-          <h2 className="text-5xl font-bold">
+          <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Samurai</span> Services
           </h2>
           <div
