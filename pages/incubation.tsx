@@ -27,31 +27,37 @@ export default function Incubation() {
       title: "Fundraising",
       description:
         "We leverage our ever-growing network of well-established venture capital firms and launchpads to help our partners raise the funds necessary to get their projects off the ground in a strong financial position.",
+      color: bg.dark,
     },
     {
       title: "Strategy",
       description:
         "We apply our expertise in advising projects on step-by-step strategies for growing their business. From project ideation, through fundraising and platform launch, our partners leverage our expertise to develop global strategies.",
+      color: bg.light,
     },
     {
       title: "Business Development",
       description:
         "We connect you to the highest value-add partners in the web3 space. If you need developers, market makers, CEX listings, auditors and other strategic partners, we connect you to the best in the business.",
+      color: bg.dark,
     },
     {
       title: "Marketing",
       description:
         "Spreading the word to reach new audiences is critical in the web3 space. We help deliver your marketing communications to a global audience through our in-house socials, our PR branch, and other marketing partners.",
+      color: bg.light,
     },
     {
       title: "Community Building",
       description:
         "Samurai Starter investors are incentivized to not only invest money, but also time into early-stage web3 projects. Our Samurai Sanka platform incentivizes active platform participation.",
+      color: bg.dark,
     },
     {
       title: "Content Creation",
       description:
         "Need a cutting edge designs to attract attention to your project or long-form articles to keep your audience engaged? Our team of graphic design and writing professionals leverage their expertise to suit your needs.",
+      color: bg.light,
     },
   ];
 
@@ -276,12 +282,20 @@ export default function Incubation() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="flex flex-col gap-2 bg-white border border-black p-8 rounded-xl shadow-lg"
+                className={`flex flex-col gap-2 ${
+                  service.color === bg.light
+                    ? "bg-white text-black"
+                    : "bg-black text-white"
+                }  border border-black p-8 rounded-xl shadow-lg`}
               >
-                <span className="font-bold text-2xl text-black">
-                  {service.title}
-                </span>
-                <p className="text-[16px] text-neutral-800">
+                <span className="font-bold text-2xl">{service.title}</span>
+                <p
+                  className={`text-[16px] ${
+                    service.color === bg.light
+                      ? "text-neutral-800"
+                      : "text-neutral-400"
+                  }`}
+                >
                   {service.description}
                 </p>
               </div>
