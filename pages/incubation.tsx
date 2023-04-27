@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import LayoutClean from "@/components/layoutClean";
 import { SOCIALS } from "@/utils/constants";
 import { Inter } from "next/font/google";
@@ -38,6 +39,75 @@ export default function Incubation() {
       title: "Content Creation",
       description:
         "Need a cutting edge designs to attract attention to your project or long-form articles to keep your audience engaged? Our team of graphic design and writing professionals leverage their expertise to suit your needs.",
+    },
+  ];
+
+  enum bg {
+    light,
+    dark,
+  }
+
+  const portfolio = [
+    {
+      image: "/portfolio/changex.svg",
+      width: 200,
+      height: 200,
+      color: bg.light,
+    },
+    {
+      image: "/portfolio/onering.svg",
+      width: 400,
+      height: 400,
+      color: bg.dark,
+    },
+    {
+      image: "/portfolio/acreworld.svg",
+      width: 180,
+      height: 200,
+      color: bg.light,
+    },
+    { image: "/portfolio/nfty.svg", width: 300, height: 200, color: bg.dark },
+    {
+      image: "/portfolio/roguewest.svg",
+      width: 200,
+      height: 200,
+      color: bg.dark,
+    },
+    {
+      image: "/portfolio/smartplaces.svg",
+      width: 300,
+      height: 200,
+      color: bg.light,
+    },
+    {
+      image: "/portfolio/buktechnology.svg",
+      width: 300,
+      height: 200,
+      color: bg.dark,
+    },
+    {
+      image: "/portfolio/inwariumonline.svg",
+      width: 200,
+      height: 200,
+      color: bg.dark,
+    },
+    {
+      image: "/portfolio/rewater.svg",
+      width: 300,
+      height: 200,
+      color: bg.dark,
+    },
+    {
+      image: "/portfolio/alterverse.svg",
+      width: 200,
+      height: 200,
+      color: bg.dark,
+    },
+    {
+      image: "/portfolio/thepiece.svg",
+      width: 300,
+      height: 200,
+      color: bg.light,
     },
   ];
   return (
@@ -106,6 +176,41 @@ export default function Incubation() {
                 <p className="text-[16px] text-neutral-800">
                   {service.description}
                 </p>
+              </div>
+            ))}
+          </div>
+
+          <Link
+            href="https://medium.com/samurai-starter"
+            target="_blank"
+            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
+          >
+            Apply to launchpad →
+          </Link>
+        </div>
+      </div>
+
+      {/* PORTFOLIO */}
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-200 border-t border-black/20">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
+          <h2 className="text-4xl lg:text-5xl font-bold">
+            <span className="text-samurai-red">P</span>ortfolio
+          </h2>
+          <div
+            className={`flex md:justify-center items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+          >
+            {portfolio.map((item, index) => (
+              <div
+                className={`flex justify-center items-center rounded-full w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] p-10 transition-all hover:scale-105 ${
+                  item.color === bg.dark ? "bg-black" : "bg-white"
+                } hover:shadow-xl`}
+              >
+                <Image
+                  src={item.image}
+                  width={item.width}
+                  height={item.height}
+                  alt=""
+                />
               </div>
             ))}
           </div>
