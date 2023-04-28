@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { NAV } from "@/utils/constants";
 import Image from "next/image";
+import { useContext } from "react";
+import { StateContext } from "@/context/StateContext";
 
 export default function BottomNav() {
+  const { page, setPage } = useContext(StateContext);
+
   return (
     <nav className="fixed lg:hidden bottom-0 w-full h-[80px] bg-[#FF284C] z-50 pb-2">
       <div className="flex justify-around items-center w-full h-full px-4">
@@ -10,16 +14,14 @@ export default function BottomNav() {
           <Link
             key={index}
             href={item.href}
-            className={` text-[8px] sm:text-md hover:opacity-75 text-slate-500"
-              }`}
+            className={`text-[8px] sm:text-md  ${
+              item.page === page
+                ? "text-black"
+                : "text-white hover:text-pink-900"
+            }`}
           >
-            <div className="flex flex-col items-center text-white">
-              <Image
-                src={item.iconHref}
-                width={24}
-                height={24}
-                alt={item.title}
-              />
+            <div className="flex flex-col items-center">
+              <div className="w-[24px] h-[24px]">{item.icon}</div>
               <span>{item.title.toUpperCase()}</span>
             </div>
           </Link>

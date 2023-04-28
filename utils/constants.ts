@@ -5,6 +5,11 @@ import {
   discord,
   linkedin,
   home,
+  nft,
+  rocket,
+  sanka,
+  token,
+  incubation,
 } from '@/utils/svgs'
 import { Page } from './enums'
 
@@ -12,31 +17,31 @@ export const NAV = [
   {
     title: 'SamNFT',
     href: '#',
-    iconHref: '/nft-icon.svg',
+    icon: nft,
     page: Page.nft,
   },
   {
     title: 'Launchpad',
     href: '/launchpad',
-    iconHref: '/rocketship-icon.svg',
+    icon: rocket,
     page: Page.launchpad,
   },
   {
     title: 'Sanka',
     href: '#',
-    iconHref: '/knife-icon.svg',
+    icon: sanka,
     page: Page.sanka,
   },
   {
     title: 'Tokens',
     href: '#',
-    iconHref: '/coin-icon.svg',
+    icon: token,
     page: Page.tokens,
   },
   {
     title: 'Incubation',
     href: '/incubation',
-    iconHref: '/incubation-icon.svg',
+    icon: incubation,
     page: Page.incubation,
   },
 ]
