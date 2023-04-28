@@ -17,8 +17,7 @@ enum bg {
 const applyToLaunchpad = (
   <div className="flex justify-end mt-8">
     <Link
-      href="https://medium.com/samurai-starter"
-      target="_blank"
+      href="/launchpad"
       className={`items-center text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
     >
       Apply to launchpad →
@@ -261,8 +260,7 @@ export default function Incubation() {
             community is eager to accelerate your project.{" "}
             <div className="absolute bottom-[-40px] right-8 flex justify-end">
               <Link
-                href="https://medium.com/samurai-starter"
-                target="_blank"
+                href="/launchpad"
                 className={`items-center text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
               >
                 Apply to launchpad →
@@ -422,14 +420,14 @@ export default function Incubation() {
                   d="M21.75 9v.906a2.25 2.25 0 01-1.183 1.981l-6.478 3.488M2.25 9v.906a2.25 2.25 0 001.183 1.981l6.478 3.488m8.839 2.51l-4.66-2.51m0 0l-1.023-.55a2.25 2.25 0 00-2.134 0l-1.022.55m0 0l-4.661 2.51m16.5 1.615a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V8.844a2.25 2.25 0 011.183-1.98l7.5-4.04a2.25 2.25 0 012.134 0l7.5 4.04a2.25 2.25 0 011.183 1.98V19.5z"
                 ></path>
               </svg>
-              <div
+              <span
                 className={`
-                    text-md rounded-full w-max mb-5 text-black
-                    ${!loading && mailSent && "text-samurai-red"}
+                    text-md rounded-full w-max mb-5 
+                    ${mailSent ? "text-samurai-red" : "text-white"}
                   `}
               >
                 {mailSent ? "Message successfully sent!" : "Send a message"}
-              </div>
+              </span>
               <p className="flex flex-col text-sm gap-2 font-bold">
                 <span>Name:</span>
                 <input
@@ -475,11 +473,11 @@ export default function Incubation() {
               <button
                 disabled={loading}
                 type="submit"
-                className={`${
+                className={`border rounded-2xl  px-8 h-14 text-lg transition-all  w-full ${
                   loading
-                    ? "bg-slate-400"
-                    : "bg-[#FF284C] hover:bg-black/90 hover:text-white hover:border-white"
-                } border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all  w-full`}
+                    ? "bg-white/5 text-white/10 border-white/20"
+                    : "bg-[#FF284C] border-[#e2d4d6] hover:bg-black/90 hover:text-white hover:border-white"
+                }`}
               >
                 {loading ? "Loading..." : "Send"}
               </button>

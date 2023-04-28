@@ -1,4 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import StateProvider from "@/context/StateContext";
 
 export default function Document() {
   return (
