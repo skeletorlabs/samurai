@@ -6,32 +6,38 @@ import {
   linkedin,
   home,
 } from '@/utils/svgs'
+import { Page } from './enums'
 
 export const NAV = [
   {
     title: 'SamNFT',
     href: '#',
     iconHref: '/nft-icon.svg',
+    page: Page.nft,
   },
   {
     title: 'Launchpad',
-    href: '#',
+    href: '/launchpad',
     iconHref: '/rocketship-icon.svg',
+    page: Page.launchpad,
   },
   {
     title: 'Sanka',
     href: '#',
     iconHref: '/knife-icon.svg',
+    page: Page.sanka,
   },
   {
     title: 'Tokens',
     href: '#',
     iconHref: '/coin-icon.svg',
+    page: Page.tokens,
   },
   {
     title: 'Incubation',
-    href: '#',
+    href: '/incubation',
     iconHref: '/incubation-icon.svg',
+    page: Page.incubation,
   },
 ]
 

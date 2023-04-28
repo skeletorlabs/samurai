@@ -1,15 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NAV } from "@/utils/constants";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Inter } from "next/font/google";
+import { StateContext } from "@/context/StateContext";
+
 const inter = Inter({
   subsets: ["latin"],
 });
+
 export default function Nav() {
   const [active, setActive] = useState("");
+  const { page, setPage } = useContext(StateContext);
   return (
-    <div className="h-20 px-2 lg:px-8 flex items-center justify-between mt-10 z-10">
+    <div
+      className={`h-20 px-2 lg:px-8 flex items-center justify-between mt-10 z-10`}
+    >
       <div className="flex items-center w-full gap-9 font-bold text-xl">
         <Link
           href="/"
@@ -29,10 +35,11 @@ export default function Nav() {
             key={index}
             href={item.href}
             className={`hidden lg:flex hover:border-b hover:border-samurai-red h-8 ${
-              active === item.title &&
-              "text-samurai-red border-b border-samurai-red"
-            } ${inter.className}`}
-            onClick={() => setActive(item.title)}
+              page === item.page
+                ? "text-samurai-red border-b border-samurai-red"
+                : ""
+            }`}
+            onClick={() => setPage(item.page)}
           >
             {item.title}
           </Link>
