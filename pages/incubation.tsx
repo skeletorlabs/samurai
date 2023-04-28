@@ -121,7 +121,7 @@ export default function Incubation() {
       image: "/portfolio/rewater.svg",
       width: 300,
       height: 200,
-      color: bg.dark,
+      color: bg.light,
     },
     {
       image: "/portfolio/alterverse.svg",
@@ -147,7 +147,7 @@ export default function Incubation() {
     { src: "/partners/polygon.svg", color: bg.light },
     { src: "/partners/okx.svg", color: bg.dark },
     { src: "/partners/bsc.svg", color: bg.light },
-    { src: "/partners/avalanche.svg", color: bg.light },
+    { src: "/partners/avalanche.svg", color: bg.dark },
     { src: "/partners/fantom.svg", color: bg.light },
     { src: "/partners/supra.svg", color: bg.light },
     { src: "/partners/syscoin.svg", color: bg.light },
@@ -309,13 +309,13 @@ export default function Incubation() {
       </div>
 
       {/* PORTFOLIO */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-300 border-t">
+      <div className="flex flex-col py-10 md:py-20 w-full bg-slate-300 border-t">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">P</span>ortfolio
           </h2>
           <div
-            className={`flex md:justify-center items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+            className={`flex justify-center items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
           >
             {portfolio.map((item, index) => (
               <div
@@ -337,13 +337,13 @@ export default function Incubation() {
       </div>
 
       {/* TEAM */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-black border-t border-black/20">
+      <div className="flex flex-col py-10 md:py-20 w-full bg-black border-t border-black/20">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">T</span>eam
           </h2>
           <div
-            className={`flex items-center flex-wrap gap-10 leading-normal py-10 xl:py-16 text-xl ${inter.className}`}
+            className={`flex justify-center md:justify-start items-center flex-wrap gap-10 leading-normal py-10 xl:py-16 text-xl ${inter.className}`}
           >
             {team.map((member, index) => (
               <div className="flex flex-col justify-center items-center p-5 pb-2 bg-white rounded-xl transition-all hover:scale-105">
@@ -352,6 +352,7 @@ export default function Incubation() {
                   width={220}
                   height={220}
                   alt={member.name}
+                  className="w-[400px] md:w-[220px]"
                 />
                 <span className="text-black mt-1">{member.name}</span>
               </div>
@@ -378,7 +379,7 @@ export default function Incubation() {
                 alt=""
                 className={`flex justify-center items-center ${
                   item.color === bg.dark ? "bg-black" : "bg-white"
-                } py-5 px-10 rounded-[8px] min-h-[200px] transition-all hover:scale-105 shadow-xl hover:shadow-2xl`}
+                } py-5 px-10 rounded-[8px] w-full md:w-[300px] min-h-[200px] transition-all hover:scale-105 shadow-xl hover:shadow-2xl`}
               />
             ))}
           </div>
