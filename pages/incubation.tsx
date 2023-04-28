@@ -232,7 +232,7 @@ export default function Incubation() {
       </div>
 
       {/* TOKEN LAUNCH */}
-      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-white border-t border-samurai-red mt-20">
+      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-white border-t border-samurai-red mt-20 text-black">
         <svg
           fill="none"
           stroke="black"
