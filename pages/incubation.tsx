@@ -214,7 +214,7 @@ export default function Incubation() {
           <svg
             fill="none"
             stroke="currentColor"
-            strokeWidth="1"
+            strokeWidth="0.5"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
@@ -252,11 +252,11 @@ export default function Incubation() {
         <svg
           fill="none"
           stroke="black"
-          strokeWidth="1"
+          strokeWidth="0.5"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
-          className="hidden xl:block w-[200px]"
+          className="hidden xl:block w-[200px] drop-shadow-[6px_6px_6px_gray]"
         >
           <path
             strokeLinecap="round"
@@ -305,7 +305,13 @@ export default function Incubation() {
                     : "bg-black text-white"
                 }  border border-black p-8 rounded-xl shadow-lg transition-all hover:scale-105`}
               >
-                <span className="font-bold text-2xl">{service.title}</span>
+                <span
+                  className={`font-bold text-2xl border-b-[0.5px] ${
+                    service.color === bg.light ? "border-black" : "border-white"
+                  } pb-3  mb-2`}
+                >
+                  {service.title}
+                </span>
                 <p
                   className={`text-[16px] ${
                     service.color === bg.light
@@ -330,7 +336,7 @@ export default function Incubation() {
             <span className="text-samurai-red">P</span>ortfolio
           </h2>
           <div
-            className={`flex justify-center items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+            className={`flex justify-center lg:justify-start items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
           >
             {portfolio.map((item, index) => (
               <div

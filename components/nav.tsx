@@ -1,26 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NAV } from "@/utils/constants";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { Inter } from "next/font/google";
 import { StateContext } from "@/context/StateContext";
+import { Page } from "@/utils/enums";
 
 const inter = Inter({
   subsets: ["latin"],
 });
 
 export default function Nav() {
-  const [active, setActive] = useState("");
   const { page, setPage } = useContext(StateContext);
   return (
     <div
-      className={`h-20 px-2 lg:px-8 flex items-center justify-between mt-10 z-10`}
+      className={`h-20 px-2 lg:px-8 flex items-center justify-between mt-5 z-10 ${inter.className}`}
     >
       <div className="flex items-center w-full gap-9 font-bold text-xl">
         <Link
           href="/"
           className="transition-all hover:opacity-75"
-          onClick={() => setActive("")}
+          onClick={() => setPage(Page.home)}
         >
           <Image
             src="/logo.svg"
