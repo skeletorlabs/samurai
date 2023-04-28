@@ -14,6 +14,18 @@ enum bg {
   dark,
 }
 
+const applyToLaunchpad = (
+  <div className="flex justify-end mt-8">
+    <Link
+      href="https://medium.com/samurai-starter"
+      target="_blank"
+      className={`items-center text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
+    >
+      Apply to launchpad →
+    </Link>
+  </div>
+);
+
 export default function Incubation() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -125,18 +137,11 @@ export default function Incubation() {
     },
   ];
 
-  // const partners = [
-  //   { title: "Polygon", color: "bg-purple-700" },
-  //   { title: "OKX Chain", color: "bg-black/70" },
-  //   { title: "BNB Chain", color: "bg-yellow-600" },
-  //   { title: "Avalanche", color: "bg-red-500" },
-  //   { title: "Fantom", color: "bg-blue-500" },
-  //   { title: "SupraOracles", color: "bg-red-600" },
-  //   { title: "Syscoin", color: "bg-blue-600" },
-  //   { title: "Cherry Network", color: "bg-red-600" },
-  //   { title: "Boba Network", color: "bg-green-400" },
-  //   { title: "Gate Labs", color: "bg-black" },
-  // ];
+  const team = [
+    { src: "/team/avatar0.svg", name: "Lucas" },
+    { src: "/team/avatar1.svg", name: "Paul" },
+    { src: "/team/avatar2.svg", name: "Chadagorn" },
+  ];
 
   const partnersLogos = [
     { src: "/partners/polygon.svg", color: bg.light },
@@ -204,11 +209,6 @@ export default function Incubation() {
               strokeLinejoin="round"
               d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
             ></path>
-            {/* <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
-            ></path> */}
           </svg>
           <h1 className="text-[38px] lg:text-[58px] font-black leading-[48px] lg:leading-[68px] xl:max-w-[900px]">
             Accelerating your project from ideation to token launch and beyond.
@@ -223,7 +223,7 @@ export default function Incubation() {
           <div className="flex flex-col lg:flex-row items-center pt-16 gap-5 z-20">
             <Link
               href="#contact"
-              className="flex justify-center items-center bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]"
+              className="flex justify-center items-center hover:bg-[#FF284C] border rounded-2xl hover:border-[#e2d4d6] px-8 h-14 text-lg transition-all bg-black/90 text-white border-white w-full lg:w-[190px]"
             >
               Get Started
             </Link>
@@ -248,7 +248,7 @@ export default function Incubation() {
             d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
           ></path>
         </svg>
-        <div className="flex flex-col text-black relative">
+        <div className="flex flex-col relative">
           <h2 className="text-4xl lg:text-5xl font-bold">
             Token <span className="text-samurai-red">Launch</span>
           </h2>
@@ -259,13 +259,15 @@ export default function Incubation() {
             Launchpad is well-positioned to support your token launch. Whether
             you are raising on seed, private, or public rounds, our vibrant
             community is eager to accelerate your project.{" "}
-            <Link
-              href="https://medium.com/samurai-starter"
-              target="_blank"
-              className={`absolute bottom-[-40px] right-8 items-center text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
-            >
-              Apply to launchpad →
-            </Link>
+            <div className="absolute bottom-[-40px] right-8 flex justify-end">
+              <Link
+                href="https://medium.com/samurai-starter"
+                target="_blank"
+                className={`items-center text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
+              >
+                Apply to launchpad →
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -286,7 +288,7 @@ export default function Incubation() {
                   service.color === bg.light
                     ? "bg-white text-black"
                     : "bg-black text-white"
-                }  border border-black p-8 rounded-xl shadow-lg`}
+                }  border border-black p-8 rounded-xl shadow-lg transition-all hover:scale-105`}
               >
                 <span className="font-bold text-2xl">{service.title}</span>
                 <p
@@ -302,13 +304,7 @@ export default function Incubation() {
             ))}
           </div>
 
-          <Link
-            href="https://medium.com/samurai-starter"
-            target="_blank"
-            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
-          >
-            Apply to launchpad →
-          </Link>
+          {applyToLaunchpad}
         </div>
       </div>
 
@@ -347,39 +343,22 @@ export default function Incubation() {
             <span className="text-samurai-red">T</span>eam
           </h2>
           <div
-            className={`flex md:justify-center items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
-          ></div>
-        </div>
-      </div>
-
-      {/* PARTNERS */}
-      {/* <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-300 border-t border-black/20">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
-          <h2 className="text-4xl lg:text-5xl font-bold">
-            Our <span className="text-samurai-red">Partners</span>
-          </h2>
-          <div
-            className={`flex items-center flex-wrap gap-5 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+            className={`flex items-center flex-wrap gap-10 leading-normal py-10 xl:py-16 text-xl ${inter.className}`}
           >
-            {partners.map((item, index) => (
-              <div
-                key={index}
-                className={`flex justify-center items-center bg-black py-5 px-10 rounded-[8px] text-white text-2xl ${item.color}`}
-              >
-                {item.title}
+            {team.map((member, index) => (
+              <div className="flex flex-col justify-center items-center p-5 pb-2 bg-white rounded-xl transition-all hover:scale-105">
+                <Image
+                  src={member.src}
+                  width={220}
+                  height={220}
+                  alt={member.name}
+                />
+                <span className="text-black mt-1">{member.name}</span>
               </div>
             ))}
           </div>
-
-          <Link
-            href="https://medium.com/samurai-starter"
-            target="_blank"
-            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
-          >
-            Apply to launchpad →
-          </Link>
         </div>
-      </div> */}
+      </div>
 
       {/* PARTNERS */}
       <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-300 border-t border-black/20">
@@ -399,18 +378,12 @@ export default function Incubation() {
                 alt=""
                 className={`flex justify-center items-center ${
                   item.color === bg.dark ? "bg-black" : "bg-white"
-                } py-5 px-10 rounded-[8px] min-h-[200px]`}
+                } py-5 px-10 rounded-[8px] min-h-[200px] transition-all hover:scale-105 shadow-xl hover:shadow-2xl`}
               />
             ))}
           </div>
 
-          <Link
-            href="https://medium.com/samurai-starter"
-            target="_blank"
-            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
-          >
-            Apply to launchpad →
-          </Link>
+          {applyToLaunchpad}
         </div>
       </div>
 
@@ -428,7 +401,7 @@ export default function Incubation() {
           >
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col p-10 gap-5  bg-slate-300 w-[600px] rounded-2xl relative"
+              className="flex flex-col p-10 gap-5 bg-white/5 border border-samurai-red w-[600px] rounded-2xl relative"
             >
               <svg
                 fill="none"
@@ -453,42 +426,42 @@ export default function Incubation() {
               >
                 {mailSent ? "Message successfully sent!" : "Send a message"}
               </div>
-              <p className="flex flex-col text-black text-sm gap-2 font-bold">
+              <p className="flex flex-col text-sm gap-2 font-bold">
                 <span>Name:</span>
                 <input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   type="text"
-                  className="bg-white p-4 text-xl outline-none"
+                  className="bg-white p-4 text-xl outline-none text-black"
                   required
                 />
               </p>
-              <p className="flex flex-col text-black text-sm gap-2 font-bold">
+              <p className="flex flex-col text-sm gap-2 font-bold">
                 <span>Email:</span>
                 <input
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
-                  className="bg-white p-4 text-xl outline-none"
+                  className="bg-white p-4 text-xl outline-none text-black"
                   required
                 />
               </p>
-              <p className="flex flex-col text-black text-sm gap-2 font-bold">
+              <p className="flex flex-col text-sm gap-2 font-bold">
                 <span>Subject:</span>
                 <input
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   type="text"
-                  className="bg-white p-4 text-xl outline-none"
+                  className="bg-white p-4 text-xl outline-none text-black"
                   required
                 />
               </p>
-              <p className="flex flex-col text-black text-sm gap-2 font-bold">
+              <p className="flex flex-col text-sm gap-2 font-bold">
                 <span>Message:</span>
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="bg-white p-4 text-xl h-[200px] outline-none"
+                  className="bg-white p-4 text-xl h-[200px] outline-none text-black"
                   required
                 />
               </p>
@@ -509,13 +482,7 @@ export default function Incubation() {
             </form>
           </div>
 
-          <Link
-            href="https://medium.com/samurai-starter"
-            target="_blank"
-            className={`flex justify-end items-center mt-8 text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
-          >
-            Apply to launchpad →
-          </Link>
+          {applyToLaunchpad}
         </div>
       </div>
     </LayoutClean>
