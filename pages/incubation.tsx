@@ -346,7 +346,10 @@ export default function Incubation() {
             className={`flex justify-center md:justify-start items-center flex-wrap gap-10 leading-normal py-10 xl:py-16 text-xl ${inter.className}`}
           >
             {team.map((member, index) => (
-              <div className="flex flex-col justify-center items-center p-5 pb-2 bg-white rounded-xl transition-all hover:scale-105">
+              <div
+                key={index}
+                className="flex flex-col justify-center items-center p-5 pb-2 bg-white rounded-xl transition-all hover:scale-105"
+              >
                 <Image
                   src={member.src}
                   width={220}
