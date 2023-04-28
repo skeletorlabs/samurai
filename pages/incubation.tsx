@@ -134,6 +134,18 @@ export default function Incubation() {
       height: 200,
       color: bg.light,
     },
+    {
+      image: "/portfolio/metacourt.svg",
+      width: 200,
+      height: 200,
+      color: bg.light,
+    },
+    {
+      image: "/portfolio/almazeus.svg",
+      width: 200,
+      height: 200,
+      color: bg.light,
+    },
   ];
 
   const team = [
@@ -153,6 +165,11 @@ export default function Incubation() {
     { src: "/partners/cherry.svg", color: bg.light },
     { src: "/partners/boba.svg", color: bg.dark },
     { src: "/partners/gatelabs.svg", color: bg.light },
+    { src: "/partners/dedaub.svg", color: bg.light },
+    { src: "/partners/kucoin.svg", color: bg.dark },
+    { src: "/partners/mempool.svg", color: bg.light },
+    { src: "/partners/slance.svg", color: bg.light },
+    { src: "/partners/throne.svg", color: bg.dark },
   ];
 
   const handleSubmit = useCallback(
