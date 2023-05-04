@@ -13,7 +13,7 @@ const links = [
 
 export default function Footer() {
   return (
-    <div className="h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-800">
+    <div className="h-[500px] md:h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-800">
       <div className="flex flex-col lg:flex-row gap-10">
         <div className="flex flex-col items-center lg:items-start">
           <Link

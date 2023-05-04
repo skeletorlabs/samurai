@@ -300,7 +300,7 @@ export default function Home() {
           {edge.map((item, index) => (
             <div
               key={index}
-              className="flex items-center w-full min-h-[160px] md:bg-white bg-opacity-30 backdrop-blur-[8px] rounded-xl md:px-5 lg:px-3 gap-5 shadow-lg z-10"
+              className="flex items-center  w-full min-h-[160px] md:bg-white bg-opacity-30 backdrop-blur-[8px] rounded-xl md:px-5 lg:px-3 gap-5 shadow-lg z-10"
             >
               <div
                 className="
@@ -321,10 +321,10 @@ export default function Home() {
                 />
               </div>
 
-              <div className="flex flex-col text-black">
+              <div className="flex flex-col md:text-black">
                 <span className="font-bold text-xl">{item.title}</span>
                 <p
-                  className={`font-normal text-[16px] leading-tight text-black ${inter.className}`}
+                  className={`font-normal text-[16px] leading-tight text-white/80 md:text-black ${inter.className}`}
                 >
                   {item.description}
                 </p>
