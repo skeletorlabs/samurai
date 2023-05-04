@@ -109,7 +109,7 @@ export default function Home() {
             <button className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]">
               Launchpad
             </button>
-            <button className="bg-white/90 border border-samurai-red rounded-2xl px-8 h-14 text-lg transition-all hover:bg-black/90 text-samurai-red hover:text-white hover:border-white w-full lg:w-[190px]">
+            <button className="border border-slate-500 rounded-2xl px-8 h-14 text-lg transition-all bg-black/90 text-neutral-400 hover:text-white hover:border-white w-full lg:w-[190px]">
               Sanka
             </button>
             <button className="bg-[#000000] border rounded-2xl text-samurai-red  border-samurai-red px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]">
@@ -292,7 +292,7 @@ export default function Home() {
       </div>
 
       {/* SAMURAI EDGE */}
-      <div className="flex flex-col pt-20 w-full px-6 lg:px-8 xl:px-20 bg-neutral-900/50">
+      <div className="flex flex-col pt-20 w-full px-6 lg:px-8 xl:px-20 bg-black">
         <h2 className="text-6xl font-bold">
           The <span className="text-samurai-red">SAMURAI</span> Edge
         </h2>
@@ -300,11 +300,11 @@ export default function Home() {
           {edge.map((item, index) => (
             <div
               key={index}
-              className="flex items-center w-full min-h-[160px] md:bg-neutral-600 bg-opacity-30 backdrop-blur-[8px] rounded-xl md:px-5 lg:px-3 gap-5 shadow-lg z-10"
+              className="flex items-center w-full min-h-[160px] md:bg-white bg-opacity-30 backdrop-blur-[8px] rounded-xl md:px-5 lg:px-3 gap-5 shadow-lg z-10"
             >
               <div
                 className="
-                  flex relative 
+                  flex relative
                   w-full opacity-80
                   min-w-[68px] max-w-[38px]
                   min-h-[68px]  max-h-[38px]
@@ -321,10 +321,10 @@ export default function Home() {
                 />
               </div>
 
-              <div className="flex flex-col">
+              <div className="flex flex-col text-black">
                 <span className="font-bold text-xl">{item.title}</span>
                 <p
-                  className={`font-normal text-[16px] leading-tight text-white/70 ${inter.className}`}
+                  className={`font-normal text-[16px] leading-tight text-black ${inter.className}`}
                 >
                   {item.description}
                 </p>
