@@ -13,7 +13,7 @@ const links = [
 
 export default function Footer() {
   return (
-    <div className="h-[500px] md:h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-800">
+    <div className="h-[240px] md:h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-800">
       <div className="flex flex-col lg:flex-row gap-10">
         <div className="flex flex-col items-center lg:items-start">
           <Link
@@ -58,13 +58,6 @@ export default function Footer() {
           <span className="flex ml-3 font-light text-md justify-end">
             © 2023 Samurai Starter
           </span>
-        </div>
-        <div className="py-5">
-          <script
-            src="//web.webformscr.com/apps/fc3/build/loader.js"
-            async
-            sp-form-id="0229cc821b515da43f09d3b34f142798efa2f98d40eb42d322744cb90dca5100"
-          ></script>
         </div>
       </div>
     </div>

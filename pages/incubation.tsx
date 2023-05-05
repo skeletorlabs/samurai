@@ -81,14 +81,14 @@ export default function Incubation() {
     },
     {
       image: "/portfolio/onering.svg",
-      width: 400,
-      height: 400,
+      width: 200,
+      height: 200,
       color: bg.dark,
     },
     {
       image: "/portfolio/acreworld.svg",
-      width: 180,
-      height: 200,
+      width: 100,
+      height: 100,
       color: bg.light,
     },
     { image: "/portfolio/nfty.svg", width: 300, height: 200, color: bg.dark },
@@ -341,7 +341,7 @@ export default function Incubation() {
             {portfolio.map((item, index) => (
               <div
                 key={index}
-                className={`flex justify-center items-center rounded-full w-[200px] h-[200px] lg:w-[300px] lg:h-[300px] p-10 transition-all hover:scale-105 ${
+                className={`flex justify-center items-center rounded-full w-[150px] h-[150px] lg:w-[180px] lg:h-[180px] p-7 lg:p-6 transition-all hover:scale-105 ${
                   item.color === bg.dark ? "bg-black" : "bg-white"
                 } hover:shadow-xl`}
               >
@@ -387,28 +387,34 @@ export default function Incubation() {
 
       {/* PARTNERS */}
       <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-300 border-t border-black/20">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
-          <h2 className="text-4xl lg:text-5xl font-bold">
+        <div className="flex flex-col text-black">
+          <h2 className="text-4xl lg:text-5xl font-bold px-6 lg:px-8 xl:px-20">
             Our <span className="text-samurai-red">Partners</span>
           </h2>
-          <div
-            className={`flex items-center flex-wrap gap-5 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
-          >
-            {partnersLogos.map((item, index) => (
-              <Image
-                key={index}
-                src={item.src}
-                width={300}
-                height={300}
-                alt=""
-                className={`flex justify-center items-center ${
-                  item.color === bg.dark ? "bg-black" : "bg-white"
-                } py-5 px-10 rounded-[8px] w-full md:w-[300px] min-h-[200px] transition-all hover:scale-105 shadow-xl hover:shadow-2xl`}
-              />
-            ))}
+          <div className="flex flex-col pb-14 w-full overflow-x-scroll px-6 lg:px-8 xl:px-20">
+            <div
+              className={`flex items-center w-full gap-5 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+            >
+              {partnersLogos.map((item, index) => (
+                <>
+                  <Image
+                    key={index}
+                    src={item.src}
+                    width={180}
+                    height={180}
+                    alt=""
+                    className={`flex justify-center items-center ${
+                      item.color === bg.dark ? "bg-black" : "bg-white"
+                    } py-2 px-5 rounded-[8px] w-full md:w-[180px] min-h-[120px] transition-all hover:scale-105 shadow-xl hover:shadow-2xl`}
+                  />
+                  {index === partnersLogos.length - 1 && (
+                    <div className="w-10 h-10 text-transparent">empty</div>
+                  )}
+                </>
+              ))}
+            </div>
           </div>
-
-          {applyToLaunchpad}
+          <div className="px-6 lg:px-8 xl:px-20">{applyToLaunchpad}</div>
         </div>
       </div>
 
