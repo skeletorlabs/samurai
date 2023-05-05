@@ -154,14 +154,14 @@ export default function Incubation() {
       name: "Paul Osmond - CEO",
       nickname: "HamNcheese",
       linkedin: "https://www.linkedin.com/in/paul-osmond-53381b179/",
-      telegram: "t.me/runningtrips",
+      telegram: "https://t.me/runningtrips",
     },
     {
       src: "/team/avatar0.svg",
       name: "Lucas Silviera - CTO",
       nickname: "Skeletor",
       linkedin: "",
-      telegram: "t.me/skeletor_keldor",
+      telegram: "https://t.me/skeletor_keldor",
     },
     {
       src: "/team/avatar2.svg",
