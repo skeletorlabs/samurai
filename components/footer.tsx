@@ -4,12 +4,12 @@ import { SOCIALS } from "@/utils/constants";
 import { linkedin, twitter } from "@/utils/svgs";
 
 const links = [
-  { title: "Launchpad", href: "#" },
+  { title: "Launchpad", href: "/launchpad" },
   { title: "Sanka", href: "#" },
   { title: "SamNFT", href: "#" },
   { title: "Tokens", href: "#" },
   { title: "$SAM Liquidity", href: "#" },
-  { title: "Incubation", href: "#" },
+  { title: "Incubation", href: "/incubation" },
 ];
 
 export default function Footer() {
@@ -37,7 +37,11 @@ export default function Footer() {
                 key={index}
                 href={item.href}
                 className={`transition-all hover:opacity-75 text-white w-9 ${
-                  item.svg === linkedin ? "scale-[0.78]" : item.svg === twitter ? "scale-90" : "scale-100"
+                  item.svg === linkedin
+                    ? "scale-[0.78]"
+                    : item.svg === twitter
+                    ? "scale-90"
+                    : "scale-100"
                 }`}
                 target="_blank"
               >
