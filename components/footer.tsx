@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SOCIALS } from "@/utils/constants";
+import { linkedin, twitter } from "@/utils/svgs";
 
 const links = [
   { title: "Launchpad", href: "#" },
@@ -35,7 +36,9 @@ export default function Footer() {
               <Link
                 key={index}
                 href={item.href}
-                className="transition-all hover:opacity-75 scale-[1.5]"
+                className={`transition-all hover:opacity-75 text-white w-9 ${
+                  item.svg === linkedin ? "scale-[0.78]" : item.svg === twitter ? "scale-90" : "scale-100"
+                }`}
                 target="_blank"
               >
                 {item.svg}

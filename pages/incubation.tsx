@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import LayoutClean from "@/components/layoutClean";
-import { SOCIALS } from "@/utils/constants";
 import { Inter } from "next/font/google";
 import { useCallback, useState } from "react";
+import { rocket, telegram, linkedin } from "@/utils/svgs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -149,9 +149,27 @@ export default function Incubation() {
   ];
 
   const team = [
-    { src: "/team/avatar0.svg", name: "Lucas" },
-    { src: "/team/avatar1.svg", name: "Paul" },
-    { src: "/team/avatar2.svg", name: "Chadagorn" },
+    {
+      src: "/team/avatar1.svg",
+      name: "Paul Osmond - CEO",
+      nickname: "HamNcheese",
+      linkedin: "https://www.linkedin.com/in/paul-osmond-53381b179/",
+      telegram: "t.me/runningtrips",
+    },
+    {
+      src: "/team/avatar0.svg",
+      name: "Lucas Silviera - CTO",
+      nickname: "Skeletor",
+      linkedin: "",
+      telegram: "t.me/skeletor_keldor",
+    },
+    {
+      src: "/team/avatar2.svg",
+      name: "Chadagorn - RA",
+      nickname: "The Chad",
+      linkedin: "",
+      telegram: "",
+    },
   ];
 
   const partnersLogos = [
@@ -299,12 +317,15 @@ export default function Incubation() {
             {services.map((service, index) => (
               <div
                 key={index}
-                className={`flex flex-col gap-2 ${
+                className={`flex flex-col gap-2 text-center ${
                   service.color === bg.light
                     ? "bg-white text-black"
                     : "bg-black text-white"
                 }  border border-black p-8 rounded-xl shadow-lg transition-all hover:scale-105`}
               >
+                <div className="flex justify-center pb-10">
+                  <div className="w-40">{rocket}</div>
+                </div>
                 <span
                   className={`font-bold text-2xl border-b-[0.5px] ${
                     service.color === bg.light ? "border-black" : "border-white"
@@ -369,16 +390,40 @@ export default function Incubation() {
             {team.map((member, index) => (
               <div
                 key={index}
-                className="flex flex-col justify-center items-center p-5 pb-2 bg-white rounded-xl transition-all hover:scale-105"
+                className="flex flex-col items-center h-[350px] p-5 pb-4 bg-white rounded-xl transition-all hover:scale-105"
               >
                 <Image
                   src={member.src}
-                  width={220}
-                  height={220}
+                  width={200}
+                  height={200}
                   alt={member.name}
-                  className="w-[400px] md:w-[220px]"
+                  className="w-[180px] md:w-[200px]"
                 />
-                <span className="text-black mt-1">{member.name}</span>
+
+                <p className="text-black mt-3 text-[14px] font-bold">
+                  {member.name}
+                </p>
+                <p className="text-black text-[14px]">aka {member.nickname}</p>
+                <div className="flex w-full justify-center gap-3 items-center pt-4">
+                  {member.linkedin && (
+                    <Link
+                      href={member.linkedin}
+                      target="blank"
+                      className="w-[30px] text-blue-600 hover:shadow-lg"
+                    >
+                      {linkedin}
+                    </Link>
+                  )}
+                  {member.telegram && (
+                    <Link
+                      href=""
+                      target="blank"
+                      className="w-[41px] text-blue-400 hover:drop-shadow-lg"
+                    >
+                      {telegram}
+                    </Link>
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -405,7 +450,7 @@ export default function Incubation() {
                     alt=""
                     className={`flex justify-center items-center ${
                       item.color === bg.dark ? "bg-black" : "bg-white"
-                    } py-2 px-5 rounded-[8px] w-full md:w-[180px] min-h-[120px] transition-all hover:scale-105 shadow-xl hover:shadow-2xl`}
+                    } py-2 px-5 rounded-[8px] w-[180px] min-h-[120px] transition-all hover:scale-105 shadow-xl hover:shadow-2xl`}
                   />
                   {index === partnersLogos.length - 1 && (
                     <div className="w-10 h-10 text-transparent">empty</div>

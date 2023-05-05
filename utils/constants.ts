@@ -47,10 +47,22 @@ export const NAV = [
 ]
 
 export const SOCIALS = [
-  { svg: twitter, href: 'https://twitter.com/cyberfi_tech' },
-  { svg: telegram, href: 'https://t.me/SamuraiLaunchpad' },
-  { svg: medium, href: 'https://medium.com/samurai-starter' },
-  { svg: linkedin, href: 'https://www.linkedin.com/company/samurai-starter/' },
+  {
+    svg: twitter,
+    href: 'https://twitter.com/cyberfi_tech',
+    class: 'scale-100',
+  },
+  { svg: telegram, href: 'https://t.me/SamuraiLaunchpad', class: 'scale-100' },
+  {
+    svg: medium,
+    href: 'https://medium.com/samurai-starter',
+    class: 'scale-100',
+  },
+  {
+    svg: linkedin,
+    href: 'https://www.linkedin.com/company/samurai-starter/',
+    class: 'scale-50',
+  },
 ]
 
 export const BASE_API_URL = 'https://samuraistarter.com/api/v1'

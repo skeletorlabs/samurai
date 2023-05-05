@@ -52,7 +52,7 @@ const edge = [
   {
     title: "Cashback rewards",
     description:
-      "SamuraiStarter is the first launchpad to offer cashback rewards for participating in token offerings through our $SAM token.",
+      "Samurai Starter is the first launchpad to offer cashback rewards for participating in token offerings through our $SAM token.",
     image: "/rewards.png",
   },
   {
@@ -64,7 +64,7 @@ const edge = [
   {
     title: "Interact and Earn",
     description:
-      "Participate in entertaining games and contests through SamuraiStarter and interact with our partner’s platforms to earn partner native tokens and even more $SAM rewards.",
+      "Participate in entertaining games and contests through Samurai Starter and interact with our partner’s platforms to earn partner native tokens and even more $SAM rewards.",
     image: "/people.png",
   },
   {
@@ -101,9 +101,9 @@ export default function Home() {
             Invest. Interact. Earn.
           </h1>
           <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
-            SamuraiStarter is the leading early-stage crowdfunding platform that
-            incentivizes community members to invest and participate in the most
-            novel projects in the crypto space
+            Samurai Starter is the leading early-stage crowdfunding platform
+            that incentivizes community members to invest and participate in the
+            most novel projects in the crypto space
           </p>
           <div className="flex flex-col lg:flex-row items-center pt-10 gap-5 z-20">
             <button className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]">
