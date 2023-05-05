@@ -416,7 +416,7 @@ export default function Incubation() {
                   )}
                   {member.telegram && (
                     <Link
-                      href=""
+                      href={member.telegram}
                       target="blank"
                       className="w-[41px] text-blue-400 hover:drop-shadow-lg"
                     >
