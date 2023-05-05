@@ -188,6 +188,7 @@ export default function Incubation() {
     { src: "/partners/mempool.svg", color: bg.light },
     { src: "/partners/slance.svg", color: bg.light },
     { src: "/partners/throne.svg", color: bg.dark },
+    { src: "", color: bg.dark },
   ];
 
   const handleSubmit = useCallback(
@@ -368,6 +369,8 @@ export default function Incubation() {
               >
                 <Image
                   src={item.image}
+                  placeholder="blur"
+                  blurDataURL={item.image}
                   width={item.width}
                   height={item.height}
                   alt=""
@@ -394,6 +397,8 @@ export default function Incubation() {
               >
                 <Image
                   src={member.src}
+                  placeholder="blur"
+                  blurDataURL={member.src}
                   width={200}
                   height={200}
                   alt={member.name}
@@ -440,11 +445,17 @@ export default function Incubation() {
             <div
               className={`flex items-center w-full gap-5 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
             >
-              {partnersLogos.map((item, index) => (
-                <>
+              {partnersLogos.map((item, index) => {
+                return index === partnersLogos.length - 1 ? (
+                  <div key={index} className="w-10 h-10 text-transparent">
+                    empty
+                  </div>
+                ) : (
                   <Image
                     key={index}
                     src={item.src}
+                    placeholder="blur"
+                    blurDataURL={item.src}
                     width={180}
                     height={180}
                     alt=""
@@ -452,11 +463,8 @@ export default function Incubation() {
                       item.color === bg.dark ? "bg-black" : "bg-white"
                     } py-2 px-5 rounded-[8px] w-[180px] min-h-[120px] transition-all hover:scale-105 shadow-xl hover:shadow-2xl`}
                   />
-                  {index === partnersLogos.length - 1 && (
-                    <div className="w-10 h-10 text-transparent">empty</div>
-                  )}
-                </>
-              ))}
+                );
+              })}
             </div>
           </div>
           <div className="px-6 lg:px-8 xl:px-20">{applyToLaunchpad}</div>

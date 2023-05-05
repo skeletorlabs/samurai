@@ -146,6 +146,8 @@ export default function Home() {
             >
               <Image
                 src={item.image}
+                placeholder="blur"
+                blurDataURL={item.image}
                 width={426}
                 height={0}
                 alt=""
@@ -314,6 +316,8 @@ export default function Home() {
               >
                 <Image
                   src={item.image}
+                  placeholder="blur"
+                  blurDataURL={item.image}
                   alt={item.title}
                   fill
                   sizes="68px"

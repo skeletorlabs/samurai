@@ -24,6 +24,8 @@ export default function Footer() {
           >
             <Image
               src="/logo.svg"
+              placeholder="blur"
+              blurDataURL="/logo.svg"
               width={0}
               height={0}
               alt="logo"

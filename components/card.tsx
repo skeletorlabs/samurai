@@ -14,6 +14,10 @@ export default function Card({ project }: Card) {
     <Link href="#" className="flex flex-col w-full">
       <Image
         src={`/projects/${project.name.toLowerCase().replaceAll(" ", "-")}.svg`}
+        placeholder="blur"
+        blurDataURL={`/projects/${project.name
+          .toLowerCase()
+          .replaceAll(" ", "-")}.svg`}
         width={426}
         height={0}
         alt=""
