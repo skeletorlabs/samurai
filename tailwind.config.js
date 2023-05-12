@@ -16,8 +16,14 @@ module.exports = {
         art: "url('/art5.svg')",
         edge: "url('/edge.svg')",
         sanka: "url('/bg-sanka.svg')",
+        button: "url('/bg-button.svg')",
+        "button-hover": "url('/bg-button-hover.svg')",
       },
     },
+    clipPath: {
+      "s-polygon": "polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 1rem))",
+      "s-polygon2": "polygon(0px 0px, 90% 0px, 285px 90px, 0px 45px)",
+    },
   },
-  plugins: [],
+  plugins: [require("tailwind-clip-path")],
 };

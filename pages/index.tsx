@@ -8,6 +8,7 @@ import fetchProjects from "./api/projects";
 import Card from "@/components/card";
 import { Project } from "@/utils/interfaces";
 import { Inter } from "next/font/google";
+import SSButton from "@/components/ssButton";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,37 +42,37 @@ const edge = [
     title: "High Quality Projects",
     description:
       "Our projects are vetted with the highest standard due diligence processes that are backed by some of the leading verification services in the crypto industry.",
-    image: "/quality.png",
+    image: "/samurai-edge/quality.svg",
   },
   {
     title: "Equal investment opportunities for all",
     description:
       "No more investment tiers! Every SamNFT holder has the opportunity to participate in crowdfunding rounds with max allocation regardless of whale status.",
-    image: "/investment.png",
+    image: "/samurai-edge/equality.svg",
   },
   {
     title: "Cashback rewards",
     description:
       "Samurai Starter is the first launchpad to offer cashback rewards for participating in token offerings through our $SAM token.",
-    image: "/rewards.png",
+    image: "/samurai-edge/cashback.svg",
   },
   {
     title: "DeFi yield farming mechanisms",
     description:
       "Use earned $SAM tokens to provide $SAM-$ETH  liquidity on https://www.ramses.exchange for outstanding ve(3,3) powered yield farming opportunities.",
-    image: "/farm.png",
+    image: "/samurai-edge/yield.svg",
   },
   {
     title: "Interact and Earn",
     description:
       "Participate in entertaining games and contests through Samurai Starter and interact with our partner’s platforms to earn partner native tokens and even more $SAM rewards.",
-    image: "/people.png",
+    image: "/samurai-edge/interact.svg",
   },
   {
     title: "Secure investments",
     description:
       "Our Samurai investor confidence insurance policy finds a happy medium between the needs of our community and wants of our partner projects. Feel confident that your investment will meet basic launch requirements or get your money back. ",
-    image: "/people.png",
+    image: "/samurai-edge/secure.svg",
   },
 ];
 
@@ -106,15 +107,18 @@ export default function Home() {
             most novel projects in the crypto space
           </p>
           <div className="flex flex-col lg:flex-row items-center pt-10 gap-5 z-20">
-            <button className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]">
+            <SSButton>Launchpad</SSButton>
+            <SSButton>Sanka</SSButton>
+            <SSButton>For projects</SSButton>
+            {/* <button className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]">
               Launchpad
-            </button>
-            <button className="border border-slate-500 rounded-2xl px-8 h-14 text-lg transition-all bg-black/90 text-neutral-400 hover:text-white hover:border-white w-full lg:w-[190px]">
+            </button> */}
+            {/* <button className="border border-slate-500 rounded-2xl px-8 h-14 text-lg transition-all bg-black/90 text-neutral-400 hover:text-white hover:border-white w-full lg:w-[190px]">
               Sanka
             </button>
             <button className="bg-[#000000] border rounded-2xl text-samurai-red  border-samurai-red px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]">
               For projects
-            </button>
+            </button> */}
           </div>
           <div className="hidden lg:flex items-center gap-16 ml-2 mt-32">
             {SOCIALS.map((item, index) => (
@@ -185,7 +189,7 @@ export default function Home() {
       </div>
 
       {/* FEATURED PROJECTS */}
-      <div className="flex flex-col pt-20 pb-10 w-full bg-white to-transparent px-6 lg:px-8 xl:px-20 text-black">
+      <div className="flex flex-col pt-20 pb-10 w-full bg-white/10 px-6 lg:px-8 xl:px-20 text-white border-t-[1px] border-samurai-red">
         <h2 className="text-6xl font-bold">
           Featured <span className="text-samurai-red">Projects</span>
         </h2>
@@ -214,7 +218,7 @@ export default function Home() {
       </div>
 
       {/* COMMUNITY */}
-      <div className="flex flex-col pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20  lg:bg-sanka bg-contain bg-no-repeat bg-[right_-4rem_top_2rem] xl:bg-[right_-2rem_top_2rem] bg-opacity-75">
+      <div className="flex flex-col pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20  lg:bg-sanka bg-contain bg-no-repeat bg-[right_-4rem_top_2rem] xl:bg-[right_-2rem_top_2rem] bg-opacity-75 border-t-[1px] border-samurai-red">
         <h2 className="text-6xl font-bold">
           Samurai <span className="text-black">Sanka</span>
           <p
@@ -294,7 +298,7 @@ export default function Home() {
       </div>
 
       {/* SAMURAI EDGE */}
-      <div className="flex flex-col pt-20 w-full px-6 lg:px-8 xl:px-20 bg-black">
+      <div className="flex flex-col pt-20 w-full px-6 lg:px-8 xl:px-20 bg-black border-t-[1px] border-samurai-red">
         <h2 className="text-6xl font-bold">
           The <span className="text-samurai-red">SAMURAI</span> Edge
         </h2>
@@ -302,7 +306,7 @@ export default function Home() {
           {edge.map((item, index) => (
             <div
               key={index}
-              className="flex items-center  w-full min-h-[160px] md:bg-white bg-opacity-30 backdrop-blur-[8px] rounded-xl md:px-5 lg:px-3 gap-5 shadow-lg z-10"
+              className="flex items-center w-full min-h-[160px] border-[1px] border-samurai-red rounded-xl md:px-5 lg:px-3 gap-5 shadow-lg z-10"
             >
               <div
                 className="
@@ -325,10 +329,12 @@ export default function Home() {
                 />
               </div>
 
-              <div className="flex flex-col md:text-black">
-                <span className="font-bold text-xl">{item.title}</span>
+              <div className="flex flex-col">
+                <span className="font-bold text-xl text-samurai-red">
+                  {item.title}
+                </span>
                 <p
-                  className={`font-normal text-[16px] leading-tight text-white/80 md:text-black ${inter.className}`}
+                  className={`font-normal text-[16px] leading-tight text-white/80 ${inter.className}`}
                 >
                   {item.description}
                 </p>
@@ -339,7 +345,7 @@ export default function Home() {
       </div>
 
       {/* NEWSLETTER */}
-      <div className="flex items-center justify-center py-5 pb-10 w-full">
+      <div className="flex items-center px-6 lg:px-8 xl:px-20 py-20 w-full border-t-[1px] border-samurai-red">
         <script
           src="//web.webformscr.com/apps/fc3/build/loader.js"
           async

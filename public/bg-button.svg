@@ -1,0 +1,19 @@
+<svg width="195" height="56" viewBox="0 0 195 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1 1H173.08L193.998 20.046V54.3116H109.89H25.1089L1 36.6016V1Z" fill="url(#paint0_radial_118_27)" stroke="#FF284C" stroke-width="2"/>
+<circle cx="5.86836" cy="5.49726" r="1.16621" fill="#FF284C"/>
+<circle cx="5.86836" cy="12.1613" r="1.16621" fill="#FF284C" fill-opacity="0.7"/>
+<circle cx="5.86836" cy="18.8254" r="1.16621" fill="#FF284C" fill-opacity="0.5"/>
+<circle cx="5.86836" cy="25.4895" r="1.16621" fill="#FF284C" fill-opacity="0.2"/>
+<circle cx="5.86836" cy="32.1535" r="1.16621" fill="#FF284C" fill-opacity="0.2"/>
+<circle cx="1.16621" cy="1.16621" r="1.16621" transform="matrix(1 0 0 -1 187.964 49.9795)" fill="#FF284C"/>
+<circle cx="1.16621" cy="1.16621" r="1.16621" transform="matrix(1 0 0 -1 187.964 43.3154)" fill="#FF284C" fill-opacity="0.7"/>
+<circle cx="1.16621" cy="1.16621" r="1.16621" transform="matrix(1 0 0 -1 187.964 36.6514)" fill="#FF284C" fill-opacity="0.5"/>
+<circle cx="1.16621" cy="1.16621" r="1.16621" transform="matrix(1 0 0 -1 187.964 29.9873)" fill="#FF284C" fill-opacity="0.2"/>
+<circle cx="1.16621" cy="1.16621" r="1.16621" transform="matrix(1 0 0 -1 187.964 23.3232)" fill="#FF284C" fill-opacity="0.2"/>
+<defs>
+<radialGradient id="paint0_radial_118_27" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(91 29.5) rotate(-0.950882) scale(120.517 424.875)">
+<stop stop-color="#FF284C" stop-opacity="0.3"/>
+<stop offset="1" stop-color="#100709"/>
+</radialGradient>
+</defs>
+</svg>
