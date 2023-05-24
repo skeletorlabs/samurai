@@ -4,7 +4,6 @@ import LayoutClean from "@/components/layoutClean";
 import { Inter } from "next/font/google";
 import { useCallback, useState } from "react";
 import { rocket, telegram, linkedin } from "@/utils/svgs";
-import SSButton from "@/components/ssButton";
 
 const inter = Inter({
   subsets: ["latin"],
