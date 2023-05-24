@@ -276,15 +276,15 @@ export default function Incubation() {
       </div>
 
       {/* TOKEN LAUNCH */}
-      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-white border-t border-samurai-red mt-20 text-black">
+      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-white/10 text-white border-t-[1px] border-samurai-red mt-20 ">
         <svg
           fill="none"
-          stroke="black"
+          stroke="#FF284C"
           strokeWidth="0.5"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
-          className="hidden xl:block w-[200px] drop-shadow-[6px_6px_6px_gray]"
+          className="hidden xl:block w-[200px]"
         >
           <path
             strokeLinecap="round"
@@ -316,7 +316,7 @@ export default function Incubation() {
       </div>
 
       {/* SERVICES */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-800">
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white/20 border-t-[1px] border-samurai-red">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Samurai</span> Services
@@ -366,8 +366,8 @@ export default function Incubation() {
       </div>
 
       {/* PORTFOLIO */}
-      <div className="flex flex-col py-10 md:py-20 w-full bg-slate-300 border-t">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-black">
+      <div className="flex flex-col py-10 md:py-20 w-full bg-white/10 border-t-[1px] border-samurai-red">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">P</span>ortfolio
           </h2>
@@ -396,7 +396,7 @@ export default function Incubation() {
       </div>
 
       {/* TEAM */}
-      <div className="flex flex-col py-10 md:py-20 w-full bg-black border-t border-black/20">
+      <div className="flex flex-col py-10 md:py-20 w-full bg-black border-t-[1px] border-samurai-red">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">T</span>eam
@@ -450,8 +450,8 @@ export default function Incubation() {
       </div>
 
       {/* PARTNERS */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-slate-300 border-t border-black/20">
-        <div className="flex flex-col text-black">
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white/10 border-t-[1px] border-samurai-red">
+        <div className="flex flex-col text-white">
           <h2 className="text-4xl lg:text-5xl font-bold px-6 lg:px-8 xl:px-20">
             Our <span className="text-samurai-red">Partners</span>
           </h2>
