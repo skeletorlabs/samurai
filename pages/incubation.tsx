@@ -329,7 +329,7 @@ export default function Incubation() {
                 key={index}
                 className={`flex flex-col gap-2 text-center ${
                   service.color === bg.light
-                    ? "bg-white text-black"
+                    ? "bg-black/40 text-white border-[1px] border-samurai-red"
                     : "bg-black text-white"
                 }  border border-black p-8 rounded-xl shadow-lg transition-all hover:scale-105`}
               >
@@ -343,18 +343,14 @@ export default function Incubation() {
                 </div>
                 <span
                   className={`font-bold text-2xl border-b-[0.5px] ${
-                    service.color === bg.light ? "border-black" : "border-white"
+                    service.color === bg.light
+                      ? "border-neutral-400"
+                      : "border-white"
                   } pb-3  mb-2`}
                 >
                   {service.title}
                 </span>
-                <p
-                  className={`text-[16px] ${
-                    service.color === bg.light
-                      ? "text-neutral-800"
-                      : "text-neutral-400"
-                  }`}
-                >
+                <p className={`text-[16px] text-neutral-400`}>
                   {service.description}
                 </p>
               </div>
