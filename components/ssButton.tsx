@@ -1,11 +1,25 @@
+import Link from "next/link";
 import { ReactElement } from "react";
 
 interface SSButton {
   children: string;
+  isLink?: boolean;
+  href?: string;
 }
-export default function SSButton({ children }: SSButton) {
-  return (
-    <button className="transition-all bg-button hover:bg-button-hover bg-no-repeat w-[195px] h-[55.31px] text-center">
+export default function SSButton({
+  children,
+  isLink = false,
+  href = "",
+}: SSButton) {
+  return isLink ? (
+    <Link
+      href={href}
+      className="flex border rounded-[8px] border-red-500 px-8 py-3 transition-all hover:bg-samurai-red hover:text-black text-red-500"
+    >
+      {children}
+    </Link>
+  ) : (
+    <button className="flex border rounded-[8px] border-red-500 px-8 py-3 transition-all hover:bg-samurai-red hover:text-black text-red-500">
       {children}
     </button>
   );

@@ -4,6 +4,7 @@ import LayoutClean from "@/components/layoutClean";
 import { Inter } from "next/font/google";
 import { useCallback, useState } from "react";
 import { rocket, telegram, linkedin } from "@/utils/svgs";
+import SSButton from "@/components/ssButton";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -251,8 +252,10 @@ export default function Incubation() {
               d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
             ></path>
           </svg>
-          <h1 className="text-[38px] lg:text-[58px] font-black leading-[48px] lg:leading-[68px] xl:max-w-[900px]">
-            Accelerating your project from ideation to token launch and beyond.
+          <h1 className="text-[38px] lg:text-[58px] font-black leading-[48px] lg:leading-[68px] xl:max-w-[900px] text-samurai-red ">
+            <span className="text-white">Accelerating</span> your project from
+            ideation to token <span className="text-white">launch</span> and
+            beyond.
           </h1>
           <p
             className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px] ${inter.className}`}
@@ -262,20 +265,15 @@ export default function Incubation() {
             platform launch you have reached.
           </p>
           <div className="flex flex-col lg:flex-row items-center pt-16 gap-5 z-20">
-            <Link
-              href="#contact"
-              className="flex justify-center items-center hover:bg-[#FF284C] border rounded-2xl hover:border-[#e2d4d6] px-8 h-14 text-lg transition-all bg-black/90 text-white border-white w-full lg:w-[190px]"
-            >
+            <SSButton isLink href="#contact">
               Get Started
-            </Link>
-
-            {/* <SSButton>Get Started</SSButton> */}
+            </SSButton>
           </div>
         </div>
       </div>
 
       {/* TOKEN LAUNCH */}
-      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-white/10 text-white border-t-[1px] border-samurai-red mt-20 ">
+      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-32 w-full bg-white/10 text-white border-t-[1px] border-samurai-red mt-20 ">
         <svg
           fill="none"
           stroke="#FF284C"

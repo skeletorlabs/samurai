@@ -34,7 +34,7 @@ export const NAV = [
   },
   {
     title: 'Tokens',
-    href: '#',
+    href: '/tokens',
     icon: token,
     page: Page.tokens,
   },
