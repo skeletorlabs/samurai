@@ -376,37 +376,37 @@ export default function Tokens() {
       </div>
 
       {/* SAM */}
-      <div className="flex justify-between py-10 md:py-20 w-full bg-white/10 border-t-[1px] border-samurai-red">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white w-full">
+      <div className="flex justify-between w-full bg-white/10 border-t-[1px] border-samurai-red">
+        <div className="flex flex-col items-center text-center text-white w-full py-10 md:py-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">$SAM</span> Token
           </h2>
           <div
-            className={`flex flex-col leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+            className={`flex flex-col leading-normal pt-10 xl:pt-16 text-2xl ${inter.className}`}
           >
             <span className={`text-neutral-400 ${inter.className}`}>
               My $SAM earnings:
             </span>
-            <span className="text-4xl pb-1 text-green-200">123.99</span>
+            <span className="text-5xl pb-1 text-green-200">123.99</span>
           </div>
           <div
-            className={`flex flex-col leading-normal pt-10 text-xl ${inter.className}`}
+            className={`flex flex-col leading-normal pt-10 text-2xl ${inter.className}`}
           >
             <span className={`text-neutral-400 ${inter.className}`}>
               Pending $SAM Rewards:
             </span>
-            <span className="text-4xl pb-1 text-orange-200">123.99</span>
+            <span className="text-5xl pb-1 text-orange-200">123.99</span>
           </div>
           <div className="pt-20">
             <SSButton>Claim $SAM Rewards</SSButton>
           </div>
         </div>
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white w-full">
+        <div className="flex flex-col items-center text-center text-white w-full bg-black/20 py-10 md:py-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">$SAM</span> Ladder
           </h2>
           <div
-            className={`flex flex-col pt-10 xl:pt-16 text-xl pl-32 ${inter.className}`}
+            className={`flex flex-col pt-10 xl:pt-16 text-xl ${inter.className}`}
           >
             <div className="bg-samurai-red w-2 h-[380px] rounded-t-full relative ml-[5px]">
               {/* BARS */}
