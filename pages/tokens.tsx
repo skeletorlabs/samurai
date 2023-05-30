@@ -234,8 +234,8 @@ export default function Tokens() {
 
   return (
     <LayoutClean>
+      {/* TOP CONTENT */}
       <div className="px-6 lg:px-8 xl:px-20">
-        {/* TOP CONTENT */}
         <div className="pt-10 lg:pt-24 relative">
           <Image
             src="/samurai.svg"
@@ -371,6 +371,29 @@ export default function Tokens() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* SAM DESCRIPTION */}
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white/5 border-t-[1px] border-samurai-red">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+          <div className="flex flex-col text-white text-2xl pb-20">
+            <div className="flex items-end gap-8 pb-10">
+              <Image src="/samurai.svg" width={90} height={90} alt="" />
+              <p className="font-bold text-5xl pb-2">
+                About <span className="text-samurai-red">$SAM</span> Token
+              </p>
+            </div>
+            <p
+              className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px] ${inter.className}`}
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
+              venenatis nec elit non dictum. Quisque non lorem consectetur,
+              varius erat vitae, vehicula nulla. Donec quis tellus
+              dolor.Pellentesque habitant morbi tristique senectus et netus et
+              malesuada fames ac turpis egestas.
+            </p>
           </div>
         </div>
       </div>
