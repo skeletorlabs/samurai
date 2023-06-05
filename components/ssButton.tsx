@@ -14,12 +14,12 @@ export default function SSButton({
   return isLink ? (
     <Link
       href={href}
-      className="flex border rounded-[8px] border-red-500 px-8 py-3 transition-all hover:bg-samurai-red hover:text-black text-red-500"
+      className="flex justify-center border rounded-[8px] border-red-500 px-8 py-3 transition-all hover:bg-samurai-red hover:text-black text-red-500"
     >
       {children}
     </Link>
   ) : (
-    <button className="flex border rounded-[8px] border-red-500 px-8 py-3 transition-all hover:bg-samurai-red hover:text-black text-red-500">
+    <button className="flex justify-center border rounded-[8px] border-red-500 px-8 py-3 transition-all hover:bg-samurai-red hover:text-black text-red-500">
       {children}
     </button>
   );
