@@ -3,9 +3,20 @@ import { NFTS_ABI } from "./abis";
 
 const CONTRACT_ADDRESS = "0x2E759F0f558dB7b4077097AA7f08e1158833A8E7";
 
+export async function general(signer: ethers.Signer) {
+  try {
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer)
+    const totalSupply = await contract.totalSupply()
+    const maxSupply = await contract.MAX_SUPPLY();
+
+    return { totalSupply: totalSupply.toString(), maxSupply: maxSupply.toString() }
+  } catch (error) {
+    console.log(error)  
+  }
+}
+
 export async function mint(signer: ethers.Signer) {
   try {
-    console.log(signer)
     const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer)
 
     // console.log(contract)
