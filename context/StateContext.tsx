@@ -42,7 +42,6 @@ export const StateProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (router.isReady) {
-      console.log(router.pathname);
       const page = NAV.find((item) => item.href === router.pathname);
       setPage(page?.page as Page);
     }
