@@ -23,7 +23,7 @@
     "@rainbow-me/rainbowkit": "^1.0.1",
     "@sendgrid/mail": "^7.7.0",
     "autoprefixer": "^10.4.14",
-    "ethers": "^6.4.1",
+    "ethers": "^6.4.2",
     "postcss": "^8.4.21",
     "tailwind-clip-path": "^1.0.0",
     "tailwindcss": "^3.2.7",

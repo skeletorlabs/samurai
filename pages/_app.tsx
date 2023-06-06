@@ -28,7 +28,11 @@ const wagmiConfig = createConfig({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains} theme={midnightTheme()}>
+      <RainbowKitProvider
+        chains={chains}
+        modalSize="compact"
+        theme={midnightTheme()}
+      >
         <StateProvider>
           <Component {...pageProps} />
         </StateProvider>
