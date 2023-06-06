@@ -1,15 +1,19 @@
 import { useRouter } from "next/router";
-import React from "react";
+import { useState, useEffect, createContext } from "react";
+import { ethers } from "ethers";
 
 import { Page } from "../utils/enums";
 import { NAV } from "../utils/constants";
 
-export const StateContext = React.createContext({
+export const StateContext = createContext({
   page: Page.home,
   setPage: (value: Page) => {},
 
   isLoading: false,
   setIsLoading: (value: boolean) => {},
+
+  signer: null,
+  setSigner: (value: ethers.Signer | null) => {},
 });
 
 type Props = {
@@ -18,10 +22,13 @@ type Props = {
 
 export const StateProvider = ({ children }: Props) => {
   const router = useRouter();
-  const [page, setPage] = React.useState(Page.home);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [page, setPage] = useState(Page.home);
+  const [isLoading, setIsLoading] = useState(false);
+  const [signer, setSigner] = useState<any>(null);
 
-  React.useEffect(() => {
+  // const { data: walletSigner } = useSigner();
+
+  useEffect(() => {
     if (router.isReady) {
       console.log(router.pathname);
       const page = NAV.find((item) => item.href === router.pathname);
@@ -36,6 +43,8 @@ export const StateProvider = ({ children }: Props) => {
         setPage,
         isLoading,
         setIsLoading,
+        signer,
+        setSigner,
       }}
     >
       {children}

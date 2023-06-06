@@ -16,7 +16,7 @@ import { Page } from './enums'
 export const NAV = [
   {
     title: 'SamNFT',
-    href: '#',
+    href: '/nft',
     icon: nft,
     page: Page.nft,
   },

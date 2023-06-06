@@ -5,6 +5,8 @@ import { useContext } from "react";
 import { Inter } from "next/font/google";
 import { StateContext } from "@/context/StateContext";
 import { Page } from "@/utils/enums";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import SSButton from "./ssButton";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,7 +18,7 @@ export default function Nav() {
     <div
       className={`h-20 px-2 lg:px-8 flex items-center justify-between mt-5 z-10 ${inter.className}`}
     >
-      <div className="flex items-center w-full gap-9 font-bold text-xl">
+      <div className="flex items-center gap-9 font-bold text-xl">
         <Link
           href="/"
           className="transition-all hover:opacity-75"
@@ -47,9 +49,13 @@ export default function Nav() {
           </Link>
         ))}
       </div>
-      <button className="hidden lg:flex border rounded-[8px] border-red-500 px-4 py-1 text-sm transition-all hover:bg-[#FF4E6B] hover:text-black text-red-500 hover:font-medium">
-        V1(Old)
-      </button>
+      <div className="flex gap-5 h-10">
+        {page === Page.nft && <ConnectButton />}
+
+        <SSButton isLink href="#">
+          V1(Old)
+        </SSButton>
+      </div>
     </div>
   );
 }

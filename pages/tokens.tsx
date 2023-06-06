@@ -245,27 +245,23 @@ export default function Tokens() {
             className="hidden xl:block absolute top-32 right-[40px] w-[200px]"
           />
 
-          <h1 className="text-[38px] lg:text-[58px] font-black xl:max-w-[900px] text-samurai-red ">
-            <span className="text-white">Samurai</span> Tokens
+          <h1 className="text-[38px] lg:text-[58px] font-black xl:max-w-[900px] text-samurai-red">
+            Samurai <span className="text-white">Two-Token</span> System
           </h1>
           <div
-            className={`pt-3 !leading-relaxed text-neutral-300 lg:text-xl xl:max-w-[900px] ${inter.className}`}
+            className={`pt-3 !leading-[30px] text-neutral-300 lg:text-xl xl:max-w-[1000px] font-light ${inter.className}`}
           >
-            The Samurai Starter ecosystem is driven by a{" "}
+            The Samurai Starter ecosystem is fuelled by a{" "}
             <span className="font-bold text-white">two-token system</span> that
-            is accessible, fair, and rewarding. The{" "}
+            is accessible, fair, and rewarding for all. The{" "}
             <span className="font-bold text-white">$CFI</span> governance token
-            boosts stakers cashback rewards and provides{" "}
-            <span className="font-bold text-white">real platform yield</span> to
-            its LP providers. The{" "}
+            boosts stakers' cashback rewards rate and liquidity providers can
+            earn <span className="font-bold text-white">real yield</span> from
+            all business activities. The{" "}
             <span className="font-bold text-white">$SAM</span> token acts as a
             reward or cashback token that is distributed based on your
-            participation on the Samurai Starter platform.
-          </div>
-          <div className="flex flex-col lg:flex-row items-center pt-16 gap-5 z-20">
-            <SSButton isLink href="#contact">
-              Get Started
-            </SSButton>
+            participation throughout the Samurai Starter platform and is packed
+            with tons of utility.
           </div>
         </div>
       </div>
@@ -274,14 +270,19 @@ export default function Tokens() {
       <div className="flex flex-col pt-10 md:pt-20 pb-10 mt-20 w-full bg-white/5 border-t-[1px] border-samurai-red">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
-            <div className="flex w-full justify-between items-end gap-8 pb-10">
+            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 pb-10">
               <div className="flex gap-8 items-end">
-                <Image src="/samurai.svg" width={90} height={90} alt="" />
+                <Image
+                  src="/cyberfi-logo.svg"
+                  width={100}
+                  height={100}
+                  alt=""
+                />
                 <p className="font-bold text-5xl pb-2">
-                  My <span className="text-samurai-red">$CFI</span> Token
+                  <span className="text-samurai-red">$CFI</span> Staking
                 </p>
               </div>
-              <div className="flex gap-8 justify-end pb-10 text-sm">
+              <div className="flex gap-8 text-sm h-12">
                 <SSButton isLink href="">
                   Buy CFI on Arbitrum (coming soon)
                 </SSButton>
@@ -293,60 +294,56 @@ export default function Tokens() {
                 </SSButton>
               </div>
             </div>
-            <p className="text-lg text-neutral-300 pr-5">
-              The CyberFi token is the governance token that captures the value
-              of the Samurai Starter ecosystem. It is minted on the Ethereum
+            <p
+              className={`text-lg text-neutral-300 pr-5 font-light ${inter.className}`}
+            >
+              The $CFI token is the governance token that captures the value of
+              the Samurai Starter ecosystem. It is minted on the Ethereum
               blockchain with a fully-circulating supply of 2.4m $CFI. When you
-              provide $CFI-ETH LP on Uniswap V2 Ethereum or Chamelot DEX on
+              provide $CFI-ETH LP on Uniswap V2 Ethereum or Camelot DEX on
               Arbitrum, you are eligible to receive real platform yield.
-              Providing LP or single-token staking $CFI increases your $SAM
-              cashback. Check our{" "}
+              Providing LP or single-token staking $CFI also increases your $SAM
+              cashback rewards rate. Check out our{" "}
               <Link href="#" className="text-white underline">
                 docs
               </Link>{" "}
-              to learn how to get the most value from your $CFI.
+              to learn how to gain the most value from your $CFI.{" "}
             </p>
 
             <div
-              className={`flex justify-around leading-normal mt-10 py-10 text-2xl border-[0.5px] border-samurai-red rounded-xl`}
+              className={`grid lg:grid-cols-3 gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
             >
-              <div className="flex flex-col">
-                <span className={`text-neutral-400 ${inter.className}`}>
-                  My Stake
-                </span>
-                <span className="text-4xl pb-1">99.99 $CFI-WETH LP</span>
-                <span className="text-samurai-red text-xl">123.99 $CFI</span>
+              <div className="flex flex-col bg-black text-white border-[0.5px] border-samurai-red p-8 rounded-xl shadow-lg">
+                <div className="flex flex-col">
+                  <span className={`text-neutral-400 ${inter.className}`}>
+                    My Stake
+                  </span>
+                  <span className="text-xl pb-1">99.99 $CFI-WETH LP</span>
+                  <span className="text-samurai-red text-sm">123.99 $CFI</span>
+                </div>
+                <div className="flex justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6">
+                  <span className={`text-neutral-400 ${inter.className}`}>
+                    $SAM Cashback
+                  </span>
+                  <span className="text-xl">1%</span>
+                </div>
+                <div className="flex justify-between items-center pt-3">
+                  <span className={`text-neutral-400 ${inter.className}`}>
+                    Earnings
+                  </span>
+                  <span className="text-xl">500 $SAM</span>
+                </div>
               </div>
-
-              <div className="flex flex-col text-center ">
-                <span className={`text-neutral-400 ${inter.className}`}>
-                  My Earnings
-                </span>
-                <span className="text-4xl">500 $SAM</span>
-              </div>
-
-              <div className="flex flex-col text-right">
-                <span className={`text-neutral-400 ${inter.className}`}>
-                  $SAM Cashback
-                </span>
-                <span className="text-4xl">1%</span>
-              </div>
-            </div>
-
-            <div
-              className={`grid lg:grid-cols-2 gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
-            >
-              <div className="flex flex-col text-center bg-black h-[300px] text-white border-[0.5px] border-samurai-red p-8 rounded-xl shadow-lg">
+              <div className="flex flex-col text-center bg-black text-white border-[0.5px] border-samurai-red p-8 rounded-xl shadow-lg">
                 <div className="flex justify-center pb-3">
                   <Image
-                    src="/chain-logos/ethereum.svg"
-                    width={90}
-                    height={90}
+                    src="/cyberfi-logo.svg"
+                    width={60}
+                    height={60}
                     alt=""
-                    className="border-2 border-samurai-red rounded-full"
                   />
                 </div>
-                <span className={`font-bold text-2xl ${inter.className}`}>
+                <span className="text-xl text-neutral-300">
                   $CFI (Ethereum)
                 </span>
                 <div className="flex justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6">
@@ -366,17 +363,16 @@ export default function Tokens() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col text-center  h-[300px] text-white border-[0.5px] border-samurai-red p-8 rounded-xl shadow-lg">
+              <div className="flex flex-col text-center   text-white border-[0.5px] border-samurai-red p-8 rounded-xl shadow-lg">
                 <div className="flex justify-center pb-3">
                   <Image
-                    src="/chain-logos/arbitrum.svg"
-                    width={90}
-                    height={90}
+                    src="/cyberfi-logo.svg"
+                    width={60}
+                    height={60}
                     alt=""
-                    className="border-2 border-samurai-red rounded-full"
                   />
                 </div>
-                <span className={`font-bold text-2xl ${inter.className}`}>
+                <span className="text-xl text-neutral-300">
                   $CFI (Arbitrum)
                 </span>
                 <div className="flex justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6">
@@ -402,21 +398,25 @@ export default function Tokens() {
       </div>
 
       {/* SAM */}
-      <div className="flex justify-between w-full bg-white/10 border-t-[1px] border-samurai-red">
+      <div className="flex flex-col lg:flex-row justify-between w-full bg-white/10 border-t-[1px] border-samurai-red">
         <div className="flex flex-col text-white w-full py-10 md:py-20 px-12">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">$SAM</span> Token
           </h2>
 
           <div className={`flex flex-col text-2xl ${inter.className}`}>
-            <p className={`py-6  lg:text-lg pb-14 ${inter.className}`}>
-              The $SAM token rewards participation on the Samurai Starter
-              platform and is designed to deliver tremendous benefits to the
-              Samurai Starter community. The more you participate, the more you
-              earn, the more future benefits you may enjoy. $SAM is minted on
-              Ethereum layer-2 Arbitrum with a maximum supply of 1b tokens.
+            <p
+              className={`pt-8 text-lg text-neutral-300 font-light text-justify ${inter.className}`}
+            >
+              The $SAM token rewards participation across the entire Samurai
+              Starter ecosystem and is designed to deliver tremendous benefits
+              to the Samurai Starter community. The more you participate, the
+              more you earn, the more future benefits you may enjoy! All $SAM
+              rewards are vested over a period of three months, but users can
+              choose to claim rewards early with a 15% penalty. $SAM is minted
+              on Ethereum layer-2 Arbitrum with a maximum supply of 100m tokens.
             </p>
-            <span className={`text-neutral-400 ${inter.className}`}>
+            <span className={`text-neutral-400 pt-[90px] ${inter.className}`}>
               My $SAM earnings:
             </span>
             <span className="text-5xl pb-1 text-green-200">123.99</span>
@@ -424,12 +424,12 @@ export default function Tokens() {
           <div
             className={`flex flex-col leading-normal pt-10 text-2xl ${inter.className}`}
           >
-            <span className={`text-neutral-400 ${inter.className}`}>
+            <span className={`text-neutral-400  ${inter.className}`}>
               Pending $SAM Rewards:
             </span>
             <span className="text-5xl pb-1 text-orange-200">123.99</span>
           </div>
-          <div className="pt-10 flex gap-5">
+          <div className="pt-[120px] flex gap-5">
             <SSButton>Claim Vested $SAM Rewards</SSButton>
             <SSButton>Claim All $SAM Rewards</SSButton>
           </div>
@@ -438,15 +438,17 @@ export default function Tokens() {
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">$SAM</span> Ladder
           </h2>
-          <p className={`py-6 lg:text-md leading-relaxed ${inter.className}`}>
-            The $SAM Ladder represents your lifetime $SAM earnings in relation
-            to all other wallets that have earned $SAM since its inception. You
-            can claim, provide liquidity, and trade your $SAM rewards without a
-            worry. The $SAM Ladder shows your cumulative earnings regardless of
-            what you did with the token later. Climb The Ladder for more
-            platform benefits including the chance for airdrops, special
-            giveaways, and exclusive deals. Each Tier: Gotta think of Tier names
-            for each of the five (bottom 50%, top 50%, Top 25% etc.)
+          <p
+            className={`pt-8 text-lg text-neutral-300 pb-14 font-light text-justify ${inter.className}`}
+          >
+            The $SAM Ladder represents your lifetime $SAM rewards in relation to
+            all other wallets that have earned $SAM since its inception. The
+            $SAM Ladder shows your cumulative earnings regardless of what you do
+            with the rewards. You can claim, provide liquidity, or trade your
+            $SAM rewards without affecting your position on the $SAM Ladder.
+            Climb The Ladder for tremendous platform benefits including the
+            chance for airdrops, special giveaways, exclusive deals, and much
+            more!
           </p>
           <div
             className={`flex flex-col pt-8 text-xl items-center ${inter.className}`}
