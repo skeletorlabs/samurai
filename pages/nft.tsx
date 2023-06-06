@@ -42,8 +42,6 @@ export default function Nft() {
     };
   }, []);
 
-  console.log(Math.floor(Math.random() * images.length));
-
   return (
     <LayoutClean>
       <div className="flex w-full justify-between items-center px-6 lg:px-8 xl:px-20">
