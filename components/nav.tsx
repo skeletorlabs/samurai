@@ -18,7 +18,7 @@ export default function Nav() {
     <div
       className={`h-20 px-2 lg:px-8 flex items-center justify-between mt-5 z-10 ${inter.className}`}
     >
-      <div className="flex items-center gap-9 font-bold text-xl">
+      <div className="flex items-center gap-9 font-bold text-lg 2xl:text-xl">
         <Link
           href="/"
           className="transition-all hover:opacity-75"
