@@ -66,7 +66,7 @@ export default function Nft() {
         {/* TOP CONTENT */}
         <div className="lg:max-w-[750px]">
           <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
-            <span className="text-samurai-red">Sam</span> NFT
+            <span className="text-samurai-red">Sam</span>NFT
           </h1>
           <div
             className={`flex flex-col font-light leading-normal pt-4 text-lg text-neutral-300 pb-14 gap-4 ${inter.className}`}
