@@ -72,67 +72,97 @@ export default function Nft() {
             className={`flex flex-col font-light leading-normal pt-4 text-lg text-neutral-300 pb-14 gap-4 ${inter.className}`}
           >
             <p className="font-medium">
-              By participating in this minting event, you'll become part of our
-              vibrant community and gain access to exciting benefits. Here's
-              what you can expect as a proud owner of our unique NFTs:
+              By participating in the SamNFT minting event, you become part of
+              our vibrant community and gain access to tremendous benefits.
+              Here's what you can expect as a proud owner of our SamNFTs:
             </p>
 
             <p>
               <span className="text-samurai-red font-normal">
-                Airdrops and Rewards:
+                Lifetime Launchpad Access:
               </span>{" "}
-              As a token of appreciation for your support, we'll be providing
-              exclusive airdrops and rewards to all NFT holders. These airdrops
-              could include additional tokens, limited editions, or even special
-              experiences.
+              Enjoy lifetime access to all token offerings on Samurai Launchpad.
+              No need to buy and stake costly launchpad tokens, no more token
+              staking tiers*, minimal barriers to entry. The SamNFT gives you
+              equal access to token offerings from the most novel and hyped
+              startups in the crypto space.
             </p>
 
             <p>
               <span className="text-samurai-red font-normal">
-                VIP Access to Web3 Events:
+                $SAM Airdrop:{" "}
               </span>{" "}
-              Get ready to dive into the world of Web3! As an NFT holder, you'll
-              receive VIP access to our web3 events, where you can connect with
-              industry experts, learn about the latest developments in the
-              blockchain space, and engage in stimulating discussions with
-              like-minded individuals.
+              Our reward token, $SAM, is launching in Q4 2023 on Arbitrum.
+              People who purchase SamNFT during the pre-mint period are eligible
+              to receive a share of 30% of the total supply of $SAM tokens which
+              is vested over one year.
             </p>
 
             <p>
               <span className="text-samurai-red font-normal">
-                Community Engagement:
+                Cashback Rewards:
               </span>{" "}
-              Our community is the heart of our project. By minting our NFTs,
-              you'll become part of a dynamic and passionate group of
-              individuals who share a common interest in art, technology, and
-              the decentralized future. Engage in lively conversations,
-              collaborate on exciting projects, and forge lasting connections
-              with fellow community members.
+              SamNFT stakers who participate in token offerings on Samurai
+              Launchpad are eligible to receive cashback rewards in the form of
+              $SAM tokens. Stake or LP the $CFI governance token to increase
+              your cashback rewards.
             </p>
 
             <p>
               <span className="text-samurai-red font-normal">
-                Early Access and Exclusive Opportunities:
+                SamNFT Rentals:
               </span>{" "}
-              Stay ahead of the curve! As an NFT holder, you'll have the
-              privilege of gaining early access to future project updates,
-              releases, and exclusive opportunities. Be the first to explore new
-              features, participate in unique collaborations, and unlock special
-              benefits reserved for our esteemed community members.
+              Not interested in participating in an upcoming token offering?
+              Want to earn some passive income from your SamNFTs? Holders can
+              offer their SamNFTs for rent on our in-house SamNFT rental
+              marketplace! Set your desired price and length of time of the
+              rental and lease your SamNFT to non-holders who may want to
+              participate in token offerings.
+            </p>
+
+            <p>
+              <span className="text-samurai-red font-normal">
+                VIP Access to Samurai Sanka:
+              </span>{" "}
+              Samurai Sanka is our upcoming user interaction platform. It
+              includes a Partner's Quest platform, Prediction Markets, Lotteries
+              and more. As a SamNFT staker, you receive special VIP perks
+              including reward boosts for participating on Sanka.
+            </p>
+
+            <p>
+              <span className="text-samurai-red font-normal">
+                Eligibility for special giveaways:
+              </span>{" "}
+              When Samurai Starter is bringing in new projects for either our
+              accelerator, launchpad or other services, we always strive to
+              bring in some freebies for our community whether they be tokens,
+              NFTs, or some other digital gifts.
+            </p>
+
+            <p>
+              <span className="text-samurai-red font-normal">
+                DAO Governance Rights:
+              </span>{" "}
+              As SamNFT holders, the decision to launch a project is in your
+              hands. The number of holders who express interest in a token
+              offering will determine whether we launch the project and the size
+              of the allocation we secure so that everyone who is interested can
+              get the token allotment they desire.
             </p>
 
             <p className="text-white">
-              Join us on this incredible journey into the world of NFTs and the
-              decentralized revolution. Mint your NFTs today and embark on a
-              thrilling adventure filled with rewards, exclusive access, and a
-              vibrant community.
+              These are just a few of the utilities provided by the SamNFT. We
+              are delighted that you are going to join us on this journey and we
+              will always strive to bring more and more value and benefits to
+              our early SamNFT supporters.
             </p>
           </div>
         </div>
 
         {/* TOP SIDE CONTENT */}
         <div className="">
-          <div className="flex justify-center items-center w-[500px] h-[500px] bg-white rounded-[8px] relative">
+          <div className="flex justify-center items-center w-[500px] h-[500px] bg-white rounded-[8px] mt-10 relative">
             <Image
               key={imageKey}
               src={image}
