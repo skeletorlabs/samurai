@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
@@ -25,5 +26,5 @@ module.exports = {
       "s-polygon2": "polygon(0px 0px, 90% 0px, 285px 90px, 0px 45px)",
     },
   },
-  plugins: [require("tailwind-clip-path")],
+  plugins: [require("tailwind-clip-path"), require("flowbite/plugin")],
 };

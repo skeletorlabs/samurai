@@ -249,7 +249,7 @@ export default function Tokens() {
             Samurai <span className="text-white">Two-Token</span> System
           </h1>
           <div
-            className={`pt-3 !leading-[30px] text-neutral-300 lg:text-xl xl:max-w-[1000px] font-light ${inter.className}`}
+            className={`pt-3 !leading-[30px] text-neutral-300 lg:text-xl xl:max-w-[1000px] font-light text-justify ${inter.className}`}
           >
             The Samurai Starter ecosystem is fuelled by a{" "}
             <span className="font-bold text-white">two-token system</span> that
@@ -282,7 +282,7 @@ export default function Tokens() {
                   <span className="text-samurai-red">$CFI</span> Staking
                 </p>
               </div>
-              <div className="flex gap-8 text-sm h-12">
+              <div className="flex flex-col md:flex-row gap-2 md:gap-8 text-sm h-12">
                 <SSButton isLink href="">
                   Buy CFI on Arbitrum (coming soon)
                 </SSButton>
@@ -295,7 +295,7 @@ export default function Tokens() {
               </div>
             </div>
             <p
-              className={`text-lg text-neutral-300 pr-5 font-light ${inter.className}`}
+              className={`text-lg pt-10 lg:pt-0 text-neutral-300 lg:pr-5 font-light text-justify ${inter.className}`}
             >
               The $CFI token is the governance token that captures the value of
               the Samurai Starter ecosystem. It is minted on the Ethereum
@@ -346,10 +346,10 @@ export default function Tokens() {
                 <span className="text-xl text-neutral-300">
                   $CFI (Ethereum)
                 </span>
-                <div className="flex justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6">
+                <div className="flex flex-col md:flex-row justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6 gap-4 lg:gap-0">
                   <Link
                     href="https://etherscan.io/address/0x63b4f3e3fa4e438698ce330e365e831f7ccd1ef4"
-                    className="text-[16px] border-b transition-all hover:border-samurai-red hover:text-samurai-red"
+                    className="text-[12px] lg:text-[16px] border-b transition-all hover:border-samurai-red hover:text-samurai-red"
                   >
                     Token and LP contract
                   </Link>
@@ -375,10 +375,10 @@ export default function Tokens() {
                 <span className="text-xl text-neutral-300">
                   $CFI (Arbitrum)
                 </span>
-                <div className="flex justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6">
+                <div className="flex flex-col md:flex-row justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6 gap-4 lg:gap-0">
                   <Link
                     href="https://etherscan.io/address/0x63b4f3e3fa4e438698ce330e365e831f7ccd1ef4"
-                    className="text-[16px] border-b transition-all hover:border-samurai-red hover:text-samurai-red"
+                    className="text-[12px] lg:text-[16px]  border-b transition-all hover:border-samurai-red hover:text-samurai-red"
                   >
                     Token and LP contract
                   </Link>
@@ -399,7 +399,7 @@ export default function Tokens() {
 
       {/* SAM */}
       <div className="flex flex-col lg:flex-row justify-between w-full bg-white/10 border-t-[1px] border-samurai-red">
-        <div className="flex flex-col text-white w-full py-10 md:py-20 px-12">
+        <div className="flex flex-col text-white w-full py-10 md:py-20 px-4 lg:px-12">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">$SAM</span> Token
           </h2>
@@ -416,7 +416,9 @@ export default function Tokens() {
               choose to claim rewards early with a 15% penalty. $SAM is minted
               on Ethereum layer-2 Arbitrum with a maximum supply of 100m tokens.
             </p>
-            <span className={`text-neutral-400 pt-[90px] ${inter.className}`}>
+            <span
+              className={`text-neutral-400 pt-10 md:pt-[90px] ${inter.className}`}
+            >
               My $SAM earnings:
             </span>
             <span className="text-5xl pb-1 text-green-200">123.99</span>
@@ -429,12 +431,12 @@ export default function Tokens() {
             </span>
             <span className="text-5xl pb-1 text-orange-200">123.99</span>
           </div>
-          <div className="pt-[120px] flex gap-5">
+          <div className="pt-10 md:pt-[120px] flex flex-col md:flex-row gap-3 md:gap-5">
             <SSButton>Claim Vested $SAM Rewards</SSButton>
             <SSButton>Claim All $SAM Rewards</SSButton>
           </div>
         </div>
-        <div className="flex flex-col text-white w-full bg-black/20 py-10 md:py-20 px-12">
+        <div className="flex flex-col text-white w-full bg-black/20 py-10 md:py-20 px-4 lg:px-12">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">$SAM</span> Ladder
           </h2>
