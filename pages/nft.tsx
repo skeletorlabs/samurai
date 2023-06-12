@@ -329,7 +329,7 @@ export default function Nft() {
         <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-white/10 text-white border-t-[1px] border-samurai-red mt-20 ">
           <div className="flex flex-col relative">
             <h2 className="text-4xl lg:text-5xl font-bold">
-              Last <span className="text-samurai-red">5 NFTs</span> Minted
+              Lastest <span className="text-samurai-red">Mints</span>
             </h2>
             <div
               className={`relative mt-3 leading-normal pt-4 text-xl max-w-[1000px] ${inter.className}`}
