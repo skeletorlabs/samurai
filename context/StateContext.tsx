@@ -18,6 +18,9 @@ export const StateContext = createContext({
 
   signer: null,
   setSigner: (value: ethers.Signer | null) => {},
+
+  account: "",
+  setAccount: (value: string) => {},
 });
 
 type Props = {
@@ -29,8 +32,9 @@ export const StateProvider = ({ children }: Props) => {
   const [page, setPage] = useState(Page.home);
   const [isLoading, setIsLoading] = useState(false);
   const [signer, setSigner] = useState<any>(null);
+  const [account, setAccount] = useState<string>("");
 
-  const account = useAccount();
+  const wallet = useAccount();
 
   const getSigner = useCallback(async () => {
     if (window.ethereum !== null) {
@@ -48,14 +52,16 @@ export const StateProvider = ({ children }: Props) => {
   }, [router]);
 
   useEffect(() => {
-    if (account.isConnected) {
+    if (wallet.isConnected) {
       getSigner();
     } else {
       setSigner(null);
     }
-  }, [account.isConnected]);
 
-  useEffect(() => {}, [account.isDisconnected]);
+    setAccount(wallet?.address as string);
+  }, [wallet.isConnected]);
+
+  useEffect(() => {}, [wallet.isDisconnected]);
 
   return (
     <StateContext.Provider
@@ -66,6 +72,8 @@ export const StateProvider = ({ children }: Props) => {
         setIsLoading,
         signer,
         setSigner,
+        account,
+        setAccount,
       }}
     >
       {children}

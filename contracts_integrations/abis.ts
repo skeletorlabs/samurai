@@ -1,10 +1,32 @@
-export const NFTS_ABI = [
+export const NFTS_ABI =
+[
   {
     "inputs": [
       
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "inputs": [
+      
+    ],
+    "name": "Sam_Address_Not_Whitelisted",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      
+    ],
+    "name": "Sam_Already_Minted_For_Free",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      
+    ],
+    "name": "Sam_Already_Whitelisted",
+    "type": "error"
   },
   {
     "inputs": [
@@ -113,6 +135,12 @@ export const NFTS_ABI = [
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "address",
+        "name": "wallet",
+        "type": "address"
+      },
+      {
         "indexed": false,
         "internalType": "uint256",
         "name": "tokenId",
@@ -166,6 +194,19 @@ export const NFTS_ABI = [
       {
         "indexed": true,
         "internalType": "address",
+        "name": "wallet",
+        "type": "address"
+      }
+    ],
+    "name": "RemovedFromWhitelist",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "from",
         "type": "address"
       },
@@ -199,10 +240,76 @@ export const NFTS_ABI = [
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "wallet",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "newBaseURI",
+        "type": "string"
+      }
+    ],
+    "name": "UpdatedBaseURI",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "wallet",
+        "type": "address"
+      }
+    ],
+    "name": "Whitelisted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "wallet",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Withdrawal",
+    "type": "event"
+  },
+  {
     "inputs": [
       
     ],
     "name": "MAX_SUPPLY",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      
+    ],
+    "name": "MAX_SUPPLY_WHITELIST",
     "outputs": [
       {
         "internalType": "uint256",
@@ -226,6 +333,21 @@ export const NFTS_ABI = [
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "wallet",
+        "type": "address"
+      }
+    ],
+    "name": "addToWhitelist",
+    "outputs": [
+      
+    ],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -300,6 +422,21 @@ export const NFTS_ABI = [
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      }
+    ],
+    "name": "freeMint",
+    "outputs": [
+      
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "tokenId",
         "type": "uint256"
@@ -311,6 +448,25 @@ export const NFTS_ABI = [
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "hasUsedFreeMint",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -338,6 +494,40 @@ export const NFTS_ABI = [
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "isWhitelisted",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      }
+    ],
+    "name": "mint",
+    "outputs": [
+      
+    ],
+    "stateMutability": "payable",
     "type": "function"
   },
   {
@@ -417,9 +607,13 @@ export const NFTS_ABI = [
   },
   {
     "inputs": [
-      
+      {
+        "internalType": "address",
+        "name": "wallet",
+        "type": "address"
+      }
     ],
-    "name": "renounceOwnership",
+    "name": "removeFromWhitelist",
     "outputs": [
       
     ],
@@ -428,17 +622,13 @@ export const NFTS_ABI = [
   },
   {
     "inputs": [
-      {
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
-      }
+      
     ],
-    "name": "safeMint",
+    "name": "renounceOwnership",
     "outputs": [
       
     ],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -629,6 +819,21 @@ export const NFTS_ABI = [
   },
   {
     "inputs": [
+      
+    ],
+    "name": "totalSupplyWhitelist",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
       {
         "internalType": "address",
         "name": "from",
@@ -686,7 +891,7 @@ export const NFTS_ABI = [
         "type": "string"
       }
     ],
-    "name": "updateIPFSHash",
+    "name": "updatedBaseURI",
     "outputs": [
       
     ],
