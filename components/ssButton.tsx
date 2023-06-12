@@ -7,6 +7,7 @@ interface SSButton {
   href?: string;
   click?: () => void;
   flexSize?: boolean;
+  disabled?: boolean;
 }
 export default function SSButton({
   children,
@@ -14,20 +15,26 @@ export default function SSButton({
   href = "",
   click = () => {},
   flexSize = false,
+  disabled = false,
 }: SSButton) {
   return isLink ? (
     <Link
       href={href}
-      className="flex justify-center items-center border rounded-[8px] border-red-500 px-8 py-3 transition-all hover:bg-samurai-red hover:text-black text-red-500"
+      className="flex justify-center items-center border rounded-[8px] border-samurai-red px-8 py-3 transition-all hover:bg-samurai-red hover:text-black text-samurai-red"
     >
       {children}
     </Link>
   ) : (
     <button
+      disabled={disabled}
       onClick={() => click()}
-      className={`flex justify-center items-center ${
-        flexSize ? "w-full" : "w-auto"
-      } border rounded-[8px] border-red-500 px-8 py-3 transition-all hover:bg-samurai-red hover:text-black text-red-500`}
+      className={`
+        flex justify-center items-center text-samurai-red px-8 py-3 transition-all 
+        ${flexSize ? "w-full" : "w-auto"} 
+        border rounded-[8px] border-samurai-red 
+        enabled:hover:bg-samurai-red enabled:hover:text-black
+        disabled:border-gray-800 disabled:text-gray-800
+      `}
     >
       {children}
     </button>

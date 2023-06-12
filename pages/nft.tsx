@@ -32,6 +32,8 @@ const images = [
   "/nfts/8.png",
 ];
 
+const baseUri = process.env.NEXT_PUBLIC_BASE_URI as string;
+
 export default function Nft() {
   const { account, isLoading, signer, setIsLoading } = useContext(StateContext);
 
@@ -41,8 +43,6 @@ export default function Nft() {
   const [generalInfo, setGeneralInfo] = useState<GeneralInfo | null>(null);
   const [userNfts, setUserNfts] = useState<Nfts | []>([]);
   const [lastFiveNfts, setLastFiveNfts] = useState<Nfts | []>([]);
-
-  const baseURI = "ipfs://QmTjbQGtJLRPCffUw5Pg1ugYWnAYMaUM6HQ9bm2oFtmwi3/";
 
   const fetcher = (query: string, variables: any) => {
     return request(
@@ -80,17 +80,25 @@ export default function Nft() {
   }, [signer]);
 
   useEffect(() => {
-    if (signer) getGeneralInfo();
+    if (signer) {
+      getGeneralInfo();
+    }
   }, [signer]);
 
   useEffect(() => {
+    setUserNfts([]);
     const fetchSrcForNfts = async () => {
       const list = { ...(myNftsData as { minteds: Nfts }) };
+      setUserNfts(list.minteds);
 
-      if (list && list.minteds && list.minteds.length > 0) {
+      if (generalInfo && list && list.minteds && list.minteds.length > 0) {
         const updatedUserNfts = await Promise.all(
           list.minteds.map(async (nft) => {
-            const src = await getNFTData(baseURI, nft.tokenId, nft.tokenUri);
+            const src = await getNFTData(
+              generalInfo.baseUri,
+              nft.tokenId,
+              nft.tokenUri
+            );
             return { ...nft, src };
           })
         );
@@ -100,16 +108,17 @@ export default function Nft() {
     };
 
     fetchSrcForNfts();
-  }, [myNftsData]);
+  }, [myNftsData, generalInfo]);
 
   useEffect(() => {
     const fetchSrcForNfts = async () => {
       const list = { ...(lastFiveNftsData as { minteds: Nfts }) };
+      setLastFiveNfts(list.minteds);
 
       if (list && list.minteds && list.minteds.length > 0) {
         const updatedLastFiveNfts = await Promise.all(
           list.minteds.map(async (nft) => {
-            const src = await getNFTData(baseURI, nft.tokenId, nft.tokenUri);
+            const src = await getNFTData(baseUri, nft.tokenId, nft.tokenUri);
             return { ...nft, src };
           })
         );
@@ -235,64 +244,65 @@ export default function Nft() {
               </Carousel>
             </div>
             <div className="flex flex-col w-full mt-4">
-              {signer ? (
-                <div className="flex flex-col gap-3">
-                  <div className="flex flex-col lg:flex-row items-center gap-3">
-                    <SSButton
-                      click={() =>
-                        mint(
-                          signer! as ethers.Signer,
-                          generalInfo!.isWhitelisted &&
-                            !generalInfo?.hasUsedFreeMint
-                        )
-                      }
-                      flexSize
-                    >
-                      MINT A SAMURAI NFT
-                    </SSButton>
-                    <SSButton click={() => {}} flexSize>
-                      RENT A SAMURAI NFT
-                    </SSButton>
+              <div className="flex flex-col gap-3">
+                <div className="flex flex-col lg:flex-row items-center gap-3">
+                  <SSButton
+                    disabled={!signer}
+                    click={() =>
+                      mint(
+                        signer! as ethers.Signer,
+                        generalInfo!.isWhitelisted &&
+                          !generalInfo?.hasUsedFreeMint
+                      )
+                    }
+                    flexSize
+                  >
+                    MINT A SAMURAI NFT
+                  </SSButton>
+                  <SSButton disabled={!signer} click={() => {}} flexSize>
+                    RENT A SAMURAI NFT
+                  </SSButton>
+                </div>
+
+                <div className="flex flex-col text-xl gap-3 mt-4">
+                  <div className="flex justify-between items-center gap-4">
+                    <div>
+                      <span className="text-samurai-red">MINTED</span>
+                      /SUPPLY
+                    </div>
+                    <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
+                    <div className="text-2xl">
+                      <span className="text-samurai-red">
+                        {generalInfo?.totalSupply.toString() || 0}
+                      </span>
+                      /{generalInfo?.maxSupply.toString() || 0}
+                    </div>
                   </div>
 
-                  <div className="flex flex-col text-xl gap-3 mt-4">
-                    <div className="flex justify-between items-center gap-4">
-                      <div>
-                        <span className="text-samurai-red">MINTED</span>
-                        /SUPPLY
-                      </div>
-                      <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
-                      <div className="text-2xl">
-                        <span className="text-samurai-red">
-                          {generalInfo?.totalSupply.toString() || 0}
-                        </span>
-                        /{generalInfo?.maxSupply.toString() || 0}
-                      </div>
+                  <div className="flex justify-between items-center gap-2">
+                    <div>MY NFTS</div>
+                    <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
+                    <div>
+                      <span className="text-samurai-red text-2xl">
+                        {userNfts?.length || 0}
+                      </span>
                     </div>
+                  </div>
 
-                    <div className="flex justify-between items-center gap-2">
-                      <div>MY NFTS</div>
-                      <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
-                      <div>
-                        <span className="text-samurai-red text-2xl">
-                          {userNfts?.length}
-                        </span>
-                      </div>
-                    </div>
+                  <div className="flex w-full lg:max-w-[500px] items-center flex-wrap gap-4 mt-5">
+                    {userNfts?.map((nft, index) => (
+                      <div
+                        key={index}
+                        className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
+                      >
+                        <Image
+                          src={nft?.src ? nft?.src : "/loading.gif"}
+                          fill
+                          alt={image}
+                          className="scale-[0.95] rounded-[8px]"
+                        />
 
-                    <div className="flex w-full lg:max-w-[500px] items-center flex-wrap gap-4 mt-5">
-                      {userNfts?.map((nft, index) => (
-                        <div
-                          key={index}
-                          className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
-                        >
-                          <Image
-                            src={nft?.src ? nft?.src : "/loading.gif"}
-                            fill
-                            alt={image}
-                            className="scale-[0.95] rounded-[8px]"
-                          />
-
+                        {signer && nft.src && (
                           <button
                             className="
                               absolute bottom-4 left-0 
@@ -305,14 +315,12 @@ export default function Nft() {
                           >
                             RENT
                           </button>
-                        </div>
-                      ))}
-                    </div>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ) : (
-                <ConnectButton />
-              )}
+              </div>
             </div>
           </div>
         </div>

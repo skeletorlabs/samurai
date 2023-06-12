@@ -42,26 +42,25 @@ export const StateProvider = ({ children }: Props) => {
       const walletSigner = await provider.getSigner();
       setSigner(walletSigner);
     }
-  }, []);
+  }, [setSigner]);
 
   useEffect(() => {
     if (router.isReady) {
       const page = NAV.find((item) => item.href === router.pathname);
       setPage(page?.page as Page);
     }
-  }, [router]);
+  }, [router, setPage]);
 
   useEffect(() => {
-    if (wallet.isConnected) {
+    if (wallet.address && wallet.address !== account) {
+      // console.log(wallet.address);
       getSigner();
     } else {
       setSigner(null);
     }
 
     setAccount(wallet?.address as string);
-  }, [wallet.isConnected]);
-
-  useEffect(() => {}, [wallet.isDisconnected]);
+  }, [wallet.address, setSigner]);
 
   return (
     <StateContext.Provider
