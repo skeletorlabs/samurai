@@ -15,6 +15,7 @@ export type Nfts = {
     tokenUri: string
     wallet: string
     src?: string
+    metadata?: NFTMetadata
 }[]
 
 export type NFTMetadata = {

@@ -77,5 +77,5 @@ export async function getNFTData(ipfsUrl: string, tokenUri: string) {
 
   const imageUrl = gateway + "/ipfs/" + metadata.image.substring(metadata.image.indexOf("ipfs://") + 7, metadata.image.length)
   
-  return imageUrl
+  return { metadata, imageUrl }
 }

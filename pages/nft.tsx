@@ -1,6 +1,6 @@
+import Link from "next/link";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { StateContext } from "@/context/StateContext";
-import Layout from "@/components/layout";
 import { Inter } from "next/font/google";
 import SSButton from "@/components/ssButton";
 import { general, getNFTData, mint } from "@/contracts_integrations/nft";
@@ -8,7 +8,6 @@ import { general, getNFTData, mint } from "@/contracts_integrations/nft";
 import { ethers } from "ethers";
 import LayoutClean from "@/components/layoutClean";
 import Image from "next/image";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Accordion, Carousel } from "flowbite-react";
 
 import { SupplyInfo, GeneralInfo, Nfts } from "@/utils/interfaces";
@@ -108,8 +107,11 @@ export default function Nft() {
       if (generalInfo && list && list.minteds && list.minteds.length > 0) {
         const updatedUserNfts = await Promise.all(
           list.minteds.map(async (nft) => {
-            const src = await getNFTData(generalInfo.baseUri, nft.tokenUri);
-            return { ...nft, src };
+            const { imageUrl, metadata } = await getNFTData(
+              generalInfo.baseUri,
+              nft.tokenUri
+            );
+            return { ...nft, src: imageUrl, metadata };
           })
         );
 
@@ -128,8 +130,11 @@ export default function Nft() {
       if (list && list.minteds && list.minteds.length > 0) {
         const updatedLastFiveNfts = await Promise.all(
           list.minteds.map(async (nft) => {
-            const src = await getNFTData(baseUri, nft.tokenUri);
-            return { ...nft, src };
+            const { imageUrl, metadata } = await getNFTData(
+              baseUri,
+              nft.tokenUri
+            );
+            return { ...nft, src: imageUrl, metadata };
           })
         );
 
@@ -317,6 +322,27 @@ export default function Nft() {
                           className="scale-[0.95] rounded-[8px]"
                         />
 
+                        {/* CHECK ON OPENSEA */}
+                        {signer && nft.metadata && (
+                          <Link
+                            target="blank"
+                            href={`${
+                              process.env.NEXT_PUBLIC_OPENSEA_URL as string
+                            }/${nft.tokenId}`}
+                            className="
+                              absolute bottom-12 left-0 
+                              border border-l-0 border-black rounded-tr-[8px] rounded-br-[8px] 
+                              px-3 
+                              text-[12px] font-bold text-white
+                              bg-blue-500  shadow-lg
+                              transition-all hover:pl-6 hover:font-black  
+                            "
+                          >
+                            VIEW
+                          </Link>
+                        )}
+
+                        {/* RENT */}
                         {signer && nft.src && (
                           <button
                             className="
@@ -345,6 +371,14 @@ export default function Nft() {
           <div className="flex flex-col relative">
             <h2 className="text-4xl lg:text-5xl font-bold">
               Lastest <span className="text-samurai-red">Mints</span>
+              <p className="text-yellow-200 text-[16px] hover:underline w-max pt-2">
+                <Link
+                  href="https://testnets.opensea.io/collection/test-sam-nft"
+                  target="blank"
+                >
+                  View entire collection ➜
+                </Link>
+              </p>
             </h2>
 
             <div
@@ -356,16 +390,29 @@ export default function Nft() {
                 <span>- New minted NFTs will appear here</span>
               )}
               {lastFiveNfts?.map((nft, index) => (
-                <div
-                  key={index}
-                  className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
-                >
-                  <Image
-                    src={nft?.src ? nft?.src : "/loading.gif"}
-                    fill
-                    alt={image}
-                    className="scale-[0.95] rounded-[8px]"
-                  />
+                <div className="transition-all hover:scale-110">
+                  <Link
+                    key={index}
+                    target="blank"
+                    href={
+                      nft.metadata
+                        ? `${process.env.NEXT_PUBLIC_OPENSEA_URL as string}/${
+                            nft.tokenId
+                          }`
+                        : "#"
+                    }
+                    className="flex flex-col justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
+                  >
+                    <Image
+                      src={nft?.src ? nft?.src : "/loading.gif"}
+                      fill
+                      alt={image}
+                      className="scale-[0.95] rounded-[8px]"
+                    />
+                  </Link>
+                  <p className="text-white text-sm mt-2">
+                    {nft.metadata?.name}
+                  </p>
                 </div>
               ))}
             </div>
