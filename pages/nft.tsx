@@ -390,9 +390,8 @@ export default function Nft() {
                 <span>- New minted NFTs will appear here</span>
               )}
               {lastFiveNfts?.map((nft, index) => (
-                <div className="transition-all hover:scale-110">
+                <div key={index} className="transition-all hover:scale-110">
                   <Link
-                    key={index}
                     target="blank"
                     href={
                       nft.metadata
