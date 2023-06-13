@@ -248,7 +248,7 @@ export default function Nft() {
           </div>
 
           {/* SIDE CONTENT */}
-          <div className="">
+          <div className="mt-28">
             <div className="flex justify-center items-center w-full h-[300px] lg:w-[500px] lg:h-[500px] bg-white p-2 rounded-[8px] relative">
               <Carousel leftControl=" " rightControl=" ">
                 {images.map((image, index) => (
