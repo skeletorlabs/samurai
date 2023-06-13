@@ -262,9 +262,10 @@ export default function Nft() {
                     src={image}
                     width={500}
                     height={300}
-                    // fill
-                    alt=""
+                    alt={image}
                     className="rounded-[8px]"
+                    placeholder="blur"
+                    blurDataURL="/loading.gif"
                   />
                 ))}
               </Carousel>
