@@ -3,27 +3,22 @@ import { NFTS_ABI } from "./abis";
 import Notificate from '../components/notificate'
 import handleError from '../utils/handleErrors'
 import { GeneralInfo, NFTMetadata } from "@/utils/interfaces";
-import { Metadata } from "next"
 
-// const CONTRACT_ADDRESS = "0x2E759F0f558dB7b4077097AA7f08e1158833A8E7";
-const CONTRACT_ADDRESS = "0x2f7B66161A34e396ED82F1bC3932eb044726d8d3"
+const GOERLI_RPC_URL = process.env.NEXT_PUBLIC_GOERLI_RPC_URL as string;
+const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as string;
 
-export async function general(signer: ethers.Signer) {
+export async function general() {
   try {
-    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer)
-    const signerAddress = await signer.getAddress();
+    const provider = new ethers.JsonRpcProvider(GOERLI_RPC_URL);
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, provider)
+    // const signerAddress = await signer.getAddress();
     const isPaused = await contract.paused();
     const totalSupply = await contract.totalSupply()
-    const maxSupply = await contract.MAX_SUPPLY();
     const baseUri = await contract.baseURI();
-    const isWhitelisted = await contract.isWhitelisted(signerAddress)
-    const hasUsedFreeMint = await contract.hasUsedFreeMint(signerAddress)
+    
 
     return { 
       totalSupply, 
-      maxSupply,
-      isWhitelisted, 
-      hasUsedFreeMint, 
       isPaused,
       baseUri
     } as GeneralInfo
@@ -32,14 +27,18 @@ export async function general(signer: ethers.Signer) {
   }
 }
 
-export async function mint(signer: ethers.Signer, freeMint: boolean) {
+export async function mint(signer: ethers.Signer) {
   try {
     const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer)
     const signerAddress = await signer.getAddress();
+    
+    const isWhitelisted = await contract.isWhitelisted(signerAddress)
+    const hasUsedFreeMint = await contract.hasUsedFreeMint(signerAddress)
+    
 
     let tx: any
     
-    if (freeMint) {
+    if (isWhitelisted && !hasUsedFreeMint) {
       tx = await contract.freeMint(signerAddress);
     } else {
       const amount = ethers.parseEther("0.1");
@@ -69,7 +68,7 @@ export async function mint(signer: ethers.Signer, freeMint: boolean) {
   }
 }
 
-export async function getNFTData(ipfsUrl: string, tokenId: string, tokenUri: string) {
+export async function getNFTData(ipfsUrl: string, tokenUri: string) {
   const gateway = process.env.NEXT_PUBLIC_IPFS_GATEWAY as string
 
   const metadataUrl = gateway + "/ipfs/" + ipfsUrl.substring(ipfsUrl.indexOf("ipfs://") + 7, ipfsUrl.length) + tokenUri

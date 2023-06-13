@@ -33,7 +33,7 @@ export default function SSButton({
         ${flexSize ? "w-full" : "w-auto"} 
         border rounded-[8px] border-samurai-red 
         enabled:hover:bg-samurai-red enabled:hover:text-black
-        disabled:border-gray-800 disabled:text-gray-800
+        disabled:border-white/20 disabled:text-white/10
       `}
     >
       {children}

@@ -11,11 +11,15 @@ import Image from "next/image";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Accordion, Carousel } from "flowbite-react";
 
-import { GeneralInfo, Nfts } from "@/utils/interfaces";
+import { SupplyInfo, GeneralInfo, Nfts } from "@/utils/interfaces";
 
 import useSWR from "swr";
 import { request } from "graphql-request";
-import { MY_NFTS_QUERY, LAST_FIVE_NFTS_QUERY } from "@/queries/nft";
+import {
+  SUPPLY_QUERY,
+  MY_NFTS_QUERY,
+  LAST_FIVE_NFTS_QUERY,
+} from "@/queries/nft";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -41,6 +45,7 @@ export default function Nft() {
     images[Math.floor(Math.random() * images.length)]
   );
   const [generalInfo, setGeneralInfo] = useState<GeneralInfo | null>(null);
+  const [supply, setSupply] = useState<SupplyInfo | null>(null);
   const [userNfts, setUserNfts] = useState<Nfts | []>([]);
   const [lastFiveNfts, setLastFiveNfts] = useState<Nfts | []>([]);
 
@@ -55,6 +60,14 @@ export default function Nft() {
   const myNftsVariables = {
     wallet: account,
   };
+
+  const { data: supplyData, error: supplyError } = useSWR(
+    [SUPPLY_QUERY],
+    fetcher,
+    {
+      refreshInterval: 120000,
+    }
+  );
 
   const { data: myNftsData, error: myNftsDataError } = useSWR(
     [MY_NFTS_QUERY, myNftsVariables],
@@ -74,15 +87,16 @@ export default function Nft() {
 
   const getGeneralInfo = useCallback(async () => {
     setIsLoading(true);
-    const response = await general(signer!);
+    const response = await general();
     setGeneralInfo(response as GeneralInfo);
     setIsLoading(false);
-  }, [signer]);
+  }, [setGeneralInfo, setIsLoading]);
 
-  useEffect(() => {
-    if (signer) {
-      getGeneralInfo();
-    }
+  const mintNFT = useCallback(async () => {
+    setIsLoading(true);
+    await mint(signer! as ethers.Signer);
+    await getGeneralInfo();
+    setIsLoading(false);
   }, [signer]);
 
   useEffect(() => {
@@ -94,11 +108,7 @@ export default function Nft() {
       if (generalInfo && list && list.minteds && list.minteds.length > 0) {
         const updatedUserNfts = await Promise.all(
           list.minteds.map(async (nft) => {
-            const src = await getNFTData(
-              generalInfo.baseUri,
-              nft.tokenId,
-              nft.tokenUri
-            );
+            const src = await getNFTData(generalInfo.baseUri, nft.tokenUri);
             return { ...nft, src };
           })
         );
@@ -118,7 +128,7 @@ export default function Nft() {
       if (list && list.minteds && list.minteds.length > 0) {
         const updatedLastFiveNfts = await Promise.all(
           list.minteds.map(async (nft) => {
-            const src = await getNFTData(baseUri, nft.tokenId, nft.tokenUri);
+            const src = await getNFTData(baseUri, nft.tokenUri);
             return { ...nft, src };
           })
         );
@@ -129,6 +139,17 @@ export default function Nft() {
 
     fetchSrcForNfts();
   }, [lastFiveNftsData]);
+
+  useEffect(() => {
+    if (supplyData) {
+      const { createds } = supplyData as { createds: [SupplyInfo] };
+      setSupply(createds[0]);
+    }
+  }, [supplyData]);
+
+  useEffect(() => {
+    getGeneralInfo();
+  }, []);
 
   return (
     <LayoutClean>
@@ -246,17 +267,7 @@ export default function Nft() {
             <div className="flex flex-col w-full mt-4">
               <div className="flex flex-col gap-3">
                 <div className="flex flex-col lg:flex-row items-center gap-3">
-                  <SSButton
-                    disabled={!signer}
-                    click={() =>
-                      mint(
-                        signer! as ethers.Signer,
-                        generalInfo!.isWhitelisted &&
-                          !generalInfo?.hasUsedFreeMint
-                      )
-                    }
-                    flexSize
-                  >
+                  <SSButton disabled={!signer} click={() => mintNFT()} flexSize>
                     MINT A SAMURAI NFT
                   </SSButton>
                   <SSButton disabled={!signer} click={() => {}} flexSize>
@@ -275,19 +286,23 @@ export default function Nft() {
                       <span className="text-samurai-red">
                         {generalInfo?.totalSupply.toString() || 0}
                       </span>
-                      /{generalInfo?.maxSupply.toString() || 0}
+                      /
+                      {Number(supply?.maxSupply) +
+                        Number(supply?.maxWhitelistedSupply) || 0}
                     </div>
                   </div>
 
-                  <div className="flex justify-between items-center gap-2">
-                    <div>MY NFTS</div>
-                    <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
-                    <div>
-                      <span className="text-samurai-red text-2xl">
-                        {userNfts?.length || 0}
-                      </span>
+                  {signer && (
+                    <div className="flex justify-between items-center gap-2">
+                      <div>MY NFTS</div>
+                      <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
+                      <div>
+                        <span className="text-samurai-red text-2xl">
+                          {userNfts?.length || 0}
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <div className="flex w-full lg:max-w-[500px] items-center flex-wrap gap-4 mt-5">
                     {userNfts?.map((nft, index) => (
@@ -326,29 +341,33 @@ export default function Nft() {
         </div>
 
         {/* LATEST NFTS MINTED */}
-        <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-white/10 text-white border-t-[1px] border-samurai-red mt-20 ">
+        <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-white/10 text-white border-t-[0.5px] border-samurai-red mt-20 ">
           <div className="flex flex-col relative">
             <h2 className="text-4xl lg:text-5xl font-bold">
               Lastest <span className="text-samurai-red">Mints</span>
             </h2>
+
             <div
-              className={`relative mt-3 leading-normal pt-4 text-xl max-w-[1000px] ${inter.className}`}
+              className={`flex w-full items-center flex-wrap gap-6 ${
+                lastFiveNfts?.length === 0 ? "mt-5" : "mt-10"
+              }`}
             >
-              <div className="flex w-full lg:max-w-[500px] items-center flex-wrap gap-4 mt-5">
-                {lastFiveNfts?.map((nft, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
-                  >
-                    <Image
-                      src={nft?.src ? nft?.src : "/loading.gif"}
-                      fill
-                      alt={image}
-                      className="scale-[0.95] rounded-[8px]"
-                    />
-                  </div>
-                ))}
-              </div>
+              {lastFiveNfts?.length === 0 && (
+                <span>- New minted NFTs will appear here</span>
+              )}
+              {lastFiveNfts?.map((nft, index) => (
+                <div
+                  key={index}
+                  className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
+                >
+                  <Image
+                    src={nft?.src ? nft?.src : "/loading.gif"}
+                    fill
+                    alt={image}
+                    className="scale-[0.95] rounded-[8px]"
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>

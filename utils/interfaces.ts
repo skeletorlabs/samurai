@@ -1,8 +1,10 @@
+export type SupplyInfo = {
+  maxSupply: string;
+  maxWhitelistedSupply: string;
+}
+
 export type GeneralInfo = {
   totalSupply: number
-  maxSupply: number
-  isWhitelisted: boolean
-  hasUsedFreeMint: boolean
   isPaused: boolean
   baseUri: string
 }
