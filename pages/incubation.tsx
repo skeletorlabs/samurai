@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import LayoutClean from "@/components/layoutClean";
+import Layout from "@/components/layout";
 import { Inter } from "next/font/google";
 import { useCallback, useState } from "react";
 import { rocket, telegram, linkedin } from "@/utils/svgs";
@@ -233,26 +234,11 @@ export default function Incubation() {
   );
 
   return (
-    <LayoutClean>
-      <div className="px-6 lg:px-8 xl:px-20">
+    <Layout>
+      <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20">
         {/* TOP CONTENT */}
-        <div className="pt-10 lg:pt-24 relative">
-          <svg
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="0.5"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            className="hidden xl:block absolute top-12 right-[-20px] w-[350px]"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
-          <h1 className="text-[38px] lg:text-[58px] font-black leading-[48px] lg:leading-[68px] xl:max-w-[900px] text-samurai-red ">
+        <div className="pt-10 lg:pt-28 relative">
+          <h1 className="text-[58px] font-black leading-[68px] mr-12 xl:max-w-[1000px] text-samurai-red ">
             <span className="text-white">Accelerating</span> your project from
             ideation to token <span className="text-white">launch</span> and
             beyond.
@@ -270,10 +256,25 @@ export default function Incubation() {
             </SSButton>
           </div>
         </div>
+        <svg
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="0.5"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          className="hidden xl:block opacity-40 xl:opacity-100 w-[350px]"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
       </div>
 
       {/* TOKEN LAUNCH */}
-      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-32 w-full bg-white/10 text-white border-t-[1px] border-samurai-red mt-20 ">
+      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t-[1px] border-samurai-red mt-20 ">
         <svg
           fill="none"
           stroke="#FF284C"
@@ -281,7 +282,7 @@ export default function Incubation() {
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
-          className="hidden xl:block w-[200px]"
+          className="hidden xl:block w-[300px]"
         >
           <path
             strokeLinecap="round"
@@ -294,7 +295,7 @@ export default function Incubation() {
             Token <span className="text-samurai-red">Launch</span>
           </h2>
           <div
-            className={`relative mt-3 leading-normal pt-4 text-xl max-w-[1000px] ${inter.className}`}
+            className={`relative mt-3 leading-normal pt-3 text-[20px]  ${inter.className}`}
           >
             Having supported over 60 projects with their token launches, Samurai
             Launchpad is well-positioned to support your token launch. Whether
@@ -576,7 +577,7 @@ export default function Incubation() {
           {applyToLaunchpad}
         </div>
       </div>
-    </LayoutClean>
+    </Layout>
   );
 }
 

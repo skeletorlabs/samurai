@@ -16,7 +16,7 @@ export default function Nav() {
   const { page, setPage } = useContext(StateContext);
   return (
     <div
-      className={`h-20 px-2 lg:px-8 flex flex-col xl:flex-row xl:items-center justify-between mt-5 z-10 ${inter.className} pb-10 lg:pb-0 border-b lg:border-none border-samurai-red h-max`}
+      className={`h-20 px-2 lg:px-8 flex flex-row items-center justify-between mt-5 z-10 ${inter.className} h-max`}
     >
       <div className="flex items-center gap-9 font-bold text-lg 2xl:text-xl">
         <Link
@@ -52,9 +52,11 @@ export default function Nav() {
       <div className="flex gap-5 h-10 px-5 lg:px-0">
         {page === Page.nft && <ConnectButton showBalance={false} />}
 
-        <SSButton isLink href="#">
-          V1(Old)
-        </SSButton>
+        <div className="hidden xl:flex">
+          <SSButton isLink href="#">
+            V1(Old)
+          </SSButton>
+        </div>
       </div>
     </div>
   );

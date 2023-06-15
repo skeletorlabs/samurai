@@ -20,18 +20,18 @@ export const NAV = [
     icon: nft,
     page: Page.nft,
   },
-  {
-    title: 'Launchpad',
-    href: '/launchpad',
-    icon: rocket,
-    page: Page.launchpad,
-  },
-  {
-    title: 'Sanka',
-    href: '#',
-    icon: sanka,
-    page: Page.sanka,
-  },
+  // {
+  //   title: 'Launchpad',
+  //   href: '/launchpad',
+  //   icon: rocket,
+  //   page: Page.launchpad,
+  // },
+  // {
+  //   title: 'Sanka',
+  //   href: '#',
+  //   icon: sanka,
+  //   page: Page.sanka,
+  // },
   {
     title: 'Tokens',
     href: '/tokens',

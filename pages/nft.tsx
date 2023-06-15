@@ -161,7 +161,7 @@ export default function Nft() {
       <div className="flex flex-col">
         <div className="flex flex-col xl:flex-row w-full justify-between px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24">
           {/* TOP CONTENT */}
-          <div className="w-full xl:max-w-[770px] lg:mr-10">
+          <div className="w-full  lg:mr-10">
             <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide pt-10 lg:pt-0">
               <span className="text-samurai-red">Sam</span>NFT
             </h1>
