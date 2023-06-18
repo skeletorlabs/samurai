@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ReactElement } from "react";
 
 interface SSButton {
   children: string;
@@ -8,6 +7,8 @@ interface SSButton {
   click?: () => void;
   flexSize?: boolean;
   disabled?: boolean;
+  secondary?: boolean;
+  buttonType?: "button" | "submit" | "reset";
 }
 export default function SSButton({
   children,
@@ -16,23 +17,40 @@ export default function SSButton({
   click = () => {},
   flexSize = false,
   disabled = false,
+  secondary = false,
+  buttonType = "button",
 }: SSButton) {
   return isLink ? (
     <Link
       href={href}
-      className="flex justify-center items-center border rounded-[8px] border-samurai-red px-8 py-3 transition-all hover:bg-samurai-red hover:text-black text-samurai-red"
+      className={`
+        flex justify-center items-center border rounded-[8px]
+        ${
+          secondary
+            ? "text-yellow-300 border-yellow-300"
+            : "text-samurai-red border-samurai-red"
+        }
+         px-8 py-3 transition-all 
+        hover:bg-samurai-red hover:text-black hover:border-samurai-red
+      `}
     >
       {children}
     </Link>
   ) : (
     <button
+      type={buttonType}
       disabled={disabled}
       onClick={() => click()}
       className={`
-        flex justify-center items-center text-samurai-red px-8 py-3 transition-all 
+        flex justify-center items-center  px-8 py-3 transition-all 
         ${flexSize ? "w-full" : "w-auto"} 
-        border rounded-[8px] border-samurai-red 
-        enabled:hover:bg-samurai-red enabled:hover:text-black
+        ${
+          secondary
+            ? "border-yellow-300 text-yellow-300"
+            : "border-samurai-red text-samurai-red"
+        }
+        border rounded-[8px]  
+        enabled:hover:bg-samurai-red enabled:hover:text-black enabled:hover:border-samurai-red
         disabled:border-white/20 disabled:text-white/10
       `}
     >

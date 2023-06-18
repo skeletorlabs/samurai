@@ -14,7 +14,7 @@ const links = [
 
 export default function Footer() {
   return (
-    <div className="h-[240px] md:h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-700">
+    <div className="w-full h-[240px] md:h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-700">
       <div className="flex flex-col lg:flex-row gap-10">
         <div className="flex flex-col items-center lg:items-start">
           <Link

@@ -9,6 +9,7 @@ import Card from "@/components/card";
 import { Project } from "@/utils/interfaces";
 import { Inter } from "next/font/google";
 import SSButton from "@/components/ssButton";
+import TopLayout from "@/components/topLayout";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -95,38 +96,38 @@ export default function Home() {
   }, []);
   return (
     <Layout>
-      <div className="px-6 lg:px-8 xl:px-20 relative">
-        <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-1 right-24 z-0 opacity-40 2xl:opacity-100" />
-
-        {/* TOP CONTENT */}
-        <div className="pt-24 lg:max-w-[750px] h-[530px] z-10">
-          <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
-            Invest. Interact. Earn.
-          </h1>
-          <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
-            Samurai Starter is the leading early-stage crowdfunding platform
-            that incentivizes community members to invest and participate in the
-            most novel projects in the crypto space
-          </p>
-          <div className="flex flex-row items-center pt-10 gap-5 z-20">
-            <SSButton>Launchpad</SSButton>
-            <SSButton>Sanka</SSButton>
-            <SSButton>For projects</SSButton>
-          </div>
-          <div className="hidden lg:flex items-center gap-16 ml-2 mt-32">
-            {SOCIALS.map((item, index) => (
-              <Link
-                key={index}
-                href={item.href}
-                className="scale-[2] transition-all hover:opacity-70"
-                target="_blank"
-              >
-                {item.svg}
-              </Link>
-            ))}
+      <TopLayout padding={false}>
+        <div className="px-6 lg:px-8 xl:px-20 relative">
+          <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-1 right-24 z-0 opacity-40 2xl:opacity-100" />
+          <div className="pt-24 lg:max-w-[750px] h-[530px] z-10">
+            <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
+              Invest. Interact. Earn.
+            </h1>
+            <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
+              Samurai Starter is the leading early-stage crowdfunding platform
+              that incentivizes community members to invest and participate in
+              the most novel projects in the crypto space
+            </p>
+            <div className="flex flex-row items-center pt-10 gap-5 z-20">
+              <SSButton>Launchpad</SSButton>
+              <SSButton>Sanka</SSButton>
+              <SSButton>For projects</SSButton>
+            </div>
+            <div className="hidden lg:flex items-center gap-16 ml-2 mt-32">
+              {SOCIALS.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.href}
+                  className="scale-[2] transition-all hover:opacity-70"
+                  target="_blank"
+                >
+                  {item.svg}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </TopLayout>
 
       {/* LATEST UPDATES */}
       <div className="flex flex-col pt-20 pb-10 w-full px-6 lg:px-8 xl:px-20 bg-neutral-900/50">

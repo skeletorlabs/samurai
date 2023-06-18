@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import LayoutClean from "@/components/layoutClean";
+import Layout from "@/components/layout";
 import { Inter } from "next/font/google";
 import { useCallback, useState } from "react";
 import { rocket, telegram, linkedin } from "@/utils/svgs";
 import SSButton from "@/components/ssButton";
+import TopLayout from "@/components/topLayout";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -233,41 +234,43 @@ export default function Tokens() {
   );
 
   return (
-    <LayoutClean>
-      {/* TOP CONTENT */}
-      <div className="px-6 lg:px-8 xl:px-20">
-        <div className="pt-10 lg:pt-24 relative ">
-          <Image
-            src="/samurai.svg"
-            alt="tokens"
-            width={100}
-            height={100}
-            className="hidden xl:block absolute top-32 right-[40px] w-[200px]"
-          />
+    <Layout>
+      <TopLayout>
+        <div className="px-6 lg:px-8 xl:px-20 h-full">
+          <div className="sm:pt-10 lg:pt-24 relative">
+            <Image
+              src="/samurai.svg"
+              alt="tokens"
+              width={100}
+              height={100}
+              className="hidden xl:block opacity-40 2xl:opacity-100 absolute top-32 right-[40px] w-[200px]"
+            />
 
-          <h1 className="text-[38px] lg:text-[58px] font-black xl:max-w-[900px] text-samurai-red">
-            Samurai <span className="text-white">Two-Token</span> System
-          </h1>
-          <div
-            className={`pt-3 !leading-[30px] text-neutral-300 lg:text-xl xl:max-w-[1000px] font-light text-justify ${inter.className}`}
-          >
-            The Samurai Starter ecosystem is fuelled by a{" "}
-            <span className="font-bold text-white">two-token system</span> that
-            is accessible, fair, and rewarding for all. The{" "}
-            <span className="font-bold text-white">$CFI</span> governance token
-            boosts stakers' cashback rewards rate and liquidity providers can
-            earn <span className="font-bold text-white">real yield</span> from
-            all business activities. The{" "}
-            <span className="font-bold text-white">$SAM</span> token acts as a
-            reward or cashback token that is distributed based on your
-            participation throughout the Samurai Starter platform and is packed
-            with tons of utility.
+            <h1 className="text-[58px] font-black xl:max-w-[900px] text-samurai-red">
+              <span className="text-white">Two-Token</span> System
+            </h1>
+            <div
+              className={`leading-normal pt-6 lg:text-xl text-neutral-300 xl:max-w-[1280px] font-light  ${inter.className}`}
+            >
+              The Samurai Starter ecosystem is fuelled by a{" "}
+              <span className="font-bold text-white">two-token system</span>{" "}
+              that is accessible, fair, and rewarding for all. The{" "}
+              <span className="font-bold text-white">$CFI</span> governance
+              token boosts stakers' cashback rewards rate and liquidity
+              providers can earn{" "}
+              <span className="font-bold text-white">real yield</span> from all
+              business activities. The{" "}
+              <span className="font-bold text-white">$SAM</span> token acts as a
+              reward or cashback token that is distributed based on your
+              participation throughout the Samurai Starter platform and is
+              packed with tons of utility.
+            </div>
           </div>
         </div>
-      </div>
+      </TopLayout>
 
       {/* STAKING */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10 mt-20 w-full bg-white/5 border-t-[1px] border-samurai-red">
+      <div className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/5 border-t-[1px] border-samurai-red">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
             <div className="flex flex-col lg:flex-row w-full justify-between gap-8 pb-10">
@@ -287,6 +290,7 @@ export default function Tokens() {
                   Buy CFI on Arbitrum (coming soon)
                 </SSButton>
                 <SSButton
+                  secondary
                   isLink
                   href="https://app.uniswap.org/#/swap?inputCurrency=0x63b4f3e3fa4e438698ce330e365e831f7ccd1ef4&outputCurrency=ETH"
                 >
@@ -295,7 +299,7 @@ export default function Tokens() {
               </div>
             </div>
             <p
-              className={`text-lg pt-10 lg:pt-0 text-neutral-300 lg:pr-5 font-light text-justify ${inter.className}`}
+              className={`text-lg pt-10 lg:pt-0 text-neutral-300 lg:pr-5 font-light ${inter.className}`}
             >
               The $CFI token is the governance token that captures the value of
               the Samurai Starter ecosystem. It is minted on the Ethereum
@@ -384,6 +388,7 @@ export default function Tokens() {
                   </Link>
                   <div className="w-32">
                     <SSButton
+                      secondary
                       isLink
                       href="https://samuraistarter.com/projects/cfi-stake"
                     >
@@ -398,7 +403,7 @@ export default function Tokens() {
       </div>
 
       {/* SAM */}
-      <div className="flex flex-col lg:flex-row justify-between w-full bg-white/10 border-t-[1px] border-samurai-red">
+      <div className="flex flex-col lg:flex-row justify-between w-full bg-white/10 border-t-[1px] border-yellow-300">
         <div className="flex flex-col text-white w-full py-10 md:py-20 px-4 lg:px-12">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">$SAM</span> Token
@@ -406,7 +411,7 @@ export default function Tokens() {
 
           <div className={`flex flex-col text-2xl ${inter.className}`}>
             <p
-              className={`pt-8 text-lg text-neutral-300 font-light text-justify ${inter.className}`}
+              className={`pt-8 text-lg text-neutral-300 font-light ${inter.className}`}
             >
               The $SAM token rewards participation across the entire Samurai
               Starter ecosystem and is designed to deliver tremendous benefits
@@ -433,7 +438,7 @@ export default function Tokens() {
           </div>
           <div className="pt-10 md:pt-[120px] flex flex-col md:flex-row gap-3 md:gap-5">
             <SSButton>Claim Vested $SAM Rewards</SSButton>
-            <SSButton>Claim All $SAM Rewards</SSButton>
+            <SSButton secondary>Claim All $SAM Rewards</SSButton>
           </div>
         </div>
         <div className="flex flex-col text-white w-full bg-black/20 py-10 md:py-20 px-4 lg:px-12">
@@ -441,7 +446,7 @@ export default function Tokens() {
             <span className="text-samurai-red">$SAM</span> Ladder
           </h2>
           <p
-            className={`pt-8 text-lg text-neutral-300 pb-14 font-light text-justify ${inter.className}`}
+            className={`pt-8 text-lg text-neutral-300 pb-14 font-light ${inter.className}`}
           >
             The $SAM Ladder represents your lifetime $SAM rewards in relation to
             all other wallets that have earned $SAM since its inception. The
@@ -489,7 +494,7 @@ export default function Tokens() {
           </div>
         </div>
       </div>
-    </LayoutClean>
+    </Layout>
   );
 }
 

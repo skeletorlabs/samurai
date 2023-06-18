@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { useCallback, useState } from "react";
 import { rocket, telegram, linkedin } from "@/utils/svgs";
 import SSButton from "@/components/ssButton";
+import TopLayout from "@/components/topLayout";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -235,46 +236,48 @@ export default function Incubation() {
 
   return (
     <Layout>
-      <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20">
-        {/* TOP CONTENT */}
-        <div className="pt-10 lg:pt-28 relative">
-          <h1 className="text-[58px] font-black leading-[68px] mr-12 xl:max-w-[1000px] text-samurai-red ">
-            <span className="text-white">Accelerating</span> your project from
-            ideation to token <span className="text-white">launch</span> and
-            beyond.
-          </h1>
-          <p
-            className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px] ${inter.className}`}
-          >
-            Committed to advising, guiding and incubating the most novel and
-            innovative platforms in the Web3 space no matter which stage of
-            platform launch you have reached.
-          </p>
-          <div className="flex flex-col lg:flex-row items-center pt-16 gap-5 z-20">
-            <SSButton isLink href="#contact">
-              Get Started
-            </SSButton>
+      <TopLayout>
+        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20">
+          {/* TOP CONTENT */}
+          <div className="sm:pt-10 lg:pt-24 relative">
+            <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-samurai-red ">
+              <span className="text-white">Accelerating</span> your project from
+              ideation to token <span className="text-white">launch</span> and
+              beyond.
+            </h1>
+            <p
+              className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px] ${inter.className}`}
+            >
+              Committed to advising, guiding and incubating the most novel and
+              innovative platforms in the Web3 space no matter which stage of
+              platform launch you have reached.
+            </p>
+            <div className="flex flex-col lg:flex-row pt-16 gap-5 z-20">
+              <SSButton isLink href="#contact">
+                Get Started
+              </SSButton>
+            </div>
           </div>
+          <svg
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="0.5"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            className="hidden xl:block opacity-40 xl:opacity-100 w-[350px]"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
         </div>
-        <svg
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="0.5"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          className="hidden xl:block opacity-40 xl:opacity-100 w-[350px]"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-          ></path>
-        </svg>
-      </div>
+      </TopLayout>
 
       {/* TOKEN LAUNCH */}
-      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t-[1px] border-samurai-red mt-20 ">
+      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t-[1px] border-samurai-red">
         <svg
           fill="none"
           stroke="#FF284C"
@@ -314,7 +317,7 @@ export default function Incubation() {
       </div>
 
       {/* SERVICES */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white/20 border-t-[1px] border-samurai-red">
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white/20 border-t-[1px] border-yellow-300">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Samurai</span> Services
@@ -390,7 +393,7 @@ export default function Incubation() {
       </div>
 
       {/* TEAM */}
-      <div className="flex flex-col py-10 md:py-20 w-full bg-black border-t-[1px] border-samurai-red">
+      <div className="flex flex-col py-10 md:py-20 w-full bg-black border-t-[1px] border-yellow-300">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">T</span>eam
@@ -401,7 +404,7 @@ export default function Incubation() {
             {team.map((member, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center h-[350px] p-5 pb-4 bg-white rounded-xl transition-all hover:scale-105"
+                className="flex flex-col items-center w-full md:w-max md:h-[350px] p-5 pb-4 bg-white rounded-xl transition-all md:hover:scale-105"
               >
                 <Image
                   src={member.src}
@@ -410,7 +413,7 @@ export default function Incubation() {
                   width={200}
                   height={200}
                   alt={member.name}
-                  className="w-[180px] md:w-[200px]"
+                  className="w-full md:w-[200px]"
                 />
 
                 <p className="text-black mt-3 text-[14px] font-bold">
@@ -493,7 +496,7 @@ export default function Incubation() {
           >
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col p-10 gap-5 bg-white/5 border border-samurai-red w-[600px] rounded-2xl relative"
+              className="flex flex-col md:p-10 gap-5 bg-white/5 md:border border-samurai-red w-[600px] rounded-2xl relative"
             >
               <svg
                 fill="none"
@@ -524,7 +527,7 @@ export default function Incubation() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   type="text"
-                  className="bg-white p-4 text-xl outline-none text-black"
+                  className="bg-white p-4 text-xl outline-none text-black rounded-[8px]"
                   required
                 />
               </p>
@@ -534,7 +537,7 @@ export default function Incubation() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
-                  className="bg-white p-4 text-xl outline-none text-black"
+                  className="bg-white p-4 text-xl outline-none text-black rounded-[8px]"
                   required
                 />
               </p>
@@ -544,7 +547,7 @@ export default function Incubation() {
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   type="text"
-                  className="bg-white p-4 text-xl outline-none text-black"
+                  className="bg-white p-4 text-xl outline-none text-black rounded-[8px]"
                   required
                 />
               </p>
@@ -553,7 +556,7 @@ export default function Incubation() {
                 <textarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="bg-white p-4 text-xl h-[200px] outline-none text-black"
+                  className="bg-white p-4 text-xl h-[200px] outline-none text-black rounded-[8px]"
                   required
                 />
               </p>
@@ -563,11 +566,14 @@ export default function Incubation() {
               <button
                 disabled={loading}
                 type="submit"
-                className={`border rounded-2xl  px-8 h-14 text-lg transition-all  w-full ${
-                  loading
-                    ? "bg-white/5 text-white/10 border-white/20"
-                    : "bg-[#FF284C] border-[#e2d4d6] hover:bg-black/90 hover:text-white hover:border-white"
-                }`}
+                className={`
+                flex justify-center items-center  px-8 py-3 transition-all 
+                w-auto
+              border-samurai-red text-samurai-red  
+                border rounded-[8px]  
+                enabled:hover:bg-samurai-red enabled:hover:text-black enabled:hover:border-samurai-red
+                disabled:border-white/20 disabled:text-white/10
+              `}
               >
                 {loading ? "Loading..." : "Send"}
               </button>

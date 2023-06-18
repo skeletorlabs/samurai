@@ -46,21 +46,11 @@ export default function Layout({ children }: layout) {
       />
 
       <main className={roboto.className}>
-        <div className="flex flex-col w-full h-full items-center">
-          <div className="flex flex-col jutify-between w-full h-full relative bg-home-art bg-repeat-x text-white/90 mb-12 lg:mb-0">
-            {/* <div className="bg-gradient-to-br from-samurai-red via-transparent to-transparent opacity-70 w-[600px] h-[500px] absolute top-0 left-0" /> */}
-            <Nav />
-            {children}
-            <Footer />
-          </div>
-          <BottomNav />
-          {/* <div className="flex flex-col justify-between text-white/90 relative  self-center bg-red-200 h-screen bg-art bg-no-repeat bg-[center_top_-3rem]"> */}
-          {/* <div className="bg-gradient-to-br from-red-900 via-transparent to-transparent opacity-70 w-[600px] h-[500px] absolute top-0 left-0" />
-            <Nav />
-            {children}
-            <Footer /> */}
-          {/* </div> */}
+        <div className="flex flex-col w-full h-full items-center text-white/90">
+          {children}
+          <Footer />
         </div>
+        <BottomNav />
       </main>
     </>
   );
