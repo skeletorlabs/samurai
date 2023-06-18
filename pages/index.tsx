@@ -9,6 +9,7 @@ import Card from "@/components/card";
 import { Project } from "@/utils/interfaces";
 import { Inter } from "next/font/google";
 import SSButton from "@/components/ssButton";
+import TopLayout from "@/components/topLayout";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -95,52 +96,45 @@ export default function Home() {
   }, []);
   return (
     <Layout>
-      <div className="px-6 lg:px-8 xl:px-20">
-        {/* TOP CONTENT */}
-        <div className="pt-10 lg:pt-24 lg:max-w-[750px] lg:h-[630px]">
-          <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
-            Invest. Interact. Earn.
-          </h1>
-          <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
-            Samurai Starter is the leading early-stage crowdfunding platform
-            that incentivizes community members to invest and participate in the
-            most novel projects in the crypto space
-          </p>
-          <div className="flex flex-col lg:flex-row items-center pt-10 gap-5 z-20">
-            <SSButton>Launchpad</SSButton>
-            <SSButton>Sanka</SSButton>
-            <SSButton>For projects</SSButton>
-            {/* <button className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]">
-              Launchpad
-            </button> */}
-            {/* <button className="border border-slate-500 rounded-2xl px-8 h-14 text-lg transition-all bg-black/90 text-neutral-400 hover:text-white hover:border-white w-full lg:w-[190px]">
-              Sanka
-            </button>
-            <button className="bg-[#000000] border rounded-2xl text-samurai-red  border-samurai-red px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]">
-              For projects
-            </button> */}
-          </div>
-          <div className="hidden lg:flex items-center gap-16 ml-2 mt-32">
-            {SOCIALS.map((item, index) => (
-              <Link
-                key={index}
-                href={item.href}
-                className="scale-[2] transition-all hover:opacity-70"
-                target="_blank"
-              >
-                {item.svg}
-              </Link>
-            ))}
+      <TopLayout padding={false}>
+        <div className="px-6 lg:px-8 xl:px-20 relative">
+          <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-1 right-24 z-0 opacity-40 2xl:opacity-100" />
+          <div className="pt-24 lg:max-w-[750px] h-[530px] z-10">
+            <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
+              Invest. Interact. Earn.
+            </h1>
+            <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
+              Samurai Starter is the leading early-stage crowdfunding platform
+              that incentivizes community members to invest and participate in
+              the most novel projects in the crypto space
+            </p>
+            <div className="flex flex-row items-center pt-10 gap-5 z-20">
+              <SSButton>Launchpad</SSButton>
+              <SSButton>Sanka</SSButton>
+              <SSButton>For projects</SSButton>
+            </div>
+            <div className="hidden lg:flex items-center gap-16 ml-2 mt-32">
+              {SOCIALS.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.href}
+                  className="scale-[2] transition-all hover:opacity-70"
+                  target="_blank"
+                >
+                  {item.svg}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </TopLayout>
 
       {/* LATEST UPDATES */}
       <div className="flex flex-col pt-20 pb-10 w-full px-6 lg:px-8 xl:px-20 bg-neutral-900/50">
         <h2 className="text-6xl font-bold">
           Latest <span className="text-samurai-red">Updates</span>
         </h2>
-        <div className="grid lg:grid-cols-3 gap-9 flex-wrap mt-10">
+        <div className="grid lg:grid-cols-3 gap-9 flex-wrap mt-16">
           {latestupdates.map((item, index) => (
             <Link
               key={index}
@@ -157,17 +151,6 @@ export default function Home() {
                 alt=""
                 className="rounded-t-2xl w-full lg:w-[426px] lg:h-[200px]"
               />
-              {/* <div className="w-full h-full lg:w-[422px] lg:h-[200px] relative">
-                <Image
-                  src={item.image}
-                  fill
-                  sizes="(max-width: 768px) 100vw,
-                    (max-width: 1200px) 50vw,
-                    33vw"
-                  className="rounded-t-2xl border-b border-white/20"
-                  alt=""
-                />
-              </div> */}
               <div className="w-full h-[106px] bg-black rounded-b-2xl px-3 pt-4 text-white">
                 <h3 className="text-xl font-semibold tracking-wide text-white">
                   {item.title}
@@ -189,7 +172,7 @@ export default function Home() {
       </div>
 
       {/* FEATURED PROJECTS */}
-      <div className="flex flex-col pt-20 pb-10 w-full bg-white/10 px-6 lg:px-8 xl:px-20 text-white border-t-[1px] border-samurai-red">
+      <div className="flex flex-col pt-20 pb-10 w-full bg-white/10 px-6 lg:px-8 xl:px-20 text-white border-t-[0.5px] border-samurai-red">
         <h2 className="text-6xl font-bold">
           Featured <span className="text-samurai-red">Projects</span>
         </h2>
@@ -298,7 +281,7 @@ export default function Home() {
       </div>
 
       {/* SAMURAI EDGE */}
-      <div className="flex flex-col pt-20 w-full px-6 lg:px-8 xl:px-20 bg-black border-t-[1px] border-samurai-red">
+      <div className="flex flex-col pt-20 w-full px-6 lg:px-8 xl:px-20 bg-black border-t-[0.5px] border-samurai-red">
         <h2 className="text-6xl font-bold">
           The <span className="text-samurai-red">SAMURAI</span> Edge
         </h2>
@@ -306,7 +289,7 @@ export default function Home() {
           {edge.map((item, index) => (
             <div
               key={index}
-              className="flex items-center w-full min-h-[160px] border-[1px] border-samurai-red rounded-xl md:px-5 lg:px-3 gap-5 shadow-lg z-10"
+              className="flex items-center w-full min-h-[160px] border-[1px] border-samurai-red rounded-xl px-5 gap-5 shadow-lg z-10"
             >
               <div
                 className="
@@ -345,7 +328,7 @@ export default function Home() {
       </div>
 
       {/* NEWSLETTER */}
-      <div className="flex items-center px-6 lg:px-8 xl:px-20 py-20 w-full border-t-[1px] border-samurai-red">
+      <div className="flex items-center px-6 lg:px-8 xl:px-20 py-20 w-full border-t-[0.5px] border-samurai-red/50">
         <script
           src="//web.webformscr.com/apps/fc3/build/loader.js"
           async
