@@ -9,7 +9,7 @@ interface TopLayout {
 export default function TopLayout({ children, padding = true }: TopLayout) {
   return (
     <div
-      className={`flex flex-col w-full h-full bg-home-art bg-repeat ${
+      className={`flex flex-col w-full h-full bg-home-art bg-repeat z-20 ${
         padding ? "pb-12 lg:pb-24" : ""
       }`}
     >

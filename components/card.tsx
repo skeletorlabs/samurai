@@ -12,6 +12,7 @@ interface Card {
 export default function Card({ project }: Card) {
   return (
     <Link href="#" className="flex flex-col w-full">
+      {/* <div className="w-full h-max relative"> */}
       <Image
         src={`/projects/${project.name.toLowerCase().replaceAll(" ", "-")}.svg`}
         placeholder="blur"
@@ -21,8 +22,9 @@ export default function Card({ project }: Card) {
         width={426}
         height={0}
         alt=""
-        className="rounded-2xl border-2 hover:border-samurai-red transition-all w-full lg:w-[426px]"
+        className="rounded-2xl border-2 hover:border-samurai-red transition-all w-full"
       />
+      {/* </div> */}
 
       <div className="flex flex-col w-full z-10 mt-4">
         <div className="flex flex-row gap-4 items-center">

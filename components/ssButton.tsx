@@ -42,7 +42,7 @@ export default function SSButton({
       disabled={disabled}
       onClick={() => click()}
       className={`
-        flex justify-center items-center  px-8 py-3 transition-all 
+        flex justify-center items-center px-8 py-3 transition-all z-20
         ${flexSize ? "w-full" : "w-auto"} 
         ${
           secondary

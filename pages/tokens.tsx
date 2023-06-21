@@ -270,7 +270,7 @@ export default function Tokens() {
       </TopLayout>
 
       {/* STAKING */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/5 border-t-[1px] border-samurai-red">
+      <div className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/5 border-t border-samurai-red/40 border-dotted">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
             <div className="flex flex-col lg:flex-row w-full justify-between gap-8 pb-10">
@@ -403,7 +403,7 @@ export default function Tokens() {
       </div>
 
       {/* SAM */}
-      <div className="flex flex-col lg:flex-row justify-between w-full bg-white/10 border-t-[1px] border-yellow-300">
+      <div className="flex flex-col lg:flex-row justify-between w-full bg-white/10 border-t-[1px] border-yellow-300/40">
         <div className="flex flex-col text-white w-full py-10 md:py-20 px-4 lg:px-12">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">$SAM</span> Token

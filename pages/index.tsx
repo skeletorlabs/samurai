@@ -99,7 +99,7 @@ export default function Home() {
       <TopLayout padding={false}>
         <div className="px-6 lg:px-8 xl:px-20 relative">
           <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-1 right-24 z-0 opacity-40 2xl:opacity-100" />
-          <div className="sm:pt-10 lg:pt-24 lg:max-w-[750px] h-[530px] z-10">
+          <div className="sm:pt-10 lg:pt-24 lg:max-w-[750px] h-[530px]">
             <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
               Invest. Interact. Earn.
             </h1>
@@ -108,7 +108,7 @@ export default function Home() {
               that incentivizes community members to invest and participate in
               the most novel projects in the crypto space
             </p>
-            <div className="flex flex-row items-center pt-10 gap-5 z-20">
+            <div className="flex flex-row items-center pt-10 gap-5">
               <SSButton>Launchpad</SSButton>
               <SSButton>Sanka</SSButton>
               <SSButton>For projects</SSButton>
@@ -140,7 +140,7 @@ export default function Home() {
               key={index}
               href={item.href}
               target="_blank"
-              className="rounded-2xl border-2  border-samurai-red shadow-lg hover:shadow-2xl hover:shadow-samurai-red shadow-samurai-red/20 w-full lg:max-w-[426px] transition-all hover:scale-[1.03]"
+              className="rounded-2xl border-2 border-samurai-red shadow-lg hover:shadow-2xl hover:shadow-samurai-red shadow-samurai-red/20 transition-all hover:scale-[1.03]"
             >
               <Image
                 src={item.image}
@@ -149,9 +149,9 @@ export default function Home() {
                 width={426}
                 height={0}
                 alt=""
-                className="rounded-t-2xl w-full lg:w-[426px] lg:h-[200px]"
+                className="rounded-t-2xl w-full h-[226px]"
               />
-              <div className="w-full h-[106px] bg-black rounded-b-2xl px-3 pt-4 text-white">
+              <div className="w-full h-[106px] bg-black rounded-b-2xl px-4 pt-6 text-white border-t-2 border-dotted border-samurai-red/40">
                 <h3 className="text-xl font-semibold tracking-wide text-white">
                   {item.title}
                 </h3>
@@ -165,7 +165,7 @@ export default function Home() {
         <Link
           href="https://medium.com/samurai-starter"
           target="_blank"
-          className={`flex justify-end items-center mt-8 text-lg text-white hover:text-samurai-red font-light ${inter.className}`}
+          className={`flex justify-end items-center self-end w-max mt-8 text-lg text-white hover:text-samurai-red font-light ${inter.className}`}
         >
           More +
         </Link>
@@ -194,7 +194,7 @@ export default function Home() {
         <Link
           href="https://medium.com/samurai-starter"
           target="_blank"
-          className={`flex justify-end items-center mt-8 text-lg text-black hover:text-samurai-red font-light ${inter.className}`}
+          className={`flex justify-end items-center self-end w-max mt-8 text-lg text-samurai-red/70 hover:text-samurai-red font-light ${inter.className}`}
         >
           More +
         </Link>
