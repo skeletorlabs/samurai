@@ -235,18 +235,51 @@ export default function Tokens() {
 
   return (
     <Layout>
-      <TopLayout>
-        <div className="px-6 lg:px-8 xl:px-20 h-full">
+      <TopLayout background="bg-samurai-incubator-bg">
+        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20">
+          {/* TOP CONTENT */}
+          <div className="sm:pt-10 lg:pt-24 relative">
+            <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-white ">
+              The Samurai Starter ecosystem is
+              <span className="font-bold text-samurai-red"> Fueled</span> by a
+              <span className="font-bold text-samurai-red"> Two-Token</span>{" "}
+              system
+            </h1>
+            <p
+              className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px] ${inter.className}`}
+            >
+              The Samurai Starter ecosystem is accessible, fair, and rewarding
+              for all. The <span className="font-bold text-white">$CFI</span>{" "}
+              governance token boosts stakers' cashback rewards rate and
+              liquidity providers can earn{" "}
+              <span className="font-bold text-white">real yield</span> from all
+              business activities. The{" "}
+              <span className="font-bold text-white">$SAM</span> token acts as a
+              reward or cashback token that is distributed based on your
+              participation throughout the Samurai Starter platform and is
+              packed with tons of utility.
+            </p>
+          </div>
+          <Image
+            src="/samurai.svg"
+            alt="tokens"
+            width={350}
+            height={350}
+            className="hidden xl:block opacity-40 2xl:opacity-100 w-[350px]"
+          />
+        </div>
+        {/* <div className="px-6 lg:px-8 xl:px-20 h-full">
           <div className="sm:pt-10 lg:pt-24 relative">
             <Image
               src="/samurai.svg"
               alt="tokens"
               width={100}
               height={100}
-              className="hidden xl:block opacity-40 2xl:opacity-100 absolute top-32 right-[40px] w-[200px]"
+              // className="hidden xl:block opacity-40 2xl:opacity-100 absolute top-32 right-[40px] w-[200px]"
+              className="hidden xl:block opacity-40 xl:opacity-100 w-[350px]"
             />
 
-            <h1 className="text-[58px] font-black xl:max-w-[900px] text-samurai-red">
+            <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-samurai-red ">
               <span className="text-white">Two-Token</span> System
             </h1>
             <div
@@ -266,11 +299,11 @@ export default function Tokens() {
               packed with tons of utility.
             </div>
           </div>
-        </div>
+        </div> */}
       </TopLayout>
 
       {/* STAKING */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/5 border-t border-samurai-red/40 border-dotted">
+      <div className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
             <div className="flex flex-col lg:flex-row w-full justify-between gap-8 pb-10">

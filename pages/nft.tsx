@@ -36,6 +36,44 @@ const images = [
   "/nfts/8.png",
 ];
 
+const utilities = [
+  {
+    title: "Lifetime Launchpad Access",
+    description:
+      "Enjoy lifetime access to all token offerings on Samurai Launchpad. No need to buy and stake costly launchpad tokens, no more token staking tiers*, minimal barriers to entry. The SamNFT gives you equal access to token offerings from the most novel and hyped startups in the crypto space.",
+  },
+  {
+    title: "$SAM Airdrop",
+    description:
+      "Our reward token, $SAM, is launching in Q4 2023 on Arbitrum. People who purchase SamNFT during the pre-mint period are eligible to receive a share of 30% of the total supply of $SAM tokens which is vested over one year.",
+  },
+  {
+    title: "Cashback Rewards",
+    description:
+      "SamNFT stakers who participate in token offerings on Samurai Launchpad are eligible to receive cashback rewards in the form of $SAM tokens. Stake or LP the $CFI governance token to increase your cashback rewards.",
+  },
+  {
+    title: "SamNFT Rentals",
+    description:
+      "Not interested in participating in an upcoming token offering? Want to earn some passive income from your SamNFTs? Holders can offer their SamNFTs for rent on our in-house SamNFT rental marketplace! Set your desired price and length of time of the rental and lease your SamNFT to non-holders who may want to participate in token offerings.",
+  },
+  {
+    title: "VIP Access to Samurai Sanka",
+    description:
+      "Samurai Sanka is our upcoming user interaction platform. It includes a Partner's Quest platform, Prediction Markets, Lotteries and more. As a SamNFT staker, you receive special VIP perks including reward boosts for participating on Sanka.",
+  },
+  {
+    title: "Eligibility for special giveaways",
+    description:
+      "When Samurai Starter is bringing in new projects for either our accelerator, launchpad or other services, we always strive to bring in some freebies for our community whether they be tokens, NFTs, or some other digital gifts.",
+  },
+  {
+    title: "DAO Governance Rights",
+    description:
+      "As SamNFT holders, the decision to launch a project is in your hands. The number of holders who express interest in a token offering will determine whether we launch the project and the size of the allocation we secure so that everyone who is interested can get the token allotment they desire.",
+  },
+];
+
 const baseUri = process.env.NEXT_PUBLIC_BASE_URI as string;
 
 export default function Nft() {
@@ -159,92 +197,65 @@ export default function Nft() {
 
   return (
     <Layout>
-      <TopLayout>
-        <div className="flex flex-col xl:flex-row w-full justify-between px-6 lg:px-8 xl:px-20 pt-10 lg:pt-28">
+      <TopLayout background="bg-samurai-incubator-bg">
+        <div className="flex flex-col xl:flex-row justify-between xl:items-center gap-6 xl:gap-0 px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24 ">
           {/* TOP CONTENT */}
-          <div className="w-full  lg:mr-16">
-            <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
-              <span className="text-samurai-red">Sam</span>NFT
+
+          <div className="relative md:mr-12 xl:max-w-[800px]">
+            <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] text-white">
+              Mint a Sam<span className="text-samurai-red">NFT </span>
+              to be <span className="text-samurai-red">part</span> of{" "}
+              {/* <br className="hidden md:block" /> */}
+              our
+              <span className="text-samurai-red"> Vibrant</span> Community
             </h1>
-
-            <div
-              className={`flex flex-col text-lg text-neutral-300 gap-8 pt-6 pb-10 ${inter.className}`}
+            <p
+              className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px]  ${inter.className}`}
             >
-              <p
-                className={`leading-normal lg:text-xl xl:max-w-[900px] ${inter.className}`}
-              >
-                By participating in the SamNFT minting event, you become part of
-                our vibrant community and gain access to tremendous benefits.
-                Here's what you can expect as a proud owner of our SamNFTs:
-              </p>
+              By participating in the SamNFT minting event, you become part of
+              our vibrant community and gain access to tremendous benefits.{" "}
+              Check it out what you can expect as a proud owner of our SamNFTs
+            </p>
+          </div>
 
-              <div className="p-6 bg-neutral-900/80 rounded-[8px] border-[0.5px] border-neutral-600 border-dashed opacity-90 backdrop-blur-[8px] shadow-xl">
-                <p className="text-samurai-red font-normal pb-2 text-xl">
-                  Lifetime Launchpad Access:
-                </p>
-                Enjoy lifetime access to all token offerings on Samurai
-                Launchpad. No need to buy and stake costly launchpad tokens, no
-                more token staking tiers*, minimal barriers to entry. The SamNFT
-                gives you equal access to token offerings from the most novel
-                and hyped startups in the crypto space.
-              </div>
-              <div className="p-6 bg-neutral-900/80 rounded-[8px] border-[0.5px] border-neutral-600 border-dashed opacity-90 backdrop-blur-[8px] shadow-xl">
-                <p className="text-samurai-red font-normal pb-2 text-xl">
-                  $SAM Airdrop:{" "}
-                </p>
-                Our reward token, $SAM, is launching in Q4 2023 on Arbitrum.
-                People who purchase SamNFT during the pre-mint period are
-                eligible to receive a share of 30% of the total supply of $SAM
-                tokens which is vested over one year.
-              </div>
-              <div className="p-6 bg-neutral-900/80 rounded-[8px] border-[0.5px] border-neutral-600 border-dashed opacity-90 backdrop-blur-[8px] shadow-xl">
-                <p className="text-samurai-red font-normal pb-2 text-xl">
-                  Cashback Rewards:
-                </p>
-                SamNFT stakers who participate in token offerings on Samurai
-                Launchpad are eligible to receive cashback rewards in the form
-                of $SAM tokens. Stake or LP the $CFI governance token to
-                increase your cashback rewards.
-              </div>
-              <div className="p-6 bg-neutral-900/80 rounded-[8px] border-[0.5px] border-neutral-600 border-dashed opacity-90 backdrop-blur-[8px] shadow-xl">
-                <p className="text-samurai-red font-normal pb-2 text-xl">
-                  SamNFT Rentals:
-                </p>
-                Not interested in participating in an upcoming token offering?
-                Want to earn some passive income from your SamNFTs? Holders can
-                offer their SamNFTs for rent on our in-house SamNFT rental
-                marketplace! Set your desired price and length of time of the
-                rental and lease your SamNFT to non-holders who may want to
-                participate in token offerings.
-              </div>
-              <div className="p-6 bg-neutral-900/80 rounded-[8px] border-[0.5px] border-neutral-600 border-dashed opacity-90 backdrop-blur-[8px] shadow-xl">
-                <p className="text-samurai-red font-normal pb-2 text-xl">
-                  VIP Access to Samurai Sanka:
-                </p>
-                Samurai Sanka is our upcoming user interaction platform. It
-                includes a Partner's Quest platform, Prediction Markets,
-                Lotteries and more. As a SamNFT staker, you receive special VIP
-                perks including reward boosts for participating on Sanka.
-              </div>
-              <div className="p-6 bg-neutral-900/80 rounded-[8px] border-[0.5px] border-neutral-600 border-dashed opacity-90 backdrop-blur-[8px] shadow-xl">
-                <p className="text-samurai-red font-normal pb-2 text-xl">
-                  Eligibility for special giveaways:
-                </p>
-                When Samurai Starter is bringing in new projects for either our
-                accelerator, launchpad or other services, we always strive to
-                bring in some freebies for our community whether they be tokens,
-                NFTs, or some other digital gifts.
-              </div>
-              <div className="p-6 bg-neutral-900/80 rounded-[8px] border-[0.5px] border-neutral-600 border-dashed opacity-90 backdrop-blur-[8px] shadow-xl">
-                <p className="text-samurai-red font-normal pb-2 text-xl">
-                  DAO Governance Rights:
-                </p>
-                As SamNFT holders, the decision to launch a project is in your
-                hands. The number of holders who express interest in a token
-                offering will determine whether we launch the project and the
-                size of the allocation we secure so that everyone who is
-                interested can get the token allotment they desire.
-              </div>
+          <div className="flex w-full md:min-w-[500px] md:max-w-[500px] h-[350px] bg-white p-2 rounded-[8px] relative">
+            <Carousel leftControl=" " rightControl=" ">
+              {images.map((image, index) => (
+                <Image
+                  key={index}
+                  src={image}
+                  width={500}
+                  height={350}
+                  alt={image}
+                  className="rounded-[8px] w-full md:w-[500px] h-[350px]"
+                  placeholder="blur"
+                  blurDataURL="/thumb.png"
+                />
+              ))}
+            </Carousel>
+          </div>
+        </div>
+      </TopLayout>
+
+      <div className="flex flex-col w-full">
+        {/* CONTENT */}
+        <div className="flex flex-col lg:flex-row gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t border-samurai-red/50 border-dotted">
+          <div className="flex flex-col relative">
+            <div
+              className={`flex flex-col text-lg text-neutral-300 gap-8 lg:gap-8 pb-10 ${inter.className}`}
+            >
+              {utilities.map((item, index) => (
+                <div
+                  key={index}
+                  className="rounded-[8px] opacity-90 backdrop-blur-[8px] shadow-xl"
+                >
+                  <p className="text-samurai-red font-normal pb-2 text-xl">
+                    {item.title}
+                  </p>
+                  {item.description}
+                </div>
+              ))}
+
               <p className="font-normal">
                 These are just a few of the utilities provided by the SamNFT. We
                 are delighted that you are going to join us on this journey and
@@ -254,90 +265,72 @@ export default function Nft() {
             </div>
           </div>
 
-          {/* SIDE CONTENT */}
-          <div className="mt-20">
-            <div className="flex justify-center items-center w-full h-[300px] lg:w-[500px] lg:h-[500px] bg-white p-2 rounded-[8px] relative">
-              <Carousel leftControl=" " rightControl=" ">
-                {images.map((image, index) => (
-                  <Image
-                    key={index}
-                    src={image}
-                    width={500}
-                    height={300}
-                    alt={image}
-                    className="rounded-[8px]"
-                    placeholder="blur"
-                    blurDataURL="/thumb.png"
-                  />
-                ))}
-              </Carousel>
-            </div>
-            <div className="flex flex-col w-full mt-10">
-              <div className="flex flex-col gap-3">
-                <div className="flex flex-col lg:flex-row items-center gap-3">
-                  <SSButton disabled={!signer} click={() => mintNFT()} flexSize>
-                    MINT A SAMURAI NFT
-                  </SSButton>
-                  <SSButton
-                    secondary
-                    disabled={!signer}
-                    click={() => {}}
-                    flexSize
-                  >
-                    RENT A SAMURAI NFT
-                  </SSButton>
+          <div className="flex flex-col w-full min-w-[500px] max-w-[500px]">
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col lg:flex-row items-center gap-3">
+                <SSButton disabled={!signer} click={() => mintNFT()} flexSize>
+                  MINT A SAMURAI NFT
+                </SSButton>
+                <SSButton
+                  secondary
+                  disabled={!signer}
+                  click={() => {}}
+                  flexSize
+                >
+                  RENT A SAMURAI NFT
+                </SSButton>
+              </div>
+
+              <div className="flex flex-col text-xl gap-3 mt-4">
+                <div className="flex justify-between items-center gap-4">
+                  <div>
+                    <span className="text-samurai-red">MINTED</span>
+                    /SUPPLY
+                  </div>
+                  <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
+                  <div className="text-2xl">
+                    <span className="text-samurai-red">
+                      {generalInfo?.totalSupply.toString() || 0}
+                    </span>
+                    /
+                    {Number(supply?.maxSupply) +
+                      Number(supply?.maxWhitelistedSupply) || 0}
+                  </div>
                 </div>
 
-                <div className="flex flex-col text-xl gap-3 mt-4">
-                  <div className="flex justify-between items-center gap-4">
-                    <div>
-                      <span className="text-samurai-red">MINTED</span>
-                      /SUPPLY
-                    </div>
+                {signer && (
+                  <div className="flex justify-between items-center gap-2">
+                    <div>MY NFTS</div>
                     <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
-                    <div className="text-2xl">
-                      <span className="text-samurai-red">
-                        {generalInfo?.totalSupply.toString() || 0}
+                    <div>
+                      <span className="text-samurai-red text-2xl">
+                        {userNfts?.length || 0}
                       </span>
-                      /
-                      {Number(supply?.maxSupply) +
-                        Number(supply?.maxWhitelistedSupply) || 0}
                     </div>
                   </div>
+                )}
 
-                  {signer && (
-                    <div className="flex justify-between items-center gap-2">
-                      <div>MY NFTS</div>
-                      <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
-                      <div>
-                        <span className="text-samurai-red text-2xl">
-                          {userNfts?.length || 0}
-                        </span>
-                      </div>
-                    </div>
-                  )}
+                <div className="flex w-full lg:max-w-[500px] items-center flex-wrap gap-4 mt-5">
+                  {userNfts?.map((nft, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
+                    >
+                      <Image
+                        src={nft?.src ? nft?.src : "/loading.gif"}
+                        fill
+                        alt={image}
+                        className="scale-[0.95] rounded-[8px]"
+                      />
 
-                  <div className="flex w-full lg:max-w-[500px] items-center flex-wrap gap-4 mt-5">
-                    {userNfts?.map((nft, index) => (
-                      <div
-                        key={index}
-                        className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
-                      >
-                        <Image
-                          src={nft?.src ? nft?.src : "/loading.gif"}
-                          fill
-                          alt={image}
-                          className="scale-[0.95] rounded-[8px]"
-                        />
-
-                        {/* CHECK ON OPENSEA */}
-                        {signer && nft.metadata && (
-                          <Link
-                            target="blank"
-                            href={`${
-                              process.env.NEXT_PUBLIC_OPENSEA_URL as string
-                            }/${nft.tokenId}`}
-                            className="
+                      {/* CHECK ON OPENSEA */}
+                      {signer && nft.metadata && (
+                        <Link
+                          target="blank"
+                          href={`${
+                            process.env.NEXT_PUBLIC_OPENSEA_URL as string
+                          }/${nft.tokenId}`}
+                          className="
                               absolute bottom-12 left-0 
                               border border-l-0 border-black rounded-tr-[8px] rounded-br-[8px] 
                               px-3 
@@ -345,15 +338,15 @@ export default function Nft() {
                               bg-blue-500  shadow-lg
                               transition-all hover:pl-6 hover:font-black  
                             "
-                          >
-                            VIEW
-                          </Link>
-                        )}
+                        >
+                          VIEW
+                        </Link>
+                      )}
 
-                        {/* RENT */}
-                        {signer && nft.src && (
-                          <button
-                            className="
+                      {/* RENT */}
+                      {signer && nft.src && (
+                        <button
+                          className="
                               absolute bottom-4 left-0 
                               border border-l-0 border-black rounded-tr-[8px] rounded-br-[8px] 
                               px-3 
@@ -361,19 +354,18 @@ export default function Nft() {
                               bg-yellow-300  shadow-lg
                               transition-all hover:pl-6 hover:font-black  
                             "
-                          >
-                            RENT
-                          </button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                        >
+                          RENT
+                        </button>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </TopLayout>
+      </div>
       <div className="flex flex-col w-full">
         {/* LATEST NFTS MINTED */}
         <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t-[0.5px] border-samurai-red">

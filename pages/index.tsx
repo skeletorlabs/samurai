@@ -96,9 +96,9 @@ export default function Home() {
   }, []);
   return (
     <Layout>
-      <TopLayout padding={false}>
+      <TopLayout background="bg-samurai-incubator-bg" padding={false}>
         <div className="px-6 lg:px-8 xl:px-20 relative">
-          <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-1 right-24 z-0 opacity-40 2xl:opacity-100" />
+          <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-[0.5px] right-24 z-0 opacity-40 2xl:opacity-100" />
           <div className="sm:pt-10 lg:pt-24 lg:max-w-[750px] h-[530px]">
             <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
               Invest. Interact. Earn.
@@ -130,7 +130,7 @@ export default function Home() {
       </TopLayout>
 
       {/* LATEST UPDATES */}
-      <div className="flex flex-col pt-20 pb-10 w-full px-6 lg:px-8 xl:px-20 bg-neutral-900/50">
+      <div className="flex flex-col pt-20 pb-10 w-full px-6 lg:px-8 xl:px-20 bg-neutral-900/50 border-t border-samurai-red/50 border-dotted">
         <h2 className="text-6xl font-bold">
           Latest <span className="text-samurai-red">Updates</span>
         </h2>
@@ -200,84 +200,93 @@ export default function Home() {
         </Link>
       </div>
 
-      {/* COMMUNITY */}
-      <div className="flex flex-col pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20  lg:bg-sanka bg-contain bg-no-repeat bg-[right_-4rem_top_2rem] xl:bg-[right_-2rem_top_2rem] bg-opacity-75 border-t-[1px] border-samurai-red">
-        <h2 className="text-6xl font-bold">
-          Samurai <span className="text-black">Sanka</span>
-          <p
-            className={`font-light text-[32px]  text-white mt-2 ${inter.className}`}
+      {/* SAMURAI SANKA */}
+      <div className="flex justify-between pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20 bg-samurai-sanka-bg bg-[right_-10rem_top_-20rem] border-t-[1px] border-samurai-red">
+        <div className="flex flex-col">
+          <h2 className="text-6xl font-bold">
+            Samurai <span className="text-samurai-red">Sanka</span>
+            <p
+              className={`font-light text-[32px]  text-white mt-2 ${inter.className}`}
+            >
+              Community interaction platform.
+            </p>
+          </h2>
+          <div
+            className={`text-[20px] mt-5 inline-flex max-w-[800px] ${inter.className}`}
           >
-            Community interaction platform.
-          </p>
-        </h2>
-        <div
-          className={`text-[20px] mt-5 inline-flex max-w-[800px] ${inter.className}`}
-        >
-          Begin your Web3 journey with Samurai Sanka! Join thousands of people
-          who are participating in fun, interactive games and contests and earn
-          rewards for participating on our partners' platforms.
-        </div>
+            Begin your Web3 journey with Samurai Sanka! Join thousands of people
+            who are participating in fun, interactive games and contests and
+            earn rewards for participating on our partners' platforms.
+          </div>
 
-        <Link
-          href="https://medium.com/samurai-starter"
-          target="_blank"
-          className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black transition-all hover:scale-105 hover:opacity-90 w-full lg:max-w-[830px] xl:max-w-[700px] mt-10 border shadow-xl"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            className="bi bi-rocket-takeoff w-8 lg:w-[46px] h-8 lg:h-[46px]"
-            viewBox="0 0 16 16"
-          >
-            <path d="M9.752 6.193c.599.6 1.73.437 2.528-.362.798-.799.96-1.932.362-2.531-.599-.6-1.73-.438-2.528.361-.798.8-.96 1.933-.362 2.532Z" />
-            <path d="M15.811 3.312c-.363 1.534-1.334 3.626-3.64 6.218l-.24 2.408a2.56 2.56 0 0 1-.732 1.526L8.817 15.85a.51.51 0 0 1-.867-.434l.27-1.899c.04-.28-.013-.593-.131-.956a9.42 9.42 0 0 0-.249-.657l-.082-.202c-.815-.197-1.578-.662-2.191-1.277-.614-.615-1.079-1.379-1.275-2.195l-.203-.083a9.556 9.556 0 0 0-.655-.248c-.363-.119-.675-.172-.955-.132l-1.896.27A.51.51 0 0 1 .15 7.17l2.382-2.386c.41-.41.947-.67 1.524-.734h.006l2.4-.238C9.005 1.55 11.087.582 12.623.208c.89-.217 1.59-.232 2.08-.188.244.023.435.06.57.093.067.017.12.033.16.045.184.06.279.13.351.295l.029.073a3.475 3.475 0 0 1 .157.721c.055.485.051 1.178-.159 2.065Zm-4.828 7.475.04-.04-.107 1.081a1.536 1.536 0 0 1-.44.913l-1.298 1.3.054-.38c.072-.506-.034-.993-.172-1.418a8.548 8.548 0 0 0-.164-.45c.738-.065 1.462-.38 2.087-1.006ZM5.205 5c-.625.626-.94 1.351-1.004 2.09a8.497 8.497 0 0 0-.45-.164c-.424-.138-.91-.244-1.416-.172l-.38.054 1.3-1.3c.245-.246.566-.401.91-.44l1.08-.107-.04.039Zm9.406-3.961c-.38-.034-.967-.027-1.746.163-1.558.38-3.917 1.496-6.937 4.521-.62.62-.799 1.34-.687 2.051.107.676.483 1.362 1.048 1.928.564.565 1.25.941 1.924 1.049.71.112 1.429-.067 2.048-.688 3.079-3.083 4.192-5.444 4.556-6.987.183-.771.18-1.345.138-1.713a2.835 2.835 0 0 0-.045-.283 3.078 3.078 0 0 0-.3-.041Z" />
-            <path d="M7.009 12.139a7.632 7.632 0 0 1-1.804-1.352A7.568 7.568 0 0 1 3.794 8.86c-1.102.992-1.965 5.054-1.839 5.18.125.126 3.936-.896 5.054-1.902Z" />
-          </svg>
-
-          <span className="text-xl lg:text-4xl">Partner Quests</span>
-        </Link>
-
-        <div className="flex flex-row gap-7 flex-wrap mt-6">
           <Link
             href="https://medium.com/samurai-starter"
             target="_blank"
-            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black border border-white transition-all hover:scale-105 hover:opacity-90 shadow-xl w-full lg:w-auto"
+            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black transition-all hover:scale-105 hover:opacity-90 w-full lg:max-w-[830px] xl:max-w-[700px] mt-10 border shadow-xl"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
-              className="bi bi-sliders2-vertical w-8 lg:w-[46px] xl:w-[36px] h-8 lg:h-[46px] xl:h-[36px]"
+              className="bi bi-rocket-takeoff w-8 lg:w-[46px] h-8 lg:h-[46px]"
               viewBox="0 0 16 16"
             >
-              <path
-                fillRule="evenodd"
-                d="M0 10.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H3V1.5a.5.5 0 0 0-1 0V10H.5a.5.5 0 0 0-.5.5ZM2.5 12a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Zm3-6.5A.5.5 0 0 0 6 6h1.5v8.5a.5.5 0 0 0 1 0V6H10a.5.5 0 0 0 0-1H6a.5.5 0 0 0-.5.5ZM8 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2A.5.5 0 0 0 8 1Zm3 9.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H14V1.5a.5.5 0 0 0-1 0V10h-1.5a.5.5 0 0 0-.5.5Zm2.5 1.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Z"
-              />
+              <path d="M9.752 6.193c.599.6 1.73.437 2.528-.362.798-.799.96-1.932.362-2.531-.599-.6-1.73-.438-2.528.361-.798.8-.96 1.933-.362 2.532Z" />
+              <path d="M15.811 3.312c-.363 1.534-1.334 3.626-3.64 6.218l-.24 2.408a2.56 2.56 0 0 1-.732 1.526L8.817 15.85a.51.51 0 0 1-.867-.434l.27-1.899c.04-.28-.013-.593-.131-.956a9.42 9.42 0 0 0-.249-.657l-.082-.202c-.815-.197-1.578-.662-2.191-1.277-.614-.615-1.079-1.379-1.275-2.195l-.203-.083a9.556 9.556 0 0 0-.655-.248c-.363-.119-.675-.172-.955-.132l-1.896.27A.51.51 0 0 1 .15 7.17l2.382-2.386c.41-.41.947-.67 1.524-.734h.006l2.4-.238C9.005 1.55 11.087.582 12.623.208c.89-.217 1.59-.232 2.08-.188.244.023.435.06.57.093.067.017.12.033.16.045.184.06.279.13.351.295l.029.073a3.475 3.475 0 0 1 .157.721c.055.485.051 1.178-.159 2.065Zm-4.828 7.475.04-.04-.107 1.081a1.536 1.536 0 0 1-.44.913l-1.298 1.3.054-.38c.072-.506-.034-.993-.172-1.418a8.548 8.548 0 0 0-.164-.45c.738-.065 1.462-.38 2.087-1.006ZM5.205 5c-.625.626-.94 1.351-1.004 2.09a8.497 8.497 0 0 0-.45-.164c-.424-.138-.91-.244-1.416-.172l-.38.054 1.3-1.3c.245-.246.566-.401.91-.44l1.08-.107-.04.039Zm9.406-3.961c-.38-.034-.967-.027-1.746.163-1.558.38-3.917 1.496-6.937 4.521-.62.62-.799 1.34-.687 2.051.107.676.483 1.362 1.048 1.928.564.565 1.25.941 1.924 1.049.71.112 1.429-.067 2.048-.688 3.079-3.083 4.192-5.444 4.556-6.987.183-.771.18-1.345.138-1.713a2.835 2.835 0 0 0-.045-.283 3.078 3.078 0 0 0-.3-.041Z" />
+              <path d="M7.009 12.139a7.632 7.632 0 0 1-1.804-1.352A7.568 7.568 0 0 1 3.794 8.86c-1.102.992-1.965 5.054-1.839 5.18.125.126 3.936-.896 5.054-1.902Z" />
             </svg>
 
-            <span className="text-lg lg:text-3xl xl:text-2xl">
-              $SAM Prediction Markets
-            </span>
+            <span className="text-xl lg:text-4xl">Partner Quests</span>
           </Link>
-          <Link
-            href="https://medium.com/samurai-starter"
-            target="_blank"
-            className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black border border-white transition-all hover:scale-105 hover:opacity-90  shadow-xl  w-full lg:w-auto"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              className="bi bi-x-diamond w-8 lg:w-[46px] xl:w-[36px] h-8 lg:h-[46px] xl:h-[36px]"
-              viewBox="0 0 16 16"
+
+          <div className="flex flex-row gap-7 flex-wrap mt-6">
+            <Link
+              href="https://medium.com/samurai-starter"
+              target="_blank"
+              className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black border border-white transition-all hover:scale-105 hover:opacity-90 shadow-xl w-full lg:w-auto"
             >
-              <path d="M7.987 16a1.526 1.526 0 0 1-1.07-.448L.45 9.082a1.531 1.531 0 0 1 0-2.165L6.917.45a1.531 1.531 0 0 1 2.166 0l6.469 6.468A1.526 1.526 0 0 1 16 8.013a1.526 1.526 0 0 1-.448 1.07l-6.47 6.469A1.526 1.526 0 0 1 7.988 16zM7.639 1.17 4.766 4.044 8 7.278l3.234-3.234L8.361 1.17a.51.51 0 0 0-.722 0zM8.722 8l3.234 3.234 2.873-2.873c.2-.2.2-.523 0-.722l-2.873-2.873L8.722 8zM8 8.722l-3.234 3.234 2.873 2.873c.2.2.523.2.722 0l2.873-2.873L8 8.722zM7.278 8 4.044 4.766 1.17 7.639a.511.511 0 0 0 0 .722l2.874 2.873L7.278 8z" />
-            </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                className="bi bi-sliders2-vertical w-8 lg:w-[46px] xl:w-[36px] h-8 lg:h-[46px] xl:h-[36px]"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M0 10.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H3V1.5a.5.5 0 0 0-1 0V10H.5a.5.5 0 0 0-.5.5ZM2.5 12a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Zm3-6.5A.5.5 0 0 0 6 6h1.5v8.5a.5.5 0 0 0 1 0V6H10a.5.5 0 0 0 0-1H6a.5.5 0 0 0-.5.5ZM8 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2A.5.5 0 0 0 8 1Zm3 9.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H14V1.5a.5.5 0 0 0-1 0V10h-1.5a.5.5 0 0 0-.5.5Zm2.5 1.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Z"
+                />
+              </svg>
 
-            <span className="text-xl lg:text-3xl xl:text-2xl">
-              $SAM Lottery
-            </span>
-          </Link>
+              <span className="text-lg lg:text-3xl xl:text-2xl">
+                $SAM Prediction Markets
+              </span>
+            </Link>
+            <Link
+              href="https://medium.com/samurai-starter"
+              target="_blank"
+              className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black border border-white transition-all hover:scale-105 hover:opacity-90  shadow-xl  w-full lg:w-auto"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                className="bi bi-x-diamond w-8 lg:w-[46px] xl:w-[36px] h-8 lg:h-[46px] xl:h-[36px]"
+                viewBox="0 0 16 16"
+              >
+                <path d="M7.987 16a1.526 1.526 0 0 1-1.07-.448L.45 9.082a1.531 1.531 0 0 1 0-2.165L6.917.45a1.531 1.531 0 0 1 2.166 0l6.469 6.468A1.526 1.526 0 0 1 16 8.013a1.526 1.526 0 0 1-.448 1.07l-6.47 6.469A1.526 1.526 0 0 1 7.988 16zM7.639 1.17 4.766 4.044 8 7.278l3.234-3.234L8.361 1.17a.51.51 0 0 0-.722 0zM8.722 8l3.234 3.234 2.873-2.873c.2-.2.2-.523 0-.722l-2.873-2.873L8.722 8zM8 8.722l-3.234 3.234 2.873 2.873c.2.2.523.2.722 0l2.873-2.873L8 8.722zM7.278 8 4.044 4.766 1.17 7.639a.511.511 0 0 0 0 .722l2.874 2.873L7.278 8z" />
+              </svg>
+
+              <span className="text-xl lg:text-3xl xl:text-2xl">
+                $SAM Lottery
+              </span>
+            </Link>
+          </div>
         </div>
+        <Image
+          src="/samurai-sanka-icon.svg"
+          alt="tokens"
+          width={500}
+          height={500}
+          className="hidden xl:block"
+        />
       </div>
 
       {/* SAMURAI EDGE */}
