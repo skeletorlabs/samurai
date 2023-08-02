@@ -236,39 +236,93 @@ export default function Tokens() {
   return (
     <Layout>
       <TopLayout background="bg-samurai-incubator-bg">
-        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20">
-          {/* TOP CONTENT */}
-          <div className="sm:pt-10 lg:pt-24 relative">
-            <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-white ">
-              The Samurai Starter ecosystem is
-              <span className="font-bold text-samurai-red"> Fueled</span> by a
-              <span className="font-bold text-samurai-red"> Two-Token</span>{" "}
-              system
-            </h1>
-            <p
-              className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px] ${inter.className}`}
-            >
-              The Samurai Starter ecosystem is accessible, fair, and rewarding
-              for all. The <span className="font-bold text-white">$CFI</span>{" "}
-              governance token boosts stakers' cashback rewards rate and
-              liquidity providers can earn{" "}
-              <span className="font-bold text-white">real yield</span> from all
-              business activities. The{" "}
-              <span className="font-bold text-white">$SAM</span> token acts as a
-              reward or cashback token that is distributed based on your
-              participation throughout the Samurai Starter platform and is
-              packed with tons of utility.
-            </p>
+        <>
+          <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20">
+            {/* TOP CONTENT */}
+            <div className="sm:pt-10 lg:pt-24 relative">
+              <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-white ">
+                The Samurai Starter ecosystem is
+                <span className="font-bold text-samurai-red"> fueled</span> by
+                our native
+                <span className="font-bold text-samurai-red"> $SAM</span> token
+              </h1>
+              <p
+                className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px] ${inter.className}`}
+              >
+                The <span className="font-bold text-white">$SAM</span> token
+                rewards participation across the entire Samurai Starter
+                ecosystem. It is designed to deliver tremendous benefits to the
+                Samurai Starter community. The more you participate, the more
+                you earn, the more future benefits you may enjoy!{" "}
+                <span className="font-bold text-white">$SAM</span> is minted on
+                Ethereum layer-2 Base with a maximum supply of 100m tokens.
+              </p>
+              <div className="pt-10 flex flex-col md:flex-row gap-3 md:gap-5">
+                <SSButton>Buy $SAM on Aerodrome</SSButton>
+              </div>
+            </div>
+            <Image
+              src="/samurai.svg"
+              alt="tokens"
+              width={350}
+              height={350}
+              className="hidden xl:block opacity-40 2xl:opacity-100 w-[350px]"
+            />
           </div>
-          <Image
-            src="/samurai.svg"
-            alt="tokens"
-            width={350}
-            height={350}
-            className="hidden xl:block opacity-40 2xl:opacity-100 w-[350px]"
-          />
-        </div>
-        {/* <div className="px-6 lg:px-8 xl:px-20 h-full">
+
+          {/* TOKENOMICS */}
+          <div className="flex flex-col w-full pt-10 md:pt-14">
+            <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+              <div className="flex flex-col text-white text-2xl">
+                <p className="font-bold text-4xl pb-2 opacity-[0.8]">
+                  <span className="text-samurai-red">$SAM</span> Tokenomics
+                </p>
+
+                <div
+                  className={`flex flex-row flex-wrap gap-5 text-lg pt-4 text-white lg:pr-5 font-light xl:max-w-[1100px] ${inter.className}`}
+                >
+                  <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Total Supply:
+                    </span>{" "}
+                    100,000,000 $SAM
+                  </div>
+                  <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Initial Listing Price:
+                    </span>{" "}
+                    $0.0075 USD
+                  </div>
+                  <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Fully-diluted Market Cap:
+                    </span>{" "}
+                    $750,000 USD
+                  </div>
+                  <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Initial Market Cap:
+                    </span>{" "}
+                    $232,500 USD
+                  </div>
+                  <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Token Standard:
+                    </span>{" "}
+                    ERC-20
+                  </div>
+                  <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Blockchain:
+                    </span>{" "}
+                    Base
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* <div className="px-6 lg:px-8 xl:px-20 h-full">
           <div className="sm:pt-10 lg:pt-24 relative">
             <Image
               src="/samurai.svg"
@@ -300,10 +354,55 @@ export default function Tokens() {
             </div>
           </div>
         </div> */}
+        </>
       </TopLayout>
 
+      {/* CASHBACK */}
+      <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+          <div className="flex flex-col text-white text-2xl pb-20">
+            <p className="font-bold text-5xl pb-2">
+              <span className="text-samurai-red">$SAM</span> Cashback Reward
+            </p>
+
+            <p
+              className={`text-lg pt-10 lg:pt-0 text-neutral-300 font-light xl:max-w-[1300px] ${inter.className}`}
+            >
+              $SAM rewards are bought from the market and distributed to Samurai
+              Starter token offering participants based on their position on the
+              SAM Ladder. $SAM rewards are vested over a period of three months,
+              but users can choose to claim rewards early with a 20% penalty.
+              All $SAM penalties accrued by Samurai Starter are redistributed as
+              bribes to incentivize liquidity on Aerodrome DEX.
+            </p>
+            <div className="flex flex-col md:flex-row md:items-center gap-[24px] md:gap-[90px] pt-10 md:pt-[50px]">
+              <div
+                className={`flex flex-col text-2xl gap-2 ${inter.className}`}
+              >
+                <span className={`${inter.className}`}>
+                  My Lifetime $SAM Earnings
+                </span>
+                <span className="text-5xl pb-1 text-green-300">123.99</span>
+              </div>
+              <div
+                className={`flex flex-col leading-normal text-2xl gap-2 ${inter.className}`}
+              >
+                <span className={`${inter.className}`}>
+                  My Pending $SAM Rewards
+                </span>
+                <span className="text-5xl pb-1 text-yellow-300">123.99</span>
+              </div>
+            </div>
+            <div className="pt-10 md:pt-[80px] flex flex-col md:flex-row gap-3 md:gap-5">
+              <SSButton>Claim Vested $SAM Rewards</SSButton>
+              <SSButton secondary>Claim All $SAM Rewards</SSButton>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* STAKING */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
+      {/* <div className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
             <div className="flex flex-col lg:flex-row w-full justify-between gap-8 pb-10">
@@ -433,97 +532,119 @@ export default function Tokens() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      {/* SAM */}
+      {/* LADDER */}
       <div className="flex flex-col lg:flex-row justify-between w-full bg-white/10 border-t-[1px] border-yellow-300/40">
-        <div className="flex flex-col text-white w-full py-10 md:py-20 px-4 lg:px-12">
+        <div className="flex flex-col text-white w-full py-10 md:py-20 px-6 lg:px-8 xl:px-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
-            <span className="text-samurai-red">$SAM</span> Token
+            <span className="text-samurai-red">$SAM</span> Ladder
           </h2>
 
           <div className={`flex flex-col text-2xl ${inter.className}`}>
             <p
               className={`pt-8 text-lg text-neutral-300 font-light ${inter.className}`}
             >
-              The $SAM token rewards participation across the entire Samurai
-              Starter ecosystem and is designed to deliver tremendous benefits
-              to the Samurai Starter community. The more you participate, the
-              more you earn, the more future benefits you may enjoy! All $SAM
-              rewards are vested over a period of three months, but users can
-              choose to claim rewards early with a 15% penalty. $SAM is minted
-              on Ethereum layer-2 Arbitrum with a maximum supply of 100m tokens.
+              The SAM Ladder represents your lifetime $SAM rewards in relation
+              to all other wallets that have earned $SAM since its inception.
+              The SAM Ladder shows your cumulative earnings regardless of what
+              you do with the rewards. You can claim, provide liquidity, or
+              trade your $SAM rewards without affecting your position on the SAM
+              Ladder. Climb the SAM Ladder for tremendous platform benefits
+              including the chance for airdrops, special giveaways, exclusive
+              deals, and much more!
             </p>
-            <span
-              className={`text-neutral-400 pt-10 md:pt-[90px] ${inter.className}`}
+          </div>
+          <div className="flex flex-wrap gap-10 xl:gap-20 pt-10">
+            <div
+              className={`flex flex-col leading-normal text-2xl ${inter.className}`}
             >
-              My $SAM earnings:
-            </span>
-            <span className="text-5xl pb-1 text-green-200">123.99</span>
-          </div>
-          <div
-            className={`flex flex-col leading-normal pt-10 text-2xl ${inter.className}`}
-          >
-            <span className={`text-neutral-400  ${inter.className}`}>
-              Pending $SAM Rewards:
-            </span>
-            <span className="text-5xl pb-1 text-orange-200">123.99</span>
-          </div>
-          <div className="pt-10 md:pt-[120px] flex flex-col md:flex-row gap-3 md:gap-5">
-            <SSButton>Claim Vested $SAM Rewards</SSButton>
-            <SSButton secondary>Claim All $SAM Rewards</SSButton>
+              <span className={`text-neutral-400 ${inter.className}`}>
+                Total Platform $SAM earnings
+              </span>
+              <span className="text-5xl text-green-300">123.99</span>$SAM
+            </div>
+            <div
+              className={`flex flex-col leading-normal text-2xl ${inter.className}`}
+            >
+              <span className={`text-neutral-400 ${inter.className}`}>
+                My Lifetime $SAM Earnings
+              </span>
+              <span className="text-5xl text-yellow-300">123.99</span>$SAM
+            </div>
+            <div
+              className={`flex flex-col leading-normal text-2xl ${inter.className}`}
+            >
+              <span className={`text-neutral-400 ${inter.className}`}>
+                My SAM Ladder Tier
+              </span>
+              <span className="text-5xl text-yellow-300">Tier X</span>
+            </div>
+            <div
+              className={`flex flex-col leading-normal text-2xl ${inter.className}`}
+            >
+              <span className={`text-neutral-400 ${inter.className}`}>
+                My $SAM Cashback Rate
+              </span>
+              <span className="text-5xl text-yellow-300">4%</span>
+            </div>
           </div>
         </div>
-        <div className="flex flex-col text-white w-full bg-black/20 py-10 md:py-20 px-4 lg:px-12">
-          <h2 className="text-4xl lg:text-5xl font-bold">
-            <span className="text-samurai-red">$SAM</span> Ladder
-          </h2>
-          <p
-            className={`pt-8 text-lg text-neutral-300 pb-14 font-light ${inter.className}`}
-          >
-            The $SAM Ladder represents your lifetime $SAM rewards in relation to
-            all other wallets that have earned $SAM since its inception. The
-            $SAM Ladder shows your cumulative earnings regardless of what you do
-            with the rewards. You can claim, provide liquidity, or trade your
-            $SAM rewards without affecting your position on the $SAM Ladder.
-            Climb The Ladder for tremendous platform benefits including the
-            chance for airdrops, special giveaways, exclusive deals, and much
-            more!
-          </p>
-          <div
-            className={`flex flex-col pt-8 text-xl items-center ${inter.className}`}
-          >
-            <div className="bg-samurai-red w-2 h-[380px] rounded-t-full relative">
-              {/* BARS */}
-              <div className="w-5 h-1 bg-black border border-samurai-red absolute left-[-6px] top-[50px]" />
-              <div className="w-5 h-1 bg-black border border-samurai-red absolute left-[-6px] top-[140px]" />
-              <div className="w-5 h-1 bg-black border border-samurai-red absolute left-[-6px] top-[230px]" />
-              <div className="w-5 h-1 bg-black border border-samurai-red absolute left-[-6px] top-[320px]" />
+        <div
+          className={`flex flex-col ml-[140px] xl:ml-0 pt-10 lg:pt-40 pb-10 xl:pb-0 text-xl lg:w-[600px] xl:items-center ${inter.className}`}
+        >
+          <div className="bg-samurai-red w-2 h-[380px] rounded-t-full relative">
+            {/* BARS */}
+            <div className="w-5 h-1 bg-black border border-samurai-red absolute left-[-6px] top-[50px]" />
+            <div className="w-5 h-1 bg-black border border-samurai-red absolute left-[-6px] top-[140px]" />
+            <div className="w-5 h-1 bg-black border border-samurai-red absolute left-[-6px] top-[230px]" />
+            <div className="w-5 h-1 bg-black border border-samurai-red absolute left-[-6px] top-[320px]" />
 
-              {/* USER */}
-              <div className="w-5 h-1 bg-white  absolute left-[-6px] top-[110px]" />
-              <div className="w-24 h-5 absolute left-[-110px] top-[102px] text-sm underline">
-                My position
-              </div>
-
-              {/* LABELS */}
-              <div className="w-24 h-5 absolute left-[30px] top-[10px] text-sm">
-                Top 5%
-              </div>
-              <div className="w-24 h-5 absolute left-[30px] top-[87px] text-sm">
-                Top 10%
-              </div>
-              <div className="w-24 h-5 absolute left-[30px] top-[175px] text-sm">
-                Top 25%
-              </div>
-              <div className="w-24 h-5 absolute left-[30px] top-[260px] text-sm">
-                Top 50%
-              </div>
-              <div className="w-24 h-5 absolute left-[30px] top-[340px] text-sm">
-                Bottom 50%
-              </div>
+            {/* USER */}
+            <div className="w-5 h-1 bg-white  absolute left-[-6px] top-[110px]" />
+            <div className="w-24 h-5 absolute left-[-110px] top-[100px] text-sm text-white font-bold">
+              My position
             </div>
-            <div className="bg-samurai-red w-5 h-1"></div>
+
+            {/* LABELS */}
+            <div className="w-24 h-5 absolute left-[30px] top-[10px] text-sm">
+              Top 5%
+            </div>
+            <div className="w-24 h-5 absolute left-[30px] top-[87px] text-sm">
+              Top 10%
+            </div>
+            <div className="w-24 h-5 absolute left-[30px] top-[175px] text-sm">
+              Top 25%
+            </div>
+            <div className="w-24 h-5 absolute left-[30px] top-[260px] text-sm">
+              Top 50%
+            </div>
+            <div className="w-24 h-5 absolute left-[30px] top-[340px] text-sm">
+              Bottom 50%
+            </div>
+          </div>
+          <div className="bg-samurai-red w-5 h-1"></div>
+        </div>
+      </div>
+
+      {/* AIRDROP */}
+      <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+          <div className="flex flex-col text-white text-2xl pb-20">
+            <p className="font-bold text-5xl pb-2">
+              <span className="text-samurai-red">$SAM</span> Airdrop
+            </p>
+
+            <p
+              className={`text-lg pt-10 lg:pt-0 text-neutral-300 font-light xl:max-w-[1300px] ${inter.className}`}
+            >
+              CFI holders, stakers, and LP providers can claim $SAM at 1:1 ratio
+              to their CFI holdings. 50% of the airdrop can be claimed at TGE
+              with the remaining 50% claimable linearly over 5 months.
+            </p>
+            <div className="pt-10 md:pt-[80px] flex flex-col md:flex-row gap-3 md:gap-5">
+              <SSButton>Claim $SAM</SSButton>
+            </div>
           </div>
         </div>
       </div>
