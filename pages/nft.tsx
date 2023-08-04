@@ -418,6 +418,28 @@ export default function Nft() {
             </div>
           </div>
         </div>
+
+        {/* STAKE */}
+        <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
+          <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+            <div className="flex flex-col text-white text-2xl pb-20">
+              <p className="font-bold text-5xl pb-2">
+                Stake <span className="text-samurai-red">SamNFT</span>
+              </p>
+
+              <p
+                className={`text-lg pt-10 lg:pt-0 text-neutral-300 font-light xl:max-w-[1300px] ${inter.className}`}
+              >
+                Stake your SamNFT to claim your $SAM airdrop which is vested
+                with 20% released at TGE and 10% per month for eight months.
+              </p>
+              <div className="pt-10 md:pt-[80px] flex flex-col md:flex-row gap-3 md:gap-5">
+                Coming soon...
+                {/* <SSButton>Claim $SAM</SSButton> */}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </Layout>
   );
