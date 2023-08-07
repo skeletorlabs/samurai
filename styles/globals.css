@@ -28,3 +28,7 @@
     color: black !important;
   }
 }
+
+.custom-overlay {
+  background-color: rgba(0, 0, 0, 0.6) !important; /* 40% opacity */
+}

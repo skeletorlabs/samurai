@@ -74,8 +74,6 @@ const utilities = [
   },
 ];
 
-const baseUri = process.env.NEXT_PUBLIC_BASE_URI as string;
-
 export default function Nft() {
   const { account, isLoading, signer, setIsLoading } = useContext(StateContext);
 
@@ -166,11 +164,16 @@ export default function Nft() {
       const list = { ...(lastFiveNftsData as { minteds: Nfts }) };
       setLastFiveNfts(list.minteds);
 
-      if (list && list.minteds && list.minteds.length > 0) {
+      if (
+        generalInfo?.baseUri &&
+        list &&
+        list.minteds &&
+        list.minteds.length > 0
+      ) {
         const updatedLastFiveNfts = await Promise.all(
           list.minteds.map(async (nft) => {
             const { imageUrl, metadata } = await getNFTData(
-              baseUri,
+              generalInfo?.baseUri,
               nft.tokenUri
             );
             return { ...nft, src: imageUrl, metadata };
@@ -182,7 +185,7 @@ export default function Nft() {
     };
 
     fetchSrcForNfts();
-  }, [lastFiveNftsData]);
+  }, [lastFiveNftsData, generalInfo]);
 
   useEffect(() => {
     if (supplyData) {

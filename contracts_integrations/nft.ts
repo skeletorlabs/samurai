@@ -79,3 +79,4 @@ export async function getNFTData(ipfsUrl: string, tokenUri: string) {
   
   return { metadata, imageUrl }
 }
+
