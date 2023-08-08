@@ -8,6 +8,6 @@ const nextConfig = {
       "tan-gothic-partridge-694.mypinata.cloud",
     ],
   },
-q};
+};
 
 module.exports = nextConfig;
