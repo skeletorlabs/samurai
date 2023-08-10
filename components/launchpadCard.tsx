@@ -12,8 +12,10 @@ export default function LaunchpadCard({
   return (
     <div
       className={`flex flex-col rounded-lg ${
-        type === "dark" ? "bg-black/30" : "bg-white/5"
-      }  w-full md:max-w-[360px] max-h-[440px] py-4 shadow-xl`}
+        type === "dark"
+          ? "bg-black/30 hover:bg-black/20"
+          : "bg-white/5 hover:bg-white/10"
+      }  w-full md:max-w-[360px] max-h-[440px] py-4 shadow-xl transition-all hover:scale-[1.02]`}
     >
       <div className="flex justify-between items-center px-4">
         {ido.tokenImage}
