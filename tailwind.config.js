@@ -21,8 +21,9 @@ module.exports = {
         sanka: "url('/bg-sanka.svg')",
         button: "url('/bg-button.svg')",
         "button-hover": "url('/bg-button-hover.svg')",
-        "samurai-incubator-bg": "url('/samurai-incubator-bg.png')",
-        "samurai-sanka-bg": "url('/samurai-sanka-bg.png')",
+        "samurai-incubator": "url('/samurai-incubator-bg.png')",
+        "samurai-sanka": "url('/samurai-sanka-bg.png')",
+        "samurai-launchpad": "url('/samurai-launchpad-bg.png')",
       },
     },
     clipPath: {

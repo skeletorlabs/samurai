@@ -236,7 +236,7 @@ export default function Incubation() {
 
   return (
     <Layout>
-      <TopLayout background="bg-samurai-incubator-bg">
+      <TopLayout background="bg-samurai-incubator">
         <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20">
           {/* TOP CONTENT */}
           <div className="sm:pt-10 lg:pt-24 relative">

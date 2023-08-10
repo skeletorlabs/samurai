@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 export type SupplyInfo = {
   maxSupply: string;
   maxWhitelistedSupply: string;
@@ -94,4 +96,18 @@ export interface Project {
   hardcodeTemplate: string
   mainBtnType: string
   links: ProjectLink[]
+}
+
+
+export interface IDO {
+  tokenImage: ReactElement
+  status: string
+  chainImageSrc: string
+  title: string
+  description: string
+  startedAt: number
+  closedAt: number
+  access: string
+  raised: string
+  goal: string
 }

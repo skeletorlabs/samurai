@@ -25,6 +25,7 @@
     "@sendgrid/mail": "^7.7.0",
     "autoprefixer": "^10.4.14",
     "base-path-converter": "^1.0.2",
+    "date-fns": "^2.30.0",
     "ethers": "^6.4.2",
     "flowbite": "^1.6.5",
     "flowbite-react": "^0.4.7",

@@ -24,11 +24,12 @@ export async function generateDefaultImages() {
 export async function generateMetadataFiles(imagesFolderHash: string) {
   for (let index = 1; index < 9; index++) {
     const metadata = {
-      "name": `#${index} SamNFT`,
-      "symbol": "SamNFT",
-      "description": "Super SAM NFTs now testing the remarkable Masters of Universe collection.",
+      "name": `SamNFT #${index}`,
+      "symbol": "SNFT",
+      "description": "Access token offerings from the most novel projects in the crypto space on Samurai Starter launchpad. Participate and get your share of cashback rewards in the form of $SAM.",
       "image": `ipfs://${imagesFolderHash}/${index}.png`,
       "edition": 1,
+      "creator": "Samurai Starter",
       "compiler": "Samurai Starter"
     }
 

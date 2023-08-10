@@ -20,12 +20,12 @@ export const NAV = [
     icon: nft,
     page: Page.nft,
   },
-  // {
-  //   title: 'Launchpad',
-  //   href: '/launchpad',
-  //   icon: rocket,
-  //   page: Page.launchpad,
-  // },
+  {
+    title: 'Launchpad',
+    href: '/launchpad',
+    icon: rocket,
+    page: Page.launchpad,
+  },
   // {
   //   title: 'Sanka',
   //   href: '#',

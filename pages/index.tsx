@@ -201,7 +201,7 @@ export default function Home() {
       </div>
 
       {/* SAMURAI SANKA */}
-      <div className="flex justify-between pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20 bg-samurai-sanka-bg bg-[right_-10rem_top_-20rem] border-t-[1px] border-samurai-red">
+      <div className="flex justify-between pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20 bg-samurai-sanka bg-[right_-10rem_top_-20rem] border-t-[1px] border-samurai-red">
         <div className="flex flex-col">
           <h2 className="text-6xl font-bold">
             Samurai <span className="text-samurai-red">Sanka</span>

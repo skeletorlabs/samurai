@@ -1,30 +1,245 @@
 import Link from "next/link";
+import Image from "next/image";
+import LayoutClean from "@/components/layoutClean";
 import Layout from "@/components/layout";
 import { Inter } from "next/font/google";
+import { useCallback, useState } from "react";
+import { rocket, telegram, linkedin, op, dola, velov2 } from "@/utils/svgs";
+import SSButton from "@/components/ssButton";
+import TopLayout from "@/components/topLayout";
+import LaunchpadCard from "@/components/launchpadCard";
+import { IDO } from "@/utils/interfaces";
+import { type } from "os";
 
 const inter = Inter({
   subsets: ["latin"],
 });
 
 export default function Launchpad() {
+  const idos: IDO[] = [
+    {
+      tokenImage: op,
+      status: "ONGOING",
+      chainImageSrc: "/chain-logos/MATIC.svg",
+      title: "X Protocol",
+      description:
+        "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
+      startedAt: 1691681894,
+      closedAt: 0,
+      access: "public",
+      raised: "120000/120000 MATIC",
+      goal: "190000 MATIC",
+    },
+    {
+      tokenImage: velov2,
+      status: "ENDED",
+      chainImageSrc: "/chain-logos/AVAX.svg",
+      title: "X Protocol",
+      description:
+        "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
+      startedAt: 1691681894,
+      closedAt: 0,
+      access: "public",
+      raised: "120000/120000 AVAX",
+      goal: "190000 AVAX",
+    },
+    {
+      tokenImage: op,
+      status: "ONGOING",
+      chainImageSrc: "/chain-logos/MATIC.svg",
+      title: "X Protocol",
+      description:
+        "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
+      startedAt: 1691681894,
+      closedAt: 0,
+      access: "public",
+      raised: "120000/120000 MATIC",
+      goal: "190000 MATIC",
+    },
+    {
+      tokenImage: velov2,
+      status: "ENDED",
+      chainImageSrc: "/chain-logos/AVAX.svg",
+      title: "X Protocol",
+      description:
+        "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
+      startedAt: 1691681894,
+      closedAt: 0,
+      access: "public",
+      raised: "120000/120000 AVAX",
+      goal: "190000 AVAX",
+    },
+    {
+      tokenImage: op,
+      status: "ONGOING",
+      chainImageSrc: "/chain-logos/BSC.svg",
+      title: "X Protocol",
+      description:
+        "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
+      startedAt: 1691681894,
+      closedAt: 0,
+      access: "public",
+      raised: "120000/120000 BUSD",
+      goal: "190000 BUSD",
+    },
+    {
+      tokenImage: velov2,
+      status: "ENDED",
+      chainImageSrc: "/chain-logos/SOLANA.svg",
+      title: "X Protocol",
+      description:
+        "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
+      startedAt: 1691681894,
+      closedAt: 0,
+      access: "public",
+      raised: "120000/120000 SOL",
+      goal: "190000 SOL",
+    },
+  ];
+
   return (
     <Layout>
-      <div className="px-6 lg:px-8 xl:px-20">
-        {/* TOP CONTENT */}
-        <div className="pt-10 lg:pt-24 lg:max-w-[750px] lg:h-[630px]">
-          <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
-            Launchpad
-          </h1>
-          <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
-            Lorem ipsum dolor sit amet
+      <TopLayout background="bg-samurai-launchpad">
+        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20">
+          {/* TOP CONTENT */}
+          <div className="sm:pt-10 lg:pt-24 relative">
+            <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-samurai-red ">
+              Samurai <span className="text-white">Launchpad</span>
+            </h1>
+            <p
+              className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px] ${inter.className}`}
+            >
+              Committed to advising, guiding and incubating the most novel and
+              innovative platforms in the Web3 space no matter which stage of
+              platform launch you have reached.
+            </p>
+            <div className="flex flex-col lg:flex-row pt-16 gap-5 z-20">
+              <SSButton isLink href="#contact">
+                Get Started
+              </SSButton>
+            </div>
+          </div>
+          <Image
+            src="/samurai-launchpad-icon.svg"
+            width={350}
+            height={350}
+            alt="incubation"
+            className="rounded-[8px] hidden xl:block opacity-40 xl:opacity-100"
+            placeholder="blur"
+            blurDataURL="/thumb.png"
+          />
+        </div>
+      </TopLayout>
+
+      {/* HOW TO PARTICIPATE */}
+      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted">
+        <div className="flex flex-col relative">
+          <h2 className="text-4xl lg:text-5xl font-bold">
+            How to <span className="text-samurai-red">participate</span>
+          </h2>
+          <p
+            className={`relative mt-3 leading-normal pt-3 text-[20px]  ${inter.className}`}
+          >
+            Follow the next steps to participate →
           </p>
-          <div className="flex flex-col lg:flex-row items-center pt-10 gap-5 z-20">
-            <button className="bg-[#FF284C] border rounded-2xl border-[#e2d4d6] px-8 h-14 text-lg transition-all hover:bg-black/90 hover:text-white hover:border-white w-full lg:w-[190px]">
-              Lorem ipsum
-            </button>
+
+          <div className="w-full flex items-center gap-10 flex-wrap mt-14 text-xl">
+            <div className="flex items-center gap-3">
+              <span
+                className={`text-[110px] text-samurai-red/30 ${inter.className}`}
+              >
+                1
+              </span>
+              <div className="bg-gradient-to-r from-black/5 to-black/20 p-8 rounded-full shadow-inner">
+                <Link href="/nft" className="text-samurai-red hover:underline">
+                  Buy or rent
+                </Link>{" "}
+                a SamNFT for IDO access.
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <span
+                className={`text-[110px] text-samurai-red/30 ${inter.className}`}
+              >
+                2
+              </span>
+              <div className="bg-gradient-to-r from-black/5 to-black/20 p-8 rounded-full shadow-inner">
+                Register your interest to participate in the token offering
+                during the whitelisting period.
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <span
+                className={`text-[110px] text-samurai-red/30 ${inter.className}`}
+              >
+                3
+              </span>
+              <div className="bg-gradient-to-r from-black/5 to-black/20 p-8 rounded-full shadow-inner">
+                Commit selected payment currency during the participation
+                period.
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <span
+                className={`text-[110px] text-samurai-red/30 ${inter.className}`}
+              >
+                4
+              </span>
+              <div className="bg-gradient-to-r from-black/5 to-black/20 p-8 rounded-full shadow-inner">
+                Claim your tokens according to each project's vesting terms.
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <span
+                className={`text-[110px] text-samurai-red/30 ${inter.className}`}
+              >
+                5
+              </span>
+              <div className="bg-gradient-to-r from-black/5 to-black/20 p-8 rounded-full shadow-inner">
+                Claim your $SAM rewards
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Offerings */}
+      <div className="flex flex-col py-10 md:py-20 w-full bg-white/20 border-t-[1px] border-samurai-red/40">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+          <h2 className="text-4xl lg:text-5xl font-bold">
+            <span className="text-samurai-red">Upcoming</span> Token Offerings
+          </h2>
+          <div
+            className={`flex justify-center lg:justify-start items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+          >
+            {idos.map((ido: IDO, index) => (
+              <LaunchpadCard key={index} ido={ido} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Past */}
+      <div className="flex flex-col py-10 md:py-20 w-full bg-white/10 border-t-[1px] border-samurai-red/40">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+          <h2 className="text-4xl lg:text-5xl font-bold">
+            <span className="text-samurai-red">Past</span> Token Offerings
+          </h2>
+          <div
+            className={`flex justify-center lg:justify-start items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+          >
+            {idos.map((ido: IDO, index) => (
+              <LaunchpadCard key={index} ido={ido} type="light" />
+            ))}
           </div>
         </div>
       </div>
     </Layout>
   );
 }
+
+// paul@samuraistarter.com, projects@samuraistarter.com
