@@ -4,40 +4,46 @@ import { fromUnixTime } from "date-fns";
 
 export default function LaunchpadCard({
   ido,
-  type,
+  type = "dark",
 }: {
   ido: IDO;
   type?: string;
 }) {
   return (
     <div
-      className={`flex flex-col rounded-lg ${
+      className={`flex flex-col rounded-lg border-[0.5px] border-neutral-700 ${
         type === "dark"
           ? "bg-black/30 hover:bg-black/20"
-          : "bg-white/5 hover:bg-white/10"
+          : "bg-neutral-700 hover:bg-white/10"
       }  w-full md:max-w-[360px] max-h-[440px] py-4 shadow-xl transition-all hover:scale-[1.02]`}
     >
       <div className="flex justify-between items-center px-4">
         {ido.tokenImage}
-        <div className="flex justify-between items-center gap-3">
+        <div className="flex justify-between items-center gap-3 px-3 py-2 bg-black rounded-md">
           <span
-            className={`text-xs italic ${
+            className={`text-[10px] italic ${
               ido.status === "ONGOING" ? "text-green-400" : "text-red-500"
             }`}
           >
             {ido.status}
           </span>{" "}
-          <Image src={ido.chainImageSrc} alt="chain" width={24} height={24} />
+          <Image src={ido.chainImageSrc} alt="chain" width={16} height={16} />
         </div>
       </div>
-      <div className="mt-8 text-samurai-red  px-4">{ido.title}</div>
-      <div className="mt-3 text-white/70 text-[16px] overflow-scroll px-4">
+      <div className="mt-4 text-samurai-red  px-4">{ido.title}</div>
+      <div className="mt-3 text-white/70 text-[15px] overflow-scroll px-4">
         {ido.description}
       </div>
-      <div className="bg-black/50 p-4 mt-4">
-        <span className="text-[16px] text-samurai-red">Raised</span>
+
+      <div className="flex items-center gap-2 bg-black/30 py-2 px-4 mt-4 text-[16px] rounded-md mx-2 w-max">
+        <span className="text-[14px]">Goal:</span>
+        <p className="text-white/70">{ido.goal}</p>
+      </div>
+      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md mx-2 w-max mt-1">
+        <span className="text-[14px] text-samurai-red">Raised:</span>
         <p className="text-white/70">{ido.raised}</p>
       </div>
+
       <div className="flex justify-between items-center px-4 mt-4">
         <div className="flex flex-col">
           <span className="text-sm text-white/70">Started</span>
@@ -48,7 +54,7 @@ export default function LaunchpadCard({
 
         <div className="flex flex-col">
           <span className="text-sm text-white/70">Access</span>
-          <span className="text-[16px]">{ido.access}</span>
+          <span className="text-[16px] text-samurai-red">{ido.access}</span>
         </div>
       </div>
     </div>
