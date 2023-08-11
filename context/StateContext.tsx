@@ -8,6 +8,8 @@ import { useNetwork, useAccount } from "wagmi";
 
 import { Page } from "../utils/enums";
 import { NAV } from "../utils/constants";
+import { Project } from "@/utils/interfaces";
+import fetchProjects from "@/pages/api/projects";
 
 export const StateContext = createContext({
   page: Page.home,
@@ -21,6 +23,9 @@ export const StateContext = createContext({
 
   account: "",
   setAccount: (value: string) => {},
+
+  projects: [] as Project[] | [],
+  setProjects: (value: Project[] | []) => {},
 });
 
 type Props = {
@@ -33,6 +38,7 @@ export const StateProvider = ({ children }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [signer, setSigner] = useState<any>(null);
   const [account, setAccount] = useState<string>("");
+  const [projects, setProjects] = useState<Project[] | []>([]);
 
   const wallet = useAccount();
 
@@ -43,6 +49,18 @@ export const StateProvider = ({ children }: Props) => {
       setSigner(walletSigner);
     }
   }, [setSigner]);
+
+  const getInfos = useCallback(async () => {
+    const projects = await fetchProjects();
+    setProjects(
+      projects.filter(
+        (project) =>
+          project.key === "maya" ||
+          project.key === "d-etf-second" ||
+          project.key === "devvio"
+      )
+    );
+  }, [setProjects]);
 
   useEffect(() => {
     if (router.isReady) {
@@ -62,6 +80,10 @@ export const StateProvider = ({ children }: Props) => {
     setAccount(wallet?.address as string);
   }, [wallet.address, setSigner]);
 
+  useEffect(() => {
+    getInfos();
+  }, []);
+
   return (
     <StateContext.Provider
       value={{
@@ -73,6 +95,8 @@ export const StateProvider = ({ children }: Props) => {
         setSigner,
         account,
         setAccount,
+        projects,
+        setProjects,
       }}
     >
       {children}

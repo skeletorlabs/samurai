@@ -143,14 +143,14 @@ export default function Launchpad() {
             Follow the next steps to participate →
           </p>
 
-          <div className="w-full flex items-center gap-10 flex-wrap mt-14 text-xl">
+          <div className="w-full flex items-center gap-10 flex-wrap mt-14 text-3xl">
             <div className="flex items-center gap-3">
               <span
-                className={`text-[110px] text-samurai-red/30 ${inter.className}`}
+                className={`text-[110px] text-samurai-red ${inter.className}`}
               >
                 1
               </span>
-              <div className="bg-gradient-to-r from-black/5 to-black/20 p-8 rounded-full shadow-inner">
+              <div className="bg-gradient-to-r from-transparent to-neutral-600 rounded-r-md p-8 shadow-inner">
                 <Link href="/nft" className="text-samurai-red hover:underline">
                   Buy or rent
                 </Link>{" "}
@@ -160,11 +160,11 @@ export default function Launchpad() {
 
             <div className="flex items-center gap-3">
               <span
-                className={`text-[110px] text-samurai-red/30 ${inter.className}`}
+                className={`text-[110px] text-samurai-red ${inter.className}`}
               >
                 2
               </span>
-              <div className="bg-gradient-to-r from-black/5 to-black/20 p-8 rounded-full shadow-inner">
+              <div className="bg-gradient-to-r from-transparent to-neutral-600 rounded-r-md p-8 shadow-inner">
                 Register your interest to participate in the token offering
                 during the whitelisting period.
               </div>
@@ -172,11 +172,11 @@ export default function Launchpad() {
 
             <div className="flex items-center gap-3">
               <span
-                className={`text-[110px] text-samurai-red/30 ${inter.className}`}
+                className={`text-[110px] text-samurai-red ${inter.className}`}
               >
                 3
               </span>
-              <div className="bg-gradient-to-r from-black/5 to-black/20 p-8 rounded-full shadow-inner">
+              <div className="bg-gradient-to-r from-transparent to-neutral-600 rounded-r-md p-8 shadow-inner">
                 Commit selected payment currency during the participation
                 period.
               </div>
@@ -184,22 +184,22 @@ export default function Launchpad() {
 
             <div className="flex items-center gap-3">
               <span
-                className={`text-[110px] text-samurai-red/30 ${inter.className}`}
+                className={`text-[110px] text-samurai-red ${inter.className}`}
               >
                 4
               </span>
-              <div className="bg-gradient-to-r from-black/5 to-black/20 p-8 rounded-full shadow-inner">
+              <div className="bg-gradient-to-r from-transparent to-neutral-600 rounded-r-md p-8 shadow-inner">
                 Claim your tokens according to each project's vesting terms.
               </div>
             </div>
 
             <div className="flex items-center gap-3">
               <span
-                className={`text-[110px] text-samurai-red/30 ${inter.className}`}
+                className={`text-[110px] text-samurai-red ${inter.className}`}
               >
                 5
               </span>
-              <div className="bg-gradient-to-r from-black/5 to-black/20 p-8 rounded-full shadow-inner">
+              <div className="bg-gradient-to-r from-transparent to-neutral-600 rounded-r-md p-8 shadow-inner">
                 Claim your $SAM rewards
               </div>
             </div>

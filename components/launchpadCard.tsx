@@ -15,10 +15,22 @@ export default function LaunchpadCard({
         type === "dark"
           ? "bg-black/30 hover:bg-black/20"
           : "bg-neutral-700 hover:bg-white/10"
-      }  w-full md:max-w-[360px] max-h-[440px] py-4 shadow-xl transition-all hover:scale-[1.02]`}
+      }  w-full md:max-w-[360px] max-h-[510px] py-4 shadow-xl transition-all hover:scale-[1.02]`}
     >
+      <div className="flex w-full px-4 mb-4">
+        <div className="flex w-full h-[164px] relative">
+          <Image
+            src="/projects/maya-protocol.svg"
+            placeholder="blur"
+            blurDataURL="/projects/maya-protocol.svg"
+            fill
+            alt=""
+            className="rounded-md border border-neutral-600 hover:border-samurai-red transition-all"
+          />
+        </div>
+      </div>
       <div className="flex justify-between items-center px-4">
-        {ido.tokenImage}
+        <div className="text-samurai-red">{ido.title}</div>
         <div className="flex justify-between items-center gap-3 px-3 py-2 bg-black rounded-md">
           <span
             className={`text-[10px] italic ${
@@ -30,7 +42,7 @@ export default function LaunchpadCard({
           <Image src={ido.chainImageSrc} alt="chain" width={16} height={16} />
         </div>
       </div>
-      <div className="mt-4 text-samurai-red  px-4">{ido.title}</div>
+
       <div className="mt-3 text-white/70 text-[15px] overflow-scroll px-4">
         {ido.description}
       </div>

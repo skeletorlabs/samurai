@@ -3,13 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import Layout from "@/components/layout";
 import { SOCIALS } from "@/utils/constants";
-import { useCallback, useEffect, useState } from "react";
-import fetchProjects from "./api/projects";
+import { useContext } from "react";
+
 import Card from "@/components/card";
 import { Project } from "@/utils/interfaces";
 import { Inter } from "next/font/google";
 import SSButton from "@/components/ssButton";
 import TopLayout from "@/components/topLayout";
+import { StateContext } from "@/context/StateContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -78,22 +79,7 @@ const edge = [
 ];
 
 export default function Home() {
-  const [featured, setFeatured] = useState<Project[] | []>([]);
-  const getInfos = useCallback(async () => {
-    const projects = await fetchProjects();
-    setFeatured(
-      projects.filter(
-        (project) =>
-          project.key === "maya" ||
-          project.key === "d-etf-second" ||
-          project.key === "devvio"
-      )
-    );
-  }, []);
-
-  useEffect(() => {
-    getInfos();
-  }, []);
+  const { projects } = useContext(StateContext);
   return (
     <Layout>
       <TopLayout background="bg-samurai-incubator-bg" padding={false}>
@@ -187,7 +173,7 @@ export default function Home() {
           </Link>
         </div>
         <div className="grid lg:grid-cols-3 gap-12 lg:gap-9 flex-wrap mt-10">
-          {featured.map((item, index) => (
+          {projects.map((item, index) => (
             <Card key={index} project={item} />
           ))}
         </div>
