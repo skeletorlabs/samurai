@@ -26,6 +26,9 @@ export const StateContext = createContext({
 
   projects: [] as Project[] | [],
   setProjects: (value: Project[] | []) => {},
+
+  idoModalOpen: false,
+  setIdoModalOpen: (value: boolean) => {},
 });
 
 type Props = {
@@ -39,6 +42,7 @@ export const StateProvider = ({ children }: Props) => {
   const [signer, setSigner] = useState<any>(null);
   const [account, setAccount] = useState<string>("");
   const [projects, setProjects] = useState<Project[] | []>([]);
+  const [idoModalOpen, setIdoModalOpen] = useState(false);
 
   const wallet = useAccount();
 
@@ -97,6 +101,8 @@ export const StateProvider = ({ children }: Props) => {
         setAccount,
         projects,
         setProjects,
+        idoModalOpen,
+        setIdoModalOpen,
       }}
     >
       {children}

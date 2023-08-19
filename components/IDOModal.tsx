@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { IDO } from "@/utils/interfaces";
-import { ReactElement, useState } from "react";
+import { ReactElement, useState, useContext } from "react";
 import { fromUnixTime } from "date-fns";
 import Link from "next/link";
 import { discord, globe, telegram, twitter } from "@/utils/svgs";
 import { Inter, Inter_Tight } from "next/font/google";
 import SSButton from "./ssButton";
+import { StateContext } from "@/context/StateContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,27 +29,28 @@ const socials = [
 ];
 
 export default function IDOModal({ children, ido }: IDOModal) {
-  const [open, setOpen] = useState(false);
+  const { idoModalOpen, setIdoModalOpen } = useContext(StateContext);
   return (
     <>
-      <button onClick={() => setOpen(true)}>{children}</button>
+      <button onClick={() => setIdoModalOpen(true)}>{children}</button>
       <div
         className={`
           transition-all 
-          ${open ? "fixed" : "hidden"}
+          ${idoModalOpen ? "fixed" : "hidden"}
           top-0 left-0 w-full h-full bg-neutral-900/95 z-50
           flex justify-center items-center
+          pb-20 md:pb-0
         `}
       >
-        <div className="flex w-full max-w-[1300px] h-full p-4 lg:p-20">
+        <div className="flex w-full max-w-[1300px] h-full md:p-4 lg:p-20">
           <div
             className="
               relative
-              flex p-8 w-full h-full 
+              flex p-4 md:p-8 w-full h-full 
               bg-[#0d0d0d]/70
               
               
-              border-[16px] border-neutral-700 rounded-xl 
+              md:border-[16px] border-neutral-700 rounded-xl 
               shadow-2xl shadow-neutral-500/5
             "
           >
@@ -100,7 +102,7 @@ export default function IDOModal({ children, ido }: IDOModal) {
               </div>
               {/* LABELS */}
               <div
-                className={`flex gap-2 flex-wrap text-[18px] mt-8 xl:mx-4 ${inter.className}`}
+                className={`flex gap-2 flex-wrap text-[14px] md:text-[18px] mt-8 xl:mx-4 ${inter.className}`}
               >
                 <div className="flex items-center gap-2 bg-black/30 py-2 px-4 rounded-md w-max">
                   <span>Starts:</span>
@@ -154,7 +156,7 @@ export default function IDOModal({ children, ido }: IDOModal) {
                 {ido.description}
               </div>
               {/* BUTTONS */}
-              <div className="flex flex-col md:flex-row items-center gap-20 xl:px-4 mt-8">
+              <div className="flex flex-col md:flex-row items-center gap-4 md:gap-20 xl:px-4 mt-8">
                 <SSButton flexSize>Whitelist for IDO</SSButton>
                 <SSButton flexSize isLink href="/nft" secondary>
                   Mint SamNFT
@@ -162,7 +164,7 @@ export default function IDOModal({ children, ido }: IDOModal) {
               </div>
 
               {/* INFORMATIONS */}
-              <div className="flex flex-col xl:flex-row justify-between gap-20 xl:px-4 mt-14 border-t border-neutral-600 pt-12">
+              <div className="flex flex-col xl:flex-row justify-between gap-4 md:gap-20 xl:px-4 mt-14 border-t border-neutral-600 pt-12">
                 <div className="flex flex-col w-full">
                   <p className="text-yellow-300 text-4xl px-4 py-2 mb-3 bg-black/70">
                     Pool <span className="text-white">Information</span>
@@ -254,7 +256,7 @@ export default function IDOModal({ children, ido }: IDOModal) {
               </div>
               {/* ABOUT THE PROJECT */}
               <div className="flex flex-col xl:px-4 mt-20 pt-14 border-t border-neutral-600">
-                <h2 className="text-4xl lg:text-4xl font-bold">
+                <h2 className="text-3xl md:text-4xl font-bold">
                   About <span className="text-samurai-red">{ido.title}</span>
                 </h2>
                 <p className="text-lg text-zinc-500 mt-6">
@@ -338,7 +340,7 @@ export default function IDOModal({ children, ido }: IDOModal) {
             </div>
             {/* END OF CONTENT */}
             <button
-              onClick={() => setOpen(false)}
+              onClick={() => setIdoModalOpen(false)}
               className="absolute top-8 right-8 w-10 h-10 text-neutral-500"
             >
               <svg

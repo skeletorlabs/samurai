@@ -1,9 +1,9 @@
 import Head from "next/head";
 import { Roboto } from "next/font/google";
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 import { ToastContainer } from "react-toastify";
+import { StateContext } from "@/context/StateContext";
 
-import Nav from "./nav";
 import Footer from "./footer";
 import BottomNav from "./bottomNav";
 
@@ -19,6 +19,7 @@ interface layout {
 }
 
 export default function Layout({ children }: layout) {
+  const { idoModalOpen } = useContext(StateContext);
   return (
     <>
       <Head>
@@ -46,7 +47,11 @@ export default function Layout({ children }: layout) {
       />
 
       <main className={roboto.className}>
-        <div className="flex flex-col w-full h-full items-center text-white/90">
+        <div
+          className={`${
+            idoModalOpen ? "fixed" : "flex"
+          } flex-col w-full h-full items-center text-white/90`}
+        >
           {children}
           <Footer />
         </div>

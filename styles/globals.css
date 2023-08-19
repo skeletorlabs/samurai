@@ -2,11 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 @layer base {
   html {
     background-color: black;
     scroll-behavior: smooth;
-  }
+  }  
 
   [data-testid="rk-connect-button"] {
     background-color: transparent !important;
@@ -32,3 +34,4 @@
 .custom-overlay {
   background-color: rgba(0, 0, 0, 0.6) !important; /* 40% opacity */
 }
+
