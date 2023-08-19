@@ -25,16 +25,7 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const images = [
-  "/nfts/1.png",
-  "/nfts/2.png",
-  "/nfts/3.png",
-  "/nfts/4.png",
-  "/nfts/5.png",
-  "/nfts/6.png",
-  "/nfts/7.png",
-  "/nfts/8.png",
-];
+const images = ["/nfts/1.jpg", "/nfts/2.jpg"];
 
 const utilities = [
   {
@@ -204,8 +195,8 @@ export default function Nft() {
         <div className="flex flex-col xl:flex-row justify-between xl:items-center gap-6 xl:gap-0 px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24 ">
           {/* TOP CONTENT */}
 
-          <div className="relative md:mr-12 xl:max-w-[800px]">
-            <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] text-white">
+          <div className="relative md:mr-12 xl:max-w-[900px]">
+            <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
               Mint a Sam<span className="text-samurai-red">NFT </span>
               to be <span className="text-samurai-red">part</span> of{" "}
               {/* <br className="hidden md:block" /> */}
@@ -213,7 +204,7 @@ export default function Nft() {
               <span className="text-samurai-red"> Vibrant</span> Community
             </h1>
             <p
-              className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px]  ${inter.className}`}
+              className={`leading-normal lg:leading-relaxed pt-6 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
             >
               By participating in the SamNFT minting event, you become part of
               our vibrant community and gain access to tremendous benefits.{" "}
@@ -221,16 +212,16 @@ export default function Nft() {
             </p>
           </div>
 
-          <div className="flex w-full md:min-w-[500px] md:max-w-[500px] h-[350px] bg-white p-2 rounded-[8px] relative">
+          <div className="flex min-w-[400px] md:max-w-[400px] h-[500px] bg-white p-2 rounded-[8px] relative">
             <Carousel leftControl=" " rightControl=" ">
               {images.map((image, index) => (
                 <Image
                   key={index}
                   src={image}
-                  width={500}
-                  height={350}
+                  width={400}
+                  height={500}
                   alt={image}
-                  className="rounded-[8px] w-full md:w-[500px] h-[350px]"
+                  className="rounded-[8px] w-full md:w-[400px] h-[500px]"
                   placeholder="blur"
                   blurDataURL="/thumb.png"
                 />

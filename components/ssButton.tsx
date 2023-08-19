@@ -25,6 +25,7 @@ export default function SSButton({
       href={href}
       className={`
         flex justify-center items-center border rounded-[8px]
+        ${flexSize ? "w-full" : "w-auto"} 
         ${
           secondary
             ? "text-yellow-300 border-yellow-300"

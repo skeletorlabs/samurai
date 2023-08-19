@@ -99,12 +99,12 @@ export default function Home() {
               <SSButton>Sanka</SSButton>
               <SSButton>For projects</SSButton>
             </div>
-            <div className="hidden lg:flex items-center gap-16 ml-2 mt-32">
+            <div className="flex items-center gap-16 ml-2 mt-14">
               {SOCIALS.map((item, index) => (
                 <Link
                   key={index}
                   href={item.href}
-                  className="scale-[2] transition-all hover:opacity-70"
+                  className="transition-all hover:opacity-70 scale-125 md:scale-150"
                   target="_blank"
                 >
                   {item.svg}

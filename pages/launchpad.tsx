@@ -9,7 +9,7 @@ import SSButton from "@/components/ssButton";
 import TopLayout from "@/components/topLayout";
 import LaunchpadCard from "@/components/launchpadCard";
 import { IDO } from "@/utils/interfaces";
-import { type } from "os";
+import IDOModal from "@/components/IDOModal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,7 +21,7 @@ export default function Launchpad() {
       tokenImage: op,
       status: "ONGOING",
       chainImageSrc: "/chain-logos/MATIC.svg",
-      title: "X Protocol",
+      title: "Maya Protocol",
       description:
         "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
       startedAt: 1691681894,
@@ -34,7 +34,7 @@ export default function Launchpad() {
       tokenImage: velov2,
       status: "ENDED",
       chainImageSrc: "/chain-logos/AVAX.svg",
-      title: "X Protocol",
+      title: "Maya Protocol",
       description:
         "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
       startedAt: 1691681894,
@@ -47,7 +47,7 @@ export default function Launchpad() {
       tokenImage: op,
       status: "ONGOING",
       chainImageSrc: "/chain-logos/MATIC.svg",
-      title: "X Protocol",
+      title: "Maya Protocol",
       description:
         "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
       startedAt: 1691681894,
@@ -60,7 +60,7 @@ export default function Launchpad() {
       tokenImage: velov2,
       status: "ENDED",
       chainImageSrc: "/chain-logos/AVAX.svg",
-      title: "X Protocol",
+      title: "Maya Protocol",
       description:
         "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
       startedAt: 1691681894,
@@ -73,7 +73,7 @@ export default function Launchpad() {
       tokenImage: op,
       status: "ONGOING",
       chainImageSrc: "/chain-logos/BSC.svg",
-      title: "X Protocol",
+      title: "Maya Protocol",
       description:
         "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
       startedAt: 1691681894,
@@ -86,7 +86,7 @@ export default function Launchpad() {
       tokenImage: velov2,
       status: "ENDED",
       chainImageSrc: "/chain-logos/SOLANA.svg",
-      title: "X Protocol",
+      title: "Maya Protocol",
       description:
         "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
       startedAt: 1691681894,
@@ -149,7 +149,10 @@ export default function Launchpad() {
                 1.
               </span>
               <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
-                <Link href="/nft" className="text-samurai-red hover:underline">
+                <Link
+                  href="/nft"
+                  className="text-samurai-red hover:underline ml-4"
+                >
                   Buy or rent
                 </Link>{" "}
                 a SamNFT for IDO access.
@@ -207,7 +210,9 @@ export default function Launchpad() {
             className={`flex justify-center lg:justify-start items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
           >
             {idos.map((ido: IDO, index) => (
-              <LaunchpadCard key={index} ido={ido} />
+              <IDOModal key={index} ido={ido}>
+                <LaunchpadCard ido={ido} />
+              </IDOModal>
             ))}
           </div>
         </div>
@@ -217,7 +222,7 @@ export default function Launchpad() {
       <div className="flex flex-col py-10 md:py-20 w-full bg-white/10 border-t-[1px] border-samurai-red/40">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
-            <span className="text-samurai-red">Past</span> Token Offerings
+            <span className="text-white/30">Past</span> Token Offerings
           </h2>
           <div
             className={`flex justify-center lg:justify-start items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}

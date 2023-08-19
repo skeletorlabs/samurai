@@ -11,7 +11,7 @@ export default function LaunchpadCard({
 }) {
   return (
     <div
-      className={`flex flex-col rounded-lg border-[0.5px] border-neutral-700 ${
+      className={`flex flex-col rounded-lg border-[0.5px] border-neutral-700 text-start ${
         type === "dark"
           ? "bg-black/30 hover:bg-black/20"
           : "bg-neutral-700 hover:bg-white/10"

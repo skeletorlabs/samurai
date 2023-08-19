@@ -14,7 +14,7 @@ export default function TopLayout({
 }: TopLayout) {
   return (
     <div
-      className={`flex flex-col w-full h-full  bg-no-repeat bg-fit z-20 ${
+      className={`flex flex-col w-full h-full bg-no-repeat bg-cover bg-center 2xl:bg-[0_-10rem] z-20 ${
         padding ? "pb-12 lg:pb-24" : ""
       } ${background ? background : "bg-home-art"}`}
     >
