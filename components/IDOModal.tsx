@@ -68,8 +68,9 @@ export default function IDOModal({ children, ido }: IDOModal) {
                     />
                     {/* SOCIALS MOBILE */}
                     <div className="flex md:hidden flex-row items-center scale-75 gap-4 px-6 py-2 ml-[-18px] bg-gray-600/50 w-max rounded-full">
-                      {socials.map((social) => (
+                      {socials.map((social, index) => (
                         <Link
+                          key={index}
                           href={social.href}
                           className="transition-all hover:scale-110 text-white hover:text-neutral-500"
                         >
@@ -85,8 +86,9 @@ export default function IDOModal({ children, ido }: IDOModal) {
 
                   {/* SOCIALS DESKTOP */}
                   <div className="hidden md:flex flex-row items-center scale-75 gap-4 px-6 py-2 ml-[-18px] bg-gray-600/50 w-max rounded-full">
-                    {socials.map((social) => (
+                    {socials.map((social, index) => (
                       <Link
+                        key={index}
                         href={social.href}
                         className="transition-all hover:scale-110 text-white hover:text-neutral-500"
                       >
