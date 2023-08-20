@@ -4,11 +4,11 @@ import { SOCIALS } from "@/utils/constants";
 import { linkedin, twitter } from "@/utils/svgs";
 
 const links = [
+  { title: "SamNFT", href: "/nft" },
   { title: "Launchpad", href: "/launchpad" },
-  { title: "Sanka", href: "#" },
-  { title: "SamNFT", href: "#" },
-  { title: "Tokens", href: "#" },
-  { title: "$SAM Liquidity", href: "#" },
+  { title: "Sanka", href: "/#sanka" },
+  { title: "Tokens", href: "/tokens" },
+  // { title: "$SAM Liquidity", href: "#" },
   { title: "Incubation", href: "/incubation" },
 ];
 

@@ -7,7 +7,7 @@
 @layer base {
   html {
     background-color: black;
-    scroll-behavior: smooth;
+    scroll-behavior: smooth !important;
   }  
 
   [data-testid="rk-connect-button"] {

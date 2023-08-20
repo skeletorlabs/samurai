@@ -31,8 +31,8 @@ export default function SSButton({
             ? "text-yellow-300 border-yellow-300"
             : "text-samurai-red border-samurai-red"
         }
-         px-8 py-3 transition-all 
-        hover:bg-samurai-red hover:text-black hover:border-samurai-red
+         px-8 py-3 transition-all z-20
+         hover:bg-samurai-red hover:text-black hover:border-samurai-red
       `}
     >
       {children}

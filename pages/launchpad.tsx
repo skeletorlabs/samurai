@@ -114,7 +114,7 @@ export default function Launchpad() {
               platform launch you have reached.
             </p>
             <div className="flex flex-col lg:flex-row pt-16 gap-5 z-20">
-              <SSButton isLink href="#contact">
+              <SSButton isLink href="#participate">
                 Get Started
               </SSButton>
             </div>
@@ -132,7 +132,10 @@ export default function Launchpad() {
       </TopLayout>
 
       {/* HOW TO PARTICIPATE */}
-      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted">
+      <div
+        id="participate"
+        className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted"
+      >
         <div className="flex flex-col relative">
           <h2 className="text-4xl lg:text-5xl font-bold">
             How to <span className="text-samurai-red">participate</span>

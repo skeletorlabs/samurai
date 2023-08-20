@@ -95,9 +95,15 @@ export default function Home() {
               the most novel projects in the crypto space
             </p>
             <div className="flex flex-row items-center pt-10 gap-5">
-              <SSButton>Launchpad</SSButton>
-              <SSButton>Sanka</SSButton>
-              <SSButton>For projects</SSButton>
+              <SSButton isLink href="/launchpad">
+                Launchpad
+              </SSButton>
+              <SSButton isLink href="#sanka">
+                Sanka
+              </SSButton>
+              <SSButton isLink href="/incubation">
+                For projects
+              </SSButton>
             </div>
             <div className="flex items-center gap-16 ml-2 mt-14">
               {SOCIALS.map((item, index) => (
@@ -187,7 +193,10 @@ export default function Home() {
       </div>
 
       {/* SAMURAI SANKA */}
-      <div className="flex justify-between pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20 bg-samurai-sanka bg-[right_-10rem_top_-20rem] border-t-[1px] border-samurai-red">
+      <div
+        id="sanka"
+        className="flex justify-between pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20 bg-samurai-sanka bg-[right_-10rem_top_-20rem] border-t-[1px] border-samurai-red"
+      >
         <div className="flex flex-col">
           <h2 className="text-6xl font-bold">
             Samurai <span className="text-samurai-red">Sanka</span>
@@ -205,7 +214,11 @@ export default function Home() {
             earn rewards for participating on our partners' platforms.
           </div>
 
-          <Link
+          <div className="text-samurai-red text-5xl lg:text-7xl mt-16 lg:mt-32">
+            Coming soon!
+          </div>
+
+          {/* <Link
             href="https://medium.com/samurai-starter"
             target="_blank"
             className="flex justify-center items-center font-black gap-5 text-white p-8 rounded-xl bg-black transition-all hover:scale-105 hover:opacity-90 w-full lg:max-w-[830px] xl:max-w-[700px] mt-10 border shadow-xl"
@@ -264,7 +277,7 @@ export default function Home() {
                 $SAM Lottery
               </span>
             </Link>
-          </div>
+          </div> */}
         </div>
         <Image
           src="/samurai-sanka-icon.svg"
