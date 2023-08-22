@@ -173,7 +173,14 @@ export default function Launchpad() {
                   href="/nft"
                   className="text-samurai-red hover:opacity-75 underline"
                 >
-                  Buy or rent
+                  Buy
+                </Link>
+                {" or "}
+                <Link
+                  href="#"
+                  className="text-samurai-red hover:opacity-75 underline"
+                >
+                  rent (coming soon)
                 </Link>{" "}
                 a SamNFT to gain token offering access.
               </div>
