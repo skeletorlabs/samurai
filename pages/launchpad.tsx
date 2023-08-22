@@ -163,13 +163,15 @@ export default function Launchpad() {
 
           <div className="w-full flex flex-col gap-10 flex-wrap mt-14 text-2xl lg:text-3xl">
             <div className="flex items-center gap-3">
-              <span className={`text-7xl text-samurai-red ${inter.className}`}>
+              <span
+                className={`w-[50px] text-7xl text-samurai-red ${inter.className}`}
+              >
                 1.
               </span>
               <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
                 <Link
                   href="/nft"
-                  className="text-samurai-red hover:underline ml-4"
+                  className="text-samurai-red hover:opacity-75 underline"
                 >
                   Buy or rent
                 </Link>{" "}
@@ -178,7 +180,9 @@ export default function Launchpad() {
             </div>
 
             <div className="flex items-center gap-3">
-              <span className={`text-7xl text-samurai-red ${inter.className}`}>
+              <span
+                className={`w-[50px] text-7xl text-samurai-red ${inter.className}`}
+              >
                 2.
               </span>
               <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
@@ -189,7 +193,9 @@ export default function Launchpad() {
             </div>
 
             <div className="flex items-center gap-3">
-              <span className={`text-7xl text-samurai-red ${inter.className}`}>
+              <span
+                className={`w-[50px] text-7xl text-samurai-red ${inter.className}`}
+              >
                 3.
               </span>
               <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
@@ -199,7 +205,9 @@ export default function Launchpad() {
             </div>
 
             <div className="flex items-center gap-3">
-              <span className={`text-7xl text-samurai-red ${inter.className}`}>
+              <span
+                className={`w-[50px] text-7xl text-samurai-red ${inter.className}`}
+              >
                 4.
               </span>
               <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
@@ -209,7 +217,9 @@ export default function Launchpad() {
             </div>
 
             <div className="flex items-center gap-3">
-              <span className={`text-7xl text-samurai-red ${inter.className}`}>
+              <span
+                className={`w-[50px] text-7xl text-samurai-red ${inter.className}`}
+              >
                 5.
               </span>
               <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
