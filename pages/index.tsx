@@ -11,6 +11,7 @@ import { Inter } from "next/font/google";
 import SSButton from "@/components/ssButton";
 import TopLayout from "@/components/topLayout";
 import { StateContext } from "@/context/StateContext";
+import { linkedin, twitter } from "@/utils/svgs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -107,12 +108,18 @@ export default function Home() {
                 For projects
               </SSButton>
             </div>
-            <div className="flex items-center gap-16 ml-2 mt-14">
+            <div className="flex items-center gap-12 ml-2 mt-14">
               {SOCIALS.map((item, index) => (
                 <Link
                   key={index}
                   href={item.href}
-                  className="transition-all hover:opacity-70 scale-125 md:scale-150"
+                  className={`transition-all hover:opacity-75 text-white ${
+                    item.svg === linkedin
+                      ? "scale-[1.08]"
+                      : item.svg === twitter
+                      ? "scale-[1.2]"
+                      : "scale-[1.3]"
+                  }`}
                   target="_blank"
                 >
                   {item.svg}

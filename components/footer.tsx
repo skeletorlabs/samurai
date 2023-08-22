@@ -38,12 +38,12 @@ export default function Footer() {
               <Link
                 key={index}
                 href={item.href}
-                className={`transition-all hover:opacity-75 text-white w-9 ${
+                className={`transition-all hover:opacity-75 text-white ${
                   item.svg === linkedin
-                    ? "scale-[0.78]"
+                    ? "scale-[1.08]"
                     : item.svg === twitter
-                    ? "scale-90"
-                    : "scale-100"
+                    ? "scale-[1.2]"
+                    : "scale-[1.3]"
                 }`}
                 target="_blank"
               >
