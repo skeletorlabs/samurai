@@ -50,7 +50,7 @@ export default function Nav() {
         ))}
       </div>
       <div className="flex gap-5 h-10 px-5 lg:px-0">
-        {page === Page.nft && <ConnectButton showBalance={false} />}
+        {/* {page === Page.nft && <ConnectButton showBalance={false} />} */}
 
         <div className="hidden xl:flex">
           <SSButton isLink href="#">

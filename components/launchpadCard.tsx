@@ -20,9 +20,9 @@ export default function LaunchpadCard({
       <div className="flex w-full px-4 mb-4">
         <div className="flex w-full h-[164px] relative">
           <Image
-            src="/projects/maya-protocol.svg"
+            src={ido.tokenImageSrc}
             placeholder="blur"
-            blurDataURL="/projects/maya-protocol.svg"
+            blurDataURL={ido.tokenImageSrc}
             fill
             alt=""
             className="rounded-md border border-neutral-600 hover:border-samurai-red transition-all"

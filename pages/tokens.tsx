@@ -241,7 +241,11 @@ export default function Tokens() {
             {/* TOP CONTENT */}
             <div className="sm:pt-10 lg:pt-24 relative">
               <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-white ">
-                The Samurai Starter ecosystem is
+                The{" "}
+                <span className="font-bold text-samurai-red">
+                  Samurai Starter
+                </span>{" "}
+                ecosystem is
                 <span className="font-bold text-samurai-red"> fueled</span> by
                 our native
                 <span className="font-bold text-samurai-red"> $SAM</span> token
@@ -249,13 +253,12 @@ export default function Tokens() {
               <p
                 className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px] ${inter.className}`}
               >
-                The <span className="font-bold text-white">$SAM</span> token
-                rewards participation across the entire Samurai Starter
-                ecosystem. It is designed to deliver tremendous benefits to the
-                Samurai Starter community. The more you participate, the more
-                you earn, the more future benefits you may enjoy!{" "}
-                <span className="font-bold text-white">$SAM</span> is minted on
-                Ethereum layer-2 Base with a maximum supply of 100m tokens.
+                The $SAM token rewards participation across the entire Samurai
+                Starter ecosystem and is designed to deliver tremendous benefits
+                to the Samurai Starter community. The more you participate, the
+                more you earn, the more future benefits you may enjoy. $SAM is
+                minted on Ethereum layer-2 Base with a maximum supply of 100m
+                tokens.
               </p>
               <div className="pt-10 flex flex-col md:flex-row gap-3 md:gap-5">
                 <SSButton>Buy $SAM on Aerodrome</SSButton>
@@ -289,24 +292,6 @@ export default function Tokens() {
                   </div>
                   <div className="bg-white/10 p-3">
                     <span className="text-yellow-400 font-bold">
-                      Initial Listing Price:
-                    </span>{" "}
-                    $0.0075 USD
-                  </div>
-                  <div className="bg-white/10 p-3">
-                    <span className="text-yellow-400 font-bold">
-                      Fully-diluted Market Cap:
-                    </span>{" "}
-                    $750,000 USD
-                  </div>
-                  <div className="bg-white/10 p-3">
-                    <span className="text-yellow-400 font-bold">
-                      Initial Market Cap:
-                    </span>{" "}
-                    $232,500 USD
-                  </div>
-                  <div className="bg-white/10 p-3">
-                    <span className="text-yellow-400 font-bold">
                       Token Standard:
                     </span>{" "}
                     ERC-20
@@ -317,6 +302,38 @@ export default function Tokens() {
                     </span>{" "}
                     Base
                   </div>
+                  <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Token Contract:
+                    </span>{" "}
+                    Coming soon
+                  </div>
+                  <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">$SAM</span> on
+                    CoinGecko
+                  </div>
+                  <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">$SAM</span> on
+                    CoinMarketCap
+                  </div>
+                  {/* <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Initial Listing Price:
+                    </span>{" "}
+                    $0.0075 USD
+                  </div> */}
+                  {/* <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Fully-diluted Market Cap:
+                    </span>{" "}
+                    $750,000 USD
+                  </div>
+                  <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Initial Market Cap:
+                    </span>{" "}
+                    $232,500 USD
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -591,7 +608,7 @@ export default function Tokens() {
           </div>
         </div>
         <div
-          className={`flex flex-col ml-[140px] xl:ml-0 pt-10 lg:pt-40 pb-10 xl:pb-0 text-xl lg:w-[600px] xl:items-center ${inter.className}`}
+          className={`flex flex-col ml-[140px] xl:ml-0 pt-10 lg:pt-40 pb-10 xl:pb-6 text-xl lg:w-[600px] xl:items-center ${inter.className}`}
         >
           <div className="bg-samurai-red w-2 h-[380px] rounded-t-full relative">
             {/* BARS */}

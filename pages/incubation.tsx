@@ -4,7 +4,7 @@ import LayoutClean from "@/components/layoutClean";
 import Layout from "@/components/layout";
 import { Inter } from "next/font/google";
 import { useCallback, useState } from "react";
-import { rocket, telegram, linkedin } from "@/utils/svgs";
+import { rocket, telegram, linkedin, globe } from "@/utils/svgs";
 import SSButton from "@/components/ssButton";
 import TopLayout from "@/components/topLayout";
 
@@ -40,9 +40,23 @@ export default function Incubation() {
     {
       title: "Fundraising",
       description:
-        "We leverage our ever-growing network of well-established venture capital firms and launchpads to help our partners raise the funds necessary to get their projects off the ground in a strong financial position.",
+        "We leverage our ever-growing network of well-established venture capital firms and launchpads to help our partners raise the necessary funds to get their projects off the ground in a strong financial position.",
       color: bg.dark,
       src: "/services/samurai-service-funding.svg",
+    },
+    {
+      title: "Community Building",
+      description:
+        "Samurai Starter investors are incentivized to invest not only money, but also time into early-stage Web3 projects. Our Samurai Sanka platform incentivizes active platform participation converting our community from investors to active users.",
+      color: bg.dark,
+      src: "/services/samurai-service-community.svg",
+    },
+    {
+      title: "Content Creation",
+      description:
+        "Need cutting edge designs to attract attention to your project or long-form articles to keep your audience engaged? Our team of graphic design and writing professionals leverage their expertise to suit your needs.",
+      color: bg.light,
+      src: "/services/samurai-service-content.svg",
     },
     {
       title: "Strategy",
@@ -64,20 +78,6 @@ export default function Incubation() {
         "Spreading the word to reach new audiences is critical in the web3 space. We help deliver your marketing communications to a global audience through our in-house socials, our PR branch, and other marketing partners.",
       color: bg.light,
       src: "/services/samurai-service-marketing.svg",
-    },
-    {
-      title: "Community Building",
-      description:
-        "Samurai Starter investors are incentivized to not only invest money, but also time into early-stage web3 projects. Our Samurai Sanka platform incentivizes active platform participation.",
-      color: bg.dark,
-      src: "/services/samurai-service-community.svg",
-    },
-    {
-      title: "Content Creation",
-      description:
-        "Need a cutting edge designs to attract attention to your project or long-form articles to keep your audience engaged? Our team of graphic design and writing professionals leverage their expertise to suit your needs.",
-      color: bg.light,
-      src: "/services/samurai-service-content.svg",
     },
   ];
 
@@ -178,6 +178,14 @@ export default function Incubation() {
       nickname: "The Chad",
       linkedin: "",
       telegram: "",
+    },
+    {
+      src: "/team/avatar3.jpg",
+      name: "Beau - Content/Design",
+      nickname: "Beau",
+      linkedin: "",
+      telegram: "",
+      website: "https://slance.co/",
     },
   ];
 
@@ -289,15 +297,15 @@ export default function Incubation() {
             className={`relative mt-3 leading-normal pt-3 text-[20px]  ${inter.className}`}
           >
             Having supported over 60 projects with their token launches, Samurai
-            Launchpad is well-positioned to support your token launch. Whether
-            you are raising on seed, private, or public rounds, our vibrant
+            Starter is well-positioned to support your token launch. Whether you
+            are raising on seed, private, or public rounds, our vibrant
             community is eager to accelerate your project.{" "}
             <div className="absolute bottom-[-40px] right-8 flex justify-end">
               <Link
-                href="/launchpad"
+                href="mailto:hello@samuraistarter.com"
                 className={`items-center text-lg text-samurai-red hover:text-samurai-red/70 font-light ${inter.className}`}
               >
-                Apply to launchpad →
+                Apply for Incubation →
               </Link>
             </div>
           </div>
@@ -387,7 +395,7 @@ export default function Incubation() {
             <span className="text-samurai-red">T</span>eam
           </h2>
           <div
-            className={`flex justify-center md:justify-start items-center flex-wrap gap-10 leading-normal py-10 xl:py-16 text-xl ${inter.className}`}
+            className={`flex justify-center md:justify-start items-center flex-wrap gap-32 leading-normal py-10 xl:py-16 text-xl ${inter.className}`}
           >
             {team.map((member, index) => (
               <div
@@ -401,7 +409,7 @@ export default function Incubation() {
                   width={200}
                   height={200}
                   alt={member.name}
-                  className="w-full md:w-[200px]"
+                  className="w-full md:w-[200px] rounded-xl"
                 />
 
                 <p className="text-black mt-3 text-[14px] font-bold">
@@ -425,6 +433,15 @@ export default function Incubation() {
                       className="w-[41px] text-blue-400 hover:drop-shadow-lg"
                     >
                       {telegram}
+                    </Link>
+                  )}
+                  {member.website && (
+                    <Link
+                      href={member.website}
+                      target="blank"
+                      className="w-[41px] text-black hover:drop-shadow-lg"
+                    >
+                      {globe}
                     </Link>
                   )}
                 </div>

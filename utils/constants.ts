@@ -49,7 +49,7 @@ export const NAV = [
 export const SOCIALS = [
   {
     svg: twitter,
-    href: 'https://twitter.com/cyberfi_tech',
+    href: 'https://twitter.com/SamuraiStarter',
     class: 'scale-100',
   },
   { svg: telegram, href: 'https://t.me/SamuraiLaunchpad', class: 'scale-100' },

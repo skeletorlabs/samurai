@@ -18,11 +18,11 @@ const inter = Inter({
 
 const latestupdates = [
   {
-    title: "The Samurai Scoop — Vol. 5",
+    title: "The Samurai Scoop — Vol. 9",
     description:
-      "Macro musings, Smart Places, Maya Protocol launch, ve(3,3) and more",
-    href: "https://medium.com/samurai-starter/the-samurai-scoop-vol-5-c2e36b944c23",
-    image: "/scoop.png",
+      "$SAM Airdrop, SamNFT OG Free Mint, Building on Base, New Twitter Account and more",
+    href: "https://medium.com/samurai-starter/the-samurai-scoop-vol-9-ac2b2ae1a51e",
+    image: "/the samurai scoop_banner.svg",
   },
   {
     title: "Introducing Changex",
@@ -43,37 +43,39 @@ const edge = [
   {
     title: "High Quality Projects",
     description:
-      "Our projects are vetted with the highest standard due diligence processes that are backed by some of the leading verification services in the crypto industry.",
+      "Our partner projects are vetted with the highest standard due diligence practices backed by some of the leading verification services in the Web3 industry.",
     image: "/samurai-edge/quality.svg",
   },
   {
-    title: "Equal investment opportunities for all",
+    title: "Cashback Rewards",
     description:
-      "No more investment tiers! Every SamNFT holder has the opportunity to participate in crowdfunding rounds with max allocation regardless of whale status.",
-    image: "/samurai-edge/equality.svg",
-  },
-  {
-    title: "Cashback rewards",
-    description:
-      "Samurai Starter is the first launchpad to offer cashback rewards for participating in token offerings through our $SAM token.",
+      "Samurai Starter is the very first launchpad to offer cashback loyalty rewards for participating in token offerings on our platform. The more you participate, the more you earn via our $SAM token.",
     image: "/samurai-edge/cashback.svg",
-  },
-  {
-    title: "DeFi yield farming mechanisms",
-    description:
-      "Use earned $SAM tokens to provide $SAM-$ETH  liquidity on https://www.ramses.exchange for outstanding ve(3,3) powered yield farming opportunities.",
-    image: "/samurai-edge/yield.svg",
   },
   {
     title: "Interact and Earn",
     description:
-      "Participate in entertaining games and contests through Samurai Starter and interact with our partner’s platforms to earn partner native tokens and even more $SAM rewards.",
+      "Participate in entertaining games and contests on the Samurai Starter platform and interact with our partners' platforms to earn their native token rewards and even more $SAM.",
     image: "/samurai-edge/interact.svg",
   },
   {
-    title: "Secure investments",
+    title: "Equal Investment Opportunities For All",
     description:
-      "Our Samurai investor confidence insurance policy finds a happy medium between the needs of our community and wants of our partner projects. Feel confident that your investment will meet basic launch requirements or get your money back. ",
+      "No more launchpad tiers! Every SamNFT holder has equal opportunity to participate in crowdfunding rounds with max allocation regardless of whale status.",
+    image: "/samurai-edge/equality.svg",
+  },
+
+  {
+    title: "DeFi Yield Farming Mechanisms",
+    description:
+      "Use your earned $SAM rewards to provide SAM-ETH liquidity on Aerodrome Finance and enjoy incredible ve(3,3) powered yield farming opportunities.",
+    image: "/samurai-edge/yield.svg",
+  },
+
+  {
+    title: "Secure Investments",
+    description:
+      "Our Samurai investor confidence insurance policy finds a happy medium between the needs of our community and the wants of our partner projects. Feel confident that your investment meets basic launch requirements or get your money back.",
     image: "/samurai-edge/secure.svg",
   },
 ];
@@ -92,7 +94,7 @@ export default function Home() {
             <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
               Samurai Starter is the leading early-stage crowdfunding platform
               that incentivizes community members to invest and participate in
-              the most novel projects in the crypto space
+              the most innovative projects in the crypto space.
             </p>
             <div className="flex flex-row items-center pt-10 gap-5">
               <SSButton isLink href="/launchpad">
@@ -138,6 +140,7 @@ export default function Home() {
                 src={item.image}
                 placeholder="blur"
                 blurDataURL={item.image}
+                fill
                 width={426}
                 height={0}
                 alt=""
@@ -178,18 +181,21 @@ export default function Home() {
             →
           </Link>
         </div>
-        <div className="grid lg:grid-cols-3 gap-12 lg:gap-9 flex-wrap mt-10">
-          {projects.map((item, index) => (
+        <div className="grid lg:grid-cols-3 gap-12 lg:gap-9 flex-wrap my-10">
+          <div className="text-samurai-red text-5xl lg:text-4xl mt-8 lg:mt-32">
+            Coming soon!
+          </div>
+          {/* {projects.map((item, index) => (
             <Card key={index} project={item} />
-          ))}
+          ))} */}
         </div>
-        <Link
+        {/* <Link
           href="https://medium.com/samurai-starter"
           target="_blank"
           className={`flex justify-end items-center self-end w-max mt-8 text-lg text-samurai-red/70 hover:text-samurai-red font-light ${inter.className}`}
         >
           More +
-        </Link>
+        </Link> */}
       </div>
 
       {/* SAMURAI SANKA */}
@@ -214,7 +220,7 @@ export default function Home() {
             earn rewards for participating on our partners' platforms.
           </div>
 
-          <div className="text-samurai-red text-5xl lg:text-7xl mt-16 lg:mt-32">
+          <div className="text-samurai-red text-5xl lg:text-4xl mt-16 lg:mt-32">
             Coming soon!
           </div>
 

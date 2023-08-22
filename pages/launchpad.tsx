@@ -18,83 +18,95 @@ const inter = Inter({
 export default function Launchpad() {
   const idos: IDO[] = [
     {
-      tokenImage: op,
+      tokenImageSrc: "/ido-sample.svg",
       status: "ONGOING",
-      chainImageSrc: "/chain-logos/MATIC.svg",
-      title: "Maya Protocol",
-      description:
-        "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
-      startedAt: 1691681894,
+      chainImageSrc: "/samurai.svg",
+      title: "Coming soon",
+      description: "New IDOs are coming soon, stay tuned to don't lose it!",
+      startedAt: 1692710825,
       closedAt: 0,
-      access: "public",
-      raised: "120000/120000 MATIC",
-      goal: "190000 MATIC",
+      access: "whitelist",
+      raised: "0",
+      goal: "∞",
     },
-    {
-      tokenImage: velov2,
-      status: "ENDED",
-      chainImageSrc: "/chain-logos/AVAX.svg",
-      title: "Maya Protocol",
-      description:
-        "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
-      startedAt: 1691681894,
-      closedAt: 0,
-      access: "public",
-      raised: "120000/120000 AVAX",
-      goal: "190000 AVAX",
-    },
-    {
-      tokenImage: op,
-      status: "ONGOING",
-      chainImageSrc: "/chain-logos/MATIC.svg",
-      title: "Maya Protocol",
-      description:
-        "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
-      startedAt: 1691681894,
-      closedAt: 0,
-      access: "public",
-      raised: "120000/120000 MATIC",
-      goal: "190000 MATIC",
-    },
-    {
-      tokenImage: velov2,
-      status: "ENDED",
-      chainImageSrc: "/chain-logos/AVAX.svg",
-      title: "Maya Protocol",
-      description:
-        "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
-      startedAt: 1691681894,
-      closedAt: 0,
-      access: "public",
-      raised: "120000/120000 AVAX",
-      goal: "190000 AVAX",
-    },
-    {
-      tokenImage: op,
-      status: "ONGOING",
-      chainImageSrc: "/chain-logos/BSC.svg",
-      title: "Maya Protocol",
-      description:
-        "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
-      startedAt: 1691681894,
-      closedAt: 0,
-      access: "public",
-      raised: "120000/120000 BUSD",
-      goal: "190000 BUSD",
-    },
-    {
-      tokenImage: velov2,
-      status: "ENDED",
-      chainImageSrc: "/chain-logos/SOLANA.svg",
-      title: "Maya Protocol",
-      description:
-        "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
-      startedAt: 1691681894,
-      closedAt: 0,
-      access: "public",
-      raised: "120000/120000 SOL",
-      goal: "190000 SOL",
-    },
+    // {
+    //   tokenImage: op,
+    //   status: "ONGOING",
+    //   chainImageSrc: "/chain-logos/MATIC.svg",
+    //   title: "Maya Protocol",
+    //   description:
+    //     "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
+    //   startedAt: 1691681894,
+    //   closedAt: 0,
+    //   access: "public",
+    //   raised: "120000/120000 MATIC",
+    //   goal: "190000 MATIC",
+    // },
+    // {
+    //   tokenImage: velov2,
+    //   status: "ENDED",
+    //   chainImageSrc: "/chain-logos/AVAX.svg",
+    //   title: "Maya Protocol",
+    //   description:
+    //     "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
+    //   startedAt: 1691681894,
+    //   closedAt: 0,
+    //   access: "public",
+    //   raised: "120000/120000 AVAX",
+    //   goal: "190000 AVAX",
+    // },
+    // {
+    //   tokenImage: op,
+    //   status: "ONGOING",
+    //   chainImageSrc: "/chain-logos/MATIC.svg",
+    //   title: "Maya Protocol",
+    //   description:
+    //     "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
+    //   startedAt: 1691681894,
+    //   closedAt: 0,
+    //   access: "public",
+    //   raised: "120000/120000 MATIC",
+    //   goal: "190000 MATIC",
+    // },
+    // {
+    //   tokenImage: velov2,
+    //   status: "ENDED",
+    //   chainImageSrc: "/chain-logos/AVAX.svg",
+    //   title: "Maya Protocol",
+    //   description:
+    //     "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
+    //   startedAt: 1691681894,
+    //   closedAt: 0,
+    //   access: "public",
+    //   raised: "120000/120000 AVAX",
+    //   goal: "190000 AVAX",
+    // },
+    // {
+    //   tokenImage: op,
+    //   status: "ONGOING",
+    //   chainImageSrc: "/chain-logos/BSC.svg",
+    //   title: "Maya Protocol",
+    //   description:
+    //     "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
+    //   startedAt: 1691681894,
+    //   closedAt: 0,
+    //   access: "public",
+    //   raised: "120000/120000 BUSD",
+    //   goal: "190000 BUSD",
+    // },
+    // {
+    //   tokenImage: velov2,
+    //   status: "ENDED",
+    //   chainImageSrc: "/chain-logos/SOLANA.svg",
+    //   title: "Maya Protocol",
+    //   description:
+    //     "Maya Protocol is a THORchain-friendly fork which moves digital assets, swaps, or stakes cross-chain without the need to wrap or peg any of them. Aztec Chain, with its smart contract capabilities, is a powerful demonstration of the high potential of the Maya Protocol's design.",
+    //   startedAt: 1691681894,
+    //   closedAt: 0,
+    //   access: "public",
+    //   raised: "120000/120000 SOL",
+    //   goal: "190000 SOL",
+    // },
   ];
 
   return (
@@ -109,9 +121,11 @@ export default function Launchpad() {
             <p
               className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px] ${inter.className}`}
             >
-              Committed to advising, guiding and incubating the most novel and
-              innovative platforms in the Web3 space no matter which stage of
-              platform launch you have reached.
+              Advising, guiding, and accelerating the most novel and innovative
+              projects in the Web3 space, Samurai Starter brings together a
+              knowledgeable and active community of crowdfunding participants
+              who are dedicated to furthering the fundamental ideas of the
+              cryptocurrency movement.
             </p>
             <div className="flex flex-col lg:flex-row pt-16 gap-5 z-20">
               <SSButton isLink href="#participate">
@@ -143,7 +157,8 @@ export default function Launchpad() {
           <p
             className={`relative mt-3 leading-normal pt-3 text-[20px]  ${inter.className}`}
           >
-            Follow the next steps to participate →
+            Follow these easy steps to become an active member of the Samurai
+            Starter community →
           </p>
 
           <div className="w-full flex flex-col gap-10 flex-wrap mt-14 text-2xl lg:text-3xl">
@@ -158,7 +173,7 @@ export default function Launchpad() {
                 >
                   Buy or rent
                 </Link>{" "}
-                a SamNFT for IDO access.
+                a SamNFT to gain token offering access.
               </div>
             </div>
 
@@ -167,8 +182,9 @@ export default function Launchpad() {
                 2.
               </span>
               <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
-                Register your interest to participate in the token offering
-                during the whitelisting period.
+                <span className="text-samurai-red">Register</span> your interest
+                in participating in the token offering during the whitelisting
+                period.
               </div>
             </div>
 
@@ -177,8 +193,8 @@ export default function Launchpad() {
                 3.
               </span>
               <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
-                Commit selected payment currency during the participation
-                period.
+                <span className="text-samurai-red">Commit</span> selected
+                payment currency during the participation period. period.
               </div>
             </div>
 
@@ -187,7 +203,8 @@ export default function Launchpad() {
                 4.
               </span>
               <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
-                Claim your tokens according to each project's vesting terms.
+                <span className="text-samurai-red">Claim</span> your tokens
+                according to each project's vesting terms.
               </div>
             </div>
 
@@ -196,7 +213,8 @@ export default function Launchpad() {
                 5.
               </span>
               <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
-                Claim your $SAM rewards
+                <span className="text-samurai-red">Claim</span> your $SAM
+                rewards after participating in the token offering.
               </div>
             </div>
           </div>
@@ -212,17 +230,19 @@ export default function Launchpad() {
           <div
             className={`flex justify-center lg:justify-start items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
           >
+            {/* <div className="text-5xl lg:text-4xl mt-8">Coming soon!</div> */}
             {idos.map((ido: IDO, index) => (
-              <IDOModal key={index} ido={ido}>
-                <LaunchpadCard ido={ido} />
-              </IDOModal>
+              // <IDOModal key={index} ido={ido}>
+              //   <LaunchpadCard ido={ido} />
+              // </IDOModal>
+              <LaunchpadCard key={index} ido={ido} />
             ))}
           </div>
         </div>
       </div>
 
       {/* Past */}
-      <div className="flex flex-col py-10 md:py-20 w-full bg-white/10 border-t-[1px] border-samurai-red/40">
+      {/* <div className="flex flex-col py-10 md:py-20 w-full bg-white/10 border-t-[1px] border-samurai-red/40">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-white/30">Past</span> Token Offerings
@@ -235,7 +255,7 @@ export default function Launchpad() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </Layout>
   );
 }

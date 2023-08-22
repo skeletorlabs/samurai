@@ -100,7 +100,7 @@ export interface Project {
 
 
 export interface IDO {
-  tokenImage: ReactElement
+  tokenImageSrc: string
   status: string
   chainImageSrc: string
   title: string
