@@ -140,7 +140,6 @@ export default function Home() {
                 src={item.image}
                 placeholder="blur"
                 blurDataURL={item.image}
-                fill
                 width={426}
                 height={0}
                 alt=""
