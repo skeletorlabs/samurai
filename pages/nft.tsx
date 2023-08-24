@@ -197,18 +197,17 @@ export default function Nft() {
 
           <div className="relative md:mr-12 xl:max-w-[900px]">
             <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
-              Mint a Sam<span className="text-samurai-red">NFT </span>
-              to be <span className="text-samurai-red">part</span> of{" "}
-              {/* <br className="hidden md:block" /> */}
-              our
-              <span className="text-samurai-red"> Vibrant</span> Community
+              Mint a <span className="text-samurai-red">SamNFT </span>
+              to be part of our vibrant
+              <span className="text-samurai-red"> community</span>
             </h1>
             <p
               className={`leading-normal lg:leading-relaxed pt-6 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
             >
-              By participating in the SamNFT minting event, you become part of
-              our vibrant community and gain access to tremendous benefits.{" "}
-              Check it out what you can expect as a proud owner of our SamNFTs
+              Participate in the SamNFT minting event to become an integral part
+              of our exciting community and gain access to tremendous benefits
+              including lifetime launchpad access, cashback rewards, a $SAM
+              token airdrop and much more!
             </p>
             <div className="text-samurai-red text-5xl lg:text-4xl mt-12">
               Coming soon!
