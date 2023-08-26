@@ -261,7 +261,7 @@ export default function Incubation() {
               platform launch you have reached.
             </p>
             <div className="flex flex-col lg:flex-row pt-16 gap-5 z-20">
-              <SSButton isLink href="#contact">
+              <SSButton isLink href="#token-launch">
                 Get Started
               </SSButton>
             </div>
@@ -279,7 +279,10 @@ export default function Incubation() {
       </TopLayout>
 
       {/* TOKEN LAUNCH */}
-      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted">
+      <div
+        id="token-launch"
+        className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted"
+      >
         <Image
           src="/samurai-launchpad-icon.svg"
           width={350}
