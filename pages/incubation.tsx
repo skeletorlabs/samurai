@@ -167,7 +167,7 @@ export default function Incubation() {
     },
     {
       src: "/team/avatar0.svg",
-      name: "Lucas Silviera - CTO",
+      name: "Lucas Silveira - CTO",
       nickname: "Skeletor",
       linkedin: "",
       telegram: "https://t.me/skeletor_keldor",
