@@ -261,7 +261,7 @@ export default function Tokens() {
                 tokens.
               </p>
               <div className="pt-10 flex flex-col md:flex-row gap-3 md:gap-5">
-                <SSButton>Buy $SAM on Aerodrome</SSButton>
+                <SSButton>Buy $SAM on Aerodrome (coming soon)</SSButton>
               </div>
             </div>
             <Image
@@ -380,6 +380,7 @@ export default function Tokens() {
           <div className="flex flex-col text-white text-2xl pb-20">
             <p className="font-bold text-5xl pb-2">
               <span className="text-samurai-red">$SAM</span> Cashback Reward
+              (coming soon)
             </p>
 
             <p
@@ -399,7 +400,7 @@ export default function Tokens() {
                 <span className={`${inter.className}`}>
                   My Lifetime $SAM Earnings
                 </span>
-                <span className="text-5xl pb-1 text-green-300">123.99</span>
+                <span className="text-5xl pb-1 text-green-300">X.XX</span>
               </div>
               <div
                 className={`flex flex-col leading-normal text-2xl gap-2 ${inter.className}`}
@@ -407,7 +408,7 @@ export default function Tokens() {
                 <span className={`${inter.className}`}>
                   My Pending $SAM Rewards
                 </span>
-                <span className="text-5xl pb-1 text-yellow-300">123.99</span>
+                <span className="text-5xl pb-1 text-yellow-300">X.XX</span>
               </div>
             </div>
             <div className="pt-10 md:pt-[80px] flex flex-col md:flex-row gap-3 md:gap-5">
@@ -555,7 +556,7 @@ export default function Tokens() {
       <div className="flex flex-col lg:flex-row justify-between w-full bg-white/10 border-t-[1px] border-yellow-300/40">
         <div className="flex flex-col text-white w-full py-10 md:py-20 px-6 lg:px-8 xl:px-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
-            <span className="text-samurai-red">$SAM</span> Ladder
+            <span className="text-samurai-red">$SAM</span> Ladder (coming soon)
           </h2>
 
           <div className={`flex flex-col text-2xl ${inter.className}`}>
@@ -579,7 +580,7 @@ export default function Tokens() {
               <span className={`text-neutral-400 ${inter.className}`}>
                 Total Platform $SAM earnings
               </span>
-              <span className="text-5xl text-green-300">123.99</span>$SAM
+              <span className="text-5xl text-green-300">X.XX</span>$SAM
             </div>
             <div
               className={`flex flex-col leading-normal text-2xl ${inter.className}`}
@@ -587,7 +588,7 @@ export default function Tokens() {
               <span className={`text-neutral-400 ${inter.className}`}>
                 My Lifetime $SAM Earnings
               </span>
-              <span className="text-5xl text-yellow-300">123.99</span>$SAM
+              <span className="text-5xl text-yellow-300">X.XX</span>$SAM
             </div>
             <div
               className={`flex flex-col leading-normal text-2xl ${inter.className}`}
@@ -603,7 +604,7 @@ export default function Tokens() {
               <span className={`text-neutral-400 ${inter.className}`}>
                 My $SAM Cashback Rate
               </span>
-              <span className="text-5xl text-yellow-300">4%</span>
+              <span className="text-5xl text-yellow-300">X.XX%</span>
             </div>
           </div>
         </div>
@@ -660,7 +661,7 @@ export default function Tokens() {
               with the remaining 50% claimable linearly over 5 months.
             </p>
             <div className="pt-10 md:pt-[80px] flex flex-col md:flex-row gap-3 md:gap-5">
-              <SSButton>Claim $SAM</SSButton>
+              <SSButton>Claim $SAM (coming soon)</SSButton>
             </div>
           </div>
         </div>
