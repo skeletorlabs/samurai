@@ -12,8 +12,8 @@ const pinata = new Pinata({
 
 export async function generateDefaultImages() {
   const basePath = (__dirname.substring(0, __dirname.indexOf("/.next")))
-  for (let index = 1; index < 9; index++) {
-    const template = fs.readFileSync(basePath + "/public/nft-hidden.png")
+  for (let index = 1; index < 201; index++) {
+    const template = fs.readFileSync(basePath + "/public/unrevealed.png")
     const path = basePath + "/public/nfts-default-images/" + index + ".png"
 
     fs.writeFileSync(path, template)
@@ -22,7 +22,7 @@ export async function generateDefaultImages() {
 
 
 export async function generateMetadataFiles(imagesFolderHash: string) {
-  for (let index = 1; index < 9; index++) {
+  for (let index = 1; index < 201; index++) {
     const metadata = {
       "name": `SamNFT #${index}`,
       "symbol": "SNFT",
