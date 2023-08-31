@@ -26,11 +26,11 @@ const latestupdates = [
     image: "/the samurai scoop_banner.png",
   },
   {
-    title: "Introducing Changex",
+    title: "IntroduciSamNFT by Samurai Starter",
     description:
-      "Money matters made simple with this DeFi + non-custodial wallet platform",
-    href: "https://medium.com/samurai-starter/samurai-starter-presents-changex-fa3468f30427",
-    image: "/changex.png",
+      "It is now easier and fairer than ever to get into early-stage token offerings",
+    href: "https://medium.com/samurai-starter/samnft-by-samurai-starter-8da4b373c66",
+    image: "/samnft-article.png",
   },
   {
     title: "Our Vision",
@@ -83,6 +83,7 @@ const edge = [
 
 export default function Home() {
   const { projects } = useContext(StateContext);
+
   return (
     <Layout>
       <TopLayout background="bg-samurai-incubator-bg" padding={false}>
@@ -141,24 +142,28 @@ export default function Home() {
               key={index}
               href={item.href}
               target="_blank"
-              className="rounded-2xl border-2 border-samurai-red shadow-lg hover:shadow-2xl hover:shadow-samurai-red shadow-samurai-red/20 transition-all hover:scale-[1.03]"
+              className="rounded-2xl bg-black border-2 border-samurai-red shadow-lg hover:shadow-2xl hover:shadow-samurai-red shadow-samurai-red/20 transition-all hover:scale-[1.03]"
             >
-              <Image
-                src={item.image}
-                placeholder="blur"
-                blurDataURL={item.image}
-                width={426}
-                height={0}
-                alt=""
-                className="rounded-t-2xl w-full h-[226px]"
-              />
-              <div className="w-full h-[106px] bg-black rounded-b-2xl px-4 pt-6 text-white border-t-2 border-dotted border-samurai-red/40">
-                <h3 className="text-xl font-semibold tracking-wide text-white">
-                  {item.title}
-                </h3>
-                <p className={`text-sm font-light ${inter.className}`}>
-                  {item.description}
-                </p>
+              <div className="w-full min-h-[220px] rounded-b-2xl  text-white border-t-2 border-dotted border-samurai-red/40">
+                <div className="w-full h-[150px] relative">
+                  <Image
+                    src={item.image}
+                    placeholder="blur"
+                    blurDataURL={item.image}
+                    fill
+                    objectFit="cover"
+                    alt=""
+                    className="rounded-t-2xl"
+                  />
+                </div>
+                <div className="py-6 px-4">
+                  <h3 className="text-xl font-semibold tracking-wide text-white">
+                    {item.title}
+                  </h3>
+                  <p className={`text-sm font-light ${inter.className}`}>
+                    {item.description}
+                  </p>
+                </div>
               </div>
             </Link>
           ))}
