@@ -26,7 +26,7 @@ const latestupdates = [
     image: "/the samurai scoop_banner.png",
   },
   {
-    title: "IntroduciSamNFT by Samurai Starter",
+    title: "SamNFT by Samurai Starter",
     description:
       "It is now easier and fairer than ever to get into early-stage token offerings",
     href: "https://medium.com/samurai-starter/samnft-by-samurai-starter-8da4b373c66",
