@@ -193,7 +193,7 @@ export default function Home() {
           </Link>
         </div>
         <div className="grid lg:grid-cols-3 gap-12 lg:gap-9 flex-wrap my-10">
-          <div className="text-samurai-red text-5xl lg:text-4xl mt-8 lg:mt-32">
+          <div className="text-samurai-red text-5xl lg:text-4xl mt-8 lg:mt-12">
             Coming soon!
           </div>
           {/* {projects.map((item, index) => (
@@ -231,7 +231,7 @@ export default function Home() {
             earn rewards for participating on our partners' platforms.
           </div>
 
-          <div className="text-samurai-red text-5xl lg:text-4xl mt-16 lg:mt-32">
+          <div className="text-samurai-red text-5xl lg:text-4xl mt-16">
             Coming soon!
           </div>
 
