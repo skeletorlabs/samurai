@@ -32,7 +32,8 @@ export default function SSButton({
             : "text-samurai-red border-samurai-red"
         }
          px-8 py-3 transition-all z-20
-         hover:bg-samurai-red hover:text-black hover:border-samurai-red
+         bg-black/40
+         hover:bg-samurai-red hover:text-black hover:border-black
       `}
     >
       {children}
@@ -43,7 +44,7 @@ export default function SSButton({
       disabled={disabled}
       onClick={() => click()}
       className={`
-        flex justify-center items-center px-8 py-3 transition-all z-20
+        flex justify-center items-center px-8 py-3 transition-all z-20 
         ${flexSize ? "w-full" : "w-auto"} 
         ${
           secondary

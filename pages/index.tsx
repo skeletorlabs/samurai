@@ -86,9 +86,9 @@ export default function Home() {
 
   return (
     <Layout>
-      <TopLayout background="bg-samurai-incubator-bg" padding={false}>
+      <TopLayout background="bg-samurai-cyborg" padding={false}>
         <div className="px-6 lg:px-8 xl:px-20 relative">
-          <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-[0.5px] right-24 z-0 opacity-40 2xl:opacity-100" />
+          {/* <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-[0.5px] right-24 z-0 opacity-40 2xl:opacity-100" /> */}
           <div className="sm:pt-10 lg:pt-24 lg:max-w-[750px] h-[530px]">
             <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
               Invest. Interact. Earn.
