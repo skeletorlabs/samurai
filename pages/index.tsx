@@ -87,52 +87,105 @@ export default function Home() {
   return (
     <Layout>
       <TopLayout background="bg-samurai-cyborg" padding={false}>
-        <div className="px-6 lg:px-8 xl:px-20 relative">
-          {/* <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-[0.5px] right-24 z-0 opacity-40 2xl:opacity-100" /> */}
-          <div className="sm:pt-10 lg:pt-24 lg:max-w-[750px] h-[530px]">
-            <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
-              Invest. Interact. Earn.
-            </h1>
-            <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
-              Samurai Starter is the leading early-stage crowdfunding platform
-              that incentivizes community members to invest and participate in
-              the most innovative projects in the crypto space.
-            </p>
-            <div className="flex flex-row items-center pt-10 gap-5">
-              <SSButton isLink href="/launchpad">
-                Launchpad
-              </SSButton>
-              <SSButton isLink href="#sanka">
-                Sanka
-              </SSButton>
-              <SSButton isLink href="/incubation">
-                For projects
-              </SSButton>
-            </div>
-            <div className="flex items-center gap-12 ml-2 mt-14">
-              {SOCIALS.map((item, index) => (
-                <Link
-                  key={index}
-                  href={item.href}
-                  className={`transition-all hover:opacity-75 text-white ${
-                    item.svg === linkedin
-                      ? "scale-[1.08]"
-                      : item.svg === twitter
-                      ? "scale-[1.2]"
-                      : "scale-[1.3]"
-                  }`}
-                  target="_blank"
-                >
-                  {item.svg}
-                </Link>
-              ))}
+        <>
+          <div className="px-6 lg:px-8 xl:px-20 relative">
+            {/* <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-[0.5px] right-24 z-0 opacity-40 2xl:opacity-100" /> */}
+            <div className="sm:pt-10 lg:pt-24 lg:max-w-[750px] h-[530px]">
+              <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
+                Invest. Interact. Earn.
+              </h1>
+              <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
+                Samurai Starter is the leading early-stage crowdfunding platform
+                that incentivizes community members to invest and participate in
+                the most innovative projects in the crypto space.
+              </p>
+              <div className="flex flex-row items-center pt-10 gap-5">
+                <SSButton isLink href="/launchpad">
+                  Launchpad
+                </SSButton>
+                <SSButton isLink href="#sanka">
+                  Sanka
+                </SSButton>
+                <SSButton isLink href="/incubation">
+                  For projects
+                </SSButton>
+              </div>
+              <div className="flex items-center gap-12 ml-2 mt-14">
+                {SOCIALS.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className={`transition-all hover:opacity-75 text-white ${
+                      item.svg === linkedin
+                        ? "scale-[1.08]"
+                        : item.svg === twitter
+                        ? "scale-[1.2]"
+                        : "scale-[1.3]"
+                    }`}
+                    target="_blank"
+                  >
+                    {item.svg}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+          <div className="flex flex-col w-full mt-10 py-10 md:py-14 bg-black/40">
+            <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+              <div className="flex flex-col text-white text-2xl">
+                <p className="font-bold text-4xl pb-2 opacity-[0.8]">
+                  Latest <span className="text-samurai-red">Updates</span>
+                </p>
+
+                <div className="grid lg:grid-cols-3 pt-4 gap-9 flex-wrap ">
+                  {latestupdates.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.href}
+                      target="_blank"
+                      className="rounded-2xl bg-black border-2 border-samurai-red shadow-lg hover:shadow-2xl hover:shadow-samurai-red shadow-samurai-red/20 transition-all hover:scale-[1.03]"
+                    >
+                      <div className="w-full min-h-[220px] rounded-b-2xl  text-white">
+                        <div className="w-full h-[200px] relative">
+                          <Image
+                            src={item.image}
+                            placeholder="blur"
+                            blurDataURL={item.image}
+                            fill
+                            objectFit="cover"
+                            alt=""
+                            className="rounded-t-2xl"
+                          />
+                        </div>
+                        <div className="py-6 px-4">
+                          <h3 className="text-xl font-semibold tracking-wide text-white">
+                            {item.title}
+                          </h3>
+                          <p
+                            className={`text-sm font-light ${inter.className}`}
+                          >
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <Link
+                  href="https://medium.com/samurai-starter"
+                  target="_blank"
+                  className={`flex justify-end items-center self-end w-max mt-8 text-lg text-white hover:text-samurai-red font-light ${inter.className}`}
+                >
+                  More +
+                </Link>
+              </div>
+            </div>
+          </div>
+        </>
       </TopLayout>
 
       {/* LATEST UPDATES */}
-      <div className="flex flex-col pt-20 pb-10 w-full px-6 lg:px-8 xl:px-20 bg-neutral-900/50 border-t border-samurai-red/50 border-dotted">
+      {/* <div className="flex flex-col pt-20 pb-10 w-full px-6 lg:px-8 xl:px-20 bg-neutral-900/50 border-t border-samurai-red/50 border-dotted">
         <h2 className="text-6xl font-bold">
           Latest <span className="text-samurai-red">Updates</span>
         </h2>
@@ -175,7 +228,7 @@ export default function Home() {
         >
           More +
         </Link>
-      </div>
+      </div> */}
 
       {/* FEATURED PROJECTS */}
       <div className="flex flex-col pt-20 pb-10 w-full bg-white/10 px-6 lg:px-8 xl:px-20 text-white border-t-[0.5px] border-samurai-red">

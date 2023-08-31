@@ -235,12 +235,12 @@ export default function Tokens() {
 
   return (
     <Layout>
-      <TopLayout background="bg-samurai-incubator-bg">
+      <TopLayout background="bg-samurai-cyborg-fem">
         <>
           <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20">
             {/* TOP CONTENT */}
             <div className="sm:pt-10 lg:pt-24 relative">
-              <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-white ">
+              <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-white">
                 The{" "}
                 <span className="font-bold text-samurai-red">
                   Samurai Starter
@@ -264,17 +264,17 @@ export default function Tokens() {
                 <SSButton>Buy $SAM on Aerodrome (coming soon)</SSButton>
               </div>
             </div>
-            <Image
+            {/* <Image
               src="/samurai.svg"
               alt="tokens"
               width={350}
               height={350}
               className="hidden xl:block opacity-40 2xl:opacity-100 w-[350px]"
-            />
+            /> */}
           </div>
 
           {/* TOKENOMICS */}
-          <div className="flex flex-col w-full pt-10 md:pt-14">
+          <div className="flex flex-col w-full mt-10 mb-[-60px] py-10 md:py-14 bg-black/40">
             <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
               <div className="flex flex-col text-white text-2xl">
                 <p className="font-bold text-4xl pb-2 opacity-[0.8]">

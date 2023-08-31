@@ -22,6 +22,8 @@ module.exports = {
         button: "url('/bg-button.svg')",
         "button-hover": "url('/bg-button-hover.svg')",
         "samurai-cyborg": "url('/art-cyborg.svg')",
+        "samurai-cyborg-fem": "url('/art-cyborg-fem.svg')",
+        "samurai-shadow": "url('/art-shadow.svg')",
         "samurai-incubator": "url('/samurai-incubator-bg.png')",
         "samurai-sanka": "url('/samurai-sanka-bg.png')",
         "samurai-launchpad": "url('/samurai-launchpad-bg.png')",
