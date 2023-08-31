@@ -145,7 +145,7 @@ export default function Home() {
               className="rounded-2xl bg-black border-2 border-samurai-red shadow-lg hover:shadow-2xl hover:shadow-samurai-red shadow-samurai-red/20 transition-all hover:scale-[1.03]"
             >
               <div className="w-full min-h-[220px] rounded-b-2xl  text-white border-t-2 border-dotted border-samurai-red/40">
-                <div className="w-full h-[150px] relative">
+                <div className="w-full h-[200px] relative">
                   <Image
                     src={item.image}
                     placeholder="blur"
