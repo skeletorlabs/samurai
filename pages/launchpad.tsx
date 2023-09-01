@@ -22,7 +22,8 @@ export default function Launchpad() {
       status: "ONGOING",
       chainImageSrc: "/samurai.svg",
       title: "Coming Soon",
-      description: "New IDOs are coming soon, stay tuned to don't lose it!",
+      description:
+        "New token offerings are on the way! Stay tuned for all the latest updates.",
       startedAt: 1692710825,
       closedAt: 0,
       access: "whitelist",

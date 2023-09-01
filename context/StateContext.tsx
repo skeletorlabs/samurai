@@ -85,7 +85,7 @@ export const StateProvider = ({ children }: Props) => {
   }, [wallet.address, setSigner]);
 
   useEffect(() => {
-    getInfos();
+    // getInfos();
   }, []);
 
   return (
