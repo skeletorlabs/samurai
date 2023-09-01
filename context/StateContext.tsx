@@ -54,18 +54,6 @@ export const StateProvider = ({ children }: Props) => {
     }
   }, [setSigner]);
 
-  const getInfos = useCallback(async () => {
-    const projects = await fetchProjects();
-    setProjects(
-      projects.filter(
-        (project) =>
-          project.key === "maya" ||
-          project.key === "d-etf-second" ||
-          project.key === "devvio"
-      )
-    );
-  }, [setProjects]);
-
   useEffect(() => {
     if (router.isReady) {
       const page = NAV.find((item) => item.href === router.pathname);
@@ -83,10 +71,6 @@ export const StateProvider = ({ children }: Props) => {
 
     setAccount(wallet?.address as string);
   }, [wallet.address, setSigner]);
-
-  useEffect(() => {
-    // getInfos();
-  }, []);
 
   return (
     <StateContext.Provider

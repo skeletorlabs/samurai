@@ -130,7 +130,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-full mt-10 py-10 md:py-14 bg-black/40">
+          <div className="flex flex-col w-full  py-10 md:py-12 bg-black/40 relative">
             <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
               <div className="flex flex-col text-white text-2xl">
                 <p className="font-bold text-4xl pb-2 opacity-[0.8]">
@@ -171,15 +171,15 @@ export default function Home() {
                     </Link>
                   ))}
                 </div>
-                <Link
-                  href="https://medium.com/samurai-starter"
-                  target="_blank"
-                  className={`flex justify-end items-center self-end w-max mt-8 text-lg text-white hover:text-samurai-red font-light ${inter.className}`}
-                >
-                  More +
-                </Link>
               </div>
             </div>
+            <Link
+              href="https://medium.com/samurai-starter"
+              target="_blank"
+              className={`absolute bottom-2 right-20 flex justify-end items-center self-end w-max mt-8 text-lg text-white hover:text-samurai-red font-light ${inter.className}`}
+            >
+              More +
+            </Link>
           </div>
         </>
       </TopLayout>
