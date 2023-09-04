@@ -14,7 +14,7 @@ const links = [
 
 export default function Footer() {
   return (
-    <div className="w-full h-[240px] md:h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-700">
+    <div className="w-full h-[320px] lg:h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-700">
       <div className="flex flex-col lg:flex-row gap-10">
         <div className="flex flex-col items-center lg:items-start">
           <Link
@@ -29,11 +29,11 @@ export default function Footer() {
               width={0}
               height={0}
               alt="logo"
-              className="mr-10 mt-[12px] mb-2 w-[400px] h-[100px]"
+              className="md:mr-10 mt-[12px] mb-2 w-[400px] h-[100px]"
             />
           </Link>
 
-          <div className="flex items-center justify-center w-full lg:justify-start gap-10 lg:px-6">
+          <div className="flex items-center justify-center w-full lg:justify-start gap-10 lg:px-5">
             {SOCIALS.map((item, index) => (
               <Link
                 key={index}
@@ -52,8 +52,8 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="hidden lg:flex flex-col h-full w-full mt-[50px] gap-[47px] text-white">
-          <div className="flex h-full justify-end w-full gap-4 font-light text-lg flex-wrap">
+        <div className="flex flex-col h-full w-full lg:mt-[50px] gap-[47px] text-white">
+          <div className="hidden lg:flex h-full justify-end w-full gap-4 font-light text-lg flex-wrap">
             {links.map((item, index) => (
               <Link
                 key={index}
@@ -63,10 +63,24 @@ export default function Footer() {
                 {item.title}
               </Link>
             ))}
+            <Link
+              target="blank"
+              href="https://v1.samuraistarter.com"
+              className="hover:border-b max-h-[25px]"
+            >
+              V1
+            </Link>
           </div>
-          <span className="flex ml-3 font-light text-md justify-end">
-            © 2023 Samurai Starter
-          </span>
+          <div className="flex mt-[-14px] lg:mt-0 lg:ml-3 gap-5 font-light text-md justify-center lg:justify-end">
+            <span>© 2023 Samurai Starter</span>
+            <Link
+              target="blank"
+              href="https://v1.samuraistarter.com"
+              className="lg:hidden hover:border-b max-h-[25px]"
+            >
+              V1
+            </Link>
+          </div>
         </div>
       </div>
     </div>

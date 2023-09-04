@@ -3,6 +3,7 @@ import Link from "next/link";
 interface SSButton {
   children: string;
   isLink?: boolean;
+  target?: string;
   href?: string;
   click?: () => void;
   flexSize?: boolean;
@@ -13,6 +14,7 @@ interface SSButton {
 export default function SSButton({
   children,
   isLink = false,
+  target = "",
   href = "",
   click = () => {},
   flexSize = false,
@@ -22,6 +24,7 @@ export default function SSButton({
 }: SSButton) {
   return isLink ? (
     <Link
+      target={target}
       href={href}
       className={`
         flex justify-center items-center border rounded-[8px]

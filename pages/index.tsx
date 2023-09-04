@@ -110,7 +110,7 @@ export default function Home() {
                   For projects
                 </SSButton>
               </div>
-              <div className="flex items-center gap-12 ml-2 mt-14">
+              <div className="flex items-center gap-12 ml-2 mt-10">
                 {SOCIALS.map((item, index) => (
                   <Link
                     key={index}
@@ -176,7 +176,7 @@ export default function Home() {
             <Link
               href="https://medium.com/samurai-starter"
               target="_blank"
-              className={`absolute bottom-2 right-20 flex justify-end items-center self-end w-max mt-8 text-lg text-white hover:text-samurai-red font-light ${inter.className}`}
+              className={`absolute bottom-4 right-20 flex justify-end items-center self-end w-max mt-8 text-md text-white hover:text-samurai-red font-light ${inter.className}`}
             >
               More +
             </Link>

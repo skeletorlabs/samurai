@@ -433,7 +433,7 @@ export default function Incubation() {
                     <Link
                       href={member.telegram}
                       target="blank"
-                      className="w-[41px] text-blue-400 hover:drop-shadow-lg"
+                      className="text-blue-400 hover:drop-shadow-lg scale-[1.4]"
                     >
                       {telegram}
                     </Link>
@@ -442,7 +442,7 @@ export default function Incubation() {
                     <Link
                       href={member.website}
                       target="blank"
-                      className="w-[41px] text-black hover:drop-shadow-lg"
+                      className="text-black hover:drop-shadow-lg scale-[1.2]"
                     >
                       {globe}
                     </Link>

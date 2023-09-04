@@ -393,7 +393,7 @@ export default function Tokens() {
               All $SAM penalties accrued by Samurai Starter are redistributed as
               bribes to incentivize liquidity on Aerodrome DEX.
             </p>
-            <div className="flex flex-col md:flex-row md:items-center gap-[24px] md:gap-[90px] pt-10 md:pt-[50px]">
+            <div className="flex flex-col md:flex-row md:items-center gap-[24px] md:gap-24 pt-10 md:pt-[50px]">
               <div
                 className={`flex flex-col text-2xl gap-2 ${inter.className}`}
               >
@@ -411,7 +411,7 @@ export default function Tokens() {
                 <span className="text-5xl pb-1 text-yellow-300">X.XX</span>
               </div>
             </div>
-            <div className="pt-10 md:pt-[80px] flex flex-col md:flex-row gap-3 md:gap-5">
+            <div className="pt-10 md:pt-[80px] flex flex-col md:flex-row gap-3 md:gap-7">
               <SSButton>Claim Vested $SAM Rewards</SSButton>
               <SSButton secondary>Claim All $SAM Rewards</SSButton>
             </div>

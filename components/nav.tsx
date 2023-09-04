@@ -53,8 +53,8 @@ export default function Nav() {
         {/* {page === Page.nft && <ConnectButton showBalance={false} />} */}
 
         <div className="hidden xl:flex">
-          <SSButton isLink href="#">
-            V1(Old)
+          <SSButton isLink target="blank" href="https://v1.samuraistarter.com">
+            V1
           </SSButton>
         </div>
       </div>
