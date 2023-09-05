@@ -15,6 +15,12 @@ import { Page } from './enums'
 
 export const NAV = [
   {
+    title: 'Home',
+    href: '/',
+    icon: home,
+    page: Page.home,
+  },
+  {
     title: 'SamNFT',
     href: '/nft',
     icon: nft,

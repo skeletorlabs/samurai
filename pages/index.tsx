@@ -88,9 +88,9 @@ export default function Home() {
     <Layout>
       <TopLayout background="bg-samurai-cyborg" padding={false}>
         <>
-          <div className="px-6 lg:px-8 xl:px-20 relative">
+          <div className="px-6 lg:px-8 xl:px-20 relative pt-10 lg:pt-24">
             {/* <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-[0.5px] right-24 z-0 opacity-40 2xl:opacity-100" /> */}
-            <div className="pb-10 lg:pb-0 sm:pt-10 lg:pt-24 lg:max-w-[750px] lg:h-[530px]">
+            {/* <div className="pb-10 lg:pb-0 sm:pt-10 lg:pt-24 lg:max-w-[750px] lg:h-[530px]">
               <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
                 Invest. Interact. Earn.
               </h1>
@@ -128,6 +128,48 @@ export default function Home() {
                   </Link>
                 ))}
               </div>
+            </div> */}
+
+            <div className="relative md:mr-12 xl:max-w-[900px] pb-10">
+              <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
+                Invest. Interact. Earn.
+              </h1>
+              <p
+                className={`leading-normal lg:leading-relaxed pt-6 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
+              >
+                Samurai Starter is the leading early-stage crowdfunding platform
+                that incentivizes community members to invest and participate in
+                the most innovative projects in the crypto space.
+              </p>
+              <div className="flex flex-col md:flex-row gap-2 md:gap-5 text-samurai-red text-5xl lg:text-4xl mt-12">
+                <SSButton isLink href="/launchpad" flexSize>
+                  Launchpad
+                </SSButton>
+                <SSButton isLink href="#sanka" flexSize>
+                  Sanka
+                </SSButton>
+                <SSButton isLink href="/incubation" flexSize>
+                  For projects
+                </SSButton>
+              </div>
+              {/* <div className="flex justify-center lg:justify-start items-center gap-12 lg:ml-2 mt-10">
+                {SOCIALS.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className={`transition-all hover:opacity-75 text-white ${
+                      item.svg === linkedin
+                        ? "scale-[1.08]"
+                        : item.svg === twitter
+                        ? "scale-[1.2]"
+                        : "scale-[1.3]"
+                    }`}
+                    target="_blank"
+                  >
+                    {item.svg}
+                  </Link>
+                ))}
+              </div> */}
             </div>
           </div>
           <div className="flex flex-col w-full  py-10 md:py-12 bg-black/40 relative">
@@ -246,7 +288,7 @@ export default function Home() {
           </Link>
         </div>
         <div className="grid lg:grid-cols-3 gap-12 lg:gap-9 flex-wrap my-10">
-          <div className="text-samurai-red text-5xl lg:text-4xl mt-8 lg:mt-12">
+          <div className="text-samurai-red text-2xl md:text-4xl ">
             Coming soon!
           </div>
           {/* {projects.map((item, index) => (
@@ -271,7 +313,7 @@ export default function Home() {
           <h2 className="text-6xl font-bold">
             Samurai <span className="text-samurai-red">Sanka</span>
             <p
-              className={`font-light text-[32px]  text-white mt-2 ${inter.className}`}
+              className={`font-light text-2xl md:text-[32px]  text-white mt-2 ${inter.className}`}
             >
               Community interaction platform.
             </p>
@@ -284,7 +326,7 @@ export default function Home() {
             earn rewards for participating on our partners' platforms.
           </div>
 
-          <div className="text-samurai-red text-5xl lg:text-4xl mt-16">
+          <div className="text-samurai-red text-2xl md:text-4xl mt-16">
             Coming soon!
           </div>
 
@@ -352,56 +394,46 @@ export default function Home() {
         <Image
           src="/samurai-sanka-icon.svg"
           alt="tokens"
-          width={500}
-          height={500}
+          width={350}
+          height={350}
           className="hidden xl:block"
         />
       </div>
 
       {/* SAMURAI EDGE */}
-      <div className="flex flex-col pt-20 w-full px-6 lg:px-8 xl:px-20 bg-black border-t-[0.5px] border-samurai-red">
-        <h2 className="text-6xl font-bold">
-          The <span className="text-samurai-red">SAMURAI</span> Edge
-        </h2>
-        <div className="grid lg:grid-cols-2 mt-10 relative gap-5 2xl:gap-10 pt-8 pb-20">
-          {edge.map((item, index) => (
-            <div
-              key={index}
-              className="flex items-center w-full min-h-[160px] border-[1px] border-samurai-red rounded-xl px-5 gap-5 shadow-lg z-10"
-            >
+      <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white/20 border-t-[1px] border-yellow-300/40">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+          <h2 className="text-6xl font-bold">
+            The Samurai <span className="text-samurai-red">Edge</span>
+          </h2>
+          <div
+            className={`grid lg:grid-cols-3 gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+          >
+            {edge.map((item, index) => (
               <div
-                className="
-                  flex relative
-                  w-full opacity-80
-                  min-w-[68px] max-w-[38px]
-                  min-h-[68px]  max-h-[38px]
-                  md:min-w-[98px] md:max-w-[68px]
-                  md:min-h-[98px]  md:max-h-[68px]
-                "
+                key={index}
+                className={`flex flex-col gap-2 text-center bg-black/40 text-white border-[1px] border-samurai-red"
+                }  border border-black p-8 rounded-xl shadow-lg transition-all hover:scale-105`}
               >
-                <Image
-                  src={item.image}
-                  placeholder="blur"
-                  blurDataURL={item.image}
-                  alt={item.title}
-                  fill
-                  sizes="68px"
-                  className="drop-shadow-xl"
-                />
-              </div>
-
-              <div className="flex flex-col">
-                <span className="font-bold text-xl text-samurai-red">
+                <div className="flex justify-center pb-10">
+                  <Image
+                    src={item.image}
+                    width={200}
+                    height={200}
+                    alt={item.title}
+                  />
+                </div>
+                <span
+                  className={`font-bold text-2xl border-b-[0.5px] border-neutral-400 pb-3 mb-2`}
+                >
                   {item.title}
                 </span>
-                <p
-                  className={`font-normal text-[16px] leading-tight text-white/80 ${inter.className}`}
-                >
+                <p className={`text-[16px] text-neutral-400`}>
                   {item.description}
                 </p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 

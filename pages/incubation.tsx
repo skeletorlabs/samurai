@@ -120,18 +120,6 @@ export default function Incubation() {
       color: bg.dark,
     },
     {
-      image: "/portfolio/inwariumonline.svg",
-      width: 200,
-      height: 200,
-      color: bg.dark,
-    },
-    {
-      image: "/portfolio/rewater.svg",
-      width: 300,
-      height: 200,
-      color: bg.light,
-    },
-    {
       image: "/portfolio/alterverse.svg",
       width: 200,
       height: 200,
@@ -144,16 +132,16 @@ export default function Incubation() {
       color: bg.light,
     },
     {
-      image: "/portfolio/metacourt.svg",
+      image: "/portfolio/almazeus.svg",
       width: 200,
       height: 200,
       color: bg.light,
     },
     {
-      image: "/portfolio/almazeus.svg",
+      image: "/portfolio/oredcurry.svg",
       width: 200,
       height: 200,
-      color: bg.light,
+      color: bg.dark,
     },
   ];
 
@@ -245,9 +233,9 @@ export default function Incubation() {
   return (
     <Layout>
       <TopLayout background="bg-samurai-incubator">
-        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20">
+        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24">
           {/* TOP CONTENT */}
-          <div className="sm:pt-10 lg:pt-24 relative">
+          {/* <div className="sm:pt-10 lg:pt-24 relative">
             <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-samurai-red ">
               <span className="text-white">Accelerating</span> your project from
               ideation to token <span className="text-white">launch</span> and
@@ -265,11 +253,30 @@ export default function Incubation() {
                 Get Started
               </SSButton>
             </div>
+          </div> */}
+          <div className="relative md:mr-12 xl:max-w-[1100px]">
+            <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-samurai-red">
+              <span className="text-white">Accelerating</span> your project from
+              ideation to token <span className="text-white">launch</span> and
+              beyond.
+            </h1>
+            <p
+              className={`leading-normal lg:leading-relaxed pt-6 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
+            >
+              Committed to advising, guiding and incubating the most novel and
+              innovative platforms in the Web3 space no matter which stage of
+              platform launch you have reached.
+            </p>
+            <div className="flex z-20 text-samurai-red text-5xl lg:text-4xl mt-12">
+              <SSButton isLink href="#token-launch">
+                Get Started
+              </SSButton>
+            </div>
           </div>
           <Image
             src="/samurai-incubator-icon.svg"
-            width={350}
-            height={350}
+            width={450}
+            height={450}
             alt="incubation"
             className="rounded-[8px] hidden xl:block opacity-40 xl:opacity-100"
             placeholder="blur"
@@ -398,7 +405,7 @@ export default function Incubation() {
             <span className="text-samurai-red">T</span>eam
           </h2>
           <div
-            className={`flex justify-center md:justify-start items-center flex-wrap gap-32 leading-normal py-10 xl:py-16 text-xl ${inter.className}`}
+            className={`flex justify-center md:justify-start items-center flex-wrap gap-10 md:gap-32 leading-normal py-10 xl:py-16 text-xl ${inter.className}`}
           >
             {team.map((member, index) => (
               <div

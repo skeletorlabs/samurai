@@ -113,11 +113,11 @@ export default function Launchpad() {
   return (
     <Layout>
       <TopLayout background="bg-samurai-launchpad">
-        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20">
+        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24">
           {/* TOP CONTENT */}
-          <div className="sm:pt-10 lg:pt-24 relative">
+          {/* <div className="sm:pt-10 lg:pt-24 relative">
             <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-samurai-red ">
-              Samurai <span className="text-white">Launchpad</span>
+              <span className="text-white">Samurai</span> Launchpad
             </h1>
             <p
               className={`leading-normal pt-6 lg:text-xl xl:max-w-[900px] ${inter.className}`}
@@ -128,7 +128,26 @@ export default function Launchpad() {
               who are dedicated to furthering the fundamental ideas of the
               cryptocurrency movement.
             </p>
-            <div className="flex flex-col lg:flex-row pt-16 gap-5 z-20">
+            <div className="flex flex-col lg:flex-row pt-10 md:pt-16 gap-5 z-20">
+              <SSButton isLink href="#participate">
+                Get Started
+              </SSButton>
+            </div>
+          </div> */}
+          <div className="relative md:mr-12 xl:max-w-[900px]">
+            <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
+              Samurai <span className="text-samurai-red">Launchpad</span>
+            </h1>
+            <p
+              className={`leading-normal lg:leading-relaxed pt-6 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
+            >
+              Advising, guiding, and accelerating the most novel and innovative
+              projects in the Web3 space, Samurai Starter brings together a
+              knowledgeable and active community of crowdfunding participants
+              who are dedicated to furthering the fundamental ideas of the
+              cryptocurrency movement.
+            </p>
+            <div className="flex flex-col lg:flex-row mt-12 gap-5 z-20">
               <SSButton isLink href="#participate">
                 Get Started
               </SSButton>
@@ -165,11 +184,11 @@ export default function Launchpad() {
           <div className="w-full flex flex-col gap-10 flex-wrap mt-14 text-2xl lg:text-3xl">
             <div className="flex items-center gap-3">
               <span
-                className={`w-[50px] text-7xl text-samurai-red ${inter.className}`}
+                className={`w-[35px] md:w-[50px] text-7xl text-samurai-red ${inter.className}`}
               >
                 1.
               </span>
-              <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
+              <div className="text-xl md:text-2xl bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
                 <Link
                   href="/nft"
                   className="text-samurai-red hover:opacity-75 underline"
@@ -189,11 +208,11 @@ export default function Launchpad() {
 
             <div className="flex items-center gap-3">
               <span
-                className={`w-[50px] text-7xl text-samurai-red ${inter.className}`}
+                className={`w-[35px] md:w-[50px] text-7xl text-samurai-red ${inter.className}`}
               >
                 2.
               </span>
-              <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
+              <div className="text-xl md:text-2xl bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
                 <span className="text-samurai-red">Register</span> your interest
                 in participating in the token offering during the whitelisting
                 period.
@@ -202,11 +221,11 @@ export default function Launchpad() {
 
             <div className="flex items-center gap-3">
               <span
-                className={`w-[50px] text-7xl text-samurai-red ${inter.className}`}
+                className={`w-[35px] md:w-[50px] text-7xl text-samurai-red ${inter.className}`}
               >
                 3.
               </span>
-              <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
+              <div className="text-xl md:text-2xl bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
                 <span className="text-samurai-red">Commit</span> selected
                 payment currency during the participation period. period.
               </div>
@@ -214,11 +233,11 @@ export default function Launchpad() {
 
             <div className="flex items-center gap-3">
               <span
-                className={`w-[50px] text-7xl text-samurai-red ${inter.className}`}
+                className={`w-[35px] md:w-[50px] text-7xl text-samurai-red ${inter.className}`}
               >
                 4.
               </span>
-              <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
+              <div className="text-xl md:text-2xl bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
                 <span className="text-samurai-red">Claim</span> your tokens
                 according to each project's vesting terms.
               </div>
@@ -226,11 +245,11 @@ export default function Launchpad() {
 
             <div className="flex items-center gap-3">
               <span
-                className={`w-[50px] text-7xl text-samurai-red ${inter.className}`}
+                className={`w-[35px] md:w-[50px] text-7xl text-samurai-red ${inter.className}`}
               >
                 5.
               </span>
-              <div className="bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
+              <div className="text-xl md:text-2xl bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
                 <span className="text-samurai-red">Claim</span> your $SAM
                 rewards after participating in the token offering.
               </div>

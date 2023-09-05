@@ -237,9 +237,9 @@ export default function Tokens() {
     <Layout>
       <TopLayout background="bg-samurai-cyborg-fem">
         <>
-          <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20">
+          <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24">
             {/* TOP CONTENT */}
-            <div className="sm:pt-10 lg:pt-24 relative">
+            {/* <div className="sm:pt-10 lg:pt-24 relative">
               <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-white">
                 The{" "}
                 <span className="font-bold text-samurai-red">
@@ -261,9 +261,14 @@ export default function Tokens() {
                 tokens.
               </p>
               <div className="pt-10 flex flex-col md:flex-row gap-3 md:gap-5">
-                <SSButton>Buy $SAM on Aerodrome (coming soon)</SSButton>
+                <SSButton>
+                  <>
+                    Buy $SAM on Aerodrome{" "}
+                    <span className="text-[10px] ml-1">(coming soon)</span>
+                  </>
+                </SSButton>
               </div>
-            </div>
+            </div> */}
             {/* <Image
               src="/samurai.svg"
               alt="tokens"
@@ -271,6 +276,39 @@ export default function Tokens() {
               height={350}
               className="hidden xl:block opacity-40 2xl:opacity-100 w-[350px]"
             /> */}
+
+            <div className="relative md:mr-12 xl:max-w-[900px]">
+              <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
+                The{" "}
+                <span className="font-bold text-samurai-red">
+                  Samurai Starter
+                </span>{" "}
+                ecosystem is
+                <span className="font-bold text-samurai-red"> fueled</span> by
+                our native
+                <span className="font-bold text-samurai-red"> $SAM</span> token.
+              </h1>
+              <p
+                className={`leading-normal lg:leading-relaxed pt-6 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
+              >
+                The $SAM token rewards participation across the entire Samurai
+                Starter ecosystem and is designed to deliver tremendous benefits
+                to the Samurai Starter community. The more you participate, the
+                more you earn, the more future benefits you may enjoy. $SAM is
+                minted on Ethereum layer-2 Base with a maximum supply of 100m
+                tokens.
+              </p>
+              <div className="text-samurai-red text-5xl lg:text-4xl mt-12">
+                <SSButton>
+                  <>
+                    Buy $SAM on Aerodrome{" "}
+                    <span className="text-[10px] md:text-lg ml-1">
+                      (coming soon)
+                    </span>
+                  </>
+                </SSButton>
+              </div>
+            </div>
           </div>
 
           {/* TOKENOMICS */}

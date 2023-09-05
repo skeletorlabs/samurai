@@ -3,9 +3,11 @@ import { NAV } from "@/utils/constants";
 import Image from "next/image";
 import { useContext } from "react";
 import { StateContext } from "@/context/StateContext";
+import { Page } from "@/utils/enums";
+import { home } from "@/utils/svgs";
 
 export default function BottomNav() {
-  const { page, setPage } = useContext(StateContext);
+  const { page } = useContext(StateContext);
 
   return (
     <nav className="fixed lg:hidden bottom-0 w-full h-[80px] bg-[#FF284C] z-50 pb-2">

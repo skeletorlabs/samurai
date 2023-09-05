@@ -49,7 +49,7 @@ export default function Nav() {
           </Link>
         ))}
       </div>
-      <div className="flex gap-5 h-10 px-5 lg:px-0">
+      <div className="flex gap-5 px-5 lg:px-0">
         {/* {page === Page.nft && <ConnectButton showBalance={false} />} */}
 
         <div className="hidden xl:flex">

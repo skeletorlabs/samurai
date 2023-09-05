@@ -192,14 +192,14 @@ export default function Nft() {
   return (
     <Layout>
       <TopLayout background="bg-samurai-shadow">
-        <div className="flex flex-col xl:flex-row justify-between xl:items-center gap-6 xl:gap-0 px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24 ">
+        <div className="flex flex-col xl:flex-row justify-between xl:items-center gap-6 xl:gap-0 lg:px-8 xl:px-20 pt-10 lg:pt-24">
           {/* TOP CONTENT */}
 
-          <div className="relative md:mr-12 xl:max-w-[900px]">
+          <div className="relative md:mr-12 xl:max-w-[900px] px-6 md:px-0">
             <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
               Mint a <span className="text-samurai-red">SamNFT </span>
               to be part of our vibrant
-              <span className="text-samurai-red"> community</span>
+              <span className="text-samurai-red"> community</span>.
             </h1>
             <p
               className={`leading-normal lg:leading-relaxed pt-6 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
@@ -214,7 +214,7 @@ export default function Nft() {
             </div>
           </div>
 
-          <div className="flex min-w-[400px] md:max-w-[400px] h-[500px] bg-white p-2 rounded-[8px] relative">
+          <div className="flex md:min-w-[400px] md:max-w-[400px] h-[500px] md:bg-white p-2 rounded-[8px] relative">
             <Carousel leftControl=" " rightControl=" ">
               {images.map((image, index) => (
                 <Image

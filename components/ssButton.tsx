@@ -1,7 +1,8 @@
 import Link from "next/link";
+import { ReactElement } from "react";
 
 interface SSButton {
-  children: string;
+  children: string | ReactElement;
   isLink?: boolean;
   target?: string;
   href?: string;
@@ -27,6 +28,7 @@ export default function SSButton({
       target={target}
       href={href}
       className={`
+      text-lg md:text-normal
         flex justify-center items-center border rounded-[8px]
         ${flexSize ? "w-full" : "w-auto"} 
         ${
@@ -35,8 +37,8 @@ export default function SSButton({
             : "text-samurai-red border-samurai-red"
         }
          px-8 py-3 transition-all z-20
-         bg-black/40
-         hover:bg-samurai-red hover:text-black hover:border-black
+         bg-black/70
+         hover:bg-samurai-red hover:text-black hover:border-black hover:font-bold
       `}
     >
       {children}
@@ -47,6 +49,8 @@ export default function SSButton({
       disabled={disabled}
       onClick={() => click()}
       className={`
+      bg-black/70
+        text-lg md:text-normal
         flex justify-center items-center px-8 py-3 transition-all z-20 
         ${flexSize ? "w-full" : "w-auto"} 
         ${
