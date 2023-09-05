@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://samuraistarter.com
+
+# Sitemaps
+Sitemap: https://samuraistarter.com/sitemap.xml
