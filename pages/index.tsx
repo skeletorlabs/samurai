@@ -172,7 +172,7 @@ export default function Home() {
               </div> */}
             </div>
           </div>
-          <div className="flex flex-col w-full  py-10 md:py-12 bg-black/40 relative">
+          <div className="flex flex-col w-full py-14 md:py-12 bg-black/40 relative">
             <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
               <div className="flex flex-col text-white text-2xl">
                 <p className="font-bold text-4xl pb-2 opacity-[0.8]">
@@ -218,7 +218,7 @@ export default function Home() {
             <Link
               href="https://medium.com/samurai-starter"
               target="_blank"
-              className={`absolute bottom-4 right-20 flex justify-end items-center self-end w-max mt-8 text-md text-white hover:text-samurai-red font-light ${inter.className}`}
+              className={`absolute right-6 bottom-4 md:right-20 flex justify-end items-center self-end w-max mt-8 text-md text-white hover:text-samurai-red font-light ${inter.className}`}
             >
               More +
             </Link>

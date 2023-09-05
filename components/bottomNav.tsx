@@ -16,7 +16,7 @@ export default function BottomNav() {
           <Link
             key={index}
             href={item.href}
-            className={`text-[8px] sm:text-md  ${
+            className={`text-[10px]  ${
               item.page === page
                 ? "text-black"
                 : "text-white hover:text-pink-900"
