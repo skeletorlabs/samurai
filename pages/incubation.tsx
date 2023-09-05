@@ -511,7 +511,7 @@ export default function Incubation() {
           >
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col md:p-10 gap-5 bg-white/5 md:border border-samurai-red w-[600px] rounded-2xl relative"
+              className="flex flex-col md:p-10 gap-5 md:bg-white/5 md:border border-samurai-red w-[600px] rounded-2xl relative"
             >
               <svg
                 fill="none"
