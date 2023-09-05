@@ -35,3 +35,7 @@
   background-color: rgba(0, 0, 0, 0.6) !important; /* 40% opacity */
 }
 
+.sp-button:focus {
+  opacity: 0.9 !important;
+}
+
