@@ -90,7 +90,7 @@ export default function Home() {
         <>
           <div className="px-6 lg:px-8 xl:px-20 relative">
             {/* <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-[0.5px] right-24 z-0 opacity-40 2xl:opacity-100" /> */}
-            <div className="sm:pt-10 lg:pt-24 lg:max-w-[750px] h-[530px]">
+            <div className="pb-10 lg:pb-0 sm:pt-10 lg:pt-24 lg:max-w-[750px] lg:h-[530px]">
               <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
                 Invest. Interact. Earn.
               </h1>
@@ -99,18 +99,18 @@ export default function Home() {
                 that incentivizes community members to invest and participate in
                 the most innovative projects in the crypto space.
               </p>
-              <div className="flex flex-row items-center pt-10 gap-5">
-                <SSButton isLink href="/launchpad">
+              <div className="flex flex-col lg:flex-row items-center pt-10 gap-5">
+                <SSButton isLink href="/launchpad" flexSize>
                   Launchpad
                 </SSButton>
-                <SSButton isLink href="#sanka">
+                <SSButton isLink href="#sanka" flexSize>
                   Sanka
                 </SSButton>
-                <SSButton isLink href="/incubation">
+                <SSButton isLink href="/incubation" flexSize>
                   For projects
                 </SSButton>
               </div>
-              <div className="flex items-center gap-12 ml-2 mt-10">
+              <div className="flex justify-center lg:justify-start items-center gap-12 lg:ml-2 mt-10">
                 {SOCIALS.map((item, index) => (
                   <Link
                     key={index}
