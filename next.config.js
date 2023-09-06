@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     domains: [
       "samuraistarter.com",
-      "miro.medium.com",
+      // "miro.medium.com",
       "tan-gothic-partridge-694.mypinata.cloud",
     ],
   },

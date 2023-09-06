@@ -1,17 +1,17 @@
-import Head from "next/head";
-import Image from "next/image";
+// import Head from "next/head";
+import Image from "next/legacy/image";
 import Link from "next/link";
 import Layout from "@/components/layout";
-import { SOCIALS } from "@/utils/constants";
-import { useContext } from "react";
+// import { SOCIALS } from "@/utils/constants";
+// import { useContext } from "react";
 
 import Card from "@/components/card";
-import { Project } from "@/utils/interfaces";
+// import { Project } from "@/utils/interfaces";
 import { Inter } from "next/font/google";
 import SSButton from "@/components/ssButton";
 import TopLayout from "@/components/topLayout";
 import { StateContext } from "@/context/StateContext";
-import { linkedin, twitter } from "@/utils/svgs";
+// import { linkedin, twitter } from "@/utils/svgs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -82,7 +82,7 @@ const edge = [
 ];
 
 export default function Home() {
-  const { projects } = useContext(StateContext);
+  // const { projects } = useContext(StateContext);
 
   return (
     <Layout>
@@ -193,7 +193,7 @@ export default function Home() {
                             src={item.image}
                             placeholder="blur"
                             blurDataURL={item.image}
-                            fill
+                            layout="fill"
                             objectFit="cover"
                             alt=""
                             className="rounded-t-2xl"

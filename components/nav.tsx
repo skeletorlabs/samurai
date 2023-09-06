@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { Inter } from "next/font/google";
 import { StateContext } from "@/context/StateContext";
 import { Page } from "@/utils/enums";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+// import { ConnectButton } from "@rainbow-me/rainbowkit";
 import SSButton from "./ssButton";
 
 const inter = Inter({
