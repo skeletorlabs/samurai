@@ -89,47 +89,6 @@ export default function Home() {
       <TopLayout background="bg-samurai-cyborg" padding={false}>
         <>
           <div className="px-6 lg:px-8 xl:px-20 relative pt-10 lg:pt-24">
-            {/* <div className="hidden lg:flex w-full h-full bg-sword-art bg-right-bottom bg-no-repeat absolute bottom-[0.5px] right-24 z-0 opacity-40 2xl:opacity-100" /> */}
-            {/* <div className="pb-10 lg:pb-0 sm:pt-10 lg:pt-24 lg:max-w-[750px] lg:h-[530px]">
-              <h1 className="text-[58px] lg:text-[68px] font-black leading-[62px] tracking-wide">
-                Invest. Interact. Earn.
-              </h1>
-              <p className={`leading-normal pt-4 text-2xl ${inter.className}`}>
-                Samurai Starter is the leading early-stage crowdfunding platform
-                that incentivizes community members to invest and participate in
-                the most innovative projects in the crypto space.
-              </p>
-              <div className="flex flex-col lg:flex-row items-center pt-10 gap-5">
-                <SSButton isLink href="/launchpad" flexSize>
-                  Launchpad
-                </SSButton>
-                <SSButton isLink href="#sanka" flexSize>
-                  Sanka
-                </SSButton>
-                <SSButton isLink href="/incubation" flexSize>
-                  For projects
-                </SSButton>
-              </div>
-              <div className="flex justify-center lg:justify-start items-center gap-12 lg:ml-2 mt-10">
-                {SOCIALS.map((item, index) => (
-                  <Link
-                    key={index}
-                    href={item.href}
-                    className={`transition-all hover:opacity-75 text-white ${
-                      item.svg === linkedin
-                        ? "scale-[1.08]"
-                        : item.svg === twitter
-                        ? "scale-[1.2]"
-                        : "scale-[1.3]"
-                    }`}
-                    target="_blank"
-                  >
-                    {item.svg}
-                  </Link>
-                ))}
-              </div>
-            </div> */}
-
             <div className="relative md:mr-12 xl:max-w-[900px] pb-10">
               <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
                 Invest. Interact. Earn.
@@ -152,24 +111,6 @@ export default function Home() {
                   For projects
                 </SSButton>
               </div>
-              {/* <div className="flex justify-center lg:justify-start items-center gap-12 lg:ml-2 mt-10">
-                {SOCIALS.map((item, index) => (
-                  <Link
-                    key={index}
-                    href={item.href}
-                    className={`transition-all hover:opacity-75 text-white ${
-                      item.svg === linkedin
-                        ? "scale-[1.08]"
-                        : item.svg === twitter
-                        ? "scale-[1.2]"
-                        : "scale-[1.3]"
-                    }`}
-                    target="_blank"
-                  >
-                    {item.svg}
-                  </Link>
-                ))}
-              </div> */}
             </div>
           </div>
           <div className="flex flex-col w-full py-14 md:py-12 bg-black/40 relative">

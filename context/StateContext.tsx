@@ -4,12 +4,11 @@ import { ethers } from "ethers";
 
 declare let window: any;
 
-import { useNetwork, useAccount } from "wagmi";
+import { useAccount } from "wagmi";
 
 import { Page } from "../utils/enums";
 import { NAV } from "../utils/constants";
 import { Project } from "@/utils/interfaces";
-import fetchProjects from "@/pages/api/projects";
 
 export const StateContext = createContext({
   page: Page.home,
@@ -63,7 +62,6 @@ export const StateProvider = ({ children }: Props) => {
 
   useEffect(() => {
     if (wallet.address && wallet.address !== account) {
-      // console.log(wallet.address);
       getSigner();
     } else {
       setSigner(null);

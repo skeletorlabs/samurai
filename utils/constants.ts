@@ -70,5 +70,3 @@ export const SOCIALS = [
     class: 'scale-50',
   },
 ]
-
-export const BASE_API_URL = 'https://samuraistarter.com/api/v1'
