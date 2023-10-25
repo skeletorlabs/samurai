@@ -29,34 +29,39 @@ const images = ["/nfts/1.jpg", "/nfts/2.jpg"];
 
 const utilities = [
   {
+    title: "",
+    description:
+      "Check out the amazing benefits you can expect to enjoy as a proud owner of our SamNFT:",
+  },
+  {
     title: "Lifetime Launchpad Access",
     description:
-      "Enjoy lifetime access to all token offerings on Samurai Launchpad. No need to buy and stake costly launchpad tokens, no more token staking tiers*, minimal barriers to entry. The SamNFT gives you equal access to token offerings from the most novel and hyped startups in the crypto space.",
+      "Enjoy lifetime access to all token offerings on Samurai Starter. No need to buy and stake costly launchpad tokens; No more token staking tiers; Minimal barriers to entry. SamNFT gives you equal access to token offerings from the most novel and hyped startups in the crypto space.",
   },
   {
     title: "$SAM Airdrop",
     description:
-      "Our reward token, $SAM, is launching in Q4 2023 on Arbitrum. People who purchase SamNFT during the pre-mint period are eligible to receive a share of 30% of the total supply of $SAM tokens which is vested over one year.",
+      "Our loyalty reward token, $SAM, is scheduled to launch Q4 2023 on Base. Purchase a SamNFT during the minting period to be eligible to receive a generous share of the total supply of $SAM tokens. For every 1,000 SamNFTs minted, we add 5% of the total supply of $SAM to the SamNFT airdrop. If 1,000 SamNFTs are minted, we airdrop 5% of the $SAM supply to minters. If the maximum 5,000 SamNFTs are minted, we airdrop 25% of the $SAM supply to minters.",
   },
   {
     title: "Cashback Rewards",
     description:
-      "SamNFT stakers who participate in token offerings on Samurai Launchpad are eligible to receive cashback rewards in the form of $SAM tokens. Stake or LP the $CFI governance token to increase your cashback rewards.",
+      "SamNFT holders who participate in token offerings on Samurai Starter are eligible to receive cashback rewards in the form of $SAM tokens. We love loyalty and want to reward it! The more you participate, the higher you climb the SAM Ladder, the more $SAM rewards you earn. The SAM Ladder shows your ranking among all $SAM earners. Climb The Ladder to earn up to 5% cashback on your token offering purchases.",
   },
   {
     title: "SamNFT Rentals",
     description:
-      "Not interested in participating in an upcoming token offering? Want to earn some passive income from your SamNFTs? Holders can offer their SamNFTs for rent on our in-house SamNFT rental marketplace! Set your desired price and length of time of the rental and lease your SamNFT to non-holders who may want to participate in token offerings.",
+      "Not interested in participating in an upcoming token offering? Want to earn some passive income from your SamNFT? Holders can offer their SamNFTs for rent on our in-house SamNFT rental marketplace! Set your desired price and length of time of the rental and lease your SamNFT to non-holders who may want to participate in token offerings, but do not want to risk waiting for the public round. It is a win-win for all!",
   },
   {
     title: "VIP Access to Samurai Sanka",
     description:
-      "Samurai Sanka is our upcoming user interaction platform. It includes a Partner's Quest platform, Prediction Markets, Lotteries and more. As a SamNFT staker, you receive special VIP perks including reward boosts for participating on Sanka.",
+      "Samurai Sanka is our upcoming community interaction platform. It includes a Partner Quest Platform, Prediction Markets, Lotteries and many more entertaining applications that will allow you to utilize your $SAM rewards and become high-value participants. As a SamNFT holder, you receive special VIP perks including reward boosts for participating on Sanka.",
   },
   {
     title: "Eligibility for special giveaways",
     description:
-      "When Samurai Starter is bringing in new projects for either our accelerator, launchpad or other services, we always strive to bring in some freebies for our community whether they be tokens, NFTs, or some other digital gifts.",
+      "When Samurai Starter brings in new projects for either our accelerator, crowdfunding platform, or other services, we always aim to acquire freebies for our community whether they be tokens, NFTs, or some other digital gifts. As a SamNFT holder, you will be immediately eligible to receive such gifts from our partners and others.",
   },
   {
     title: "DAO Governance Rights",
@@ -243,7 +248,9 @@ export default function Nft() {
               {utilities.map((item, index) => (
                 <div
                   key={index}
-                  className="rounded-[8px] opacity-90 backdrop-blur-[8px] shadow-xl"
+                  className={`rounded-[8px] opacity-90 backdrop-blur-[8px] shadow-xl ${
+                    index === 0 && "text-3xl max-w-[700px]"
+                  }`}
                 >
                   <p className="text-samurai-red font-normal pb-2 text-xl">
                     {item.title}

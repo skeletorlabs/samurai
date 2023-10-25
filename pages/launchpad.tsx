@@ -227,7 +227,7 @@ export default function Launchpad() {
               </span>
               <div className="text-xl md:text-2xl bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
                 <span className="text-samurai-red">Commit</span> selected
-                payment currency during the participation period. period.
+                payment currency during the participation period.
               </div>
             </div>
 
