@@ -26,11 +26,11 @@ const latestupdates = [
     image: "/samnft-article.png",
   },
   {
-    title: "The Samurai Scoop — Vol. 9",
+    title: "Samurai Starter — $SAM Token Guide",
     description:
-      "$SAM Airdrop, SamNFT OG Free Mint, Building on Base, New Twitter Account and more",
-    href: "https://medium.com/samurai-starter/the-samurai-scoop-vol-9-ac2b2ae1a51e",
-    image: "/the samurai scoop_banner.png",
+      "The fuel that powers the Samurai Starter ecosystem is prepping for launch",
+    href: "https://medium.com/samurai-starter/samurai-starter-sam-token-guide-ae9c183de28c",
+    image: "/token-guide.png",
   },
   {
     title: "Our Vision",

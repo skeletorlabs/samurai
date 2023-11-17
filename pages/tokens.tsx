@@ -235,9 +235,9 @@ export default function Tokens() {
 
   return (
     <Layout>
-      <TopLayout background="bg-samurai-cyborg-fem">
+      <TopLayout background="bg-samurai-cyborg-fem bg-cover bg-top">
         <>
-          <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24">
+          <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 py-10 lg:pt-24 bg-transparent sm:bg-black/60 2xl:bg-transparent">
             {/* TOP CONTENT */}
             {/* <div className="sm:pt-10 lg:pt-24 relative">
               <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-white">
@@ -283,9 +283,7 @@ export default function Tokens() {
                 <span className="font-bold text-samurai-red">
                   Samurai Starter
                 </span>{" "}
-                ecosystem is
-                <span className="font-bold text-samurai-red"> fueled</span> by
-                our native
+                ecosystem is fueled by our native
                 <span className="font-bold text-samurai-red"> $SAM</span> token.
               </h1>
               <p
@@ -312,7 +310,7 @@ export default function Tokens() {
           </div>
 
           {/* TOKENOMICS */}
-          <div className="flex flex-col w-full mt-10 mb-[-60px] py-10 md:py-14 bg-black/40">
+          <div className="flex flex-col justify-center w-full mt-10 bg-black/40 h-[400px] md:h-[240px]">
             <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
               <div className="flex flex-col text-white text-2xl">
                 <p className="font-bold text-4xl pb-2 opacity-[0.8]">
@@ -326,7 +324,7 @@ export default function Tokens() {
                     <span className="text-yellow-400 font-bold">
                       Total Supply:
                     </span>{" "}
-                    100,000,000 $SAM
+                    130,000,000 $SAM
                   </div>
                   <div className="bg-white/10 p-3">
                     <span className="text-yellow-400 font-bold">
@@ -413,7 +411,7 @@ export default function Tokens() {
       </TopLayout>
 
       {/* CASHBACK */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
+      <div className="flex flex-col mt-[-35px] pt-10 md:pt-20 pb-2 w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
             <p className="font-bold text-5xl pb-2">
