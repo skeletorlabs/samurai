@@ -193,6 +193,7 @@ export default function Incubation() {
     { src: "/partners/mempool.svg", color: bg.light },
     { src: "/partners/slance.svg", color: bg.light },
     { src: "/partners/throne.svg", color: bg.dark },
+    { src: "/partners/cyberscope.svg", color: bg.dark },
     { src: "", color: bg.dark },
   ];
 
