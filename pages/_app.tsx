@@ -16,11 +16,21 @@ import {
   connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum, goerli } from "wagmi/chains";
+import {
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  goerli,
+  localhost,
+} from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
-const { chains, publicClient } = configureChains([goerli], [publicProvider()]);
+const { chains, publicClient } = configureChains(
+  [localhost],
+  [publicProvider()]
+);
 // const { connectors } = getDefaultWallets({
 //   appName: "samuraistarter",
 //   projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
