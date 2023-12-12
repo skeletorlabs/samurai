@@ -306,7 +306,7 @@ export default function Nft() {
             <div className="flex flex-col gap-3">
               <div className="flex flex-col lg:flex-row items-center gap-3">
                 <SSButton
-                  disabled={!signer || isLoading}
+                  disabled={!signer || isLoading || generalInfo?.isPaused}
                   click={() => mintNFT()}
                   flexSize
                 >
@@ -384,7 +384,7 @@ export default function Nft() {
                   RENT A SAMURAI NFT
                 </SSButton> */}
               </div>
-              {whitelistData?.isWhitelisted && (
+              {!generalInfo?.isPaused && whitelistData?.isWhitelisted && (
                 <div className="flex items-center justify-between text-white/80 py-5 mt-5 bg-white/10 px-4 rounded-[8px]">
                   <div className="flex items-center gap-2 text-green-400">
                     <svg
@@ -405,6 +405,7 @@ export default function Nft() {
                     getUnixTime(new Date()) <
                       whitelistData?.whitelistFinishAt && (
                       <button
+                        disabled={isLoading || generalInfo?.isPaused}
                         onClick={freeMintNFT}
                         className="text-green-400 border p-2 px-5 rounded-[8px] text-[12px] border-green-400 hover:bg-green-400 hover:text-black font-semibold"
                       >

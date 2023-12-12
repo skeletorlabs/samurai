@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import the CSS for styling
+import { useAccount } from "wagmi";
 
 import SSButton from "@/components/ssButton";
 import {
@@ -34,7 +35,7 @@ export default function Manager() {
     null
   );
   const { signer, isLoading, setIsLoading } = useContext(StateContext);
-  const router = useRouter();
+  const { address } = useAccount();
 
   const onTextAreaChange = (value: string) => {
     const addresses: string[] = value
@@ -94,19 +95,11 @@ export default function Manager() {
     setIsLoading(false);
   }, [signer, data, setIsLoading, setWhitelistData]);
 
-  const checkOwnership = useCallback(async () => {
-    if (signer) {
-      const theSigner: ethers.Signer = signer;
-      const address = await theSigner.getAddress();
-      if (data && data.owner !== address) {
-        router.push("/");
-      }
-    }
-  }, [router, signer, data]);
+  const checkOwnership = useCallback(() => {
+    if (signer && address) return data && data.owner === address;
 
-  useEffect(() => {
-    // checkOwnership();
-  }, [router, signer, data]);
+    return false;
+  }, [signer, data, address]);
 
   const createMetadata = useCallback(async () => {
     const response: any = await fetch("/api/pinata");
@@ -149,11 +142,11 @@ export default function Manager() {
       <TopLayout>
         <div className="flex items-center justify-center w-full">
           <div className="flex flex-col w-full h-full justify-center items-center mt-20 mb-10">
-            {signer && (
+            {signer && checkOwnership() ? (
               <div className="flex flex-col gap-14 w-full">
-                <div className="flex items-center gap-5 bg-black border-b border-t border-gray-800 py-8 px-12">
+                {/* <div className="flex items-center gap-5 bg-black border-b border-t border-gray-800 py-8 px-12">
                   <SSButton click={handlePinButtonClick}>Pin</SSButton>
-                </div>
+                </div> */}
                 <div className="flex items-center gap-5 bg-black border-b border-t border-gray-800 py-8 px-12">
                   <SSButton click={onTogglePause}>
                     {isLoading
@@ -168,7 +161,9 @@ export default function Manager() {
                     </SSButton>
                   )}
                 </div>
-                {data &&
+                {whitelistData &&
+                  whitelistData?.whitelistFinishAt > 0 &&
+                  data &&
                   data?.maxSupplyRetained === 0 &&
                   data?.maxSupplyReleased === 0 && (
                     <div className="flex items-center gap-5 bg-black border-b border-t border-gray-800 py-8 px-12">
@@ -251,6 +246,8 @@ export default function Manager() {
                   </div>
                 </div>
               </div>
+            ) : (
+              <span>You're not allowed to check this page! Get out.</span>
             )}
           </div>
         </div>
