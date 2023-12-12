@@ -15,7 +15,7 @@ import {
   midnightTheme,
   connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { configureChains, createConfig, sepolia, WagmiConfig } from "wagmi";
 import {
   mainnet,
   polygon,
@@ -23,13 +23,29 @@ import {
   arbitrum,
   goerli,
   localhost,
+  base,
 } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
+import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
 const { chains, publicClient } = configureChains(
-  [localhost],
-  [publicProvider()]
+  [base],
+  [
+    publicProvider(),
+    jsonRpcProvider({
+      rpc: (chain) => ({
+        http:
+          chain.id === base.id
+            ? (process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string)
+            : "http://localhost:8545",
+        webSocket:
+          chain.id === base.id
+            ? (process.env.NEXT_PUBLIC_BASE_WSS as string)
+            : "wss://localhost:8545",
+      }),
+    }),
+  ]
 );
 // const { connectors } = getDefaultWallets({
 //   appName: "samuraistarter",

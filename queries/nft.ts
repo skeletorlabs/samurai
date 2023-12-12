@@ -1,11 +1,10 @@
-
 export const SUPPLY_QUERY = `
   query Supply {
     createds(first: 1) {
       maxSupply maxWhitelistedSupply
     }
   }
-`
+`;
 
 export const MY_NFTS_QUERY = `
   query Minted($wallet: String!) {
@@ -13,12 +12,12 @@ export const MY_NFTS_QUERY = `
       id, tokenId, tokenUri, wallet
     }
   }
-`
+`;
 
 export const LAST_FIVE_NFTS_QUERY = `
   query LAST_FIVE_NFTS_MINTED {
-    minteds(last: 5) {
+    minteds(orderBy: id, orderDirection: desc, first: 5) {
       id, tokenId, tokenUri, wallet
     }
   }
-`
+`;

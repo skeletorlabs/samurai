@@ -2,11 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-      "samuraistarter.com",
-      // "miro.medium.com",
-      "tan-gothic-partridge-694.mypinata.cloud",
-    ],
+    domains: ["samuraistarter.com", "samuraistarter.mypinata.cloud"],
   },
 };
 
