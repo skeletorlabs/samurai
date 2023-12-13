@@ -468,9 +468,9 @@ export default function Nft() {
                       {generalInfo?.totalSupply.toString() || 0}
                     </span>
                     /
-                    {generalInfo
-                      ? generalInfo?.maxSupplyPublic +
-                        generalInfo?.maxSupplyWhitelist
+                    {supply
+                      ? Number(supply?.maxSupply) +
+                        Number(supply?.maxWhitelistedSupply)
                       : 0}
                   </div>
                 </div>
