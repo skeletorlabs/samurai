@@ -6,6 +6,7 @@ import {
   injectedWallet,
   // rainbowWallet,
   walletConnectWallet,
+  metaMaskWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 
 import "@rainbow-me/rainbowkit/styles.css";
@@ -58,6 +59,10 @@ const connectors = connectorsForWallets([
     groupName: "Recommended",
     wallets: [
       injectedWallet({ chains }),
+      metaMaskWallet({
+        chains: chains,
+        projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
+      }),
       // rainbowWallet({ projectId, chains }),
       walletConnectWallet({
         projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
