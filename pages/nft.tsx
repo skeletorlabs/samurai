@@ -325,7 +325,7 @@ export default function Nft() {
                     {isLoading ? (
                       <span className="animate-pulse">Loading...</span>
                     ) : (
-                      <span className="text-[16px] xl:text-lg">
+                      <span className="text-[14px] sm:text-[16px] xl:text-lg">
                         MINT {numberOfTokens.toString()} SAMURAI NFT
                         {numberOfTokens > 1 && "s"} FOR{" "}
                         {(generalInfo?.unitPrice || 0) * numberOfTokens} ETH
