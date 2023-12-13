@@ -5,7 +5,7 @@ import StateProvider from "@/context/StateContext";
 import {
   injectedWallet,
   // rainbowWallet,
-  // walletConnectWallet,
+  walletConnectWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 
 import "@rainbow-me/rainbowkit/styles.css";
@@ -59,7 +59,10 @@ const connectors = connectorsForWallets([
     wallets: [
       injectedWallet({ chains }),
       // rainbowWallet({ projectId, chains }),
-      // walletConnectWallet({ projectId, chains }),
+      walletConnectWallet({
+        projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
+        chains,
+      }),
     ],
   },
 ]);

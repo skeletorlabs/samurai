@@ -285,7 +285,7 @@ export default function Nft() {
 
       <div className="flex flex-col w-full">
         {/* CONTENT */}
-        <div className="flex flex-col lg:flex-row gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t border-samurai-red/50 border-dotted">
+        <div className="flex flex-col xl:flex-row gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t border-samurai-red/50 border-dotted">
           <div className="flex flex-col relative">
             <div
               className={`flex flex-col text-lg text-neutral-300 gap-8 lg:gap-8 pb-10 ${inter.className}`}
@@ -313,7 +313,7 @@ export default function Nft() {
             </div>
           </div>
 
-          <div className="flex flex-col w-full min-w-[540px] max-w-[540px]">
+          <div className="flex flex-col w-full xl:min-w-[540px] xl:max-w-[540px]">
             <div className="flex flex-col gap-3">
               <div className="flex flex-col lg:flex-row items-center gap-3">
                 <SSButton
@@ -325,7 +325,7 @@ export default function Nft() {
                     {isLoading ? (
                       <span className="animate-pulse">Loading...</span>
                     ) : (
-                      <span>
+                      <span className="text-[16px] xl:text-lg">
                         MINT {numberOfTokens.toString()} SAMURAI NFT
                         {numberOfTokens > 1 && "s"} FOR{" "}
                         {(generalInfo?.unitPrice || 0) * numberOfTokens} ETH
