@@ -502,7 +502,7 @@ export default function Nft() {
                       />
 
                       {/* CHECK ON OPENSEA */}
-                      {/* {signer && nft.metadata && (
+                      {signer && nft.metadata && (
                         <Link
                           target="blank"
                           href={`${
@@ -519,7 +519,7 @@ export default function Nft() {
                         >
                           VIEW
                         </Link>
-                      )} */}
+                      )}
 
                       {/* RENT */}
                       {/* {signer && nft.src && (
@@ -550,14 +550,14 @@ export default function Nft() {
           <div className="flex flex-col relative">
             <h2 className="text-4xl lg:text-5xl font-bold">
               Lastest <span className="text-samurai-red">Mints</span>
-              {/* <p className="text-yellow-200 text-[16px] hover:underline w-max pt-2">
+              <p className="text-yellow-200 text-[16px] hover:underline w-max pt-2">
                 <Link
-                  href="https://testnets.opensea.io/collection/test-sam-nft"
+                  href="https://opensea.io/collection/samuraistarter"
                   target="blank"
                 >
                   View entire collection ➜
                 </Link>
-              </p> */}
+              </p>
             </h2>
 
             <div
