@@ -13,7 +13,7 @@ import {
 import { ethers } from "ethers";
 import Layout from "@/components/layout";
 import Image from "next/image";
-import { Accordion, Carousel } from "flowbite-react";
+import { Carousel } from "flowbite-react";
 import { getNetwork } from "@wagmi/core";
 
 import {
@@ -115,7 +115,7 @@ export default function Nft() {
     [SUPPLY_QUERY],
     fetcher,
     {
-      refreshInterval: 120000,
+      refreshInterval: 5000,
     }
   );
 
@@ -123,7 +123,7 @@ export default function Nft() {
     [MY_NFTS_QUERY, myNftsVariables],
     fetcher,
     {
-      refreshInterval: 120000,
+      refreshInterval: 5000,
     }
   );
 
@@ -131,7 +131,7 @@ export default function Nft() {
     [LAST_FIVE_NFTS_QUERY],
     fetcher,
     {
-      refreshInterval: 120000,
+      refreshInterval: 5000,
     }
   );
 
@@ -465,7 +465,9 @@ export default function Nft() {
                   <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
                   <div className="text-2xl">
                     <span className="text-samurai-red">
-                      {generalInfo?.totalSupply.toString() || 0}
+                      {lastFiveNfts && lastFiveNfts.length > 0
+                        ? lastFiveNfts[0].tokenId
+                        : 0}
                     </span>
                     /
                     {supply

@@ -29,6 +29,10 @@ export type Nfts = {
   metadata?: NFTMetadata;
 }[];
 
+export type Minted = {
+  tokenId: string;
+}[];
+
 export type NFTMetadata = {
   compiler: string;
   description: string;
