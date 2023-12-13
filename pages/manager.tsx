@@ -16,8 +16,7 @@ import { StateContext } from "@/context/StateContext";
 import Layout from "@/components/layout";
 import TopLayout from "@/components/topLayout";
 import { WhitelistDataType } from "@/utils/interfaces";
-import { useRouter } from "next/router";
-import { ethers } from "ethers";
+import { getNetwork } from "@wagmi/core";
 
 type Pinned = {
   imagesCID: string;
@@ -36,6 +35,7 @@ export default function Manager() {
   );
   const { signer, isLoading, setIsLoading } = useContext(StateContext);
   const { address } = useAccount();
+  const { chain } = getNetwork();
 
   const onTextAreaChange = (value: string) => {
     const addresses: string[] = value
@@ -47,59 +47,69 @@ export default function Manager() {
   };
 
   const getGeneralData = useCallback(async () => {
+    setIsLoading(true);
     const response = await general();
     setData(response);
-  }, [setData]);
+    setIsLoading(false);
+  }, [setData, setIsLoading]);
 
   const onTogglePause = useCallback(async () => {
     setIsLoading(true);
-    if (signer) await togglePause(signer);
+    if (signer && chain && !chain.unsupported) await togglePause(signer);
 
     await getGeneralData();
     setIsLoading(false);
-  }, [signer]);
+  }, [chain, signer, setIsLoading]);
 
   const onStartWhitelistRound = useCallback(async () => {
     setIsLoading(true);
-    if (signer) await startWhitelistRound(signer);
+    if (signer && chain && !chain.unsupported)
+      await startWhitelistRound(signer);
 
     await getGeneralData();
     setIsLoading(false);
-  }, [signer]);
+  }, [chain, signer]);
 
   const onSplitAssets = useCallback(async () => {
     setIsLoading(true);
-    if (signer) await releaseWhitelistAssets(signer, percentage);
+    if (signer && chain && !chain.unsupported)
+      await releaseWhitelistAssets(signer, percentage);
 
     await getGeneralData();
     setIsLoading(false);
-  }, [signer]);
+  }, [chain, signer, setIsLoading]);
 
   const onAddToWhitelist = useCallback(async () => {
     setIsLoading(true);
 
-    if (signer && whitelistAddresses.length > 0) {
+    if (
+      signer &&
+      chain &&
+      !chain.unsupported &&
+      whitelistAddresses.length > 0
+    ) {
       await addToWhitelist(signer, whitelistAddresses);
     }
 
     setIsLoading(false);
-  }, [signer, whitelistAddresses]);
+  }, [chain, signer, whitelistAddresses, setIsLoading]);
 
   const getWhiteListInfos = useCallback(async () => {
     setIsLoading(true);
-    if (signer && data && !data.isPaused) {
+    if (signer && chain && !chain.unsupported && data && !data.isPaused) {
       const checkWhitelist = await isWhitelisted(signer);
       console.log(checkWhitelist);
       setWhitelistData(checkWhitelist as WhitelistDataType);
     }
     setIsLoading(false);
-  }, [signer, data, setIsLoading, setWhitelistData]);
+  }, [chain, signer, data, setIsLoading, setWhitelistData]);
 
   const checkOwnership = useCallback(() => {
-    if (signer && address) return data && data.owner === address;
+    if (signer && address && chain && !chain.unsupported)
+      return data && data.owner === address;
 
     return false;
-  }, [signer, data, address]);
+  }, [chain, signer, data, address]);
 
   const createMetadata = useCallback(async () => {
     const response: any = await fetch("/api/pinata");
@@ -137,12 +147,16 @@ export default function Manager() {
     getGeneralData();
   }, []);
 
+  console.log(isLoading);
+
   return (
     <Layout>
       <TopLayout>
         <div className="flex items-center justify-center w-full">
           <div className="flex flex-col w-full h-full justify-center items-center mt-20 mb-10">
-            {signer && checkOwnership() ? (
+            {isLoading ? (
+              <span>You're not allowed to check this page! Get out.</span>
+            ) : signer && checkOwnership() ? (
               <div className="flex flex-col gap-14 w-full">
                 {/* <div className="flex items-center gap-5 bg-black border-b border-t border-gray-800 py-8 px-12">
                   <SSButton click={handlePinButtonClick}>Pin</SSButton>

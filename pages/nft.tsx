@@ -14,6 +14,7 @@ import { ethers } from "ethers";
 import Layout from "@/components/layout";
 import Image from "next/image";
 import { Accordion, Carousel } from "flowbite-react";
+import { getNetwork } from "@wagmi/core";
 
 import {
   SupplyInfo,
@@ -96,6 +97,8 @@ export default function Nft() {
     null
   );
 
+  const { chain } = getNetwork();
+
   const fetcher = (query: string, variables: any) => {
     return request(
       `https://api.studio.thegraph.com/query/38777/samnft-base/version/latest`,
@@ -134,12 +137,12 @@ export default function Nft() {
 
   const getWhiteListInfos = useCallback(async () => {
     setIsLoading(true);
-    if (signer) {
+    if (signer && chain && !chain.unsupported) {
       const checkWhitelist = await isWhitelisted(signer);
       setWhitelistData(checkWhitelist as WhitelistDataType);
     }
     setIsLoading(false);
-  }, [signer, setIsLoading, setWhitelistData]);
+  }, [chain, signer, setIsLoading, setWhitelistData]);
 
   const getGeneralInfo = useCallback(async () => {
     setIsLoading(true);
@@ -151,18 +154,24 @@ export default function Nft() {
 
   const mintNFT = useCallback(async () => {
     setIsLoading(true);
-    await mint(numberOfTokens, signer! as ethers.Signer);
+    if (signer && chain && !chain.unsupported) {
+      await mint(numberOfTokens, signer);
+    }
+
     await getGeneralInfo();
     setIsLoading(false);
   }, [signer, numberOfTokens]);
 
   const freeMintNFT = useCallback(async () => {
     setIsLoading(true);
-    await mint(1, signer! as ethers.Signer, true);
-    await getWhiteListInfos();
+    if (signer && chain && !chain.unsupported) {
+      await mint(1, signer! as ethers.Signer, true);
+      await getWhiteListInfos();
+    }
+
     await getGeneralInfo();
     setIsLoading(false);
-  }, [signer]);
+  }, [chain, signer]);
 
   useEffect(() => {
     setUserNfts([]);
@@ -224,7 +233,9 @@ export default function Nft() {
   }, [supplyData]);
 
   useEffect(() => {
-    getWhiteListInfos();
+    if (signer) {
+      getWhiteListInfos();
+    }
   }, [signer]);
 
   useEffect(() => {
@@ -455,12 +466,11 @@ export default function Nft() {
                       {generalInfo?.totalSupply.toString() || 0}
                     </span>
                     /
-                    {(
-                      (generalInfo?.maxSupplyPublic || 0) +
-                      (generalInfo?.maxSupplyWhitelist || 0)
+                    {(supply
+                      ? Number(supply?.maxSupply) +
+                        Number(supply?.maxWhitelistedSupply)
+                      : 0
                     ).toString()}
-                    {/* {Number(supply?.maxSupply) +
-                      Number(supply?.maxWhitelistedSupply) || 0} */}
                   </div>
                 </div>
 
