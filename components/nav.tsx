@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { Inter } from "next/font/google";
 import { StateContext } from "@/context/StateContext";
 import { Page } from "@/utils/enums";
-// import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import SSButton from "./ssButton";
 
 const inter = Inter({
@@ -50,7 +50,7 @@ export default function Nav() {
         ))}
       </div>
       <div className="flex gap-5 px-5 lg:px-0">
-        {/* {page === Page.nft && <ConnectButton showBalance={false} />} */}
+        {page === Page.nft && <ConnectButton showBalance={false} />}
 
         <div className="hidden xl:flex">
           <SSButton isLink target="blank" href="https://v1.samuraistarter.com">

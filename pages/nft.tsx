@@ -3,14 +3,26 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { StateContext } from "@/context/StateContext";
 import { Inter } from "next/font/google";
 import SSButton from "@/components/ssButton";
-import { general, getNFTData, mint } from "@/contracts_integrations/nft";
+import {
+  general,
+  getNFTData,
+  isWhitelisted,
+  mint,
+} from "@/contracts_integrations/nft";
 
 import { ethers } from "ethers";
 import Layout from "@/components/layout";
 import Image from "next/image";
 import { Accordion, Carousel } from "flowbite-react";
+import { getNetwork } from "@wagmi/core";
 
-import { SupplyInfo, GeneralInfo, Nfts } from "@/utils/interfaces";
+import {
+  SupplyInfo,
+  GeneralInfo,
+  Nfts,
+  WhitelistDataType,
+} from "@/utils/interfaces";
+import { getUnixTime, fromUnixTime, formatDistance } from "date-fns";
 
 import useSWR from "swr";
 import { request } from "graphql-request";
@@ -80,10 +92,16 @@ export default function Nft() {
   const [supply, setSupply] = useState<SupplyInfo | null>(null);
   const [userNfts, setUserNfts] = useState<Nfts | []>([]);
   const [lastFiveNfts, setLastFiveNfts] = useState<Nfts | []>([]);
+  const [numberOfTokens, setNumberOfTokens] = useState(1);
+  const [whitelistData, setWhitelistData] = useState<WhitelistDataType | null>(
+    null
+  );
+
+  const { chain } = getNetwork();
 
   const fetcher = (query: string, variables: any) => {
     return request(
-      `https://api.thegraph.com/subgraphs/name/lucasfernandes/samnft`,
+      `https://api.studio.thegraph.com/query/38777/samnft-base/version/latest`,
       query,
       variables
     );
@@ -117,19 +135,43 @@ export default function Nft() {
     }
   );
 
+  const getWhiteListInfos = useCallback(async () => {
+    setIsLoading(true);
+    if (signer && chain && !chain.unsupported) {
+      const checkWhitelist = await isWhitelisted(signer);
+      setWhitelistData(checkWhitelist as WhitelistDataType);
+    }
+    setIsLoading(false);
+  }, [chain, signer, setIsLoading, setWhitelistData]);
+
   const getGeneralInfo = useCallback(async () => {
     setIsLoading(true);
     const response = await general();
     setGeneralInfo(response as GeneralInfo);
+
     setIsLoading(false);
   }, [setGeneralInfo, setIsLoading]);
 
   const mintNFT = useCallback(async () => {
     setIsLoading(true);
-    await mint(signer! as ethers.Signer);
+    if (signer && chain && !chain.unsupported) {
+      await mint(numberOfTokens, signer);
+    }
+
     await getGeneralInfo();
     setIsLoading(false);
-  }, [signer]);
+  }, [signer, numberOfTokens]);
+
+  const freeMintNFT = useCallback(async () => {
+    setIsLoading(true);
+    if (signer && chain && !chain.unsupported) {
+      await mint(1, signer! as ethers.Signer, true);
+      await getWhiteListInfos();
+    }
+
+    await getGeneralInfo();
+    setIsLoading(false);
+  }, [chain, signer]);
 
   useEffect(() => {
     setUserNfts([]);
@@ -191,6 +233,12 @@ export default function Nft() {
   }, [supplyData]);
 
   useEffect(() => {
+    if (signer) {
+      getWhiteListInfos();
+    }
+  }, [signer]);
+
+  useEffect(() => {
     getGeneralInfo();
   }, []);
 
@@ -207,16 +255,13 @@ export default function Nft() {
               <span className="text-samurai-red"> community</span>.
             </h1>
             <p
-              className={`leading-normal lg:leading-relaxed pt-6 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
+              className={`leading-normal lg:leading-relaxed pt-16 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
             >
               Participate in the SamNFT minting event to become an integral part
               of our exciting community and gain access to tremendous benefits
               including lifetime launchpad access, cashback rewards, a $SAM
               token airdrop and much more!
             </p>
-            <div className="text-samurai-red text-5xl lg:text-4xl mt-12">
-              Coming soon!
-            </div>
           </div>
 
           <div className="flex md:min-w-[400px] md:max-w-[400px] h-[500px] md:bg-white p-2 rounded-[8px] relative">
@@ -240,7 +285,7 @@ export default function Nft() {
 
       <div className="flex flex-col w-full">
         {/* CONTENT */}
-        <div className="flex flex-col lg:flex-row gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t border-samurai-red/50 border-dotted">
+        <div className="flex flex-col xl:flex-row gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t border-samurai-red/50 border-dotted">
           <div className="flex flex-col relative">
             <div
               className={`flex flex-col text-lg text-neutral-300 gap-8 lg:gap-8 pb-10 ${inter.className}`}
@@ -268,74 +313,202 @@ export default function Nft() {
             </div>
           </div>
 
-          {/* REMOVE THE CONTENT FROM THIS CONDITION LATER */}
-          {true === undefined && (
-            <div className="flex flex-col w-full min-w-[500px] max-w-[500px]">
-              <div className="flex flex-col gap-3">
-                <div className="flex flex-col lg:flex-row items-center gap-3">
-                  <SSButton disabled={!signer} click={() => mintNFT()} flexSize>
-                    MINT A SAMURAI NFT
-                  </SSButton>
-                  <SSButton
-                    secondary
-                    disabled={!signer}
-                    click={() => {}}
-                    flexSize
+          <div className="flex flex-col w-full xl:min-w-[540px] xl:max-w-[540px]">
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col lg:flex-row items-center gap-3">
+                <SSButton
+                  disabled={!signer || isLoading || generalInfo?.isPaused}
+                  click={() => mintNFT()}
+                  flexSize
+                >
+                  <>
+                    {isLoading ? (
+                      <span className="animate-pulse">Loading...</span>
+                    ) : generalInfo?.isPaused ? (
+                      <span>Paused</span>
+                    ) : (
+                      <span className="text-[14px] sm:text-[16px] xl:text-lg">
+                        MINT {numberOfTokens.toString()} SAMURAI NFT
+                        {numberOfTokens > 1 && "s"} FOR{" "}
+                        {(generalInfo?.unitPrice || 0) * numberOfTokens} ETH
+                      </span>
+                    )}
+                  </>
+                </SSButton>
+
+                <div className="flex items-center ">
+                  <button
+                    className="w-8 h-8"
+                    onClick={() =>
+                      numberOfTokens > 1
+                        ? setNumberOfTokens(numberOfTokens - 1)
+                        : {}
+                    }
                   >
-                    RENT A SAMURAI NFT
-                  </SSButton>
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 19.5L8.25 12l7.5-7.5"
+                      ></path>
+                    </svg>
+                  </button>
+                  <span className="bg-black text-white text-center rounded-xl text-2xl min-w-[30px]">
+                    {numberOfTokens}
+                  </span>
+                  <button
+                    className="w-8 h-8"
+                    onClick={() =>
+                      numberOfTokens < 10
+                        ? setNumberOfTokens(numberOfTokens + 1)
+                        : {}
+                    }
+                  >
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                      ></path>
+                    </svg>
+                  </button>
                 </div>
 
-                <div className="flex flex-col text-xl gap-3 mt-4">
-                  <div className="flex justify-between items-center gap-4">
-                    <div>
-                      <span className="text-samurai-red">MINTED</span>
-                      /SUPPLY
-                    </div>
-                    <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
-                    <div className="text-2xl">
-                      <span className="text-samurai-red">
-                        {generalInfo?.totalSupply.toString() || 0}
-                      </span>
-                      /
-                      {Number(supply?.maxSupply) +
-                        Number(supply?.maxWhitelistedSupply) || 0}
-                    </div>
+                {/* <SSButton
+                  secondary
+                  disabled={!signer}
+                  click={() => {}}
+                  flexSize
+                >
+                  RENT A SAMURAI NFT
+                </SSButton> */}
+              </div>
+              {!generalInfo?.isPaused && whitelistData?.isWhitelisted && (
+                <div className="flex items-center justify-between text-white/80 py-5 mt-5 bg-white/10 px-4 rounded-[8px]">
+                  <div className="flex items-center gap-2 text-green-400">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      fill="currentColor"
+                      className="bi bi-check-circle-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                    </svg>
+                    WHITELISTED
                   </div>
 
-                  {signer && (
-                    <div className="flex justify-between items-center gap-2">
-                      <div>MY NFTS</div>
-                      <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
-                      <div>
-                        <span className="text-samurai-red text-2xl">
-                          {userNfts?.length || 0}
-                        </span>
-                      </div>
-                    </div>
+                  {!whitelistData?.hasUsedFreeMint &&
+                    whitelistData?.whitelistFinishAt > 0 &&
+                    getUnixTime(new Date()) <
+                      whitelistData?.whitelistFinishAt && (
+                      <button
+                        disabled={isLoading || generalInfo?.isPaused}
+                        onClick={freeMintNFT}
+                        className="text-green-400 border p-2 px-5 rounded-[8px] text-[12px] border-green-400 hover:bg-green-400 hover:text-black font-semibold"
+                      >
+                        {isLoading ? (
+                          "Loading..."
+                        ) : (
+                          <>
+                            MINT FOR FREE UNTIL{" "}
+                            {fromUnixTime(whitelistData?.whitelistFinishAt)
+                              .toDateString()
+                              .toUpperCase()}
+                          </>
+                        )}
+                      </button>
+                    )}
+                  {whitelistData.hasUsedFreeMint && (
+                    <span className="text-green-400 font-semibold">MINTED</span>
                   )}
 
-                  <div className="flex w-full lg:max-w-[500px] items-center flex-wrap gap-4 mt-5">
-                    {userNfts?.map((nft, index) => (
-                      <div
-                        key={index}
-                        className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
-                      >
-                        <Image
-                          src={nft?.src ? nft?.src : "/loading.gif"}
-                          fill
-                          alt={image}
-                          className="scale-[0.95] rounded-[8px]"
-                        />
+                  {!whitelistData?.hasUsedFreeMint &&
+                    whitelistData?.whitelistFinishAt > 0 &&
+                    getUnixTime(new Date()) >
+                      whitelistData?.whitelistFinishAt && (
+                      <span className="text-red-400 font-semibold">
+                        OUT OF FREE MINT WINDOW
+                      </span>
+                    )}
 
-                        {/* CHECK ON OPENSEA */}
-                        {signer && nft.metadata && (
-                          <Link
-                            target="blank"
-                            href={`${
-                              process.env.NEXT_PUBLIC_OPENSEA_URL as string
-                            }/${nft.tokenId}`}
-                            className="
+                  {!whitelistData?.hasUsedFreeMint &&
+                    whitelistData?.whitelistFinishAt === 0 && (
+                      <span className="text-green-400 font-semibold">
+                        COMING SOON...
+                      </span>
+                    )}
+                </div>
+              )}
+
+              <div className="flex flex-col text-xl gap-3 mt-8">
+                <div className="flex justify-between items-center gap-4">
+                  <div>
+                    <span className="text-samurai-red">MINTED</span>
+                    /SUPPLY
+                  </div>
+                  <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
+                  <div className="text-2xl">
+                    <span className="text-samurai-red">
+                      {generalInfo?.totalSupply.toString() || 0}
+                    </span>
+                    /
+                    {(supply
+                      ? Number(supply?.maxSupply) +
+                        Number(supply?.maxWhitelistedSupply)
+                      : 0
+                    ).toString()}
+                  </div>
+                </div>
+
+                {signer && (
+                  <div className="flex justify-between items-center gap-2">
+                    <div>MY NFTS</div>
+                    <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
+                    <div>
+                      <span className="text-samurai-red text-2xl">
+                        {userNfts?.length || 0}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex w-full lg:max-w-[600px] items-center flex-wrap gap-14 mt-5 2xl:max-h-[830px] 2xl:overflow-scroll">
+                  {userNfts?.map((nft, index) => (
+                    <div
+                      key={index}
+                      className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
+                    >
+                      <Image
+                        src={nft?.src ? nft?.src : "/loading.gif"}
+                        fill
+                        alt={image}
+                        className="scale-[0.95] rounded-[8px]"
+                      />
+
+                      {/* CHECK ON OPENSEA */}
+                      {/* {signer && nft.metadata && (
+                        <Link
+                          target="blank"
+                          href={`${
+                            process.env.NEXT_PUBLIC_OPENSEA_URL as string
+                          }/${nft.tokenId}`}
+                          className="
                               absolute bottom-12 left-0 
                               border border-l-0 border-black rounded-tr-[8px] rounded-br-[8px] 
                               px-3 
@@ -343,15 +516,15 @@ export default function Nft() {
                               bg-blue-500  shadow-lg
                               transition-all hover:pl-6 hover:font-black  
                             "
-                          >
-                            VIEW
-                          </Link>
-                        )}
+                        >
+                          VIEW
+                        </Link>
+                      )} */}
 
-                        {/* RENT */}
-                        {signer && nft.src && (
-                          <button
-                            className="
+                      {/* RENT */}
+                      {/* {signer && nft.src && (
+                        <button
+                          className="
                               absolute bottom-4 left-0 
                               border border-l-0 border-black rounded-tr-[8px] rounded-br-[8px] 
                               px-3 
@@ -359,33 +532,32 @@ export default function Nft() {
                               bg-yellow-300  shadow-lg
                               transition-all hover:pl-6 hover:font-black  
                             "
-                          >
-                            RENT
-                          </button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
+                        >
+                          RENT
+                        </button>
+                      )} */}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
       <div className="flex flex-col w-full">
         {/* LATEST NFTS MINTED */}
-        {/* <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t-[0.5px] border-samurai-red">
+        <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t-[0.5px] border-samurai-red">
           <div className="flex flex-col relative">
             <h2 className="text-4xl lg:text-5xl font-bold">
               Lastest <span className="text-samurai-red">Mints</span>
-              <p className="text-yellow-200 text-[16px] hover:underline w-max pt-2">
+              {/* <p className="text-yellow-200 text-[16px] hover:underline w-max pt-2">
                 <Link
                   href="https://testnets.opensea.io/collection/test-sam-nft"
                   target="blank"
                 >
                   View entire collection ➜
                 </Link>
-              </p>
+              </p> */}
             </h2>
 
             <div
@@ -423,7 +595,7 @@ export default function Nft() {
               ))}
             </div>
           </div>
-        </div> */}
+        </div>
 
         {/* STAKE */}
         {/* <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">

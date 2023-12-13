@@ -13,6 +13,20 @@ import {
 } from "@/utils/svgs";
 import { Page } from "./enums";
 
+export const LINKS: { [key: number]: string } = {
+  1337: "http://localhost:8545",
+  5: "https://goerli.etherscan.io",
+  11155111: "https://sepolia.etherscan.io/",
+  8454: "https://basescan.org",
+};
+
+export const RPC_URL: { [key: number]: string } = {
+  1337: "http://localhost:8545",
+  5: process.env.NEXT_PUBLIC_GOERLI_RPC_URL as string,
+  11155111: process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL as string,
+  8454: process.env.NEXT_PUBLIC_BASE_RPC_URL as string,
+};
+
 export const NAV = [
   {
     title: "Home",

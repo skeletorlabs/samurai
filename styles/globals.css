@@ -11,14 +11,14 @@
   }  
 
   [data-testid="rk-connect-button"] {
-    background-color: transparent !important;
+    background-color: rgba(0, 0, 0, 0.7) !important;
     display: flex !important; 
     justify-content: center !important;
     align-items: center !important;
     border: 1px solid #FF284C !important;
     border-radius: 8px !important;
     color: #FF284C !important;
-    padding: 6px 22px 6px 22px !important;
+    padding: 26px 26px 26px 26px !important;
     /* height: 56px !important; */
     font-weight: normal !important;
   }
