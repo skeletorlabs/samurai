@@ -98,7 +98,6 @@ export default function Manager() {
     setIsLoading(true);
     if (signer && chain && !chain.unsupported && data && !data.isPaused) {
       const checkWhitelist = await isWhitelisted(signer);
-      console.log(checkWhitelist);
       setWhitelistData(checkWhitelist as WhitelistDataType);
     }
     setIsLoading(false);
@@ -146,8 +145,6 @@ export default function Manager() {
   useEffect(() => {
     getGeneralData();
   }, []);
-
-  console.log(isLoading);
 
   return (
     <Layout>
