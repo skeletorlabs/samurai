@@ -33,6 +33,11 @@ export type Minted = {
   tokenId: string;
 }[];
 
+export type UniqueWallet = {
+  tokenId: string;
+  wallet: string;
+}[];
+
 export type NFTMetadata = {
   compiler: string;
   description: string;

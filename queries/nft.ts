@@ -21,3 +21,12 @@ export const LAST_FIVE_NFTS_QUERY = `
     }
   }
 `;
+
+export const ALL_WALLETS = `
+  query ALL_WALLETS($first: Int!, $skip: Int!) {
+    minteds(orderBy: tokenId, orderDirection: asc, first: $first, skip: $skip) {
+      tokenId,
+      wallet
+    }
+  }
+`;

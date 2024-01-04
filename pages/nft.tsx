@@ -21,6 +21,7 @@ import {
   GeneralInfo,
   Nfts,
   WhitelistDataType,
+  UniqueWallet,
 } from "@/utils/interfaces";
 import { getUnixTime, fromUnixTime, formatDistance } from "date-fns";
 
@@ -30,6 +31,7 @@ import {
   SUPPLY_QUERY,
   MY_NFTS_QUERY,
   LAST_FIVE_NFTS_QUERY,
+  ALL_WALLETS,
 } from "@/queries/nft";
 import TopLayout from "@/components/topLayout";
 
@@ -134,6 +136,97 @@ export default function Nft() {
       refreshInterval: 5000,
     }
   );
+
+  // const { data: wallets100 } = useSWR(
+  //   [ALL_WALLETS, { first: 100, skip: 0 }],
+  //   fetcher
+  // );
+
+  // const { data: wallets200 } = useSWR(
+  //   [ALL_WALLETS, { first: 100, skip: 100 }],
+  //   fetcher
+  // );
+
+  // const { data: wallets300 } = useSWR(
+  //   [ALL_WALLETS, { first: 100, skip: 200 }],
+  //   fetcher
+  // );
+
+  // const { data: wallets400 } = useSWR(
+  //   [ALL_WALLETS, { first: 100, skip: 300 }],
+  //   fetcher
+  // );
+
+  // const { data: wallets500 } = useSWR(
+  //   [ALL_WALLETS, { first: 100, skip: 400 }],
+  //   fetcher
+  // );
+
+  // const { data: wallets600 } = useSWR(
+  //   [ALL_WALLETS, { first: 100, skip: 500 }],
+  //   fetcher
+  // );
+
+  // const { data: wallets700 } = useSWR(
+  //   [ALL_WALLETS, { first: 100, skip: 600 }],
+  //   fetcher
+  // );
+
+  // const { data: wallets800 } = useSWR(
+  //   [ALL_WALLETS, { first: 100, skip: 700 }],
+  //   fetcher
+  // );
+
+  // const { data: wallets900 } = useSWR(
+  //   [ALL_WALLETS, { first: 100, skip: 800 }],
+  //   fetcher
+  // );
+
+  // useEffect(() => {
+  //   if (
+  //     wallets100 !== undefined &&
+  //     wallets200 !== undefined &&
+  //     wallets300 !== undefined &&
+  //     wallets400 !== undefined &&
+  //     wallets500 !== undefined &&
+  //     wallets600 !== undefined &&
+  //     wallets700 !== undefined &&
+  //     wallets800 !== undefined &&
+  //     wallets900 !== undefined
+  //   ) {
+  //     const list = [
+  //       ...wallets100!.minteds,
+  //       ...wallets200!.minteds,
+  //       ...wallets300!.minteds,
+  //       ...wallets400!.minteds,
+  //       ...wallets500!.minteds,
+  //       ...wallets600!.minteds,
+  //       ...wallets700!.minteds,
+  //       ...wallets800!.minteds,
+  //       ...wallets900!.minteds,
+  //     ];
+
+  //     const uniqueWallets = new Set();
+
+  //     const filteredArray = list.filter((item) => {
+  //       const isUnique = uniqueWallets.has(item.wallet);
+  //       uniqueWallets.add(item.wallet);
+  //       return !isUnique;
+  //     });
+
+  //     console.log(filteredArray);
+  //   }
+  // }, [
+  //   wallets100,
+  //   wallets200,
+  //   wallets300,
+  //   wallets400,
+  //   wallets500,
+  //   wallets600,
+  //   wallets700,
+  //   wallets800,
+  //   wallets900,
+  // ]);
 
   const getWhiteListInfos = useCallback(async () => {
     setIsLoading(true);
@@ -470,10 +563,8 @@ export default function Nft() {
                         : 0}
                     </span>
                     /
-                    {supply
-                      ? Number(supply?.maxSupply) +
-                        Number(supply?.maxWhitelistedSupply)
-                      : 0}
+                    {/* {supply ? Number(supply?.maxSupply) + Number(supply?.maxWhitelistedSupply) : 0} */}
+                    2000
                   </div>
                 </div>
 
