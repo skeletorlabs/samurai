@@ -19,10 +19,9 @@ const inter = Inter({
 
 const latestupdates = [
   {
-    title: "SamNFT by Samurai Starter",
-    description:
-      "It is now easier and fairer than ever to get into early-stage token offerings",
-    href: "https://medium.com/samurai-starter/samnft-by-samurai-starter-8da4b373c66",
+    title: "Samurai Starter — SamNFT Final Round UPDATE",
+    description: "Important updates and timelines regarding SamNFT",
+    href: "https://medium.com/samurai-starter/samurai-starter-samnft-final-round-update-c3edebc4c40f",
     image: "/samnft-article.png",
   },
   {
