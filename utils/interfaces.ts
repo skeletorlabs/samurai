@@ -134,3 +134,17 @@ export interface IDO {
   raised: string;
   goal: string;
 }
+
+export interface IDONEW {
+  idoImageSrc: string;
+  acceptedToken: string;
+  network: string;
+  networkImageSrc: string;
+  type: string;
+  projectName: string;
+  projectDescription: string;
+  raised: string;
+  price: string;
+  idoDate: number;
+  registrationDate: number;
+}

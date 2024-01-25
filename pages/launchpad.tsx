@@ -7,8 +7,8 @@ import { useCallback, useState } from "react";
 import { rocket, telegram, linkedin, op, dola, velov2 } from "@/utils/svgs";
 import SSButton from "@/components/ssButton";
 import TopLayout from "@/components/topLayout";
-import LaunchpadCard from "@/components/launchpadCard";
-import { IDO } from "@/utils/interfaces";
+import LaunchpadCardNew from "@/components/launchpadCardNew";
+import { IDO, IDONEW } from "@/utils/interfaces";
 import IDOModal from "@/components/IDOModal";
 
 const inter = Inter({
@@ -16,6 +16,35 @@ const inter = Inter({
 });
 
 export default function Launchpad() {
+  // export interface IDONEW {
+  //   idoImageSrc: string;
+  //   acceptedToken: string;
+  //   network: string;
+  //   networkImageSrc: string;
+  //   type: string;
+  //   projectName: string;
+  //   projectDescription: string;
+  //   raised: string;
+  //   price: string;
+  //   idoDate: number;
+  //   registrationDate: number;
+  // }
+  const idosNew: IDONEW[] = [
+    {
+      idoImageSrc: "/IDOs/babylon.jpeg",
+      acceptedToken: "USDC",
+      network: "BASE",
+      networkImageSrc: "/ido-sample.svg",
+      type: "Public Round",
+      projectName: "Babylonia",
+      projectDescription:
+        "Loren ipsum dolor sit amet, some stuff text another one ipsum dolor sit amet dolor.",
+      raised: "100,000",
+      price: "0,03",
+      idoDate: 1707577630,
+      registrationDate: 1706195232,
+    },
+  ];
   const idos: IDO[] = [
     {
       tokenImageSrc: "/ido-sample.svg",
@@ -268,11 +297,11 @@ export default function Launchpad() {
             className={`flex justify-center lg:justify-start items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
           >
             {/* <div className="text-5xl lg:text-4xl mt-8">Coming soon!</div> */}
-            {idos.map((ido: IDO, index) => (
+            {idosNew.map((ido: IDONEW, index) => (
               // <IDOModal key={index} ido={ido}>
               //   <LaunchpadCard ido={ido} />
               // </IDOModal>
-              <LaunchpadCard key={index} ido={ido} />
+              <LaunchpadCardNew key={index} ido={ido} />
             ))}
           </div>
         </div>
