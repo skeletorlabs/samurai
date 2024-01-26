@@ -2,16 +2,83 @@ import {
   medium,
   twitter,
   telegram,
-  discord,
   linkedin,
   home,
   nft,
   rocket,
-  sanka,
   token,
   incubation,
 } from "@/utils/svgs";
 import { Page } from "./enums";
+import { IDONEW } from "./interfaces";
+
+export const IDO_LIST: IDONEW[] = [
+  {
+    id: "launchpad/shiba",
+    idoImageSrc: "/IDOs/shibainu.png",
+    acceptedToken: "USDC",
+    network: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    type: "Public Round",
+    projectName: "Shiba Inu",
+    projectDescription:
+      "Loren ipsum dolor sit amet, some stuff text another one ipsum dolor sit amet dolor amet dorum.",
+    raised: "100,000",
+    price: "0.07",
+    idoDate: 1707577630,
+    registrationDate: 1706195232,
+    simplified: true,
+    tgeDate: 1706195232,
+    tgePercentage: 10,
+    cliff: 86400 * 30 * 4,
+    releaseType: "Linear",
+    currentPhase: "Participation",
+  },
+
+  {
+    id: "launchpad/ethereum",
+    idoImageSrc: "/IDOs/ethereum.png",
+    acceptedToken: "ETH",
+    network: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    type: "Public Round",
+    projectName: "Ethereum",
+    projectDescription:
+      "Loren ipsum dolor sit amet, some stuff text another one ipsum dolor sit amet dolor amet dorum.",
+    raised: "300,000",
+    price: "0.1",
+    idoDate: 1707577630,
+    registrationDate: 1706195232,
+    simplified: true,
+    tgeDate: 1706195232,
+    tgePercentage: 10,
+    cliff: 86400 * 30 * 4,
+    releaseType: "Linear",
+    currentPhase: "TGE",
+  },
+
+  {
+    id: "launchpad/babylon",
+    idoImageSrc: "/IDOs/babylon.jpeg",
+    acceptedToken: "USDC",
+    network: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    type: "Public Round",
+    projectName: "Babylon",
+    projectDescription:
+      "Loren ipsum dolor sit amet, some stuff text another one ipsum dolor sit amet dolor amet dorum.",
+    raised: "100,000",
+    price: "0.03",
+    idoDate: 1707577630,
+    registrationDate: 1706195232,
+    simplified: true,
+    tgeDate: 1706195232,
+    tgePercentage: 10,
+    cliff: 86400 * 30 * 4,
+    releaseType: "Linear",
+    currentPhase: "Release",
+  },
+];
 
 export const LINKS: { [key: number]: string } = {
   1337: "http://localhost:8545",

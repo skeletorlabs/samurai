@@ -136,6 +136,7 @@ export interface IDO {
 }
 
 export interface IDONEW {
+  id: string;
   idoImageSrc: string;
   acceptedToken: string;
   network: string;
@@ -147,4 +148,10 @@ export interface IDONEW {
   price: string;
   idoDate: number;
   registrationDate: number;
+  simplified: boolean;
+  tgeDate: number;
+  tgePercentage: number;
+  cliff: number;
+  releaseType: string;
+  currentPhase: string;
 }

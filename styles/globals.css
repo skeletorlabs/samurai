@@ -39,3 +39,7 @@
   opacity: 0.9 !important;
 }
 
+.text-border {
+  box-shadow:  0 0 1em gold, 0 0 1em red;
+}
+

@@ -10,6 +10,7 @@ import TopLayout from "@/components/topLayout";
 import LaunchpadCardNew from "@/components/launchpadCardNew";
 import { IDO, IDONEW } from "@/utils/interfaces";
 import IDOModal from "@/components/IDOModal";
+import { IDO_LIST } from "@/utils/constants";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,22 +30,7 @@ export default function Launchpad() {
   //   idoDate: number;
   //   registrationDate: number;
   // }
-  const idosNew: IDONEW[] = [
-    {
-      idoImageSrc: "/IDOs/babylon.jpeg",
-      acceptedToken: "USDC",
-      network: "BASE",
-      networkImageSrc: "/ido-sample.svg",
-      type: "Public Round",
-      projectName: "Babylonia",
-      projectDescription:
-        "Loren ipsum dolor sit amet, some stuff text another one ipsum dolor sit amet dolor.",
-      raised: "100,000",
-      price: "0,03",
-      idoDate: 1707577630,
-      registrationDate: 1706195232,
-    },
-  ];
+
   const idos: IDO[] = [
     {
       tokenImageSrc: "/ido-sample.svg",
@@ -194,6 +180,26 @@ export default function Launchpad() {
         </div>
       </TopLayout>
 
+      {/* Offerings */}
+      <div className="flex flex-col py-10 md:py-20 w-full bg-white/20 border-t-[1px] border-samurai-red/40">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+          <h2 className="text-4xl lg:text-5xl font-bold">
+            <span className="text-samurai-red">Upcoming</span> Token Offerings
+          </h2>
+          <div
+            className={`flex justify-center lg:justify-start items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+          >
+            {/* <div className="text-5xl lg:text-4xl mt-8">Coming soon!</div> */}
+            {IDO_LIST.map((ido: IDONEW, index) => (
+              // <IDOModal key={index} ido={ido}>
+              //   <LaunchpadCard ido={ido} />
+              // </IDOModal>
+              <LaunchpadCardNew key={index} ido={ido} />
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* HOW TO PARTICIPATE */}
       <div
         id="participate"
@@ -283,26 +289,6 @@ export default function Launchpad() {
                 rewards after participating in the token offering.
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Offerings */}
-      <div className="flex flex-col py-10 md:py-20 w-full bg-white/20 border-t-[1px] border-samurai-red/40">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
-          <h2 className="text-4xl lg:text-5xl font-bold">
-            <span className="text-samurai-red">Upcoming</span> Token Offerings
-          </h2>
-          <div
-            className={`flex justify-center lg:justify-start items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
-          >
-            {/* <div className="text-5xl lg:text-4xl mt-8">Coming soon!</div> */}
-            {idosNew.map((ido: IDONEW, index) => (
-              // <IDOModal key={index} ido={ido}>
-              //   <LaunchpadCard ido={ido} />
-              // </IDOModal>
-              <LaunchpadCardNew key={index} ido={ido} />
-            ))}
           </div>
         </div>
       </div>
