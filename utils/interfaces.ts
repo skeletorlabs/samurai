@@ -144,6 +144,7 @@ export interface IDONEW {
   type: string;
   projectName: string;
   projectDescription: string;
+  projectTokenSymbol: string;
   raised: string;
   price: string;
   idoDate: number;

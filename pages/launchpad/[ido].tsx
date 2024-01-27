@@ -21,6 +21,9 @@ export default function Ido() {
   const { ido: idoID } = query;
 
   const ido = IDO_LIST.find((item) => item.id.includes(idoID as string));
+  const idoIndex = IDO_LIST.findIndex((item) =>
+    item.id.includes(idoID as string)
+  );
   const bg = `url("${ido?.idoImageSrc}")`;
 
   const phases = [
@@ -53,18 +56,14 @@ export default function Ido() {
 
   const currentPhase = phases.find((item) => item.title === ido?.currentPhase);
 
-  const userPhases = [
-    { phase: simplifiedPhases[0], completed: true, participation: 100 },
-    { phase: simplifiedPhases[1], completed: false },
-    { phase: simplifiedPhases[2], completed: false },
+  const mockedUserIdosPhases = [
+    { ido: 0, phase: 0, completed: false, participation: 0 },
+    { ido: 1, phase: 0, completed: true, participation: 1000 },
+    { ido: 2, phase: 1, completed: false, participation: 0 },
+    { ido: 3, phase: 2, completed: false, participation: 0 },
   ];
 
-  const userPhase = userPhases.find(
-    (item) => item.phase.title === currentPhase?.title
-  );
-
-  console.log(userPhase);
-  console.log(currentPhase);
+  const userIdo = mockedUserIdosPhases.find((item) => item.ido === idoIndex);
 
   const onInputChange = (value: string) => {
     const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
@@ -234,7 +233,7 @@ export default function Ido() {
                 )}
 
                 {currentPhase?.title === "Participation" &&
-                  !userPhase?.completed && (
+                  !userIdo?.completed && (
                     <div className="flex flex-col">
                       <button className="self-end text-sm mb-1 hover:text-samurai-red">
                         BALANCE: 10000
@@ -266,14 +265,14 @@ export default function Ido() {
                   )}
 
                 {currentPhase?.title === "Participation" &&
-                  userPhase?.completed && (
+                  userIdo?.completed && (
                     <div className="flex flex-row justify-center border-t border-white/20 pt-12 gap-16 mt-4">
                       <div className="p-4 px-6 border border-white/20 rounded-[8px]">
                         <p className={`text-xl ${inter.className}`}>
                           MY PARTICIPATION
                         </p>
                         <p className="text-4xl text-samurai-red">
-                          {userPhase?.participation?.toLocaleString("en-us", {
+                          {userIdo?.participation?.toLocaleString("en-us", {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })}{" "}
@@ -287,12 +286,12 @@ export default function Ido() {
                         </p>
                         <p className="text-4xl text-samurai-red">
                           {(
-                            Number(userPhase?.participation) * Number(ido.price)
+                            Number(userIdo?.participation) * Number(ido.price)
                           )?.toLocaleString("en-us", {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })}{" "}
-                          {ido.projectName}
+                          {ido.projectTokenSymbol}
                         </p>
                       </div>
                     </div>

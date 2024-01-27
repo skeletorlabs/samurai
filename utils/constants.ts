@@ -14,6 +14,28 @@ import { IDONEW } from "./interfaces";
 
 export const IDO_LIST: IDONEW[] = [
   {
+    id: "launchpad/slp",
+    idoImageSrc: "/IDOs/slp.png",
+    acceptedToken: "USDC",
+    network: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    type: "Public Round",
+    projectName: "Axie Infinity",
+    projectDescription:
+      "Loren ipsum dolor sit amet, some stuff text another one ipsum dolor sit amet dolor amet dorum.",
+    projectTokenSymbol: "SLP",
+    raised: "100,000",
+    price: "0.07",
+    idoDate: 1707577630,
+    registrationDate: 1706195232,
+    simplified: true,
+    tgeDate: 1706195232,
+    tgePercentage: 10,
+    cliff: 86400 * 30 * 4,
+    releaseType: "Linear",
+    currentPhase: "Participation",
+  },
+  {
     id: "launchpad/shiba",
     idoImageSrc: "/IDOs/shibainu.png",
     acceptedToken: "USDC",
@@ -23,6 +45,7 @@ export const IDO_LIST: IDONEW[] = [
     projectName: "Shiba Inu",
     projectDescription:
       "Loren ipsum dolor sit amet, some stuff text another one ipsum dolor sit amet dolor amet dorum.",
+    projectTokenSymbol: "SHIB",
     raised: "100,000",
     price: "0.07",
     idoDate: 1707577630,
@@ -45,6 +68,7 @@ export const IDO_LIST: IDONEW[] = [
     projectName: "Ethereum",
     projectDescription:
       "Loren ipsum dolor sit amet, some stuff text another one ipsum dolor sit amet dolor amet dorum.",
+    projectTokenSymbol: "ETH",
     raised: "300,000",
     price: "0.1",
     idoDate: 1707577630,
@@ -67,6 +91,7 @@ export const IDO_LIST: IDONEW[] = [
     projectName: "Babylon",
     projectDescription:
       "Loren ipsum dolor sit amet, some stuff text another one ipsum dolor sit amet dolor amet dorum.",
+    projectTokenSymbol: "BAB",
     raised: "100,000",
     price: "0.03",
     idoDate: 1707577630,
