@@ -293,7 +293,7 @@ export default function Tokens() {
                 Starter ecosystem and is designed to deliver tremendous benefits
                 to the Samurai Starter community. The more you participate, the
                 more you earn, the more future benefits you may enjoy. $SAM is
-                minted on Ethereum layer-2 Base with a maximum supply of 100m
+                minted on Ethereum layer-2 Base with a maximum supply of 130m
                 tokens.
               </p>
               <div className="text-samurai-red text-5xl lg:text-4xl mt-12">
