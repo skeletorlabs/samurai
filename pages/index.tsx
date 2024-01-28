@@ -32,10 +32,10 @@ const latestupdates = [
     image: "/token-guide.png",
   },
   {
-    title: "Our Vision",
-    description: "Community is at the center of everything we do",
-    href: "https://medium.com/samurai-starter/samurai-starter-our-vision-d8a01842f564",
-    image: "/vision.png",
+    title: "Samurai Starter — a ve(3,3) DEX Explainer",
+    description: "Time to kickstart the Samurai Starter ve(3,3) flywheel",
+    href: "https://medium.com/samurai-starter/samurai-starter-a-ve-3-3-dex-explainer-612efa18b142",
+    image: "/ve33.png",
   },
 ];
 

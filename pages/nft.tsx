@@ -50,12 +50,12 @@ const utilities = [
   {
     title: "Lifetime Launchpad Access",
     description:
-      "Enjoy lifetime access to all token offerings on Samurai Starter. No need to buy and stake costly launchpad tokens; No more token staking tiers; Minimal barriers to entry. SamNFT gives you equal access to token offerings from the most novel and hyped startups in the crypto space.",
+      "Enjoy lifetime access to all token offerings on Samurai Starter. By holding SamNFT, you enjoy guaranteed whitelisting to amazing token offerings from the most innovative and hyped projects in the Web3 space.",
   },
   {
     title: "$SAM Airdrop",
     description:
-      "Our loyalty reward token, $SAM, is scheduled to launch Q4 2023 on Base. Purchase a SamNFT during the minting period to be eligible to receive a generous share of the total supply of $SAM tokens. For every 1,000 SamNFTs minted, we add 5% of the total supply of $SAM to the SamNFT airdrop. If 1,000 SamNFTs are minted, we airdrop 5% of the $SAM supply to minters. If the maximum 5,000 SamNFTs are minted, we airdrop 25% of the $SAM supply to minters.",
+      "Our loyalty reward token, $SAM, is scheduled to launch Q1 2024 on Base. Purchase a SamNFT during the minting period to be eligible to receive a generous share of the total supply of $SAM tokens. 10% of the entire $SAM supply will be claimed by SamNFT minters!",
   },
   {
     title: "Cashback Rewards",
