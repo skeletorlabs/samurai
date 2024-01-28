@@ -50,7 +50,10 @@ export default function Launchpad() {
       </TopLayout>
 
       {/* Offerings */}
-      <div className="flex flex-col py-10 md:py-20 w-full bg-white/20 border-t-[1px] border-samurai-red/40">
+      <div
+        id="participate"
+        className="flex flex-col py-10 md:py-20 w-full bg-white/20 border-t-[1px] border-samurai-red/40"
+      >
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Upcoming</span> Token Offerings
@@ -66,10 +69,7 @@ export default function Launchpad() {
       </div>
 
       {/* HOW TO PARTICIPATE */}
-      <div
-        id="participate"
-        className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted"
-      >
+      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted">
         <div className="flex flex-col relative">
           <h2 className="text-4xl lg:text-5xl font-bold">
             How to <span className="text-samurai-red">participate</span>

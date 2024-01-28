@@ -4,34 +4,40 @@ import StateProvider from "@/context/StateContext";
 
 import {
   injectedWallet,
-  // rainbowWallet,
   walletConnectWallet,
   metaMaskWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 
 import "@rainbow-me/rainbowkit/styles.css";
 import {
-  getDefaultWallets,
   RainbowKitProvider,
   midnightTheme,
   connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, sepolia, WagmiConfig } from "wagmi";
-import {
-  mainnet,
-  polygon,
-  optimism,
-  arbitrum,
-  goerli,
-  localhost,
-  base,
-} from "wagmi/chains";
-import { alchemyProvider } from "wagmi/providers/alchemy";
+import { base } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
+import { defineChain } from "viem";
+
+export const localhost = /*#__PURE__*/ defineChain({
+  id: 31337,
+  name: "Localhost",
+  network: "localhost",
+  nativeCurrency: {
+    decimals: 18,
+    name: "Ether",
+    symbol: "ETH",
+  },
+  rpcUrls: {
+    default: { http: ["http://127.0.0.1:8545"] },
+    public: { http: ["http://127.0.0.1:8545"] },
+  },
+});
+
 const { chains, publicClient } = configureChains(
-  [base],
+  [localhost, base],
   [
     publicProvider(),
     jsonRpcProvider({
