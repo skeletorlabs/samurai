@@ -12,6 +12,15 @@ import {
 import { Page } from "./enums";
 import { IDONEW } from "./interfaces";
 
+export const simplifiedPhases = [
+  { title: "Upcoming", buttonTitle: "" },
+  {
+    title: "Participation",
+    buttonTitle: "PARTICIPATE",
+  },
+  { title: "Completed", buttonTitle: "" },
+];
+
 export const IDO_LIST: IDONEW[] = [
   {
     id: "launchpad/slp",
@@ -33,7 +42,7 @@ export const IDO_LIST: IDONEW[] = [
     tgePercentage: 10,
     cliff: 86400 * 30 * 4,
     releaseType: "Linear",
-    currentPhase: "Participation",
+    currentPhase: simplifiedPhases[1].title,
   },
   {
     id: "launchpad/shiba",
@@ -55,7 +64,7 @@ export const IDO_LIST: IDONEW[] = [
     tgePercentage: 10,
     cliff: 86400 * 30 * 4,
     releaseType: "Linear",
-    currentPhase: "Participation",
+    currentPhase: simplifiedPhases[1].title,
   },
 
   {
@@ -78,7 +87,7 @@ export const IDO_LIST: IDONEW[] = [
     tgePercentage: 10,
     cliff: 86400 * 30 * 4,
     releaseType: "Linear",
-    currentPhase: "TGE",
+    currentPhase: simplifiedPhases[2].title,
   },
 
   {
@@ -101,7 +110,7 @@ export const IDO_LIST: IDONEW[] = [
     tgePercentage: 10,
     cliff: 86400 * 30 * 4,
     releaseType: "Linear",
-    currentPhase: "Release",
+    currentPhase: simplifiedPhases[0].title,
   },
 ];
 

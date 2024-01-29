@@ -1,7 +1,8 @@
 import { IDONEW } from "@/utils/interfaces";
 import Image from "next/image";
-import { fromUnixTime } from "date-fns";
+import { fromUnixTime, format } from "date-fns";
 import Link from "next/link";
+import { formattedDate } from "@/utils/formattedDate";
 
 export default function launchpadCardNew({
   ido,
@@ -31,14 +32,38 @@ export default function launchpadCardNew({
         </div>
 
         <div className="flex justify-between gap-2 w-full absolute bottom-3 px-3">
-          <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-md w-full mt-1 text-[14px] border border-white/20">
-            {ido.acceptedToken} ON {ido.network}
-          </div>
+          {/* <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-md w-full mt-1 text-[14px] border border-white/20"> */}
+          {/* {ido.acceptedToken} ON {ido.network} */}
+
+          {/* </div> */}
 
           <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-md w-full mt-1 text-[14px] border border-white/20">
             {ido.type.toUpperCase()}
           </div>
+          <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-md w-full mt-1 text-[14px] border border-white/20 text-samurai-red">
+            {ido.currentPhase.toUpperCase()}
+          </div>
         </div>
+
+        <Image
+          src="/chain-logos/Base_Symbol_Blue.svg"
+          placeholder="blur"
+          blurDataURL="/chain-logos/Base_Symbol_Blue.svg"
+          alt={ido.projectName}
+          width={24}
+          height={24}
+          className="absolute top-4 left-4 p-[1px] bg-white/80 rounded-full"
+        />
+
+        <Image
+          src="/chain-logos/MATIC-NETWORK.svg"
+          placeholder="blur"
+          blurDataURL="/chain-logos/MATIC.svg"
+          alt={ido.projectName}
+          width={24}
+          height={24}
+          className="absolute top-4 left-8 p-[1px] bg-white/80 rounded-full"
+        />
       </div>
 
       <div className="flex justify-between items-center px-1">
@@ -50,7 +75,7 @@ export default function launchpadCardNew({
       </div>
 
       <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md  w-max">
-        <span className="text-[14px] text-samurai-red">RAISED:</span>
+        <span className="text-[14px] text-samurai-red">Allocation:</span>
         <p className="text-white/70">
           {ido.raised} {ido.acceptedToken}
         </p>
@@ -66,9 +91,7 @@ export default function launchpadCardNew({
       <div className="flex justify-between items-center px-1 mt-4">
         <div className="flex flex-col">
           <span className="text-sm text-white/70">IDO DATE</span>
-          <span className="text-[16px]">
-            {fromUnixTime(ido.idoDate).toLocaleString()}
-          </span>
+          <span className="text-[16px]">{formattedDate(ido.idoDate)}</span>
         </div>
       </div>
 
@@ -76,14 +99,10 @@ export default function launchpadCardNew({
         <div className="flex flex-col">
           <span className="text-sm text-white/70">REGISTRATION</span>
           <span className="text-[16px]">
-            {fromUnixTime(ido.registrationDate).toLocaleString()}
+            {formattedDate(ido.registrationDate)}
           </span>
         </div>
       </div>
-
-      <button className="bg-samurai-red rounded-[8px] w-full mt-8 py-2 text-[18px] text-center transition-all hover:opacity-75">
-        QUICK HITTER
-      </button>
     </Link>
   );
 }

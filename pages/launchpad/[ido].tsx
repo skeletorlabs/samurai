@@ -9,7 +9,8 @@ import { IDO, IDONEW } from "@/utils/interfaces";
 import { useRouter } from "next/router";
 import { fromUnixTime } from "date-fns";
 
-import { IDO_LIST } from "@/utils/constants";
+import { IDO_LIST, simplifiedPhases } from "@/utils/constants";
+import { formattedDate } from "@/utils/formattedDate";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,25 +43,13 @@ export default function Ido() {
     },
   ];
 
-  const simplifiedPhases = [
-    {
-      title: "Participation",
-      buttonTitle: "PARTICIPATE",
-    },
-    { title: "TGE", buttonTitle: "CLAIM TGE" },
-    {
-      title: "Release",
-      buttonTitle: "CLAIM TOKENS",
-    },
-  ];
-
   const currentPhase = phases.find((item) => item.title === ido?.currentPhase);
 
   const mockedUserIdosPhases = [
-    { ido: 0, phase: 0, completed: false, participation: 0 },
-    { ido: 1, phase: 0, completed: true, participation: 1000 },
-    { ido: 2, phase: 1, completed: false, participation: 0 },
-    { ido: 3, phase: 2, completed: false, participation: 0 },
+    { ido: 0, phase: 1, completed: false, participation: 0 },
+    { ido: 1, phase: 1, completed: true, participation: 1000 },
+    { ido: 2, phase: 2, completed: false, participation: 0 },
+    { ido: 3, phase: 3, completed: false, participation: 0 },
   ];
 
   const userIdo = mockedUserIdosPhases.find((item) => item.ido === idoIndex);
@@ -219,14 +208,14 @@ export default function Ido() {
                     <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
                       <span className="text-samurai-red">START:</span>
                       <p className="text-white/70">
-                        {fromUnixTime(ido.idoDate).toLocaleString()}
+                        {formattedDate(ido.idoDate)}
                       </p>
                     </div>
 
                     <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
                       <span className="text-samurai-red">END:</span>
                       <p className="text-white/70">
-                        {fromUnixTime(ido.idoDate).toLocaleString()}
+                        {formattedDate(ido.idoDate)}
                       </p>
                     </div>
                   </div>
@@ -241,7 +230,7 @@ export default function Ido() {
                       <div className="relative">
                         <input
                           type="text"
-                          placeholder="Fill the amount desired"
+                          placeholder="USDC to allocate"
                           className="w-full p-4 rounded-[8px] placeholder-black/50 text-black"
                           value={inputValue}
                           onChange={(e) => onInputChange(e.target.value)}
@@ -269,7 +258,7 @@ export default function Ido() {
                     <div className="flex flex-row justify-center border-t border-white/20 pt-12 gap-16 mt-4">
                       <div className="p-4 px-6 border border-white/20 rounded-[8px]">
                         <p className={`text-xl ${inter.className}`}>
-                          MY PARTICIPATION
+                          MY ALLOCATION
                         </p>
                         <p className="text-4xl text-samurai-red">
                           {userIdo?.participation?.toLocaleString("en-us", {
@@ -298,7 +287,7 @@ export default function Ido() {
                   )}
 
                 {/* TGE PHASE BLOCK */}
-                {currentPhase?.title === "TGE" && (
+                {currentPhase?.title === "Completed" && (
                   <>
                     <div className="flex flex-row gap-4 mt-10 flex-wrap">
                       <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
@@ -320,31 +309,6 @@ export default function Ido() {
                       <p className="text-samurai-red">IMPORTANT NOTE:</p>
                       The unlocked tokens in TGE phase will be airdroped by the
                       team at the date above.
-                    </div>
-                  </>
-                )}
-
-                {/* RELEASE PHASE BLOCK */}
-                {currentPhase?.title === "Release" && (
-                  <>
-                    <div className="flex flex-row gap-4 mt-10 flex-wrap">
-                      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
-                        <span className="text-samurai-red">START:</span>
-                        <p className="text-white/70">
-                          {fromUnixTime(ido.tgeDate).toLocaleString()}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
-                        <span className="text-samurai-red">RELEASE TYPE:</span>
-                        <p className="text-white/70">{ido.releaseType}</p>
-                      </div>
-                    </div>
-                    <div
-                      className={`text-2xl text-white/80 mt-10 pt-10 border-t border-white/20 leading-normal ${inter.className}`}
-                    >
-                      <p className="text-samurai-red">IMPORTANT NOTE:</p>
-                      The vested tokens in Release phase will be airdroped by
-                      the team at the date above.
                     </div>
                   </>
                 )}
