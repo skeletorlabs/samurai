@@ -47,8 +47,6 @@ export default function launchpadCardNew({
 
         <Image
           src="/chain-logos/Base_Symbol_Blue.svg"
-          placeholder="blur"
-          blurDataURL="/chain-logos/Base_Symbol_Blue.svg"
           alt={ido.projectName}
           width={24}
           height={24}
@@ -57,8 +55,6 @@ export default function launchpadCardNew({
 
         <Image
           src="/chain-logos/MATIC-NETWORK.svg"
-          placeholder="blur"
-          blurDataURL="/chain-logos/MATIC.svg"
           alt={ido.projectName}
           width={24}
           height={24}
