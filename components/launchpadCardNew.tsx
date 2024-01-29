@@ -54,7 +54,7 @@ export default function launchpadCardNew({
         />
 
         <Image
-          src="/chain-logos/MATIC-NETWORK.svg"
+          src="/chain-logos/polygon.svg"
           alt={ido.projectName}
           width={24}
           height={24}
