@@ -45,28 +45,34 @@ export default function launchpadCardNew({
           </div>
         </div>
 
-        <Image
-          src="/chain-logos/Base_Symbol_Blue.svg"
-          alt={ido.projectName}
-          width={24}
-          height={24}
-          className="absolute top-4 left-4 p-[1px] bg-white/80 rounded-full"
-        />
+        <div className="flex items-center gap-2 bg-black/90 px-2 py-1 rounded-md text-[14px] border border-white/20 absolute top-4 left-4">
+          <span className="text-sm">Project Tokens</span>
+          <Image
+            src="/chain-logos/polygon.svg"
+            alt={ido.projectName}
+            width={24}
+            height={24}
+            className="p-[1px] bg-white/80 rounded-full"
+          />
+        </div>
 
-        <Image
-          src="/chain-logos/polygon.svg"
-          alt={ido.projectName}
-          width={24}
-          height={24}
-          className="absolute top-4 left-8 p-[1px] bg-white/80 rounded-full"
-        />
+        <div className="flex items-center gap-2 bg-black/90 px-2 py-1 rounded-md text-[14px] border border-white/20 absolute top-14 left-4">
+          <span className="text-sm">Crowdsale</span>
+          <Image
+            src="/chain-logos/Base_Symbol_Blue.svg"
+            alt={ido.projectName}
+            width={24}
+            height={24}
+            className="p-[1px] bg-white/80 rounded-full"
+          />
+        </div>
       </div>
 
       <div className="flex justify-between items-center px-1">
         <div className="text-samurai-red">{ido.projectName}</div>
       </div>
 
-      <div className="text-white/70 text-[15px] px-1 mb-4">
+      <div className="text-white/70 text-[15px] px-1 mb-4 line-clamp-2 text-base">
         {ido.projectDescription}
       </div>
 

@@ -135,6 +135,12 @@ export interface IDO {
   goal: string;
 }
 
+export interface IDO_SOCIAL {
+  svg: any;
+  href: string;
+  class: string;
+}
+
 export interface IDONEW {
   id: string;
   idoImageSrc: string;
@@ -155,4 +161,5 @@ export interface IDONEW {
   cliff: number;
   releaseType: string;
   currentPhase: string;
+  socials: IDO_SOCIAL[];
 }
