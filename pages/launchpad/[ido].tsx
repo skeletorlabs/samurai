@@ -142,9 +142,9 @@ export default function Ido() {
                     )}
                     <button
                       disabled
-                      className={`p-2 w-full text-lg ${
+                      className={`p-2 w-full text-2xl ${
                         phase.title === ido?.currentPhase
-                          ? "text-white"
+                          ? "text-samurai-red"
                           : "text-white/40"
                       }`}
                     >
@@ -191,35 +191,33 @@ export default function Ido() {
             {ido && (
               <div className="flex flex-col gap-10">
                 {/* PARTICIPATION PHASE BLOCK */}
-                {currentPhase?.title === "Participation" && (
-                  <div className="flex flex-row gap-4 mt-10 flex-wrap">
-                    <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
-                      <span className="text-samurai-red">TOKEN:</span>
-                      <p className="text-white/70">
-                        {ido.acceptedToken} on {ido.network}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
-                      <span className="text-samurai-red">PRICE:</span>
-                      <p className="text-white/70">
-                        {ido.price} {ido.acceptedToken}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
-                      <span className="text-samurai-red">START:</span>
-                      <p className="text-white/70">
-                        {formattedDate(ido.idoDate)}
-                      </p>
-                    </div>
 
-                    <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
-                      <span className="text-samurai-red">END:</span>
-                      <p className="text-white/70">
-                        {formattedDate(ido.idoDate)}
-                      </p>
-                    </div>
+                <div className="flex gap-4 items-center flex-wrap mt-10">
+                  <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
+                    <span className="text-samurai-red">
+                      PARTICIPATION DATE:
+                    </span>
+                    <p className="text-white/70">
+                      {formattedDate(ido.idoDate)}
+                    </p>
                   </div>
-                )}
+                  <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
+                    <span className="text-samurai-red">TGE DATE:</span>
+                    <p className="text-white/70">
+                      {formattedDate(ido.tgeDate)}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
+                    <span className="text-samurai-red">TOKEN:</span>
+                    <p className="text-white/70">{ido.projectTokenSymbol}</p>
+                  </div>
+                  <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
+                    <span className="text-samurai-red">PRICE:</span>
+                    <p className="text-white/70">
+                      {ido.price} {ido.acceptedToken} on {ido.network}
+                    </p>
+                  </div>
+                </div>
 
                 {currentPhase?.title === "Participation" &&
                   !userIdo?.completed && (
@@ -289,20 +287,6 @@ export default function Ido() {
                 {/* TGE PHASE BLOCK */}
                 {currentPhase?.title === "Completed" && (
                   <>
-                    <div className="flex flex-row gap-4 mt-10 flex-wrap">
-                      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
-                        <span className="text-samurai-red">START:</span>
-                        <p className="text-white/70">
-                          {fromUnixTime(ido.tgeDate).toLocaleString()}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max border border-white/10">
-                        <span className="text-samurai-red">
-                          TGE PERCENTAGE:
-                        </span>
-                        <p className="text-white/70">{ido.tgePercentage}%</p>
-                      </div>
-                    </div>
                     <div
                       className={`text-2xl text-white/80 mt-10 pt-10 border-t border-white/20 leading-normal ${inter.className}`}
                     >
