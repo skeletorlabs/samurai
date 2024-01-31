@@ -162,4 +162,5 @@ export interface IDONEW {
   releaseType: string;
   currentPhase: string;
   socials: IDO_SOCIAL[];
+  bigDescription: string;
 }
