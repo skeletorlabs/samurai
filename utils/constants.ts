@@ -75,6 +75,7 @@ export const IDO_LIST: IDONEW[] = [
     
     Anya grasped the token, its chill seeping into her bones. Her heart, a drum against her ribs, echoed the token's rhythm. This was no mere heirloom, no trinket to boast about in firelit taverns. This was a compass, a promise etched in silver, an invitation to a dance with the cosmos itself. With a deep breath, Anya stepped out into the night, the token her guiding star, ready to chase the whispers into the unknown.
 `,
+    contract: "",
   },
   {
     id: "launchpad/slp",
@@ -135,6 +136,8 @@ She traced the worn crest with her thumb, a silent vow burning in her eyes. She 
 
 But the path wouldn't be easy. Anya knew whispers often preceded shadows, and those who had stolen her birthright wouldn't relinquish it without a fight. Yet, with the tarnished token clutched in her hand, a beacon of defiance against the tide of time, Anya was ready to face whatever awaited. The fire of the griffin burned bright within her, a promise to reclaim what was lost, a song of vengeance etched in gold.
 `,
+
+    contract: "",
   },
   {
     id: "launchpad/shiba",
@@ -195,6 +198,7 @@ She traced the worn crest with her thumb, a silent vow burning in her eyes. She 
 
 But the path wouldn't be easy. Anya knew whispers often preceded shadows, and those who had stolen her birthright wouldn't relinquish it without a fight. Yet, with the tarnished token clutched in her hand, a beacon of defiance against the tide of time, Anya was ready to face whatever awaited. The fire of the griffin burned bright within her, a promise to reclaim what was lost, a song of vengeance etched in gold.
 `,
+    contract: "",
   },
 ];
 
