@@ -39,7 +39,8 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const images = ["/nfts/1.jpg", "/nfts/2.jpg"];
+// const images = ["/nfts/1.jpg", "/nfts/2.jpg"];
+const images = ["/cyborg-male.png", "/cyborg-female.png"];
 
 const utilities = [
   {
@@ -182,6 +183,16 @@ export default function Nft() {
   //   fetcher
   // );
 
+  // const { data: wallets1000 } = useSWR(
+  //   [ALL_WALLETS, { first: 100, skip: 900 }],
+  //   fetcher
+  // );
+
+  // const { data: wallets1100 } = useSWR(
+  //   [ALL_WALLETS, { first: 100, skip: 1000 }],
+  //   fetcher
+  // );
+
   // useEffect(() => {
   //   if (
   //     wallets100 !== undefined &&
@@ -204,6 +215,8 @@ export default function Nft() {
   //       ...wallets700!.minteds,
   //       ...wallets800!.minteds,
   //       ...wallets900!.minteds,
+  //       ...wallets1000!.minteds,
+  //       ...wallets1100!.minteds,
   //     ];
 
   //     const uniqueWallets = new Set();
@@ -226,6 +239,8 @@ export default function Nft() {
   //   wallets700,
   //   wallets800,
   //   wallets900,
+  //   wallets1000,
+  //   wallets1100,
   // ]);
 
   const getWhiteListInfos = useCallback(async () => {

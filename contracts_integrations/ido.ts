@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { PARTICIPATOR_ABI } from "./abis";
+import { ERC20_ABI, PARTICIPATOR_ABI } from "./abis";
 import Notificate from "../components/notificate";
 import handleError from "../utils/handleErrors";
 import {
@@ -8,8 +8,12 @@ import {
   WhitelistDataType,
 } from "@/utils/interfaces";
 import { IDO_LIST, LINKS } from "@/utils/constants";
+import { balanceOf } from "./balanceOf";
+import checkApproval from "./check-approval";
+import { getUnixTime } from "date-fns";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
+const TEST_RPC = "http://127.0.0.1:8545";
 
 // address[] public acceptedTokens;
 // uint256 public min;
@@ -25,7 +29,7 @@ async function getContract(
   signer?: ethers.Signer
 ): Promise<ethers.Contract> {
   const ido = IDO_LIST[index];
-  const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+  const provider = new ethers.JsonRpcProvider(TEST_RPC);
   const contractAddress = ido.contract;
   const contract = new ethers.Contract(
     contractAddress,
@@ -56,24 +60,50 @@ async function notificateTx(tx: any, network: any) {
   });
 }
 
-export async function general(index: number) {
+// OVERALL INFOS
+
+export async function generalInfo(index: number) {
   const contract = await getContract(index);
 
   const owner = await contract.owner();
-  const minPerWallet = await contract.min();
-  const maxPerWallet = await contract.max();
+  const minPerWallet = Number(ethers.formatUnits(await contract.min(), 6));
+  const maxPerWallet = Number(ethers.formatUnits(await contract.max(), 6));
   const isPublic = await contract.isPublic();
-  const acceptedtokens = await contract.acceptedTokens();
+  const acceptedToken = await contract.acceptedTokens(0);
+  const isPaused = await contract.paused();
+
+  return {
+    owner,
+    minPerWallet,
+    maxPerWallet,
+    isPublic,
+    acceptedToken,
+    isPaused,
+  };
 }
+
+// USER INFOS
 
 export async function userInfo(index: number, signer: ethers.Signer) {
   const signerAdress = await signer.getAddress();
   const contract = await getContract(index, signer);
-
-  const allocation = await contract.allocations(signerAdress);
+  const allocation = Number(
+    ethers.formatUnits(await contract.allocations(signerAdress), 6)
+  );
   const isWhitelisted = await contract.whitelist(signerAdress);
   const isBlacklisted = await contract.blacklist(signerAdress);
+  const acceptedtoken = await contract.acceptedTokens(0);
+  const balance = Number(
+    ethers.formatUnits(
+      await balanceOf(ERC20_ABI, acceptedtoken, signerAdress, signer),
+      6
+    )
+  );
+
+  return { allocation, isWhitelisted, isBlacklisted, balance };
 }
+
+// PARTICIPATE IN THE IDO
 
 export async function participate(
   index: number,
@@ -85,6 +115,17 @@ export async function participate(
     const signerAddress = await signer.getAddress();
     const contract = await getContract(index, signer);
     const network = await signer.provider?.getNetwork();
+
+    const contractAddress = await contract.getAddress();
+    await checkApproval(
+      acceptedToken,
+      contractAddress,
+      signer,
+      ethers.parseUnits(amount, 6)
+    );
+
+    console.log("VAI ENVIAR OS TOKENS");
+
     const tx = await contract.sendToken(
       signerAddress,
       acceptedToken,
@@ -96,6 +137,8 @@ export async function participate(
     handleError({ e: e, notificate: true });
   }
 }
+
+// ADMIN ACTIONS
 
 export async function addToWhitelist(
   index: number,
@@ -161,7 +204,7 @@ export async function withdraw(index: number, signer: ethers.Signer) {
     const network = await signer.provider?.getNetwork();
 
     if (owner === signerAddress) {
-      const tx = await contract.withdraw();
+      const tx = await contract.whithdraw();
       await notificateTx(tx, network);
     }
   } catch (e) {
@@ -203,4 +246,19 @@ export async function togglePause(index: number, signer: ethers.Signer) {
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
+}
+
+export function getParticipationPhase(index: number) {
+  const ido = IDO_LIST[index];
+  const participationStartAt = ido.participationStartsAt;
+  const participationEndsAt = ido.participationEndsAt;
+  const now = getUnixTime(new Date()) + 5 * 86400;
+
+  let phase = "Upcoming";
+
+  if (now >= participationStartAt && now <= participationEndsAt)
+    phase = "Participation";
+  if (now >= participationEndsAt) phase = "Completed";
+
+  return phase;
 }

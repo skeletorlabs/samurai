@@ -11,6 +11,7 @@ import { Inter } from "next/font/google";
 import SSButton from "@/components/ssButton";
 import TopLayout from "@/components/topLayout";
 import { StateContext } from "@/context/StateContext";
+import Projects from "@/components/projects";
 // import { linkedin, twitter } from "@/utils/svgs";
 
 const inter = Inter({
@@ -227,14 +228,7 @@ export default function Home() {
             →
           </Link>
         </div>
-        <div className="grid lg:grid-cols-3 gap-12 lg:gap-9 flex-wrap my-10">
-          <div className="text-samurai-red text-2xl md:text-4xl ">
-            Coming soon!
-          </div>
-          {/* {projects.map((item, index) => (
-            <Card key={index} project={item} />
-          ))} */}
-        </div>
+        <Projects />
         {/* <Link
           href="https://medium.com/samurai-starter"
           target="_blank"

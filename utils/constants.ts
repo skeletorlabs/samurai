@@ -10,6 +10,7 @@ import {
   incubation,
   discord,
   globe,
+  youtube,
 } from "@/utils/svgs";
 import { Page } from "./enums";
 import { IDONEW, IDO_SOCIAL } from "./interfaces";
@@ -25,180 +26,75 @@ export const simplifiedPhases = [
 
 export const IDO_LIST: IDONEW[] = [
   {
-    id: "launchpad/babylon",
-    idoImageSrc: "/IDOs/babylon.jpeg",
-    acceptedToken: "USDC",
+    id: "launchpad/havens-compass",
+    idoImageSrc: "/IDOs/havens-compass.png",
+    acceptedTokenSymbol: "USDC",
     network: "BASE",
     networkImageSrc: "/ido-sample.svg",
-    type: "Public Round",
-    projectName: "Babylon",
+    projectName: "Haven's Compass",
+    projectListDescription:
+      "Haven's Compass is a tactical FPS game that empowers players, enhances ownership rights, and create a thriving gaming ecosystem.",
     projectDescription:
-      "Tarnished gold, worn smooth by generations of grasping hands, the token whispered of lineage and loss. An intricate crest emblazoned its face, a faded reminder of a once-proud noble house. Now, clutched in a calloused palm, it was a beacon of hope, a promise of reclaiming a birthright stolen by time and treachery.",
-    projectTokenSymbol: "BAB",
-    raised: "100,000",
-    price: "0.03",
-    idoDate: 1707577630,
-    registrationDate: 1706195232,
+      "Haven's Compass sees the last-surviving inhabitants of a near-future Earth battle for survival following an apocalyptic geological catastrophe. Players enter this dangerous world and battle against each other for token rewards, utilizing their arsenal of highly customisable NFT weapons.",
+    projectTokenSymbol: "CMPS",
+    totalAllocation: 50_000,
+    price: "0.0130",
+    participationStartsAt: 1707310800,
+    participationEndsAt: 1707397200,
+    publicParticipationStartsAt: 1707397200,
+    publicParticipationEndsAt: 1707483600,
     simplified: true,
     tgeDate: 1706195232,
-    tgePercentage: 10,
-    cliff: 86400 * 30 * 4,
-    releaseType: "Linear",
-    currentPhase: simplifiedPhases[0].title,
-    socials: [
-      {
-        svg: twitterX,
-        href: "",
-        class: "scale-100",
-      },
-      {
-        svg: telegram,
-        href: "",
-        class: "scale-100",
-      },
-      {
-        svg: discord,
-        href: "",
-        class: "scale-100",
-      },
-      {
-        svg: medium,
-        href: "",
-        class: "scale-100",
-      },
-    ],
-    bigDescription: `Moonlight kissed the silver surface of the token, revealing intricate runes that danced in the shadows. Each twist and curve seemed to whisper forgotten secrets, tales of fallen empires and untold power. Its origin shrouded in mist, it had become a legend whispered amongst dusty tomes and firelit taverns. Was it the key to a celestial vault, its contents promising dominion over the stars? Or a harbinger of a cosmic storm, its touch sparking a chain reaction of celestial upheaval?
-
-    Rumors swirled around the token like moths drawn to a flame. A band of treasure hunters believed it the map to a lost library carved into the side of a rogue moon. A reclusive scholar suspected it a conduit to converse with long-dead civilizations. Even whispers of dark cults and ancient pacts with otherworldly entities clung to its cold silver.
-    
-    For Anya, a young woman with wanderlust etched into her soul, the token was a call. The thrill of the unknown, the promise of answers to questions both spoken and unspoken, pulsed through her veins like the token's faint hum. It beckoned her from the dusty comfort of her village, whispering of adventures etched in constellations and battles waged across the fabric of time.
-    
-    Anya grasped the token, its chill seeping into her bones. Her heart, a drum against her ribs, echoed the token's rhythm. This was no mere heirloom, no trinket to boast about in firelit taverns. This was a compass, a promise etched in silver, an invitation to a dance with the cosmos itself. With a deep breath, Anya stepped out into the night, the token her guiding star, ready to chase the whispers into the unknown.
-`,
-    contract: "",
-  },
-  {
-    id: "launchpad/slp",
-    idoImageSrc: "/IDOs/slp.png",
-    acceptedToken: "USDC",
-    network: "BASE",
-    networkImageSrc: "/ido-sample.svg",
-    type: "Public Round",
-    projectName: "Axie Infinity",
-    projectDescription:
-      "Glimmering silver, etched with runes unknown, the token pulsed with unseen energy. Whispers followed its journey, tales of forgotten empires and untold power. Was it key to a celestial vault, or a harbinger of impending doom? Each touch sent shivers down the spine, urging the bearer towards a destiny both thrilling and terrifying.",
-    projectTokenSymbol: "SLP",
-    raised: "100,000",
-    price: "0.07",
-    idoDate: 1707577630,
-    registrationDate: 1706195232,
-    simplified: true,
-    tgeDate: 1706195232,
-    tgePercentage: 10,
-    cliff: 86400 * 30 * 4,
+    tgePercentage: 7,
+    cliff: 86400 * 30 * 5,
+    investmentRound: "Private Round",
+    fdv: "17000000",
+    circulatingSupplyAtTGE: 24_500_000,
+    marketCapAtTGE: 416_500,
+    vesting: "7% at TGE, 5 month cliff, 14 month linear vesting",
     releaseType: "Linear",
     currentPhase: simplifiedPhases[1].title,
     socials: [
       {
         svg: globe,
-        href: "",
-        class: "scale-100",
+        href: "https://www.havenscompass.com/",
       },
       {
         svg: twitterX,
-        href: "",
-        class: "scale-100",
+        href: "https://twitter.com/HavensCompass",
       },
       {
         svg: telegram,
-        href: "",
-        class: "scale-100",
+        href: "https://t.me/havenscompass",
       },
       {
         svg: discord,
-        href: "",
-        class: "scale-100",
+        href: "https://t.co/KfGWR06E93",
       },
       {
-        svg: medium,
-        href: "",
-        class: "scale-100",
+        svg: youtube,
+        href: "https://www.youtube.com/@ghostivy1555",
       },
     ],
     bigDescription: `
-    The weight of centuries pressed into Anya's palm as she clutched the tarnished gold token. Its once-proud crest, bearing the sigil of a roaring griffin, was now a faded whisper against the worn metal. Yet, to Anya, it wasn't just an artifact, it was a birthright, a tangible thread tethering her to a lineage stolen by time and treachery.
-
-Legends whispered of House Griffin, once rulers of a vast swathe of land, their banners heralding justice and prosperity. Then, whispers turned to screams, as a rival house, fueled by envy and avarice, struck in the dead of night. The Griffins were scattered, their lands seized, their legacy buried beneath the dust of ages.
-
-The token, passed down through generations in secret, was Anya's only connection to this lost legacy. It wasn't just metal; it was a promise, a flicker of hope that the Griffin line could rise again. Anya could almost hear the whispers of her ancestors, their voices urging her to reclaim what was rightfully theirs.
-
-She traced the worn crest with her thumb, a silent vow burning in her eyes. She would learn the forgotten history of her house, uncover the truth behind their fall. She would find the descendants, scattered like seeds on the wind, and reunite them under the banner of the griffin. Anya wouldn't be just a whisper in the annals of history; she would be the roar that reawakened a slumbering legacy.
-
-But the path wouldn't be easy. Anya knew whispers often preceded shadows, and those who had stolen her birthright wouldn't relinquish it without a fight. Yet, with the tarnished token clutched in her hand, a beacon of defiance against the tide of time, Anya was ready to face whatever awaited. The fire of the griffin burned bright within her, a promise to reclaim what was lost, a song of vengeance etched in gold.
-`,
-
-    contract: "",
-  },
-  {
-    id: "launchpad/shiba",
-    idoImageSrc: "/IDOs/shibainu.png",
-    acceptedToken: "USDC",
-    network: "BASE",
-    networkImageSrc: "/ido-sample.svg",
-    type: "Public Round",
-    projectName: "Shiba Inu",
-    projectDescription:
-      "Shimmering like a captured sunset, the token thrummed with the promise of worlds unseen. Held beneath a starlit sky, it revealed constellations unknown, their patterns echoing alien landscapes. A single touch sent a jolt of anticipation, beckoning the curious towards a shimmering gateway, a threshold to the impossible.",
-    projectTokenSymbol: "SHIB",
-    raised: "100,000",
-    price: "0.07",
-    idoDate: 1707577630,
-    registrationDate: 1706195232,
-    simplified: true,
-    tgeDate: 1706195232,
-    tgePercentage: 10,
-    cliff: 86400 * 30 * 4,
-    releaseType: "Linear",
-    currentPhase: simplifiedPhases[1].title,
-    socials: [
-      {
-        svg: globe,
-        href: "",
-        class: "scale-100",
-      },
-      {
-        svg: twitterX,
-        href: "",
-        class: "scale-100",
-      },
-      {
-        svg: telegram,
-        href: "",
-        class: "scale-100",
-      },
-      {
-        svg: discord,
-        href: "",
-        class: "scale-100",
-      },
-      {
-        svg: medium,
-        href: "",
-        class: "scale-100",
-      },
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <h1 style="font-weight: bold; font-size: 1.2em;">Haven's Compass</h1>
+        <p>Built inside Unreal Engine 5, Haven's Compass is an innovative tactical FPS game which utilizes blockchain technology to “empower players, enhance ownership rights, and create a thriving gaming ecosystem”.</p>
+        <p>Haven's Compass sees the last-surviving inhabitants of a near-future Earth battle for survival following an apocalyptic geological catastrophe. Players enter this dangerous world and battle against each other for token rewards, utilizing their arsenal of highly customisable NFT weapons.</p>
+        <p>Developer Ghost Ivy's player-first approach and high production values set Haven's Compass head and shoulders above the other blockchain games on the market, which are often plagued by rigid (or non-existent) gameplay and high technical barriers for entry. They instead aim to make the transition to Web3 gaming as seamless as possible for traditional gamers, opening the doors for thousands of newcomers to join their action-packed world.</p>
+        <p>The game has already proven itself a roaring success, with over 25,000 downloads on the public alpha since its launch on the Epic Games Store in August 2023 (you can try it for yourself here). On top of that, their first NFT mint sold out in just 59 seconds!</p>
+        <p>Haven's Compass is clearly making all the right moves — we can't wait to see how the project develops in the lead-up to the full game launch in Q4 2024.</p>
+        <h1 style="font-weight: bold; font-size: 1.2em;">The $CMPS Token</h1>
+        <p>$CMPS is the native utility token of Haven's Compass, and the fuel powering every aspect of its gaming ecosystem. Players can earn $CMPS rewards by winning matches, participating in special events, or even creating art which is utilized inside the game.</p>
+        <p>They can then use these tokens to trade weapon and item NFTs with other players on the in-game decentralized marketplace. Ghost Ivy will also implement DAO governance features, giving $CMPS holders the chance to take an active part in the development of the game.</p>
+      </div>
+  `,
+    contract: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    images: [
+      "/IDOs/havens-compass/havens-compass-1.png",
+      "/IDOs/havens-compass/havens-compass-2.png",
+      "/IDOs/havens-compass/havens-compass-3.png",
     ],
-    bigDescription: `
-    The weight of centuries pressed into Anya's palm as she clutched the tarnished gold token. Its once-proud crest, bearing the sigil of a roaring griffin, was now a faded whisper against the worn metal. Yet, to Anya, it wasn't just an artifact, it was a birthright, a tangible thread tethering her to a lineage stolen by time and treachery.
-
-Legends whispered of House Griffin, once rulers of a vast swathe of land, their banners heralding justice and prosperity. Then, whispers turned to screams, as a rival house, fueled by envy and avarice, struck in the dead of night. The Griffins were scattered, their lands seized, their legacy buried beneath the dust of ages.
-
-The token, passed down through generations in secret, was Anya's only connection to this lost legacy. It wasn't just metal; it was a promise, a flicker of hope that the Griffin line could rise again. Anya could almost hear the whispers of her ancestors, their voices urging her to reclaim what was rightfully theirs.
-
-She traced the worn crest with her thumb, a silent vow burning in her eyes. She would learn the forgotten history of her house, uncover the truth behind their fall. She would find the descendants, scattered like seeds on the wind, and reunite them under the banner of the griffin. Anya wouldn't be just a whisper in the annals of history; she would be the roar that reawakened a slumbering legacy.
-
-But the path wouldn't be easy. Anya knew whispers often preceded shadows, and those who had stolen her birthright wouldn't relinquish it without a fight. Yet, with the tarnished token clutched in her hand, a beacon of defiance against the tide of time, Anya was ready to face whatever awaited. The fire of the griffin burned bright within her, a promise to reclaim what was lost, a song of vengeance etched in gold.
-`,
-    contract: "",
   },
 ];
 

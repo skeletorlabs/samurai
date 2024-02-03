@@ -2,16 +2,29 @@ import Link from "next/link";
 import Image from "next/image";
 import Layout from "@/components/layout";
 import { Inter } from "next/font/google";
-import { useCallback, useState, Fragment } from "react";
-import SSButton from "@/components/ssButton";
+import { useState, Fragment, useContext, useEffect, useCallback } from "react";
 import TopLayout from "@/components/topLayout";
-import { IDO, IDONEW } from "@/utils/interfaces";
 import { useRouter } from "next/router";
-import { fromUnixTime } from "date-fns";
 
-import { IDO_LIST, SOCIALS, simplifiedPhases } from "@/utils/constants";
+import { IDO_LIST, simplifiedPhases } from "@/utils/constants";
 import { formattedDate } from "@/utils/formattedDate";
-import { discord, globe, linkedin, twitter, twitterX } from "@/utils/svgs";
+import { discord, youtube } from "@/utils/svgs";
+import SSButton from "@/components/ssButton";
+import { StateContext } from "@/context/StateContext";
+import { useNetwork } from "wagmi";
+import {
+  addToBlacklist,
+  addToWhitelist,
+  generalInfo,
+  getParticipationPhase,
+  makePublic,
+  participate,
+  togglePause,
+  userInfo,
+  withdraw,
+} from "@/contracts_integrations/ido";
+
+import { getUnixTime } from "date-fns";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,6 +32,17 @@ const inter = Inter({
 
 export default function Ido() {
   const [inputValue, setInputValue] = useState("");
+  const [whitelistData, setWhitelistData] = useState<any | null>(null); // admin area
+  const [whitelistAddresses, setWhitelistAddresses] = useState<string[] | []>(
+    []
+  ); // admin area
+  const [blacklistAddress, setBlacklistAddress] = useState(""); // admin area
+  const [isLoading, setIsLoading] = useState(false);
+  const [general, setGeneral] = useState<any>(null);
+  const [user, setUser] = useState<any>(null);
+  const [currentPhase, setCurrentPhase] = useState<string | null>(null);
+  const { signer, account } = useContext(StateContext);
+  const { chain } = useNetwork();
   const { query } = useRouter();
   const { ido: idoID } = query;
 
@@ -28,18 +52,122 @@ export default function Ido() {
   );
   const bg = `url("${ido?.idoImageSrc}")`;
 
-  const currentPhase = simplifiedPhases.find(
-    (item) => item.title === ido?.currentPhase
-  );
+  // const currentPhase = simplifiedPhases.find(
+  //   (item) => item.title === ido?.currentPhase
+  // );
 
-  const mockedUserIdosPhases = [
-    { ido: 0, phase: 1, completed: false, participation: 0 },
-    { ido: 1, phase: 1, completed: true, participation: 1000 },
-    { ido: 2, phase: 2, completed: false, participation: 0 },
-    { ido: 3, phase: 3, completed: false, participation: 0 },
-  ];
+  // const mockedUserIdosPhases = [
+  //   { ido: 0, phase: 1, completed: false, participation: 0 },
+  //   { ido: 1, phase: 1, completed: true, participation: 1000 },
+  //   { ido: 2, phase: 2, completed: false, participation: 0 },
+  //   { ido: 3, phase: 3, completed: false, participation: 0 },
+  // ];
 
-  const userIdo = mockedUserIdosPhases.find((item) => item.ido === idoIndex);
+  // const userIdo = mockedUserIdosPhases.find((item) => item.ido === idoIndex);
+
+  // ============================================================================================================
+  // ADMIN FUNCTIONS
+  // ============================================================================================================
+
+  const onTextAreaChange = (value: string) => {
+    const addresses: string[] = value
+      .toString()
+      .replaceAll(" ", "")
+      .replaceAll("\n", "")
+      .split(",");
+    setWhitelistAddresses(addresses);
+  };
+
+  const onTogglePause = useCallback(async () => {
+    setIsLoading(true);
+    if (
+      account &&
+      general &&
+      account === general.owner &&
+      signer &&
+      chain &&
+      !chain.unsupported
+    ) {
+      await togglePause(idoIndex, signer);
+      await getGeneralData();
+      await getUserInfos();
+    }
+
+    setIsLoading(false);
+  }, [chain, signer, idoIndex, general, account, setIsLoading]);
+
+  const onWithdraw = useCallback(async () => {
+    setIsLoading(true);
+    if (
+      account &&
+      general &&
+      account === general.owner &&
+      signer &&
+      chain &&
+      !chain.unsupported
+    ) {
+      await withdraw(idoIndex, signer);
+      await getGeneralData();
+      await getUserInfos();
+    }
+
+    setIsLoading(false);
+  }, [chain, signer, idoIndex, general, account, setIsLoading]);
+
+  const onMakePublic = useCallback(async () => {
+    setIsLoading(true);
+    if (
+      account &&
+      general &&
+      account === general.owner &&
+      signer &&
+      chain &&
+      !chain.unsupported
+    ) {
+      await makePublic(idoIndex, signer);
+      await getGeneralData();
+      await getUserInfos();
+    }
+
+    setIsLoading(false);
+  }, [chain, signer, idoIndex, general, account, setIsLoading]);
+
+  const onAddToWhitelist = useCallback(async () => {
+    setIsLoading(true);
+
+    if (
+      signer &&
+      chain &&
+      !chain.unsupported &&
+      whitelistAddresses.length > 0
+    ) {
+      await addToWhitelist(idoIndex, signer, whitelistAddresses);
+      await getGeneralData();
+      await getUserInfos();
+    }
+
+    setIsLoading(false);
+  }, [chain, signer, whitelistAddresses, idoIndex, setIsLoading]);
+
+  const onAddToBlacklist = useCallback(async () => {
+    setIsLoading(true);
+
+    if (signer && chain && !chain.unsupported && blacklistAddress.length > 0) {
+      await addToBlacklist(idoIndex, signer, blacklistAddress);
+      await getGeneralData();
+      await getUserInfos();
+    }
+
+    setIsLoading(false);
+  }, [chain, signer, blacklistAddress, idoIndex, setIsLoading]);
+
+  // ============================================================================================================
+  // END ADMIN FUNCTIONS
+  // ============================================================================================================
+
+  // ============================================================================================================
+  // USER ACTIONS
+  // ============================================================================================================
 
   const onInputChange = (value: string) => {
     const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
@@ -50,6 +178,70 @@ export default function Ido() {
 
     return false;
   };
+
+  const onParticipate = useCallback(async () => {
+    setIsLoading(true);
+    if (
+      signer &&
+      chain &&
+      !chain.unsupported &&
+      general &&
+      user &&
+      !user.isBlacklisted &&
+      (user.isWhitelisted || general.isPublic)
+    ) {
+      await participate(idoIndex, signer, inputValue, general.acceptedToken);
+      await getGeneralData();
+      await getUserInfos();
+    }
+
+    setIsLoading(false);
+  }, [
+    chain,
+    signer,
+    blacklistAddress,
+    idoIndex,
+    general,
+    user,
+    inputValue,
+    setIsLoading,
+  ]);
+
+  // ============================================================================================================
+  // FETCHING USER INFOS FROM CONTRACT
+  // ============================================================================================================
+
+  const getUserInfos = useCallback(async () => {
+    if (signer && chain && !chain.unsupported) {
+      const response = await userInfo(idoIndex, signer);
+      // console.log(response);
+      setUser(response);
+    }
+  }, [signer, chain, idoIndex]);
+
+  useEffect(() => {
+    getUserInfos();
+  }, [signer]);
+
+  // ============================================================================================================
+  // FETCHING GENERAL DATA FROM CONTRACT
+  // ============================================================================================================
+
+  const getGeneralData = useCallback(async () => {
+    if (chain && !chain.unsupported && idoIndex !== -1) {
+      const response = await generalInfo(idoIndex);
+      setGeneral(response);
+    }
+
+    if (idoIndex !== -1) {
+      const phase = getParticipationPhase(idoIndex);
+      setCurrentPhase(phase);
+    }
+  }, [chain, idoIndex, setCurrentPhase]);
+
+  useEffect(() => {
+    getGeneralData();
+  }, [idoID]);
 
   return (
     <Layout>
@@ -63,11 +255,11 @@ export default function Ido() {
         }}
       >
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 pt-10 lg:pt-14">
-          <div className="flex flex-row items-center justify-between relative">
+          <div className="flex flex-col xl:flex-row items-center justify-between relative">
             <div className="relative md:mr-12 xl:max-w-[900px]">
               <Link
                 href="/launchpad"
-                className="transition-all text-white/40 hover:text-white"
+                className="transition-all text-white/40 hover:text-white hidden xl:block"
               >
                 <svg
                   data-slot="icon"
@@ -77,7 +269,7 @@ export default function Ido() {
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                   aria-hidden="true"
-                  className="w-20 mb-14"
+                  className="xl:w-20 mb-14"
                 >
                   <path
                     strokeLinecap="round"
@@ -89,7 +281,7 @@ export default function Ido() {
 
               <div className="flex flex-col text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
                 {ido?.projectName}
-                <div className="flex items-center gap-4 pt-2">
+                <div className="flex items-center gap-4 pt-5">
                   <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
                     <span className="text-sm">Project Tokens</span>
                     <Image
@@ -114,17 +306,21 @@ export default function Ido() {
                 </div>
               </div>
               <p
-                className={`leading-normal lg:leading-relaxed font-light pt-6 lg:text-2xl xl:max-w-[860px] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] pb-10 ${inter.className} text-justify`}
+                className={`leading-normal lg:leading-relaxed font-light pt-6 lg:text-[28px] xl:max-w-[860px] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] pb-10 ${inter.className}`}
               >
                 {ido?.projectDescription}
               </p>
-              <div className="flex items-center justify-center w-full lg:justify-start gap-8">
+              <div className="flex items-center w-full gap-8">
                 {ido?.socials.map((item, index) => (
                   <Link
                     key={index}
                     href={item.href}
                     className={`transition-all hover:opacity-75 text-white ${
-                      item.svg === discord ? "scale-[1.7]" : "scale-[1.2]"
+                      item.svg === discord
+                        ? "scale-[1.7]"
+                        : item.svg === youtube
+                        ? "scale-[1.9] mx-2"
+                        : "scale-[1.2]"
                     }`}
                     target="_blank"
                   >
@@ -134,14 +330,14 @@ export default function Ido() {
               </div>
             </div>
 
-            <div className="flex flex-col w-[700px]">
-              <div className="flex flex-col w-[700px] h-[540px] rounded-[8px] bg-black/50 p-8 mt-[170px] shadow-xl border border-white/20">
-                <div className="text-center text-2xl text-white">
-                  <span className="text-samurai-red">{ido?.projectName}</span>{" "}
-                  {" | "}
-                  {ido?.type}
+            <div className="flex flex-col xl:w-[700px]">
+              <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-14 mt-[70px] xl:mt-[170px] shadow-xl lg:border border-white/20">
+                {/* <div className="text-center text-xl xl:text-2xl text-white"> */}
+                <div className="text-2xl xl:text-3xl bg-samurai-red px-7 py-3 text-white">
+                  <span>{ido?.projectName}</span> {" | "}
+                  {ido?.investmentRound}
                 </div>
-                <div className="flex flex-row mt-10 bg-black-900/90 stroke-white rounded-[8px] text-white border border-white/20">
+                <div className="flex flex-row mt-10 bg-black-900/90 stroke-white rounded-[8px] text-white border border-white/20 mx-8">
                   {ido?.simplified &&
                     simplifiedPhases.map((phase, index) => (
                       <Fragment key={index}>
@@ -154,7 +350,7 @@ export default function Ido() {
                             viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg"
                             aria-hidden="true"
-                            className="w-20"
+                            className="w-2 md:w-6 "
                           >
                             <path
                               strokeLinecap="round"
@@ -165,8 +361,8 @@ export default function Ido() {
                         )}
                         <button
                           disabled
-                          className={`p-2 w-full text-2xl ${
-                            phase.title === ido?.currentPhase
+                          className={`p-2 flex-1  xl:text-2xl ${
+                            phase.title === currentPhase
                               ? "text-samurai-red"
                               : "text-white/40"
                           }`}
@@ -178,40 +374,69 @@ export default function Ido() {
                 </div>
 
                 {ido && (
-                  <div className="flex flex-col gap-10">
+                  <div className="flex flex-col gap-10 px-8">
                     {/* PARTICIPATION PHASE BLOCK */}
-                    <div className="flex gap-4 items-center flex-wrap mt-10">
-                      <div className="flex items-center gap-2 py-2 px-4 text-[16px] rounded-md w-max min-w-[300px]">
+                    <div className="flex justify-center lg:justify-start lg:grid lg:grid-cols-2 gap-1 items-center flex-wrap mt-6">
+                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
                         <span className="text-samurai-red">
-                          PARTICIPATION DATE:
+                          PARTICIPATION START:
                         </span>
                         <p className="text-white/70">
-                          {formattedDate(ido.idoDate).toUpperCase()}
+                          {formattedDate(
+                            ido.participationStartsAt
+                          ).toUpperCase()}
                         </p>
                       </div>
-                      <div className="flex items-center gap-2 py-2 px-4 text-[16px] rounded-md w-max min-w-[300px]">
+                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                        <span className="text-samurai-red">
+                          PARTICIPATION END:
+                        </span>
+                        <p className="text-white/70">
+                          {formattedDate(ido.participationEndsAt).toUpperCase()}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                        <span className="text-samurai-red">FCFS START:</span>
+                        <p className="text-white/70">
+                          {formattedDate(
+                            ido.publicParticipationStartsAt
+                          ).toUpperCase()}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                        <span className="text-samurai-red">FCFS END:</span>
+                        <p className="text-white/70">
+                          {formattedDate(
+                            ido.publicParticipationEndsAt
+                          ).toUpperCase()}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
                         <span className="text-samurai-red">TGE DATE:</span>
                         <p className="text-white/70">
-                          {formattedDate(ido.tgeDate).toUpperCase()}
+                          TO BE ANNOUNCED
+                          {/* {formattedDate(ido.tgeDate).toUpperCase()} */}
                         </p>
                       </div>
-                      <div className="flex items-center gap-2 py-2 px-4 text-[16px] rounded-md w-max min-w-[300px]">
+                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
                         <span className="text-samurai-red">TOKEN SYMBOL:</span>
                         <p className="text-white/70">
                           {ido.projectTokenSymbol}
                         </p>
                       </div>
-                      <div className="flex items-center gap-2 py-2 px-4 text-[16px] rounded-md w-max min-w-[300px]">
+                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
                         <span className="text-samurai-red">TOKEN PRICE:</span>
-                        <p className="text-white/70">${ido.price}</p>
+                        <p className="text-white/70">
+                          ${ido.price} {ido.acceptedTokenSymbol}
+                        </p>
                       </div>
                     </div>
 
                     {/* UPCOMING BLOCK */}
-                    {currentPhase?.title.toLowerCase() === "upcoming" && (
+                    {currentPhase?.toLowerCase() === "upcoming" && (
                       <>
                         <div
-                          className={`text-2xl text-white/80 mt-10 pt-10 leading-normal ${inter.className}`}
+                          className={`text-xl xl:text-2xl text-white/80 xl:mt-10 pt-6 xl:pt-10 leading-normal ${inter.className}`}
                         >
                           <p className="text-white/70samurai-red text-center">
                             SAVE THE DATE TO HOPPING IN!
@@ -220,11 +445,20 @@ export default function Ido() {
                       </>
                     )}
 
-                    {currentPhase?.title.toLowerCase() === "participation" &&
-                      !userIdo?.completed && (
+                    {currentPhase?.toLowerCase() === "participation" &&
+                      user?.allocation === 0 && (
                         <div className="flex flex-col">
-                          <button className="self-end text-sm mb-1 hover:text-samurai-red">
-                            BALANCE: 10000
+                          <button
+                            onClick={() =>
+                              onInputChange(user.balance.toString())
+                            }
+                            className="self-end text-sm mb-1 hover:text-samurai-red mr-1"
+                          >
+                            BALANCE:{" "}
+                            {Number(user?.balance).toLocaleString("en-us", {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2,
+                            })}
                           </button>
                           <div className="relative">
                             <input
@@ -246,37 +480,96 @@ export default function Ido() {
                             </div>
                           </div>
 
-                          <button className="bg-samurai-red rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all hover:opacity-75">
-                            {currentPhase?.buttonTitle}
+                          {/* PARTICIPATE BUTTON */}
+
+                          <button
+                            onClick={onParticipate}
+                            disabled={
+                              isLoading ||
+                              !general ||
+                              !user ||
+                              user.isBlacklisted ||
+                              (!user.isWhitelisted && !general.isPublic) ||
+                              inputValue === "" ||
+                              Number(inputValue) === 0
+                            }
+                            className={`
+                            ${
+                              isLoading ||
+                              !general ||
+                              !user ||
+                              user.isBlacklisted ||
+                              (!user.isWhitelisted && !general.isPublic) ||
+                              inputValue === "" ||
+                              Number(inputValue) === 0
+                                ? "bg-black text-white/20"
+                                : "bg-samurai-red text-white hover:opacity-75"
+                            }
+                               rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
+                          >
+                            {isLoading ? "Loading..." : "PARTICIPATE"}
                           </button>
                         </div>
                       )}
 
-                    {currentPhase?.title.toLowerCase() === "participation" &&
-                      userIdo?.completed && (
-                        <div className="flex flex-row justify-between items-center border-t border-white/20 pt-12 gap-8">
-                          <div className="p-4 px-6 border border-white/20 rounded-[8px] w-full">
-                            <p className={`text-xl ${inter.className}`}>
+                    {currentPhase?.toLowerCase() === "participation" &&
+                      user?.allocation > 0 && (
+                        <div className="flex flex-row justify-between items-center flex-wrap gap-4">
+                          <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
+                            <p className={`text-lg ${inter.className}`}>
                               MY ALLOCATION
                             </p>
-                            <p className="text-4xl text-samurai-red">
-                              {userIdo?.participation?.toLocaleString("en-us", {
+                            <p className="text-2xl text-samurai-red">
+                              {user.allocation.toLocaleString("en-us", {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2,
                               })}{" "}
-                              {ido.acceptedToken}
+                              {ido.acceptedTokenSymbol}
                             </p>
                           </div>
 
-                          <div className="p-4 px-6 border border-white/20 rounded-[8px] w-full">
-                            <p className={`text-xl ${inter.className}`}>
+                          <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
+                            <p className={`text-lg ${inter.className}`}>
                               TOKENS TO RECEIVE
                             </p>
-                            <p className="text-4xl text-samurai-red">
+                            <p className="text-2xl text-samurai-red">
                               {(
-                                Number(userIdo?.participation) *
-                                Number(ido.price)
+                                Number(user?.allocation) / Number(ido.price)
                               )?.toLocaleString("en-us", {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              })}{" "}
+                              {ido.projectTokenSymbol}
+                            </p>
+                          </div>
+                          <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
+                            <p className={`text-lg ${inter.className}`}>
+                              {ido.tgePercentage}% TGE RELEASE
+                            </p>
+                            <p className="text-2xl text-samurai-red">
+                              {(
+                                ((Number(user?.allocation) /
+                                  Number(ido.price)) *
+                                  ido.tgePercentage) /
+                                100
+                              ).toLocaleString("en-us", {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              })}{" "}
+                              {ido.projectTokenSymbol}
+                            </p>
+                          </div>
+                          <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
+                            <p className={`text-lg ${inter.className}`}>
+                              {100 - ido.tgePercentage}% VESTING RELEASE
+                            </p>
+                            <p className="text-2xl text-samurai-red">
+                              {(
+                                ((Number(user?.allocation) /
+                                  Number(ido.price)) *
+                                  (100 - ido.tgePercentage)) /
+                                100
+                              ).toLocaleString("en-us", {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2,
                               })}{" "}
@@ -287,109 +580,166 @@ export default function Ido() {
                       )}
 
                     {/* TGE PHASE BLOCK */}
-                    {currentPhase?.title.toLowerCase() === "completed" && (
+                    {currentPhase?.toLowerCase() === "completed" && (
                       <>
                         <div
-                          className={`text-2xl text-white/80 mt-10 pt-10 border-t border-white/20 leading-normal ${inter.className}`}
+                          className={`text-2xl text-white/80 pt-10 border-t border-white/20 leading-normal ${inter.className}`}
                         >
-                          <p className="text-samurai-red">IMPORTANT NOTE:</p>
-                          The unlocked tokens in TGE phase will be airdroped by
-                          the team at the date above.
+                          <p className="text-samurai-red text-[16px]">
+                            TOKEN DISTRIBUTION:
+                          </p>
+                          TO BE ANNOUNCED
                         </div>
                       </>
                     )}
                   </div>
                 )}
               </div>
-              {/* <div className="flex items-center gap-4 mt-6">
-                <div className="w-full h-[180px] relative">
-                  <Image
-                    src="/IDOs/shibainu.png"
-                    alt={ido?.projectName || ""}
-                    fill
-                    className="w-[200px] h-[140px] p-[1px] bg-white/10 rounded-[8px]"
-                  />
-                </div>
-                <div className="w-full h-[180px] relative">
-                  <Image
-                    src="/IDOs/shibainu.png"
-                    alt={ido?.projectName || ""}
-                    fill
-                    className="w-[200px] h-[140px] p-[1px] bg-white/10 rounded-[8px]"
-                  />
-                </div>
-              </div> */}
             </div>
           </div>
         </div>
       </TopLayout>
-      <div className="flex items-center gap-10 pt-8 pb-32 mt-16 px-6 lg:px-8 xl:px-20 border-white/20">
+      <div className="flex flex-col xl:flex-row  gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 px-1 lg:px-8 xl:px-20 border-t border-white/20 bg-white/10">
         {ido && (
           <>
-            <div className="flex flex-col bg-[#0b0b0b] p-10 py-[55px] rounded-[8px] border border-white/20">
-              <h1 className="text-3xl">TOKEN INFO</h1>
-              <div className="flex flex-col gap-6 mt-10 text-xl">
-                <div className="flex items-center gap-2 bg-black/50 py-2 px-4 rounded-md w-max border border-white/10">
+            <div
+              className={`flex w-full !leading-[28px] font-light px-2 lg:px-0 lg:text-lg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-gray-300 ${inter.className}`}
+              dangerouslySetInnerHTML={{ __html: ido.bigDescription as string }}
+            />
+            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-8 lg:py-[70px] shadow-xl lg:border border-white/20 h-max">
+              <h1 className="text-2xl xl:text-3xl bg-samurai-red px-7 py-3">
+                TOKEN INFO
+              </h1>
+              <div className="flex flex-col gap-4 xl:gap-8 mt-16 text-[15px] xl:text-xl px-7">
+                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
                   <span className="text-samurai-red">TOKEN SYMBOL:</span>
                   <p className="text-white/70">{ido.projectTokenSymbol}</p>
                 </div>
-                <div className="flex items-center gap-2 bg-black/50 py-2 px-4 rounded-md w-max border border-white/10">
+                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
                   <span className="text-samurai-red">NETWORK:</span>
                   <p className="text-white/70">POLYGON</p>
                 </div>
-                <div className="flex items-center gap-2 bg-black/50 py-2 px-4 rounded-md w-max border border-white/10">
+                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
                   <span className="text-samurai-red">FDV:</span>
                   <p className="text-white/70">
                     $
-                    {Number(10_000_000).toLocaleString("en-us", {
+                    {Number(ido.fdv).toLocaleString("en-us", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}{" "}
                     USD
                   </p>
                 </div>
-                <div className="flex items-center gap-2 bg-black/50 py-2 px-4 rounded-md w-max border border-white/10">
+                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
                   <span className="text-samurai-red">
                     CIRCULATING SUPPLY AT TGE:
                   </span>
-                  <p className="text-white/70">20%</p>
+                  <p className="text-white/70">
+                    {Number(ido.circulatingSupplyAtTGE).toLocaleString(
+                      "en-us",
+                      {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      }
+                    )}{" "}
+                    {ido.projectTokenSymbol}
+                  </p>
                 </div>
 
-                <div className="flex items-center gap-2 bg-black/50 py-2 px-4 rounded-md w-max border border-white/10">
+                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
                   <span className="text-samurai-red">MARKET CAP AT TGE:</span>
                   <p className="text-white/70">
                     $
-                    {Number(2_000_000).toLocaleString("en-us", {
+                    {Number(ido.marketCapAtTGE).toLocaleString("en-us", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}{" "}
-                    USD
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 bg-black/50 py-2 px-4 rounded-md w-max border border-white/10">
+                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
                   <span className="text-samurai-red">VESTING:</span>
-                  <p className="text-white/70">
-                    30% AT TGE WITH LINEAR UNLOCK FOR 4 MONTHS
-                  </p>
+                  <p className="text-white/70">{ido.vesting.toUpperCase()}</p>
                 </div>
 
-                <div className="flex items-center gap-2 bg-black/50 py-2 px-4 rounded-md w-max border border-white/10">
+                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
                   <span className="text-samurai-red">DEX SCREENER:</span>
                   <p className="text-white/70">
-                    <Link href="#">https://somelink</Link>
+                    <Link href="#">{"https://somelink".toUpperCase()}</Link>
                   </p>
                 </div>
               </div>
             </div>
-            <p
-              className={`flex w-full !leading-[34px] font-light lg:text-xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] ${inter.className} text-justify `}
-            >
-              {ido?.bigDescription}
-            </p>
           </>
         )}
       </div>
+
+      {/* ============================================================================================================ */}
+      {/* ADMIN AREA */}
+      {/* ============================================================================================================ */}
+
+      {general && account && general.owner === account && (
+        <div className="flex flex-col xl:flex-row  gap-10 pt-24 pb-10 xl:pb-32 px-6 lg:px-8 xl:px-20 border-t border-white/20 w-full">
+          {ido && (
+            <div className="flex flex-col gap-10">
+              <h1 className="text-2xl xl:text-3xl">ADMIN AREA</h1>
+              <div className="flex items-center gap-10 flex-wrap">
+                <SSButton disabled={isLoading} click={onTogglePause}>
+                  {isLoading
+                    ? "Loading..."
+                    : general.isPaused
+                    ? "Unpause"
+                    : "Pause"}
+                </SSButton>
+                <SSButton disabled={isLoading} click={onWithdraw}>
+                  {isLoading ? "Loading..." : "Withdraw Participations"}
+                </SSButton>
+                <SSButton disabled={isLoading} click={onMakePublic}>
+                  {isLoading ? "Loading..." : "Make Public"}
+                </SSButton>
+              </div>
+
+              {/* WHITELIST */}
+              <div className="flex flex-col gap-5 bg-black border-t border-gray-800 py-8">
+                <label>
+                  Enter the addresses to be whitelisteds (max 1200 per
+                  transaction)
+                </label>
+                <textarea
+                  name=""
+                  cols={30}
+                  rows={10}
+                  placeholder="Enter the wallets (separated by comma)"
+                  className="text-black rounded-[8px] xl:w-[600px]"
+                  onChange={(e) => onTextAreaChange(e.target.value)}
+                ></textarea>
+                <div>
+                  <SSButton disabled={isLoading} click={onAddToWhitelist}>
+                    {isLoading ? "Loading..." : "Add to Whitelist"}
+                  </SSButton>
+                </div>
+              </div>
+
+              {/* BLACKLIST */}
+              <div className="flex flex-col gap-5 bg-black border-t border-gray-800 py-8">
+                <label>Enter the address to be blacklisted</label>
+                <input
+                  type="text"
+                  placeholder="Enter the wallet you want to blacklist"
+                  className="text-black rounded-[8px] xl:w-[600px]"
+                  onChange={(e) => setBlacklistAddress(e.target.value)}
+                  value={blacklistAddress}
+                />
+                <div>
+                  <SSButton disabled={isLoading} click={onAddToBlacklist}>
+                    {isLoading ? "Loading..." : "Add to Blacklist"}
+                  </SSButton>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
     </Layout>
   );
 }

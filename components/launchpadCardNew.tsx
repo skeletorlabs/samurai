@@ -3,6 +3,8 @@ import Image from "next/image";
 import { fromUnixTime, format } from "date-fns";
 import Link from "next/link";
 import { formattedDate } from "@/utils/formattedDate";
+import { IDO_LIST } from "@/utils/constants";
+import { getParticipationPhase } from "@/contracts_integrations/ido";
 
 export default function launchpadCardNew({
   ido,
@@ -21,12 +23,13 @@ export default function launchpadCardNew({
       }  w-full md:max-w-[360px] xl:max-w-[400px] max-h-[840px] py-4 pb-5 shadow-xl transition-all hover:scale-[1.02] px-4`}
     >
       <div className="flex w-full mb-4 relative">
-        <div className="flex w-full h-[264px] relative">
+        <div className="flex w-full h-[260px] relative">
           <Image
             src={ido.idoImageSrc}
             placeholder="blur"
             blurDataURL={ido.idoImageSrc}
             fill
+            style={{ objectFit: "cover" }}
             alt={ido.projectName}
           />
         </div>
@@ -38,10 +41,12 @@ export default function launchpadCardNew({
           {/* </div> */}
 
           <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-md w-full mt-1 text-[14px] border border-white/20">
-            {ido.type.toUpperCase()}
+            {ido.investmentRound.toUpperCase()}
           </div>
           <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-md w-full mt-1 text-[14px] border border-white/20 text-samurai-red">
-            {ido.currentPhase.toUpperCase()}
+            {getParticipationPhase(
+              IDO_LIST.findIndex((item) => item.contract === ido.contract)
+            ).toUpperCase()}
           </div>
         </div>
 
@@ -72,39 +77,50 @@ export default function launchpadCardNew({
         <div className="text-samurai-red">{ido.projectName}</div>
       </div>
 
-      <div className="text-white/70 text-[15px] px-1 mb-4 line-clamp-2 text-base">
-        {ido.projectDescription}
+      <div className="text-white/70 text-[15px] px-1 mb-4 line-clamp-3 text-base">
+        {ido.projectListDescription}
       </div>
 
       <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md  w-max">
-        <span className="text-[14px] text-samurai-red">Allocation:</span>
+        <span className="text-[14px] text-samurai-red">ALLOCATION:</span>
         <p className="text-white/70">
-          {ido.raised} {ido.acceptedToken}
+          {ido.totalAllocation.toLocaleString("en-us", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}{" "}
+          {ido.acceptedTokenSymbol}
+          {/* ({(Number(ido.totalAllocation) / Number(ido.price)).toLocaleString("en-us", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}{" "}
+          {ido.projectTokenSymbol}) */}
         </p>
       </div>
 
       <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max mt-2">
         <span className="text-[14px] text-samurai-red">PRICE:</span>
         <p className="text-white/70">
-          {ido.price} {ido.acceptedToken}
+          {ido.price} {ido.acceptedTokenSymbol}
         </p>
       </div>
 
       <div className="flex justify-between items-center px-1 mt-4">
         <div className="flex flex-col">
           <span className="text-sm text-white/70">IDO DATE</span>
-          <span className="text-[16px]">{formattedDate(ido.idoDate)}</span>
+          <span className="text-[16px]">
+            {formattedDate(ido.participationStartsAt)}
+          </span>
         </div>
       </div>
 
-      <div className="flex justify-between items-center px-1 mt-4">
+      {/* <div className="flex justify-between items-center px-1 mt-4">
         <div className="flex flex-col">
           <span className="text-sm text-white/70">REGISTRATION</span>
           <span className="text-[16px]">
             {formattedDate(ido.registrationDate)}
           </span>
         </div>
-      </div>
+      </div> */}
     </Link>
   );
 }

@@ -1,5 +1,9 @@
 import { fromUnixTime, format } from "date-fns";
+import { utcToZonedTime } from "date-fns-tz";
 
 export function formattedDate(timestamp: number) {
-  return format(fromUnixTime(timestamp), "dd MMM, HH:mm");
+  return format(
+    utcToZonedTime(fromUnixTime(timestamp), "UTC"),
+    "dd MMM, HH:mm"
+  );
 }

@@ -7,6 +7,7 @@ import TopLayout from "@/components/topLayout";
 import LaunchpadCardNew from "@/components/launchpadCardNew";
 import { IDONEW } from "@/utils/interfaces";
 import { IDO_LIST } from "@/utils/constants";
+import Projects from "@/components/projects";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -58,13 +59,7 @@ export default function Launchpad() {
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Upcoming</span> Token Offerings
           </h2>
-          <div
-            className={`flex justify-center lg:justify-start items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
-          >
-            {IDO_LIST.map((ido: IDONEW, index) => (
-              <LaunchpadCardNew key={index} ido={ido} />
-            ))}
-          </div>
+          <Projects />
         </div>
       </div>
 
