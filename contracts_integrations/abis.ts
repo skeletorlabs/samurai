@@ -774,7 +774,7 @@ export const PARTICIPATOR_ABI = [
   },
   {
     type: "function",
-    name: "whithdraw",
+    name: "withdraw",
     inputs: [],
     outputs: [],
     stateMutability: "nonpayable",

@@ -29,7 +29,8 @@ export const IDO_LIST: IDONEW[] = [
     id: "launchpad/havens-compass",
     idoImageSrc: "/IDOs/havens-compass.png",
     acceptedTokenSymbol: "USDC",
-    network: "BASE",
+    tokenNetwork: "TO BE ANNOUNCED",
+    crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
     projectName: "Haven's Compass",
     projectListDescription:

@@ -145,7 +145,8 @@ export interface IDONEW {
   id: string;
   idoImageSrc: string;
   acceptedTokenSymbol: string;
-  network: string;
+  tokenNetwork: string;
+  crowdsaleNetwork: string;
   networkImageSrc: string;
   projectName: string;
   projectListDescription: string;

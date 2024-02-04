@@ -52,9 +52,8 @@ export async function general() {
 }
 
 export async function togglePause(signer: ethers.Signer) {
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-
   try {
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
     const owner = await contract.owner();
     const signerAddress = await signer.getAddress();
 
@@ -88,29 +87,32 @@ export async function togglePause(signer: ethers.Signer) {
 }
 
 export async function isWhitelisted(signer: ethers.Signer) {
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-  const signerAddress = await signer.getAddress();
+  try {
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
+    const signerAddress = await signer.getAddress();
 
-  const isWhitelisted: boolean = await contract.isWhitelisted(signerAddress);
-  const hasUsedFreeMint: boolean = await contract.hasUsedFreeMint(
-    signerAddress
-  );
-  const whitelistFinishAt = Number(await contract.whitelistRoundFinishAt());
+    const isWhitelisted: boolean = await contract.isWhitelisted(signerAddress);
+    const hasUsedFreeMint: boolean = await contract.hasUsedFreeMint(
+      signerAddress
+    );
+    const whitelistFinishAt = Number(await contract.whitelistRoundFinishAt());
 
-  return {
-    isWhitelisted,
-    hasUsedFreeMint,
-    whitelistFinishAt,
-  } as WhitelistDataType;
+    return {
+      isWhitelisted,
+      hasUsedFreeMint,
+      whitelistFinishAt,
+    } as WhitelistDataType;
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
 }
 
 export async function releaseWhitelistAssets(
   signer: ethers.Signer,
   percentage: number
 ) {
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-
   try {
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
     const owner = await contract.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();
@@ -143,9 +145,8 @@ export async function releaseWhitelistAssets(
 }
 
 export async function startWhitelistRound(signer: ethers.Signer) {
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-
   try {
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
     const owner = await contract.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();
@@ -180,9 +181,8 @@ export async function addToWhitelist(
   signer: ethers.Signer,
   addresses: string[]
 ) {
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-
   try {
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
     const owner = await contract.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();

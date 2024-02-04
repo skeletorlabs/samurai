@@ -5,6 +5,7 @@ import Link from "next/link";
 import { formattedDate } from "@/utils/formattedDate";
 import { IDO_LIST } from "@/utils/constants";
 import { getParticipationPhase } from "@/contracts_integrations/ido";
+import { useCallback, useEffect, useState } from "react";
 
 export default function launchpadCardNew({
   ido,
@@ -13,6 +14,21 @@ export default function launchpadCardNew({
   ido: IDONEW;
   type?: string;
 }) {
+  const [phase, setPhase] = useState("");
+
+  const getPhase = useCallback(async () => {
+    const phase = await getParticipationPhase(
+      IDO_LIST.findIndex((item) => item.contract === ido.contract)
+    );
+    setPhase(phase.toUpperCase());
+  }, [ido]);
+
+  useEffect(() => {
+    if (ido) {
+      getPhase();
+    }
+  }, [ido]);
+
   return (
     <Link
       href={ido.id}
@@ -44,24 +60,28 @@ export default function launchpadCardNew({
             {ido.investmentRound.toUpperCase()}
           </div>
           <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-md w-full mt-1 text-[14px] border border-white/20 text-samurai-red">
-            {getParticipationPhase(
-              IDO_LIST.findIndex((item) => item.contract === ido.contract)
-            ).toUpperCase()}
+            {phase}
           </div>
         </div>
 
-        <div className="flex items-center gap-2 bg-black/90 px-2 py-1 rounded-md text-[14px] border border-white/20 absolute top-4 left-4">
-          <span className="text-sm">Project Tokens</span>
-          <Image
-            src="/chain-logos/polygon.svg"
-            alt={ido.projectName}
-            width={24}
-            height={24}
-            className="p-[1px] bg-white/80 rounded-full"
-          />
-        </div>
+        {ido?.tokenNetwork !== "TO BE ANNOUNCED" && (
+          <div className="flex items-center gap-2 bg-black/90 px-2 py-1 rounded-md text-[14px] border border-white/20 absolute top-4 left-4">
+            <span className="text-sm">Project Tokens</span>
+            <Image
+              src="/chain-logos/polygon.svg"
+              alt={ido.projectName}
+              width={24}
+              height={24}
+              className="p-[1px] bg-white/80 rounded-full"
+            />
+          </div>
+        )}
 
-        <div className="flex items-center gap-2 bg-black/90 px-2 py-1 rounded-md text-[14px] border border-white/20 absolute top-14 left-4">
+        <div
+          className={`flex items-center gap-2 bg-black/90 px-2 py-1 rounded-md text-[14px] border border-white/20 absolute ${
+            ido?.tokenNetwork === "TO BE ANNOUNCED" ? "top-4" : "top-14"
+          } left-4`}
+        >
           <span className="text-sm">Crowdsale</span>
           <Image
             src="/chain-logos/Base_Symbol_Blue.svg"
@@ -108,7 +128,7 @@ export default function launchpadCardNew({
         <div className="flex flex-col">
           <span className="text-sm text-white/70">IDO DATE</span>
           <span className="text-[16px]">
-            {formattedDate(ido.participationStartsAt)}
+            {formattedDate(ido.participationStartsAt)} UTC
           </span>
         </div>
       </div>

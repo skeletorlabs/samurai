@@ -2,42 +2,29 @@ import { ethers } from "ethers";
 import { ERC20_ABI, PARTICIPATOR_ABI } from "./abis";
 import Notificate from "../components/notificate";
 import handleError from "../utils/handleErrors";
-import {
-  GeneralInfo,
-  NFTMetadata,
-  WhitelistDataType,
-} from "@/utils/interfaces";
 import { IDO_LIST, LINKS } from "@/utils/constants";
 import { balanceOf } from "./balanceOf";
 import checkApproval from "./check-approval";
 import { getUnixTime } from "date-fns";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
-const TEST_RPC = "http://127.0.0.1:8545";
+// const TEST_RPC = "http://127.0.0.1:8545";
 
-// address[] public acceptedTokens;
-// uint256 public min;
-// uint256 public max;
-// bool public isPublic;
+async function getContract(index: number, signer?: ethers.Signer) {
+  try {
+    const ido = IDO_LIST[index];
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+    const contractAddress = ido.contract;
+    const contract = new ethers.Contract(
+      contractAddress,
+      PARTICIPATOR_ABI,
+      signer || provider
+    );
 
-// mapping(address wallet => uint256 allocation) public allocations;
-// mapping(address wallet => bool isWhitelisted) public whitelist;
-// mapping(address wallet => bool isBlacklisted) public blacklist;
-
-async function getContract(
-  index: number,
-  signer?: ethers.Signer
-): Promise<ethers.Contract> {
-  const ido = IDO_LIST[index];
-  const provider = new ethers.JsonRpcProvider(TEST_RPC);
-  const contractAddress = ido.contract;
-  const contract = new ethers.Contract(
-    contractAddress,
-    PARTICIPATOR_ABI,
-    signer || provider
-  );
-
-  return contract;
+    return contract;
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
 }
 
 async function notificateTx(tx: any, network: any) {
@@ -62,45 +49,80 @@ async function notificateTx(tx: any, network: any) {
 
 // OVERALL INFOS
 
+export async function checkIsPaused(index: number) {
+  try {
+    const contract = await getContract(index);
+    const isPaused = await contract?.paused();
+    return isPaused;
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
+}
+
 export async function generalInfo(index: number) {
-  const contract = await getContract(index);
+  try {
+    const contract = await getContract(index);
 
-  const owner = await contract.owner();
-  const minPerWallet = Number(ethers.formatUnits(await contract.min(), 6));
-  const maxPerWallet = Number(ethers.formatUnits(await contract.max(), 6));
-  const isPublic = await contract.isPublic();
-  const acceptedToken = await contract.acceptedTokens(0);
-  const isPaused = await contract.paused();
+    const owner = await contract?.owner();
+    const minPerWallet = Number(ethers.formatUnits(await contract?.min(), 6));
+    const maxPerWallet = Number(ethers.formatUnits(await contract?.max(), 6));
+    const isPublic = await contract?.isPublic();
+    const acceptedToken = await contract?.acceptedTokens(0);
+    const isPaused = await contract?.paused();
 
-  return {
-    owner,
-    minPerWallet,
-    maxPerWallet,
-    isPublic,
-    acceptedToken,
-    isPaused,
-  };
+    return {
+      owner,
+      minPerWallet,
+      maxPerWallet,
+      isPublic,
+      acceptedToken,
+      isPaused,
+    };
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
 }
 
 // USER INFOS
 
 export async function userInfo(index: number, signer: ethers.Signer) {
-  const signerAdress = await signer.getAddress();
-  const contract = await getContract(index, signer);
-  const allocation = Number(
-    ethers.formatUnits(await contract.allocations(signerAdress), 6)
-  );
-  const isWhitelisted = await contract.whitelist(signerAdress);
-  const isBlacklisted = await contract.blacklist(signerAdress);
-  const acceptedtoken = await contract.acceptedTokens(0);
-  const balance = Number(
-    ethers.formatUnits(
-      await balanceOf(ERC20_ABI, acceptedtoken, signerAdress, signer),
-      6
-    )
-  );
+  try {
+    const signerAdress = await signer.getAddress();
+    const contract = await getContract(index, signer);
+    const allocation = Number(
+      ethers.formatUnits(await contract?.allocations(signerAdress), 6)
+    );
+    const isWhitelisted = await contract?.whitelist(signerAdress);
+    const isBlacklisted = await contract?.blacklist(signerAdress);
+    const acceptedToken = await contract?.acceptedTokens(0);
+    const balance = Number(
+      ethers.formatUnits(
+        await balanceOf(ERC20_ABI, acceptedToken, signerAdress, signer),
+        6
+      )
+    );
 
-  return { allocation, isWhitelisted, isBlacklisted, balance };
+    const contractAddress = await contract?.getAddress();
+    const acceptedTokenBalance = ethers.formatUnits(
+      await balanceOf(
+        ERC20_ABI,
+        acceptedToken,
+        contractAddress as string,
+        signer
+      ),
+      6
+    );
+
+    return {
+      allocation,
+      isWhitelisted,
+      isBlacklisted,
+      balance,
+      acceptedTokenBalance,
+    };
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
 }
 
 // PARTICIPATE IN THE IDO
@@ -116,17 +138,17 @@ export async function participate(
     const contract = await getContract(index, signer);
     const network = await signer.provider?.getNetwork();
 
-    const contractAddress = await contract.getAddress();
+    const contractAddress = await contract?.getAddress();
     await checkApproval(
       acceptedToken,
-      contractAddress,
+      contractAddress!,
       signer,
       ethers.parseUnits(amount, 6)
     );
 
     console.log("VAI ENVIAR OS TOKENS");
 
-    const tx = await contract.sendToken(
+    const tx = await contract?.sendToken(
       signerAddress,
       acceptedToken,
       ethers.parseUnits(amount, 6)
@@ -147,12 +169,12 @@ export async function addToWhitelist(
 ) {
   try {
     const contract = await getContract(index, signer);
-    const owner = await contract.owner();
+    const owner = await contract?.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();
 
     if (owner === signerAddress) {
-      const tx = await contract.addBatchToWhitelist(addresses);
+      const tx = await contract?.addBatchToWhitelist(addresses);
       await notificateTx(tx, network);
     }
   } catch (e) {
@@ -167,12 +189,12 @@ export async function addToBlacklist(
 ) {
   try {
     const contract = await getContract(index, signer);
-    const owner = await contract.owner();
+    const owner = await contract?.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();
 
     if (owner === signerAddress) {
-      const tx = await contract.addToWhitelist(address);
+      const tx = await contract?.addToWhitelist(address);
       await notificateTx(tx, network);
     }
   } catch (e) {
@@ -183,12 +205,12 @@ export async function addToBlacklist(
 export async function makePublic(index: number, signer: ethers.Signer) {
   try {
     const contract = await getContract(index, signer);
-    const owner = await contract.owner();
+    const owner = await contract?.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();
 
     if (owner === signerAddress) {
-      const tx = await contract.makePublic();
+      const tx = await contract?.makePublic();
       await notificateTx(tx, network);
     }
   } catch (e) {
@@ -199,12 +221,12 @@ export async function makePublic(index: number, signer: ethers.Signer) {
 export async function withdraw(index: number, signer: ethers.Signer) {
   try {
     const contract = await getContract(index, signer);
-    const owner = await contract.owner();
+    const owner = await contract?.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();
 
     if (owner === signerAddress) {
-      const tx = await contract.whithdraw();
+      const tx = await contract?.withdraw();
       await notificateTx(tx, network);
     }
   } catch (e) {
@@ -216,14 +238,14 @@ export async function togglePause(index: number, signer: ethers.Signer) {
   const contract = await getContract(index, signer);
 
   try {
-    const owner = await contract.owner();
+    const owner = await contract?.owner();
     const signerAddress = await signer.getAddress();
 
     if (owner === signerAddress) {
-      const isPaused = await contract.paused();
+      const isPaused = await contract?.paused();
       let tx: any;
 
-      tx = isPaused ? await contract.unpause() : await contract.pause();
+      tx = isPaused ? await contract?.unpause() : await contract?.pause();
 
       const txUrl = "https://goerli.etherscan.io/tx/" + tx.hash.toString();
 
@@ -248,17 +270,19 @@ export async function togglePause(index: number, signer: ethers.Signer) {
   }
 }
 
-export function getParticipationPhase(index: number) {
+export async function getParticipationPhase(index: number) {
   const ido = IDO_LIST[index];
   const participationStartAt = ido.participationStartsAt;
   const participationEndsAt = ido.participationEndsAt;
-  const now = getUnixTime(new Date()) + 5 * 86400;
+  const now = getUnixTime(new Date());
+  const isPaused = await checkIsPaused(index);
 
   let phase = "Upcoming";
 
   if (now >= participationStartAt && now <= participationEndsAt)
     phase = "Participation";
   if (now >= participationEndsAt) phase = "Completed";
+  if (phase !== "Upcoming" && isPaused) phase = "Completed";
 
   return phase;
 }

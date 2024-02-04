@@ -234,7 +234,7 @@ export default function Ido() {
     }
 
     if (idoIndex !== -1) {
-      const phase = getParticipationPhase(idoIndex);
+      const phase = await getParticipationPhase(idoIndex);
       setCurrentPhase(phase);
     }
   }, [chain, idoIndex, setCurrentPhase]);
@@ -282,16 +282,18 @@ export default function Ido() {
               <div className="flex flex-col text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
                 {ido?.projectName}
                 <div className="flex items-center gap-4 pt-5">
-                  <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
-                    <span className="text-sm">Project Tokens</span>
-                    <Image
-                      src="/chain-logos/polygon.svg"
-                      alt={ido?.projectName || ""}
-                      width={24}
-                      height={24}
-                      className="p-[1px] bg-white/80 rounded-full"
-                    />
-                  </div>
+                  {ido?.tokenNetwork !== "TO BE ANNOUNCED" && (
+                    <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
+                      <span className="text-sm">Project Tokens</span>
+                      <Image
+                        src="/chain-logos/polygon.svg"
+                        alt={ido?.projectName || ""}
+                        width={24}
+                        height={24}
+                        className="p-[1px] bg-white/80 rounded-full"
+                      />
+                    </div>
+                  )}
 
                   <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20  w-max">
                     <span className="text-sm">Crowdsale</span>
@@ -378,21 +380,19 @@ export default function Ido() {
                     {/* PARTICIPATION PHASE BLOCK */}
                     <div className="flex justify-center lg:justify-start lg:grid lg:grid-cols-2 gap-1 items-center flex-wrap mt-6">
                       <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                        <span className="text-samurai-red">
-                          PARTICIPATION START:
-                        </span>
+                        <span className="text-samurai-red">IDO START:</span>
                         <p className="text-white/70">
                           {formattedDate(
                             ido.participationStartsAt
-                          ).toUpperCase()}
+                          ).toUpperCase()}{" "}
+                          UTC
                         </p>
                       </div>
                       <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                        <span className="text-samurai-red">
-                          PARTICIPATION END:
-                        </span>
+                        <span className="text-samurai-red">IDO END:</span>
                         <p className="text-white/70">
-                          {formattedDate(ido.participationEndsAt).toUpperCase()}
+                          {formattedDate(ido.participationEndsAt).toUpperCase()}{" "}
+                          UTC
                         </p>
                       </div>
                       <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
@@ -400,7 +400,8 @@ export default function Ido() {
                         <p className="text-white/70">
                           {formattedDate(
                             ido.publicParticipationStartsAt
-                          ).toUpperCase()}
+                          ).toUpperCase()}{" "}
+                          UTC
                         </p>
                       </div>
                       <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
@@ -408,7 +409,8 @@ export default function Ido() {
                         <p className="text-white/70">
                           {formattedDate(
                             ido.publicParticipationEndsAt
-                          ).toUpperCase()}
+                          ).toUpperCase()}{" "}
+                          UTC
                         </p>
                       </div>
                       <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
@@ -448,18 +450,42 @@ export default function Ido() {
                     {currentPhase?.toLowerCase() === "participation" &&
                       user?.allocation === 0 && (
                         <div className="flex flex-col">
-                          <button
-                            onClick={() =>
-                              onInputChange(user.balance.toString())
-                            }
-                            className="self-end text-sm mb-1 hover:text-samurai-red mr-1"
-                          >
-                            BALANCE:{" "}
-                            {Number(user?.balance).toLocaleString("en-us", {
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 2,
-                            })}
-                          </button>
+                          <div className="flex items-center justify-between">
+                            <span className="self-end text-sm mb-1 hover:text-samurai-red mr-1">
+                              MIN{" "}
+                              {Number(general?.minPerWallet).toLocaleString(
+                                "en-us",
+                                {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                }
+                              )}
+                              {" / "}
+                              MAX{" "}
+                              {Number(general?.maxPerWallet).toLocaleString(
+                                "en-us",
+                                {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                }
+                              )}{" "}
+                              {ido.acceptedTokenSymbol}
+                            </span>
+                            <button
+                              onClick={() =>
+                                onInputChange(user.balance.toString())
+                              }
+                              className="self-end text-sm mb-1 hover:text-samurai-red mr-1"
+                            >
+                              BALANCE:{" "}
+                              {Number(user?.balance).toLocaleString("en-us", {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              })}{" "}
+                              {ido.acceptedTokenSymbol}
+                            </button>
+                          </div>
+
                           <div className="relative">
                             <input
                               type="text"
@@ -488,20 +514,26 @@ export default function Ido() {
                               isLoading ||
                               !general ||
                               !user ||
+                              general.isPaused ||
                               user.isBlacklisted ||
                               (!user.isWhitelisted && !general.isPublic) ||
                               inputValue === "" ||
-                              Number(inputValue) === 0
+                              Number(inputValue) === 0 ||
+                              Number(inputValue) < general.minPerWallet ||
+                              Number(inputValue) > general.maxPerWallet
                             }
                             className={`
                             ${
                               isLoading ||
                               !general ||
                               !user ||
+                              general.isPaused ||
                               user.isBlacklisted ||
                               (!user.isWhitelisted && !general.isPublic) ||
                               inputValue === "" ||
-                              Number(inputValue) === 0
+                              Number(inputValue) === 0 ||
+                              Number(inputValue) < general.minPerWallet ||
+                              Number(inputValue) > general.maxPerWallet
                                 ? "bg-black text-white/20"
                                 : "bg-samurai-red text-white hover:opacity-75"
                             }
@@ -617,7 +649,7 @@ export default function Ido() {
                 </div>
                 <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
                   <span className="text-samurai-red">NETWORK:</span>
-                  <p className="text-white/70">POLYGON</p>
+                  <p className="text-white/70">{ido.tokenNetwork}</p>
                 </div>
                 <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
                   <span className="text-samurai-red">FDV:</span>
@@ -665,7 +697,8 @@ export default function Ido() {
                 <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
                   <span className="text-samurai-red">DEX SCREENER:</span>
                   <p className="text-white/70">
-                    <Link href="#">{"https://somelink".toUpperCase()}</Link>
+                    TO BE ANNOUNCED
+                    {/* <Link href="#">{"https://somelink".toUpperCase()}</Link> */}
                   </p>
                 </div>
               </div>
@@ -691,12 +724,27 @@ export default function Ido() {
                     ? "Unpause"
                     : "Pause"}
                 </SSButton>
-                <SSButton disabled={isLoading} click={onWithdraw}>
-                  {isLoading ? "Loading..." : "Withdraw Participations"}
-                </SSButton>
-                <SSButton disabled={isLoading} click={onMakePublic}>
+                <SSButton
+                  disabled={isLoading || general.isPublic}
+                  click={onMakePublic}
+                >
                   {isLoading ? "Loading..." : "Make Public"}
                 </SSButton>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <p>
+                  CONTRACT {ido.acceptedTokenSymbol} BALANCE:{" "}
+                  {Number(user.acceptedTokenBalance).toLocaleString("en-us", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </p>
+                <div className="w-max">
+                  <SSButton disabled={isLoading} click={onWithdraw}>
+                    {isLoading ? "Loading..." : "Withdraw Participations"}
+                  </SSButton>
+                </div>
               </div>
 
               {/* WHITELIST */}
