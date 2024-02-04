@@ -85,12 +85,12 @@ export const IDO_LIST: IDONEW[] = [
         <p>Developer Ghost Ivy's player-first approach and high production values set Haven's Compass head and shoulders above the other blockchain games on the market, which are often plagued by rigid (or non-existent) gameplay and high technical barriers for entry. They instead aim to make the transition to Web3 gaming as seamless as possible for traditional gamers, opening the doors for thousands of newcomers to join their action-packed world.</p>
         <p>The game has already proven itself a roaring success, with over 25,000 downloads on the public alpha since its launch on the Epic Games Store in August 2023 (you can try it for yourself here). On top of that, their first NFT mint sold out in just 59 seconds!</p>
         <p>Haven's Compass is clearly making all the right moves — we can't wait to see how the project develops in the lead-up to the full game launch in Q4 2024.</p>
-        <h1 style="font-weight: bold; font-size: 1.2em;">The $CMPS Token</h1>
+        <h1 style="font-weight: bold; font-size: 1.2em; margin-top: 10px;">The $CMPS Token</h1>
         <p>$CMPS is the native utility token of Haven's Compass, and the fuel powering every aspect of its gaming ecosystem. Players can earn $CMPS rewards by winning matches, participating in special events, or even creating art which is utilized inside the game.</p>
         <p>They can then use these tokens to trade weapon and item NFTs with other players on the in-game decentralized marketplace. Ghost Ivy will also implement DAO governance features, giving $CMPS holders the chance to take an active part in the development of the game.</p>
       </div>
   `,
-    contract: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+    contract: "0xB3C8BB7508af2f18f3BBD96515134C3Cb3bf5702",
     images: [
       "/IDOs/havens-compass/havens-compass-1.png",
       "/IDOs/havens-compass/havens-compass-2.png",
@@ -111,6 +111,11 @@ export const RPC_URL: { [key: number]: string } = {
   5: process.env.NEXT_PUBLIC_GOERLI_RPC_URL as string,
   11155111: process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL as string,
   8453: process.env.NEXT_PUBLIC_BASE_RPC_URL as string,
+};
+
+export const TOKENS_TO_SYMBOL: Record<string, string> = {
+  "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913": "USDC",
+  "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA": "USDbC",
 };
 
 export const NAV = [

@@ -7,7 +7,7 @@ import { IDO_LIST } from "@/utils/constants";
 import { getParticipationPhase } from "@/contracts_integrations/ido";
 import { useCallback, useEffect, useState } from "react";
 
-export default function launchpadCardNew({
+export default function LaunchpadCardNew({
   ido,
   type = "dark",
 }: {

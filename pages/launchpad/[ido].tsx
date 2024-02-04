@@ -6,7 +6,11 @@ import { useState, Fragment, useContext, useEffect, useCallback } from "react";
 import TopLayout from "@/components/topLayout";
 import { useRouter } from "next/router";
 
-import { IDO_LIST, simplifiedPhases } from "@/utils/constants";
+import {
+  IDO_LIST,
+  TOKENS_TO_SYMBOL,
+  simplifiedPhases,
+} from "@/utils/constants";
 import { formattedDate } from "@/utils/formattedDate";
 import { discord, youtube } from "@/utils/svgs";
 import SSButton from "@/components/ssButton";
@@ -24,15 +28,12 @@ import {
   withdraw,
 } from "@/contracts_integrations/ido";
 
-import { getUnixTime } from "date-fns";
-
 const inter = Inter({
   subsets: ["latin"],
 });
 
 export default function Ido() {
   const [inputValue, setInputValue] = useState("");
-  const [whitelistData, setWhitelistData] = useState<any | null>(null); // admin area
   const [whitelistAddresses, setWhitelistAddresses] = useState<string[] | []>(
     []
   ); // admin area
@@ -41,6 +42,9 @@ export default function Ido() {
   const [general, setGeneral] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
   const [currentPhase, setCurrentPhase] = useState<string | null>(null);
+  const [selectedToken, setSelectedToken] = useState("");
+  const [tokenSelectionOpen, setTokenSelectionOpen] = useState(false);
+
   const { signer, account } = useContext(StateContext);
   const { chain } = useNetwork();
   const { query } = useRouter();
@@ -51,19 +55,6 @@ export default function Ido() {
     item.id.includes(idoID as string)
   );
   const bg = `url("${ido?.idoImageSrc}")`;
-
-  // const currentPhase = simplifiedPhases.find(
-  //   (item) => item.title === ido?.currentPhase
-  // );
-
-  // const mockedUserIdosPhases = [
-  //   { ido: 0, phase: 1, completed: false, participation: 0 },
-  //   { ido: 1, phase: 1, completed: true, participation: 1000 },
-  //   { ido: 2, phase: 2, completed: false, participation: 0 },
-  //   { ido: 3, phase: 3, completed: false, participation: 0 },
-  // ];
-
-  // const userIdo = mockedUserIdosPhases.find((item) => item.ido === idoIndex);
 
   // ============================================================================================================
   // ADMIN FUNCTIONS
@@ -185,12 +176,12 @@ export default function Ido() {
       signer &&
       chain &&
       !chain.unsupported &&
-      general &&
+      selectedToken !== "" &&
       user &&
       !user.isBlacklisted &&
       (user.isWhitelisted || general.isPublic)
     ) {
-      await participate(idoIndex, signer, inputValue, general.acceptedToken);
+      await participate(idoIndex, signer, inputValue, selectedToken);
       await getGeneralData();
       await getUserInfos();
     }
@@ -201,7 +192,7 @@ export default function Ido() {
     signer,
     blacklistAddress,
     idoIndex,
-    general,
+    selectedToken,
     user,
     inputValue,
     setIsLoading,
@@ -214,7 +205,6 @@ export default function Ido() {
   const getUserInfos = useCallback(async () => {
     if (signer && chain && !chain.unsupported) {
       const response = await userInfo(idoIndex, signer);
-      // console.log(response);
       setUser(response);
     }
   }, [signer, chain, idoIndex]);
@@ -231,13 +221,14 @@ export default function Ido() {
     if (chain && !chain.unsupported && idoIndex !== -1) {
       const response = await generalInfo(idoIndex);
       setGeneral(response);
+      selectedToken === "" && setSelectedToken(response?.acceptedToken1);
     }
 
     if (idoIndex !== -1) {
       const phase = await getParticipationPhase(idoIndex);
       setCurrentPhase(phase);
     }
-  }, [chain, idoIndex, setCurrentPhase]);
+  }, [chain, idoIndex, selectedToken, setCurrentPhase]);
 
   useEffect(() => {
     getGeneralData();
@@ -451,7 +442,7 @@ export default function Ido() {
                       user?.allocation === 0 && (
                         <div className="flex flex-col">
                           <div className="flex items-center justify-between">
-                            <span className="self-end text-sm mb-1 hover:text-samurai-red mr-1">
+                            <span className="self-end text-sm mb-1 mr-1">
                               MIN{" "}
                               {Number(general?.minPerWallet).toLocaleString(
                                 "en-us",
@@ -469,40 +460,103 @@ export default function Ido() {
                                   maximumFractionDigits: 2,
                                 }
                               )}{" "}
-                              {ido.acceptedTokenSymbol}
+                              {TOKENS_TO_SYMBOL[selectedToken]}
                             </span>
                             <button
                               onClick={() =>
-                                onInputChange(user.balance.toString())
+                                onInputChange(
+                                  selectedToken === general.acceptedToken1
+                                    ? user.balanceToken1.toString()
+                                    : user.balanceToken2.toString()
+                                )
                               }
                               className="self-end text-sm mb-1 hover:text-samurai-red mr-1"
                             >
                               BALANCE:{" "}
-                              {Number(user?.balance).toLocaleString("en-us", {
+                              {Number(
+                                selectedToken === general.acceptedToken1
+                                  ? user.balanceToken1
+                                  : user.balanceToken2
+                              ).toLocaleString("en-us", {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2,
                               })}{" "}
-                              {ido.acceptedTokenSymbol}
+                              {TOKENS_TO_SYMBOL[selectedToken]}
                             </button>
                           </div>
 
                           <div className="relative">
                             <input
                               type="text"
-                              placeholder="USDC to allocate"
+                              placeholder={`${TOKENS_TO_SYMBOL[selectedToken]} to allocate`}
                               className="w-full p-4 rounded-[8px] placeholder-black/50 text-black"
                               value={inputValue}
                               onChange={(e) => onInputChange(e.target.value)}
                             />
-                            <div className="absolute top-3 right-2">
+                            <div className="absolute top-3 right-2 flex items-center gap-2">
                               <Image
                                 src="/usdc-icon.svg"
-                                width={35}
-                                height={35}
+                                width={32}
+                                height={32}
                                 alt="USDC"
                                 placeholder="blur"
                                 blurDataURL="/usdc-icon.svg"
                               />
+                              <button
+                                onClick={() =>
+                                  setTokenSelectionOpen(!tokenSelectionOpen)
+                                }
+                                className="text-black/80 mr-2 text-2xl font-bold hover:text-samurai-red"
+                              >
+                                {TOKENS_TO_SYMBOL[selectedToken]}
+                              </button>
+                            </div>
+                            <div
+                              className={`${
+                                tokenSelectionOpen ? "flex" : "hidden"
+                              } absolute top-16 right-0 flex-col gap-4 bg-white text-black/80 p-4 rounded-[8px] shadow-xl z-20`}
+                            >
+                              <button
+                                onClick={() => {
+                                  setSelectedToken(general.acceptedToken1);
+                                  setTokenSelectionOpen(!tokenSelectionOpen);
+                                }}
+                                className="flex items-center gap-2"
+                              >
+                                <Image
+                                  src="/usdc-icon.svg"
+                                  width={32}
+                                  height={32}
+                                  alt="USDC"
+                                  placeholder="blur"
+                                  blurDataURL="/usdc-icon.svg"
+                                />
+                                <span className="mr-2 text-2xl font-bold hover:text-samurai-red">
+                                  {TOKENS_TO_SYMBOL[general.acceptedToken1]}
+                                </span>
+                              </button>
+
+                              <div className="w-full h-[1px] bg-black/20" />
+
+                              <button
+                                onClick={() => {
+                                  setSelectedToken(general.acceptedToken2);
+                                  setTokenSelectionOpen(!tokenSelectionOpen);
+                                }}
+                                className="flex items-center gap-2"
+                              >
+                                <Image
+                                  src="/usdc-icon.svg"
+                                  width={32}
+                                  height={32}
+                                  alt="USDC"
+                                  placeholder="blur"
+                                  blurDataURL="/usdc-icon.svg"
+                                />
+                                <span className="mr-2 text-2xl font-bold hover:text-samurai-red">
+                                  {TOKENS_TO_SYMBOL[general.acceptedToken2]}
+                                </span>
+                              </button>
                             </div>
                           </div>
 
@@ -552,11 +606,11 @@ export default function Ido() {
                               MY ALLOCATION
                             </p>
                             <p className="text-2xl text-samurai-red">
+                              $
                               {user.allocation.toLocaleString("en-us", {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2,
-                              })}{" "}
-                              {ido.acceptedTokenSymbol}
+                              })}
                             </p>
                           </div>
 
@@ -734,8 +788,15 @@ export default function Ido() {
 
               <div className="flex flex-col gap-2">
                 <p>
-                  CONTRACT {ido.acceptedTokenSymbol} BALANCE:{" "}
-                  {Number(user.acceptedTokenBalance).toLocaleString("en-us", {
+                  TOTAL {TOKENS_TO_SYMBOL[general.acceptedToken1]}:{" "}
+                  {Number(user?.acceptedToken1Balance).toLocaleString("en-us", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </p>
+                <p>
+                  TOTAL {TOKENS_TO_SYMBOL[general.acceptedToken2]}:{" "}
+                  {Number(user?.acceptedToken2Balance).toLocaleString("en-us", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}

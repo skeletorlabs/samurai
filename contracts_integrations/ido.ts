@@ -67,7 +67,8 @@ export async function generalInfo(index: number) {
     const minPerWallet = Number(ethers.formatUnits(await contract?.min(), 6));
     const maxPerWallet = Number(ethers.formatUnits(await contract?.max(), 6));
     const isPublic = await contract?.isPublic();
-    const acceptedToken = await contract?.acceptedTokens(0);
+    const acceptedToken1 = await contract?.acceptedTokens(0);
+    const acceptedToken2 = await contract?.acceptedTokens(1);
     const isPaused = await contract?.paused();
 
     return {
@@ -75,7 +76,8 @@ export async function generalInfo(index: number) {
       minPerWallet,
       maxPerWallet,
       isPublic,
-      acceptedToken,
+      acceptedToken1,
+      acceptedToken2,
       isPaused,
     };
   } catch (e) {
@@ -94,19 +96,37 @@ export async function userInfo(index: number, signer: ethers.Signer) {
     );
     const isWhitelisted = await contract?.whitelist(signerAdress);
     const isBlacklisted = await contract?.blacklist(signerAdress);
-    const acceptedToken = await contract?.acceptedTokens(0);
-    const balance = Number(
+    const acceptedToken1 = await contract?.acceptedTokens(0);
+    const acceptedToken2 = await contract?.acceptedTokens(1);
+    const balanceToken1 = Number(
       ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken, signerAdress, signer),
+        await balanceOf(ERC20_ABI, acceptedToken1, signerAdress, signer),
+        6
+      )
+    );
+
+    const balanceToken2 = Number(
+      ethers.formatUnits(
+        await balanceOf(ERC20_ABI, acceptedToken2, signerAdress, signer),
         6
       )
     );
 
     const contractAddress = await contract?.getAddress();
-    const acceptedTokenBalance = ethers.formatUnits(
+    const acceptedToken1Balance = ethers.formatUnits(
       await balanceOf(
         ERC20_ABI,
-        acceptedToken,
+        acceptedToken1,
+        contractAddress as string,
+        signer
+      ),
+      6
+    );
+
+    const acceptedToken2Balance = ethers.formatUnits(
+      await balanceOf(
+        ERC20_ABI,
+        acceptedToken2,
         contractAddress as string,
         signer
       ),
@@ -117,8 +137,10 @@ export async function userInfo(index: number, signer: ethers.Signer) {
       allocation,
       isWhitelisted,
       isBlacklisted,
-      balance,
-      acceptedTokenBalance,
+      balanceToken1,
+      balanceToken2,
+      acceptedToken1Balance,
+      acceptedToken2Balance,
     };
   } catch (e) {
     handleError({ e: e, notificate: true });
@@ -145,8 +167,6 @@ export async function participate(
       signer,
       ethers.parseUnits(amount, 6)
     );
-
-    console.log("VAI ENVIAR OS TOKENS");
 
     const tx = await contract?.sendToken(
       signerAddress,
