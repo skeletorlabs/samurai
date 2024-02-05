@@ -428,12 +428,12 @@ export default function Ido() {
                     {/* UPCOMING BLOCK */}
                     {currentPhase?.toLowerCase() === "upcoming" && (
                       <>
-                        <div
-                          className={`text-lg xl:text-2xl text-white/80  xl:mt-10 pt-2 xl:pt-10 leading-normal ${inter.className}`}
-                        >
-                          <p className="text-white/70samurai-red text-center">
-                            SAVE THE DATE TO HOPPING IN!
-                          </p>
+                        <div className={`relative w-full h-24`}>
+                          <Image
+                            src="/IDOs/havens-compass-logo.svg"
+                            alt="logo"
+                            fill
+                          />
                         </div>
                       </>
                     )}
@@ -743,6 +743,7 @@ export default function Ido() {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}{" "}
+                    USD
                   </p>
                 </div>
 
