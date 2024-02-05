@@ -302,7 +302,7 @@ export async function getParticipationPhase(index: number) {
   if (now >= participationStartAt && now <= participationEndsAt)
     phase = "Participation";
   if (now >= participationEndsAt) phase = "Completed";
-  if (phase !== "Upcoming" && isPaused) phase = "Completed";
+  // if (phase !== "Upcoming" && isPaused) phase = "Completed";
 
   return phase;
 }

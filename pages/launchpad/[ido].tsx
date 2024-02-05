@@ -245,9 +245,9 @@ export default function Ido() {
           boxShadow: "inset 0px 0px 800px 800px rgba(0, 0, 0, .65)",
         }}
       >
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 pt-10 lg:pt-14">
+        <div className="flex flex-col pt-10 lg:pt-14">
           <div className="flex flex-col xl:flex-row items-center justify-between relative">
-            <div className="relative md:mr-12 xl:max-w-[900px]">
+            <div className="relative md:mr-12 xl:max-w-[900px] px-6 lg:px-8 xl:px-20">
               <Link
                 href="/launchpad"
                 className="transition-all text-white/40 hover:text-white hidden xl:block"
@@ -270,7 +270,7 @@ export default function Ido() {
                 </svg>
               </Link>
 
-              <div className="flex flex-col text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
+              <div className="flex flex-col text-[38px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
                 {ido?.projectName}
                 <div className="flex items-center gap-4 pt-5">
                   {ido?.tokenNetwork !== "TO BE ANNOUNCED" && (
@@ -323,14 +323,14 @@ export default function Ido() {
               </div>
             </div>
 
-            <div className="flex flex-col xl:w-[700px]">
+            <div className="flex flex-col lg:pr-20">
               <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-14 mt-[70px] xl:mt-[170px] shadow-xl lg:border border-white/20">
                 {/* <div className="text-center text-xl xl:text-2xl text-white"> */}
-                <div className="text-2xl xl:text-3xl bg-samurai-red px-7 py-3 text-white">
+                <div className="text-xl xl:text-3xl bg-samurai-red px-7 py-3 text-white">
                   <span>{ido?.projectName}</span> {" | "}
                   {ido?.investmentRound}
                 </div>
-                <div className="flex flex-row mt-10 bg-black-900/90 stroke-white rounded-[8px] text-white border border-white/20 mx-8">
+                <div className="flex flex-row mt-6 lg:mt-10 bg-black-900/90 stroke-white rounded-[8px] text-white border border-white/20 mx-4 lg:mx-8">
                   {ido?.simplified &&
                     simplifiedPhases.map((phase, index) => (
                       <Fragment key={index}>
@@ -369,7 +369,7 @@ export default function Ido() {
                 {ido && (
                   <div className="flex flex-col gap-10 px-8">
                     {/* PARTICIPATION PHASE BLOCK */}
-                    <div className="flex justify-center lg:justify-start lg:grid lg:grid-cols-2 gap-1 items-center flex-wrap mt-6">
+                    <div className="flex justify-start lg:grid lg:grid-cols-2 gap-1 items-center flex-wrap mt-6">
                       <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
                         <span className="text-samurai-red">IDO START:</span>
                         <p className="text-white/70">
@@ -429,7 +429,7 @@ export default function Ido() {
                     {currentPhase?.toLowerCase() === "upcoming" && (
                       <>
                         <div
-                          className={`text-xl xl:text-2xl text-white/80 xl:mt-10 pt-6 xl:pt-10 leading-normal ${inter.className}`}
+                          className={`text-lg xl:text-2xl text-white/80  xl:mt-10 pt-2 xl:pt-10 leading-normal ${inter.className}`}
                         >
                           <p className="text-white/70samurai-red text-center">
                             SAVE THE DATE TO HOPPING IN!
@@ -442,7 +442,7 @@ export default function Ido() {
                       user?.allocation === 0 && (
                         <div className="flex flex-col">
                           <div className="flex items-center justify-between">
-                            <span className="self-end text-sm mb-1 mr-1">
+                            <span className="self-end text-[10px] lg:text-sm mb-1 mr-1">
                               MIN{" "}
                               {Number(general?.minPerWallet).toLocaleString(
                                 "en-us",
@@ -470,7 +470,7 @@ export default function Ido() {
                                     : user.balanceToken2.toString()
                                 )
                               }
-                              className="self-end text-sm mb-1 hover:text-samurai-red mr-1"
+                              className="self-end text-[10px] lg:text-sm mb-1 hover:text-samurai-red mr-1"
                             >
                               BALANCE:{" "}
                               {Number(
@@ -489,11 +489,11 @@ export default function Ido() {
                             <input
                               type="text"
                               placeholder={`${TOKENS_TO_SYMBOL[selectedToken]} to allocate`}
-                              className="w-full p-4 rounded-[8px] placeholder-black/50 text-black"
+                              className="w-full p-2 lg:p-4 rounded-[8px] placeholder-black/50 text-black"
                               value={inputValue}
                               onChange={(e) => onInputChange(e.target.value)}
                             />
-                            <div className="absolute top-3 right-2 flex items-center gap-2">
+                            <div className="absolute top-[7px] lg:top-3 right-2 flex items-center gap-2">
                               <Image
                                 src="/usdc-icon.svg"
                                 width={32}
@@ -501,12 +501,13 @@ export default function Ido() {
                                 alt="USDC"
                                 placeholder="blur"
                                 blurDataURL="/usdc-icon.svg"
+                                className="w-6 h-6 lg:w-[32px] lg:h-[32px]"
                               />
                               <button
                                 onClick={() =>
                                   setTokenSelectionOpen(!tokenSelectionOpen)
                                 }
-                                className="text-black/80 mr-2 text-2xl font-bold hover:text-samurai-red"
+                                className="text-black/80 mr-2 text-lg lg:text-2xl font-bold hover:text-samurai-red"
                               >
                                 {TOKENS_TO_SYMBOL[selectedToken]}
                               </button>
@@ -514,7 +515,7 @@ export default function Ido() {
                             <div
                               className={`${
                                 tokenSelectionOpen ? "flex" : "hidden"
-                              } absolute top-16 right-0 flex-col gap-4 bg-white text-black/80 p-4 rounded-[8px] shadow-xl z-20`}
+                              } absolute top-12 lg:top-16 right-0 flex-col gap-2 lg:gap-4 bg-white text-black/80 p-4 rounded-[8px] shadow-xl z-20`}
                             >
                               <button
                                 onClick={() => {
@@ -530,8 +531,9 @@ export default function Ido() {
                                   alt="USDC"
                                   placeholder="blur"
                                   blurDataURL="/usdc-icon.svg"
+                                  className="w-6 h-6 lg:w-[32px] lg:h-[32px]"
                                 />
-                                <span className="mr-2 text-2xl font-bold hover:text-samurai-red">
+                                <span className="mr-2 text-lg lg:text-2xl font-bold hover:text-samurai-red">
                                   {TOKENS_TO_SYMBOL[general.acceptedToken1]}
                                 </span>
                               </button>
@@ -552,8 +554,9 @@ export default function Ido() {
                                   alt="USDC"
                                   placeholder="blur"
                                   blurDataURL="/usdc-icon.svg"
+                                  className="w-6 h-6 lg:w-[32px] lg:h-[32px]"
                                 />
-                                <span className="mr-2 text-2xl font-bold hover:text-samurai-red">
+                                <span className="mr-2 text-lg lg:text-2xl font-bold hover:text-samurai-red">
                                   {TOKENS_TO_SYMBOL[general.acceptedToken2]}
                                 </span>
                               </button>
@@ -685,27 +688,27 @@ export default function Ido() {
           </div>
         </div>
       </TopLayout>
-      <div className="flex flex-col xl:flex-row  gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 px-1 lg:px-8 xl:px-20 border-t border-white/20 bg-white/10">
+      <div className="flex flex-col xl:flex-row  gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 ">
         {ido && (
           <>
             <div
-              className={`flex w-full !leading-[28px] font-light px-2 lg:px-0 lg:text-lg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-gray-300 ${inter.className}`}
+              className={`flex w-full !leading-[28px] font-light px-6 lg:px-8 xl:px-20 lg:text-lg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-gray-300 ${inter.className}`}
               dangerouslySetInnerHTML={{ __html: ido.bigDescription as string }}
             />
-            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-8 lg:py-[70px] shadow-xl lg:border border-white/20 h-max">
-              <h1 className="text-2xl xl:text-3xl bg-samurai-red px-7 py-3">
+            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-8 lg:py-[70px] shadow-xl lg:border border-white/20 h-max lg:mr-20">
+              <h1 className="text-2xl xl:text-3xl bg-samurai-red px-6 py-3">
                 TOKEN INFO
               </h1>
-              <div className="flex flex-col gap-4 xl:gap-8 mt-16 text-[15px] xl:text-xl px-7">
-                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
+              <div className="flex flex-col gap-4 xl:gap-8 mt-8 lg:mt-16 text-[15px] xl:text-xl px-6">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
                   <span className="text-samurai-red">TOKEN SYMBOL:</span>
                   <p className="text-white/70">{ido.projectTokenSymbol}</p>
                 </div>
-                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
                   <span className="text-samurai-red">NETWORK:</span>
                   <p className="text-white/70">{ido.tokenNetwork}</p>
                 </div>
-                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
                   <span className="text-samurai-red">FDV:</span>
                   <p className="text-white/70">
                     $
@@ -716,7 +719,7 @@ export default function Ido() {
                     USD
                   </p>
                 </div>
-                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
                   <span className="text-samurai-red">
                     CIRCULATING SUPPLY AT TGE:
                   </span>
@@ -732,7 +735,7 @@ export default function Ido() {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
                   <span className="text-samurai-red">MARKET CAP AT TGE:</span>
                   <p className="text-white/70">
                     $
@@ -743,12 +746,12 @@ export default function Ido() {
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md lg:w-max lg:border border-white/10 text-sm lg:text-xl">
                   <span className="text-samurai-red">VESTING:</span>
                   <p className="text-white/70">{ido.vesting.toUpperCase()}</p>
                 </div>
 
-                <div className="flex items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
                   <span className="text-samurai-red">DEX SCREENER:</span>
                   <p className="text-white/70">
                     TO BE ANNOUNCED
