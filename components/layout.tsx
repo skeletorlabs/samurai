@@ -19,7 +19,6 @@ interface layout {
 }
 
 export default function Layout({ children }: layout) {
-  const { idoModalOpen } = useContext(StateContext);
   return (
     <>
       <Head>
@@ -47,11 +46,7 @@ export default function Layout({ children }: layout) {
       />
 
       <main className={roboto.className}>
-        <div
-          className={`${
-            idoModalOpen ? "fixed" : "flex"
-          } flex-col w-full h-full items-center text-white/90`}
-        >
+        <div className="flex flex-col w-full h-full items-center text-white/90">
           {children}
           <Footer />
         </div>

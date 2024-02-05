@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { NFTS_ABI } from "./abis";
+import { ERC20_ABI, NFTS_ABI } from "./abis";
 import Notificate from "../components/notificate";
 import handleError from "../utils/handleErrors";
 import {
@@ -8,6 +8,7 @@ import {
   WhitelistDataType,
 } from "@/utils/interfaces";
 import { LINKS } from "@/utils/constants";
+import { balanceOf } from "./balanceOf";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as string;
@@ -52,9 +53,8 @@ export async function general() {
 }
 
 export async function togglePause(signer: ethers.Signer) {
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-
   try {
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
     const owner = await contract.owner();
     const signerAddress = await signer.getAddress();
 
@@ -88,29 +88,41 @@ export async function togglePause(signer: ethers.Signer) {
 }
 
 export async function isWhitelisted(signer: ethers.Signer) {
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-  const signerAddress = await signer.getAddress();
+  try {
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
+    const signerAddress = await signer.getAddress();
 
-  const isWhitelisted: boolean = await contract.isWhitelisted(signerAddress);
-  const hasUsedFreeMint: boolean = await contract.hasUsedFreeMint(
-    signerAddress
-  );
-  const whitelistFinishAt = Number(await contract.whitelistRoundFinishAt());
+    const isWhitelisted: boolean = await contract.isWhitelisted(signerAddress);
+    const hasUsedFreeMint: boolean = await contract.hasUsedFreeMint(
+      signerAddress
+    );
+    const whitelistFinishAt = Number(await contract.whitelistRoundFinishAt());
 
-  return {
-    isWhitelisted,
-    hasUsedFreeMint,
-    whitelistFinishAt,
-  } as WhitelistDataType;
+    // const balance = await balanceOf(
+    //   ERC20_ABI,
+    //   "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    //   "0x0ED0ef0838A24F360e6DE58A44A46D831E8230A6",
+    //   signer
+    // );
+
+    // console.log(balance);
+
+    return {
+      isWhitelisted,
+      hasUsedFreeMint,
+      whitelistFinishAt,
+    } as WhitelistDataType;
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
 }
 
 export async function releaseWhitelistAssets(
   signer: ethers.Signer,
   percentage: number
 ) {
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-
   try {
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
     const owner = await contract.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();
@@ -143,9 +155,8 @@ export async function releaseWhitelistAssets(
 }
 
 export async function startWhitelistRound(signer: ethers.Signer) {
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-
   try {
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
     const owner = await contract.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();
@@ -180,9 +191,8 @@ export async function addToWhitelist(
   signer: ethers.Signer,
   addresses: string[]
 ) {
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-
   try {
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
     const owner = await contract.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();

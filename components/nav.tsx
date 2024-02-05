@@ -7,6 +7,7 @@ import { StateContext } from "@/context/StateContext";
 import { Page } from "@/utils/enums";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import SSButton from "./ssButton";
+import { useRouter } from "next/router";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,6 +15,7 @@ const inter = Inter({
 
 export default function Nav() {
   const { page, setPage } = useContext(StateContext);
+  const { query, pathname } = useRouter();
   return (
     <div
       className={`h-20 px-2 lg:px-8 flex flex-col md:flex-row items-center justify-between mt-5 z-10 ${inter.className} h-max`}
@@ -38,8 +40,9 @@ export default function Nav() {
           <Link
             key={index}
             href={item.href}
-            className={`hidden lg:flex hover:border-b hover:border-samurai-red h-8 ${
-              page === item.page
+            className={`hidden lg:flex hover:border-b hover:border-samurai-red h-8 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] ${
+              page === item.page ||
+              (pathname.includes(item.href) && item.href !== "/")
                 ? "text-samurai-red border-b border-samurai-red"
                 : ""
             }`}
@@ -50,7 +53,9 @@ export default function Nav() {
         ))}
       </div>
       <div className="flex gap-5 px-5 lg:px-0">
-        {page === Page.nft && <ConnectButton showBalance={false} />}
+        {(page === Page.nft || query.ido !== "") && (
+          <ConnectButton showBalance={false} />
+        )}
 
         <div className="hidden xl:flex">
           <SSButton isLink target="blank" href="https://v1.samuraistarter.com">

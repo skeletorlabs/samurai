@@ -1,4 +1,5 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
+import { JsxElement } from "typescript";
 
 export type SupplyInfo = {
   maxSupply: string;
@@ -133,4 +134,43 @@ export interface IDO {
   access: string;
   raised: string;
   goal: string;
+}
+
+export interface IDO_SOCIAL {
+  svg: any;
+  href: string;
+}
+
+export interface IDONEW {
+  id: string;
+  idoImageSrc: string;
+  acceptedTokenSymbol: string;
+  tokenNetwork: string;
+  crowdsaleNetwork: string;
+  networkImageSrc: string;
+  projectName: string;
+  projectListDescription: string;
+  projectDescription: string;
+  projectTokenSymbol: string;
+  totalAllocation: number;
+  price: string;
+  participationStartsAt: number;
+  participationEndsAt: number;
+  publicParticipationStartsAt: number;
+  publicParticipationEndsAt: number;
+  simplified: boolean;
+  tgeDate: number;
+  tgePercentage: number;
+  cliff: number;
+  investmentRound: string;
+  fdv: string;
+  circulatingSupplyAtTGE: number;
+  marketCapAtTGE: number;
+  vesting: string;
+  releaseType: string;
+  currentPhase: string;
+  socials: IDO_SOCIAL[];
+  bigDescription: ReactNode;
+  contract: string;
+  images?: string[];
 }
