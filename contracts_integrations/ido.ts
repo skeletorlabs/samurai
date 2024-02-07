@@ -62,6 +62,8 @@ export async function checkIsPaused(index: number) {
 export async function generalInfo(index: number) {
   try {
     const contract = await getContract(index);
+    const ido = IDO_LIST[index];
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
 
     const owner = await contract?.owner();
     const minPerWallet = Number(ethers.formatUnits(await contract?.min(), 6));
@@ -70,6 +72,20 @@ export async function generalInfo(index: number) {
     const acceptedToken1 = await contract?.acceptedTokens(0);
     const acceptedToken2 = await contract?.acceptedTokens(1);
     const isPaused = await contract?.paused();
+    const acceptedToken1Balance = Number(
+      ethers.formatUnits(
+        await balanceOf(ERC20_ABI, acceptedToken1, ido.contract, provider),
+        6
+      )
+    );
+    const acceptedToken2Balance = Number(
+      ethers.formatUnits(
+        await balanceOf(ERC20_ABI, acceptedToken2, ido.contract, provider),
+        6
+      )
+    );
+
+    const raised = acceptedToken1Balance + acceptedToken2Balance;
 
     return {
       owner,
@@ -79,6 +95,7 @@ export async function generalInfo(index: number) {
       acceptedToken1,
       acceptedToken2,
       isPaused,
+      raised,
     };
   } catch (e) {
     handleError({ e: e, notificate: true });
