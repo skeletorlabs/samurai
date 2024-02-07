@@ -2,7 +2,7 @@ import Head from "next/head";
 import { Roboto } from "next/font/google";
 import { ReactElement, useContext } from "react";
 import { ToastContainer } from "react-toastify";
-import { StateContext } from "@/context/StateContext";
+import { Analytics } from "@vercel/analytics/react";
 
 import Footer from "./footer";
 import BottomNav from "./bottomNav";
@@ -49,6 +49,7 @@ export default function Layout({ children }: layout) {
         <div className="flex flex-col w-full h-full items-center text-white/90">
           {children}
           <Footer />
+          <Analytics />
         </div>
         <BottomNav />
       </main>
