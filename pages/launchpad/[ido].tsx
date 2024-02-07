@@ -424,17 +424,17 @@ export default function Ido() {
                         </p>
                       </div>
 
-                      {/* <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
                         <span className="text-samurai-red">RAISED:</span>
                         <p className="text-white/70">
                           $
-                          {general.raised.toLocaleString("en-us", {
+                          {general?.raised.toLocaleString("en-us", {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })}{" "}
-                          {ido.acceptedTokenSymbol}
+                          {ido?.acceptedTokenSymbol}
                         </p>
-                      </div> */}
+                      </div>
                     </div>
 
                     {/* UPCOMING BLOCK */}
