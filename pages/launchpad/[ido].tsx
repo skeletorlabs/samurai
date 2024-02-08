@@ -428,7 +428,7 @@ export default function Ido() {
                         <span className="text-samurai-red">RAISED:</span>
                         <p className="text-white/70">
                           $
-                          {general?.raised.toLocaleString("en-us", {
+                          {(50_000).toLocaleString("en-us", {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })}{" "}
