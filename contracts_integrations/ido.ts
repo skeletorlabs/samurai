@@ -311,6 +311,7 @@ export async function getParticipationPhase(index: number) {
   const ido = IDO_LIST[index];
   const participationStartAt = ido.participationStartsAt;
   const participationEndsAt = ido.participationEndsAt;
+  const publicEndsAt = ido.publicParticipationEndsAt;
   const now = getUnixTime(new Date());
   const isPaused = await checkIsPaused(index);
 
@@ -318,7 +319,7 @@ export async function getParticipationPhase(index: number) {
 
   if (now >= participationStartAt && now <= participationEndsAt)
     phase = "Participation";
-  if (now >= participationEndsAt) phase = "Completed";
+  if (now >= publicEndsAt) phase = "Completed";
   if (phase !== "Upcoming" && isPaused) phase = "Completed";
 
   return phase;
