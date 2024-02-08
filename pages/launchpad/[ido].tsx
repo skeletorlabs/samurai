@@ -615,7 +615,8 @@ export default function Ido() {
                         </div>
                       )}
 
-                    {currentPhase?.toLowerCase() === "participation" &&
+                    {(currentPhase?.toLowerCase() === "participation" ||
+                      currentPhase?.toLowerCase() === "completed") &&
                       user?.allocation > 0 && (
                         <div className="flex flex-row justify-between items-center flex-wrap gap-4">
                           <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
