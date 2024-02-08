@@ -317,10 +317,10 @@ export async function getParticipationPhase(index: number) {
 
   let phase = "Upcoming";
 
-  if (now >= participationStartAt && now <= participationEndsAt)
+  if (now >= participationStartAt && now <= publicEndsAt)
     phase = "Participation";
   if (now >= publicEndsAt) phase = "Completed";
-  if (phase !== "Upcoming" && isPaused) phase = "Completed";
+  // if (phase !== "Upcoming" && isPaused) phase = "Completed";
 
   return phase;
 }
