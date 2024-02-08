@@ -310,7 +310,6 @@ export async function togglePause(index: number, signer: ethers.Signer) {
 export async function getParticipationPhase(index: number) {
   const ido = IDO_LIST[index];
   const participationStartAt = ido.participationStartsAt;
-  const participationEndsAt = ido.participationEndsAt;
   const publicEndsAt = ido.publicParticipationEndsAt;
   const now = getUnixTime(new Date());
   const isPaused = await checkIsPaused(index);
@@ -320,7 +319,7 @@ export async function getParticipationPhase(index: number) {
   if (now >= participationStartAt && now <= publicEndsAt)
     phase = "Participation";
   if (now >= publicEndsAt) phase = "Completed";
-  // if (phase !== "Upcoming" && isPaused) phase = "Completed";
+  if (phase !== "Upcoming" && isPaused) phase = "Completed";
 
   return phase;
 }
