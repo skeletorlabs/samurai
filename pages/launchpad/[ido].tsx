@@ -440,12 +440,8 @@ export default function Ido() {
                     {/* UPCOMING BLOCK */}
                     {currentPhase?.toLowerCase() === "upcoming" && (
                       <>
-                        <div className={`relative w-full h-24`}>
-                          <Image
-                            src="/IDOs/havens-compass-logo.svg"
-                            alt="logo"
-                            fill
-                          />
+                        <div className="flex justify-center items-center w-full h-max">
+                          {ido.logo}
                         </div>
                       </>
                     )}
