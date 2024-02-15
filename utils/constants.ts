@@ -232,7 +232,7 @@ export const NAV = [
 export const SOCIALS = [
   {
     svg: twitterX,
-    href: "https://twitterX.com/SamuraiStarter",
+    href: "https://twitter.com/SamuraiStarter",
     class: "scale-100",
   },
   { svg: telegram, href: "https://t.me/SamuraiStarter", class: "scale-100" },
