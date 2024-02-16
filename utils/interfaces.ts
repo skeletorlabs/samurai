@@ -123,25 +123,12 @@ export interface Project {
   links: ProjectLink[];
 }
 
-export interface IDO {
-  tokenImageSrc: string;
-  status: string;
-  chainImageSrc: string;
-  title: string;
-  description: string;
-  startedAt: number;
-  closedAt: number;
-  access: string;
-  raised: string;
-  goal: string;
-}
-
 export interface IDO_SOCIAL {
   svg: any;
   href: string;
 }
 
-export interface IDONEW {
+export interface IDO {
   id: string;
   logo: ReactNode;
   idoImageSrc: string;
@@ -173,5 +160,6 @@ export interface IDONEW {
   socials: IDO_SOCIAL[];
   bigDescription: ReactNode;
   contract: string;
+  abi: any;
   images?: string[];
 }

@@ -14,8 +14,12 @@ import {
   instagram,
 } from "@/utils/svgs";
 import { Page } from "./enums";
-import { IDONEW, IDO_SOCIAL } from "./interfaces";
+import { IDO } from "./interfaces";
 import { anote, havensCompass } from "@/public/IDOs/svgs";
+import {
+  PARTICIPATOR_ABI,
+  PARTICIPATOR_V2_ABI,
+} from "@/contracts_integrations/abis";
 
 export const simplifiedPhases = [
   { title: "Upcoming", buttonTitle: "" },
@@ -26,7 +30,7 @@ export const simplifiedPhases = [
   { title: "Completed", buttonTitle: "" },
 ];
 
-export const IDO_LIST: IDONEW[] = [
+export const IDO_LIST: IDO[] = [
   {
     id: "launchpad/havens-compass",
     logo: havensCompass,
@@ -94,6 +98,7 @@ export const IDO_LIST: IDONEW[] = [
       </div>
   `,
     contract: "0xB3C8BB7508af2f18f3BBD96515134C3Cb3bf5702",
+    abi: PARTICIPATOR_ABI,
     images: [
       "/IDOs/havens-compass/havens-compass-1.png",
       "/IDOs/havens-compass/havens-compass-2.png",
@@ -116,7 +121,8 @@ export const IDO_LIST: IDONEW[] = [
     projectTokenSymbol: "$ANOTE",
     totalAllocation: 50_000,
     price: "0.125",
-    participationStartsAt: 1708606800,
+    // participationStartsAt: 1708606800,
+    participationStartsAt: 1708036013,
     participationEndsAt: 1708693200,
     publicParticipationStartsAt: 1708693200,
     publicParticipationEndsAt: 1708779600,
@@ -166,8 +172,8 @@ export const IDO_LIST: IDONEW[] = [
         <p>They can then use these tokens to trade weapon and item NFTs with other players on the in-game decentralized marketplace. Ghost Ivy will also implement DAO governance features, giving $CMPS holders the chance to take an active part in the development of the game.</p>
       </div>
   `,
-    contract: "",
-    images: [],
+    contract: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
+    abi: PARTICIPATOR_V2_ABI,
   },
 ];
 
@@ -188,6 +194,8 @@ export const RPC_URL: { [key: number]: string } = {
 export const TOKENS_TO_SYMBOL: Record<string, string> = {
   "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913": "USDC",
   "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA": "USDbC",
+  "0x5FbDB2315678afecb367f032d93F642f64180aa3": "USDC", // MOCKED TOKEN
+  "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512": "USDbC", // MOCKED TOKEN
 };
 
 export const NAV = [
@@ -232,7 +240,7 @@ export const NAV = [
 export const SOCIALS = [
   {
     svg: twitterX,
-    href: "https://twitter.com/SamuraiStarter",
+    href: "https://twitterX.com/SamuraiStarter",
     class: "scale-100",
   },
   { svg: telegram, href: "https://t.me/SamuraiStarter", class: "scale-100" },
