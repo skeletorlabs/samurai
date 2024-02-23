@@ -66,12 +66,12 @@ export async function generalInfo(index: number) {
     );
 
     const maxAllocations =
-      index === 0
+      ido.id === "launchpad/havens-compass"
         ? Number(50_000)
         : Number(ethers.formatUnits(await contract?.maxAllocations(), 6));
 
     const raised =
-      index === 0
+      ido.id === "launchpad/havens-compass"
         ? ido.totalAllocation
         : acceptedToken1Balance + acceptedToken2Balance;
 

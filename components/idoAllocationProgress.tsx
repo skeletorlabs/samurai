@@ -33,7 +33,9 @@ export default function IdoAllocationProgress({
           RAISED:{" "}
           {percentage.toLocaleString("en-us", { maximumFractionDigits: 2 })}%
         </span>
-        <span>MAX ALLOCATIONS: ${maxAllocations.toLocaleString("en-us")}</span>
+        <span>
+          TOTAL ALLOCATIONS: ${maxAllocations.toLocaleString("en-us")}
+        </span>
       </div>
     </div>
   );
