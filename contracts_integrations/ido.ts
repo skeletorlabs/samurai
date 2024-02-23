@@ -13,7 +13,7 @@ const TEST_RPC = "http://127.0.0.1:8545";
 async function getContract(index: number, signer?: ethers.Signer) {
   try {
     const ido = IDO_LIST[index];
-    const provider = new ethers.JsonRpcProvider(TEST_RPC);
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const contractAddress = ido.contract;
     const contract = new ethers.Contract(
       contractAddress,
@@ -43,7 +43,7 @@ export async function generalInfo(index: number) {
   try {
     const contract = await getContract(index);
     const ido = IDO_LIST[index];
-    const provider = new ethers.JsonRpcProvider(TEST_RPC);
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
 
     const owner = await contract?.owner();
     const minPerWallet = Number(ethers.formatUnits(await contract?.min(), 6));
@@ -51,7 +51,6 @@ export async function generalInfo(index: number) {
     const isPublic = await contract?.isPublic();
     const acceptedToken1 = await contract?.acceptedTokens(0);
     const acceptedToken2 = await contract?.acceptedTokens(1);
-    console.log(acceptedToken1, acceptedToken2);
     const isPaused = await contract?.paused();
     const acceptedToken1Balance = Number(
       ethers.formatUnits(
@@ -71,7 +70,10 @@ export async function generalInfo(index: number) {
         ? Number(50_000)
         : Number(ethers.formatUnits(await contract?.maxAllocations(), 6));
 
-    const raised = acceptedToken1Balance + acceptedToken2Balance;
+    const raised =
+      index === 0
+        ? ido.totalAllocation
+        : acceptedToken1Balance + acceptedToken2Balance;
 
     return {
       owner,

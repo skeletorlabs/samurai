@@ -11,6 +11,7 @@ import {
 import "@rainbow-me/rainbowkit/styles.css";
 import {
   RainbowKitProvider,
+  DisclaimerComponent,
   midnightTheme,
   connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
@@ -20,6 +21,15 @@ import { publicProvider } from "wagmi/providers/public";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
 import { defineChain } from "viem";
+
+// const Disclaimer: DisclaimerComponent = ({ Text, Link }) => (
+//   <Text>
+//     By connecting your wallet, you agree to the{" "}
+//     <Link href="https://termsofservice.xyz">Terms of Service</Link> and
+//     acknowledge you have read and understand the protocol{" "}
+//     <Link href="https://disclaimer.xyz">Disclaimer</Link>
+//   </Text>
+// );
 
 export const localhost = /*#__PURE__*/ defineChain({
   id: 31337,
@@ -37,19 +47,13 @@ export const localhost = /*#__PURE__*/ defineChain({
 });
 
 const { chains, publicClient } = configureChains(
-  [localhost, base],
+  [base],
   [
     publicProvider(),
     jsonRpcProvider({
       rpc: (chain) => ({
-        http:
-          chain.id === base.id
-            ? (process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string)
-            : "http://localhost:8545",
-        webSocket:
-          chain.id === base.id
-            ? (process.env.NEXT_PUBLIC_BASE_WSS as string)
-            : "wss://localhost:8545",
+        http: process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string,
+        webSocket: process.env.NEXT_PUBLIC_BASE_WSS as string,
       }),
     }),
   ]
@@ -88,6 +92,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig config={wagmiConfig}>
       <RainbowKitProvider
+        // appInfo={{
+        //   disclaimer: Disclaimer,
+        // }}
         chains={chains}
         modalSize="compact"
         theme={midnightTheme()}

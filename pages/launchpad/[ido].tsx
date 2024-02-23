@@ -219,7 +219,7 @@ export default function Ido() {
   // ============================================================================================================
 
   const getGeneralData = useCallback(async () => {
-    if (chain && !chain.unsupported && idoIndex !== -1) {
+    if (idoIndex !== -1) {
       const response = await generalInfo(idoIndex);
       setGeneral(response);
       selectedToken === "" && setSelectedToken(response?.acceptedToken1);
@@ -229,7 +229,7 @@ export default function Ido() {
       const phase = await getParticipationPhase(idoIndex);
       setCurrentPhase(phase);
     }
-  }, [chain, idoIndex, selectedToken, setCurrentPhase]);
+  }, [idoIndex, selectedToken, setCurrentPhase]);
 
   useEffect(() => {
     getGeneralData();
@@ -434,10 +434,13 @@ export default function Ido() {
                           <span className="text-samurai-red">RAISED:</span>
                           <p className="text-white/70">
                             $
-                            {Number(general?.raised).toLocaleString("en-us", {
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 2,
-                            })}{" "}
+                            {Number(general?.raised | 0).toLocaleString(
+                              "en-us",
+                              {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              }
+                            )}{" "}
                             {ido?.acceptedTokenSymbol}
                           </p>
                         </div>
@@ -743,16 +746,12 @@ export default function Ido() {
                 </div>
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
                   <span className="text-samurai-red">
-                    CIRCULATING SUPPLY AT TGE:
+                    EXCHANGE LISTING PRICE:
                   </span>
                   <p className="text-white/70">
-                    {Number(ido.circulatingSupplyAtTGE).toLocaleString(
-                      "en-us",
-                      {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      }
-                    )}{" "}
+                    {Number(ido.exchangeListingPrice).toLocaleString("en-us", {
+                      maximumFractionDigits: 4,
+                    })}{" "}
                     {ido.projectTokenSymbol}
                   </p>
                 </div>
@@ -815,14 +814,14 @@ export default function Ido() {
               <div className="flex flex-col gap-2">
                 <p>
                   TOTAL {TOKENS_TO_SYMBOL[general.acceptedToken1]}:{" "}
-                  {Number(user?.acceptedToken1Balance).toLocaleString("en-us", {
+                  {Number(user?.acceptedToken1Balance | 0).toLocaleString("en-us", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}
                 </p>
                 <p>
                   TOTAL {TOKENS_TO_SYMBOL[general.acceptedToken2]}:{" "}
-                  {Number(user?.acceptedToken2Balance).toLocaleString("en-us", {
+                  {Number(user?.acceptedToken2Balance | 0).toLocaleString("en-us", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}

@@ -152,7 +152,7 @@ export interface IDO {
   cliff: number;
   investmentRound: string;
   fdv: string;
-  circulatingSupplyAtTGE: number;
+  exchangeListingPrice: number;
   marketCapAtTGE: number;
   vesting: string;
   releaseType: string;
