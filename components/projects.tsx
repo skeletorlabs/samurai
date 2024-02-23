@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 
-import LaunchpadCardNew from "@/components/launchpadCardNew";
+import LaunchpadCardNew from "@/components/launchpadCard";
 import { IDONEW } from "@/utils/interfaces";
 import { IDO_LIST } from "@/utils/constants";
 

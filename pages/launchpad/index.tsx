@@ -4,8 +4,8 @@ import Layout from "@/components/layout";
 import { Inter } from "next/font/google";
 import SSButton from "@/components/ssButton";
 import TopLayout from "@/components/topLayout";
-import LaunchpadCardNew from "@/components/launchpadCardNew";
-import { IDONEW } from "@/utils/interfaces";
+import LaunchpadCard from "@/components/launchpadCard";
+import { IDO } from "@/utils/interfaces";
 import { IDO_LIST } from "@/utils/constants";
 import Projects from "@/components/projects";
 
