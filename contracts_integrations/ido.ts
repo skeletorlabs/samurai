@@ -1,14 +1,14 @@
 import { ethers } from "ethers";
-import { ERC20_ABI, PARTICIPATOR_ABI } from "./abis";
-import Notificate from "../components/notificate";
+import { ERC20_ABI } from "./abis";
 import handleError from "../utils/handleErrors";
-import { IDO_LIST, LINKS } from "@/utils/constants";
+import { IDO_LIST } from "@/utils/constants";
 import { balanceOf } from "./balanceOf";
 import checkApproval from "./check-approval";
 import { getUnixTime } from "date-fns";
+import { notificateTx } from "@/utils/notificateTx";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
-// const TEST_RPC = "http://127.0.0.1:8545";
+const TEST_RPC = "http://127.0.0.1:8545";
 
 async function getContract(index: number, signer?: ethers.Signer) {
   try {
@@ -17,7 +17,7 @@ async function getContract(index: number, signer?: ethers.Signer) {
     const contractAddress = ido.contract;
     const contract = new ethers.Contract(
       contractAddress,
-      PARTICIPATOR_ABI,
+      ido.abi,
       signer || provider
     );
 
@@ -25,26 +25,6 @@ async function getContract(index: number, signer?: ethers.Signer) {
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
-}
-
-async function notificateTx(tx: any, network: any) {
-  const txUrl = LINKS[Number(network?.chainId)] + "/tx/" + tx.hash.toString();
-
-  Notificate({
-    type: "",
-    title: "Transaction Submitted",
-    message: `Transaction successfully submitted.`,
-    link: txUrl,
-  });
-
-  const txReceipt = await tx.wait(3);
-
-  Notificate({
-    type: "success",
-    title: "Transaction Confirmed",
-    message: `Transaction confirmed in block: ${txReceipt.blockNumber}.`,
-    link: txUrl,
-  });
 }
 
 // OVERALL INFOS
@@ -85,7 +65,15 @@ export async function generalInfo(index: number) {
       )
     );
 
-    const raised = acceptedToken1Balance + acceptedToken2Balance;
+    const maxAllocations =
+      ido.id === "launchpad/havens-compass"
+        ? Number(50_000)
+        : Number(ethers.formatUnits(await contract?.maxAllocations(), 6));
+
+    const raised =
+      ido.id === "launchpad/havens-compass"
+        ? ido.totalAllocation
+        : acceptedToken1Balance + acceptedToken2Balance;
 
     return {
       owner,
@@ -95,6 +83,7 @@ export async function generalInfo(index: number) {
       acceptedToken1,
       acceptedToken2,
       isPaused,
+      maxAllocations,
       raised,
     };
   } catch (e) {
@@ -279,28 +268,10 @@ export async function togglePause(index: number, signer: ethers.Signer) {
     const signerAddress = await signer.getAddress();
 
     if (owner === signerAddress) {
+      const network = await signer.provider?.getNetwork();
       const isPaused = await contract?.paused();
-      let tx: any;
-
-      tx = isPaused ? await contract?.unpause() : await contract?.pause();
-
-      const txUrl = "https://goerli.etherscan.io/tx/" + tx.hash.toString();
-
-      Notificate({
-        type: "",
-        title: "Transaction Submitted",
-        message: `Transaction successfully submitted.`,
-        link: txUrl,
-      });
-
-      const txReceipt = await tx.wait(3);
-
-      Notificate({
-        type: "success",
-        title: "Transaction Confirmed",
-        message: `Transaction confirmed in block: ${txReceipt.blockNumber}.`,
-        link: txUrl,
-      });
+      const tx = isPaused ? await contract?.unpause() : await contract?.pause();
+      await notificateTx(tx, network);
     }
   } catch (e) {
     handleError({ e: e, notificate: true });

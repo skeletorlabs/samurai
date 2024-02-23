@@ -27,6 +27,7 @@ import {
   userInfo,
   withdraw,
 } from "@/contracts_integrations/ido";
+import IdoAllocationProgress from "@/components/idoAllocationProgress";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -218,7 +219,7 @@ export default function Ido() {
   // ============================================================================================================
 
   const getGeneralData = useCallback(async () => {
-    if (chain && !chain.unsupported && idoIndex !== -1) {
+    if (idoIndex !== -1) {
       const response = await generalInfo(idoIndex);
       setGeneral(response);
       selectedToken === "" && setSelectedToken(response?.acceptedToken1);
@@ -228,7 +229,7 @@ export default function Ido() {
       const phase = await getParticipationPhase(idoIndex);
       setCurrentPhase(phase);
     }
-  }, [chain, idoIndex, selectedToken, setCurrentPhase]);
+  }, [idoIndex, selectedToken, setCurrentPhase]);
 
   useEffect(() => {
     getGeneralData();
@@ -323,219 +324,193 @@ export default function Ido() {
               </div>
             </div>
 
-            <div className="flex flex-col lg:pr-20">
-              <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-14 mt-[70px] xl:mt-[170px] shadow-xl lg:border border-white/20">
-                {/* <div className="text-center text-xl xl:text-2xl text-white"> */}
-                <div className="text-xl xl:text-3xl bg-samurai-red px-7 py-3 text-white">
-                  <span>{ido?.projectName}</span> {" | "}
-                  {ido?.investmentRound}
-                </div>
-                <div className="flex flex-row mt-6 lg:mt-10 bg-black-900/90 stroke-white rounded-[8px] text-white border border-white/20 mx-4 lg:mx-8">
-                  {ido?.simplified &&
-                    simplifiedPhases.map((phase, index) => (
-                      <Fragment key={index}>
-                        {index !== 0 && (
-                          <svg
-                            data-slot="icon"
-                            fill="none"
-                            strokeWidth="4"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                            aria-hidden="true"
-                            className="w-2 md:w-6 "
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                            ></path>
-                          </svg>
-                        )}
-                        <button
-                          disabled
-                          className={`p-2 flex-1  xl:text-2xl ${
-                            phase.title === currentPhase
-                              ? "text-samurai-red"
-                              : "text-white/40"
-                          }`}
-                        >
-                          {phase.title}
-                        </button>
-                      </Fragment>
-                    ))}
-                </div>
-
-                {ido && (
-                  <div className="flex flex-col gap-10 px-8">
-                    {/* PARTICIPATION PHASE BLOCK */}
-                    <div className="flex justify-start lg:grid lg:grid-cols-2 gap-1 items-center flex-wrap mt-6">
-                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                        <span className="text-samurai-red">IDO START:</span>
-                        <p className="text-white/70">
-                          {formattedDate(
-                            ido.participationStartsAt
-                          ).toUpperCase()}{" "}
-                          UTC
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                        <span className="text-samurai-red">IDO END:</span>
-                        <p className="text-white/70">
-                          {formattedDate(ido.participationEndsAt).toUpperCase()}{" "}
-                          UTC
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                        <span className="text-samurai-red">FCFS START:</span>
-                        <p className="text-white/70">
-                          {formattedDate(
-                            ido.publicParticipationStartsAt
-                          ).toUpperCase()}{" "}
-                          UTC
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                        <span className="text-samurai-red">FCFS END:</span>
-                        <p className="text-white/70">
-                          {formattedDate(
-                            ido.publicParticipationEndsAt
-                          ).toUpperCase()}{" "}
-                          UTC
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                        <span className="text-samurai-red">TGE DATE:</span>
-                        <p className="text-white/70">
-                          TO BE ANNOUNCED
-                          {/* {formattedDate(ido.tgeDate).toUpperCase()} */}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                        <span className="text-samurai-red">TOKEN SYMBOL:</span>
-                        <p className="text-white/70">
-                          {ido.projectTokenSymbol}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                        <span className="text-samurai-red">TOKEN PRICE:</span>
-                        <p className="text-white/70">
-                          ${ido.price} {ido.acceptedTokenSymbol}
-                        </p>
-                      </div>
-
-                      <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                        <span className="text-samurai-red">RAISED:</span>
-                        <p className="text-white/70">
-                          $
-                          {(50_000).toLocaleString("en-us", {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          })}{" "}
-                          {ido?.acceptedTokenSymbol}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* UPCOMING BLOCK */}
-                    {currentPhase?.toLowerCase() === "upcoming" && (
-                      <>
-                        <div className={`relative w-full h-24`}>
-                          <Image
-                            src="/IDOs/havens-compass-logo.svg"
-                            alt="logo"
-                            fill
-                          />
-                        </div>
-                      </>
-                    )}
-
-                    {currentPhase?.toLowerCase() === "participation" &&
-                      user?.allocation === 0 && (
-                        <div className="flex flex-col">
-                          <div className="flex items-center justify-between">
-                            <span className="self-end text-[10px] lg:text-sm mb-1 mr-1">
-                              MIN{" "}
-                              {Number(general?.minPerWallet).toLocaleString(
-                                "en-us",
-                                {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                }
-                              )}
-                              {" / "}
-                              MAX{" "}
-                              {Number(general?.maxPerWallet).toLocaleString(
-                                "en-us",
-                                {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                }
-                              )}{" "}
-                              {TOKENS_TO_SYMBOL[selectedToken]}
-                            </span>
-                            <button
-                              onClick={() =>
-                                onInputChange(
-                                  selectedToken === general.acceptedToken1
-                                    ? user.balanceToken1.toString()
-                                    : user.balanceToken2.toString()
-                                )
-                              }
-                              className="self-end text-[10px] lg:text-sm mb-1 hover:text-samurai-red mr-1"
+            <div className="flex flex-col lg:pr-20 gap-10">
+              <div className="flex flex-col">
+                <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-14 mt-[70px] xl:mt-[170px] shadow-xl lg:border border-white/20">
+                  {/* <div className="text-center text-xl xl:text-2xl text-white"> */}
+                  <div className="text-xl xl:text-3xl bg-samurai-red px-7 py-3 text-white">
+                    <span>{ido?.projectName}</span> {" | "}
+                    {ido?.investmentRound}
+                  </div>
+                  <div className="flex flex-row mt-6 lg:mt-10 bg-black-900/90 stroke-white rounded-[8px] text-white border border-white/20 mx-4 lg:mx-8">
+                    {ido?.simplified &&
+                      simplifiedPhases.map((phase, index) => (
+                        <Fragment key={index}>
+                          {index !== 0 && (
+                            <svg
+                              data-slot="icon"
+                              fill="none"
+                              strokeWidth="4"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                              aria-hidden="true"
+                              className="w-2 md:w-6 "
                             >
-                              BALANCE:{" "}
-                              {Number(
-                                selectedToken === general.acceptedToken1
-                                  ? user.balanceToken1
-                                  : user.balanceToken2
-                              ).toLocaleString("en-us", {
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                              ></path>
+                            </svg>
+                          )}
+                          <button
+                            disabled
+                            className={`p-2 flex-1  xl:text-2xl ${
+                              phase.title === currentPhase
+                                ? "text-samurai-red"
+                                : "text-white/40"
+                            }`}
+                          >
+                            {phase.title}
+                          </button>
+                        </Fragment>
+                      ))}
+                  </div>
+
+                  {ido && (
+                    <div className="flex flex-col gap-10 px-8">
+                      {/* PARTICIPATION PHASE BLOCK */}
+                      <div className="flex justify-start lg:grid lg:grid-cols-2 gap-1 items-center flex-wrap mt-6">
+                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                          <span className="text-samurai-red">IDO START:</span>
+                          <p className="text-white/70">
+                            {formattedDate(
+                              ido.participationStartsAt
+                            ).toUpperCase()}{" "}
+                            UTC
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                          <span className="text-samurai-red">IDO END:</span>
+                          <p className="text-white/70">
+                            {formattedDate(
+                              ido.participationEndsAt
+                            ).toUpperCase()}{" "}
+                            UTC
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                          <span className="text-samurai-red">FCFS START:</span>
+                          <p className="text-white/70">
+                            {formattedDate(
+                              ido.publicParticipationStartsAt
+                            ).toUpperCase()}{" "}
+                            UTC
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                          <span className="text-samurai-red">FCFS END:</span>
+                          <p className="text-white/70">
+                            {formattedDate(
+                              ido.publicParticipationEndsAt
+                            ).toUpperCase()}{" "}
+                            UTC
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                          <span className="text-samurai-red">TGE DATE:</span>
+                          <p className="text-white/70">
+                            TO BE ANNOUNCED
+                            {/* {formattedDate(ido.tgeDate).toUpperCase()} */}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                          <span className="text-samurai-red">
+                            TOKEN SYMBOL:
+                          </span>
+                          <p className="text-white/70">
+                            {ido.projectTokenSymbol}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                          <span className="text-samurai-red">TOKEN PRICE:</span>
+                          <p className="text-white/70">
+                            ${ido.price} {ido.acceptedTokenSymbol}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                          <span className="text-samurai-red">RAISED:</span>
+                          <p className="text-white/70">
+                            $
+                            {Number(general?.raised | 0).toLocaleString(
+                              "en-us",
+                              {
                                 minimumFractionDigits: 2,
                                 maximumFractionDigits: 2,
-                              })}{" "}
-                              {TOKENS_TO_SYMBOL[selectedToken]}
-                            </button>
-                          </div>
+                              }
+                            )}{" "}
+                            {ido?.acceptedTokenSymbol}
+                          </p>
+                        </div>
+                      </div>
 
-                          <div className="relative">
-                            <input
-                              type="text"
-                              placeholder={`${TOKENS_TO_SYMBOL[selectedToken]} to allocate`}
-                              className="w-full p-2 lg:p-4 rounded-[8px] placeholder-black/50 text-black"
-                              value={inputValue}
-                              onChange={(e) => onInputChange(e.target.value)}
-                            />
-                            <div className="absolute top-[7px] lg:top-3 right-2 flex items-center gap-2">
-                              <Image
-                                src="/usdc-icon.svg"
-                                width={32}
-                                height={32}
-                                alt="USDC"
-                                placeholder="blur"
-                                blurDataURL="/usdc-icon.svg"
-                                className="w-6 h-6 lg:w-[32px] lg:h-[32px]"
-                              />
+                      {/* UPCOMING BLOCK */}
+                      {currentPhase?.toLowerCase() === "upcoming" && (
+                        <>
+                          <div className="flex justify-center items-center w-full h-max">
+                            {ido.logo}
+                          </div>
+                        </>
+                      )}
+
+                      {currentPhase?.toLowerCase() === "participation" &&
+                        user?.allocation === 0 && (
+                          <div className="flex flex-col">
+                            <div className="flex items-center justify-between">
+                              <span className="self-end text-[10px] lg:text-sm mb-1 mr-1">
+                                MIN{" "}
+                                {Number(general?.minPerWallet).toLocaleString(
+                                  "en-us",
+                                  {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  }
+                                )}
+                                {" / "}
+                                MAX{" "}
+                                {Number(general?.maxPerWallet).toLocaleString(
+                                  "en-us",
+                                  {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  }
+                                )}{" "}
+                                {TOKENS_TO_SYMBOL[selectedToken]}
+                              </span>
                               <button
                                 onClick={() =>
-                                  setTokenSelectionOpen(!tokenSelectionOpen)
+                                  onInputChange(
+                                    selectedToken === general.acceptedToken1
+                                      ? user.balanceToken1.toString()
+                                      : user.balanceToken2.toString()
+                                  )
                                 }
-                                className="text-black/80 mr-2 text-lg lg:text-2xl font-bold hover:text-samurai-red"
+                                className="self-end text-[10px] lg:text-sm mb-1 hover:text-samurai-red mr-1"
                               >
+                                BALANCE:{" "}
+                                {Number(
+                                  selectedToken === general.acceptedToken1
+                                    ? user.balanceToken1
+                                    : user.balanceToken2
+                                ).toLocaleString("en-us", {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                })}{" "}
                                 {TOKENS_TO_SYMBOL[selectedToken]}
                               </button>
                             </div>
-                            <div
-                              className={`${
-                                tokenSelectionOpen ? "flex" : "hidden"
-                              } absolute top-12 lg:top-16 right-0 flex-col gap-2 lg:gap-4 bg-white text-black/80 p-4 rounded-[8px] shadow-xl z-20`}
-                            >
-                              <button
-                                onClick={() => {
-                                  setSelectedToken(general.acceptedToken1);
-                                  setTokenSelectionOpen(!tokenSelectionOpen);
-                                }}
-                                className="flex items-center gap-2"
-                              >
+
+                            <div className="relative">
+                              <input
+                                type="text"
+                                placeholder={`${TOKENS_TO_SYMBOL[selectedToken]} to allocate`}
+                                className="w-full p-2 lg:p-4 rounded-[8px] placeholder-black/50 text-black"
+                                value={inputValue}
+                                onChange={(e) => onInputChange(e.target.value)}
+                              />
+                              <div className="absolute top-[7px] lg:top-3 right-2 flex items-center gap-2">
                                 <Image
                                   src="/usdc-icon.svg"
                                   width={32}
@@ -545,54 +520,84 @@ export default function Ido() {
                                   blurDataURL="/usdc-icon.svg"
                                   className="w-6 h-6 lg:w-[32px] lg:h-[32px]"
                                 />
-                                <span className="mr-2 text-lg lg:text-2xl font-bold hover:text-samurai-red">
-                                  {TOKENS_TO_SYMBOL[general.acceptedToken1]}
-                                </span>
-                              </button>
-
-                              <div className="w-full h-[1px] bg-black/20" />
-
-                              <button
-                                onClick={() => {
-                                  setSelectedToken(general.acceptedToken2);
-                                  setTokenSelectionOpen(!tokenSelectionOpen);
-                                }}
-                                className="flex items-center gap-2"
+                                <button
+                                  onClick={() =>
+                                    setTokenSelectionOpen(!tokenSelectionOpen)
+                                  }
+                                  className="text-black/80 mr-2 text-lg lg:text-2xl font-bold hover:text-samurai-red"
+                                >
+                                  {TOKENS_TO_SYMBOL[selectedToken]}
+                                </button>
+                              </div>
+                              <div
+                                className={`${
+                                  tokenSelectionOpen ? "flex" : "hidden"
+                                } absolute top-12 lg:top-16 right-0 flex-col gap-2 lg:gap-4 bg-white text-black/80 p-4 rounded-[8px] shadow-xl z-20`}
                               >
-                                <Image
-                                  src="/usdc-icon.svg"
-                                  width={32}
-                                  height={32}
-                                  alt="USDC"
-                                  placeholder="blur"
-                                  blurDataURL="/usdc-icon.svg"
-                                  className="w-6 h-6 lg:w-[32px] lg:h-[32px]"
-                                />
-                                <span className="mr-2 text-lg lg:text-2xl font-bold hover:text-samurai-red">
-                                  {TOKENS_TO_SYMBOL[general.acceptedToken2]}
-                                </span>
-                              </button>
+                                <button
+                                  onClick={() => {
+                                    setSelectedToken(general.acceptedToken1);
+                                    setTokenSelectionOpen(!tokenSelectionOpen);
+                                  }}
+                                  className="flex items-center gap-2"
+                                >
+                                  <Image
+                                    src="/usdc-icon.svg"
+                                    width={32}
+                                    height={32}
+                                    alt="USDC"
+                                    placeholder="blur"
+                                    blurDataURL="/usdc-icon.svg"
+                                    className="w-6 h-6 lg:w-[32px] lg:h-[32px]"
+                                  />
+                                  <span className="mr-2 text-lg lg:text-2xl font-bold hover:text-samurai-red">
+                                    {TOKENS_TO_SYMBOL[general.acceptedToken1]}
+                                  </span>
+                                </button>
+
+                                <div className="w-full h-[1px] bg-black/20" />
+
+                                <button
+                                  onClick={() => {
+                                    setSelectedToken(general.acceptedToken2);
+                                    setTokenSelectionOpen(!tokenSelectionOpen);
+                                  }}
+                                  className="flex items-center gap-2"
+                                >
+                                  <Image
+                                    src="/usdc-icon.svg"
+                                    width={32}
+                                    height={32}
+                                    alt="USDC"
+                                    placeholder="blur"
+                                    blurDataURL="/usdc-icon.svg"
+                                    className="w-6 h-6 lg:w-[32px] lg:h-[32px]"
+                                  />
+                                  <span className="mr-2 text-lg lg:text-2xl font-bold hover:text-samurai-red">
+                                    {TOKENS_TO_SYMBOL[general.acceptedToken2]}
+                                  </span>
+                                </button>
+                              </div>
                             </div>
-                          </div>
 
-                          {/* PARTICIPATE BUTTON */}
+                            {/* PARTICIPATE BUTTON */}
 
-                          <button
-                            onClick={onParticipate}
-                            disabled={
-                              isLoading ||
-                              !general ||
-                              !user ||
-                              general.isPaused ||
-                              user.isBlacklisted ||
-                              (!user.isWhitelisted && !general.isPublic) ||
-                              inputValue === "" ||
-                              Number(inputValue) === 0 ||
-                              Number(inputValue) < general.minPerWallet ||
-                              Number(inputValue) > general.maxPerWallet ||
-                              Number(general?.raised >= 50_000)
-                            }
-                            className={`
+                            <button
+                              onClick={onParticipate}
+                              disabled={
+                                isLoading ||
+                                !general ||
+                                !user ||
+                                general.isPaused ||
+                                user.isBlacklisted ||
+                                (!user.isWhitelisted && !general.isPublic) ||
+                                inputValue === "" ||
+                                Number(inputValue) === 0 ||
+                                Number(inputValue) < general.minPerWallet ||
+                                Number(inputValue) > general.maxPerWallet ||
+                                Number(general?.raised >= 50_000)
+                              }
+                              className={`
                             ${
                               isLoading ||
                               !general ||
@@ -609,96 +614,101 @@ export default function Ido() {
                                 : "bg-samurai-red text-white hover:opacity-75"
                             }
                                rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
+                            >
+                              {isLoading ? "Loading..." : "PARTICIPATE"}
+                            </button>
+                          </div>
+                        )}
+
+                      {(currentPhase?.toLowerCase() === "participation" ||
+                        currentPhase?.toLowerCase() === "completed") &&
+                        user?.allocation > 0 && (
+                          <div className="flex flex-row justify-between items-center flex-wrap gap-4">
+                            <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
+                              <p className={`text-lg ${inter.className}`}>
+                                MY ALLOCATION
+                              </p>
+                              <p className="text-2xl text-samurai-red">
+                                $
+                                {user.allocation.toLocaleString("en-us", {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                })}
+                              </p>
+                            </div>
+
+                            <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
+                              <p className={`text-lg ${inter.className}`}>
+                                TOKENS TO RECEIVE
+                              </p>
+                              <p className="text-2xl text-samurai-red">
+                                {(
+                                  Number(user?.allocation) / Number(ido.price)
+                                )?.toLocaleString("en-us", {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                })}{" "}
+                                {ido.projectTokenSymbol}
+                              </p>
+                            </div>
+                            <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
+                              <p className={`text-lg ${inter.className}`}>
+                                {ido.tgePercentage}% TGE RELEASE
+                              </p>
+                              <p className="text-2xl text-samurai-red">
+                                {(
+                                  ((Number(user?.allocation) /
+                                    Number(ido.price)) *
+                                    ido.tgePercentage) /
+                                  100
+                                ).toLocaleString("en-us", {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                })}{" "}
+                                {ido.projectTokenSymbol}
+                              </p>
+                            </div>
+                            <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
+                              <p className={`text-lg ${inter.className}`}>
+                                {100 - ido.tgePercentage}% VESTING RELEASE
+                              </p>
+                              <p className="text-2xl text-samurai-red">
+                                {(
+                                  ((Number(user?.allocation) /
+                                    Number(ido.price)) *
+                                    (100 - ido.tgePercentage)) /
+                                  100
+                                ).toLocaleString("en-us", {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                })}{" "}
+                                {ido.projectTokenSymbol}
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                      {/* TGE PHASE BLOCK */}
+                      {currentPhase?.toLowerCase() === "completed" && (
+                        <>
+                          <div
+                            className={`text-2xl text-white/80 pt-10 border-t border-white/20 leading-normal ${inter.className}`}
                           >
-                            {isLoading ? "Loading..." : "PARTICIPATE"}
-                          </button>
-                        </div>
+                            <p className="text-samurai-red text-[16px]">
+                              TOKEN DISTRIBUTION:
+                            </p>
+                            TO BE ANNOUNCED
+                          </div>
+                        </>
                       )}
-
-                    {(currentPhase?.toLowerCase() === "participation" ||
-                      currentPhase?.toLowerCase() === "completed") &&
-                      user?.allocation > 0 && (
-                        <div className="flex flex-row justify-between items-center flex-wrap gap-4">
-                          <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
-                            <p className={`text-lg ${inter.className}`}>
-                              MY ALLOCATION
-                            </p>
-                            <p className="text-2xl text-samurai-red">
-                              $
-                              {user.allocation.toLocaleString("en-us", {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2,
-                              })}
-                            </p>
-                          </div>
-
-                          <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
-                            <p className={`text-lg ${inter.className}`}>
-                              TOKENS TO RECEIVE
-                            </p>
-                            <p className="text-2xl text-samurai-red">
-                              {(
-                                Number(user?.allocation) / Number(ido.price)
-                              )?.toLocaleString("en-us", {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2,
-                              })}{" "}
-                              {ido.projectTokenSymbol}
-                            </p>
-                          </div>
-                          <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
-                            <p className={`text-lg ${inter.className}`}>
-                              {ido.tgePercentage}% TGE RELEASE
-                            </p>
-                            <p className="text-2xl text-samurai-red">
-                              {(
-                                ((Number(user?.allocation) /
-                                  Number(ido.price)) *
-                                  ido.tgePercentage) /
-                                100
-                              ).toLocaleString("en-us", {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2,
-                              })}{" "}
-                              {ido.projectTokenSymbol}
-                            </p>
-                          </div>
-                          <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
-                            <p className={`text-lg ${inter.className}`}>
-                              {100 - ido.tgePercentage}% VESTING RELEASE
-                            </p>
-                            <p className="text-2xl text-samurai-red">
-                              {(
-                                ((Number(user?.allocation) /
-                                  Number(ido.price)) *
-                                  (100 - ido.tgePercentage)) /
-                                100
-                              ).toLocaleString("en-us", {
-                                minimumFractionDigits: 2,
-                                maximumFractionDigits: 2,
-                              })}{" "}
-                              {ido.projectTokenSymbol}
-                            </p>
-                          </div>
-                        </div>
-                      )}
-
-                    {/* TGE PHASE BLOCK */}
-                    {currentPhase?.toLowerCase() === "completed" && (
-                      <>
-                        <div
-                          className={`text-2xl text-white/80 pt-10 border-t border-white/20 leading-normal ${inter.className}`}
-                        >
-                          <p className="text-samurai-red text-[16px]">
-                            TOKEN DISTRIBUTION:
-                          </p>
-                          TO BE ANNOUNCED
-                        </div>
-                      </>
-                    )}
-                  </div>
-                )}
+                    </div>
+                  )}
+                </div>
               </div>
+              <IdoAllocationProgress
+                maxAllocations={general?.maxAllocations || 0}
+                raised={general?.raised || 0}
+              />
             </div>
           </div>
         </div>
@@ -736,16 +746,12 @@ export default function Ido() {
                 </div>
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
                   <span className="text-samurai-red">
-                    CIRCULATING SUPPLY AT TGE:
+                    EXCHANGE LISTING PRICE:
                   </span>
                   <p className="text-white/70">
-                    {Number(ido.circulatingSupplyAtTGE).toLocaleString(
-                      "en-us",
-                      {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      }
-                    )}{" "}
+                    {Number(ido.exchangeListingPrice).toLocaleString("en-us", {
+                      maximumFractionDigits: 4,
+                    })}{" "}
                     {ido.projectTokenSymbol}
                   </p>
                 </div>
@@ -808,14 +814,14 @@ export default function Ido() {
               <div className="flex flex-col gap-2">
                 <p>
                   TOTAL {TOKENS_TO_SYMBOL[general.acceptedToken1]}:{" "}
-                  {Number(user?.acceptedToken1Balance).toLocaleString("en-us", {
+                  {Number(user?.acceptedToken1Balance | 0).toLocaleString("en-us", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}
                 </p>
                 <p>
                   TOTAL {TOKENS_TO_SYMBOL[general.acceptedToken2]}:{" "}
-                  {Number(user?.acceptedToken2Balance).toLocaleString("en-us", {
+                  {Number(user?.acceptedToken2Balance | 0).toLocaleString("en-us", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}
