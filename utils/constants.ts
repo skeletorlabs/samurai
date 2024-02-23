@@ -63,7 +63,7 @@ export const IDO_LIST: IDO[] = [
     fdv: "24000000",
     exchangeListingPrice: 0.015,
     marketCapAtTGE: 1024800,
-    vesting: "10% at TGE, 3-month cliff, 14-month linear vesting",
+    vesting: "10% at TGE, 3-month cliff, 14-month monthly vesting",
     releaseType: "Linear",
     currentPhase: simplifiedPhases[1].title,
     socials: [
