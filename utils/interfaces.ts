@@ -1,5 +1,4 @@
-import { ReactElement, ReactNode } from "react";
-import { JsxElement } from "typescript";
+import { ReactNode } from "react";
 
 export type SupplyInfo = {
   maxSupply: string;
