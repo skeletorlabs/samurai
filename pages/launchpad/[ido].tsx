@@ -757,7 +757,13 @@ export default function Ido() {
               <div className="h-56 sm:h-64 xl:h-80 2xl:h-[350px]">
                 <Carousel leftControl=" " rightControl=" ">
                   {ido?.images?.map((image, index) => (
-                    <Image src={image} width={500} height={350} alt="..." />
+                    <Image
+                      key={index}
+                      src={image}
+                      width={500}
+                      height={350}
+                      alt="..."
+                    />
                   ))}
                 </Carousel>
               </div>
