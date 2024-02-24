@@ -38,7 +38,7 @@ export const IDO_LIST: IDO[] = [
   {
     id: "launchpad/hauntedspace-gaga",
     logo: galaxyGamesHauntedSpace,
-    idoImageSrc: "/IDOs/galaxygames-hauntedspace.png",
+    idoImageSrc: "/IDOs/hauntedspace-gaga.png",
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "TO BE ANNOUNCED",
     crowdsaleNetwork: "BASE",
@@ -98,6 +98,17 @@ export const IDO_LIST: IDO[] = [
   `,
     contract: "0x7804168cD10a219cE617D96E57174aD5453447Af",
     abi: PARTICIPATOR_V2_ABI,
+    images: [
+      "/IDOs/hauntedspace-gaga/1.png",
+      "/IDOs/hauntedspace-gaga/2.png",
+      "/IDOs/hauntedspace-gaga/3.png",
+      "/IDOs/hauntedspace-gaga/4.png",
+      "/IDOs/hauntedspace-gaga/5.png",
+      "/IDOs/hauntedspace-gaga/6.png",
+      "/IDOs/hauntedspace-gaga/7.png",
+      "/IDOs/hauntedspace-gaga/8.png",
+      "/IDOs/hauntedspace-gaga/9.png",
+    ],
   },
   {
     id: "launchpad/havens-compass",

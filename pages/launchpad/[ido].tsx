@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import { useState, Fragment, useContext, useEffect, useCallback } from "react";
 import TopLayout from "@/components/topLayout";
 import { useRouter } from "next/router";
+import { Carousel } from "flowbite-react";
 
 import {
   IDO_LIST,
@@ -444,6 +445,36 @@ export default function Ido() {
                             {ido?.acceptedTokenSymbol}
                           </p>
                         </div>
+
+                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                          <span className="text-samurai-red">MIN:</span>
+                          <p className="text-white/70">
+                            $
+                            {Number(general?.minPerWallet | 0).toLocaleString(
+                              "en-us",
+                              {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              }
+                            )}{" "}
+                            {ido?.acceptedTokenSymbol}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                          <span className="text-samurai-red">MAX:</span>
+                          <p className="text-white/70">
+                            $
+                            {Number(general?.maxPerWallet | 0).toLocaleString(
+                              "en-us",
+                              {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              }
+                            )}{" "}
+                            {ido?.acceptedTokenSymbol}
+                          </p>
+                        </div>
                       </div>
 
                       {/* UPCOMING BLOCK */}
@@ -716,10 +747,21 @@ export default function Ido() {
       <div className="flex flex-col xl:flex-row  gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 ">
         {ido && (
           <>
-            <div
-              className={`flex w-full !leading-[28px] font-light px-6 lg:px-8 xl:px-20 lg:text-lg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-gray-300 ${inter.className}`}
-              dangerouslySetInnerHTML={{ __html: ido.bigDescription as string }}
-            />
+            <div className="flex flex-col gap-10 px-6 lg:px-8 xl:px-20">
+              <div
+                className={`flex w-full !leading-[28px] font-light lg:text-lg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-gray-300 ${inter.className}`}
+                dangerouslySetInnerHTML={{
+                  __html: ido.bigDescription as string,
+                }}
+              />
+              <div className="h-56 sm:h-64 xl:h-80 2xl:h-[350px]">
+                <Carousel leftControl=" " rightControl=" ">
+                  {ido?.images?.map((image, index) => (
+                    <Image src={image} width={500} height={350} alt="..." />
+                  ))}
+                </Carousel>
+              </div>
+            </div>
             <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-8 lg:py-[70px] shadow-xl lg:border border-white/20 h-max lg:mr-20">
               <h1 className="text-2xl xl:text-3xl bg-samurai-red px-6 py-3">
                 TOKEN INFO
@@ -814,17 +856,23 @@ export default function Ido() {
               <div className="flex flex-col gap-2">
                 <p>
                   TOTAL {TOKENS_TO_SYMBOL[general.acceptedToken1]}:{" "}
-                  {Number(user?.acceptedToken1Balance | 0).toLocaleString("en-us", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
+                  {Number(user?.acceptedToken1Balance | 0).toLocaleString(
+                    "en-us",
+                    {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }
+                  )}
                 </p>
                 <p>
                   TOTAL {TOKENS_TO_SYMBOL[general.acceptedToken2]}:{" "}
-                  {Number(user?.acceptedToken2Balance | 0).toLocaleString("en-us", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
+                  {Number(user?.acceptedToken2Balance | 0).toLocaleString(
+                    "en-us",
+                    {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }
+                  )}
                 </p>
                 <div className="w-max">
                   <SSButton disabled={isLoading} click={onWithdraw}>
