@@ -21,7 +21,7 @@ export default function IdoAllocationProgress({
       <div className="flex flex-row justify-between items-center w-full h-[20px] rounded-full border">
         <div
           className={`flex justify-center items-center h-full bg-gradient-to-r from-samurai-red/60 to-samurai-red ${
-            percentage === 100 ? "rounded-full" : "rounded-l-full"
+            percentage >= 95 ? "rounded-full" : "rounded-l-full"
           }`}
           style={{
             width: `${percentage > 0 && percentage < 1.2 ? 1.2 : percentage}%`,

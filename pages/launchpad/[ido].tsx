@@ -555,9 +555,44 @@ export default function Ido() {
                                   onClick={() =>
                                     setTokenSelectionOpen(!tokenSelectionOpen)
                                   }
-                                  className="text-black/80 mr-2 text-lg lg:text-2xl font-bold hover:text-samurai-red"
+                                  className="flex items-center text-black/80 mr-2 text-lg lg:text-2xl font-bold hover:text-samurai-red"
                                 >
-                                  {TOKENS_TO_SYMBOL[selectedToken]}
+                                  <span>{TOKENS_TO_SYMBOL[selectedToken]}</span>
+                                  <div className="w-6 h-6 text-black ml-1">
+                                    {tokenSelectionOpen ? (
+                                      <svg
+                                        data-slot="icon"
+                                        fill="none"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        aria-hidden="true"
+                                      >
+                                        <path
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                                        ></path>
+                                      </svg>
+                                    ) : (
+                                      <svg
+                                        data-slot="icon"
+                                        fill="none"
+                                        strokeWidth="1.5"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        aria-hidden="true"
+                                      >
+                                        <path
+                                          strokeLinecap="round"
+                                          strokeLinejoin="round"
+                                          d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                                        ></path>
+                                      </svg>
+                                    )}
+                                  </div>
                                 </button>
                               </div>
                               <div
