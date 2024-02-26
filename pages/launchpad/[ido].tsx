@@ -487,7 +487,7 @@ export default function Ido() {
                       )}
 
                       {currentPhase?.toLowerCase() === "participation" &&
-                        user?.allocation === 0 && (
+                        user?.allocation < general.maxPerWallet && (
                           <div className="flex flex-col">
                             <div className="flex items-center justify-between">
                               <span className="self-end text-[10px] lg:text-sm mb-1 mr-1">
