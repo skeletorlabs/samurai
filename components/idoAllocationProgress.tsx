@@ -11,6 +11,8 @@ export default function IdoAllocationProgress({
 }: IdoAllocationProgress) {
   const [percentage, setPercentage] = useState(0);
 
+  console.log(maxAllocations, raised);
+
   useEffect(() => {
     if (raised > 0) {
       setPercentage((raised / maxAllocations) * 100);

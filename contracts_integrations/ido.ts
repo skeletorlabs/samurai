@@ -73,7 +73,7 @@ export async function generalInfo(index: number) {
     const raised =
       ido.id === "launchpad/havens-compass"
         ? ido.totalAllocation
-        : acceptedToken1Balance + acceptedToken2Balance;
+        : Number(ethers.formatUnits(await contract?.raised(), 6));
 
     return {
       owner,
