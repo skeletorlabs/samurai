@@ -52,19 +52,6 @@ export async function generalInfo(index: number) {
     const acceptedToken1 = await contract?.acceptedTokens(0);
     const acceptedToken2 = await contract?.acceptedTokens(1);
     const isPaused = await contract?.paused();
-    const acceptedToken1Balance = Number(
-      ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken1, ido.contract, provider),
-        6
-      )
-    );
-    const acceptedToken2Balance = Number(
-      ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken2, ido.contract, provider),
-        6
-      )
-    );
-
     const maxAllocations =
       ido.id === "launchpad/havens-compass"
         ? Number(50_000)
