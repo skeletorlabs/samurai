@@ -19,6 +19,7 @@ import {
   anote,
   galaxyGamesHauntedSpace,
   havensCompass,
+  orangedx,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -35,6 +36,81 @@ export const simplifiedPhases = [
 ];
 
 export const IDO_LIST: IDO[] = [
+  {
+    id: "launchpad/orangedx",
+    logo: orangedx,
+    idoImageSrc: "/IDOs/orangedx.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "TO BE ANNOUNCED",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    projectName: "OrangeDX",
+    projectListDescription:
+      "Prepare to confront the horrors of deep space in this genre-blending flagship title from innovative Web3 game studio Galaxy Games.",
+    projectDescription:
+      "Galaxy Games is preparing to launch the definitive next-gen gaming ecosystem, uniting traditional players and blockchain gamers under one banner. Their much-hyped flagship title, Haunted Space, is set to raise the bar for Web3 gaming with AAA gameplay, a captivating original world, and a fully player-driven game economy.",
+    projectTokenSymbol: "$O4DX",
+    totalAllocation: 100_000,
+    price: "0.055",
+    participationStartsAt: 1710158400,
+    participationEndsAt: 1710244800,
+    publicParticipationStartsAt: 1710244800,
+    publicParticipationEndsAt: 1710334800,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 50,
+    cliff: 0,
+    investmentRound: "Private Round",
+    fdv: "8500000",
+    exchangeListingPrice: 0.085,
+    marketCapAtTGE: 2370000,
+    vesting: "50% at TGE and 50% after one month",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      {
+        svg: globe,
+        href: "https://orangedx.com/",
+      },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/OrangDx_BRC20",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/OrangeDx_Official_Chat",
+      },
+      // {
+      //   svg: discord,
+      //   href: "https://discord.gg/p6zZDvgNUW",
+      // },
+      {
+        svg: medium,
+        href: "https://medium.com/@orange_dex",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <h1 style="font-weight: bold; font-size: 1.2em;">Haunted Space - GAGA</h1>
+        <p>Galaxy Games is throwing open the gates of blockchain gaming and onboarding a whole new community of gamers into the world of Web3. It all begins with their first major release, Haunted Space: an innovative blend of space-sim and survival horror, coming soon to PC, Playstation, and Xbox.</p>
+        <p>Players will be thrown headfirst into a galaxy infested with gargantuan monsters, and tasked with surviving against all odds. This means gathering resources to craft powerful spaceship upgrades, fighting against other players, and slaying Lovecraftian leviathans in epic boss battles.</p>
+        <p>Secure your allocation of the $GAGA utility token for a slice of this much anticipated release. And remember, $GAGA is the token which will govern the entire Galaxy Games ecosystem. That means you're not just investing in Haunted Space, but also all of the future Web3 releases from this innovative crypto gaming studio.</p>
+      </div>
+  `,
+    contract: "0x05dCf22b2ab52c074EF94B86c5d96d71C9f86715",
+    abi: PARTICIPATOR_V2_ABI,
+    // images: [
+    //   "/IDOs/hauntedspace-gaga/1.png",
+    //   "/IDOs/hauntedspace-gaga/2.png",
+    //   "/IDOs/hauntedspace-gaga/3.png",
+    //   "/IDOs/hauntedspace-gaga/4.png",
+    //   "/IDOs/hauntedspace-gaga/5.png",
+    //   "/IDOs/hauntedspace-gaga/6.png",
+    //   "/IDOs/hauntedspace-gaga/7.png",
+    //   "/IDOs/hauntedspace-gaga/8.png",
+    //   "/IDOs/hauntedspace-gaga/9.png",
+    // ],
+  },
   {
     id: "launchpad/hauntedspace-gaga",
     logo: galaxyGamesHauntedSpace,
