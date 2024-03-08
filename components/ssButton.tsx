@@ -28,17 +28,17 @@ export default function SSButton({
       target={target}
       href={href}
       className={`
-      text-lg md:text-normal
-        flex justify-center items-center border rounded-[8px]
+      bg-black/70
+        text-lg md:text-normal
+        flex justify-center items-center px-8 py-3 transition-all z-20 
         ${flexSize ? "w-full" : "w-auto"} 
         ${
           secondary
-            ? "text-yellow-300 border-yellow-300"
-            : "text-samurai-red border-samurai-red"
+            ? "hover:bg-yellow-300 hover:text-white hover:border-yellow-300  border-yellow-300 text-yellow-300"
+            : "hover:bg-samurai-red hover:text-white hover:border-samurai-red border-samurai-red text-samurai-red"
         }
-         px-8 py-3 transition-all z-20
-         bg-black/70
-         hover:bg-samurai-red hover:text-black hover:border-black hover:font-bold
+        border rounded-[8px]  
+        disabled:border-white/20 disabled:text-white/10
       `}
     >
       {children}
@@ -55,11 +55,10 @@ export default function SSButton({
         ${flexSize ? "w-full" : "w-auto"} 
         ${
           secondary
-            ? "border-yellow-300 text-yellow-300"
-            : "border-samurai-red text-samurai-red"
+            ? "enabled:hover:bg-yellow-300 enabled:hover:text-white enabled:hover:border-yellow-300  border-yellow-300 text-yellow-300"
+            : "enabled:hover:bg-samurai-red enabled:hover:text-white enabled:hover:border-samurai-red border-samurai-red text-samurai-red"
         }
         border rounded-[8px]  
-        enabled:hover:bg-samurai-red enabled:hover:text-black enabled:hover:border-samurai-red
         disabled:border-white/20 disabled:text-white/10
       `}
     >

@@ -34,6 +34,8 @@ export default function Tokens() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [mailSent, setMailSent] = useState(false);
+  const [inputStake, setInputStake] = useState("");
+  const [inputStakeLP, setInputStakeLP] = useState("");
 
   const services = [
     {
@@ -198,6 +200,26 @@ export default function Tokens() {
     { src: "/partners/throne.svg", color: bg.dark },
     { src: "", color: bg.dark },
   ];
+
+  const onInputStakeChange = (value: string) => {
+    const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
+
+    if (value === "" || re.test(value)) {
+      setInputStake(value);
+    }
+
+    return false;
+  };
+
+  const onInputStakeLPChange = (value: string) => {
+    const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
+
+    if (value === "" || re.test(value)) {
+      setInputStakeLP(value);
+    }
+
+    return false;
+  };
 
   const handleSubmit = useCallback(
     async (e: any) => {
@@ -496,7 +518,7 @@ export default function Tokens() {
             </p>
 
             <div className="flex flex-col lg:flex-row items-center gap-10 mt-14">
-              <div className="flex flex-col justify-between w-full max-w-[550px] h-[600px] bg-white/5 border border-samurai-red rounded-[6px] p-10 shadow-lg shadow-pink-800/50">
+              <div className="flex flex-col justify-between w-full max-w-[580px] h-[600px] bg-white/5 border border-samurai-red rounded-[6px] p-10 shadow-lg shadow-pink-800/50">
                 <p className="pl-1">
                   Stake <span className="text-samurai-red">$SAM</span>
                 </p>
@@ -508,7 +530,7 @@ export default function Tokens() {
                   </div>
 
                   {/* <SSButton>WITHDRAW</SSButton> */}
-                  <button className="flex justify-center text-sm py-2 border border-samurai-red text-samurai-red rounded-full min-w-[120px]">
+                  <button className="flex justify-center text-sm py-2 border border-samurai-red text-samurai-red rounded-full min-w-[120px] hover:bg-samurai-red hover:text-white">
                     WITHDRAW
                   </button>
                 </div>
@@ -516,9 +538,16 @@ export default function Tokens() {
                 <div className="h-[1px] bg-samurai-red my-10 opacity-50" />
 
                 <div className="flex flex-col gap-5 shadow-lg">
-                  <div className="text-[14px] ml-1 mb-[-14px] text-end">
-                    <span className="text-white/70">Balance:</span> 1000000 $SAM
-                  </div>
+                  <button
+                    onClick={() => onInputStakeChange("1000.99")}
+                    className="text-[14px] ml-1 mb-[-14px] text-end transition-all hover:opacity-75"
+                  >
+                    <span className="text-white/70">Balance:</span>{" "}
+                    {Number(1000.99).toLocaleString("en-us", {
+                      maximumFractionDigits: 2,
+                    })}{" "}
+                    $SAM
+                  </button>
                   <div className="flex items-center rounded-[5px] gap-3 px-3 border border-black/50 bg-black/20">
                     <div className="flex items-center gap-3 border-r border-black pl-2 w-[150px]">
                       <Image
@@ -531,6 +560,8 @@ export default function Tokens() {
                       <span className="text-[18px]">SAM</span>
                     </div>
                     <input
+                      onChange={(e) => onInputStakeChange(e.target.value)}
+                      value={inputStake}
                       type="text"
                       placeholder="0.00"
                       className="w-full border-transparent bg-transparent py-4 focus:border-transparent focus:ring-transparent placeholder-white"
@@ -540,7 +571,7 @@ export default function Tokens() {
                 </div>
               </div>
 
-              <div className="flex flex-col justify-between w-full max-w-[550px] h-[600px] bg-white/5 border border-yellow-300 rounded-[6px] p-10 shadow-lg shadow-yellow-400/30">
+              <div className="flex flex-col justify-between w-full max-w-[580px] h-[600px] bg-white/5 border border-yellow-300 rounded-[6px] p-10 shadow-lg shadow-yellow-400/30">
                 <div className="flex items-center justify-between">
                   <p className="pl-1">
                     Stake <span className="text-yellow-300">$SAM-WETH-LP</span>
@@ -557,7 +588,7 @@ export default function Tokens() {
                       <p className="text-2xl">0.003 $SAM-LP</p>
                     </div>
 
-                    <button className="flex justify-center text-sm py-2 border border-samurai-red text-samurai-red rounded-full min-w-[120px]">
+                    <button className="flex justify-center text-sm py-2 border border-samurai-red text-samurai-red rounded-full min-w-[120px] hover:bg-samurai-red hover:text-white">
                       WITHDRAW
                     </button>
                   </div>
@@ -568,17 +599,23 @@ export default function Tokens() {
                       <p className="text-2xl">0.0000029 $AERO</p>
                     </div>
 
-                    <button className="flex justify-center text-sm py-2 border border-yellow-300 text-yellow-300 rounded-full min-w-[120px]">
+                    <button className="flex justify-center text-sm py-2 border border-yellow-300 text-yellow-300 rounded-full min-w-[120px] hover:bg-yellow-300 hover:text-white">
                       CLAIM
                     </button>
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-5 shadow-lg">
-                  <div className="text-[14px] ml-1 mb-[-14px] text-end">
-                    <span className="text-white/70">Balance:</span> 1000000
+                  <button
+                    onClick={() => onInputStakeLPChange("0.002")}
+                    className="text-[14px] ml-1 mb-[-14px] text-end transition-all hover:opacity-75"
+                  >
+                    <span className="text-white/70">Balance:</span>{" "}
+                    {Number(0.002).toLocaleString("en-us", {
+                      maximumFractionDigits: 18,
+                    })}{" "}
                     $SAM-WETH-LP
-                  </div>
+                  </button>
                   <div className="flex items-center rounded-[5px] gap-3 px-3 border border-black/50 bg-black/20">
                     <div className="flex items-center gap-3 border-r border-black pl-2 w-[400px]">
                       <Image
@@ -591,6 +628,8 @@ export default function Tokens() {
                       <span className="text-[18px]">SAM-WETH-LP</span>
                     </div>
                     <input
+                      onChange={(e) => onInputStakeLPChange(e.target.value)}
+                      value={inputStakeLP}
                       type="text"
                       placeholder="0.00"
                       className="w-full border-transparent bg-transparent py-4 focus:border-transparent focus:ring-transparent placeholder-white"
