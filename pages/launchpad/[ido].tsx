@@ -305,6 +305,7 @@ export default function Ido() {
               >
                 {ido?.projectDescription}
               </p>
+
               <div className="flex items-center w-full gap-8">
                 {ido?.socials.map((item, index) => (
                   <Link
@@ -367,6 +368,25 @@ export default function Ido() {
                           </button>
                         </Fragment>
                       ))}
+                  </div>
+
+                  <div
+                    className={`${
+                      ido?.id === "launchpad/orangedx" ? "block" : "hidden"
+                    } text-xl mt-10 px-10`}
+                  >
+                    Submit your{" "}
+                    <span className="text-samurai-red">
+                      Bitcoin Taproot wallet
+                    </span>{" "}
+                    through{" "}
+                    <Link
+                      target="blank"
+                      href="https://zealy.com"
+                      className="text-samurai-red underline"
+                    >
+                      ZEALY
+                    </Link>
                   </div>
 
                   {ido && (
@@ -797,13 +817,14 @@ export default function Ido() {
                       src={image}
                       width={500}
                       height={350}
+                      className="h-full"
                       alt="..."
                     />
                   ))}
                 </Carousel>
               </div>
             </div>
-            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-8 lg:py-[70px] shadow-xl lg:border border-white/20 h-max lg:mr-20">
+            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-8 lg:py-[50px] shadow-xl lg:border border-white/20 h-max lg:mr-20">
               <h1 className="text-2xl xl:text-3xl bg-samurai-red px-6 py-3">
                 TOKEN INFO
               </h1>
