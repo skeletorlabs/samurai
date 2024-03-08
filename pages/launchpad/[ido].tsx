@@ -384,7 +384,7 @@ export default function Ido() {
                     through{" "}
                     <Link
                       target="blank"
-                      href="https://zealy.com"
+                      href="https://zealy.io/cw/samuraistarter/questboard/c5e8646b-ad85-4240-9cd6-435bf85264d1/f5ab6895-6c29-4463-acc7-9aba4ca7739f"
                       className="text-samurai-red underline"
                     >
                       ZEALY
