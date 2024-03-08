@@ -272,8 +272,10 @@ export default function Ido() {
                 </svg>
               </Link>
 
-              <div className="flex flex-col text-[38px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
-                {ido?.projectName}
+              <div className="flex flex-col text-[38px] sm:text-[58px] lg:text-[70px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
+                <div className="flex items-center gap-5">
+                  {ido?.logo} {ido?.projectName}
+                </div>
                 <div className="flex items-center gap-4 pt-5">
                   {ido?.tokenNetwork !== "TO BE ANNOUNCED" && (
                     <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
@@ -305,6 +307,7 @@ export default function Ido() {
               >
                 {ido?.projectDescription}
               </p>
+
               <div className="flex items-center w-full gap-8">
                 {ido?.socials.map((item, index) => (
                   <Link
@@ -367,6 +370,25 @@ export default function Ido() {
                           </button>
                         </Fragment>
                       ))}
+                  </div>
+
+                  <div
+                    className={`${
+                      ido?.id === "launchpad/orangedx" ? "block" : "hidden"
+                    } text-xl mt-10 px-10`}
+                  >
+                    Submit your{" "}
+                    <span className="text-samurai-red">
+                      Bitcoin Taproot wallet
+                    </span>{" "}
+                    through{" "}
+                    <Link
+                      target="blank"
+                      href="https://zealy.io/cw/samuraistarter/questboard/c5e8646b-ad85-4240-9cd6-435bf85264d1/f5ab6895-6c29-4463-acc7-9aba4ca7739f"
+                      className="text-samurai-red underline"
+                    >
+                      ZEALY
+                    </Link>
                   </div>
 
                   {ido && (
@@ -478,13 +500,13 @@ export default function Ido() {
                       </div>
 
                       {/* UPCOMING BLOCK */}
-                      {currentPhase?.toLowerCase() === "upcoming" && (
+                      {/* {currentPhase?.toLowerCase() === "upcoming" && (
                         <>
                           <div className="flex justify-center items-center w-full h-max">
                             {ido.logo}
                           </div>
                         </>
-                      )}
+                      )} */}
 
                       {currentPhase?.toLowerCase() === "participation" &&
                         user?.allocation < general.maxPerWallet && (
@@ -797,13 +819,14 @@ export default function Ido() {
                       src={image}
                       width={500}
                       height={350}
+                      className="h-full"
                       alt="..."
                     />
                   ))}
                 </Carousel>
               </div>
             </div>
-            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-8 lg:py-[70px] shadow-xl lg:border border-white/20 h-max lg:mr-20">
+            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-8 lg:py-[50px] shadow-xl lg:border border-white/20 h-max lg:mr-20">
               <h1 className="text-2xl xl:text-3xl bg-samurai-red px-6 py-3">
                 TOKEN INFO
               </h1>

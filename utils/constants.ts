@@ -19,6 +19,7 @@ import {
   anote,
   galaxyGamesHauntedSpace,
   havensCompass,
+  orangedx,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -36,6 +37,77 @@ export const simplifiedPhases = [
 
 export const IDO_LIST: IDO[] = [
   {
+    id: "launchpad/orangedx",
+    logo: orangedx,
+    idoImageSrc: "/IDOs/orangedx.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "TO BE ANNOUNCED",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    projectName: "OrangeDX",
+    projectListDescription:
+      "OrangeDX is ready to push the envelope for Bitcoin-native DeFi, with a full suite of BRC-20 financial products.",
+    projectDescription:
+      "OrangeDX is setting out to conquer the brave new world of Bitcoin-based DeFi and gain first-mover advantage over the competition. They’ve developed a complete range of DeFi solutions to unite the worlds of BRC-20 and ERC-20, all powered by the $O4DX token.",
+    projectTokenSymbol: "$O4DX",
+    totalAllocation: 100_000,
+    price: "0.055",
+    participationStartsAt: 1710158400,
+    participationEndsAt: 1710244800,
+    publicParticipationStartsAt: 1710244800,
+    publicParticipationEndsAt: 1710334800,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 50,
+    cliff: 0,
+    investmentRound: "Private Round",
+    fdv: "8500000",
+    exchangeListingPrice: 0.085,
+    marketCapAtTGE: 2370000,
+    vesting: "50% at TGE and 50% after one month",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      {
+        svg: globe,
+        href: "https://orangedx.com/",
+      },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/OrangDx_BRC20",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/OrangeDx_Official_Chat",
+      },
+      // {
+      //   svg: discord,
+      //   href: "https://discord.gg/p6zZDvgNUW",
+      // },
+      {
+        svg: medium,
+        href: "https://medium.com/@orange_dex",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <h1 style="font-weight: bold; font-size: 1.2em;">OrangeDX - $O4DX</h1>
+        <p>OrangeDX is building a 'first-gen Bitcoin DeFi Hub' which will bring a host of DeFi utilities to the BTC blockchain. Their strategy to conquer the new frontiers of BRC-20 finance is four-pronged.</p>
+        <p>The first is a BRC-20 to EVM token bridge, making transferring Bitcoin-based tokens to other chains seamless and safe. Second is user-friendly BRC-20 token DEX, which will aggregate a range of exchanges to ensure users get the best deals.</p>
+        <p>Third is a yield platform which will offer Bitcoin-native staking and LP farming. And last but not least: a full-service launchpad suite for innovative new BRC-20 projects launching IDOs, INOs, and ILOs on the Bitcoin blockchain.</p>
+        <p>Powering all of this Bitcoin DeFi action is the $O4DX token — the key to all of the ultra-bullish earning potential which the OrangeDX ecosystem has to offer.</p>
+      </div>
+  `,
+    contract: "0x05dCf22b2ab52c074EF94B86c5d96d71C9f86715",
+    abi: PARTICIPATOR_V2_ABI,
+    images: [
+      "/IDOs/orangedx/1.png",
+      "/IDOs/orangedx/2.png",
+      "/IDOs/orangedx/3.png",
+      "/IDOs/orangedx/4.png",
+    ],
+  },
+  {
     id: "launchpad/hauntedspace-gaga",
     logo: galaxyGamesHauntedSpace,
     idoImageSrc: "/IDOs/hauntedspace-gaga.png",
@@ -43,7 +115,7 @@ export const IDO_LIST: IDO[] = [
     tokenNetwork: "TO BE ANNOUNCED",
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
-    projectName: "Haunted Space - GAGA",
+    projectName: "Haunted Space",
     projectListDescription:
       "Prepare to confront the horrors of deep space in this genre-blending flagship title from innovative Web3 game studio Galaxy Games.",
     projectDescription:
