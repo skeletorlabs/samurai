@@ -46,9 +46,9 @@ export const IDO_LIST: IDO[] = [
     networkImageSrc: "/ido-sample.svg",
     projectName: "OrangeDX",
     projectListDescription:
-      "Prepare to confront the horrors of deep space in this genre-blending flagship title from innovative Web3 game studio Galaxy Games.",
+      "OrangeDX is ready to push the envelope for Bitcoin-native DeFi, with a full suite of BRC-20 financial products.",
     projectDescription:
-      "Galaxy Games is preparing to launch the definitive next-gen gaming ecosystem, uniting traditional players and blockchain gamers under one banner. Their much-hyped flagship title, Haunted Space, is set to raise the bar for Web3 gaming with AAA gameplay, a captivating original world, and a fully player-driven game economy.",
+      "OrangeDX is setting out to conquer the brave new world of Bitcoin-based DeFi and gain first-mover advantage over the competition. They’ve developed a complete range of DeFi solutions to unite the worlds of BRC-20 and ERC-20, all powered by the $O4DX token.",
     projectTokenSymbol: "$O4DX",
     totalAllocation: 100_000,
     price: "0.055",
@@ -91,25 +91,21 @@ export const IDO_LIST: IDO[] = [
     ],
     bigDescription: `
       <div style="display: flex; flex-direction: column; gap: 15px;">
-        <h1 style="font-weight: bold; font-size: 1.2em;">Haunted Space - GAGA</h1>
-        <p>Galaxy Games is throwing open the gates of blockchain gaming and onboarding a whole new community of gamers into the world of Web3. It all begins with their first major release, Haunted Space: an innovative blend of space-sim and survival horror, coming soon to PC, Playstation, and Xbox.</p>
-        <p>Players will be thrown headfirst into a galaxy infested with gargantuan monsters, and tasked with surviving against all odds. This means gathering resources to craft powerful spaceship upgrades, fighting against other players, and slaying Lovecraftian leviathans in epic boss battles.</p>
-        <p>Secure your allocation of the $GAGA utility token for a slice of this much anticipated release. And remember, $GAGA is the token which will govern the entire Galaxy Games ecosystem. That means you're not just investing in Haunted Space, but also all of the future Web3 releases from this innovative crypto gaming studio.</p>
+        <h1 style="font-weight: bold; font-size: 1.2em;">OrangeDX - $O4DX</h1>
+        <p>OrangeDX is building a 'first-gen Bitcoin DeFi Hub' which will bring a host of DeFi utilities to the BTC blockchain. Their strategy to conquer the new frontiers of BRC-20 finance is four-pronged.</p>
+        <p>The first is a BRC-20 to EVM token bridge, making transferring Bitcoin-based tokens to other chains seamless and safe. Second is user-friendly BRC-20 token DEX, which will aggregate a range of exchanges to ensure users get the best deals.</p>
+        <p>Third is a yield platform which will offer Bitcoin-native staking and LP farming. And last but not least: a full-service launchpad suite for innovative new BRC-20 projects launching IDOs, INOs, and ILOs on the Bitcoin blockchain.</p>
+        <p>Powering all of this Bitcoin DeFi action is the $O4DX token — the key to all of the ultra-bullish earning potential which the OrangeDX ecosystem has to offer.</p>
       </div>
   `,
     contract: "0x05dCf22b2ab52c074EF94B86c5d96d71C9f86715",
     abi: PARTICIPATOR_V2_ABI,
-    // images: [
-    //   "/IDOs/hauntedspace-gaga/1.png",
-    //   "/IDOs/hauntedspace-gaga/2.png",
-    //   "/IDOs/hauntedspace-gaga/3.png",
-    //   "/IDOs/hauntedspace-gaga/4.png",
-    //   "/IDOs/hauntedspace-gaga/5.png",
-    //   "/IDOs/hauntedspace-gaga/6.png",
-    //   "/IDOs/hauntedspace-gaga/7.png",
-    //   "/IDOs/hauntedspace-gaga/8.png",
-    //   "/IDOs/hauntedspace-gaga/9.png",
-    // ],
+    images: [
+      "/IDOs/orangedx/1.png",
+      "/IDOs/orangedx/2.png",
+      "/IDOs/orangedx/3.png",
+      "/IDOs/orangedx/4.png",
+    ],
   },
   {
     id: "launchpad/hauntedspace-gaga",
@@ -119,7 +115,7 @@ export const IDO_LIST: IDO[] = [
     tokenNetwork: "TO BE ANNOUNCED",
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
-    projectName: "Haunted Space - GAGA",
+    projectName: "Haunted Space",
     projectListDescription:
       "Prepare to confront the horrors of deep space in this genre-blending flagship title from innovative Web3 game studio Galaxy Games.",
     projectDescription:
