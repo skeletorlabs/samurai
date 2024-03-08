@@ -411,7 +411,7 @@ export default function Tokens() {
       </TopLayout>
 
       {/* CASHBACK */}
-      <div className="flex flex-col mt-[-35px] pt-10 md:pt-20 pb-2 w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
+      <div className="hidden flex flex-col mt-[-35px] pt-10 md:pt-20 pb-2 w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
             <p className="font-bold text-5xl pb-2">
@@ -456,7 +456,243 @@ export default function Tokens() {
       </div>
 
       {/* STAKING */}
-      {/* <div className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
+      <div className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+          <div className="flex flex-col text-white text-2xl pb-20">
+            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 pb-10">
+              <div className="flex gap-8 items-end">
+                <Image src="/samurai.svg" width={100} height={100} alt="" />
+                <p className="font-bold text-5xl pb-2">
+                  <span className="text-samurai-red">$SAM</span> Staking
+                </p>
+              </div>
+            </div>
+            <div className="flex flex-row gap-2 md:gap-8 text-sm h-12">
+              <SSButton isLink href="">
+                Buy $SAM
+              </SSButton>
+              <SSButton
+                secondary
+                isLink
+                href="https://app.uniswap.org/#/swap?inputCurrency=0x63b4f3e3fa4e438698ce330e365e831f7ccd1ef4&outputCurrency=ETH"
+              >
+                Buy SAM-LP
+              </SSButton>
+            </div>
+            <p
+              className={`text-lg pt-10 lg:pt-0 text-neutral-300 lg:pr-5 font-light mt-10 ${inter.className}`}
+            >
+              The $CFI token is the governance token that captures the value of
+              the Samurai Starter ecosystem. It is minted on the Ethereum
+              blockchain with a fully-circulating supply of 2.4m $CFI. When you
+              provide $CFI-ETH LP on Uniswap V2 Ethereum or Camelot DEX on
+              Arbitrum, you are eligible to receive real platform yield.
+              Providing LP or single-token staking $CFI also increases your $SAM
+              cashback rewards rate. Check out our{" "}
+              <Link href="#" className="text-white underline">
+                docs
+              </Link>{" "}
+              to learn how to gain the most value from your $CFI.{" "}
+            </p>
+
+            <div className="flex flex-col lg:flex-row items-center gap-10 mt-14">
+              <div className="flex flex-col justify-between w-full max-w-[550px] h-[600px] bg-white/5 border border-samurai-red rounded-[6px] p-10 shadow-lg shadow-pink-800/50">
+                <p className="pl-1">
+                  Stake <span className="text-samurai-red">$SAM</span>
+                </p>
+
+                <div className="flex items-center rounded-[4px] w-full bg-black/20 p-6 py-8 text-[18px] leading-[20px] border border-black/50 shadow-md">
+                  <div className="flex flex-col rounded-[4px] w-full">
+                    <p className="text-white/40">Staked</p>
+                    <p className="text-2xl">100.23 $SAM</p>
+                  </div>
+
+                  {/* <SSButton>WITHDRAW</SSButton> */}
+                  <button className="flex justify-center text-sm py-2 border border-samurai-red text-samurai-red rounded-full min-w-[120px]">
+                    WITHDRAW
+                  </button>
+                </div>
+
+                <div className="h-[1px] bg-samurai-red my-10 opacity-50" />
+
+                <div className="flex flex-col gap-5 shadow-lg">
+                  <div className="text-[14px] ml-1 mb-[-14px] text-end">
+                    <span className="text-white/70">Balance:</span> 1000000 $SAM
+                  </div>
+                  <div className="flex items-center rounded-[5px] gap-3 px-3 border border-black/50 bg-black/20">
+                    <div className="flex items-center gap-3 border-r border-black pl-2 w-[150px]">
+                      <Image
+                        src="/samurai.svg"
+                        width={34}
+                        height={34}
+                        alt=""
+                        className="rounded-full p-[5px] bg-black border border-samurai-red"
+                      />
+                      <span className="text-[18px]">SAM</span>
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="0.00"
+                      className="w-full border-transparent bg-transparent py-4 focus:border-transparent focus:ring-transparent placeholder-white"
+                    />
+                  </div>
+                  <SSButton flexSize>STAKE</SSButton>
+                </div>
+              </div>
+
+              <div className="flex flex-col justify-between w-full max-w-[550px] h-[600px] bg-white/5 border border-yellow-300 rounded-[6px] p-10 shadow-lg shadow-yellow-400/30">
+                <div className="flex items-center justify-between">
+                  <p className="pl-1">
+                    Stake <span className="text-yellow-300">$SAM-WETH-LP</span>
+                  </p>
+                  <p className="pl-1 text-sm">
+                    APR <span className="text-yellow-300">800%</span>
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-5 rounded-[4px] w-full bg-black/20 p-6 py-8 text-[18px] leading-[20px] border border-black/50 shadow-md mt-[-25px]">
+                  <div className="flex items-center">
+                    <div className="flex flex-col rounded-[4px] w-full">
+                      <p className="text-white/40">Staked</p>
+                      <p className="text-2xl">0.003 $SAM-LP</p>
+                    </div>
+
+                    <button className="flex justify-center text-sm py-2 border border-samurai-red text-samurai-red rounded-full min-w-[120px]">
+                      WITHDRAW
+                    </button>
+                  </div>
+                  <div className="h-[1px] w-full bg-black" />
+                  <div className="flex items-center">
+                    <div className="flex flex-col rounded-[4px] w-full">
+                      <p className="text-white/40">Rewards</p>
+                      <p className="text-2xl">0.0000029 $AERO</p>
+                    </div>
+
+                    <button className="flex justify-center text-sm py-2 border border-yellow-300 text-yellow-300 rounded-full min-w-[120px]">
+                      CLAIM
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-5 shadow-lg">
+                  <div className="text-[14px] ml-1 mb-[-14px] text-end">
+                    <span className="text-white/70">Balance:</span> 1000000
+                    $SAM-WETH-LP
+                  </div>
+                  <div className="flex items-center rounded-[5px] gap-3 px-3 border border-black/50 bg-black/20">
+                    <div className="flex items-center gap-3 border-r border-black pl-2 w-[400px]">
+                      <Image
+                        src="/samurai.svg"
+                        width={34}
+                        height={34}
+                        alt=""
+                        className="rounded-full p-[5px] bg-black border border-yellow-300"
+                      />
+                      <span className="text-[18px]">SAM-WETH-LP</span>
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="0.00"
+                      className="w-full border-transparent bg-transparent py-4 focus:border-transparent focus:ring-transparent placeholder-white"
+                    />
+                  </div>
+                  <SSButton secondary flexSize>
+                    STAKE
+                  </SSButton>
+                </div>
+              </div>
+            </div>
+
+            {/* <div
+              className={`grid lg:grid-cols-3 gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+            >
+              <div className="flex flex-col bg-black text-white border-[0.5px] border-samurai-red bg-white/10 p-8 rounded-[6px] shadow-lg">
+                <div className="flex flex-col">
+                  <span className={`text-neutral-400 ${inter.className}`}>
+                    My Stakings
+                  </span>
+                  <span className="text-xl pb-1">0.002 SAM-LP</span>
+                  <span className="text-samurai-red text-sm">123.99 $SAM</span>
+                </div>
+                <div className="flex justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6">
+                  <span className={`text-neutral-400 ${inter.className}`}>
+                    APR
+                  </span>
+                  <span className="text-xl">800%</span>
+                </div>
+                <div className="flex justify-between items-center pt-3">
+                  <span className={`text-neutral-400 ${inter.className}`}>
+                    EARNINGS
+                  </span>
+                  <span className="text-xl">502.89 $AERO</span>
+                </div>
+              </div>
+              <div className="flex flex-col text-center bg-black text-white border-[0.5px] border-samurai-red bg-white/10 p-8 rounded-[6px] shadow-lg">
+                <div className="flex justify-center pb-3">
+                  <Image
+                    src="/cyberfi-logo.svg"
+                    width={60}
+                    height={60}
+                    alt=""
+                  />
+                </div>
+                <span className="text-xl text-neutral-300">
+                  $CFI (Ethereum)
+                </span>
+                <div className="flex flex-col md:flex-row justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6 gap-4 lg:gap-0">
+                  <Link
+                    href="https://etherscan.io/address/0x63b4f3e3fa4e438698ce330e365e831f7ccd1ef4"
+                    className="text-[12px] lg:text-[16px] border-b transition-all hover:border-samurai-red hover:text-samurai-red"
+                  >
+                    Token and LP contract
+                  </Link>
+                  <div className="w-32">
+                    <SSButton
+                      isLink
+                      href="https://samuraistarter.com/projects/cfi-stake"
+                    >
+                      Stake
+                    </SSButton>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col text-center   text-white border-[0.5px] border-samurai-red bg-white/10 p-8 rounded-[6px] shadow-lg">
+                <div className="flex justify-center pb-3">
+                  <Image
+                    src="/cyberfi-logo.svg"
+                    width={60}
+                    height={60}
+                    alt=""
+                  />
+                </div>
+                <span className="text-xl text-neutral-300">
+                  $CFI (Arbitrum)
+                </span>
+                <div className="flex flex-col md:flex-row justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6 gap-4 lg:gap-0">
+                  <Link
+                    href="https://etherscan.io/address/0x63b4f3e3fa4e438698ce330e365e831f7ccd1ef4"
+                    className="text-[12px] lg:text-[16px]  border-b transition-all hover:border-samurai-red hover:text-samurai-red"
+                  >
+                    Token and LP contract
+                  </Link>
+                  <div className="w-32">
+                    <SSButton
+                      secondary
+                      isLink
+                      href="https://samuraistarter.com/projects/cfi-stake"
+                    >
+                      Stake
+                    </SSButton>
+                  </div>
+                </div>
+              </div>
+            </div> */}
+          </div>
+        </div>
+      </div>
+
+      {/* STAKING */}
+      <div className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
             <div className="flex flex-col lg:flex-row w-full justify-between gap-8 pb-10">
@@ -586,10 +822,10 @@ export default function Tokens() {
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
 
       {/* LADDER */}
-      <div className="flex flex-col lg:flex-row justify-between w-full bg-white/10 border-t-[1px] border-yellow-300/40">
+      <div className="hidden flex flex-col lg:flex-row justify-between w-full bg-white/10 border-t-[1px] border-yellow-300/40">
         <div className="flex flex-col text-white w-full py-10 md:py-20 px-6 lg:px-8 xl:px-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">$SAM</span> Ladder (coming soon)
