@@ -115,7 +115,7 @@ export const IDO_LIST: IDO[] = [
     tokenNetwork: "TO BE ANNOUNCED",
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
-    projectName: "Haunted Space - GAGA",
+    projectName: "Haunted Space",
     projectListDescription:
       "Prepare to confront the horrors of deep space in this genre-blending flagship title from innovative Web3 game studio Galaxy Games.",
     projectDescription:

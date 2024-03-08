@@ -272,8 +272,10 @@ export default function Ido() {
                 </svg>
               </Link>
 
-              <div className="flex flex-col text-[38px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
-                {ido?.projectName}
+              <div className="flex flex-col text-[38px] sm:text-[58px] lg:text-[70px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
+                <div className="flex items-center gap-5">
+                  {ido?.logo} {ido?.projectName}
+                </div>
                 <div className="flex items-center gap-4 pt-5">
                   {ido?.tokenNetwork !== "TO BE ANNOUNCED" && (
                     <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
@@ -498,13 +500,13 @@ export default function Ido() {
                       </div>
 
                       {/* UPCOMING BLOCK */}
-                      {currentPhase?.toLowerCase() === "upcoming" && (
+                      {/* {currentPhase?.toLowerCase() === "upcoming" && (
                         <>
                           <div className="flex justify-center items-center w-full h-max">
                             {ido.logo}
                           </div>
                         </>
-                      )}
+                      )} */}
 
                       {currentPhase?.toLowerCase() === "participation" &&
                         user?.allocation < general.maxPerWallet && (
