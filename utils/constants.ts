@@ -52,7 +52,7 @@ export const IDO_LIST: IDO[] = [
     projectTokenSymbol: "$O4DX",
     totalAllocation: 100_000,
     price: "0.055",
-    participationStartsAt: 1710158400,
+    participationStartsAt: 1710165600,
     participationEndsAt: 1710244800,
     publicParticipationStartsAt: 1710244800,
     publicParticipationEndsAt: 1710334800,
