@@ -279,5 +279,23 @@ export async function getParticipationPhase(index: number) {
   if (now >= publicEndsAt) phase = "Completed";
   if (phase !== "Upcoming" && isPaused) phase = "Completed";
 
+  const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+
+  const contract = await getContract(index, undefined);
+
+  const maxAllocations =
+    ido.id === "launchpad/havens-compass"
+      ? Number(50_000)
+      : Number(ethers.formatUnits(await contract?.maxAllocations(), 6));
+
+  const raised =
+    ido.id === "launchpad/havens-compass"
+      ? ido.totalAllocation
+      : Number(ethers.formatUnits(await contract?.raised(), 6));
+
+  const minPerWallet = Number(ethers.formatUnits(await contract?.min(), 6));
+
+  if (maxAllocations - raised < minPerWallet) phase = "Completed";
+
   return phase;
 }

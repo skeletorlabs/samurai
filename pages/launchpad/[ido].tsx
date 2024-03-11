@@ -683,11 +683,7 @@ export default function Ido() {
                                 Number(inputValue) === 0 ||
                                 Number(inputValue) < general.minPerWallet ||
                                 Number(inputValue) > general.maxPerWallet ||
-                                Number(general?.raised >= 100_000) ||
-                                Number(
-                                  general?.raised + Number(inputValue) >=
-                                    100_000
-                                )
+                                Number(general?.raised >= 100_000)
                               }
                               className={`
                             ${
@@ -701,10 +697,7 @@ export default function Ido() {
                               Number(inputValue) === 0 ||
                               Number(inputValue) < general.minPerWallet ||
                               Number(inputValue) > general.maxPerWallet ||
-                              Number(general?.raised >= 100_000) ||
-                              Number(
-                                general?.raised + Number(inputValue) >= 100_000
-                              )
+                              Number(general?.raised >= 100_000)
                                 ? "bg-black text-white/20"
                                 : "bg-samurai-red text-white hover:opacity-75"
                             }
