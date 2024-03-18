@@ -2,10 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import Layout from "@/components/layout";
 import { Inter } from "next/font/google";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState, Fragment } from "react";
 import { rocket, telegram, linkedin } from "@/utils/svgs";
 import SSButton from "@/components/ssButton";
 import TopLayout from "@/components/topLayout";
+import { Dialog, Transition } from "@headlessui/react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,6 +28,10 @@ const applyToLaunchpad = (
   </div>
 );
 
+const periods = ["3 months", "6 months", "9 months", "12 months"];
+const tiers = [30_000, 60_000, 100_000, 200_000];
+const tiersRange = ["30k ~ 60k", "60k ~ 100k", "100k ~ 200k", "200k +"];
+
 export default function Tokens() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -36,6 +41,11 @@ export default function Tokens() {
   const [mailSent, setMailSent] = useState(false);
   const [inputStake, setInputStake] = useState("");
   const [inputStakeLP, setInputStakeLP] = useState("");
+  const [inputWithdraw, setInputWithdraw] = useState("");
+  const [inputWithdrawLP, setInputWithdrawLP] = useState("");
+  const [period, setPeriod] = useState(periods[0]);
+  const [tier, setTier] = useState(tiers[0]);
+  const [withdrawIsOpen, setWithdrawIsOpen] = useState(false);
 
   const services = [
     {
@@ -211,6 +221,16 @@ export default function Tokens() {
     return false;
   };
 
+  const onInputWithdrawChange = (value: string) => {
+    const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
+
+    if (value === "" || re.test(value)) {
+      setInputWithdraw(value);
+    }
+
+    return false;
+  };
+
   const onInputStakeLPChange = (value: string) => {
     const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
 
@@ -254,6 +274,10 @@ export default function Tokens() {
     },
     [name, email, subject, message]
   );
+
+  useEffect(() => {
+    onInputStakeChange(tiers[0].toString());
+  }, []);
 
   return (
     <Layout>
@@ -517,30 +541,97 @@ export default function Tokens() {
               to learn how to gain the most value from your $CFI.{" "}
             </p>
 
-            <div className="flex flex-col lg:flex-row items-center gap-10 mt-14">
-              <div className="flex flex-col justify-between w-full max-w-[580px] h-[600px] bg-white/5 border border-samurai-red rounded-[6px] p-10 shadow-lg shadow-pink-800/50">
-                <p className="pl-1">
-                  Stake <span className="text-samurai-red">$SAM</span>
-                </p>
+            <div className="flex flex-col lg:flex-row items-center gap-10 mt-14 relative">
+              <div className="flex flex-col justify-between w-full max-w-[580px] bg-white/5 border border-samurai-red rounded-[6px] p-10 shadow-lg shadow-pink-800/50 relative">
+                <div className="flex items-center relative gap-2">
+                  <p className="pl-1">
+                    LOCK <span className="text-samurai-red">$SAM</span>
+                  </p>
+                  <div className="w-20 h-20 rotate-[10deg] text-white/20 absolute top-[-30px] right-[-20px]">
+                    <svg
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        fillRule="evenodd"
+                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
 
-                <div className="flex items-center rounded-[4px] w-full bg-black/20 p-6 py-8 text-[18px] leading-[20px] border border-black/50 shadow-md">
+                <div className="flex items-center rounded-[4px] w-full bg-black/95 p-6 py-8 text-sm leading-[20px] border border-white/20 mt-10 shadow-md shadow-black/60 z-20">
                   <div className="flex flex-col rounded-[4px] w-full">
                     <p className="text-white/40">Staked</p>
-                    <p className="text-2xl">100.23 $SAM</p>
+                    <p className="text-xl">100.23 $SAM</p>
+                    <p className="pl-1 text-sm">
+                      <span className="text-samurai-red">0 POINTS</span>
+                    </p>
                   </div>
 
-                  {/* <SSButton>WITHDRAW</SSButton> */}
-                  <button className="flex justify-center text-sm py-2 border border-samurai-red text-samurai-red rounded-full min-w-[120px] hover:bg-samurai-red hover:text-white">
+                  <button
+                    onClick={() => setWithdrawIsOpen(true)}
+                    className="flex justify-center text-sm py-2 border border-samurai-red text-samurai-red rounded-full min-w-[120px] hover:bg-samurai-red hover:text-white"
+                  >
                     WITHDRAW
                   </button>
                 </div>
 
-                <div className="h-[1px] bg-samurai-red my-10 opacity-50" />
+                <div className="flex flex-col bg-black/95 p-6 py-8 rounded-[6px] border border-white/20 shadow-md shadow-black/60 mt-2 z-20">
+                  <div className="flex flex-col gap-2 text-sm">
+                    <span className="text-white/40">Select Amount Range</span>
+                    <div className="flex gap-4 items-center flex-wrap">
+                      {tiers.map((item, index) => (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            setTier(item);
+                            onInputStakeChange(item.toString());
+                          }}
+                          className={`text-sm p-1 px-3 rounded-full border  shadow-lg min-w-[90px] transition-all hover:scale-105 ${
+                            item === tier
+                              ? "bg-samurai-red border-white/50"
+                              : "bg-white/20 border-white/20"
+                          }`}
+                        >
+                          {tiersRange[index]}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-                <div className="flex flex-col gap-5 shadow-lg">
+                  <div className="flex flex-col gap-2 text-sm mt-10">
+                    <span className="text-white/40">Select Period</span>
+                    <div className="flex gap-4 items-center flex-wrap">
+                      {periods.map((item, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setPeriod(item)}
+                          className={`text-sm p-1 px-3 rounded-full border shadow-lg min-w-[90px] transition-all hover:scale-105 ${
+                            item === period
+                              ? "bg-samurai-red border-white/50"
+                              : "bg-white/20 border-white/20"
+                          }`}
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col gap-1 text-sm mt-10">
+                    <span className="text-white/40">Estimated Points</span>
+                    <span className="text-xl">100</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-5 shadow-lg mt-10 z-20">
                   <button
                     onClick={() => onInputStakeChange("1000.99")}
-                    className="text-[14px] ml-1 mb-[-14px] text-end transition-all hover:opacity-75"
+                    className="text-sm ml-1 mb-[-14px] text-end transition-all hover:opacity-75"
                   >
                     <span className="text-white/70">Balance:</span>{" "}
                     {Number(1000.99).toLocaleString("en-us", {
@@ -548,30 +639,147 @@ export default function Tokens() {
                     })}{" "}
                     $SAM
                   </button>
-                  <div className="flex items-center rounded-[5px] gap-3 px-3 border border-black/50 bg-black/20">
-                    <div className="flex items-center gap-3 border-r border-black pl-2 w-[150px]">
+                  <div className="flex items-center rounded-[5px] gap-3  bg-white/90 shadow-md shadow-black/60 text-black">
+                    <div className="flex items-center gap-2 px-3 w-[150px] h-16 bg-black rounded-l">
                       <Image
                         src="/samurai.svg"
                         width={34}
                         height={34}
                         alt=""
-                        className="rounded-full p-[5px] bg-black border border-samurai-red"
+                        className="rounded-full p-[5px] bg-black border border-red-600"
                       />
-                      <span className="text-[18px]">SAM</span>
+                      <span className="text-[16px] text-white/70">$SAM</span>
                     </div>
                     <input
                       onChange={(e) => onInputStakeChange(e.target.value)}
                       value={inputStake}
                       type="text"
-                      placeholder="0.00"
-                      className="w-full border-transparent bg-transparent py-4 focus:border-transparent focus:ring-transparent placeholder-white"
+                      placeholder="Amount to lock"
+                      className="w-full border-transparent bg-transparent py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl"
                     />
                   </div>
-                  <SSButton flexSize>STAKE</SSButton>
+                  <SSButton>
+                    <div className="flex items-center gap-2 ml-[-5px]">
+                      <div className="w-5 h-5 mt-[-3px]">
+                        <svg
+                          data-slot="icon"
+                          fill="none"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                          ></path>
+                        </svg>
+                      </div>
+                      <span>LOCK</span>
+                    </div>
+                  </SSButton>
                 </div>
+
+                {/* WITHDRAW MODAL */}
+                <Transition appear show={withdrawIsOpen} as={Fragment}>
+                  <Dialog
+                    as="div"
+                    className="relative z-20"
+                    onClose={() => setWithdrawIsOpen(false)}
+                  >
+                    <Transition.Child
+                      as={Fragment}
+                      enter="ease-out duration-300"
+                      enterFrom="opacity-0"
+                      enterTo="opacity-100"
+                      leave="ease-in duration-200"
+                      leaveFrom="opacity-100"
+                      leaveTo="opacity-0"
+                    >
+                      <div className="fixed inset-0 bg-black/70 backdrop-blur-[8px]" />
+                    </Transition.Child>
+
+                    <div className="fixed inset-0 overflow-y-auto">
+                      <div className="flex min-h-full items-center justify-center p-4 text-center">
+                        <Transition.Child
+                          as={Fragment}
+                          enter="ease-out duration-300"
+                          enterFrom="opacity-0 scale-95"
+                          enterTo="opacity-100 scale-100"
+                          leave="ease-in duration-200"
+                          leaveFrom="opacity-100 scale-100"
+                          leaveTo="opacity-0 scale-95"
+                        >
+                          <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white/5 p-6 text-left align-middle shadow-xl transition-all border border-white/20 text-white">
+                            <Dialog.Title
+                              as="h3"
+                              className="text-lg font-medium leading-6 text-white"
+                            >
+                              Withdraw{" "}
+                              <span className="text-samurai-red">$SAM</span>
+                            </Dialog.Title>
+                            <div className="mt-2 leading-[50px]">
+                              <p className="text-sm text-white/40">
+                                Check if your locked amount is already available
+                                to withdraw based on the period you locked.
+                              </p>
+
+                              <div className="flex flex-col leading-normal mt-4">
+                                <span className="text-sm text-white/40">
+                                  Locked
+                                </span>
+                                <p>60,000 $SAM</p>
+                              </div>
+
+                              <div className="flex flex-col leading-normal mt-4">
+                                <span className="text-sm text-white/40">
+                                  Unlock date
+                                </span>
+                                <p>10/06/2024 13:00 PM UTC</p>
+                              </div>
+                            </div>
+
+                            <div className="flex items-center rounded-[5px] gap-3 bg-white/90 shadow-md shadow-black/60 text-black mt-10">
+                              <div className="flex items-center gap-2 px-5 w-[160px] h-16 bg-black rounded-l">
+                                <Image
+                                  src="/samurai.svg"
+                                  width={34}
+                                  height={34}
+                                  alt=""
+                                  className="rounded-full p-[5px] bg-black border border-red-600"
+                                />
+                                <span className="text-[16px] text-white/70">
+                                  $SAM
+                                </span>
+                              </div>
+                              <input
+                                onChange={(e) =>
+                                  onInputWithdrawChange(e.target.value)
+                                }
+                                value={inputWithdraw}
+                                type="text"
+                                placeholder="Amount to withdraw"
+                                className="w-full border-transparent bg-transparent py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl"
+                              />
+                            </div>
+
+                            <div className="mt-4">
+                              <SSButton flexSize>WITHDRAW</SSButton>
+                              <button
+                                onClick={() => setWithdrawIsOpen(false)}
+                              ></button>
+                            </div>
+                          </Dialog.Panel>
+                        </Transition.Child>
+                      </div>
+                    </div>
+                  </Dialog>
+                </Transition>
               </div>
 
-              <div className="flex flex-col justify-between w-full max-w-[580px] h-[600px] bg-white/5 border border-yellow-300 rounded-[6px] p-10 shadow-lg shadow-yellow-400/30">
+              {/* <div className="flex flex-col justify-between w-full max-w-[580px] h-[924px] bg-white/5 border border-yellow-300 rounded-[6px] p-10 shadow-lg shadow-yellow-400/30 relative">
                 <div className="flex items-center justify-between">
                   <p className="pl-1">
                     Stake <span className="text-yellow-300">$SAM-WETH-LP</span>
@@ -639,93 +847,14 @@ export default function Tokens() {
                     STAKE
                   </SSButton>
                 </div>
-              </div>
+                <div className="flex flex-col justify-center items-center w-full h-full absolute top-0 left-0 bg-black/60 z-20 rounded-[8px] backdrop-blur-[5px] text-yellow-300 uppercase text-3xl">
+                  <p>SAM LP WETH STAKING</p>
+                  <p className="text-xl text-white">
+                    coming soon in early april!
+                  </p>
+                </div>
+              </div> */}
             </div>
-
-            {/* <div
-              className={`grid lg:grid-cols-3 gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
-            >
-              <div className="flex flex-col bg-black text-white border-[0.5px] border-samurai-red bg-white/10 p-8 rounded-[6px] shadow-lg">
-                <div className="flex flex-col">
-                  <span className={`text-neutral-400 ${inter.className}`}>
-                    My Stakings
-                  </span>
-                  <span className="text-xl pb-1">0.002 SAM-LP</span>
-                  <span className="text-samurai-red text-sm">123.99 $SAM</span>
-                </div>
-                <div className="flex justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6">
-                  <span className={`text-neutral-400 ${inter.className}`}>
-                    APR
-                  </span>
-                  <span className="text-xl">800%</span>
-                </div>
-                <div className="flex justify-between items-center pt-3">
-                  <span className={`text-neutral-400 ${inter.className}`}>
-                    EARNINGS
-                  </span>
-                  <span className="text-xl">502.89 $AERO</span>
-                </div>
-              </div>
-              <div className="flex flex-col text-center bg-black text-white border-[0.5px] border-samurai-red bg-white/10 p-8 rounded-[6px] shadow-lg">
-                <div className="flex justify-center pb-3">
-                  <Image
-                    src="/cyberfi-logo.svg"
-                    width={60}
-                    height={60}
-                    alt=""
-                  />
-                </div>
-                <span className="text-xl text-neutral-300">
-                  $CFI (Ethereum)
-                </span>
-                <div className="flex flex-col md:flex-row justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6 gap-4 lg:gap-0">
-                  <Link
-                    href="https://etherscan.io/address/0x63b4f3e3fa4e438698ce330e365e831f7ccd1ef4"
-                    className="text-[12px] lg:text-[16px] border-b transition-all hover:border-samurai-red hover:text-samurai-red"
-                  >
-                    Token and LP contract
-                  </Link>
-                  <div className="w-32">
-                    <SSButton
-                      isLink
-                      href="https://samuraistarter.com/projects/cfi-stake"
-                    >
-                      Stake
-                    </SSButton>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col text-center   text-white border-[0.5px] border-samurai-red bg-white/10 p-8 rounded-[6px] shadow-lg">
-                <div className="flex justify-center pb-3">
-                  <Image
-                    src="/cyberfi-logo.svg"
-                    width={60}
-                    height={60}
-                    alt=""
-                  />
-                </div>
-                <span className="text-xl text-neutral-300">
-                  $CFI (Arbitrum)
-                </span>
-                <div className="flex flex-col md:flex-row justify-between items-center border-t-[0.5px] border-neutral-600 mt-6 pt-6 gap-4 lg:gap-0">
-                  <Link
-                    href="https://etherscan.io/address/0x63b4f3e3fa4e438698ce330e365e831f7ccd1ef4"
-                    className="text-[12px] lg:text-[16px]  border-b transition-all hover:border-samurai-red hover:text-samurai-red"
-                  >
-                    Token and LP contract
-                  </Link>
-                  <div className="w-32">
-                    <SSButton
-                      secondary
-                      isLink
-                      href="https://samuraistarter.com/projects/cfi-stake"
-                    >
-                      Stake
-                    </SSButton>
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
@@ -980,5 +1109,3 @@ export default function Tokens() {
     </Layout>
   );
 }
-
-// paul@samuraistarter.com, projects@samuraistarter.com

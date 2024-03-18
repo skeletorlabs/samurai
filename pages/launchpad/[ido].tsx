@@ -509,7 +509,7 @@ export default function Ido() {
                       )} */}
 
                       {currentPhase?.toLowerCase() === "participation" &&
-                        user?.allocation < general.maxPerWallet && (
+                        user?.allocation < general?.maxPerWallet && (
                           <div className="flex flex-col">
                             <div className="flex items-center justify-between">
                               <span className="self-end text-[10px] lg:text-sm mb-1 mr-1">
@@ -683,7 +683,7 @@ export default function Ido() {
                                 Number(inputValue) === 0 ||
                                 Number(inputValue) < general.minPerWallet ||
                                 Number(inputValue) > general.maxPerWallet ||
-                                Number(general?.raised >= 50_000)
+                                Number(general?.raised >= 100_000)
                               }
                               className={`
                             ${
@@ -697,7 +697,7 @@ export default function Ido() {
                               Number(inputValue) === 0 ||
                               Number(inputValue) < general.minPerWallet ||
                               Number(inputValue) > general.maxPerWallet ||
-                              Number(general?.raised >= 50_000)
+                              Number(general?.raised >= 100_000)
                                 ? "bg-black text-white/20"
                                 : "bg-samurai-red text-white hover:opacity-75"
                             }
