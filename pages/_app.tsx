@@ -47,13 +47,19 @@ export const localhost = /*#__PURE__*/ defineChain({
 });
 
 const { chains, publicClient } = configureChains(
-  [base],
+  [localhost],
   [
     publicProvider(),
     jsonRpcProvider({
       rpc: (chain) => ({
-        http: process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string,
-        webSocket: process.env.NEXT_PUBLIC_BASE_WSS as string,
+        http:
+          chain !== base
+            ? localhost.rpcUrls.default.http.toString()
+            : (process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string),
+        webSocket:
+          chain !== base
+            ? localhost.rpcUrls.default.http.toString()
+            : (process.env.NEXT_PUBLIC_BASE_WSS as string),
       }),
     }),
   ]
