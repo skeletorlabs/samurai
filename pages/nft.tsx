@@ -433,7 +433,7 @@ export default function Nft() {
                     {isLoading ? (
                       <span className="animate-pulse">Loading...</span>
                     ) : generalInfo?.isPaused ? (
-                      <span>Paused</span>
+                      <span>ENDED</span>
                     ) : (
                       <span className="text-[14px] sm:text-[16px] xl:text-lg">
                         MINT {numberOfTokens.toString()} SAMURAI NFT
@@ -579,7 +579,9 @@ export default function Nft() {
                     </span>
                     /
                     {/* {supply ? Number(supply?.maxSupply) + Number(supply?.maxWhitelistedSupply) : 0} */}
-                    2000
+                    {lastFiveNfts && lastFiveNfts.length > 0
+                      ? lastFiveNfts[0].tokenId
+                      : 0}
                   </div>
                 </div>
 
