@@ -37,20 +37,61 @@ export async function checkIsPaused() {
   }
 }
 
-export async function generalInfo(index: number) {
+export type GeneralLockInfo = {
+  owner: string;
+  isPaused: boolean;
+  tierRanges: number[];
+  periods: { title: string; value: number }[];
+};
+
+export async function generalInfo() {
   try {
     const contract = await getContract();
 
     const owner = await contract?.owner();
     const isPaused = await contract?.paused();
 
+    const threeMonths = await contract?.THREE_MONTHS();
+    const sixMonths = await contract?.SIX_MONTHS();
+    const nineMonths = await contract?.NINE_MONTHS();
+    const twelveMonths = await contract?.TWELVE_MONTHS();
+
+    const range1 = Number(ethers.formatEther(await contract?.tierRanges(0)));
+    const range2 = Number(ethers.formatEther(await contract?.tierRanges(1)));
+    const range3 = Number(ethers.formatEther(await contract?.tierRanges(2)));
+    const range4 = Number(ethers.formatEther(await contract?.tierRanges(3)));
+
+    const tierRanges = [range1, range2, range3, range4];
+
+    const periods = [
+      { title: "3 Months", value: threeMonths },
+      { title: "6 Months", value: sixMonths },
+      { title: "9 Months", value: nineMonths },
+      { title: "12 Months", value: twelveMonths },
+    ];
+
+    console.log(periods);
+
     return {
       owner,
       isPaused,
-    };
+      tierRanges,
+      periods,
+    } as GeneralLockInfo;
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
+}
+
+export async function getEstimatedPoints(amount: string, period: number) {
+  const contract = await getContract();
+
+  const tier = await contract?.determineTier(ethers.parseEther(amount));
+  const estimatedPoints = Number(
+    ethers.formatEther(await contract?.basePoints(tier, period))
+  );
+
+  return estimatedPoints;
 }
 
 // USER INFOS
@@ -62,12 +103,19 @@ export type LockInfo = {
   lockPeriod: number;
 };
 
+export type UserInfo = {
+  locks: LockInfo[];
+  totalLocked: number;
+  // totalPoints: number;
+  samBalance: number;
+};
+
 export async function userInfo(signer: ethers.Signer) {
   try {
     const signerAdress = await signer.getAddress();
     const contract = await getContract(signer);
     const locksCount = await contract?.getLockInfosCount(signerAdress);
-    let locks = [];
+    let locks: LockInfo[] = [];
 
     if (locksCount > 0) {
       for (let i = 1; i <= locksCount; i++) {
@@ -76,7 +124,11 @@ export async function userInfo(signer: ethers.Signer) {
       }
     }
 
-    // const totalPoints = await contract?.getTotalPoints(signer);
+    const totalLocked: Number = locks.reduce((acc, curr) => {
+      return acc + curr.amount;
+    }, 0);
+
+    // const totalPoints: Number = await contract?.getTotalPoints(signer);
 
     const samBalance = Number(
       ethers.formatEther(
@@ -86,8 +138,10 @@ export async function userInfo(signer: ethers.Signer) {
 
     return {
       locks,
+      totalLocked,
+      // totalPoints,
       samBalance,
-    };
+    } as UserInfo;
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
@@ -96,7 +150,7 @@ export async function userInfo(signer: ethers.Signer) {
 export async function lock(
   signer: ethers.Signer,
   amount: string,
-  lockPeriod: string
+  lockPeriod: number
 ) {
   try {
     const signerAddress = await signer.getAddress();

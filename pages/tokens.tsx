@@ -2,11 +2,28 @@ import Link from "next/link";
 import Image from "next/image";
 import Layout from "@/components/layout";
 import { Inter } from "next/font/google";
-import { useCallback, useEffect, useState, Fragment } from "react";
+import { useCallback, useEffect, useState, Fragment, useContext } from "react";
 import { rocket, telegram, linkedin } from "@/utils/svgs";
 import SSButton from "@/components/ssButton";
 import TopLayout from "@/components/topLayout";
 import { Dialog, Transition } from "@headlessui/react";
+import {
+  GeneralLockInfo,
+  LockInfo,
+  UserInfo,
+  generalInfo,
+  getEstimatedPoints,
+  lock,
+  userInfo,
+} from "@/contracts_integrations/samLock";
+import { StateContext } from "@/context/StateContext";
+import { useNetwork } from "wagmi";
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["100", "300", "500", "900"],
+});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,7 +45,6 @@ const applyToLaunchpad = (
   </div>
 );
 
-const periods = ["3 months", "6 months", "9 months", "12 months"];
 const tiers = [30_000, 60_000, 100_000, 200_000];
 const tiersRange = ["30k ~ 60k", "60k ~ 100k", "100k ~ 200k", "200k +"];
 
@@ -39,13 +55,21 @@ export default function Tokens() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const [mailSent, setMailSent] = useState(false);
-  const [inputStake, setInputStake] = useState("");
+  const [inputLock, setInputLock] = useState("");
   const [inputStakeLP, setInputStakeLP] = useState("");
   const [inputWithdraw, setInputWithdraw] = useState("");
   const [inputWithdrawLP, setInputWithdrawLP] = useState("");
-  const [period, setPeriod] = useState(periods[0]);
+  const [period, setPeriod] = useState(0);
   const [tier, setTier] = useState(tiers[0]);
   const [withdrawIsOpen, setWithdrawIsOpen] = useState(false);
+  const [generalLockData, setGeneralLockData] =
+    useState<GeneralLockInfo | null>(null);
+  const [userInfoData, setUserInfoData] = useState<UserInfo | null>(null);
+  const [estimatedPoints, setEstimatedPoints] = useState(0);
+
+  const { signer } = useContext(StateContext);
+
+  const { chain } = useNetwork();
 
   const services = [
     {
@@ -211,11 +235,11 @@ export default function Tokens() {
     { src: "", color: bg.dark },
   ];
 
-  const onInputStakeChange = (value: string) => {
+  const onInputLockChange = (value: string) => {
     const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
 
     if (value === "" || re.test(value)) {
-      setInputStake(value);
+      setInputLock(value);
     }
 
     return false;
@@ -239,6 +263,10 @@ export default function Tokens() {
     }
 
     return false;
+  };
+
+  const formatNumber = (num: number) => {
+    return (num / 1000).toFixed(0) + "k";
   };
 
   const handleSubmit = useCallback(
@@ -275,8 +303,74 @@ export default function Tokens() {
     [name, email, subject, message]
   );
 
+  const onLock = useCallback(async () => {
+    if (signer && chain && !chain.unsupported) {
+      await lock(signer, inputLock, period);
+    }
+  }, [signer, chain, inputLock, period]);
+
   useEffect(() => {
-    onInputStakeChange(tiers[0].toString());
+    const getEstimatedPointsInfo = async () => {
+      if (period > 0) {
+        const response = await getEstimatedPoints(inputLock, period);
+        setEstimatedPoints(response);
+      }
+    };
+
+    getEstimatedPointsInfo();
+  }, [inputLock, period]);
+
+  useEffect(() => {
+    if (generalLockData && generalLockData?.tierRanges.length > 0)
+      if (Number(inputLock) < generalLockData?.tierRanges[0]) {
+        setTier(generalLockData?.tierRanges[0]);
+      } else if (
+        Number(inputLock) >= generalLockData?.tierRanges[0] &&
+        Number(inputLock) < generalLockData?.tierRanges[1]
+      ) {
+        setTier(generalLockData?.tierRanges[0]);
+      } else if (
+        Number(inputLock) >= generalLockData?.tierRanges[1] &&
+        Number(inputLock) < generalLockData?.tierRanges[2]
+      ) {
+        setTier(generalLockData?.tierRanges[1]);
+      } else if (
+        Number(inputLock) >= generalLockData?.tierRanges[2] &&
+        Number(inputLock) < generalLockData?.tierRanges[3]
+      ) {
+        setTier(generalLockData?.tierRanges[2]);
+      } else if (Number(inputLock) >= generalLockData?.tierRanges[3]) {
+        setTier(generalLockData?.tierRanges[3]);
+      }
+  }, [inputLock, generalLockData, setTier]);
+
+  useEffect(() => {
+    const onGetLockInfo = async () => {
+      if (signer && chain && !chain.unsupported) {
+        const response = await userInfo(signer);
+        console.log(response);
+        setUserInfoData(response as UserInfo);
+      }
+    };
+
+    onGetLockInfo();
+  }, [signer, chain]);
+
+  useEffect(() => {
+    if (generalLockData && generalLockData?.periods.length > 0) {
+      setPeriod(generalLockData?.periods[0].value);
+    }
+  }, [generalLockData]);
+
+  useEffect(() => {
+    onInputLockChange(tiers[0].toString());
+
+    const onGetGeneralInfo = async () => {
+      const response = await generalInfo();
+      setGeneralLockData(response as GeneralLockInfo);
+    };
+
+    onGetGeneralInfo();
   }, []);
 
   return (
@@ -565,18 +659,24 @@ export default function Tokens() {
 
                 <div className="flex items-center rounded-[4px] w-full bg-black/95 p-6 py-8 text-sm leading-[20px] border border-white/20 mt-10 shadow-md shadow-black/60 z-20">
                   <div className="flex flex-col rounded-[4px] w-full">
-                    <p className="text-white/40">Staked</p>
-                    <p className="text-xl">100.23 $SAM</p>
-                    <p className="pl-1 text-sm">
+                    <p className="text-white/40">Locked</p>
+                    <p className="text-xl">
+                      {(userInfoData?.totalLocked || 0).toLocaleString(
+                        "en-us",
+                        { minimumFractionDigits: 2 }
+                      )}{" "}
+                      $SAM
+                    </p>
+                    <p className="pl-[2px] text-sm">
                       <span className="text-samurai-red">0 POINTS</span>
                     </p>
                   </div>
 
                   <button
                     onClick={() => setWithdrawIsOpen(true)}
-                    className="flex justify-center text-sm py-2 border border-samurai-red text-samurai-red rounded-full min-w-[120px] hover:bg-samurai-red hover:text-white"
+                    className="flex justify-center text-sm py-2 border border-samurai-red text-samurai-red rounded-full min-w-[150px] hover:bg-samurai-red hover:text-white"
                   >
-                    WITHDRAW
+                    MANAGE LOCKS
                   </button>
                 </div>
 
@@ -584,12 +684,12 @@ export default function Tokens() {
                   <div className="flex flex-col gap-2 text-sm">
                     <span className="text-white/40">Select Amount Range</span>
                     <div className="flex gap-4 items-center flex-wrap">
-                      {tiers.map((item, index) => (
+                      {generalLockData?.tierRanges.map((item, index) => (
                         <button
                           key={index}
                           onClick={() => {
                             setTier(item);
-                            onInputStakeChange(item.toString());
+                            onInputLockChange(item.toString());
                           }}
                           className={`text-sm p-1 px-3 rounded-full border  shadow-lg min-w-[90px] transition-all hover:scale-105 ${
                             item === tier
@@ -597,7 +697,14 @@ export default function Tokens() {
                               : "bg-white/20 border-white/20"
                           }`}
                         >
-                          {tiersRange[index]}
+                          {formatNumber(item)}
+                          {generalLockData?.tierRanges.length - 1 === index
+                            ? " +"
+                            : " ~ "}
+                          {generalLockData?.tierRanges.length - 1 !== index &&
+                            formatNumber(
+                              generalLockData?.tierRanges[index + 1]
+                            )}
                         </button>
                       ))}
                     </div>
@@ -606,17 +713,17 @@ export default function Tokens() {
                   <div className="flex flex-col gap-2 text-sm mt-10">
                     <span className="text-white/40">Select Period</span>
                     <div className="flex gap-4 items-center flex-wrap">
-                      {periods.map((item, index) => (
+                      {generalLockData?.periods.map((item, index) => (
                         <button
                           key={index}
-                          onClick={() => setPeriod(item)}
+                          onClick={() => setPeriod(item.value)}
                           className={`text-sm p-1 px-3 rounded-full border shadow-lg min-w-[90px] transition-all hover:scale-105 ${
-                            item === period
+                            item.value === period
                               ? "bg-samurai-red border-white/50"
                               : "bg-white/20 border-white/20"
                           }`}
                         >
-                          {item}
+                          {item.title}
                         </button>
                       ))}
                     </div>
@@ -624,41 +731,62 @@ export default function Tokens() {
 
                   <div className="flex flex-col gap-1 text-sm mt-10">
                     <span className="text-white/40">Estimated Points</span>
-                    <span className="text-xl">100</span>
+                    <p className="text-xl">
+                      {estimatedPoints.toLocaleString("en-us")}{" "}
+                      <span className="text-white/30 font-medium text-[14px]">
+                        {" "}
+                        + {estimatedPoints.toLocaleString("en-us")} distributed
+                        linearly
+                      </span>
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-5 shadow-lg mt-10 z-20">
-                  <button
-                    onClick={() => onInputStakeChange("1000.99")}
-                    className="text-sm ml-1 mb-[-14px] text-end transition-all hover:opacity-75"
-                  >
-                    <span className="text-white/70">Balance:</span>{" "}
-                    {Number(1000.99).toLocaleString("en-us", {
-                      maximumFractionDigits: 2,
-                    })}{" "}
-                    $SAM
-                  </button>
-                  <div className="flex items-center rounded-[5px] gap-3  bg-white/90 shadow-md shadow-black/60 text-black">
-                    <div className="flex items-center gap-2 px-3 w-[150px] h-16 bg-black rounded-l">
-                      <Image
-                        src="/samurai.svg"
-                        width={34}
-                        height={34}
-                        alt=""
-                        className="rounded-full p-[5px] bg-black border border-red-600"
-                      />
-                      <span className="text-[16px] text-white/70">$SAM</span>
-                    </div>
+                <div className="flex flex-col gap-5 shadow-lg mt-12 z-20">
+                  <div className="flex items-center shadow-md shadow-black/60 text-black relative">
                     <input
-                      onChange={(e) => onInputStakeChange(e.target.value)}
-                      value={inputStake}
+                      onChange={(e) => onInputLockChange(e.target.value)}
+                      value={inputLock}
                       type="text"
                       placeholder="Amount to lock"
-                      className="w-full border-transparent bg-transparent py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl"
+                      className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl rounded-[8px]"
                     />
+                    <div className="flex justify-between items-center absolute top-[10px] right-[12px] gap-2">
+                      <div className="flex justify-between items-center p-1 bg-black rounded-full">
+                        <Image
+                          src="/samurai.svg"
+                          width={34}
+                          height={34}
+                          alt=""
+                          className="rounded-full p-[5px] bg-black border border-red-600"
+                        />
+                      </div>
+                      <span className="text-[20px]">$SAM</span>
+                    </div>
+                    <button
+                      onClick={() =>
+                        onInputLockChange(
+                          userInfoData?.samBalance?.toString() || "0"
+                        )
+                      }
+                      className="absolute top-[-24px] right-2 text-sm text-end transition-all hover:opacity-75 w-max text-white"
+                    >
+                      <span className="text-white/70">Balance:</span>{" "}
+                      {Number(userInfoData?.samBalance || 0).toLocaleString(
+                        "en-us",
+                        {
+                          maximumFractionDigits: 2,
+                        }
+                      )}
+                    </button>
                   </div>
-                  <SSButton>
+                  <SSButton
+                    disabled={
+                      generalLockData === null ||
+                      generalLockData.isPaused ||
+                      Number(inputLock) < generalLockData.tierRanges[0]
+                    }
+                  >
                     <div className="flex items-center gap-2 ml-[-5px]">
                       <div className="w-5 h-5 mt-[-3px]">
                         <svg
@@ -686,7 +814,7 @@ export default function Tokens() {
                 <Transition appear show={withdrawIsOpen} as={Fragment}>
                   <Dialog
                     as="div"
-                    className="relative z-20"
+                    className={`relative z-20 ${roboto.className}`}
                     onClose={() => setWithdrawIsOpen(false)}
                   >
                     <Transition.Child
@@ -741,8 +869,17 @@ export default function Tokens() {
                               </div>
                             </div>
 
-                            <div className="flex items-center rounded-[5px] gap-3 bg-white/90 shadow-md shadow-black/60 text-black mt-10">
-                              <div className="flex items-center gap-2 px-5 w-[160px] h-16 bg-black rounded-l">
+                            <div className="flex items-center rounded-[5px] gap-3 bg-white/90 shadow-md shadow-black/60 text-black mt-10 font-normal relative">
+                              <input
+                                onChange={(e) =>
+                                  onInputWithdrawChange(e.target.value)
+                                }
+                                value={inputWithdraw}
+                                type="text"
+                                placeholder="Amount to withdraw"
+                                className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl rounded-[8px]"
+                              />
+                              <div className="flex justify-between items-center p-2 pr-3 bg-black  rounded-r-md rounded-l-[28px] ml-2 absolute top-[6px] right-[6px] gap-2">
                                 <Image
                                   src="/samurai.svg"
                                   width={34}
@@ -754,15 +891,6 @@ export default function Tokens() {
                                   $SAM
                                 </span>
                               </div>
-                              <input
-                                onChange={(e) =>
-                                  onInputWithdrawChange(e.target.value)
-                                }
-                                value={inputWithdraw}
-                                type="text"
-                                placeholder="Amount to withdraw"
-                                className="w-full border-transparent bg-transparent py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl"
-                              />
                             </div>
 
                             <div className="mt-4">
