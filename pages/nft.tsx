@@ -578,14 +578,14 @@ export default function Nft() {
                       {/* {lastFiveNfts && lastFiveNfts.length > 0
                         ? lastFiveNfts[0].tokenId
                         : 0} */}
-                        2006
+                      2006
                     </span>
                     /
                     {/* {supply ? Number(supply?.maxSupply) + Number(supply?.maxWhitelistedSupply) : 0} */}
                     {/* {lastFiveNfts && lastFiveNfts.length > 0
                       ? lastFiveNfts[0].tokenId
                       : 0} */}
-                      2006
+                    2006
                   </div>
                 </div>
 
