@@ -71,11 +71,11 @@ export const IDO_LIST: IDO[] = [
     socials: [
       {
         svg: globe,
-        href: "interswap.io",
+        href: "https://interswap.io",
       },
       {
         svg: twitterX,
-        href: "x.com/@InterSwap_io",
+        href: "https://x.com/@InterSwap_io",
       },
       {
         svg: telegram,
