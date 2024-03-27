@@ -20,7 +20,7 @@ import {
   galaxyGamesHauntedSpace,
   havensCompass,
   orangedx,
-  interswap
+  interswap,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -38,7 +38,7 @@ export const simplifiedPhases = [
 
 export const IDO_LIST: IDO[] = [
   {
-    id: "launchpad/orangedx",
+    id: "launchpad/interswap",
     logo: interswap,
     idoImageSrc: "/IDOs/interswap.png",
     acceptedTokenSymbol: "USDC",
@@ -51,12 +51,12 @@ export const IDO_LIST: IDO[] = [
     projectDescription:
       "InterSwap is both a DEX and a powerful liquidity engine which utilizes the power of blockchain interoperability to unify disparate liquidity pools across different blockchains. These virtual super-pools negate the need for token bridges entirely, solving DeFi's problems of inefficiency, fragmented liquidity, and cross-chain security all at once!",
     projectTokenSymbol: "$ISWAP",
-    totalAllocation: 100000000,
-    price: "0.055",
+    totalAllocation: 150_000,
+    price: "0.15",
     participationStartsAt: 1711623600,
-    participationEndsAt: 1711710000,
-    publicParticipationStartsAt: 1711710000,
-    publicParticipationEndsAt: 1711796400,
+    participationEndsAt: 1711753200,
+    publicParticipationStartsAt: 1711753200,
+    publicParticipationEndsAt: 1711839600,
     simplified: true,
     tgeDate: 0,
     tgePercentage: 3,
@@ -94,7 +94,7 @@ export const IDO_LIST: IDO[] = [
         <p>For users, that means ultra secure cross-chain swaps, carried out in native assets, without the need for any intermediaries! All that in under 20 seconds, by submitting just a single transaction on the starting chain. This is what the future of blockchain interoperability looks like, and InterSwap is at the very tip of the spear.
       </div>
   `,
-    contract: "0x05dCf22b2ab52c074EF94B86c5d96d71C9f86715",
+    contract: "0x13dCed544b5c45Bd60d6E34C89820B1F2EAe4d2c",
     abi: PARTICIPATOR_V2_ABI,
     // images: [
     //   "/IDOs/orangedx/1.png",

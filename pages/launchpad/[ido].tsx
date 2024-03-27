@@ -334,7 +334,8 @@ export default function Ido() {
                   {/* <div className="text-center text-xl xl:text-2xl text-white"> */}
                   <div className="text-xl xl:text-3xl bg-samurai-red px-7 py-3 text-white">
                     <span>{ido?.projectName}</span> {" | "}
-                    {ido?.investmentRound}
+                    {ido?.investmentRound}{" "}
+                    {ido?.id === "launchpad/interswap" && "1"}
                   </div>
                   <div className="flex flex-row mt-6 lg:mt-10 bg-black-900/90 stroke-white rounded-[8px] text-white border border-white/20 mx-4 lg:mx-8">
                     {ido?.simplified &&
