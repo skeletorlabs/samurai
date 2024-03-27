@@ -20,6 +20,7 @@ import {
   galaxyGamesHauntedSpace,
   havensCompass,
   orangedx,
+  interswap,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -36,6 +37,72 @@ export const simplifiedPhases = [
 ];
 
 export const IDO_LIST: IDO[] = [
+  {
+    id: "launchpad/interswap",
+    logo: interswap,
+    idoImageSrc: "/IDOs/interswap.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "TO BE ANNOUNCED",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    projectName: "InterSwap",
+    projectListDescription:
+      "InterSwap is a first-of-its-kind cross-chain liquidity engine, pushing DeFi forward towards an interoperable future.",
+    projectDescription:
+      "InterSwap is both a DEX and a powerful liquidity engine which utilizes the power of blockchain interoperability to unify disparate liquidity pools across different blockchains. These virtual super-pools negate the need for token bridges entirely, solving DeFi's problems of inefficiency, fragmented liquidity, and cross-chain security all at once!",
+    projectTokenSymbol: "$ISWAP",
+    totalAllocation: 150_000,
+    price: "0.15",
+    participationStartsAt: 1711623600,
+    participationEndsAt: 1711666800,
+    publicParticipationStartsAt: 1711666800,
+    publicParticipationEndsAt: 1711753200,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 3,
+    cliff: 0,
+    investmentRound: "Private Round",
+    fdv: "25000000",
+    exchangeListingPrice: 0.25,
+    marketCapAtTGE: 285000,
+    vesting: "3% at TGE, 2-month cliff, 12-month monthly vesting",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      {
+        svg: globe,
+        href: "https://interswap.io",
+      },
+      {
+        svg: twitterX,
+        href: "https://x.com/@InterSwap_io",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/+l_Rpi9naX9dlY2Yy",
+      },
+      {
+        svg: discord,
+        href: "https://discord.gg/ech5dtkHmy",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <h1 style="font-weight: bold; font-size: 1.2em;">InterSwap - $ISWAP</h1>
+        <p>InterSwap is a powerful inter-chain liquidity protocol which utilizes the power of interoperability to unify liquidity across dozens of popular blockchains. Thanks to their lightning-fast, cross-chain infrastructure, no longer will users need to run their tokens through cumbersome bridge protocols, hold risky wrapped tokens, or surrender custody of their tokens to a CEX in order to trade between different blockchains.</p>
+        <p>The core of their innovative solution is their 'omnichain' AMM engine, deployed on the Axelar Network. These powerful smart contracts interface with disparate liquidity pools — previously sealed off from each other on different blockchains — and combine them together into a single virtual 'master pool'.</p>
+        <p>For users, that means ultra secure cross-chain swaps, carried out in native assets, without the need for any intermediaries! All that in under 20 seconds, by submitting just a single transaction on the starting chain. This is what the future of blockchain interoperability looks like, and InterSwap is at the very tip of the spear.
+      </div>
+  `,
+    contract: "0x13dCed544b5c45Bd60d6E34C89820B1F2EAe4d2c",
+    abi: PARTICIPATOR_V2_ABI,
+    // images: [
+    //   "/IDOs/orangedx/1.png",
+    //   "/IDOs/orangedx/2.png",
+    //   "/IDOs/orangedx/3.png",
+    //   "/IDOs/orangedx/4.png",
+    // ],
+  },
   {
     id: "launchpad/orangedx",
     logo: orangedx,
@@ -256,77 +323,6 @@ export const IDO_LIST: IDO[] = [
       "/IDOs/havens-compass/havens-compass-3.png",
     ],
   },
-
-  // {
-  //   id: "launchpad/anote",
-  //   logo: anote,
-  //   idoImageSrc: "/IDOs/anote.png",
-  //   acceptedTokenSymbol: "USDC",
-  //   tokenNetwork: "POLYGON",
-  //   crowdsaleNetwork: "BASE",
-  //   networkImageSrc: "/ido-sample.svg",
-  //   projectName: "Anote Music",
-  //   projectListDescription:
-  //     "The main stage for music investments Join 30,000 investors diversifying their wealth into music royalties. Purchase world renowned catalogues & earn as artists earn.",
-  //   projectDescription:
-  //     "In the world of live music and festivals, the main stage is where the biggest and best acts come to play. People flock there because they know they’re about to experience something special. In the music royalty investment market, the same goes, ANote Music is the main stage. With our leading technology and platform, investors and artists use us because they know they’re about to experience something far superior to anywhere else. For years, the music industry has been a maze to navigate; complicated, inaccessible and slow. Yet so much potential lies there untapped. We think it’s about time things change and this broken record be replaced with something better. Something that makes music even more valuable to even more people.",
-  //   projectTokenSymbol: "$ANOTE",
-  //   totalAllocation: 50_000,
-  //   price: "0.125",
-  //   // participationStartsAt: 1708606800,
-  //   participationStartsAt: 1708036013,
-  //   participationEndsAt: 1708693200,
-  //   publicParticipationStartsAt: 1708693200,
-  //   publicParticipationEndsAt: 1708779600,
-  //   simplified: true,
-  //   tgeDate: 0,
-  //   tgePercentage: 17,
-  //   cliff: 86400 * 30 * 2,
-  //   investmentRound: "Private Sale 2",
-  //   fdv: "15000000",
-  //   exchangeListingPrice: 0.015,
-  //   marketCapAtTGE: 370_000,
-  //   vesting: "17% at TGE, 2-month cliff, 7-month linear vesting",
-  //   releaseType: "Linear",
-  //   currentPhase: simplifiedPhases[1].title,
-  //   socials: [
-  //     {
-  //       svg: globe,
-  //       href: "https://www.anotemusic.com/",
-  //     },
-  //     {
-  //       svg: twitterX,
-  //       href: "https://twitter.com/anotemusic",
-  //     },
-  //     {
-  //       svg: telegram,
-  //       href: "https://t.me/anotemusic",
-  //     },
-  //     {
-  //       svg: discord,
-  //       href: "https://discord.com/invite/9ZWfskUPuc",
-  //     },
-  //     {
-  //       svg: instagram,
-  //       href: "https://www.instagram.com/anotemusic/",
-  //     },
-  //   ],
-  //   bigDescription: `
-  //     <div style="display: flex; flex-direction: column; gap: 15px;">
-  //       <h1 style="font-weight: bold; font-size: 1.2em;">Haven's Compass</h1>
-  //       <p>Built inside Unreal Engine 5, Haven's Compass is an innovative tactical FPS game which utilizes blockchain technology to “empower players, enhance ownership rights, and create a thriving gaming ecosystem”.</p>
-  //       <p>Haven's Compass sees the last-surviving inhabitants of a near-future Earth battle for survival following an apocalyptic geological catastrophe. Players enter this dangerous world and battle against each other for token rewards, utilizing their arsenal of highly customisable NFT weapons.</p>
-  //       <p>Developer Ghost Ivy's player-first approach and high production values set Haven's Compass head and shoulders above the other blockchain games on the market, which are often plagued by rigid (or non-existent) gameplay and high technical barriers for entry. They instead aim to make the transition to Web3 gaming as seamless as possible for traditional gamers, opening the doors for thousands of newcomers to join their action-packed world.</p>
-  //       <p>The game has already proven itself a roaring success, with over 25,000 downloads on the public alpha since its launch on the Epic Games Store in August 2023 (you can try it for yourself here). On top of that, their first NFT mint sold out in just 59 seconds!</p>
-  //       <p>Haven's Compass is clearly making all the right moves — we can't wait to see how the project develops in the lead-up to the full game launch in Q4 2024.</p>
-  //       <h1 style="font-weight: bold; font-size: 1.2em; margin-top: 10px;">The $CMPS Token</h1>
-  //       <p>$CMPS is the native utility token of Haven's Compass, and the fuel powering every aspect of its gaming ecosystem. Players can earn $CMPS rewards by winning matches, participating in special events, or even creating art which is utilized inside the game.</p>
-  //       <p>They can then use these tokens to trade weapon and item NFTs with other players on the in-game decentralized marketplace. Ghost Ivy will also implement DAO governance features, giving $CMPS holders the chance to take an active part in the development of the game.</p>
-  //     </div>
-  // `,
-  //   contract: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-  //   abi: PARTICIPATOR_V2_ABI,
-  // },
 ];
 
 export const LINKS: { [key: number]: string } = {
