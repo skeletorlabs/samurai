@@ -425,11 +425,13 @@ export default function Nft() {
             <div className="flex flex-col gap-3">
               <div className="flex flex-col lg:flex-row items-center gap-3">
                 <SSButton
-                  disabled={!signer || isLoading || generalInfo?.isPaused}
+                  // disabled={!signer || isLoading || generalInfo?.isPaused}
+                  disabled
                   click={() => mintNFT()}
                   flexSize
                 >
-                  <>
+                  ENDED
+                  {/* <>
                     {isLoading ? (
                       <span className="animate-pulse">Loading...</span>
                     ) : generalInfo?.isPaused ? (
@@ -441,7 +443,7 @@ export default function Nft() {
                         {(generalInfo?.unitPrice || 0) * numberOfTokens} ETH
                       </span>
                     )}
-                  </>
+                  </> */}
                 </SSButton>
 
                 <div className="flex items-center ">
@@ -573,15 +575,17 @@ export default function Nft() {
                   <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
                   <div className="text-2xl">
                     <span className="text-samurai-red">
-                      {lastFiveNfts && lastFiveNfts.length > 0
+                      {/* {lastFiveNfts && lastFiveNfts.length > 0
                         ? lastFiveNfts[0].tokenId
-                        : 0}
+                        : 0} */}
+                      2006
                     </span>
                     /
                     {/* {supply ? Number(supply?.maxSupply) + Number(supply?.maxWhitelistedSupply) : 0} */}
-                    {lastFiveNfts && lastFiveNfts.length > 0
+                    {/* {lastFiveNfts && lastFiveNfts.length > 0
                       ? lastFiveNfts[0].tokenId
-                      : 0}
+                      : 0} */}
+                    2006
                   </div>
                 </div>
 
