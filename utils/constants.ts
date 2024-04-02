@@ -73,7 +73,7 @@ export const IDO_LIST: IDO[] = [
     socials: [
       {
         svg: globe,
-        href: "https://unibit.app",
+        href: "https://www.unibit.app/#home",
       },
       {
         svg: twitterX,
