@@ -12,6 +12,7 @@ import {
   globe,
   youtube,
   instagram,
+  facebook,
 } from "@/utils/svgs";
 import { Page } from "./enums";
 import { IDO } from "./interfaces";
@@ -21,6 +22,7 @@ import {
   havensCompass,
   orangedx,
   interswap,
+  unibit,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -37,6 +39,74 @@ export const simplifiedPhases = [
 ];
 
 export const IDO_LIST: IDO[] = [
+  {
+    id: "launchpad/unibit",
+    logo: unibit,
+    idoImageSrc: "/IDOs/unibit.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "TO BE ANNOUNCED",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    projectName: "UniBit",
+    projectListDescription:
+      "UniBit is a suite of DeFi products built to enrich the BRC-20 ecosystem by connecting it with the flexibility of EVM chains.",
+    projectDescription:
+      "UniBit's ever-expanding range of products is poised to unlock deeper layers of utility for new and existing BTC-native tokens. Their token bridging protocol, inscriptions dashboard, native DEX, NFT marketplace and yield farming products will offer myriad ways for BRC-20 fanatics to create, trade, and monetize their Bitcoin-based assets!",
+    projectTokenSymbol: "$UIBT",
+    totalAllocation: 150_000,
+    price: "0.008",
+    participationStartsAt: 1712142000,
+    participationEndsAt: 1712228400,
+    publicParticipationStartsAt: 1712228400,
+    publicParticipationEndsAt: 1712314800,
+    simplified: true,
+    tgeDate: 1712534400,
+    tgePercentage: 10,
+    cliff: 0,
+    investmentRound: "Private Round",
+    fdv: "12000000",
+    exchangeListingPrice: 0.012,
+    marketCapAtTGE: 340800,
+    vesting: "10% at TGE, 9-month monthly vesting",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      {
+        svg: globe,
+        href: "https://unibit.app",
+      },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/Unibit_bridge",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/unibitprotocol",
+      },
+      {
+        svg: facebook,
+        href: "https://www.facebook.com/profile.php?id=61556631025126",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <h1 style="font-weight: bold; font-size: 1.2em;">Unibit - $UIBT</h1>
+        <p>UniBit's mission is to enrich the BRC-20 ecosystem by enhancing the utility of BTC-based assets. This means seamlessly connecting these exciting new assets with the programmable functionality and deep liquidity of EVM blockchains. To do this, they're developing an ever-expanding suite of innovative products.</p>
+        <p>The core of the project is UniBit's flagship dual-sided token bridge, which facilitates the seamless transfer of assets back and forth between the Bitcoin blockchain and 10 EVM chains. This allows users to access enhanced liquidity with their BRC-20 tokens, and to take advantage of yield farming opportunities like UniBit's own dynamic liquidity staking pools.</p>
+        <p>For builders, UniBit also makes it simple for projects to launch their own Bitcoin-based assets, with a suite of tools for easily creating, deploying, and managing inscriptions.</p>
+        <p>It's the $UIBT utility token which powers all of the products in the UniBit arsenal. Holders will be entitled to DAO voting rights, as well as a share of the revenues generated through the cross-chain bridging protocol. This means that simply holding the token is enough to generate passive yield!</p>
+
+      </div>
+  `,
+    contract: "0xc528523345f4e8f39aac8Ce56Cc5DF7F1Eb03D24",
+    abi: PARTICIPATOR_V2_ABI,
+    // images: [
+    //   "/IDOs/orangedx/1.png",
+    //   "/IDOs/orangedx/2.png",
+    //   "/IDOs/orangedx/3.png",
+    //   "/IDOs/orangedx/4.png",
+    // ],
+  },
   {
     id: "launchpad/interswap",
     logo: interswap,
