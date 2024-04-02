@@ -7,3 +7,7 @@ export function formattedDate(timestamp: number) {
     "dd MMM, HH:mm"
   );
 }
+
+export function formattedDateSimple(timestamp: number) {
+  return format(utcToZonedTime(fromUnixTime(timestamp), "UTC"), "dd MMM");
+}

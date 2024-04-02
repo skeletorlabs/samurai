@@ -12,7 +12,7 @@ import {
   TOKENS_TO_SYMBOL,
   simplifiedPhases,
 } from "@/utils/constants";
-import { formattedDate } from "@/utils/formattedDate";
+import { formattedDate, formattedDateSimple } from "@/utils/formattedDate";
 import { discord, youtube } from "@/utils/svgs";
 import SSButton from "@/components/ssButton";
 import { StateContext } from "@/context/StateContext";
@@ -434,8 +434,9 @@ export default function Ido() {
                         <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
                           <span className="text-samurai-red">TGE DATE:</span>
                           <p className="text-white/70">
-                            TO BE ANNOUNCED
-                            {/* {formattedDate(ido.tgeDate).toUpperCase()} */}
+                            {ido.tgeDate === 0
+                              ? "TO BE ANNOUNCED"
+                              : formattedDateSimple(ido.tgeDate).toUpperCase()}
                           </p>
                         </div>
                         <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
