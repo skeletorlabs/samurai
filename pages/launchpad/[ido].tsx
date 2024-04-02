@@ -676,13 +676,13 @@ export default function Ido() {
                                 isLoading ||
                                 !general ||
                                 !user ||
-                                general.isPaused ||
-                                user.isBlacklisted ||
-                                (!user.isWhitelisted && !general.isPublic) ||
+                                general?.isPaused ||
+                                user?.isBlacklisted ||
+                                (!user?.isWhitelisted && !general?.isPublic) ||
                                 inputValue === "" ||
                                 Number(inputValue) === 0 ||
-                                Number(inputValue) < general.minPerWallet ||
-                                Number(inputValue) > general.maxPerWallet ||
+                                Number(inputValue) < general?.minPerWallet ||
+                                Number(inputValue) > general?.maxPerWallet ||
                                 Number(general?.raised >= 150_000)
                               }
                               className={`
@@ -690,13 +690,13 @@ export default function Ido() {
                               isLoading ||
                               !general ||
                               !user ||
-                              general.isPaused ||
-                              user.isBlacklisted ||
-                              (!user.isWhitelisted && !general.isPublic) ||
+                              general?.isPaused ||
+                              user?.isBlacklisted ||
+                              (!user.isWhitelisted && !general?.isPublic) ||
                               inputValue === "" ||
                               Number(inputValue) === 0 ||
-                              Number(inputValue) < general.minPerWallet ||
-                              Number(inputValue) > general.maxPerWallet ||
+                              Number(inputValue) < general?.minPerWallet ||
+                              Number(inputValue) > general?.maxPerWallet ||
                               Number(general?.raised >= 150_000)
                                 ? "bg-black text-white/20"
                                 : "bg-samurai-red text-white hover:opacity-75"
