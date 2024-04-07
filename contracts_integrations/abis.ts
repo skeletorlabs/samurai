@@ -1410,7 +1410,10 @@ export const ERC20_ABI = [
 export const SAM_LOCK_ABI = [
   {
     type: "constructor",
-    inputs: [{ name: "_sam", type: "address", internalType: "address" }],
+    inputs: [
+      { name: "_sam", type: "address", internalType: "address" },
+      { name: "_minToLock", type: "uint256", internalType: "uint256" },
+    ],
     stateMutability: "nonpayable",
   },
   {
@@ -1423,6 +1426,13 @@ export const SAM_LOCK_ABI = [
   {
     type: "function",
     name: "SIX_MONTHS",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "THREE_MINUTES",
     inputs: [],
     outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
@@ -1443,51 +1453,6 @@ export const SAM_LOCK_ABI = [
   },
   {
     type: "function",
-    name: "basePoints",
-    inputs: [
-      {
-        name: "tier",
-        type: "uint8",
-        internalType: "enum ISamLock.Tier",
-      },
-      { name: "period", type: "uint256", internalType: "uint256" },
-    ],
-    outputs: [{ name: "points", type: "uint256", internalType: "uint256" }],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
-    name: "calculateRewards",
-    inputs: [
-      { name: "wallet", type: "address", internalType: "address" },
-      { name: "lockIndex", type: "uint256", internalType: "uint256" },
-    ],
-    outputs: [{ name: "rewards", type: "uint256", internalType: "uint256" }],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
-    name: "determineTier",
-    inputs: [{ name: "amount", type: "uint256", internalType: "uint256" }],
-    outputs: [{ name: "", type: "uint8", internalType: "enum ISamLock.Tier" }],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
-    name: "getBasePoints",
-    inputs: [
-      {
-        name: "tier",
-        type: "uint8",
-        internalType: "enum ISamLock.Tier",
-      },
-      { name: "period", type: "uint256", internalType: "uint256" },
-    ],
-    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
     name: "getLockInfos",
     inputs: [{ name: "wallet", type: "address", internalType: "address" }],
     outputs: [
@@ -1496,7 +1461,21 @@ export const SAM_LOCK_ABI = [
         type: "tuple[]",
         internalType: "struct ISamLock.LockInfo[]",
         components: [
-          { name: "amount", type: "uint256", internalType: "uint256" },
+          {
+            name: "lockIndex",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "lockedAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "withdrawnAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
           {
             name: "lockedAt",
             type: "uint256",
@@ -1512,26 +1491,14 @@ export const SAM_LOCK_ABI = [
             type: "uint256",
             internalType: "uint256",
           },
+          {
+            name: "multiplier",
+            type: "uint256",
+            internalType: "uint256",
+          },
         ],
       },
     ],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
-    name: "getLockInfosCount",
-    inputs: [{ name: "wallet", type: "address", internalType: "address" }],
-    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
-    name: "getTotalPoints",
-    inputs: [
-      { name: "wallet", type: "address", internalType: "address" },
-      { name: "lockIndex", type: "uint256", internalType: "uint256" },
-    ],
-    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
   },
   {
@@ -1553,16 +1520,41 @@ export const SAM_LOCK_ABI = [
       { name: "", type: "uint256", internalType: "uint256" },
     ],
     outputs: [
-      { name: "amount", type: "uint256", internalType: "uint256" },
+      { name: "lockIndex", type: "uint256", internalType: "uint256" },
+      {
+        name: "lockedAmount",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "withdrawnAmount",
+        type: "uint256",
+        internalType: "uint256",
+      },
       { name: "lockedAt", type: "uint256", internalType: "uint256" },
       { name: "unlockTime", type: "uint256", internalType: "uint256" },
       { name: "lockPeriod", type: "uint256", internalType: "uint256" },
+      { name: "multiplier", type: "uint256", internalType: "uint256" },
     ],
     stateMutability: "view",
   },
   {
     type: "function",
-    name: "minAllowedToLock",
+    name: "minToLock",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "multipliers",
+    inputs: [{ name: "period", type: "uint256", internalType: "uint256" }],
+    outputs: [{ name: "multiplier", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "nextLockIndex",
     inputs: [],
     outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
@@ -1590,11 +1582,12 @@ export const SAM_LOCK_ABI = [
   },
   {
     type: "function",
-    name: "points",
-    inputs: [{ name: "wallet", type: "address", internalType: "address" }],
-    outputs: [
-      { name: "totalPoints", type: "uint256", internalType: "uint256" },
+    name: "pointsByLock",
+    inputs: [
+      { name: "wallet", type: "address", internalType: "address" },
+      { name: "lockIndex", type: "uint256", internalType: "uint256" },
     ],
+    outputs: [{ name: "points", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
   },
   {
@@ -1613,9 +1606,9 @@ export const SAM_LOCK_ABI = [
   },
   {
     type: "function",
-    name: "tierRanges",
-    inputs: [{ name: "index", type: "uint256", internalType: "uint256" }],
-    outputs: [{ name: "amount", type: "uint256", internalType: "uint256" }],
+    name: "totalLocked",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
   },
   {
@@ -1634,12 +1627,28 @@ export const SAM_LOCK_ABI = [
   },
   {
     type: "function",
-    name: "updateTierRanges",
+    name: "updateMultipliers",
     inputs: [
-      { name: "_first", type: "uint256", internalType: "uint256" },
-      { name: "_second", type: "uint256", internalType: "uint256" },
-      { name: "_third", type: "uint256", internalType: "uint256" },
-      { name: "_fourth", type: "uint256", internalType: "uint256" },
+      {
+        name: "multiplier3x",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "multiplier6x",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "multiplier9x",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "multiplier12x",
+        type: "uint256",
+        internalType: "uint256",
+      },
     ],
     outputs: [],
     stateMutability: "nonpayable",
@@ -1682,6 +1691,37 @@ export const SAM_LOCK_ABI = [
   },
   {
     type: "event",
+    name: "MultipliersUpdated",
+    inputs: [
+      {
+        name: "multiplier3x",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "multiplier6x",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "multiplier9x",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "multiplier12x",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
     name: "OwnershipTransferred",
     inputs: [
       {
@@ -1708,37 +1748,6 @@ export const SAM_LOCK_ABI = [
         type: "address",
         indexed: false,
         internalType: "address",
-      },
-    ],
-    anonymous: false,
-  },
-  {
-    type: "event",
-    name: "TierRangesUpdated",
-    inputs: [
-      {
-        name: "tier1",
-        type: "uint256",
-        indexed: false,
-        internalType: "uint256",
-      },
-      {
-        name: "tier2",
-        type: "uint256",
-        indexed: false,
-        internalType: "uint256",
-      },
-      {
-        name: "tier3",
-        type: "uint256",
-        indexed: false,
-        internalType: "uint256",
-      },
-      {
-        name: "tier4",
-        type: "uint256",
-        indexed: false,
-        internalType: "uint256",
       },
     ],
     anonymous: false,
@@ -1839,6 +1848,6 @@ export const SAM_LOCK_ABI = [
   },
   { type: "error", name: "SamLock__InsufficientAmount", inputs: [] },
   { type: "error", name: "SamLock__InvalidLockIndex", inputs: [] },
+  { type: "error", name: "SamLock__InvalidMultiplier", inputs: [] },
   { type: "error", name: "SamLock__Invalid_Period", inputs: [] },
-  { type: "error", name: "SamLock__NotFound", inputs: [] },
 ];

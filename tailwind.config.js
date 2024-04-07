@@ -27,6 +27,7 @@ module.exports = {
         "samurai-incubator": "url('/samurai-incubator-bg.png')",
         "samurai-sanka": "url('/samurai-sanka-bg.png')",
         "samurai-launchpad": "url('/samurai-launchpad-bg.png')",
+        lock: "url('/LockClosed.svg')",
       },
     },
     clipPath: {
@@ -34,5 +35,9 @@ module.exports = {
       "s-polygon2": "polygon(0px 0px, 90% 0px, 285px 90px, 0px 45px)",
     },
   },
-  plugins: [require("tailwind-clip-path"), require("flowbite/plugin")],
+  plugins: [
+    require("tailwind-clip-path"),
+    require("flowbite/plugin"),
+    require("@headlessui/tailwindcss")({ prefix: "ui" }),
+  ],
 };

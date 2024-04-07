@@ -40,7 +40,7 @@ export async function checkIsPaused() {
 export type GeneralLockInfo = {
   owner: string;
   isPaused: boolean;
-  tierRanges: number[];
+  minToLock: number;
   periods: { title: string; value: number }[];
 };
 
@@ -50,32 +50,26 @@ export async function generalInfo() {
 
     const owner = await contract?.owner();
     const isPaused = await contract?.paused();
+    const minToLock = Number(ethers.formatEther(await contract?.minToLock()));
 
+    const threeMinutes = await contract?.THREE_MINUTES();
     const threeMonths = await contract?.THREE_MONTHS();
     const sixMonths = await contract?.SIX_MONTHS();
     const nineMonths = await contract?.NINE_MONTHS();
     const twelveMonths = await contract?.TWELVE_MONTHS();
 
-    const range1 = Number(ethers.formatEther(await contract?.tierRanges(0)));
-    const range2 = Number(ethers.formatEther(await contract?.tierRanges(1)));
-    const range3 = Number(ethers.formatEther(await contract?.tierRanges(2)));
-    const range4 = Number(ethers.formatEther(await contract?.tierRanges(3)));
-
-    const tierRanges = [range1, range2, range3, range4];
-
     const periods = [
+      { title: "3 Minutes", value: threeMinutes },
       { title: "3 Months", value: threeMonths },
       { title: "6 Months", value: sixMonths },
       { title: "9 Months", value: nineMonths },
       { title: "12 Months", value: twelveMonths },
     ];
 
-    console.log(periods);
-
     return {
       owner,
       isPaused,
-      tierRanges,
+      minToLock,
       periods,
     } as GeneralLockInfo;
   } catch (e) {
@@ -83,30 +77,39 @@ export async function generalInfo() {
   }
 }
 
-export async function getEstimatedPoints(amount: string, period: number) {
+export async function getMultiplierByPeriod(period: number) {
   const contract = await getContract();
 
-  const tier = await contract?.determineTier(ethers.parseEther(amount));
-  const estimatedPoints = Number(
-    ethers.formatEther(await contract?.basePoints(tier, period))
+  const multiplier = Number(
+    ethers.formatEther(await contract?.multipliers(period))
   );
 
-  return estimatedPoints;
+  return multiplier;
+}
+
+export async function getEstimatedPoints(amount: string, period: number) {
+  const multiplier = await getMultiplierByPeriod(period);
+
+  return Number(amount) * multiplier;
 }
 
 // USER INFOS
 
 export type LockInfo = {
-  amount: number;
+  lockIndex: number;
+  lockedAmount: number;
+  withdrawnAmount: number;
   lockedAt: number;
   unlockTime: number;
   lockPeriod: number;
+  multiplier: number;
+  points: number;
 };
 
 export type UserInfo = {
   locks: LockInfo[];
   totalLocked: number;
-  // totalPoints: number;
+  totalPoints: number;
   samBalance: number;
 };
 
@@ -114,21 +117,34 @@ export async function userInfo(signer: ethers.Signer) {
   try {
     const signerAdress = await signer.getAddress();
     const contract = await getContract(signer);
-    const locksCount = await contract?.getLockInfosCount(signerAdress);
-    let locks: LockInfo[] = [];
+    const userLocks = await contract?.getLockInfos(signerAdress);
 
-    if (locksCount > 0) {
-      for (let i = 1; i <= locksCount; i++) {
-        const lock: LockInfo = await contract?.getLockInfos(signerAdress, i);
-        locks.push(lock);
-      }
+    let locks: LockInfo[] = [];
+    for (let i = 0; i < userLocks.length; i++) {
+      const userLock = userLocks[i];
+      const lock: LockInfo = {
+        lockIndex: Number(userLock[0]),
+        lockedAmount: Number(ethers.formatEther(userLock[1])),
+        withdrawnAmount: Number(ethers.formatEther(userLock[2])),
+        lockedAt: Number(userLock[3]),
+        unlockTime: Number(userLock[4]),
+        lockPeriod: Number(userLock[5]),
+        multiplier: Number(ethers.formatEther(userLock[6])),
+        points: Number(
+          ethers.formatEther(await contract?.pointsByLock(signerAdress, i))
+        ),
+      };
+
+      locks.push(lock);
     }
 
     const totalLocked: Number = locks.reduce((acc, curr) => {
-      return acc + curr.amount;
+      return acc + curr.lockedAmount - curr.withdrawnAmount;
     }, 0);
 
-    // const totalPoints: Number = await contract?.getTotalPoints(signer);
+    const totalPoints: Number = locks.reduce((acc, curr) => {
+      return acc + curr.points;
+    }, 0);
 
     const samBalance = Number(
       ethers.formatEther(
@@ -139,7 +155,7 @@ export async function userInfo(signer: ethers.Signer) {
     return {
       locks,
       totalLocked,
-      // totalPoints,
+      totalPoints,
       samBalance,
     } as UserInfo;
   } catch (e) {
@@ -179,24 +195,17 @@ export async function lock(
 export async function withdraw(
   signer: ethers.Signer,
   amount: string,
-  lockIndex: string
+  lockIndex: number
 ) {
   try {
     const signerAddress = await signer.getAddress();
     const contract = await getContract(signer);
     const network = await signer.provider?.getNetwork();
 
-    await checkApproval(
-      SAM_ADDRESS,
-      SAM_LOCK_ADDRESS,
-      signer,
-      ethers.parseEther(amount)
-    );
-
     const tx = await contract?.withdraw(
       signerAddress,
       ethers.parseEther(amount),
-      lockIndex
+      lockIndex.toString()
     );
 
     await notificateTx(tx, network);
@@ -218,29 +227,6 @@ export async function togglePause(index: number, signer: ethers.Signer) {
       const network = await signer.provider?.getNetwork();
       const isPaused = await contract?.paused();
       const tx = isPaused ? await contract?.unpause() : await contract?.pause();
-      await notificateTx(tx, network);
-    }
-  } catch (e) {
-    handleError({ e: e, notificate: true });
-  }
-}
-
-export async function updatedTierRanges(
-  first: string,
-  second: string,
-  third: string,
-  fourth: string,
-  signer: ethers.Signer
-) {
-  const contract = await getContract(signer);
-
-  try {
-    const owner = await contract?.owner();
-    const signerAddress = await signer.getAddress();
-
-    if (owner === signerAddress) {
-      const network = await signer.provider?.getNetwork();
-      const tx = await contract?.updateTierRanges(first, second, third, fourth);
       await notificateTx(tx, network);
     }
   } catch (e) {

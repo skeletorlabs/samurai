@@ -11,3 +11,14 @@ export function formattedDate(timestamp: number) {
 export function formattedDateSimple(timestamp: number) {
   return format(utcToZonedTime(fromUnixTime(timestamp), "UTC"), "dd MMM");
 }
+
+export function formattedDate2(timestamp: number) {
+  return format(utcToZonedTime(fromUnixTime(timestamp), "UTC"), "dd/MM/yyyy");
+}
+
+export function formattedDate3(timestamp: number) {
+  return (
+    format(utcToZonedTime(fromUnixTime(timestamp), "UTC"), "dd/MM/yyyy HH:mm") +
+    " UTC"
+  );
+}
