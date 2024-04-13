@@ -21,6 +21,7 @@ import { useNetwork } from "wagmi";
 import { Roboto } from "next/font/google";
 import SCarousel from "@/components/scarousel";
 import { getUnixTime } from "date-fns";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -207,41 +208,49 @@ export default function LockSam() {
         </div>
 
         <div className="flex items-center rounded-[4px] w-full bg-black/75 backdrop-blur-sm p-6 py-8 text-sm leading-[20px] border border-white/20 mt-8 shadow-md shadow-black/60 z-20">
-          <div className="flex flex-col rounded-[4px] w-full gap-3">
-            <div>
-              <p className="text-white/40">Total Points</p>
-              <span className="text-samurai-red text-xl">
-                {userInfoData?.totalPoints.toLocaleString("en-us") || 0}
-              </span>
-            </div>
+          {signer && chain && !chain.unsupported ? (
+            <div className="flex flex-col rounded-[4px] w-full gap-3">
+              <div>
+                <p className="text-white/40">Your Points</p>
+                <span className="text-samurai-red text-xl">
+                  {userInfoData?.totalPoints.toLocaleString("en-us") || 0}
+                </span>
+              </div>
 
-            <div>
-              <p className="text-white/40">Total Locked</p>
-              <p className="text-lg">
-                {(userInfoData?.totalLocked || 0).toLocaleString("en-us", {
-                  minimumFractionDigits: 2,
-                })}{" "}
-                $SAM
-              </p>
+              <div>
+                <p className="text-white/40">Total Locked</p>
+                <p className="text-lg">
+                  {(userInfoData?.totalLocked || 0).toLocaleString("en-us", {
+                    minimumFractionDigits: 2,
+                  })}{" "}
+                  $SAM
+                </p>
+              </div>
             </div>
-          </div>
-
-          {userInfoData && userInfoData?.locks.length > 0 && (
-            <button
-              disabled={loading}
-              onClick={() => {
-                setWithdrawIsOpen(true);
-                onGetUserInfo();
-              }}
-              className={`flex justify-center text-sm py-2 border ${
-                loading
-                  ? "border-white/10 text-white/10"
-                  : "border-samurai-red text-samurai-red"
-              } rounded-full min-w-[150px] hover:bg-samurai-red hover:text-white`}
-            >
-              MANAGE LOCKS
-            </button>
+          ) : (
+            <ConnectButton />
           )}
+
+          {signer &&
+            chain &&
+            !chain.unsupported &&
+            userInfoData &&
+            userInfoData?.locks.length > 0 && (
+              <button
+                disabled={loading}
+                onClick={() => {
+                  setWithdrawIsOpen(true);
+                  onGetUserInfo();
+                }}
+                className={`flex justify-center text-sm py-2 border ${
+                  loading
+                    ? "border-white/10 text-white/10"
+                    : "border-samurai-red text-samurai-red"
+                } rounded-full min-w-[150px] hover:bg-samurai-red hover:text-white`}
+              >
+                MANAGE LOCKS
+              </button>
+            )}
         </div>
 
         <div className="flex flex-col bg-black/75 backdrop-blur-sm p-6 py-8 rounded-[6px] border border-white/20 shadow-md shadow-black/60 mt-2 z-20">
@@ -338,17 +347,14 @@ export default function LockSam() {
               </div>
               <span className="text-[17px] mt-[-4px]">$SAM</span>
             </div>
-            <button
-              onClick={() =>
-                onInputLockChange(userInfoData?.samBalance?.toString() || "0")
-              }
-              className="absolute top-[-24px] right-2 text-sm text-end transition-all hover:opacity-75 w-max text-white"
-            >
-              <span className="text-white/70">Balance:</span>{" "}
-              {Number(userInfoData?.samBalance || 0).toLocaleString("en-us", {
-                maximumFractionDigits: 2,
-              })}
-            </button>
+            {signer && chain && !chain.unsupported && (
+              <div className="absolute top-[-24px] right-2 text-sm text-end transition-all hover:opacity-75 w-max text-white">
+                <span className="text-white/70">Balance:</span>{" "}
+                {Number(userInfoData?.samBalance || 0).toLocaleString("en-us", {
+                  maximumFractionDigits: 2,
+                })}
+              </div>
+            )}
           </div>
           <SSButton
             click={onLock}
