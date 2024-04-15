@@ -279,98 +279,25 @@ export default function Tokens() {
 
             <div className="relative md:mr-12 xl:max-w-[900px]">
               <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
-                The{" "}
-                <span className="font-bold text-samurai-red">
-                  Samurai Starter
-                </span>{" "}
-                ecosystem is fueled by our native
-                <span className="font-bold text-samurai-red"> $SAM</span> token.
+                $SAM
+                <span className="font-bold text-samurai-red">TOKEN</span>
               </h1>
               <p
                 className={`leading-normal lg:leading-relaxed pt-6 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
               >
-                The $SAM token rewards participation across the entire Samurai
-                Starter ecosystem and is designed to deliver tremendous benefits
-                to the Samurai Starter community. The more you participate, the
-                more you earn, the more future benefits you may enjoy. $SAM is
-                minted on Ethereum layer-2 Base with a maximum supply of 130m
-                tokens.
+                Powering the <span className="font-bold">Samurai Starter</span>{" "}
+                ecosystem: <br />• Participate in{" "}
+                <span className="font-bold">top tier token launches</span>
+                . <br />• Gain access to{" "}
+                <span className="font-bold">VC-level deals</span>
+                . <br />• Provide liquidity for{" "}
+                <span className="font-bold">amazing APR</span>. <br />•
+                Participate in Samurai Sanka and{" "}
+                <span className="font-bold">earn</span>.
               </p>
-              <div className="text-samurai-red text-5xl lg:text-4xl mt-12">
-                <SSButton>
-                  <>
-                    Buy $SAM on Aerodrome{" "}
-                    <span className="text-[10px] md:text-lg ml-1">
-                      (coming soon)
-                    </span>
-                  </>
-                </SSButton>
-              </div>
-            </div>
-          </div>
-
-          {/* TOKENOMICS */}
-          <div className="flex flex-col justify-center w-full mt-10 bg-black/40 h-[400px] md:h-[240px]">
-            <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
-              <div className="flex flex-col text-white text-2xl">
-                <p className="font-bold text-4xl pb-2 opacity-[0.8]">
-                  <span className="text-samurai-red">$SAM</span> Tokenomics
-                </p>
-
-                <div
-                  className={`flex flex-row flex-wrap gap-5 text-lg pt-4 text-white lg:pr-5 font-light xl:max-w-[1100px] ${inter.className}`}
-                >
-                  <div className="bg-white/10 p-3">
-                    <span className="text-yellow-400 font-bold">
-                      Total Supply:
-                    </span>{" "}
-                    130,000,000 $SAM
-                  </div>
-                  <div className="bg-white/10 p-3">
-                    <span className="text-yellow-400 font-bold">
-                      Token Standard:
-                    </span>{" "}
-                    ERC-20
-                  </div>
-                  <div className="bg-white/10 p-3">
-                    <span className="text-yellow-400 font-bold">
-                      Blockchain:
-                    </span>{" "}
-                    Base
-                  </div>
-                  <div className="bg-white/10 p-3">
-                    <span className="text-yellow-400 font-bold">
-                      Token Contract:
-                    </span>{" "}
-                    Coming soon
-                  </div>
-                  <div className="bg-white/10 p-3">
-                    <span className="text-yellow-400 font-bold">$SAM</span> on
-                    CoinGecko
-                  </div>
-                  <div className="bg-white/10 p-3">
-                    <span className="text-yellow-400 font-bold">$SAM</span> on
-                    CoinMarketCap
-                  </div>
-                  {/* <div className="bg-white/10 p-3">
-                    <span className="text-yellow-400 font-bold">
-                      Initial Listing Price:
-                    </span>{" "}
-                    $0.0075 USD
-                  </div> */}
-                  {/* <div className="bg-white/10 p-3">
-                    <span className="text-yellow-400 font-bold">
-                      Fully-diluted Market Cap:
-                    </span>{" "}
-                    $750,000 USD
-                  </div>
-                  <div className="bg-white/10 p-3">
-                    <span className="text-yellow-400 font-bold">
-                      Initial Market Cap:
-                    </span>{" "}
-                    $232,500 USD
-                  </div> */}
-                </div>
+              <div className="flex items-center gap-6 text-samurai-red text-5xl lg:text-4xl mt-12">
+                <SSButton>Buy $SAM on Aerodrome</SSButton>
+                <SSButton secondary>Provide SAM/WETH LP on Aerodrome</SSButton>
               </div>
             </div>
           </div>
@@ -410,8 +337,70 @@ export default function Tokens() {
         </>
       </TopLayout>
 
+      {/* TOKENOMICS */}
+      <div className="flex flex-col py-10 md:py-20 w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+          <div className="flex flex-col text-white text-2xl">
+            <p className="font-bold text-4xl pb-2 opacity-[0.8]">
+              <span className="text-samurai-red">$SAM</span> Tokenomics
+            </p>
+
+            <div
+              className={`flex flex-row flex-wrap gap-5 text-lg pt-4 text-white lg:pr-5 font-light xl:max-w-[1100px] ${inter.className}`}
+            >
+              <div className="bg-white/10 p-3">
+                <span className="text-yellow-400 font-bold">Total Supply:</span>{" "}
+                130,000,000 $SAM
+              </div>
+              <div className="bg-white/10 p-3">
+                <span className="text-yellow-400 font-bold">
+                  Token Standard:
+                </span>{" "}
+                ERC-20
+              </div>
+              <div className="bg-white/10 p-3">
+                <span className="text-yellow-400 font-bold">Blockchain:</span>{" "}
+                Base
+              </div>
+              <div className="bg-white/10 p-3">
+                <span className="text-yellow-400 font-bold">
+                  Token Contract:
+                </span>{" "}
+                Coming soon
+              </div>
+              <div className="bg-white/10 p-3">
+                <span className="text-yellow-400 font-bold">$SAM</span> on
+                CoinGecko
+              </div>
+              <div className="bg-white/10 p-3">
+                <span className="text-yellow-400 font-bold">$SAM</span> on
+                CoinMarketCap
+              </div>
+              {/* <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Initial Listing Price:
+                    </span>{" "}
+                    $0.0075 USD
+                  </div> */}
+              {/* <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Fully-diluted Market Cap:
+                    </span>{" "}
+                    $750,000 USD
+                  </div>
+                  <div className="bg-white/10 p-3">
+                    <span className="text-yellow-400 font-bold">
+                      Initial Market Cap:
+                    </span>{" "}
+                    $232,500 USD
+                  </div> */}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* CASHBACK */}
-      <div className="flex flex-col mt-[-35px] pt-10 md:pt-20 pb-2 w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
+      <div className="hidden flex flex-col pt-10 md:pt-20 pb-2 w-full bg-white/20 border-t border-samurai-red/50 border-dotted">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
             <p className="font-bold text-5xl pb-2">
@@ -589,7 +578,7 @@ export default function Tokens() {
       </div> */}
 
       {/* LADDER */}
-      <div className="flex flex-col lg:flex-row justify-between w-full bg-white/10 border-t-[1px] border-yellow-300/40">
+      <div className="hidden flex flex-col lg:flex-row justify-between w-full bg-white/10 border-t-[1px] border-yellow-300/40">
         <div className="flex flex-col text-white w-full py-10 md:py-20 px-6 lg:px-8 xl:px-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">$SAM</span> Ladder (coming soon)

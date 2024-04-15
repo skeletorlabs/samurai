@@ -11,15 +11,15 @@ const pinata = new Pinata({
 
 export async function generateDefaultImages() {
   const basePath = __dirname.substring(0, __dirname.indexOf("/.next"));
-  const options = [
-    "/public/unrevealed-male.png",
-    "/public/unrevealed-female.png",
-  ];
+  // const options = [
+  //   "/public/unrevealed-male.png",
+  //   "/public/unrevealed-female.png",
+  // ];
+  const imagePath = "/public/unrevealed.png";
 
-  for (let index = 0; index < 5000; index++) {
-    // const template = fs.readFileSync(basePath + "/public/unrevealed.png");
-    const randomIndex = Math.floor(Math.random() * options.length);
-    const template = fs.readFileSync(basePath + options[randomIndex]);
+  for (let index = 0; index < 10000; index++) {
+    const template = fs.readFileSync(basePath + "/public/unrevealed.png");
+    // const template = fs.readFileSync(basePath + imagePath);
 
     const path =
       basePath + "/public/nfts-default-images/" + (index + 1) + ".png";
@@ -29,16 +29,21 @@ export async function generateDefaultImages() {
 }
 
 export async function generateMetadataFiles(imagesFolderHash: string) {
-  for (let index = 0; index < 5000; index++) {
+  for (let index = 0; index < 10000; index++) {
     const metadata = {
-      name: `Samurai Starter #${index + 1}`,
-      symbol: "SAM",
+      name: "Drop it like it's L2VE",
       description:
-        "Access token offerings from the most novel projects in the crypto space on Samurai Starter launchpad. Participate and get your share of cashback rewards in the form of $SAM.",
+        "The only L2VE you need in your life. 100% degen approved Meme farming. Show your L2VE to the world with the first NFT series that makes your friends regret they have a rl",
       image: `ipfs://${imagesFolderHash}/${index + 1}.png`,
       edition: 1,
-      creator: "Samurai Starter",
-      compiler: "Samurai Starter",
+      date: Math.floor(Date.now() / 1000),
+      attributes: [
+        {
+          trait_type: "Unrevealed",
+          value: "L2VE",
+        },
+      ],
+      compiler: "HashLips Art Engine",
     };
 
     const data = JSON.stringify(metadata);
@@ -83,7 +88,7 @@ async function handleMintPhase() {
   // 1. Generate default images
   // await generateDefaultImages();
 
-  await generateMetadataFiles("QmfTXvojCjrFbas9uGbj4Hq7FbNbH9Wdsxk5JVrypw7e9M");
+  await generateMetadataFiles("QmUBD1UkADVukUAoBpvoRZwCk6QLvkp4iK9iSfyyE2AksU");
   // // 2. Pin nfts-default-images folder and store CID hash
   // const nftsDefaultImageHash = await pinFolder(
   //   "/public/nfts-default-images",

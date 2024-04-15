@@ -155,9 +155,9 @@ export default function Manager() {
               <span>You're not allowed to check this page! Get out.</span>
             ) : signer && checkOwnership() ? (
               <div className="flex flex-col gap-14 w-full">
-                {/* <div className="flex items-center gap-5 bg-black border-b border-t border-gray-800 py-8 px-12">
+                <div className="flex items-center gap-5 bg-black border-b border-t border-gray-800 py-8 px-12">
                   <SSButton click={handlePinButtonClick}>Pin</SSButton>
-                </div> */}
+                </div>
                 <div className="flex items-center gap-5 bg-black border-b border-t border-gray-800 py-8 px-12">
                   <SSButton click={onTogglePause}>
                     {isLoading
