@@ -25,7 +25,6 @@ export default async function checkApproval(
     );
 
   if (!allowed || allowed < amountTocheck) {
-    console.log(1);
     const approval: ethers.BigNumberish | undefined = await giveApproval({
       owner: owner,
       spender: spender,
@@ -48,8 +47,6 @@ export default async function checkApproval(
       signer,
       customAbi: customAbi ? customAbi : null,
     });
-
-    console.log(allowed, amountTocheck);
 
     if (allowed >= amountTocheck) {
       return true;
