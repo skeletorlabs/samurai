@@ -199,15 +199,15 @@ export default function LockSam() {
 
   return (
     <div className="flex flex-col lg:flex-row items-center gap-10 mt-14 relative">
-      <div className="flex flex-col justify-between w-full max-w-[580px] bg-white/5 border border-samurai-red rounded-[6px] py-10 px-6 shadow-lg shadow-pink-800/50 relative">
-        <div className="absolute top-10 left-[50px] bg-lock bg-no-repeat bg-cover w-[500px] h-[500px] text-white/40">
+      <div className="flex flex-col justify-between w-full lg:w-[580px] lg:bg-white/5 lg:border border-samurai-red rounded-[6px] lg:py-10 lg:px-6 lg:shadow-lg shadow-pink-800/50 relative">
+        <div className="hidden absolute top-10 left-[50px] bg-lock bg-no-repeat bg-cover w-[500px] h-[500px] text-white/40">
           {lockImage}
         </div>
-        <div className="flex items-center relative gap-2 pl-2">
+        <div className="hidden lg:flex items-center relative gap-2 pl-2">
           LOCK <span className="text-samurai-red">$SAM</span>
         </div>
 
-        <div className="flex items-center rounded-[4px] w-full bg-black/75 backdrop-blur-sm p-6 py-8 text-sm leading-[20px] border border-white/20 mt-8 shadow-md shadow-black/60 z-20">
+        <div className="flex items-center rounded-[4px] w-full bg-black/75 backdrop-blur-sm p-6 py-8 text-sm leading-[20px] border border-white/20 lg:mt-8 shadow-md shadow-black/60 z-20">
           {signer && chain && !chain.unsupported ? (
             <div className="flex flex-col rounded-[4px] w-full gap-3">
               <div>
@@ -294,7 +294,7 @@ export default function LockSam() {
                         (item) => Number(item.value) === Number(period)
                       )?.title
                     }{" "}
-                    months locked.
+                    locked.
                   </div>
                 }
               >
@@ -321,7 +321,7 @@ export default function LockSam() {
         </div>
 
         <div className="flex flex-col gap-5 shadow-lg mt-12 z-20">
-          <div className="flex shadow-md shadow-black/60 text-black relative">
+          <div className="flex text-black relative border border-transparent">
             <input
               onChange={(e) => onInputLockChange(e.target.value)}
               value={inputLock}
@@ -356,41 +356,44 @@ export default function LockSam() {
               </div>
             )}
           </div>
-          <SSButton
-            click={onLock}
-            disabled={
-              loading ||
-              !chain ||
-              chain.unsupported ||
-              !signer ||
-              generalLockData === null ||
-              generalLockData.isPaused ||
-              Number(inputLock) < generalLockData.minToLock ||
-              !userInfoData ||
-              userInfoData.samBalance < generalLockData.minToLock
-            }
-          >
-            <div className="flex items-center gap-2 ml-[-5px]">
-              <div className="w-5 h-5 mt-[-3px]">
-                <svg
-                  data-slot="icon"
-                  fill="none"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
-                  ></path>
-                </svg>
+          <div className="w-full">
+            <SSButton
+              flexSize
+              click={onLock}
+              disabled={
+                loading ||
+                !chain ||
+                chain.unsupported ||
+                !signer ||
+                generalLockData === null ||
+                generalLockData?.isPaused ||
+                Number(inputLock) < generalLockData?.minToLock ||
+                !userInfoData ||
+                userInfoData?.samBalance < generalLockData?.minToLock
+              }
+            >
+              <div className="flex items-center gap-2 ml-[-5px]">
+                <div className="w-5 h-5 mt-[-3px]">
+                  <svg
+                    data-slot="icon"
+                    fill="none"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    ></path>
+                  </svg>
+                </div>
+                <span>{loading ? "LOADING..." : "LOCK"}</span>
               </div>
-              <span>{loading ? "LOADING..." : "LOCK"}</span>
-            </div>
-          </SSButton>
+            </SSButton>
+          </div>
         </div>
 
         {/* WITHDRAW MODAL */}
@@ -483,7 +486,7 @@ export default function LockSam() {
                             value={inputWithdraw}
                             type="text"
                             placeholder="Amount to withdraw"
-                            className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl rounded-[8px]"
+                            className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl rounded-[8px] mx-1"
                           />
                           <button
                             onClick={onSetMaxForWithdraw}

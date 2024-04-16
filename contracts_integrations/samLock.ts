@@ -11,7 +11,7 @@ const TEST_RPC = "http://127.0.0.1:8545";
 
 async function getContract(signer?: ethers.Signer) {
   try {
-    const provider = new ethers.JsonRpcProvider(TEST_RPC);
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const contractAddress = SAM_LOCK_ADDRESS;
     const contract = new ethers.Contract(
       contractAddress,
@@ -52,14 +52,12 @@ export async function generalInfo() {
     const isPaused = await contract?.paused();
     const minToLock = Number(ethers.formatEther(await contract?.minToLock()));
 
-    const threeMinutes = await contract?.THREE_MINUTES();
     const threeMonths = await contract?.THREE_MONTHS();
     const sixMonths = await contract?.SIX_MONTHS();
     const nineMonths = await contract?.NINE_MONTHS();
     const twelveMonths = await contract?.TWELVE_MONTHS();
 
     const periods = [
-      { title: "3 Minutes", value: threeMinutes },
       { title: "3 Months", value: threeMonths },
       { title: "6 Months", value: sixMonths },
       { title: "9 Months", value: nineMonths },

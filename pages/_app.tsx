@@ -47,7 +47,7 @@ export const localhost = /*#__PURE__*/ defineChain({
 });
 
 const { chains, publicClient } = configureChains(
-  [localhost],
+  [base],
   [
     publicProvider(),
     jsonRpcProvider({
