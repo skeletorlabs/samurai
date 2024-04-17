@@ -121,7 +121,7 @@ export default function ClaimSam() {
                   <div className="flex flex-col justify-center items-center gap-6 pt-10 text-center">
                     <p>
                       By claiming all $SAM, you are slashing your remaining $SAM
-                      allocation, reducing it by 30%
+                      allocation, reducing it by 50%
                     </p>
                     <SSButton>I understand</SSButton>
                   </div>
