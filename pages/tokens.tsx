@@ -173,7 +173,7 @@ export default function Tokens() {
           </p>
         </div>
       </div>
-      {/* <ClaimSam /> */}
+      <ClaimSam />
     </Layout>
   );
 }
