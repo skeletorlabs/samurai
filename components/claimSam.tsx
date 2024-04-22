@@ -7,6 +7,11 @@ import { Fragment, useCallback, useContext, useEffect, useState } from "react";
 import { aerodrome } from "@/utils/svgs";
 import { StateContext } from "@/context/StateContext";
 import { useNetwork } from "wagmi";
+import {
+  VestingSchedule,
+  claimVesting,
+  getClaimInfos,
+} from "@/contracts_integrations/claimSam";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,21 +22,8 @@ const roboto = Roboto({
   weight: ["100", "300", "500", "900"],
 });
 
-export type VestingSchedule = {
-  address: string;
-  claimable_amount: string;
-  created_at: string;
-  end_time: string;
-  id: number;
-  initial_percentage: number;
-  remaining_amount: string;
-  start_time: string;
-  total_amount: string;
-  updated_at: string;
-  vesting_type: string;
-};
-
 export default function ClaimSam() {
+  const [loading, setLoading] = useState(false);
   const [claimAllBoxIsOpen, setClaimAllBoxIsOpen] = useState(false);
   const [vestingSchedules, setVestingSchedules] = useState<
     VestingSchedule[] | null
@@ -41,6 +33,27 @@ export default function ClaimSam() {
   const [vesting, setVesting] = useState(0);
   const { signer, account } = useContext(StateContext);
   const { chain } = useNetwork();
+
+  const onClaimVesting = useCallback(
+    async (claimAll: boolean) => {
+      setLoading(true);
+      if (
+        chain &&
+        !chain?.unsupported &&
+        signer &&
+        account &&
+        vestingSchedules &&
+        vestingSchedules?.length > 0
+      ) {
+        await claimVesting(claimAll, account, signer);
+        await onGetSamClaimInfos();
+      }
+      if (claimAll) setClaimAllBoxIsOpen(false);
+      setLoading(false);
+    },
+
+    [account, chain, signer, vestingSchedules]
+  );
 
   useEffect(() => {
     const totalAmount =
@@ -56,24 +69,20 @@ export default function ClaimSam() {
       }, 0) || 0;
 
     setClaimable(totalClaimable);
-    setVesting(totalAmount - totalClaimable);
 
-    // const totalVesting =
-    //   vestingSchedules?.reduce((acc: number, curr: VestingSchedule) => {
-    //     return acc + Number(curr.remaining_amount);
-    //   }, 0) || 0;
+    const totalRemaining =
+      vestingSchedules?.reduce((acc: number, curr: VestingSchedule) => {
+        return acc + Number(curr.remaining_amount);
+      }, 0) || 0;
 
-    // setVesting(totalVesting);
+    setVesting(totalRemaining - totalClaimable);
   }, [vestingSchedules, setTotal, setClaimable, setVesting]);
 
   const onGetSamClaimInfos = useCallback(async () => {
     if (chain && !chain?.unsupported && signer && account) {
-      const url = `http://18.196.63.207/api/vestingschedules/wallet-claims?address=${account}`;
-      const response = await fetch(url);
-      const json = await response.json();
-      const data: VestingSchedule[] = json.data;
+      const response = await getClaimInfos(account);
 
-      setVestingSchedules(data);
+      setVestingSchedules(response);
     }
   }, [account, chain, signer]);
 
@@ -184,9 +193,18 @@ export default function ClaimSam() {
               </span>
             </div>
             <div className="pt-10 flex flex-col md:flex-row gap-3 md:gap-5">
-              <SSButton>Claim Vested $SAM</SSButton>
-              <SSButton click={() => setClaimAllBoxIsOpen(true)} secondary>
-                Claim All $SAM**
+              <SSButton
+                disabled={loading || claimable === 0}
+                click={() => onClaimVesting(false)}
+              >
+                {loading ? "Loading..." : "Claim Vested $SAM"}
+              </SSButton>
+              <SSButton
+                disabled={loading || (claimable === 0 && vesting === 0)}
+                click={() => setClaimAllBoxIsOpen(true)}
+                secondary
+              >
+                {loading ? "Loading..." : "Claim All $SAM**"}
               </SSButton>
             </div>
             <div className="pt-10 flex flex-col text-lg gap-2">
@@ -249,7 +267,9 @@ export default function ClaimSam() {
                       By claiming all $SAM, you are slashing your remaining $SAM
                       allocation, reducing it by 50%
                     </p>
-                    <SSButton>I understand</SSButton>
+                    <SSButton click={() => onClaimVesting(true)}>
+                      I understand
+                    </SSButton>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

@@ -15,8 +15,8 @@ import {
   midnightTheme,
   connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
-import { configureChains, createConfig, sepolia, WagmiConfig } from "wagmi";
-import { base } from "wagmi/chains";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { base, baseSepolia } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
@@ -47,7 +47,8 @@ export const localhost = /*#__PURE__*/ defineChain({
 });
 
 const { chains, publicClient } = configureChains(
-  [base],
+  // [base],
+  [baseSepolia],
   [
     publicProvider(),
     jsonRpcProvider({
@@ -55,10 +56,14 @@ const { chains, publicClient } = configureChains(
         http:
           chain !== base
             ? localhost.rpcUrls.default.http.toString()
+            : chain === baseSepolia
+            ? baseSepolia.rpcUrls.default.http.toString()
             : (process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string),
         webSocket:
           chain !== base
             ? localhost.rpcUrls.default.http.toString()
+            : chain === baseSepolia
+            ? baseSepolia.rpcUrls.default.http.toString()
             : (process.env.NEXT_PUBLIC_BASE_WSS as string),
       }),
     }),

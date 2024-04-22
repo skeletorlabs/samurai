@@ -123,9 +123,7 @@ export default function Tokens() {
             </p>
 
             <div className="flex flex-col xl:flex-row">
-              <div className="px-6 lg:px-8 xl:px-20">
-                <LockSam />
-              </div>
+              <div className="px-6 lg:px-8 xl:px-20">{/* <LockSam /> */}</div>
               <div className="flex flex-col max-w-[700px] mt-10">
                 <p className="font-bold text-6xl pb-2 xl:mt-12 px-6 lg:px-8 xl:px-20">
                   <Image
