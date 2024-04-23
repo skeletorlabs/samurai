@@ -1877,6 +1877,11 @@ export const SAM_CLAIM_VESTING_ABI = [
             name: "isAllClaimed",
             type: "bool",
           },
+          {
+            internalType: "bool",
+            name: "isInitialClaimed",
+            type: "bool",
+          },
         ],
         internalType: "struct VestingClaim.ClaimInfo[]",
         name: "claimInfos",
@@ -2018,6 +2023,12 @@ export const SAM_CLAIM_VESTING_ABI = [
         name: "_isAllClaimed",
         type: "bool",
       },
+      {
+        indexed: false,
+        internalType: "bool",
+        name: "_isInitialClaimed",
+        type: "bool",
+      },
     ],
     name: "VestedAmount",
     type: "event",
@@ -2033,6 +2044,25 @@ export const SAM_CLAIM_VESTING_ABI = [
     name: "withdrawTokens",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "bytes",
+        name: "",
+        type: "bytes",
+      },
+    ],
+    name: "claimedSignatures",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
