@@ -94,17 +94,17 @@ export default function ClaimSam() {
       {/* SAM TOKEN CLAIM */}
       <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
-          <div className="flex flex-col text-white text-2xl pb-20">
-            <p className="font-bold text-5xl pb-2">
+          <div className="flex flex-col text-white text-2xl pb-12 sm:pb-20">
+            <p className="font-bold text-4xl sm:text-5xl sm:pb-2">
               <span className="text-samurai-red">$SAM</span> Token Claim
             </p>
 
             <p
-              className={`text-lg pt-10 lg:pt-0 text-neutral-300 font-light xl:max-w-[1300px] ${inter.className}`}
+              className={`text-lg pt-4 sm:pt-10 lg:pt-0 text-neutral-300 font-light xl:max-w-[1300px] ${inter.className}`}
             >
               Claim your $SAM airdrop… then lock{" "}
               <Link
-                href="#"
+                href="#lock"
                 className="text-samurai-red pb-1 hover:border-b border-samurai-red"
               >
                 here
@@ -119,74 +119,78 @@ export default function ClaimSam() {
               .
             </p>
             <div
-              className={`grid grid-cols-2 max-w-[710px] gap-5 mt-10 ${inter.className}`}
+              className={`grid grid-cols-2 w-full sm:max-w-[450px] gap-5 mt-10 text-xl sm:text-2xl ${inter.className}`}
             >
-              <span>Total $SAM Airdrop</span>
-              <span>
+              <span className="w-max">Total $SAM Airdrop</span>
+              <span className="text-end">
                 {total.toLocaleString("en-us", { minimumFractionDigits: 2 })}
               </span>
-              <div className="flex items-center gap-1">
-                <span>$SAM Claimable</span>
-                <Tooltip
-                  style="dark"
-                  content={
-                    <div className="flex flex-col gap-2 w-full p-2 text-center">
-                      <span className="font-bold text-lg">Detailed values</span>
-                      <div className="grid grid-cols-2 w-[220px] gap-2">
-                        <Fragment>
-                          <div className="py-1 text-white/50 bg-white/20">
-                            Type
-                          </div>
-                          <div className="py-1 text-white/50 bg-white/20">
-                            $SAM
-                          </div>
-                        </Fragment>
-                        {vestingSchedules?.map(
-                          (item: VestingSchedule, index) => (
-                            <Fragment key={index}>
-                              <div className="py-1 border-white/50">
-                                {item.vesting_type}
-                              </div>
-                              <div className="py-1">
-                                {Number(item.claimable_amount).toLocaleString(
-                                  "en-us",
-                                  { minimumFractionDigits: 2 }
-                                )}
-                              </div>
-                            </Fragment>
-                          )
-                        )}
+              <div className="flex items-center gap-1 w-max">
+                <span className="w-max">$SAM Claimable</span>
+                {claimable > 0 && (
+                  <Tooltip
+                    style="dark"
+                    content={
+                      <div className="flex flex-col gap-2 w-full p-2 text-center">
+                        <span className="font-bold text-lg">
+                          Detailed values
+                        </span>
+                        <div className="grid grid-cols-2 w-[220px] gap-2">
+                          <Fragment>
+                            <div className="py-1 text-white/50 bg-white/20">
+                              Type
+                            </div>
+                            <div className="py-1 text-white/50 bg-white/20">
+                              $SAM
+                            </div>
+                          </Fragment>
+                          {vestingSchedules?.map(
+                            (item: VestingSchedule, index) => (
+                              <Fragment key={index}>
+                                <div className="py-1 border-white/50">
+                                  {item.vesting_type}
+                                </div>
+                                <div className="py-1">
+                                  {Number(item.claimable_amount).toLocaleString(
+                                    "en-us",
+                                    { minimumFractionDigits: 2 }
+                                  )}
+                                </div>
+                              </Fragment>
+                            )
+                          )}
+                        </div>
                       </div>
+                    }
+                  >
+                    <div className="w-6 h-6">
+                      <svg
+                        data-slot="icon"
+                        fill="none"
+                        strokeWidth="1"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
+                        ></path>
+                      </svg>
                     </div>
-                  }
-                >
-                  <div className="w-6 h-6">
-                    <svg
-                      data-slot="icon"
-                      fill="none"
-                      strokeWidth="1"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
-                      ></path>
-                    </svg>
-                  </div>
-                </Tooltip>
+                  </Tooltip>
+                )}
               </div>
 
-              <span>
+              <span className="text-end">
                 {claimable.toLocaleString("en-us", {
                   minimumFractionDigits: 2,
                 })}
               </span>
-              <span>$SAM in Vesting</span>
-              <span>
+              <span className="w-max">$SAM in Vesting</span>
+              <span className="text-end">
                 {vesting.toLocaleString("en-us", {
                   minimumFractionDigits: 2,
                 })}
@@ -208,7 +212,10 @@ export default function ClaimSam() {
               </SSButton>
             </div>
             <div className="pt-10 flex flex-col text-lg gap-2">
-              <Link href="" className="text-yellow-300 hover:opacity-80 w-max">
+              <Link
+                href="#lock"
+                className="text-yellow-300 hover:opacity-80 w-max"
+              >
                 {">"}
                 <span className="pl-2">Lock $SAM to earn Samurai Points</span>
               </Link>

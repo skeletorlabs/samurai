@@ -11,13 +11,11 @@ import {
   discord,
   globe,
   youtube,
-  instagram,
   facebook,
 } from "@/utils/svgs";
 import { Page } from "./enums";
 import { IDO } from "./interfaces";
 import {
-  anote,
   galaxyGamesHauntedSpace,
   havensCompass,
   orangedx,
