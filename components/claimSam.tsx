@@ -36,6 +36,7 @@ export default function ClaimSam() {
 
   const onClaimVesting = useCallback(
     async (claimAll: boolean) => {
+      if (claimAll) setClaimAllBoxIsOpen(false);
       setLoading(true);
       if (
         chain &&
@@ -48,7 +49,6 @@ export default function ClaimSam() {
         await claimVesting(claimAll, account, signer);
         await onGetSamClaimInfos();
       }
-      if (claimAll) setClaimAllBoxIsOpen(false);
       setLoading(false);
     },
 
@@ -274,7 +274,10 @@ export default function ClaimSam() {
                       By claiming all $SAM, you are slashing your remaining $SAM
                       allocation, reducing it by 50%
                     </p>
-                    <SSButton click={() => onClaimVesting(true)}>
+                    <SSButton
+                      disabled={loading}
+                      click={() => onClaimVesting(true)}
+                    >
                       I understand
                     </SSButton>
                   </div>
