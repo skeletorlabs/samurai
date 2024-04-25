@@ -200,13 +200,15 @@ export default function ClaimSam() {
             </div>
             <div className="pt-10 flex flex-col md:flex-row gap-3 md:gap-5">
               <SSButton
-                disabled={loading || claimable === 0}
+                disabled
+                // disabled={loading || claimable === 0}
                 click={() => onClaimVesting(false)}
               >
                 {loading ? "Loading..." : "Claim Vested $SAM"}
               </SSButton>
               <SSButton
-                disabled={loading || (claimable === 0 && vesting === 0)}
+                // disabled={loading || (claimable === 0 && vesting === 0)}
+                disabled
                 click={() => setClaimAllBoxIsOpen(true)}
                 secondary
               >
