@@ -36,8 +36,9 @@ export default function ClaimSam() {
 
   const onClaimVesting = useCallback(
     async (claimAll: boolean) => {
-      if (claimAll) setClaimAllBoxIsOpen(false);
       setLoading(true);
+      if (claimAll) setClaimAllBoxIsOpen(false);
+
       if (
         chain &&
         !chain?.unsupported &&
