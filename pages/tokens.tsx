@@ -61,7 +61,14 @@ export default function Tokens() {
                 >
                   Buy $SAM on Aerodrome
                 </SSButton>
-                <SSButton secondary>Provide SAM/WETH LP on Aerodrome</SSButton>
+                <SSButton
+                  secondary
+                  isLink
+                  href="https://aerodrome.finance/deposit?token0=0x4200000000000000000000000000000000000006&token1=0xed1779845520339693CDBffec49a74246E7D671b&type=-1"
+                  target="blank"
+                >
+                  Provide SAM/WETH LP on Aerodrome
+                </SSButton>
               </div>
             </div>
           </div>

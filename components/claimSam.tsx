@@ -222,7 +222,8 @@ export default function ClaimSam() {
               </Link>
               <Link
                 className="text-white hover:opacity-80 w-max flex items-center"
-                href=""
+                href="https://aerodrome.finance/deposit?token0=0x4200000000000000000000000000000000000006&token1=0xed1779845520339693CDBffec49a74246E7D671b&type=-1"
+                target="blank"
               >
                 {">"}
                 <span className="pl-2">Provide SAM/WETH LP on</span>
