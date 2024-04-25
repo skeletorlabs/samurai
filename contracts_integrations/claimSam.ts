@@ -21,7 +21,17 @@ export type VestingSchedule = {
 export type ClaimVestingParams = {
   signature: string;
   nonce: number;
-  claim_infos: [number, string, boolean][];
+  claim_infos: [
+    number,
+    number,
+    boolean,
+    boolean,
+    number,
+    number,
+    number,
+    number,
+    number
+  ][];
 };
 
 const baseURL = process.env.NEXT_PUBLIC_IDEOFUZION_URL;
