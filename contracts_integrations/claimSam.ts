@@ -23,11 +23,11 @@ export type ClaimVestingParams = {
   nonce: number;
   claim_infos: [
     number,
-    number,
+    string,
     boolean,
     boolean,
     number,
-    number,
+    string,
     number,
     number,
     number
