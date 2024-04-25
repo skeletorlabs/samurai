@@ -93,7 +93,7 @@ export default function ClaimSam() {
   return (
     <>
       {/* SAM TOKEN CLAIM */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
+      <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted relative">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <div className="flex flex-col text-white text-2xl pb-12 sm:pb-20">
             <p className="font-bold text-4xl sm:text-5xl sm:pb-2">
@@ -233,6 +233,16 @@ export default function ClaimSam() {
               </Link>
             </div>
           </div>
+        </div>
+        <div className="absolute top-0 left-0 flex flex-col justify-center items-center bg-black/80 backdrop-blur-md w-full h-full z-30">
+          <p className="font-bold text-5xl pb-2">
+            <span className="text-samurai-red">$SAM</span> Token Claim
+          </p>
+          <p
+            className={`text-6xl text-neutral-300 pt-4 max-w-[700px]  ${inter.className}`}
+          >
+            COMING SOON!
+          </p>
         </div>
       </div>
 

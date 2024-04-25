@@ -178,17 +178,6 @@ export default function Tokens() {
             </div>
           </div>
         </div>
-
-        {/* <div className="absolute top-0 left-0 flex flex-col justify-center items-center bg-black/80 backdrop-blur-md w-full h-full z-30">
-          <p className="font-bold text-5xl pb-2">
-            Lock <span className="text-samurai-red">$SAM</span>
-          </p>
-          <p
-            className={`text-6xl text-neutral-300 pt-4 max-w-[700px]  ${inter.className}`}
-          >
-            COMING SOON!
-          </p>
-        </div> */}
       </div>
       <ClaimSam />
     </Layout>
