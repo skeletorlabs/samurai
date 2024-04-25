@@ -11,13 +11,11 @@ import {
   discord,
   globe,
   youtube,
-  instagram,
   facebook,
 } from "@/utils/svgs";
 import { Page } from "./enums";
 import { IDO } from "./interfaces";
 import {
-  anote,
   galaxyGamesHauntedSpace,
   havensCompass,
   orangedx,
@@ -476,3 +474,4 @@ export const SOCIALS = [
 
 export const SAM_LOCK_ADDRESS = "0xfb691697BDAf1857C748C004cC7dab3d234E062E";
 export const SAM_ADDRESS = "0xed1779845520339693CDBffec49a74246E7D671b";
+export const SAM_CLAIM_VESTING = "0x9885b3994ac2446Bfe1bA1b388b0888A0785E478";

@@ -29,6 +29,21 @@
     border-radius: 8px !important;
     color: black !important;
   }
+
+  
+  [data-testid="flowbite-tooltip"], [data-testid="flowbite-tooltip-arrow"] {
+    background-color: black !important;
+  }
+
+  [data-testid="flowbite-tooltip"] {
+    border: 1px solid #FF284C;
+    
+  }
+  [data-testid="flowbite-tooltip-arrow"] {
+    border-bottom: 1px solid #FF284C;
+    border-right: 1px solid #FF284C;
+  }
+
 }
 
 .custom-overlay {

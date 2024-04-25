@@ -54,7 +54,13 @@ export default function Tokens() {
                 <span className="font-bold text-white">earn</span>.
               </p>
               <div className="flex flex-col lg:flex-row lg:items-center gap-5 lg:gap-7 mt-12">
-                <SSButton>Buy $SAM on Aerodrome</SSButton>
+                <SSButton
+                  isLink
+                  target="blank"
+                  href="https://aerodrome.finance/swap?from=0x4200000000000000000000000000000000000006&to=0xed1779845520339693CDBffec49a74246E7D671b"
+                >
+                  Buy $SAM on Aerodrome
+                </SSButton>
                 <SSButton secondary>Provide SAM/WETH LP on Aerodrome</SSButton>
               </div>
             </div>
@@ -107,7 +113,10 @@ export default function Tokens() {
       </div>
 
       {/* STAKING */}
-      <div className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/20 border-t border-samurai-red/50 border-dotted relative">
+      <div
+        id="lock"
+        className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/20 border-t border-samurai-red/50 border-dotted relative"
+      >
         <div className="flex flex-col text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
             <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-6 lg:px-8 xl:px-20">
@@ -122,23 +131,24 @@ export default function Tokens() {
               access, ventures entry, and to accumulate Samurai Points.
             </p>
 
-            <div className="flex flex-col xl:flex-row">
-              <div className="px-6 lg:px-8 xl:px-20">
-                <LockSam />
-              </div>
-              <div className="flex flex-col max-w-[700px] mt-10">
-                <p className="font-bold text-6xl pb-2 xl:mt-12 px-6 lg:px-8 xl:px-20">
+            <div className="flex flex-col xl:flex-row px-6 lg:px-8 xl:px-20">
+              <LockSam />
+
+              <div className="flex flex-col items-center w-full lg:max-w-[580px] mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-[8px] sm:border border-white/10 pt-10 sm:pb-10 xl:py-0 xl:ml-12 2xl:ml-24 sm:shadow-lg">
+                <p className="flex flex-col w-full items-center xl:mt-12">
                   <Image
                     src="/samurai.svg"
                     width={300}
                     height={300}
                     alt=""
-                    className="flex sm:ml-10 lg:ml-0 self-center sm:self-start mb-10 w-[200px] md:w-[300px]"
+                    className="mb-10 w-[200px] md:w-[300px]"
                   />
+                </p>
+                <p className="font-bold text-6xl pb-2 text-center">
                   <span className="text-samurai-red">Samurai</span> Points
                 </p>
                 <p
-                  className={`text-lg text-neutral-300 pt-1 px-6 lg:px-8 xl:px-20 ${inter.className}`}
+                  className={`text-lg text-neutral-300 pt-1 px-6 lg:px-8 xl:px-20 text-center ${inter.className}`}
                 >
                   Accumulate Samurai Points by participating in token launches,
                   locking $SAM, providing SAM liquidity, or by participating in
@@ -146,7 +156,7 @@ export default function Tokens() {
                 </p>
 
                 <p
-                  className={`text-2xl text-neutral-100 pt-10 px-6 lg:px-8 xl:px-20 ${inter.className}`}
+                  className={`text-2xl text-center text-neutral-100 pt-10 px-6 lg:px-8 xl:px-16 ${inter.className}`}
                 >
                   What can{" "}
                   <span className="text-samurai-red">Samurai Points</span> be
@@ -162,7 +172,7 @@ export default function Tokens() {
           </div>
         </div>
 
-        <div className="absolute top-0 left-0 flex flex-col justify-center items-center bg-black/80 backdrop-blur-md w-full h-full z-30">
+        {/* <div className="absolute top-0 left-0 flex flex-col justify-center items-center bg-black/80 backdrop-blur-md w-full h-full z-30">
           <p className="font-bold text-5xl pb-2">
             Lock <span className="text-samurai-red">$SAM</span>
           </p>
@@ -171,9 +181,9 @@ export default function Tokens() {
           >
             COMING SOON!
           </p>
-        </div>
+        </div> */}
       </div>
-      {/* <ClaimSam /> */}
+      <ClaimSam />
     </Layout>
   );
 }

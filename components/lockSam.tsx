@@ -285,7 +285,7 @@ export default function LockSam() {
             <div className="flex text-xl gap-2">
               {estimatedPoints.toLocaleString("en-us")}{" "}
               <Tooltip
-                style="light"
+                style="dark"
                 content={
                   <div className="font-medium text-[14px] flex-wrap max-w-[220px]">
                     Points distributed linearly during{" "}
@@ -360,18 +360,17 @@ export default function LockSam() {
             <SSButton
               flexSize
               click={onLock}
-              disabled
-              // disabled={
-              //   loading ||
-              //   !chain ||
-              //   chain.unsupported ||
-              //   !signer ||
-              //   generalLockData === null ||
-              //   generalLockData?.isPaused ||
-              //   Number(inputLock) < generalLockData?.minToLock ||
-              //   !userInfoData ||
-              //   userInfoData?.samBalance < generalLockData?.minToLock
-              // }
+              disabled={
+                loading ||
+                !chain ||
+                chain.unsupported ||
+                !signer ||
+                generalLockData === null ||
+                generalLockData?.isPaused ||
+                Number(inputLock) < generalLockData?.minToLock ||
+                !userInfoData ||
+                userInfoData?.samBalance < generalLockData?.minToLock
+              }
             >
               <div className="flex items-center gap-2 ml-[-5px]">
                 <div className="w-5 h-5 mt-[-3px]">
