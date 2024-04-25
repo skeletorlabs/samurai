@@ -112,7 +112,8 @@ export default function ClaimSam() {
               </Link>{" "}
               or LP{" "}
               <Link
-                href="#"
+                href="https://aerodrome.finance/deposit?token0=0x4200000000000000000000000000000000000006&token1=0xed1779845520339693CDBffec49a74246E7D671b&type=-1"
+                target="blank"
                 className="text-samurai-red pb-1 hover:border-b border-samurai-red"
               >
                 here
