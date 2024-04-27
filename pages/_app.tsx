@@ -6,7 +6,6 @@ import {
   injectedWallet,
   walletConnectWallet,
   metaMaskWallet,
-  coinbaseWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 
 import "@rainbow-me/rainbowkit/styles.css";
@@ -17,7 +16,7 @@ import {
   connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { base } from "wagmi/chains";
+import { base, baseSepolia } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
@@ -49,12 +48,23 @@ export const localhost = /*#__PURE__*/ defineChain({
 
 const { chains, publicClient } = configureChains(
   [base],
+  // [baseSepolia],
   [
     publicProvider(),
     jsonRpcProvider({
-      rpc: () => ({
-        http: process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string,
-        webSocket: process.env.NEXT_PUBLIC_BASE_WSS as string,
+      rpc: (chain) => ({
+        http:
+          chain !== base
+            ? localhost.rpcUrls.default.http.toString()
+            : chain === baseSepolia
+            ? baseSepolia.rpcUrls.default.http.toString()
+            : (process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string),
+        webSocket:
+          chain !== base
+            ? localhost.rpcUrls.default.http.toString()
+            : chain === baseSepolia
+            ? baseSepolia.rpcUrls.default.http.toString()
+            : (process.env.NEXT_PUBLIC_BASE_WSS as string),
       }),
     }),
   ]
@@ -74,11 +84,11 @@ const connectors = connectorsForWallets([
         chains: chains,
         projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
       }),
+      // rainbowWallet({ projectId, chains }),
       walletConnectWallet({
         projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
         chains,
       }),
-      coinbaseWallet({ appName: "Samurai Starter", chains }),
     ],
   },
 ]);

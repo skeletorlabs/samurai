@@ -396,8 +396,9 @@ export const IDO_LIST: IDO[] = [
 export const LINKS: { [key: number]: string } = {
   1337: "http://localhost:8545",
   5: "https://goerli.etherscan.io",
-  11155111: "https://sepolia.etherscan.io/",
+  11155111: "https://sepolia.etherscan.io",
   8453: "https://basescan.org",
+  84532: "https://sepolia.basescan.org",
 };
 
 export const RPC_URL: { [key: number]: string } = {
@@ -405,6 +406,7 @@ export const RPC_URL: { [key: number]: string } = {
   5: process.env.NEXT_PUBLIC_GOERLI_RPC_URL as string,
   11155111: process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL as string,
   8453: process.env.NEXT_PUBLIC_BASE_RPC_URL as string,
+  84532: process.env.NEXT_PUBLIC_BASE_SEPOLIA_RPC_URL as string,
 };
 
 export const TOKENS_TO_SYMBOL: Record<string, string> = {
@@ -474,4 +476,5 @@ export const SOCIALS = [
 
 export const SAM_LOCK_ADDRESS = "0xfb691697BDAf1857C748C004cC7dab3d234E062E";
 export const SAM_ADDRESS = "0xed1779845520339693CDBffec49a74246E7D671b";
-export const SAM_CLAIM_VESTING = "0x9885b3994ac2446Bfe1bA1b388b0888A0785E478";
+export const SAM_CLAIM_VESTING = "0xDD687b579c5C542A14874e79E404b83E78e6E18a"; // BASE MAINNET
+// export const SAM_CLAIM_VESTING = "0xE42c1929612bBc03572C518bAf05c38147D5d67e"; // BASE SEPOLIA

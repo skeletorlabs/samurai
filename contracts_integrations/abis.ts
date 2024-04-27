@@ -1882,6 +1882,31 @@ export const SAM_CLAIM_VESTING_ABI = [
             name: "isInitialClaimed",
             type: "bool",
           },
+          {
+            internalType: "uint256",
+            name: "totalClaimed",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "totalAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "startTime",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "endTime",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "initialReleasePercentage",
+            type: "uint256",
+          },
         ],
         internalType: "struct VestingClaim.ClaimInfo[]",
         name: "claimInfos",
@@ -2066,6 +2091,25 @@ export const SAM_CLAIM_VESTING_ABI = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_claimId",
+        type: "uint256",
+      },
+    ],
+    name: "getVestedAmount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "owner",
     outputs: [
@@ -2086,6 +2130,65 @@ export const SAM_CLAIM_VESTING_ABI = [
         internalType: "address",
         name: "",
         type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "vestingLimits",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "claimId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "isAllClaimed",
+        type: "bool",
+      },
+      {
+        internalType: "bool",
+        name: "isInitialClaimed",
+        type: "bool",
+      },
+      {
+        internalType: "uint256",
+        name: "totalClaimed",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "totalAmount",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "startTime",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "endTime",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "initialReleasePercentage",
+        type: "uint256",
       },
     ],
     stateMutability: "view",

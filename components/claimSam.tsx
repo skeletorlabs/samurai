@@ -200,15 +200,13 @@ export default function ClaimSam() {
             </div>
             <div className="pt-10 flex flex-col md:flex-row gap-3 md:gap-5">
               <SSButton
-                disabled
-                // disabled={loading || claimable === 0}
+                disabled={loading || claimable === 0}
                 click={() => onClaimVesting(false)}
               >
                 {loading ? "Loading..." : "Claim Vested $SAM"}
               </SSButton>
               <SSButton
-                // disabled={loading || (claimable === 0 && vesting === 0)}
-                disabled
+                disabled={loading || (claimable === 0 && vesting === 0)}
                 click={() => setClaimAllBoxIsOpen(true)}
                 secondary
               >
@@ -236,7 +234,7 @@ export default function ClaimSam() {
             </div>
           </div>
         </div>
-        <div className="absolute top-0 left-0 flex flex-col justify-center items-center bg-black/80 backdrop-blur-md w-full h-full z-30">
+        {/* <div className="absolute top-0 left-0 flex flex-col justify-center items-center bg-black/80 backdrop-blur-md w-full h-full z-30">
           <p className="font-bold text-5xl pb-2">
             <span className="text-samurai-red">$SAM</span> Token Claim
           </p>
@@ -245,7 +243,7 @@ export default function ClaimSam() {
           >
             COMING SOON!
           </p>
-        </div>
+        </div> */}
       </div>
 
       <Transition appear show={claimAllBoxIsOpen} as={Fragment}>

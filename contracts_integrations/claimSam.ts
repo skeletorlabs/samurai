@@ -21,13 +21,24 @@ export type VestingSchedule = {
 export type ClaimVestingParams = {
   signature: string;
   nonce: number;
-  claim_infos: [number, string, boolean][];
+  claim_infos: [
+    number,
+    string,
+    boolean,
+    boolean,
+    number,
+    string,
+    number,
+    number,
+    number
+  ][];
 };
 
 const baseURL = process.env.NEXT_PUBLIC_IDEOFUZION_URL;
 
 export async function getClaimInfos(account: string) {
   const url = `${baseURL}/api/vestingschedules/wallet-claims?address=${account}`;
+
   const response = await fetch(url);
   const json = await response.json();
   const data: VestingSchedule[] = json.data;
