@@ -47,8 +47,8 @@ export const localhost = /*#__PURE__*/ defineChain({
 });
 
 const { chains, publicClient } = configureChains(
-  // [base],
-  [baseSepolia],
+  [base],
+  // [baseSepolia],
   [
     publicProvider(),
     jsonRpcProvider({

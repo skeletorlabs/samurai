@@ -39,7 +39,6 @@ const baseURL = process.env.NEXT_PUBLIC_IDEOFUZION_URL;
 export async function getClaimInfos(account: string) {
   const url = `${baseURL}/api/vestingschedules/wallet-claims?address=${account}`;
 
-  console.log(url);
   const response = await fetch(url);
   const json = await response.json();
   const data: VestingSchedule[] = json.data;
