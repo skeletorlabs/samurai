@@ -6,6 +6,8 @@ import {
   injectedWallet,
   walletConnectWallet,
   metaMaskWallet,
+  coinbaseWallet,
+  trustWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 
 import "@rainbow-me/rainbowkit/styles.css";
@@ -84,10 +86,17 @@ const connectors = connectorsForWallets([
         chains: chains,
         projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
       }),
-      // rainbowWallet({ projectId, chains }),
+
+      coinbaseWallet({ appName: "SamuraiStarter", chains }),
+
       walletConnectWallet({
         projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
         chains,
+      }),
+
+      trustWallet({
+        chains,
+        projectId: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID as string,
       }),
     ],
   },
