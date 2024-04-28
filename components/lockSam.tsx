@@ -12,6 +12,7 @@ import {
   UserInfo,
   generalInfo,
   getEstimatedPoints,
+  getTotalLocked,
   lock,
   userInfo,
   withdraw,
@@ -43,6 +44,8 @@ export default function LockSam() {
   const [activeLocksList, setActiveLocksList] = useState<LockInfo[] | []>([]);
   const [unlockedsList, setUnlockedsList] = useState<LockInfo[] | []>([]);
   const [canWithdraw, setCanWithdraw] = useState(false);
+  const [totalLocked, setTotalLocked] = useState(0);
+  const [loadingEvents, setLoadingEvents] = useState(false);
 
   const { signer } = useContext(StateContext);
   const { chain } = useNetwork();
@@ -187,6 +190,13 @@ export default function LockSam() {
     }
   }, [generalLockData]);
 
+  const onReadLogs = useCallback(async () => {
+    setLoadingEvents(true);
+    const total = await getTotalLocked();
+    if (total) setTotalLocked(total);
+    setLoadingEvents(false);
+  }, [setTotalLocked, setLoadingEvents]);
+
   const onGetGeneralInfo = useCallback(async () => {
     const response = await generalInfo();
     onInputLockChange(response?.minToLock.toString() || "0");
@@ -195,6 +205,7 @@ export default function LockSam() {
 
   useEffect(() => {
     onGetGeneralInfo();
+    onReadLogs();
   }, []);
 
   return (
@@ -203,22 +214,37 @@ export default function LockSam() {
         <div className="hidden absolute top-10 left-[50px] bg-lock bg-no-repeat bg-cover w-[500px] h-[500px] text-white/40">
           {lockImage}
         </div>
-        <div className="hidden lg:flex items-center relative gap-2 pl-2">
-          LOCK <span className="text-samurai-red">$SAM</span>
+
+        <div className="flex flex-col">
+          <span className="flex items-center relative gap-2 pl-2">
+            Total Platform Locked
+          </span>
+          <div className="pl-2 text-lg">
+            {loadingEvents ? (
+              <span className="text-samurai-red pl-1">loading Logs...</span>
+            ) : (
+              <p>
+                {totalLocked.toLocaleString("en-us", {
+                  maximumFractionDigits: 18,
+                })}
+                <span className="text-samurai-red pl-1">$SAM</span>
+              </p>
+            )}
+          </div>
         </div>
 
         <div className="flex items-center rounded-[4px] w-full bg-black/75 backdrop-blur-sm p-6 py-8 text-sm leading-[20px] border border-white/20 lg:mt-8 shadow-md shadow-black/60 z-20">
           {signer && chain && !chain.unsupported ? (
             <div className="flex flex-col rounded-[4px] w-full gap-3">
               <div>
-                <p className="text-white/40">Your Points</p>
+                <p className="text-white/40">Samurai Points</p>
                 <span className="text-samurai-red text-xl">
                   {userInfoData?.totalPoints.toLocaleString("en-us") || 0}
                 </span>
               </div>
 
               <div>
-                <p className="text-white/40">Total Locked</p>
+                <p className="text-white/40">My TVL</p>
                 <p className="text-lg">
                   {(userInfoData?.totalLocked || 0).toLocaleString("en-us", {
                     minimumFractionDigits: 2,

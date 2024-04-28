@@ -1,10 +1,11 @@
-import { ethers } from "ethers";
+import { ethers, formatEther } from "ethers";
 import { ERC20_ABI, SAM_LOCK_ABI } from "./abis";
 import handleError from "../utils/handleErrors";
 import { balanceOf } from "./balanceOf";
 import checkApproval from "./check-approval";
 import { notificateTx } from "@/utils/notificateTx";
 import { SAM_ADDRESS, SAM_LOCK_ADDRESS } from "@/utils/constants";
+import { jsonRpcProvider } from "wagmi/dist/providers/jsonRpc";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const TEST_RPC = "http://127.0.0.1:8545";
@@ -209,6 +210,68 @@ export async function withdraw(
     await notificateTx(tx, network);
   } catch (e) {
     handleError({ e: e, notificate: true });
+  }
+}
+
+export type Event = {
+  wallet: string;
+  amount: number;
+  lockIndex: number;
+};
+
+export async function getLockedEvents() {
+  try {
+    const contract = await getContract();
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+    const startBlock = 13253153;
+    const currentBlock = await provider.getBlockNumber();
+    const blocksPerFilter = 10000;
+
+    let allEvents: Event[] = []; // Array to store all retrieved events
+
+    for (
+      let fromBlock = startBlock;
+      fromBlock <= currentBlock;
+      fromBlock += blocksPerFilter
+    ) {
+      const toBlock = Math.min(fromBlock + blocksPerFilter - 1, currentBlock); // Ensure toBlock doesn't exceed current block
+      const eventFilter = contract!.filters.Locked();
+      const events = await contract!.queryFilter(
+        eventFilter,
+        fromBlock,
+        toBlock
+      );
+
+      if (events && events?.length > 0) {
+        events.forEach(async (event: any) => {
+          const log = event.args as [string, number, number];
+          allEvents.push({
+            wallet: log[0],
+            amount: Number(formatEther(log[1])),
+            lockIndex: Number(log[2]),
+          });
+        });
+      }
+    }
+
+    return allEvents;
+  } catch (error) {
+    console.error("Error fetching contract log events:", error);
+    return [];
+  }
+}
+
+export async function getTotalLocked() {
+  try {
+    const lockedEvents = await getLockedEvents();
+    const totalLocked = lockedEvents?.reduce(
+      (acc: number, cur: Event) => acc + cur.amount,
+      0
+    );
+
+    return totalLocked;
+  } catch (error) {
+    return 0;
   }
 }
 
