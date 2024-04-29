@@ -8,7 +8,7 @@ export const SUPPLY_QUERY = `
 
 export const MY_NFTS_QUERY = `
   query Minted($wallet: String!) {
-    minteds(where: {wallet: $wallet}) {
+    minteds(where: {wallet: $wallet, tokenId_lte: "2006"}) {
       id, tokenId, tokenUri, wallet
     }
   }
@@ -16,7 +16,7 @@ export const MY_NFTS_QUERY = `
 
 export const LAST_FIVE_NFTS_QUERY = `
   query LAST_FIVE_NFTS_MINTED {
-    minteds(orderBy: tokenId, orderDirection: desc, first: 5) {
+    minteds(orderBy: tokenId, orderDirection: desc, first: 5, skip: 111) {
       id, tokenId, tokenUri, wallet
     }
   }

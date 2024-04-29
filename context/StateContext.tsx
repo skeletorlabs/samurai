@@ -44,8 +44,10 @@ export const StateProvider = ({ children }: Props) => {
   const getSigner = useCallback(async () => {
     if (window.ethereum !== null) {
       const provider = new ethers.BrowserProvider(window.ethereum);
-      const walletSigner = await provider.getSigner();
-      setSigner(walletSigner);
+      if (provider) {
+        const walletSigner = await provider.getSigner();
+        setSigner(walletSigner);
+      }
     }
   }, [setSigner]);
 
