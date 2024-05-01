@@ -96,7 +96,7 @@ export default function Home() {
               <p
                 className={`leading-normal lg:leading-relaxed pt-6 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
               >
-                Samurai Starter is the leading early-stage crowdfunding platform
+                Samurai Starter is a leading early-stage crowdfunding platform
                 that incentivizes community members to invest and participate in
                 the most innovative projects in the crypto space.
               </p>
@@ -108,7 +108,7 @@ export default function Home() {
                   Sanka
                 </SSButton>
                 <SSButton isLink href="/incubation" flexSize>
-                  For projects
+                  For Projects
                 </SSButton>
               </div>
             </div>

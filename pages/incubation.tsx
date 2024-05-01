@@ -94,12 +94,6 @@ export default function Incubation() {
       height: 200,
       color: bg.dark,
     },
-    {
-      image: "/portfolio/acreworld.svg",
-      width: 100,
-      height: 100,
-      color: bg.light,
-    },
     { image: "/portfolio/nfty.svg", width: 300, height: 200, color: bg.dark },
     {
       image: "/portfolio/roguewest.svg",
@@ -126,18 +120,6 @@ export default function Incubation() {
       color: bg.dark,
     },
     {
-      image: "/portfolio/thepiece.svg",
-      width: 300,
-      height: 200,
-      color: bg.light,
-    },
-    {
-      image: "/portfolio/almazeus.svg",
-      width: 200,
-      height: 200,
-      color: bg.light,
-    },
-    {
       image: "/portfolio/oredcurry.svg",
       width: 200,
       height: 200,
@@ -147,28 +129,28 @@ export default function Incubation() {
 
   const team = [
     {
-      src: "/team/avatar1.svg",
+      src: "/team/avatar1.png",
       name: "Paul Osmond - CEO",
       nickname: "HamNcheese",
       linkedin: "https://www.linkedin.com/in/paul-osmond-53381b179/",
       telegram: "https://t.me/runningtrips",
     },
     {
-      src: "/team/avatar0.svg",
+      src: "/team/avatar2.png",
       name: "Lucas Silveira - CTO",
       nickname: "Skeletor",
       linkedin: "",
       telegram: "https://t.me/skeletor_keldor",
     },
     {
-      src: "/team/avatar2.svg",
+      src: "/team/avatar3.png",
       name: "Chadagorn - RA",
       nickname: "The Chad",
       linkedin: "",
       telegram: "",
     },
     {
-      src: "/team/avatar3.jpg",
+      src: "/team/avatar4.png",
       name: "Beau - Content/Design",
       nickname: "Beau",
       linkedin: "",
@@ -411,7 +393,7 @@ export default function Incubation() {
             {team.map((member, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center w-full md:w-max md:h-[350px] p-5 pb-4 bg-white rounded-xl transition-all md:hover:scale-105"
+                className="flex flex-col items-center w-full md:w-max md:h-[380px] p-5 pb-4 bg-white rounded-xl transition-all md:hover:scale-105"
               >
                 <Image
                   src={member.src}

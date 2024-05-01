@@ -358,17 +358,16 @@ export default function Nft() {
 
           <div className="relative md:mr-12 xl:max-w-[900px] px-6 md:px-0">
             <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
-              Mint a <span className="text-samurai-red">SamNFT </span>
-              to be part of our vibrant
-              <span className="text-samurai-red"> community</span>.
+              Buy a <span className="text-samurai-red">SamNFT </span>
+              for lifetime VIP access to the hottest launchapd on the market!
             </h1>
             <p
               className={`leading-normal lg:leading-relaxed pt-16 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
             >
-              Participate in the SamNFT minting event to become an integral part
-              of our exciting community and gain access to tremendous benefits
-              including lifetime launchpad access, cashback rewards, a $SAM
-              token airdrop and much more!
+              SamNFT holders are the core of the Samurai Starter community —
+              pick up yours on OpenSea to gain access to tremendous benefits
+              including lifetime top-tier launchpad access, cashback rewards,
+              and more!
             </p>
           </div>
 
@@ -421,238 +420,62 @@ export default function Nft() {
             </div>
           </div>
 
-          <div className="flex flex-col w-full xl:min-w-[540px] xl:max-w-[540px]">
-            <div className="flex flex-col gap-3">
-              <div className="flex flex-col lg:flex-row items-center gap-3">
-                <SSButton
-                  // disabled={!signer || isLoading || generalInfo?.isPaused}
-                  disabled
-                  click={() => mintNFT()}
-                  flexSize
-                >
-                  ENDED
-                  {/* <>
-                    {isLoading ? (
-                      <span className="animate-pulse">Loading...</span>
-                    ) : generalInfo?.isPaused ? (
-                      <span>ENDED</span>
-                    ) : (
-                      <span className="text-[14px] sm:text-[16px] xl:text-lg">
-                        MINT {numberOfTokens.toString()} SAMURAI NFT
-                        {numberOfTokens > 1 && "s"} FOR{" "}
-                        {(generalInfo?.unitPrice || 0) * numberOfTokens} ETH
-                      </span>
-                    )}
-                  </> */}
-                </SSButton>
+          <div className="flex flex-col w-full xl:min-w-[540px] xl:max-w-[540px] gap-3">
+            <Link
+              target="blank"
+              href="https://opensea.io/collection/samuraistarter"
+              className="bg-blue-500 px-10 py-2 rounded-[8px] w-full flex justify-center items-center gap-2 mb-3 transition-all text-lg hover:text-xl"
+            >
+              <Image
+                src="/opensea-logo.svg"
+                width={34}
+                height={34}
+                alt="opensea"
+              />
+              <span>OpenSea SamNFT Collection</span>
+            </Link>
 
-                <div className="flex items-center ">
-                  <button
-                    className="w-8 h-8"
-                    onClick={() =>
-                      numberOfTokens > 1
-                        ? setNumberOfTokens(numberOfTokens - 1)
-                        : {}
-                    }
-                  >
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M15.75 19.5L8.25 12l7.5-7.5"
-                      ></path>
-                    </svg>
-                  </button>
-                  <span className="bg-black text-white text-center rounded-xl text-2xl min-w-[30px]">
-                    {numberOfTokens}
+            <div className="flex justify-between items-center gap-4 text-xl">
+              <div>
+                <span className="text-samurai-red">SUPPLY</span>
+              </div>
+              <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
+              <div className="text-2xl">
+                <span>{generalInfo?.totalSupply || 0}</span>
+              </div>
+            </div>
+
+            {signer && (
+              <div className="flex justify-between items-center gap-2 text-xl">
+                <div>MY NFTS</div>
+                <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
+                <div>
+                  <span className="text-samurai-red text-2xl">
+                    {userNfts?.length || 0}
                   </span>
-                  <button
-                    className="w-8 h-8"
-                    onClick={() =>
-                      numberOfTokens < 10
-                        ? setNumberOfTokens(numberOfTokens + 1)
-                        : {}
-                    }
-                  >
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                      ></path>
-                    </svg>
-                  </button>
                 </div>
+              </div>
+            )}
 
-                {/* <SSButton
-                  secondary
-                  disabled={!signer}
-                  click={() => {}}
-                  flexSize
+            <div className="flex w-full lg:max-w-[600px] items-center flex-wrap gap-14 mt-5 2xl:max-h-[830px] 2xl:overflow-scroll">
+              {userNfts?.map((nft, index) => (
+                <Link
+                  key={index}
+                  className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
+                  target="blank"
+                  href={`${process.env.NEXT_PUBLIC_OPENSEA_URL as string}/${
+                    nft.tokenId
+                  }`}
+                  // className="transition-all hover:rotate-12"
                 >
-                  RENT A SAMURAI NFT
-                </SSButton> */}
-              </div>
-              {!generalInfo?.isPaused && whitelistData?.isWhitelisted && (
-                <div className="flex items-center justify-between text-white/80 py-5 mt-5 bg-white/10 px-4 rounded-[8px]">
-                  <div className="flex items-center gap-2 text-green-400">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="22"
-                      height="22"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    WHITELISTED
-                  </div>
-
-                  {!whitelistData?.hasUsedFreeMint &&
-                    whitelistData?.whitelistFinishAt > 0 &&
-                    getUnixTime(new Date()) <
-                      whitelistData?.whitelistFinishAt && (
-                      <button
-                        disabled={isLoading || generalInfo?.isPaused}
-                        onClick={freeMintNFT}
-                        className="text-green-400 border p-2 px-5 rounded-[8px] text-[12px] border-green-400 hover:bg-green-400 hover:text-black font-semibold"
-                      >
-                        {isLoading ? (
-                          "Loading..."
-                        ) : (
-                          <>
-                            MINT FOR FREE UNTIL{" "}
-                            {fromUnixTime(whitelistData?.whitelistFinishAt)
-                              .toDateString()
-                              .toUpperCase()}
-                          </>
-                        )}
-                      </button>
-                    )}
-                  {whitelistData.hasUsedFreeMint && (
-                    <span className="text-green-400 font-semibold">MINTED</span>
-                  )}
-
-                  {!whitelistData?.hasUsedFreeMint &&
-                    whitelistData?.whitelistFinishAt > 0 &&
-                    getUnixTime(new Date()) >
-                      whitelistData?.whitelistFinishAt && (
-                      <span className="text-red-400 font-semibold">
-                        OUT OF FREE MINT WINDOW
-                      </span>
-                    )}
-
-                  {!whitelistData?.hasUsedFreeMint &&
-                    whitelistData?.whitelistFinishAt === 0 && (
-                      <span className="text-green-400 font-semibold">
-                        COMING SOON...
-                      </span>
-                    )}
-                </div>
-              )}
-
-              <div className="flex flex-col text-xl gap-3 mt-8">
-                <div className="flex justify-between items-center gap-4">
-                  <div>
-                    <span className="text-samurai-red">MINTED</span>
-                    /SUPPLY
-                  </div>
-                  <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
-                  <div className="text-2xl">
-                    <span className="text-samurai-red">
-                      {/* {lastFiveNfts && lastFiveNfts.length > 0
-                        ? lastFiveNfts[0].tokenId
-                        : 0} */}
-                      2006
-                    </span>
-                    /
-                    {/* {supply ? Number(supply?.maxSupply) + Number(supply?.maxWhitelistedSupply) : 0} */}
-                    {/* {lastFiveNfts && lastFiveNfts.length > 0
-                      ? lastFiveNfts[0].tokenId
-                      : 0} */}
-                    2006
-                  </div>
-                </div>
-
-                {signer && (
-                  <div className="flex justify-between items-center gap-2">
-                    <div>MY NFTS</div>
-                    <div className="flex flex-1 border-[0.5px] border-neutral-600 border-dashed" />
-                    <div>
-                      <span className="text-samurai-red text-2xl">
-                        {userNfts?.length || 0}
-                      </span>
-                    </div>
-                  </div>
-                )}
-
-                <div className="flex w-full lg:max-w-[600px] items-center flex-wrap gap-14 mt-5 2xl:max-h-[830px] 2xl:overflow-scroll">
-                  {userNfts?.map((nft, index) => (
-                    <div
-                      key={index}
-                      className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
-                    >
-                      <Image
-                        src={nft?.src ? nft?.src : "/loading.gif"}
-                        fill
-                        alt={image}
-                        className="scale-[0.95] rounded-[8px]"
-                      />
-
-                      {/* CHECK ON OPENSEA */}
-                      {signer && nft.metadata && (
-                        <Link
-                          target="blank"
-                          href={`${
-                            process.env.NEXT_PUBLIC_OPENSEA_URL as string
-                          }/${nft.tokenId}`}
-                          className="
-                              absolute bottom-12 left-0 
-                              border border-l-0 border-black rounded-tr-[8px] rounded-br-[8px] 
-                              px-3 
-                              text-[12px] font-bold text-white
-                              bg-blue-500  shadow-lg
-                              transition-all hover:pl-6 hover:font-black  
-                            "
-                        >
-                          VIEW
-                        </Link>
-                      )}
-
-                      {/* RENT */}
-                      {/* {signer && nft.src && (
-                        <button
-                          className="
-                              absolute bottom-4 left-0 
-                              border border-l-0 border-black rounded-tr-[8px] rounded-br-[8px] 
-                              px-3 
-                              text-[12px] font-bold text-black
-                              bg-yellow-300  shadow-lg
-                              transition-all hover:pl-6 hover:font-black  
-                            "
-                        >
-                          RENT
-                        </button>
-                      )} */}
-                    </div>
-                  ))}
-                </div>
-              </div>
+                  <Image
+                    src={nft?.src ? nft?.src : "/loading.gif"}
+                    fill
+                    alt={image}
+                    className="scale-[0.95] rounded-[8px] transition-all hover:scale-[0.99]"
+                  />
+                </Link>
+              ))}
             </div>
           </div>
         </div>
@@ -661,21 +484,28 @@ export default function Nft() {
         {/* LATEST NFTS MINTED */}
         <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t-[0.5px] border-samurai-red">
           <div className="flex flex-col relative">
-            <h2 className="text-4xl lg:text-5xl font-bold">
-              Lastest <span className="text-samurai-red">Mints</span>
-              <p className="text-yellow-200 text-[16px] hover:underline w-max pt-2">
+            <h2 className="flex items-center text-4xl lg:text-5xl font-bold gap-5 mb-10">
+              Gallery
+              <p className="w-max">
                 <Link
-                  href="https://opensea.io/collection/samuraistarter"
                   target="blank"
+                  href="https://opensea.io/collection/samuraistarter"
+                  className="bg-blue-500 px-4 py-1 rounded-[8px] flex justify-center items-center gap-2 transition-all text-lg hover:text-xl w-[150px]"
                 >
-                  View entire collection ➜
+                  <Image
+                    src="/opensea-logo.svg"
+                    width={34}
+                    height={34}
+                    alt="opensea"
+                  />
+                  <span>OpenSea</span>
                 </Link>
               </p>
             </h2>
 
             <div
               className={`flex w-full items-center flex-wrap gap-6 ${
-                lastFiveNfts?.length === 0 ? "mt-5" : "mt-10"
+                lastFiveNfts?.length === 0 ? "mt-5" : "mt-4"
               }`}
             >
               {lastFiveNfts?.length === 0 && (

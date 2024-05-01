@@ -72,7 +72,7 @@ export default function Footer() {
             </Link>
           </div>
           <div className="flex mt-[-14px] lg:mt-0 lg:ml-3 gap-5 font-light text-md justify-center lg:justify-end">
-            <span>© 2023 Samurai Starter</span>
+            <span>© 2024 Samurai Starter</span>
             <Link
               target="blank"
               href="https://v1.samuraistarter.com"

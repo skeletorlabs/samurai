@@ -16,7 +16,7 @@ export const MY_NFTS_QUERY = `
 
 export const LAST_FIVE_NFTS_QUERY = `
   query LAST_FIVE_NFTS_MINTED {
-    minteds(orderBy: tokenId, orderDirection: desc, first: 5, skip: 111) {
+    minteds(orderBy: tokenId, orderDirection: desc, first: 24, skip: 111) {
       id, tokenId, tokenUri, wallet
     }
   }

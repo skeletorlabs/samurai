@@ -6,6 +6,7 @@ import TopLayout from "@/components/topLayout";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import LockSam from "@/components/lockSam";
 import ClaimSam from "@/components/claimSam";
+import Link from "next/link";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -84,7 +85,7 @@ export default function Tokens() {
             </p>
 
             <div
-              className={`flex flex-row flex-wrap gap-5 text-lg pt-4 text-white lg:pr-5 font-light xl:max-w-[1100px] ${inter.className}`}
+              className={`flex flex-row flex-wrap gap-5 text-lg pt-4 text-white lg:pr-5 font-light xl:max-w-[1200px] ${inter.className}`}
             >
               <div className="bg-white/10 p-3">
                 <span className="text-yellow-400 font-bold">Total Supply:</span>{" "}
@@ -104,7 +105,13 @@ export default function Tokens() {
                 <span className="text-yellow-400 font-bold">
                   Token Contract:
                 </span>{" "}
-                Coming soon
+                <Link
+                  href="https://basescan.org/address/0x519ed34150300dc0d04d50a5ff401177a92b4406"
+                  target="blank"
+                  className="underline hover:text-samurai-red"
+                >
+                  0x519eD3...2b4406
+                </Link>
               </div>
               <div className="bg-white/10 p-3">
                 <span className="text-yellow-400 font-bold">$SAM</span> on

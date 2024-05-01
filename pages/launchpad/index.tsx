@@ -29,11 +29,6 @@ export default function Launchpad() {
               who are dedicated to furthering the fundamental ideas of the
               cryptocurrency movement.
             </p>
-            <div className="flex flex-col lg:flex-row mt-12 gap-5 z-20">
-              <SSButton isLink href="#participate">
-                Get Started
-              </SSButton>
-            </div>
           </div>
           <Image
             src="/samurai-launchpad-icon.svg"
