@@ -151,11 +151,10 @@ export default function Incubation() {
     },
     {
       src: "/team/avatar4.png",
-      name: "Beau - Content/Design",
-      nickname: "Beau",
+      name: "Callum Howe - CBDO",
+      nickname: "Cal",
       linkedin: "",
-      telegram: "",
-      website: "https://slance.co/",
+      telegram: "https://t.me/TheCryptoCopywriter",
     },
   ];
 
@@ -428,7 +427,7 @@ export default function Incubation() {
                       {telegram}
                     </Link>
                   )}
-                  {member.website && (
+                  {/* {member && (
                     <Link
                       href={member.website}
                       target="blank"
@@ -436,7 +435,7 @@ export default function Incubation() {
                     >
                       {globe}
                     </Link>
-                  )}
+                  )} */}
                 </div>
               </div>
             ))}
