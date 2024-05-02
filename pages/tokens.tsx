@@ -124,11 +124,11 @@ export default function Tokens() {
                   Token Contract:
                 </span>{" "}
                 <Link
-                  href="https://basescan.org/address/0x519ed34150300dc0d04d50a5ff401177a92b4406"
+                  href="https://basescan.org/token/0xed1779845520339693CDBffec49a74246E7D671b"
                   target="blank"
                   className="underline hover:text-samurai-red"
                 >
-                  0x519eD3...2b4406
+                  0xe...71b
                 </Link>
               </div>
             </div>
