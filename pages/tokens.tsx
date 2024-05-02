@@ -7,6 +7,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import LockSam from "@/components/lockSam";
 import ClaimSam from "@/components/claimSam";
 import Link from "next/link";
+import { SOCIALS } from "@/utils/constants";
+import { linkedin, twitter } from "@/utils/svgs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -80,9 +82,25 @@ export default function Tokens() {
       <div className="flex flex-col py-10 md:py-20 w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <div className="flex flex-col text-white text-2xl">
-            <p className="font-bold text-4xl pb-2 opacity-[0.8]">
-              <span className="text-samurai-red">$SAM</span> Tokenomics
-            </p>
+            <div className="flex items-center gap-3">
+              <p className="font-bold text-4xl pb-2 opacity-[0.8] w-[400px]">
+                <span className="text-samurai-red">$SAM</span> Tokenomics
+              </p>
+              <div className="flex items-center justify-center w-full lg:justify-start gap-8 lg:px-5 mb-1">
+                {SOCIALS.toReversed()
+                  .slice(0, 2)
+                  .map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.href}
+                      className="transition-all hover:opacity-75 text-white scale-[1.5]"
+                      target="blank"
+                    >
+                      {item.svg}
+                    </Link>
+                  ))}
+              </div>
+            </div>
 
             <div
               className={`flex flex-row flex-wrap gap-5 text-lg pt-4 text-white lg:pr-5 font-light xl:max-w-[1200px] ${inter.className}`}

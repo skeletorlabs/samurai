@@ -45,7 +45,7 @@ export default function Footer() {
                     ? "scale-[1.2]"
                     : "scale-[1.3]"
                 }`}
-                target="_blank"
+                target="blank"
               >
                 {item.svg}
               </Link>

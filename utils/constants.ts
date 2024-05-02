@@ -12,6 +12,8 @@ import {
   globe,
   youtube,
   facebook,
+  dextools,
+  dexscreener,
 } from "@/utils/svgs";
 import { Page } from "./enums";
 import { IDO } from "./interfaces";
@@ -471,6 +473,16 @@ export const SOCIALS = [
     svg: linkedin,
     href: "https://www.linkedin.com/company/samurai-starter/",
     class: "scale-50",
+  },
+  {
+    svg: dextools,
+    href: "https://www.dextools.io/app/en/base/pair-explorer/0x598299fb3f3829f7ba08662948706cdff7ec2350?t=1714671643659",
+    class: "",
+  },
+  {
+    svg: dexscreener,
+    href: "https://dexscreener.com/base/0x598299fb3f3829f7ba08662948706cdff7ec2350",
+    class: "",
   },
 ];
 
