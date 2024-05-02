@@ -87,9 +87,8 @@ export default function Tokens() {
                 <span className="text-samurai-red">$SAM</span> Tokenomics
               </p>
               <div className="flex items-center justify-center w-full lg:justify-start gap-8 lg:px-5 mb-1">
-                {SOCIALS.toReversed()
-                  .slice(0, 2)
-                  .map((item, index) => (
+                {SOCIALS.slice(SOCIALS.length - 4, SOCIALS.length).map(
+                  (item, index) => (
                     <Link
                       key={index}
                       href={item.href}
@@ -98,7 +97,8 @@ export default function Tokens() {
                     >
                       {item.svg}
                     </Link>
-                  ))}
+                  )
+                )}
               </div>
             </div>
 
@@ -130,14 +130,6 @@ export default function Tokens() {
                 >
                   0x519eD3...2b4406
                 </Link>
-              </div>
-              <div className="bg-white/10 p-3">
-                <span className="text-yellow-400 font-bold">$SAM</span> on
-                CoinGecko
-              </div>
-              <div className="bg-white/10 p-3">
-                <span className="text-yellow-400 font-bold">$SAM</span> on
-                CoinMarketCap
               </div>
             </div>
           </div>

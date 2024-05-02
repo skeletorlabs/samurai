@@ -14,6 +14,8 @@ import {
   facebook,
   dextools,
   dexscreener,
+  coingecko,
+  coinmarketcap,
 } from "@/utils/svgs";
 import { Page } from "./enums";
 import { IDO } from "./interfaces";
@@ -473,6 +475,16 @@ export const SOCIALS = [
     svg: linkedin,
     href: "https://www.linkedin.com/company/samurai-starter/",
     class: "scale-50",
+  },
+  {
+    svg: coinmarketcap,
+    href: "#",
+    class: "",
+  },
+  {
+    svg: coingecko,
+    href: "#",
+    class: "",
   },
   {
     svg: dextools,
