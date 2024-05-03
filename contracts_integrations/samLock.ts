@@ -216,7 +216,6 @@ export async function withdraw(
 export type Event = {
   wallet: string;
   amount: number;
-  lockIndex: number;
 };
 
 export async function getLockedEvents() {
@@ -245,10 +244,74 @@ export async function getLockedEvents() {
       if (events && events?.length > 0) {
         events.forEach(async (event: any) => {
           const log = event.args as [string, number, number];
+          const wallet = log[0];
+
+          const index = allEvents.findIndex((event) => event.wallet === wallet);
+
+          if (index !== -1) {
+            allEvents[index].amount += Number(formatEther(log[1]));
+          } else {
+            allEvents.push({
+              wallet: log[0],
+              amount: Number(formatEther(log[1])),
+            });
+          }
+        });
+      }
+    }
+
+    return allEvents;
+  } catch (error) {
+    console.error("Error fetching contract log events:", error);
+    return [];
+  }
+}
+
+export type EventComplete = {
+  wallet: string;
+  amount: number;
+  lockIndex: number;
+  points: number;
+};
+
+export async function getLockedCompleteInfos() {
+  try {
+    const contract = await getContract();
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+    const startBlock = 13253153;
+    const currentBlock = await provider.getBlockNumber();
+    const blocksPerFilter = 10000;
+
+    let allEvents: EventComplete[] = []; // Array to store all retrieved events
+
+    for (
+      let fromBlock = startBlock;
+      fromBlock <= currentBlock;
+      fromBlock += blocksPerFilter
+    ) {
+      const toBlock = Math.min(fromBlock + blocksPerFilter - 1, currentBlock); // Ensure toBlock doesn't exceed current block
+      const eventFilter = contract!.filters.Locked();
+      const events = await contract!.queryFilter(
+        eventFilter,
+        fromBlock,
+        toBlock
+      );
+
+      if (events && events?.length > 0) {
+        events.forEach(async (event: any) => {
+          const log = event.args as [string, number, number];
+          const wallet = log[0];
+          const lockIndex = Number(log[2]);
+          console.log(wallet, lockIndex);
+
+          // const points = await contract?.pointsByLock(wallet, lockIndex);
+
           allEvents.push({
-            wallet: log[0],
+            wallet: wallet,
             amount: Number(formatEther(log[1])),
-            lockIndex: Number(log[2]),
+            lockIndex: lockIndex,
+            points: 0,
+            // points: Number(points),
           });
         });
       }
