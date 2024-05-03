@@ -483,7 +483,7 @@ export const SOCIALS = [
   },
   {
     svg: coingecko,
-    href: "#",
+    href: "https://www.coingecko.com/en/coins/samurai-starter",
     class: "",
   },
   {
