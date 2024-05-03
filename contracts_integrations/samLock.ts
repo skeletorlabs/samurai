@@ -270,54 +270,35 @@ export async function getLockedEvents() {
 export type EventComplete = {
   wallet: string;
   amount: number;
-  lockIndex: number;
   points: number;
 };
 
-export async function getLockedCompleteInfos() {
+export async function getLockedCompleteInfos(lockedEvents: Event[]) {
   try {
     const contract = await getContract();
-    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
-    const startBlock = 13253153;
-    const currentBlock = await provider.getBlockNumber();
-    const blocksPerFilter = 10000;
+    const completeEvents: EventComplete[] = [];
 
-    let allEvents: EventComplete[] = []; // Array to store all retrieved events
+    for (let i = 0; i < lockedEvents.length; i++) {
+      const element = lockedEvents[i];
 
-    for (
-      let fromBlock = startBlock;
-      fromBlock <= currentBlock;
-      fromBlock += blocksPerFilter
-    ) {
-      const toBlock = Math.min(fromBlock + blocksPerFilter - 1, currentBlock); // Ensure toBlock doesn't exceed current block
-      const eventFilter = contract!.filters.Locked();
-      const events = await contract!.queryFilter(
-        eventFilter,
-        fromBlock,
-        toBlock
-      );
+      const lockingsByWallet = await contract?.getLockInfos(element.wallet);
+      let pointsPerWallet = 0;
 
-      if (events && events?.length > 0) {
-        events.forEach(async (event: any) => {
-          const log = event.args as [string, number, number];
-          const wallet = log[0];
-          const lockIndex = Number(log[2]);
-          console.log(wallet, lockIndex);
-
-          // const points = await contract?.pointsByLock(wallet, lockIndex);
-
-          allEvents.push({
-            wallet: wallet,
-            amount: Number(formatEther(log[1])),
-            lockIndex: lockIndex,
-            points: 0,
-            // points: Number(points),
-          });
-        });
+      for (let ii = 0; ii < lockingsByWallet.length; ii++) {
+        const points = Number(
+          ethers.formatEther(await contract?.pointsByLock(element.wallet, ii))
+        );
+        pointsPerWallet += points;
       }
+
+      completeEvents.push({
+        wallet: element.wallet,
+        amount: element.amount,
+        points: pointsPerWallet,
+      });
     }
 
-    return allEvents;
+    return completeEvents;
   } catch (error) {
     console.error("Error fetching contract log events:", error);
     return [];
@@ -327,6 +308,12 @@ export async function getLockedCompleteInfos() {
 export async function getTotalLocked() {
   try {
     const lockedEvents = await getLockedEvents();
+
+    // CALL IT TO GET SUMARIZED VALUES ------------------------------------
+    // const completeEvents = await getLockedCompleteInfos(lockedEvents);
+    // console.log(completeEvents);
+    // --------------------------------------------------------------------
+
     const totalLocked = lockedEvents?.reduce(
       (acc: number, cur: Event) => acc + cur.amount,
       0
