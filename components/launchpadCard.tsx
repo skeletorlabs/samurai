@@ -104,11 +104,18 @@ export default function LaunchpadCard({
       <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md  w-max">
         <span className="text-[14px] text-samurai-red">ALLOCATION:</span>
         <p className="text-white/70">
-          {ido.totalAllocation.toLocaleString("en-us", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}{" "}
-          {ido.acceptedTokenSymbol}
+          {ido?.type === "NFT" ? (
+            <>{ido.totalAllocation} NFTs</>
+          ) : (
+            <>
+              {ido.totalAllocation.toLocaleString("en-us", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}{" "}
+              {ido.acceptedTokenSymbol}
+            </>
+          )}
+
           {/* ({(Number(ido.totalAllocation) / Number(ido.price)).toLocaleString("en-us", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
@@ -120,7 +127,8 @@ export default function LaunchpadCard({
       <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max mt-2">
         <span className="text-[14px] text-samurai-red">PRICE:</span>
         <p className="text-white/70">
-          {ido.price} {ido.acceptedTokenSymbol}
+          {ido.price} {ido.acceptedTokenSymbol}{" "}
+          {ido.type === "NFT" && "per NFT"}
         </p>
       </div>
 

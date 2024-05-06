@@ -161,4 +161,5 @@ export interface IDO {
   contract: string;
   abi: any;
   images?: string[];
+  type?: string;
 }

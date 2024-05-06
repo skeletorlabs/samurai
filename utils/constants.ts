@@ -25,9 +25,11 @@ import {
   orangedx,
   interswap,
   unibit,
+  rivalz,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
+  PARTICIPATOR_NFT_ABI,
   PARTICIPATOR_V2_ABI,
 } from "@/contracts_integrations/abis";
 
@@ -41,6 +43,83 @@ export const simplifiedPhases = [
 ];
 
 export const IDO_LIST: IDO[] = [
+  {
+    id: "launchpad-nft/rivalz",
+    logo: rivalz,
+    idoImageSrc: "/IDOs/rivalz.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "TO BE ANNOUNCED",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    projectName: "Rivalz",
+    projectListDescription:
+      "The decentralized storage layer and modular RollApp blockchain powering the next generation of AI-enabled DApps.",
+    projectDescription:
+      "Rivalz aims to use the power of decentralized computing to intelligently collate, clean, and index AI application datasets to create the ‘first AI intel layer’ in Web3. They are building a powerful DePIN storage layer and programmable RollApp blockchain — together these form a decentralized, cross-chain hub where AI applications can tap into vast and dependable data resources.",
+    projectTokenSymbol: "NODE",
+    totalAllocation: 400,
+    price: "536",
+    participationStartsAt: 1714993200,
+    participationEndsAt: 1715036400,
+    publicParticipationStartsAt: 1715036400,
+    publicParticipationEndsAt: 1715122800,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 0,
+    cliff: 0,
+    investmentRound: "Tier 3 and 4 Nodes",
+    fdv: "NA",
+    exchangeListingPrice: 0,
+    marketCapAtTGE: 0,
+    vesting: "Non-transferrable for one year",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      {
+        svg: globe,
+        href: "https://rivalz.ai",
+      },
+      {
+        svg: twitterX,
+        href: "https://x.com/Rivalz_AI",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/RivalzAI_Ann",
+      },
+      {
+        svg: discord,
+        href: "https://discord.gg/rivalzai",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <h1 style="font-weight: bold; font-size: 1.2em;">Rivalz AI</h1>
+        <p>The Rivalz AI data network is made up of two main layers. The first is the Rivalz RollApp — this is essentially an EVM compatible blockchain, built for plug-and-play access to the Rivalz data infrastructure. Here developers can build and integrate their AI-powered DApps, and connect them cross-chain through the power of EVM interoperability.
+        <p>The second layer is the Rivalz DePIN (decentralized physical infrastructure network). Simply put, this is the decentralized network made up of every device around the world running a Rivalz node. It’s here that the data inputted into the network is validated, streamlined, cataloged, stored, and managed.
+        <p>Rivalz nodes are responsible for all of the above processes, as well as controlling the inflow and outflow of information between the DePIN layer and apps built on the RollApp. This is what you’ll be contributing to when you buy and run a node through Samurai Starter!
+        <p>zNodes (validator nodes) handle the authentication and secure processing of data flowing in and out of the storage layer. These are the backbone of the whole decentralized infrastructure, and receive a high rate of $RIZ reward emissions as a result.
+        <p>A full 20% of the total supply is set aside to be distributed to zNode operators across the first 2.5 years after TGE. That means that — following the mainnet launch in Q3 2024 — each zNode will generate passive income for a full 30 months. Further rewards will be paid out after this first rewards pool is exhausted.
+        <p>To sweeten the deal even further, a further 2% of $RIZ supply will be airdropped to node sale participants directly at TGE, with 100% unlock!</p>
+        <p>Although the language surrounding nodes might at times sound complicated, actually running a node doesn’t have to be complex. You can simply delegate your node to a third-party node operator service, who will run it for you (for a portion of the fees). Rivalz is partnering with multiple of these service providers to support one-click deployment.
+        <p>To recap:<br/>
+        •  Buying a node license allows you to run a node on the Rivalz network.<br/>
+        •  Each node license you buy gets a slice of airdrop with 100% TGE unlock.<br/>
+        •  Run your own node, or pass it off to a third-party service provider.<br/>
+        •  Nodes pay out $RIZ rewards for 2.5 years, with bonus airdrops along the way.
+        </p>
+      </div>
+  `,
+    contract: "0xF4c8E3878EbfCC67c48d516cFca6bC7E05995C94",
+    abi: PARTICIPATOR_NFT_ABI,
+    // images: [
+    //   "/IDOs/orangedx/1.png",
+    //   "/IDOs/orangedx/2.png",
+    //   "/IDOs/orangedx/3.png",
+    //   "/IDOs/orangedx/4.png",
+    // ],
+    type: "NFT",
+  },
   {
     id: "launchpad/unibit",
     logo: unibit,
