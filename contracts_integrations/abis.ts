@@ -1399,7 +1399,11 @@ export const PARTICIPATOR_NFT_ABI = [
         type: "address",
         internalType: "address",
       },
-      { name: "amount", type: "uint256", internalType: "uint256" },
+      {
+        name: "amountInTokens",
+        type: "uint256",
+        internalType: "uint256",
+      },
     ],
     outputs: [],
     stateMutability: "nonpayable",
@@ -1430,7 +1434,7 @@ export const PARTICIPATOR_NFT_ABI = [
   },
   {
     type: "function",
-    name: "updatedPricePerToken",
+    name: "updatePricePerToken",
     inputs: [
       {
         name: "_pricePerToken",

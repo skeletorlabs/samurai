@@ -134,7 +134,14 @@ export default function Ido() {
       !chain.unsupported &&
       whitelistAddresses.length > 0
     ) {
-      await addToWhitelist(idoIndex, signer, whitelistAddresses);
+      let list: string[] = [];
+      whitelistAddresses.forEach((address) => {
+        if (!list.find((item) => item === address)) {
+          list.push(address);
+        }
+      });
+
+      await addToWhitelist(idoIndex, signer, list);
       await getGeneralData();
       await getUserInfos();
     }

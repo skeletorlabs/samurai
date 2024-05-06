@@ -110,7 +110,7 @@ export const IDO_LIST: IDO[] = [
         </p>
       </div>
   `,
-    contract: "0xF4c8E3878EbfCC67c48d516cFca6bC7E05995C94",
+    contract: "0x6f55b173b72e77bd13e7716297ffbc47d6bd4a1f",
     abi: PARTICIPATOR_NFT_ABI,
     // images: [
     //   "/IDOs/orangedx/1.png",

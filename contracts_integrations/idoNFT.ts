@@ -156,19 +156,19 @@ export async function participate(
     const pricePerToken = Number(
       ethers.formatUnits(await contract?.pricePerToken(), 6)
     );
-    const amountToApprove = (Number(amount) * pricePerToken).toString();
+    const amountInTokens = (Number(amount) * pricePerToken).toString();
 
     await checkApproval(
       acceptedToken,
       contractAddress!,
       signer,
-      ethers.parseUnits(amountToApprove, 6)
+      ethers.parseUnits(amountInTokens, 6)
     );
 
     const tx = await contract?.sendToken(
       signerAddress,
       acceptedToken,
-      ethers.parseUnits(amount, 6)
+      ethers.parseUnits(amountInTokens, 6)
     );
 
     await notificateTx(tx, network);
