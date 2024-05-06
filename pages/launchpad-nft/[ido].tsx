@@ -635,6 +635,12 @@ export default function Ido() {
                                 user?.isBlacklisted ||
                                 (!user?.isWhitelisted && !general?.isPublic) ||
                                 amountOfNfts === "" ||
+                                Number(amountOfNfts) * general?.pricePerToken >
+                                  Number(
+                                    selectedToken === general.acceptedToken1
+                                      ? user.balanceToken1
+                                      : user.balanceToken2
+                                  ) ||
                                 Number(
                                   general?.raised >= general?.maxAllocations
                                 )
@@ -648,6 +654,12 @@ export default function Ido() {
                               user?.isBlacklisted ||
                               (!user.isWhitelisted && !general?.isPublic) ||
                               amountOfNfts === "" ||
+                              Number(amountOfNfts) * general?.pricePerToken >
+                                Number(
+                                  selectedToken === general.acceptedToken1
+                                    ? user.balanceToken1
+                                    : user.balanceToken2
+                                ) ||
                               Number(general?.raised >= general?.maxAllocations)
                                 ? "bg-black text-white/20"
                                 : "bg-samurai-red text-white hover:opacity-75"
