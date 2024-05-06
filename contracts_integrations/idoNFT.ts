@@ -85,12 +85,7 @@ export async function userInfo(index: number, signer: ethers.Signer) {
     const contract = await getContract(index, signer);
 
     const allocation = Number(await contract?.allocations(signerAdress));
-    const allocationInPermittedToken = Number(
-      ethers.formatUnits(
-        await contract?.allocationsInTokensPermitted(signerAdress),
-        6
-      )
-    );
+
     const isWhitelisted = await contract?.whitelist(signerAdress);
     const isBlacklisted = await contract?.blacklist(signerAdress);
     const acceptedToken1 = await contract?.acceptedTokens(0);
@@ -132,7 +127,6 @@ export async function userInfo(index: number, signer: ethers.Signer) {
 
     return {
       allocation,
-      allocationInPermittedToken,
       isWhitelisted,
       isBlacklisted,
       balanceToken1,

@@ -669,13 +669,12 @@ export default function Ido() {
                               </p>
                               <p className="text-2xl text-samurai-red">
                                 $
-                                {user.allocationInPermittedToken.toLocaleString(
-                                  "en-us",
-                                  {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2,
-                                  }
-                                )}
+                                {(
+                                  user?.allocation * general?.pricePerToken
+                                ).toLocaleString("en-us", {
+                                  minimumFractionDigits: 2,
+                                  maximumFractionDigits: 2,
+                                })}
                               </p>
                             </div>
 
@@ -684,7 +683,7 @@ export default function Ido() {
                                 TOKENS TO RECEIVE
                               </p>
                               <p className="text-2xl text-samurai-red">
-                                {user?.allocation} {ido.projectTokenSymbol}
+                                {user?.allocation} {ido?.projectTokenSymbol}
                                 {user?.allocation > 1 && "S"}
                               </p>
                             </div>
