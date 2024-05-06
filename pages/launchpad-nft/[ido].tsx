@@ -440,7 +440,14 @@ export default function Ido() {
                         <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
                           <span className="text-samurai-red">TOKEN PRICE:</span>
                           <p className="text-white/70">
-                            ${ido.price} {ido.acceptedTokenSymbol}
+                            $
+                            {Number(general?.pricePerToken | 0).toLocaleString(
+                              "en-us",
+                              {
+                                maximumFractionDigits: 2,
+                              }
+                            )}{" "}
+                            {ido.acceptedTokenSymbol}
                           </p>
                         </div>
 

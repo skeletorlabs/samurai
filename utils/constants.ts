@@ -58,7 +58,7 @@ export const IDO_LIST: IDO[] = [
       "Rivalz aims to use the power of decentralized computing to intelligently collate, clean, and index AI application datasets to create the ‘first AI intel layer’ in Web3. They are building a powerful DePIN storage layer and programmable RollApp blockchain — together these form a decentralized, cross-chain hub where AI applications can tap into vast and dependable data resources.",
     projectTokenSymbol: "NODE",
     totalAllocation: 400,
-    price: "536",
+    price: "616",
     participationStartsAt: 1714993200,
     participationEndsAt: 1715036400,
     publicParticipationStartsAt: 1715036400,
