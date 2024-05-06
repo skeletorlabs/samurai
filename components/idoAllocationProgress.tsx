@@ -3,11 +3,15 @@ import { useEffect, useState } from "react";
 type IdoAllocationProgress = {
   maxAllocations: number;
   raised: number;
+  useLocale?: boolean;
+  extraInfos?: any;
 };
 
 export default function IdoAllocationProgress({
   maxAllocations,
   raised,
+  useLocale = true,
+  extraInfos,
 }: IdoAllocationProgress) {
   const [percentage, setPercentage] = useState(0);
 
@@ -33,7 +37,11 @@ export default function IdoAllocationProgress({
           RAISED:{" "}
           {percentage.toLocaleString("en-us", { maximumFractionDigits: 2 })}%
         </span>
-        <span>TOTAL ALLOCATION: ${maxAllocations.toLocaleString("en-us")}</span>
+        <span>
+          TOTAL ALLOCATION:{" "}
+          {useLocale ? maxAllocations.toLocaleString("en-us") : maxAllocations}{" "}
+          {extraInfos && extraInfos}
+        </span>
       </div>
     </div>
   );

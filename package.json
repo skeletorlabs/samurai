@@ -31,7 +31,7 @@
     "base-path-converter": "^1.0.2",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
-    "ethers": "^6.4.2",
+    "ethers": "^6.12.1",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.7.2",
     "fs": "^0.0.1-security",
