@@ -287,3 +287,9 @@ export async function getParticipationPhase(index: number) {
   if (maxAllocations - raised < minPerWallet) phase = "Completed";
   return phase;
 }
+
+export type Event = {
+  wallet: string;
+  token: string;
+  amount: number;
+};

@@ -33,7 +33,7 @@ export default function Footer() {
             />
           </Link>
 
-          <div className="flex items-center justify-center w-full lg:justify-start gap-10 lg:px-5">
+          <div className="flex items-center justify-center w-full lg:justify-start gap-10 lg:px-5 flex-wrap lg:flex-nowrap">
             {SOCIALS.map((item, index) => (
               <Link
                 key={index}
