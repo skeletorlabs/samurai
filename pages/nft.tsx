@@ -359,7 +359,7 @@ export default function Nft() {
           <div className="relative md:mr-12 xl:max-w-[900px] px-6 md:px-0">
             <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
               Buy a <span className="text-samurai-red">SamNFT </span>
-              for lifetime VIP access to the hottest launchapd on the market!
+              for lifetime VIP access to the hottest launchpad on the market!
             </h1>
             <p
               className={`leading-normal lg:leading-relaxed pt-16 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
