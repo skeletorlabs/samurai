@@ -45,7 +45,7 @@ export const simplifiedPhases = [
 
 export const IDO_LIST: IDO[] = [
   {
-    id: "launchpad/kip-protocol",
+    id: "launchpad-nft-v2/kip-protocol",
     logo: kip,
     idoImageSrc: "/IDOs/kip-protocol.png",
     acceptedTokenSymbol: "USDC",
@@ -57,7 +57,7 @@ export const IDO_LIST: IDO[] = [
       "The mission critical Web3 base layer for AI’ where data suppliers, model creators, and app developers can securely transact.",
     projectDescription:
       "KIP Protocol boasts top-tier VC backing, founders with world-class academic credentials, and a clear vision for creating ‘the mission critical Web3 Base Layer for AI’. KIP Checker Nodes regulate the actions of every entity operating on the network, ensuring security and transparency for everyone involved.",
-    projectTokenSymbol: "$UIBT",
+    projectTokenSymbol: "NODE",
     totalAllocation: 200,
     price: "0.008",
     participationStartsAt: 1715598000,
@@ -65,14 +65,14 @@ export const IDO_LIST: IDO[] = [
     publicParticipationStartsAt: 1715641200,
     publicParticipationEndsAt: 1715727600,
     simplified: true,
-    tgeDate: 1712534400,
+    tgeDate: 0,
     tgePercentage: 10,
     cliff: 0,
-    investmentRound: "Private Round",
+    investmentRound: "Node",
     fdv: "12000000",
     exchangeListingPrice: 0.012,
     marketCapAtTGE: 340800,
-    vesting: "",
+    vesting: "NOT APPLIED",
     releaseType: "Linear",
     currentPhase: simplifiedPhases[1].title,
     socials: [
@@ -102,7 +102,7 @@ export const IDO_LIST: IDO[] = [
 
       </div>
   `,
-    contract: "0xc528523345f4e8f39aac8Ce56Cc5DF7F1Eb03D24",
+    contract: "0x29173B5F859C55B07225704ce94e3cbF471e6D5a",
     abi: PARTICIPATOR_NFT_V2_ABI,
     // images: [
     //   "/IDOs/orangedx/1.png",

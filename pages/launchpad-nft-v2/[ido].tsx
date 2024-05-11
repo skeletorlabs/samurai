@@ -27,7 +27,7 @@ import {
   togglePause,
   userInfo,
   withdraw,
-} from "@/contracts_integrations/idoNFT";
+} from "@/contracts_integrations/idoNFTV2";
 import IdoAllocationProgress from "@/components/idoAllocationProgress";
 
 const inter = Inter({
@@ -36,10 +36,12 @@ const inter = Inter({
 
 export default function Ido() {
   const [amountOfNfts, setAmountOfNfts] = useState("");
+  // admin area
   const [whitelistAddresses, setWhitelistAddresses] = useState<string[] | []>(
     []
-  ); // admin area
+  );
   const [blacklistAddress, setBlacklistAddress] = useState(""); // admin area
+  const [whitelistSelected, setWhitelistSelected] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [general, setGeneral] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
@@ -141,13 +143,20 @@ export default function Ido() {
         }
       });
 
-      await addToWhitelist(idoIndex, signer, list);
+      await addToWhitelist(idoIndex, signer, list, whitelistSelected);
       await getGeneralData();
       await getUserInfos();
     }
 
     setIsLoading(false);
-  }, [chain, signer, whitelistAddresses, idoIndex, setIsLoading]);
+  }, [
+    chain,
+    signer,
+    whitelistAddresses,
+    whitelistSelected,
+    idoIndex,
+    setIsLoading,
+  ]);
 
   const onAddToBlacklist = useCallback(async () => {
     setIsLoading(true);
@@ -168,6 +177,21 @@ export default function Ido() {
   // ============================================================================================================
   // USER ACTIONS
   // ============================================================================================================
+
+  const canParticipate = useCallback(() => {
+    if (signer && general && user) {
+      if (user.whitelistedInA && user.allocation < general.maxAPerWallet)
+        return true;
+
+      if (user.whitelistedInB && user.allocation < general.maxBPerWallet)
+        return true;
+
+      if (general.isPublic && user.allocation < general.maxPublicPerWallet)
+        return true;
+    }
+
+    return false;
+  }, [general, user, signer]);
 
   const onParticipate = useCallback(async () => {
     setIsLoading(true);
@@ -218,12 +242,18 @@ export default function Ido() {
 
   const getOptionsToBuy = useCallback(() => {
     const optionsToBuy = [];
-    for (
-      let index = 0;
-      index < general.maxPerWallet - user?.allocation;
-      index++
-    ) {
-      optionsToBuy.push(index + 1);
+
+    if (general && user) {
+      const max = general?.isPublic
+        ? general?.maxPublicPerWallet
+        : user?.whitelistedInA
+        ? general?.maxAPerWallet
+        : user?.whitelistedInB
+        ? general?.maxBPerWallet
+        : 0;
+      for (let index = 0; index < max - user?.allocation; index++) {
+        optionsToBuy.push(index + 1);
+      }
     }
 
     return optionsToBuy;
@@ -283,9 +313,7 @@ export default function Ido() {
               </Link>
 
               <div className="flex flex-col text-[38px] sm:text-[58px] lg:text-[70px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
-                <div className="flex items-center gap-5">
-                  {ido?.logo} {ido?.projectName}
-                </div>
+                <div className="flex items-center gap-5">{ido?.logo}</div>
                 <div className="flex items-center gap-4 pt-5">
                   {ido?.tokenNetwork !== "TO BE ANNOUNCED" && (
                     <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
@@ -468,34 +496,59 @@ export default function Ido() {
                           </p>
                         </div>
 
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">MIN:</span>
-                          <p className="text-white/70">
-                            {general?.isPublic
-                              ? general?.minPublic
-                              : general?.whitelistedInA
-                              ? general?.minAPerWallet
-                              : general?.minBPerWallet | 0}{" "}
-                            {ido.projectTokenSymbol}
-                          </p>
-                        </div>
+                        {signer &&
+                        general &&
+                        user &&
+                        (general?.isPublic ||
+                          user?.whitelistedInA ||
+                          user?.whitelistedInB) ? (
+                          <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                            <span className="text-samurai-red">MIN:</span>
+                            <p className="text-white/70">
+                              {general?.isPublic
+                                ? general?.minPublic
+                                : user?.whitelistedInA
+                                ? general?.minAPerWallet
+                                : user?.whitelistedInB
+                                ? general?.minBPerWallet
+                                : 0 | 0}{" "}
+                              {ido.projectTokenSymbol}(s)
+                            </p>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                            {signer
+                              ? "*WALLET NOT WHITELISTED, PLEASE WAIT FOR FCFS ROUND."
+                              : ""}
+                          </div>
+                        )}
 
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">MAX:</span>
-                          <p className="text-white/70">
-                            {general?.isPublic
-                              ? general?.maxPublic
-                              : general?.whitelistedInA
-                              ? general?.maxAPerWallet
-                              : general?.maxBPerWallet | 0}{" "}
-                            {ido.projectTokenSymbol}
-                            {general?.maxPerWallet > 1 && "S"}
-                          </p>
-                        </div>
+                        {signer &&
+                        general &&
+                        user &&
+                        (general?.isPublic ||
+                          user?.whitelistedInA ||
+                          user?.whitelistedInB) ? (
+                          <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                            <span className="text-samurai-red">MAX:</span>
+                            <p className="text-white/70">
+                              {general?.isPublic
+                                ? general?.maxPublic
+                                : user?.whitelistedInA
+                                ? general?.maxAPerWallet
+                                : user?.whitelistedInB
+                                ? general?.maxBPerWallet
+                                : 0 | 0}{" "}
+                              {ido.projectTokenSymbol}(s)
+                            </p>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
                       </div>
 
                       {currentPhase?.toLowerCase() === "participation" &&
-                        user?.allocation < general?.maxPerWallet && (
+                        canParticipate() && (
                           <div className="flex flex-col w-full">
                             <div className="flex items-center justify-between text-[10px] lg:text-sm mb-1">
                               <span>Select an amount to buy</span>
@@ -849,10 +902,27 @@ export default function Ido() {
                   className="text-black rounded-[8px] xl:w-[600px]"
                   onChange={(e) => onTextAreaChange(e.target.value)}
                 ></textarea>
-                <div>
+                <div className="flex items-center gap-3">
                   <SSButton disabled={isLoading} click={onAddToWhitelist}>
                     {isLoading ? "Loading..." : "Add to Whitelist"}
                   </SSButton>
+
+                  <button
+                    onClick={() => setWhitelistSelected(0)}
+                    className={`${
+                      whitelistSelected === 0 ? "bg-samurai-red" : "bg-gray-400"
+                    } px-3 py-2`}
+                  >
+                    0
+                  </button>
+                  <button
+                    onClick={() => setWhitelistSelected(1)}
+                    className={`${
+                      whitelistSelected === 1 ? "bg-samurai-red" : "bg-gray-400"
+                    } px-3 py-2`}
+                  >
+                    1
+                  </button>
                 </div>
               </div>
 

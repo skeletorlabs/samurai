@@ -98,7 +98,7 @@ export async function userInfo(index: number, signer: ethers.Signer) {
     const allocation = Number(await contract?.allocations(signerAdress));
 
     const whitelistedInA = await contract?.whitelistA(signerAdress);
-    const whitelistedInB = await contract?.whitelistA(signerAdress);
+    const whitelistedInB = await contract?.whitelistB(signerAdress);
 
     const isBlacklisted = await contract?.blacklist(signerAdress);
     const acceptedToken1 = await contract?.acceptedTokens(0);
@@ -196,7 +196,8 @@ export async function participate(
 export async function addToWhitelist(
   index: number,
   signer: ethers.Signer,
-  addresses: string[]
+  addresses: string[],
+  whitelistIndex: number
 ) {
   try {
     const contract = await getContract(index, signer);
@@ -205,7 +206,7 @@ export async function addToWhitelist(
     const network = await signer.provider?.getNetwork();
 
     if (owner === signerAddress) {
-      const tx = await contract?.addBatchToWhitelist(addresses);
+      const tx = await contract?.addBatchToWhitelist(addresses, whitelistIndex);
       await notificateTx(tx, network);
     }
   } catch (e) {
@@ -225,7 +226,7 @@ export async function addToBlacklist(
     const network = await signer.provider?.getNetwork();
 
     if (owner === signerAddress) {
-      const tx = await contract?.addToWhitelist(address);
+      const tx = await contract?.addToBlacklist(address);
       await notificateTx(tx, network);
     }
   } catch (e) {
@@ -297,7 +298,7 @@ export async function getParticipationPhase(index: number) {
   const contract = await getContract(index, undefined);
   const maxAllocations = Number(await contract?.maxAllocations());
   const raised = Number(await contract?.raised());
-  const minPerWallet = Number(await contract?.min());
+  const minPerWallet = Number(await contract?.minA());
   if (maxAllocations - raised < minPerWallet) phase = "Completed";
   return phase;
 }

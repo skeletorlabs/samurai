@@ -5,6 +5,7 @@ import Link from "next/link";
 import { formattedDate } from "@/utils/formattedDate";
 import { IDO_LIST } from "@/utils/constants";
 import { getParticipationPhase } from "@/contracts_integrations/ido";
+import { getParticipationPhase as getParticipationPhaseNft } from "@/contracts_integrations/idoNFTV2";
 import { useCallback, useEffect, useState } from "react";
 
 export default function LaunchpadCard({
@@ -17,9 +18,15 @@ export default function LaunchpadCard({
   const [phase, setPhase] = useState("");
 
   const getPhase = useCallback(async () => {
-    const phase = await getParticipationPhase(
-      IDO_LIST.findIndex((item) => item.contract === ido.contract)
+    const contract = IDO_LIST.findIndex(
+      (item) => item.contract === ido.contract
     );
+
+    const isNft = ido.id.indexOf("launchpad-nft-v2") !== -1;
+
+    const phase = isNft
+      ? await getParticipationPhaseNft(contract)
+      : await getParticipationPhase(contract);
     setPhase(phase.toUpperCase());
   }, [ido]);
 
