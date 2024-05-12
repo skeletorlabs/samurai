@@ -25,11 +25,12 @@ import {
   orangedx,
   interswap,
   unibit,
-  rivalz,
+  kip,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
   PARTICIPATOR_NFT_ABI,
+  PARTICIPATOR_NFT_V2_ABI,
   PARTICIPATOR_V2_ABI,
 } from "@/contracts_integrations/abis";
 
@@ -43,6 +44,74 @@ export const simplifiedPhases = [
 ];
 
 export const IDO_LIST: IDO[] = [
+  {
+    id: "launchpad-nft-v2/kip-protocol",
+    logo: kip,
+    idoImageSrc: "/IDOs/kip-protocol.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "TO BE ANNOUNCED",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    projectName: "KIP Protocol",
+    projectListDescription:
+      "The mission critical Web3 base layer for AI’ where data suppliers, model creators, and app developers can securely transact.",
+    projectDescription:
+      "KIP Protocol boasts top-tier VC backing, founders with world-class academic credentials, and a clear vision for creating ‘the mission critical Web3 Base Layer for AI’. KIP Checker Nodes regulate the actions of every entity operating on the network, ensuring security and transparency for everyone involved.",
+    projectTokenSymbol: "NODE",
+    totalAllocation: 200,
+    price: "620",
+    participationStartsAt: 1715598000,
+    participationEndsAt: 1715641200,
+    publicParticipationStartsAt: 1715641200,
+    publicParticipationEndsAt: 1715727600,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 10,
+    cliff: 0,
+    investmentRound: "Node",
+    fdv: "12000000",
+    exchangeListingPrice: 0.012,
+    marketCapAtTGE: 340800,
+    vesting: "NOT APPLIED",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      {
+        svg: globe,
+        href: "http://kip.pro",
+      },
+      {
+        svg: twitterX,
+        href: "x.com/KIPprotocol",
+      },
+      {
+        svg: discord,
+        href: "http://discord.com/invite/kipprotocol",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <h1 style="font-weight: bold; font-size: 1.2em;">KIP PROTOCOL</h1>
+        <p>What does the interchange of data and value look like on the KIP Protocol network? For example, a firm which builds complex AI models can list their products on the network to easily monetize their work. Through the platform, these AI models can then be licensed by developers looking to build user-facing apps such as AI agents.</p>
+        <p>In order to optimize these AI applications, developers also require large sets of data to train the models on specific tasks — these they can also access via feeds from the various data providers integrated with the KIP Protocol network. In essence, it's a next-gen Web3 framework where all of the players in the AI industry can seamlessly and securely transact with one another.</p>
+        <p>Application builders get quick and reliable access to the models and data they need, while the providers of these models and data can easily monetise their work through the power of Web3. The latter simply deploy their creations onto the network as 'Knowledge Assets' and receive revenues directly to their wallet whenever these assets are utilized.</p>
+        <p>KIP Protocol handles the interchange of data, transfer of funds, and records of data ownership for all of these processes. And of course, ensures that users transacting on the network can do so with full trust in the quality and security of the entities they're interacting with. </p>
+        <p>This is where the Checker Nodes come in. Their job is to periodically ping the API endpoint of these AI suppliers and service providers to check three crucial things: uptime, data accuracy, and cost.</p>
+        <p>As a reward for doing so, node operators receive $KIP token reward — 20% of total supply is set aside for node rewards over the first three years. $KIP rewards will begin being generated 7 days after TGE, and paid out to operators every 15 minutes. There's no cliff, so you'll be able to claim your rewards whenever you want, with a 30-day cooldown after each withdrawal.</p>
+        <p>Each node license comes with DAO voting rights which can be used to vote on the outcome of these disputes, with bonus rewards being paid out for participation.</p>
+
+      </div>
+  `,
+    contract: "0x29173B5F859C55B07225704ce94e3cbF471e6D5a",
+    abi: PARTICIPATOR_NFT_V2_ABI,
+    // images: [
+    //   "/IDOs/orangedx/1.png",
+    //   "/IDOs/orangedx/2.png",
+    //   "/IDOs/orangedx/3.png",
+    //   "/IDOs/orangedx/4.png",
+    // ],
+    type: "NFT",
+  },
   {
     id: "launchpad/unibit",
     logo: unibit,
