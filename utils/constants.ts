@@ -59,7 +59,7 @@ export const IDO_LIST: IDO[] = [
       "KIP Protocol boasts top-tier VC backing, founders with world-class academic credentials, and a clear vision for creating ‘the mission critical Web3 Base Layer for AI’. KIP Checker Nodes regulate the actions of every entity operating on the network, ensuring security and transparency for everyone involved.",
     projectTokenSymbol: "NODE",
     totalAllocation: 200,
-    price: "0.008",
+    price: "620",
     participationStartsAt: 1715598000,
     participationEndsAt: 1715641200,
     publicParticipationStartsAt: 1715641200,
@@ -110,6 +110,7 @@ export const IDO_LIST: IDO[] = [
     //   "/IDOs/orangedx/3.png",
     //   "/IDOs/orangedx/4.png",
     // ],
+    type: "NFT",
   },
   {
     id: "launchpad/unibit",
