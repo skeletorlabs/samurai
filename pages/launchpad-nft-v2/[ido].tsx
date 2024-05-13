@@ -550,7 +550,7 @@ export default function Ido() {
                       {currentPhase?.toLowerCase() === "participation" &&
                         canParticipate() && (
                           <div className="flex flex-col w-full">
-                            <div className="flex items-center justify-between text-[10px] lg:text-sm mb-1">
+                            <div className="hidden lg:flex items-center justify-between text-[10px] lg:text-sm mb-1">
                               <span>Select an amount to buy</span>
                               BALANCE:{" "}
                               {Number(
@@ -565,7 +565,97 @@ export default function Ido() {
                             </div>
 
                             <div className="relative">
-                              <div className="flex items-center justify-between">
+                              <div className="flex lg:hidden flex-col gap-5">
+                                {/* TOKEN SELECT */}
+                                <div className="text-[12px] mb-[-10px]">
+                                  BALANCE:{" "}
+                                  {Number(
+                                    selectedToken === general.acceptedToken1
+                                      ? user.balanceToken1
+                                      : user.balanceToken2
+                                  ).toLocaleString("en-us", {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  })}{" "}
+                                  {TOKENS_TO_SYMBOL[selectedToken]}
+                                </div>
+                                <div className="flex items-center gap-2 bg-white px-2 py-1 rounded-lg w-[120px]">
+                                  <Image
+                                    src="/usdc-icon.svg"
+                                    width={28}
+                                    height={28}
+                                    alt="USDC"
+                                    placeholder="blur"
+                                    blurDataURL="/usdc-icon.svg"
+                                    className="w-6 h-6 lg:w-[28px] lg:h-[28px]"
+                                  />
+                                  <button
+                                    onClick={() =>
+                                      setTokenSelectionOpen(!tokenSelectionOpen)
+                                    }
+                                    className="flex items-center text-black/80 mr-2 text-lg lg:text-xl font-bold hover:text-samurai-red"
+                                  >
+                                    <span>
+                                      {TOKENS_TO_SYMBOL[selectedToken]}
+                                    </span>
+                                    <div className="w-6 h-6 text-black ml-1">
+                                      {tokenSelectionOpen ? (
+                                        <svg
+                                          data-slot="icon"
+                                          fill="none"
+                                          strokeWidth="1.5"
+                                          stroke="currentColor"
+                                          viewBox="0 0 24 24"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          aria-hidden="true"
+                                        >
+                                          <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                                          ></path>
+                                        </svg>
+                                      ) : (
+                                        <svg
+                                          data-slot="icon"
+                                          fill="none"
+                                          strokeWidth="1.5"
+                                          stroke="currentColor"
+                                          viewBox="0 0 24 24"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          aria-hidden="true"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                                          ></path>
+                                        </svg>
+                                      )}
+                                    </div>
+                                  </button>
+                                </div>
+
+                                <span>Select an amount to buy</span>
+                                <div className="flex items-center gap-3">
+                                  {getOptionsToBuy().map((item, index) => (
+                                    <button
+                                      key={index}
+                                      onClick={() =>
+                                        setAmountOfNfts(item.toString())
+                                      }
+                                      className={`flex items-center px-3 text-white rounded-full text-sm h-6 ${
+                                        amountOfNfts === item.toString()
+                                          ? "bg-samurai-red"
+                                          : "bg-gray-400"
+                                      }`}
+                                    >
+                                      {item} NODE{index > 0 && "S"}
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
+                              <div className="hidden lg:flex items-center justify-between">
                                 <div className="flex items-center gap-3">
                                   {getOptionsToBuy().map((item, index) => (
                                     <button

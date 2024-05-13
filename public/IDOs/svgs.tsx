@@ -230,8 +230,6 @@ export const unibit = (
 
 export const kip = (
   <svg
-    width="627"
-    height="339"
     viewBox="0 0 627 339"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
