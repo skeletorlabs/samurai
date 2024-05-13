@@ -202,7 +202,7 @@ export default function Ido() {
       selectedToken !== "" &&
       user &&
       !user.isBlacklisted &&
-      (user.isWhitelisted || general.isPublic)
+      (user.whitelistedInA || user.whitelistedInB || general.isPublic)
     ) {
       await participate(idoIndex, signer, amountOfNfts, selectedToken);
       await getGeneralData();
@@ -703,7 +703,9 @@ export default function Ido() {
                                 !user ||
                                 general?.isPaused ||
                                 user?.isBlacklisted ||
-                                (!user?.isWhitelisted && !general?.isPublic) ||
+                                (!user?.whitelistedInA &&
+                                  !user?.whitelistedInB &&
+                                  !general?.isPublic) ||
                                 amountOfNfts === "" ||
                                 Number(amountOfNfts) * general?.pricePerToken >
                                   Number(
@@ -722,7 +724,9 @@ export default function Ido() {
                               !user ||
                               general?.isPaused ||
                               user?.isBlacklisted ||
-                              (!user.isWhitelisted && !general?.isPublic) ||
+                              (!user.whitelistedInA &&
+                                !user.whitelistedInB &&
+                                !general?.isPublic) ||
                               amountOfNfts === "" ||
                               Number(amountOfNfts) * general?.pricePerToken >
                                 Number(
