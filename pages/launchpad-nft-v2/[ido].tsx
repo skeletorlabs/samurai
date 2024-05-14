@@ -479,22 +479,24 @@ export default function Ido() {
                           </p>
                         </div>
 
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">RAISED:</span>
-                          <p className="text-white/70">
-                            {Number(general?.raised | 0)}{" "}
-                            {ido?.projectTokenSymbol}
-                            {" ($"}
-                            {Number(
-                              general?.raisedInTokensPermitted | 0
-                            ).toLocaleString("en-us", {
-                              minimumFractionDigits: 2,
-                              maximumFractionDigits: 2,
-                            })}{" "}
-                            {ido?.acceptedTokenSymbol}
-                            {")"}
-                          </p>
-                        </div>
+                        {ido.projectName !== "KIP PROTOCOL" && (
+                          <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                            <span className="text-samurai-red">RAISED:</span>
+                            <p className="text-white/70">
+                              {Number(general?.raised | 0)}{" "}
+                              {ido?.projectTokenSymbol}
+                              {" ($"}
+                              {Number(
+                                general?.raisedInTokensPermitted | 0
+                              ).toLocaleString("en-us", {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              })}{" "}
+                              {ido?.acceptedTokenSymbol}
+                              {")"}
+                            </p>
+                          </div>
+                        )}
 
                         {signer &&
                         general &&
@@ -890,12 +892,14 @@ export default function Ido() {
                   )}
                 </div>
               </div>
-              <IdoAllocationProgress
-                maxAllocations={general?.maxAllocations || 0}
-                raised={general?.raised || 0}
-                useLocale={false}
-                extraInfos={ido?.projectTokenSymbol + "S"}
-              />
+              {ido?.projectName !== "KIP Protocol" && (
+                <IdoAllocationProgress
+                  maxAllocations={general?.maxAllocations || 0}
+                  raised={general?.raised || 0}
+                  useLocale={false}
+                  extraInfos={ido?.projectTokenSymbol + "S"}
+                />
+              )}
             </div>
           </div>
         </div>

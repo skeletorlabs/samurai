@@ -286,6 +286,9 @@ export async function togglePause(index: number, signer: ethers.Signer) {
 
 export async function getParticipationPhase(index: number) {
   const ido = IDO_LIST[index];
+
+  if (ido.projectName === "KIP Protocol") return "Completed";
+
   const participationStartAt = ido.participationStartsAt;
   const publicEndsAt = ido.publicParticipationEndsAt;
   const now = getUnixTime(new Date());
