@@ -479,7 +479,7 @@ export default function Ido() {
                           </p>
                         </div>
 
-                        {ido.projectName !== "KIP PROTOCOL" && (
+                        {ido.projectName !== "KIP Protocol" && (
                           <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
                             <span className="text-samurai-red">RAISED:</span>
                             <p className="text-white/70">
