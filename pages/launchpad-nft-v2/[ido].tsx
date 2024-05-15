@@ -501,6 +501,7 @@ export default function Ido() {
                         {signer &&
                         general &&
                         user &&
+                        ido?.projectName !== "KIP Protocol" &&
                         (general?.isPublic ||
                           user?.whitelistedInA ||
                           user?.whitelistedInB) ? (
@@ -528,6 +529,7 @@ export default function Ido() {
                         {signer &&
                         general &&
                         user &&
+                        ido?.projectName !== "KIP Protocol" &&
                         (general?.isPublic ||
                           user?.whitelistedInA ||
                           user?.whitelistedInB) ? (
