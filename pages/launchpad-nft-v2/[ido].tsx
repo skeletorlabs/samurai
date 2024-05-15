@@ -498,33 +498,36 @@ export default function Ido() {
                           </div>
                         )}
 
-                        {signer &&
-                        general &&
-                        user &&
-                        ido?.projectName !== "KIP Protocol" &&
-                        (general?.isPublic ||
-                          user?.whitelistedInA ||
-                          user?.whitelistedInB) ? (
-                          <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                            <span className="text-samurai-red">MIN:</span>
-                            <p className="text-white/70">
-                              {general?.isPublic
-                                ? general?.minPublic
-                                : user?.whitelistedInA
-                                ? general?.minAPerWallet
-                                : user?.whitelistedInB
-                                ? general?.minBPerWallet
-                                : 0 | 0}{" "}
-                              {ido.projectTokenSymbol}(s)
-                            </p>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                            {signer
-                              ? "*WALLET NOT WHITELISTED, PLEASE WAIT FOR FCFS ROUND."
-                              : ""}
-                          </div>
-                        )}
+                        {
+                          signer &&
+                            general &&
+                            user &&
+                            ido?.projectName !== "KIP Protocol" &&
+                            (general?.isPublic ||
+                              user?.whitelistedInA ||
+                              user?.whitelistedInB) && (
+                              <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                                <span className="text-samurai-red">MIN:</span>
+                                <p className="text-white/70">
+                                  {general?.isPublic
+                                    ? general?.minPublic
+                                    : user?.whitelistedInA
+                                    ? general?.minAPerWallet
+                                    : user?.whitelistedInB
+                                    ? general?.minBPerWallet
+                                    : 0 | 0}{" "}
+                                  {ido.projectTokenSymbol}(s)
+                                </p>
+                              </div>
+                            )
+                          //  : (
+                          //   <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                          //     {signer
+                          //       ? "*WALLET NOT WHITELISTED, PLEASE WAIT FOR FCFS ROUND."
+                          //       : ""}
+                          //   </div>
+                          // )
+                        }
 
                         {signer &&
                         general &&
