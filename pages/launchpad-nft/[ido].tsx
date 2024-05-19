@@ -16,7 +16,6 @@ import { formattedDate, formattedDateSimple } from "@/utils/formattedDate";
 import { discord, youtube } from "@/utils/svgs";
 import SSButton from "@/components/ssButton";
 import { StateContext } from "@/context/StateContext";
-import { useNetwork } from "wagmi";
 import {
   addToBlacklist,
   addToWhitelist,
@@ -48,7 +47,6 @@ export default function Ido() {
   const [tokenSelectionOpen, setTokenSelectionOpen] = useState(false);
 
   const { signer, account } = useContext(StateContext);
-  const { chain } = useNetwork();
   const { query } = useRouter();
   const { ido: idoID } = query;
 
@@ -73,67 +71,41 @@ export default function Ido() {
 
   const onTogglePause = useCallback(async () => {
     setIsLoading(true);
-    if (
-      account &&
-      general &&
-      account === general.owner &&
-      signer &&
-      chain &&
-      !chain.unsupported
-    ) {
+    if (account && general && account === general.owner && signer) {
       await togglePause(idoIndex, signer);
       await getGeneralData();
       await getUserInfos();
     }
 
     setIsLoading(false);
-  }, [chain, signer, idoIndex, general, account, setIsLoading]);
+  }, [signer, idoIndex, general, account, setIsLoading]);
 
   const onWithdraw = useCallback(async () => {
     setIsLoading(true);
-    if (
-      account &&
-      general &&
-      account === general.owner &&
-      signer &&
-      chain &&
-      !chain.unsupported
-    ) {
+    if (account && general && account === general.owner && signer) {
       await withdraw(idoIndex, signer);
       await getGeneralData();
       await getUserInfos();
     }
 
     setIsLoading(false);
-  }, [chain, signer, idoIndex, general, account, setIsLoading]);
+  }, [signer, idoIndex, general, account, setIsLoading]);
 
   const onMakePublic = useCallback(async () => {
     setIsLoading(true);
-    if (
-      account &&
-      general &&
-      account === general.owner &&
-      signer &&
-      chain &&
-      !chain.unsupported
-    ) {
+    if (account && general && account === general.owner && signer) {
       await makePublic(idoIndex, signer);
       await getGeneralData();
       await getUserInfos();
     }
 
     setIsLoading(false);
-  }, [chain, signer, idoIndex, general, account, setIsLoading]);
+  }, [signer, idoIndex, general, account, setIsLoading]);
 
   const onAddToWhitelist = useCallback(async () => {
     setIsLoading(true);
 
-    if (
-      signer &&
-      chain &&
-      !chain.unsupported &&
-      whitelistAddresses.length > 0
-    ) {
+    if (signer && whitelistAddresses.length > 0) {
       let list: string[] = [];
       whitelistAddresses.forEach((address) => {
         if (!list.find((item) => item === address)) {
@@ -147,19 +119,19 @@ export default function Ido() {
     }
 
     setIsLoading(false);
-  }, [chain, signer, whitelistAddresses, idoIndex, setIsLoading]);
+  }, [signer, whitelistAddresses, idoIndex, setIsLoading]);
 
   const onAddToBlacklist = useCallback(async () => {
     setIsLoading(true);
 
-    if (signer && chain && !chain.unsupported && blacklistAddress.length > 0) {
+    if (signer && blacklistAddress.length > 0) {
       await addToBlacklist(idoIndex, signer, blacklistAddress);
       await getGeneralData();
       await getUserInfos();
     }
 
     setIsLoading(false);
-  }, [chain, signer, blacklistAddress, idoIndex, setIsLoading]);
+  }, [signer, blacklistAddress, idoIndex, setIsLoading]);
 
   // ============================================================================================================
   // END ADMIN FUNCTIONS
@@ -173,8 +145,6 @@ export default function Ido() {
     setIsLoading(true);
     if (
       signer &&
-      chain &&
-      !chain.unsupported &&
       selectedToken !== "" &&
       user &&
       !user.isBlacklisted &&
@@ -187,7 +157,6 @@ export default function Ido() {
 
     setIsLoading(false);
   }, [
-    chain,
     signer,
     blacklistAddress,
     idoIndex,
@@ -202,11 +171,11 @@ export default function Ido() {
   // ============================================================================================================
 
   const getUserInfos = useCallback(async () => {
-    if (signer && chain && !chain.unsupported) {
+    if (signer) {
       const response = await userInfo(idoIndex, signer);
       setUser(response);
     }
-  }, [signer, chain, idoIndex]);
+  }, [signer, idoIndex]);
 
   useEffect(() => {
     getUserInfos();

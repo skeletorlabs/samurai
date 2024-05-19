@@ -14,7 +14,6 @@ import { ethers } from "ethers";
 import Layout from "@/components/layout";
 import Image from "next/image";
 import { Carousel } from "flowbite-react";
-import { getNetwork } from "@wagmi/core";
 
 import {
   SupplyInfo,
@@ -34,6 +33,7 @@ import {
   ALL_WALLETS,
 } from "@/queries/nft";
 import TopLayout from "@/components/topLayout";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -86,7 +86,7 @@ const utilities = [
 ];
 
 export default function Nft() {
-  const { account, isLoading, signer, setIsLoading } = useContext(StateContext);
+  const { account, signer, setIsLoading } = useContext(StateContext);
 
   const [image, setImage] = useState(
     images[Math.floor(Math.random() * images.length)]
@@ -99,8 +99,6 @@ export default function Nft() {
   const [whitelistData, setWhitelistData] = useState<WhitelistDataType | null>(
     null
   );
-
-  const { chain } = getNetwork();
 
   const fetcher = (query: string, variables: any) => {
     return request(
@@ -245,12 +243,12 @@ export default function Nft() {
 
   const getWhiteListInfos = useCallback(async () => {
     setIsLoading(true);
-    if (signer && chain && !chain.unsupported) {
+    if (signer) {
       const checkWhitelist = await isWhitelisted(signer);
       setWhitelistData(checkWhitelist as WhitelistDataType);
     }
     setIsLoading(false);
-  }, [chain, signer, setIsLoading, setWhitelistData]);
+  }, [signer, setIsLoading, setWhitelistData]);
 
   const getGeneralInfo = useCallback(async () => {
     setIsLoading(true);
@@ -262,7 +260,7 @@ export default function Nft() {
 
   const mintNFT = useCallback(async () => {
     setIsLoading(true);
-    if (signer && chain && !chain.unsupported) {
+    if (signer) {
       await mint(numberOfTokens, signer);
     }
 
@@ -272,14 +270,14 @@ export default function Nft() {
 
   const freeMintNFT = useCallback(async () => {
     setIsLoading(true);
-    if (signer && chain && !chain.unsupported) {
+    if (signer) {
       await mint(1, signer! as ethers.Signer, true);
       await getWhiteListInfos();
     }
 
     await getGeneralInfo();
     setIsLoading(false);
-  }, [chain, signer]);
+  }, [signer]);
 
   useEffect(() => {
     setUserNfts([]);
