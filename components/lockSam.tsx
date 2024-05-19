@@ -18,11 +18,10 @@ import {
   withdraw,
 } from "@/contracts_integrations/samLock";
 import { StateContext } from "@/context/StateContext";
-import { useNetwork } from "wagmi";
 import { Roboto } from "next/font/google";
 import SCarousel from "@/components/scarousel";
 import { getUnixTime } from "date-fns";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import ConnectButton from "./connectbutton";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -48,7 +47,6 @@ export default function LockSam() {
   const [loadingEvents, setLoadingEvents] = useState(false);
 
   const { signer } = useContext(StateContext);
-  const { chain } = useNetwork();
 
   const onInputLockChange = (value: string) => {
     const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
@@ -124,23 +122,23 @@ export default function LockSam() {
 
   const onLock = useCallback(async () => {
     setLoading(true);
-    if (signer && chain && !chain.unsupported) {
+    if (signer) {
       await lock(signer, inputLock, period);
       await onGetGeneralInfo();
       await onGetUserInfo();
     }
     setLoading(false);
-  }, [signer, chain, inputLock, period, setLoading]);
+  }, [signer, inputLock, period, setLoading]);
 
   const onWithdraw = useCallback(async () => {
     setLoading(true);
-    if (signer && chain && !chain.unsupported) {
+    if (signer) {
       await withdraw(signer, inputWithdraw, selectedLockIndex);
       await onGetGeneralInfo();
       await onGetUserInfo();
     }
     setLoading(false);
-  }, [signer, chain, inputWithdraw, selectedLockIndex, setLoading]);
+  }, [signer, inputWithdraw, selectedLockIndex, setLoading]);
 
   useEffect(() => {
     const now = getUnixTime(new Date());
@@ -174,15 +172,15 @@ export default function LockSam() {
   }, [inputLock, period]);
 
   const onGetUserInfo = useCallback(async () => {
-    if (signer && chain && !chain.unsupported) {
+    if (signer) {
       const response = await userInfo(signer);
       setUserInfoData(response as UserInfo);
     }
-  }, [signer, chain]);
+  }, [signer]);
 
   useEffect(() => {
     onGetUserInfo();
-  }, [signer, chain]);
+  }, [signer]);
 
   useEffect(() => {
     if (generalLockData && generalLockData?.periods.length > 0) {
@@ -234,7 +232,7 @@ export default function LockSam() {
         </div>
 
         <div className="flex items-center rounded-[4px] w-full bg-black/75 backdrop-blur-sm p-6 py-8 text-sm leading-[20px] border border-white/20 lg:mt-8 shadow-md shadow-black/60 z-20">
-          {signer && chain && !chain.unsupported ? (
+          {signer ? (
             <div className="flex flex-col rounded-[4px] w-full gap-3">
               <div>
                 <p className="text-white/40">Samurai Points</p>
@@ -257,26 +255,22 @@ export default function LockSam() {
             <ConnectButton />
           )}
 
-          {signer &&
-            chain &&
-            !chain.unsupported &&
-            userInfoData &&
-            userInfoData?.locks.length > 0 && (
-              <button
-                disabled={loading}
-                onClick={() => {
-                  setWithdrawIsOpen(true);
-                  onGetUserInfo();
-                }}
-                className={`flex justify-center text-sm py-2 border ${
-                  loading
-                    ? "border-white/10 text-white/10"
-                    : "border-samurai-red text-samurai-red"
-                } rounded-full min-w-[150px] hover:bg-samurai-red hover:text-white`}
-              >
-                MANAGE LOCKS
-              </button>
-            )}
+          {signer && userInfoData && userInfoData?.locks.length > 0 && (
+            <button
+              disabled={loading}
+              onClick={() => {
+                setWithdrawIsOpen(true);
+                onGetUserInfo();
+              }}
+              className={`flex justify-center text-sm py-2 border ${
+                loading
+                  ? "border-white/10 text-white/10"
+                  : "border-samurai-red text-samurai-red"
+              } rounded-full min-w-[150px] hover:bg-samurai-red hover:text-white`}
+            >
+              MANAGE LOCKS
+            </button>
+          )}
         </div>
 
         <div className="flex flex-col bg-black/75 backdrop-blur-sm p-6 py-8 rounded-[6px] border border-white/20 shadow-md shadow-black/60 mt-2 z-20">
@@ -373,7 +367,7 @@ export default function LockSam() {
               </div>
               <span className="text-[17px] mt-[-4px]">$SAM</span>
             </div>
-            {signer && chain && !chain.unsupported && (
+            {signer && (
               <div className="absolute top-[-24px] right-2 text-sm text-end transition-all hover:opacity-75 w-max text-white">
                 <span className="text-white/70">Balance:</span>{" "}
                 {Number(userInfoData?.samBalance || 0).toLocaleString("en-us", {
@@ -388,8 +382,6 @@ export default function LockSam() {
               click={onLock}
               disabled={
                 loading ||
-                !chain ||
-                chain.unsupported ||
                 !signer ||
                 generalLockData === null ||
                 generalLockData?.isPaused ||

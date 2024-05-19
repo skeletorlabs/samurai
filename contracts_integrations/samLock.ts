@@ -5,7 +5,6 @@ import { balanceOf } from "./balanceOf";
 import checkApproval from "./check-approval";
 import { notificateTx } from "@/utils/notificateTx";
 import { SAM_ADDRESS, SAM_LOCK_ADDRESS } from "@/utils/constants";
-import { jsonRpcProvider } from "wagmi/dist/providers/jsonRpc";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const TEST_RPC = "http://127.0.0.1:8545";

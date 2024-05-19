@@ -1,14 +1,16 @@
 import { useRouter } from "next/router";
 import { useState, useEffect, createContext, useCallback } from "react";
-import { ethers } from "ethers";
+import { BrowserProvider, ethers } from "ethers";
 
 declare let window: any;
-
-import { useAccount } from "wagmi";
 
 import { Page } from "../utils/enums";
 import { NAV } from "../utils/constants";
 import { Project } from "@/utils/interfaces";
+import {
+  useWeb3ModalAccount,
+  useWeb3ModalProvider,
+} from "@web3modal/ethers/react";
 
 export const StateContext = createContext({
   page: Page.home,
@@ -36,20 +38,11 @@ export const StateProvider = ({ children }: Props) => {
   const [page, setPage] = useState(Page.home);
   const [isLoading, setIsLoading] = useState(false);
   const [signer, setSigner] = useState<any>(null);
-  const [account, setAccount] = useState<string>("");
+  const [account, setAccount] = useState("");
   const [projects, setProjects] = useState<Project[] | []>([]);
 
-  const wallet = useAccount();
-
-  const getSigner = useCallback(async () => {
-    if (window.ethereum !== null) {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      if (provider) {
-        const walletSigner = await provider.getSigner();
-        setSigner(walletSigner);
-      }
-    }
-  }, [setSigner]);
+  const { walletProvider } = useWeb3ModalProvider();
+  const { address } = useWeb3ModalAccount();
 
   useEffect(() => {
     if (router.isReady) {
@@ -59,14 +52,20 @@ export const StateProvider = ({ children }: Props) => {
   }, [router, setPage]);
 
   useEffect(() => {
-    if (wallet.address && wallet.address !== account) {
-      getSigner();
-    } else {
-      setSigner(null);
-    }
+    const getSigner = async () => {
+      if (walletProvider) {
+        const provider = new BrowserProvider(walletProvider);
+        const signer = await provider.getSigner();
+        setSigner(signer);
+      }
+    };
 
-    setAccount(wallet?.address as string);
-  }, [wallet.address, setSigner]);
+    getSigner();
+  }, [walletProvider]);
+
+  useEffect(() => {
+    setAccount(address || "");
+  }, [address]);
 
   return (
     <StateContext.Provider

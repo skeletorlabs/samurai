@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { ERC20_ABI, NFTS_ABI } from "./abis";
+import { NFTS_ABI } from "./abis";
 import Notificate from "../components/notificate";
 import handleError from "../utils/handleErrors";
 import {
@@ -8,7 +8,6 @@ import {
   WhitelistDataType,
 } from "@/utils/interfaces";
 import { LINKS } from "@/utils/constants";
-import { balanceOf } from "./balanceOf";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as string;
@@ -97,15 +96,6 @@ export async function isWhitelisted(signer: ethers.Signer) {
       signerAddress
     );
     const whitelistFinishAt = Number(await contract.whitelistRoundFinishAt());
-
-    // const balance = await balanceOf(
-    //   ERC20_ABI,
-    //   "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
-    //   "0x0ED0ef0838A24F360e6DE58A44A46D831E8230A6",
-    //   signer
-    // );
-
-    // console.log(balance);
 
     return {
       isWhitelisted,

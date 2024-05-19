@@ -5,9 +5,9 @@ import { useContext } from "react";
 import { Inter } from "next/font/google";
 import { StateContext } from "@/context/StateContext";
 import { Page } from "@/utils/enums";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import SSButton from "./ssButton";
 import { useRouter } from "next/router";
+import ConnectButton from "./connectbutton";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -55,7 +55,7 @@ export default function Nav() {
       <div className="flex flex-col md:flex-row  gap-5 px-5 lg:px-0 h-max">
         {(page === Page.nft || query.ido !== "") && (
           <div className="flex self-center h-14">
-            <ConnectButton showBalance={false} />
+            <ConnectButton />
           </div>
         )}
 
@@ -66,11 +66,6 @@ export default function Nav() {
         >
           CA: 0xe...71b
         </SSButton>
-        {/* <div className="hidden xl:flex">
-          <SSButton isLink target="blank" href="https://v1.samuraistarter.com">
-            V1
-          </SSButton>
-        </div> */}
       </div>
     </div>
   );

@@ -6,12 +6,12 @@ import { Inter, Roboto } from "next/font/google";
 import { Fragment, useCallback, useContext, useEffect, useState } from "react";
 import { aerodrome } from "@/utils/svgs";
 import { StateContext } from "@/context/StateContext";
-import { useNetwork } from "wagmi";
 import {
   VestingSchedule,
   claimVesting,
   getClaimInfos,
 } from "@/contracts_integrations/claimSam";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,7 +32,6 @@ export default function ClaimSam() {
   const [claimable, setClaimable] = useState(0);
   const [vesting, setVesting] = useState(0);
   const { signer, account } = useContext(StateContext);
-  const { chain } = useNetwork();
 
   const onClaimVesting = useCallback(
     async (claimAll: boolean) => {
@@ -40,8 +39,6 @@ export default function ClaimSam() {
       if (claimAll) setClaimAllBoxIsOpen(false);
 
       if (
-        chain &&
-        !chain?.unsupported &&
         signer &&
         account &&
         vestingSchedules &&
@@ -53,7 +50,7 @@ export default function ClaimSam() {
       setLoading(false);
     },
 
-    [account, chain, signer, vestingSchedules]
+    [account, signer, vestingSchedules]
   );
 
   useEffect(() => {
@@ -80,16 +77,16 @@ export default function ClaimSam() {
   }, [vestingSchedules, setTotal, setClaimable, setVesting]);
 
   const onGetSamClaimInfos = useCallback(async () => {
-    if (chain && !chain?.unsupported && signer && account) {
+    if (signer && account) {
       const response = await getClaimInfos(account);
 
       setVestingSchedules(response);
     }
-  }, [account, chain, signer]);
+  }, [account, signer]);
 
   useEffect(() => {
     onGetSamClaimInfos();
-  }, [account, chain, signer]);
+  }, [account, signer]);
   return (
     <>
       {/* SAM TOKEN CLAIM */}
@@ -234,16 +231,6 @@ export default function ClaimSam() {
             </div>
           </div>
         </div>
-        {/* <div className="absolute top-0 left-0 flex flex-col justify-center items-center bg-black/80 backdrop-blur-md w-full h-full z-30">
-          <p className="font-bold text-5xl pb-2">
-            <span className="text-samurai-red">$SAM</span> Token Claim
-          </p>
-          <p
-            className={`text-6xl text-neutral-300 pt-4 max-w-[700px]  ${inter.className}`}
-          >
-            COMING SOON!
-          </p>
-        </div> */}
       </div>
 
       <Transition appear show={claimAllBoxIsOpen} as={Fragment}>

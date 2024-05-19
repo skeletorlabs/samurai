@@ -12,7 +12,6 @@ interface Card {
 export default function Card({ project }: Card) {
   return (
     <Link href="#" className="flex flex-col w-full">
-      {/* <div className="w-full h-max relative"> */}
       <Image
         src={`/projects/${project.name.toLowerCase().replaceAll(" ", "-")}.svg`}
         placeholder="blur"

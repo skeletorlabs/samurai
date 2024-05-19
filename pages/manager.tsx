@@ -1,7 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import the CSS for styling
-import { useAccount } from "wagmi";
 
 import SSButton from "@/components/ssButton";
 import {
@@ -16,7 +15,6 @@ import { StateContext } from "@/context/StateContext";
 import Layout from "@/components/layout";
 import TopLayout from "@/components/topLayout";
 import { WhitelistDataType } from "@/utils/interfaces";
-import { getNetwork } from "@wagmi/core";
 
 type Pinned = {
   imagesCID: string;
@@ -33,9 +31,7 @@ export default function Manager() {
   const [whitelistData, setWhitelistData] = useState<WhitelistDataType | null>(
     null
   );
-  const { signer, isLoading, setIsLoading } = useContext(StateContext);
-  const { address } = useAccount();
-  const { chain } = getNetwork();
+  const { signer, account, isLoading, setIsLoading } = useContext(StateContext);
 
   const onTextAreaChange = (value: string) => {
     const addresses: string[] = value
@@ -55,60 +51,52 @@ export default function Manager() {
 
   const onTogglePause = useCallback(async () => {
     setIsLoading(true);
-    if (signer && chain && !chain.unsupported) await togglePause(signer);
+    if (signer) await togglePause(signer);
 
     await getGeneralData();
     setIsLoading(false);
-  }, [chain, signer, setIsLoading]);
+  }, [signer, setIsLoading]);
 
   const onStartWhitelistRound = useCallback(async () => {
     setIsLoading(true);
-    if (signer && chain && !chain.unsupported)
-      await startWhitelistRound(signer);
+    if (signer) await startWhitelistRound(signer);
 
     await getGeneralData();
     setIsLoading(false);
-  }, [chain, signer]);
+  }, [signer]);
 
   const onSplitAssets = useCallback(async () => {
     setIsLoading(true);
-    if (signer && chain && !chain.unsupported)
-      await releaseWhitelistAssets(signer, percentage);
+    if (signer) await releaseWhitelistAssets(signer, percentage);
 
     await getGeneralData();
     setIsLoading(false);
-  }, [chain, signer, setIsLoading]);
+  }, [signer, setIsLoading]);
 
   const onAddToWhitelist = useCallback(async () => {
     setIsLoading(true);
 
-    if (
-      signer &&
-      chain &&
-      !chain.unsupported &&
-      whitelistAddresses.length > 0
-    ) {
+    if (signer && whitelistAddresses.length > 0) {
       await addToWhitelist(signer, whitelistAddresses);
     }
 
     setIsLoading(false);
-  }, [chain, signer, whitelistAddresses, setIsLoading]);
+  }, [signer, whitelistAddresses, setIsLoading]);
 
   const getWhiteListInfos = useCallback(async () => {
     setIsLoading(true);
-    if (signer && chain && !chain.unsupported && data && !data.isPaused) {
+    if (signer && data && !data.isPaused) {
       const checkWhitelist = await isWhitelisted(signer);
       setWhitelistData(checkWhitelist as WhitelistDataType);
     }
     setIsLoading(false);
-  }, [chain, signer, data, setIsLoading, setWhitelistData]);
+  }, [signer, data, setIsLoading, setWhitelistData]);
 
   const checkOwnership = useCallback(() => {
-    if (signer && address && chain && !chain.unsupported)
-      return data && data.owner === address;
+    if (signer && account) return data && data.owner === account;
 
     return false;
-  }, [chain, signer, data, address]);
+  }, [signer, data, account]);
 
   const createMetadata = useCallback(async () => {
     const response: any = await fetch("/api/pinata");
