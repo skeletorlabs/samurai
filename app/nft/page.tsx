@@ -422,7 +422,7 @@ export default function Nft() {
             <Link
               target="blank"
               href="https://opensea.io/collection/samuraistarter"
-              className="bg-blue-500 px-10 py-2 rounded-[8px] w-full flex justify-center items-center gap-2 mb-3 transition-all text-lg hover:text-xl"
+              className="bg-blue-500 px-10 py-2 rounded-[8px] w-full flex justify-center items-center gap-2 mb-3 transition-all md:text-lg hover:text-xl"
             >
               <Image
                 src="/opensea-logo.svg"
