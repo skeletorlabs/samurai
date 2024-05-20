@@ -214,10 +214,10 @@ export default function LockSam() {
         </div>
 
         <div className="flex flex-col">
-          <span className="flex items-center relative gap-2 pl-2">
+          <span className="flex justify-center md:justify-start items-center relative gap-2">
             Total Platform Locked
           </span>
-          <div className="pl-2 text-lg">
+          <div className="text-sm md:text-lg text-center md:text-start">
             {loadingEvents ? (
               <span className="text-samurai-red pl-1">loading Logs...</span>
             ) : (
@@ -231,7 +231,7 @@ export default function LockSam() {
           </div>
         </div>
 
-        <div className="flex items-center rounded-[4px] w-full bg-black/75 backdrop-blur-sm p-6 py-8 text-sm leading-[20px] border border-white/20 lg:mt-8 shadow-md shadow-black/60 z-20">
+        <div className="flex items-center rounded-[4px] w-full bg-black/75 backdrop-blur-sm p-6 py-8 text-sm leading-[20px] border border-white/20 lg:mt-8 shadow-md shadow-black/60 z-20 mt-5">
           {signer ? (
             <div className="flex flex-col rounded-[4px] w-full gap-3">
               <div>
