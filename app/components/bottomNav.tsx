@@ -15,9 +15,7 @@ export default function BottomNav() {
             key={index}
             href={item.href}
             className={`text-[10px]  ${
-              item.page === page
-                ? "text-black"
-                : "text-white hover:text-pink-900"
+              item.page === page ? "text-white " : "text-black hover:opacity-75"
             }`}
           >
             <div className="flex flex-col items-center">

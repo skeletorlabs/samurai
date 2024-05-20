@@ -15,7 +15,7 @@ const links = [
 
 export default function Footer() {
   return (
-    <div className="w-full h-[320px] lg:h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-700">
+    <div className="w-full h-[300px] lg:h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-700">
       <div className="flex flex-col lg:flex-row gap-10">
         <div className="flex flex-col items-center lg:items-start">
           <Link href="/" className="transition-all hover:opacity-75">
@@ -26,7 +26,7 @@ export default function Footer() {
               width={0}
               height={0}
               alt="logo"
-              className="md:mr-10 mt-5 mb-3 w-[300px] md:w-[400px] "
+              className="md:mr-10 mt-10 mb-3 md:mb-6 w-[300px]"
             />
           </Link>
 
