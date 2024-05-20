@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SOCIALS } from "@/app/utils/constants";
 import { linkedin, twitter } from "@/app/utils/svgs";
+import SSButton from "./ssButton";
 
 const links = [
   { title: "SamNFT", href: "/nft" },

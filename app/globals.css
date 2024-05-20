@@ -83,3 +83,17 @@
 .dot {
   background-color: red !important;
 }
+
+/* .sp-form[sp-id="223878"] {
+  display: flex;
+  border: none !important;
+  margin-top: -360px !important;
+} */
+
+#sendpulse {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 500px !important;
+  height: 200px !important;
+}

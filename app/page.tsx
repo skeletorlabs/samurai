@@ -362,15 +362,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      {/* NEWSLETTER */}
-      <div className="flex items-center px-6 lg:px-8 xl:px-20 py-20 w-full border-t-[0.5px] border-samurai-red/50">
-        <script
-          src="//web.webformscr.com/apps/fc3/build/loader.js"
-          async
-          sp-form-id="0229cc821b515da43f09d3b34f142798efa2f98d40eb42d322744cb90dca5100"
-        ></script>
-      </div>
     </>
   );
 }
