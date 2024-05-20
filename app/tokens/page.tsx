@@ -79,7 +79,7 @@ export default function Tokens() {
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <div className="flex flex-col text-white text-2xl">
             <div className="flex flex-col md:flex-row items-center gap-3">
-              <p className="font-bold text-4xl pb-2 opacity-[0.8] w-[400px] text-center md:text-start">
+              <p className="font-bold text-4xl pb-2 opacity-[0.8] md:w-[400px] text-center md:text-start">
                 <span className="text-samurai-red">$SAM</span> Tokenomics
               </p>
               <div className="flex items-center justify-center w-full lg:justify-start gap-8 lg:px-5 mb-1">
