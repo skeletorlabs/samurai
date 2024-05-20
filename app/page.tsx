@@ -207,7 +207,7 @@ export default function Home() {
 
       {/* FEATURED PROJECTS */}
       <div className="flex flex-col pt-20 pb-10 w-full bg-white/10 px-6 lg:px-8 xl:px-20 text-white border-t-[0.5px] border-samurai-red">
-        <h2 className="text-6xl font-bold">
+        <h2 className="text-4xl md:text-6xl font-bold">
           Featured <span className="text-samurai-red">Projects</span>
         </h2>
         <div className={`text-lg mt-2 inline-flex ${inter.className}`}>
@@ -236,7 +236,7 @@ export default function Home() {
         className="flex justify-between pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20 bg-samurai-sanka bg-[right_-10rem_top_-20rem] border-t-[1px] border-samurai-red"
       >
         <div className="flex flex-col">
-          <h2 className="text-6xl font-bold">
+          <h2 className="text-4xl md:text-6xl font-bold">
             Samurai <span className="text-samurai-red">Sanka</span>
             <p
               className={`font-light text-2xl md:text-[32px]  text-white mt-2 ${inter.className}`}
@@ -329,7 +329,7 @@ export default function Home() {
       {/* SAMURAI EDGE */}
       <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white/20 border-t-[1px] border-yellow-300/40">
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
-          <h2 className="text-6xl font-bold">
+          <h2 className="text-4xl md:text-6xl font-bold">
             The Samurai <span className="text-samurai-red">Edge</span>
           </h2>
           <div

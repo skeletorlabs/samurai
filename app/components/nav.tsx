@@ -34,7 +34,7 @@ export default function Nav() {
             width={0}
             height={0}
             alt="logo"
-            className="mt-[-5px] drop-shadow-xl w-[400px] lg:w-[300px] h-[80px] px-3 lg:px-0"
+            className="mt-[-5px] drop-shadow-xl w-[300px] lg:w-[300px] h-[80px] px-3 lg:px-0"
           />
         </Link>
         {NAV.map((item, index) => (
@@ -55,10 +55,10 @@ export default function Nav() {
           </Link>
         ))}
       </div>
-      <div className="flex flex-col md:flex-row  gap-5 px-5 lg:px-0 h-max">
+      <div className="flex gap-5 lg:px-0">
         {(page === Page.nft || ido !== "") && (
           <div className="flex self-center h-14">
-            <ConnectButton />
+            <ConnectButton mobile />
           </div>
         )}
 
@@ -66,6 +66,7 @@ export default function Nav() {
           isLink
           target="blank"
           href="https://basescan.org/token/0xed1779845520339693CDBffec49a74246E7D671b"
+          mobile
         >
           CA: 0xe...71b
         </SSButton>

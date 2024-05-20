@@ -26,11 +26,11 @@ export default function Footer() {
               width={0}
               height={0}
               alt="logo"
-              className="md:mr-10 mt-[12px] mb-2 w-[400px] h-[100px]"
+              className="md:mr-10 mt-5 mb-3 w-[300px] md:w-[400px] "
             />
           </Link>
 
-          <div className="flex items-center justify-center w-full lg:justify-start gap-10 lg:px-5 flex-wrap lg:flex-nowrap">
+          <div className="flex items-center justify-center w-full lg:justify-start gap-6 md:gap-10 lg:px-5 flex-wrap lg:flex-nowrap scale-75 md:scale-100">
             {SOCIALS.map((item, index) => (
               <Link
                 key={index}

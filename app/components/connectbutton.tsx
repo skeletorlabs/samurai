@@ -2,7 +2,10 @@ import { useWeb3ModalAccount, useWeb3Modal } from "@web3modal/ethers/react";
 import { useEffect, useState } from "react";
 import SSButton from "./ssButton";
 
-export default function ConnectButton() {
+interface ConnectButton {
+  mobile?: boolean;
+}
+export default function ConnectButton({ mobile = false }: ConnectButton) {
   const [text, setText] = useState("Connect wallet");
   const { isConnected, address } = useWeb3ModalAccount();
   const { open } = useWeb3Modal();
@@ -19,5 +22,9 @@ export default function ConnectButton() {
     );
   }, [address, isConnected]);
 
-  return <SSButton click={() => open()}>{text}</SSButton>;
+  return (
+    <SSButton mobile={mobile} click={() => open()}>
+      {text}
+    </SSButton>
+  );
 }

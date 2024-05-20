@@ -355,12 +355,12 @@ export default function Nft() {
           {/* TOP CONTENT */}
 
           <div className="relative md:mr-12 xl:max-w-[900px] px-6 md:px-0">
-            <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
+            <h1 className="text-[38px] sm:text-[58px] lg:text-[90px] font-black leading-[48px] sm:leading-[68px] lg:leading-[98px] text-white text-center sm:text-start">
               Buy a <span className="text-samurai-red">SamNFT </span>
               for lifetime VIP access to the hottest launchpad on the market!
             </h1>
             <p
-              className={`leading-normal lg:leading-relaxed pt-16 lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
+              className={`leading-normal lg:leading-relaxed pt-8 md:pt-16 lg:text-2xl xl:max-w-[900px] text-center sm:text-start ${inter.className}`}
             >
               SamNFT holders are the core of the Samurai Starter community —
               pick up yours on OpenSea to gain access to tremendous benefits
@@ -369,7 +369,7 @@ export default function Nft() {
             </p>
           </div>
 
-          <div className="flex md:min-w-[400px] md:max-w-[400px] h-[500px] md:bg-white p-2 rounded-[8px] relative">
+          <div className="flex md:min-w-[400px] md:max-w-[400px] h-[300px] sm:h-[500px] md:bg-white p-2 rounded-[8px] relative">
             <Carousel leftControl=" " rightControl=" ">
               {images.map((image, index) => (
                 <Image
@@ -455,7 +455,7 @@ export default function Nft() {
               </div>
             )}
 
-            <div className="flex w-full lg:max-w-[600px] items-center flex-wrap gap-14 mt-5 2xl:max-h-[830px] 2xl:overflow-scroll">
+            <div className="flex w-full lg:max-w-[600px] items-center flex-wrap gap-3 md:gap-14 mt-5 2xl:max-h-[830px] 2xl:overflow-scroll">
               {userNfts?.map((nft, index) => (
                 <Link
                   key={index}
@@ -502,7 +502,7 @@ export default function Nft() {
             </h2>
 
             <div
-              className={`flex w-full items-center flex-wrap gap-6 ${
+              className={`flex w-full justify-center sm:justify-start items-center flex-wrap gap-6 ${
                 lastFiveNfts?.length === 0 ? "mt-5" : "mt-4"
               }`}
             >
@@ -510,7 +510,10 @@ export default function Nft() {
                 <span>- New minted NFTs will appear here</span>
               )}
               {lastFiveNfts?.map((nft, index) => (
-                <div key={index} className="transition-all hover:scale-110">
+                <div
+                  key={index}
+                  className="flex flex-col items-center transition-all hover:scale-110"
+                >
                   <Link
                     target="blank"
                     href={
@@ -520,7 +523,7 @@ export default function Nft() {
                           }`
                         : "#"
                     }
-                    className="flex flex-col justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
+                    className="flex flex-col justify-center items-center w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
                   >
                     <Image
                       src={nft?.src ? nft?.src : "/loading.gif"}
