@@ -50,20 +50,17 @@ export const StateProvider = ({ children }: Props) => {
     setPage(page?.page as Page);
   }, [pathname, setPage]);
 
-  useEffect(() => {
-    const getSigner = async () => {
-      if (walletProvider) {
-        const provider = new BrowserProvider(walletProvider);
-        const signer = await provider.getSigner();
-        setSigner(signer);
-      }
-    };
-
-    getSigner();
-  }, [walletProvider]);
+  const getSigner = useCallback(async () => {
+    if (walletProvider) {
+      const provider = new BrowserProvider(walletProvider);
+      const signer = await provider.getSigner();
+      setSigner(signer);
+    }
+  }, [walletProvider, setSigner]);
 
   useEffect(() => {
     setAccount(address || "");
+    getSigner();
   }, [address]);
 
   return (

@@ -5,6 +5,7 @@ import { formattedDate } from "@/app/utils/formattedDate";
 import { IDO_LIST } from "@/app/utils/constants";
 import { getParticipationPhase } from "@/app/contracts_integrations/ido";
 import { getParticipationPhase as getParticipationPhaseNft } from "@/app/contracts_integrations/idoNFT";
+import { getParticipationPhase as getParticipationPhaseNftEth } from "../contracts_integrations/idoNFTETH";
 import { useCallback, useEffect, useState } from "react";
 
 export default function LaunchpadCard({
@@ -22,8 +23,11 @@ export default function LaunchpadCard({
     );
 
     const isNft = ido.type === "NFT";
+    const isNftEth = ido.type === "NFT-ETH";
     const phase = isNft
       ? await getParticipationPhaseNft(contract)
+      : isNftEth
+      ? await getParticipationPhaseNftEth(contract)
       : await getParticipationPhase(contract);
     setPhase(phase.toUpperCase());
   }, [ido]);
@@ -132,8 +136,8 @@ export default function LaunchpadCard({
       <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max mt-2">
         <span className="text-[14px] text-samurai-red">PRICE:</span>
         <p className="text-white/70">
-          {ido.price} {ido.acceptedTokenSymbol}{" "}
-          {ido.type === "NFT" && "per NFT"}
+          {ido.price} {ido.type === "NFT-ETH" ? "ETH" : ido.acceptedTokenSymbol}{" "}
+          {(ido.type === "NFT" || ido.type === "NFT-ETH") && "per NFT"}
         </p>
       </div>
 
