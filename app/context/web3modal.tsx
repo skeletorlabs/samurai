@@ -6,6 +6,14 @@ import { createWeb3Modal, defaultConfig } from "@web3modal/ethers/react";
 const projectId = "615362a649b8bf6fbed2f4694edf0e91";
 
 // 2. Set chains
+const localhost = {
+  chainId: 31337,
+  name: "Localhost",
+  currency: "ETH",
+  explorerUrl: "https://basescan.org",
+  rpcUrl: "http://127.0.0.1:8545",
+};
+
 const base = {
   chainId: 8453,
   name: "Base",

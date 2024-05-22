@@ -26,11 +26,13 @@ import {
   interswap,
   unibit,
   kip,
+  artx,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
   PARTICIPATOR_V2_ABI,
   PARTICIPATOR_NFT_ABI,
+  PARTICIPATOR_NFT_ETH,
 } from "@/app/contracts_integrations/abis";
 
 export const simplifiedPhases = [
@@ -43,6 +45,70 @@ export const simplifiedPhases = [
 ];
 
 export const IDO_LIST: IDO[] = [
+  {
+    id: "launchpad-nft-eth/artx",
+    logo: artx,
+    idoImageSrc: "/IDOs/artx.png",
+    acceptedTokenSymbol: "ETH",
+    tokenNetwork: "TO BE ANNOUNCED",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    projectName: "ARTX - NFT",
+    projectListDescription:
+      "Level up your portfolio with ARTX’s suite of AI-assisted trading and asset management tools.",
+    projectDescription:
+      "The Artxnauts NFT is your access pass to ARTX’s AI-powered portfolio management tools. Set a custom risk level and effortlessly grow your portfolio using their sophisticated AI trading bot. Each of these 500 exclusive NFTs also grants lifetime DAO membership and early access to all future ARTX products!",
+    projectTokenSymbol: "NFT",
+    totalAllocation: 500,
+    price: "0.065",
+    participationStartsAt: 1716465600,
+    participationEndsAt: 1716811200,
+    publicParticipationStartsAt: 0,
+    publicParticipationEndsAt: 0,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 0,
+    cliff: 0,
+    investmentRound: "SAMURAI ROUND",
+    fdv: "",
+    exchangeListingPrice: 0.08,
+    marketCapAtTGE: 0,
+    vesting: "NOT APPLIED",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      {
+        svg: globe,
+        href: "https://artx.capital/",
+      },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/ArtxTrading",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/artxcommunity",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <h1 style="font-weight: bold; font-size: 1.2em;">ARTX NFT</h1>
+        <p>Running the ARTX trading bot is like having your own personal asset manager constantly monitoring and optimising your portfolio, to make sure your funds are performing to their optimal potential. It does this with the power of a powerful AI engine. Set your custom risk appetite level, deploy the bot on a CEX account (or soon, directly on your Web3 wallet of choice) and let it do the rest.</p>
+        <p>Holding an Artxnaut NFT gives lifetime access to the trading bot, with no hidden fees. But thats not all — becoming an Artxnaut will also put you at the very heart of the ARTX project, with DAO membership and early access to every future product in their ever-expanding suite of AI-assisted trading tools.</p>
+        <p>The first of these is already well on the way: a Smart Index system built in collaboration with crypto index fund specialists Phuture. These next-gen Smart Indexes will operate as baskets of cryptocurrencies managed via an AI which can constantly optimise and rebalance the index's portfolio on the fly to maximise gains for holders.</p>
+        <p>Lifetime access to all this and more is granted through the Artxnaut NFTs. With a max supply of just 500 being minted (and some killer artwork) expect these to be snapped up quick.</p>
+      </div>
+  `,
+    contract: "0x00778bB6d5A185F9661F7A0Baf95E6b6E4d165b1",
+    abi: PARTICIPATOR_NFT_ETH,
+    images: [
+      "/IDOs/artx/1.jpg",
+      "/IDOs/artx/2.jpg",
+      "/IDOs/artx/3.jpg",
+      "/IDOs/artx/4.jpg",
+    ],
+    type: "NFT-ETH",
+  },
   {
     id: "launchpad-nft/kip-protocol",
     logo: kip,
