@@ -121,7 +121,7 @@ export default function LaunchpadCard({
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}{" "}
-              {ido.acceptedTokenSymbol}
+              {ido.projectTokenSymbol}s
             </>
           )}
 
