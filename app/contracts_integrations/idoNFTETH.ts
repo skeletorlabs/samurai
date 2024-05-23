@@ -242,10 +242,10 @@ export async function getParticipationPhase(index: number) {
   if (now >= participationEndsAt && publicEndsAt === 0) phase = "Completed";
   if (phase !== "Upcoming" && isPaused) phase = "Completed";
   const contract = await getContract(index, undefined);
-  const maxAllocations = Number(await contract?.maxAllocations());
+  // const maxAllocations = Number(await contract?.maxAllocations());
   const raised = Number(await contract?.raised());
   const minPerWallet = Number(await contract?.minA());
-  if (maxAllocations - raised < minPerWallet) phase = "Completed";
+  if (150 - raised < minPerWallet) phase = "Completed";
   return phase;
 }
 
