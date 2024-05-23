@@ -1,9 +1,6 @@
 import { ethers, formatEther, parseEther } from "ethers";
-import { ERC20_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
 import { IDO_LIST } from "@/app/utils/constants";
-import { balanceOf } from "./balanceOf";
-import checkApproval from "./check-approval";
 import { getUnixTime } from "date-fns";
 import { notificateTx } from "@/app/utils/notificateTx";
 

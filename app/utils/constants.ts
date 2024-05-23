@@ -55,9 +55,9 @@ export const IDO_LIST: IDO[] = [
     networkImageSrc: "/ido-sample.svg",
     projectName: "ARTX - NFT",
     projectListDescription:
-      "Level up your portfolio with ARTX’s suite of AI-assisted trading and asset management tools.",
+      "Level up your portfolio with ARTX's suite of AI-assisted trading and asset management tools.",
     projectDescription:
-      "The Artxnauts NFT is your access pass to ARTX’s AI-powered portfolio management tools. Set a custom risk level and effortlessly grow your portfolio using their sophisticated AI trading bot. Each of these 500 exclusive NFTs also grants lifetime DAO membership and early access to all future ARTX products!",
+      "The Artxnauts NFT is your access pass to ARTX's AI-powered portfolio management tools. Set a custom risk level and effortlessly grow your portfolio using their sophisticated AI trading bot. Each of these 500 exclusive NFTs also grants lifetime DAO membership and early access to all future ARTX products!",
     projectTokenSymbol: "NFT",
     totalAllocation: 500,
     price: "0.065",
@@ -73,7 +73,7 @@ export const IDO_LIST: IDO[] = [
     fdv: "",
     exchangeListingPrice: 0.08,
     marketCapAtTGE: 0,
-    vesting: "NOT APPLIED",
+    vesting: "NOT APPLICABLE",
     releaseType: "Linear",
     currentPhase: simplifiedPhases[1].title,
     socials: [
