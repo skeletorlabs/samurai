@@ -59,7 +59,7 @@ export const IDO_LIST: IDO[] = [
     projectDescription:
       "The Artxnauts NFT is your access pass to ARTX's AI-powered portfolio management tools. Set a custom risk level and effortlessly grow your portfolio using their sophisticated AI trading bot. Each of these 500 exclusive NFTs also grants lifetime DAO membership and early access to all future ARTX products!",
     projectTokenSymbol: "NFT",
-    totalAllocation: 500,
+    totalAllocation: 150,
     price: "0.065",
     participationStartsAt: 1716465600,
     participationEndsAt: 1716811200,

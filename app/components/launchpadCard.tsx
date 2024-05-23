@@ -117,10 +117,7 @@ export default function LaunchpadCard({
             <>{ido.totalAllocation} NFTs</>
           ) : (
             <>
-              {ido.totalAllocation.toLocaleString("en-us", {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}{" "}
+              {ido.totalAllocation.toLocaleString("en-us")}{" "}
               {ido.projectTokenSymbol}s
             </>
           )}

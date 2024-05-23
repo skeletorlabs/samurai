@@ -58,7 +58,8 @@ export async function generalInfo(index: number) {
 
     const isPublic = await contract?.isPublic();
     const isPaused = await contract?.paused();
-    const maxAllocations = Number(await contract?.maxAllocations());
+    // const maxAllocations = Number(await contract?.maxAllocations());
+    const maxAllocations = 150;
 
     const raised = Number(await contract?.raised());
     const raisedInETH = Number(
