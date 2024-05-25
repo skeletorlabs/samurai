@@ -106,7 +106,7 @@ export default function LaunchpadCard({
         <div className="text-samurai-red">{ido.projectName}</div>
       </div>
 
-      <div className="text-white/70 text-[15px] px-1 mb-4 line-clamp-3 text-base">
+      <div className="text-white/70 text-[15px] px-1 mb-4 line-clamp-3 text-base min-h-[80px]">
         {ido.projectListDescription}
       </div>
 
@@ -118,7 +118,9 @@ export default function LaunchpadCard({
           ) : (
             <>
               {ido.totalAllocation.toLocaleString("en-us")}{" "}
-              {ido.projectTokenSymbol}s
+              {ido.type == "NFT" || ido.type === "NFT-ETH"
+                ? "NFTs"
+                : ido.projectTokenSymbol}
             </>
           )}
 
