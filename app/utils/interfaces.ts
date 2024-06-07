@@ -141,6 +141,7 @@ export interface IDO {
   projectTokenSymbol: string;
   totalAllocation: number;
   price: string;
+  registrationStartsAt: number;
   participationStartsAt: number;
   participationEndsAt: number;
   publicParticipationStartsAt: number;

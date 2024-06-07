@@ -27,12 +27,14 @@ import {
   unibit,
   kip,
   artx,
+  kvants,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
   PARTICIPATOR_V2_ABI,
   PARTICIPATOR_NFT_ABI,
   PARTICIPATOR_NFT_ETH,
+  PARTICIPATOR_V2_2,
 } from "@/app/contracts_integrations/abis";
 
 export const simplifiedPhases = [
@@ -44,7 +46,82 @@ export const simplifiedPhases = [
   { title: "Completed", buttonTitle: "" },
 ];
 
+export const simplifiedPhasesV2 = [
+  { title: "Upcoming", buttonTitle: "" },
+  { title: "Registration", buttonTitle: "REGISTER" },
+  {
+    title: "Participation",
+    buttonTitle: "PARTICIPATE",
+  },
+  { title: "Completed", buttonTitle: "" },
+];
+
 export const IDO_LIST: IDO[] = [
+  {
+    id: "launchpad-v2/kvants",
+    logo: kvants,
+    idoImageSrc: "/IDOs/kvants.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "TO BE ANNOUNCED",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    projectName: "Kvants",
+    projectListDescription:
+      "The Kvants platform makes high-level institutional quantitative trading strategies available to the masses.",
+    projectDescription:
+      "Kvants is on a mission to democratize investment by creating a self-custodial platform where users can browse and invest in a wide range of complex quant trading strategy pools, allowing each of us to 'invest like the elite' with just a few clicks. $KVAI holders will enjoy effortless access to high-performing institutional investment models.",
+    projectTokenSymbol: "$KVAI",
+    totalAllocation: 150_000,
+    price: "0.0115",
+    registrationStartsAt: 1718100000,
+    participationStartsAt: 1718107200,
+    participationEndsAt: 1718150400,
+    publicParticipationStartsAt: 1718150400,
+    publicParticipationEndsAt: 1718193600,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 5,
+    cliff: 86400 * 30,
+    investmentRound: "Private Round",
+    fdv: "15000000",
+    exchangeListingPrice: 0.015,
+    marketCapAtTGE: 336000,
+    vesting: "5% at TGE, 1 month cliff, 9 month linear",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      {
+        svg: globe,
+        href: "http://www.kvants.ai/",
+      },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/KvantsAI",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/kvantsai",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <h1 style="font-weight: bold; font-size: 1.2em;">Kvants</h1>
+        <p>Built by a team of quantitative trading experts with experience at top TradFi institutions, Kvants is a non-custodial Asset Management Platform offering retail investors the chance to invest using institutional-grade trading strategies developed by professional hedge funds.<p>
+        <p>These quantitative strategies make use of complex, systematic trading models with algorithms which are constantly optimised through AI-powered machine learning. Such trading models constantly monitor a wide range of market analytics, automatically closing and opening positions based on a predefined set of complex rules.<p>
+        <p>These sophisticated trading strategies have traditionally been out of reach of retail crypto investors, but that is about to change. The Kvants platform is built to make investing with institutional-grade trading strategies accessible to the everyday investor.<p>
+        <p>Kvants+ is the platform where all of this action takes place. Here you'll be able to browse a wide range of carefully-audited quantitative trading strategies, each with its own unique algorithms, risk profile, and past performance data. You can then deploy funds directly into DeFi pools which utilise these strategies (and enjoy monthly dividends as a result).<p>
+      </div>
+  `,
+    contract: "0x730B7100590c8205F9Bf22bA28DF6227E0b28E38",
+    abi: PARTICIPATOR_V2_2,
+    // images: [
+    //   "/IDOs/orangedx/1.png",
+    //   "/IDOs/orangedx/2.png",
+    //   "/IDOs/orangedx/3.png",
+    //   "/IDOs/orangedx/4.png",
+    // ],
+    type: "v2",
+  },
   {
     id: "launchpad-nft-eth/artx",
     logo: artx,
@@ -61,6 +138,7 @@ export const IDO_LIST: IDO[] = [
     projectTokenSymbol: "NFT",
     totalAllocation: 150,
     price: "0.065",
+    registrationStartsAt: 0,
     participationStartsAt: 1716465600,
     participationEndsAt: 1716811200,
     publicParticipationStartsAt: 0,
@@ -125,6 +203,7 @@ export const IDO_LIST: IDO[] = [
     projectTokenSymbol: "NODE",
     totalAllocation: 200,
     price: "620",
+    registrationStartsAt: 0,
     participationStartsAt: 1715598000,
     participationEndsAt: 1715641200,
     publicParticipationStartsAt: 1715641200,
@@ -193,6 +272,7 @@ export const IDO_LIST: IDO[] = [
     projectTokenSymbol: "$UIBT",
     totalAllocation: 150_000,
     price: "0.008",
+    registrationStartsAt: 0,
     participationStartsAt: 1712142000,
     participationEndsAt: 1712228400,
     publicParticipationStartsAt: 1712228400,
@@ -261,6 +341,7 @@ export const IDO_LIST: IDO[] = [
     projectTokenSymbol: "$ISWAP",
     totalAllocation: 150_000,
     price: "0.15",
+    registrationStartsAt: 0,
     participationStartsAt: 1711623600,
     participationEndsAt: 1711666800,
     publicParticipationStartsAt: 1711666800,
@@ -327,6 +408,7 @@ export const IDO_LIST: IDO[] = [
     projectTokenSymbol: "$O4DX",
     totalAllocation: 100_000,
     price: "0.055",
+    registrationStartsAt: 0,
     participationStartsAt: 1710165600,
     participationEndsAt: 1710244800,
     publicParticipationStartsAt: 1710244800,
@@ -398,6 +480,7 @@ export const IDO_LIST: IDO[] = [
     projectTokenSymbol: "$GAGA",
     totalAllocation: 50_000,
     price: "0.01",
+    registrationStartsAt: 0,
     participationStartsAt: 1708952400,
     participationEndsAt: 1709038800,
     publicParticipationStartsAt: 1709038800,
@@ -473,6 +556,7 @@ export const IDO_LIST: IDO[] = [
     projectTokenSymbol: "CMPS",
     totalAllocation: 50_000,
     price: "0.011",
+    registrationStartsAt: 0,
     participationStartsAt: 1707310800,
     participationEndsAt: 1707397200,
     publicParticipationStartsAt: 1707397200,
@@ -639,3 +723,4 @@ export const SAM_LOCK_ADDRESS = "0xfb691697BDAf1857C748C004cC7dab3d234E062E";
 export const SAM_ADDRESS = "0xed1779845520339693CDBffec49a74246E7D671b";
 export const SAM_CLAIM_VESTING = "0xDD687b579c5C542A14874e79E404b83E78e6E18a"; // BASE MAINNET
 // export const SAM_CLAIM_VESTING = "0xE42c1929612bBc03572C518bAf05c38147D5d67e"; // BASE SEPOLIA
+export const SAM_TIERS = "0xdB0Ee72eD5190e9ef7eEC288a92f73c5cf3B3c74";
