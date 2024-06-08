@@ -316,7 +316,7 @@ export default function Ido() {
                   </div>
 
                   {ido && (
-                    <div className="flex flex-col gap-10 px-8">
+                    <div className="flex flex-col gap-10 px-5 md:px-8">
                       {/* PARTICIPATION PHASE BLOCK */}
                       <div className="flex justify-start lg:grid lg:grid-cols-2 gap-1 items-center flex-wrap mt-6">
                         <div className="flex md:hidden items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
