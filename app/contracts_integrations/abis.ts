@@ -2052,6 +2052,437 @@ export const PARTICIPATOR_NFT_ETH = [
   { type: "error", name: "ReentrancyGuardReentrantCall", inputs: [] },
 ];
 
+export const PARTICIPATOR_V2_2 = [
+  {
+    type: "constructor",
+    inputs: [
+      {
+        name: "_samuraiTiers",
+        type: "address",
+        internalType: "address",
+      },
+      {
+        name: "_maxAllocations",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      {
+        name: "_ranges",
+        type: "tuple[]",
+        internalType: "struct IParticipator.WalletRange[]",
+        components: [
+          { name: "name", type: "string", internalType: "string" },
+          { name: "min", type: "uint256", internalType: "uint256" },
+          { name: "max", type: "uint256", internalType: "uint256" },
+        ],
+      },
+      { name: "_usingETH", type: "bool", internalType: "bool" },
+    ],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "acceptedTokens",
+    inputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "acceptedTokensLength",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "allocations",
+    inputs: [{ name: "wallet", type: "address", internalType: "address" }],
+    outputs: [{ name: "allocation", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "getRange",
+    inputs: [{ name: "index", type: "uint256", internalType: "uint256" }],
+    outputs: [
+      {
+        name: "",
+        type: "tuple",
+        internalType: "struct IParticipator.WalletRange",
+        components: [
+          { name: "name", type: "string", internalType: "string" },
+          { name: "min", type: "uint256", internalType: "uint256" },
+          { name: "max", type: "uint256", internalType: "uint256" },
+        ],
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "getWalletRange",
+    inputs: [{ name: "wallet", type: "address", internalType: "address" }],
+    outputs: [
+      {
+        name: "walletRange",
+        type: "tuple",
+        internalType: "struct IParticipator.WalletRange",
+        components: [
+          { name: "name", type: "string", internalType: "string" },
+          { name: "min", type: "uint256", internalType: "uint256" },
+          { name: "max", type: "uint256", internalType: "uint256" },
+        ],
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "getWalletTier",
+    inputs: [{ name: "wallet", type: "address", internalType: "address" }],
+    outputs: [
+      {
+        name: "tier",
+        type: "tuple",
+        internalType: "struct ISamuraiTiers.Tier",
+        components: [
+          { name: "name", type: "string", internalType: "string" },
+          {
+            name: "numOfSamNfts",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "minLocking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "maxLocking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "minLPStaking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "maxLPStaking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+        ],
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "isPublic",
+    inputs: [],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "makePublic",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "maxAllocations",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "owner",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "participate",
+    inputs: [
+      {
+        name: "tokenAddress",
+        type: "address",
+        internalType: "address",
+      },
+      { name: "amount", type: "uint256", internalType: "uint256" },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "participateETH",
+    inputs: [{ name: "amount", type: "uint256", internalType: "uint256" }],
+    outputs: [],
+    stateMutability: "payable",
+  },
+  {
+    type: "function",
+    name: "pause",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "paused",
+    inputs: [],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "raised",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "ranges",
+    inputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    outputs: [
+      { name: "name", type: "string", internalType: "string" },
+      { name: "min", type: "uint256", internalType: "uint256" },
+      { name: "max", type: "uint256", internalType: "uint256" },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "rangesLength",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "registerToWhitelist",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "renounceOwnership",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "samuraiTiers",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "setRanges",
+    inputs: [
+      {
+        name: "_ranges",
+        type: "tuple[]",
+        internalType: "struct IParticipator.WalletRange[]",
+        components: [
+          { name: "name", type: "string", internalType: "string" },
+          { name: "min", type: "uint256", internalType: "uint256" },
+          { name: "max", type: "uint256", internalType: "uint256" },
+        ],
+      },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "setTokens",
+    inputs: [
+      {
+        name: "_acceptedTokens",
+        type: "address[]",
+        internalType: "address[]",
+      },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "transferOwnership",
+    inputs: [{ name: "newOwner", type: "address", internalType: "address" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "unpause",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "usingETH",
+    inputs: [],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "whitelist",
+    inputs: [{ name: "wallet", type: "address", internalType: "address" }],
+    outputs: [{ name: "whitelisted", type: "bool", internalType: "bool" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "withdraw",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "event",
+    name: "Allocated",
+    inputs: [
+      {
+        name: "wallet",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "token",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "OwnershipTransferred",
+    inputs: [
+      {
+        name: "previousOwner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "newOwner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Paused",
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "PublicAllowed",
+    inputs: [],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Unpaused",
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Whitelisted",
+    inputs: [
+      {
+        name: "wallet",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "error",
+    name: "AddressEmptyCode",
+    inputs: [{ name: "target", type: "address", internalType: "address" }],
+  },
+  {
+    type: "error",
+    name: "AddressInsufficientBalance",
+    inputs: [{ name: "account", type: "address", internalType: "address" }],
+  },
+  { type: "error", name: "EnforcedPause", inputs: [] },
+  { type: "error", name: "ExpectedPause", inputs: [] },
+  { type: "error", name: "FailedInnerCall", inputs: [] },
+  {
+    type: "error",
+    name: "IParticipator__Invalid",
+    inputs: [{ name: "message", type: "string", internalType: "string" }],
+  },
+  {
+    type: "error",
+    name: "IParticipator__Unauthorized",
+    inputs: [{ name: "message", type: "string", internalType: "string" }],
+  },
+  {
+    type: "error",
+    name: "OwnableInvalidOwner",
+    inputs: [{ name: "owner", type: "address", internalType: "address" }],
+  },
+  {
+    type: "error",
+    name: "OwnableUnauthorizedAccount",
+    inputs: [{ name: "account", type: "address", internalType: "address" }],
+  },
+  { type: "error", name: "ReentrancyGuardReentrantCall", inputs: [] },
+  {
+    type: "error",
+    name: "SafeERC20FailedOperation",
+    inputs: [{ name: "token", type: "address", internalType: "address" }],
+  },
+];
+
 export const ERC20_ABI = [
   { type: "constructor", inputs: [], stateMutability: "nonpayable" },
   {
@@ -3014,4 +3445,354 @@ export const SAM_CLAIM_VESTING_ABI = [
     stateMutability: "view",
     type: "function",
   },
+];
+
+export const SAM_TIERS_ABI = [
+  {
+    type: "constructor",
+    inputs: [
+      { name: "_nft", type: "address", internalType: "address" },
+      { name: "_lock", type: "address", internalType: "address" },
+      { name: "_lpGauge", type: "address", internalType: "address" },
+    ],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "addTier",
+    inputs: [
+      { name: "name", type: "string", internalType: "string" },
+      {
+        name: "numOfSamNfts",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      { name: "minLocking", type: "uint256", internalType: "uint256" },
+      { name: "maxLocking", type: "uint256", internalType: "uint256" },
+      {
+        name: "minLPStaking",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      { name: "maxLPStaking", type: "uint256", internalType: "uint256" },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "counter",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "getTier",
+    inputs: [{ name: "wallet", type: "address", internalType: "address" }],
+    outputs: [
+      {
+        name: "",
+        type: "tuple",
+        internalType: "struct ISamuraiTiers.Tier",
+        components: [
+          { name: "name", type: "string", internalType: "string" },
+          {
+            name: "numOfSamNfts",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "minLocking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "maxLocking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "minLPStaking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "maxLPStaking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+        ],
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "getTierByName",
+    inputs: [{ name: "name", type: "string", internalType: "string" }],
+    outputs: [
+      {
+        name: "",
+        type: "tuple",
+        internalType: "struct ISamuraiTiers.Tier",
+        components: [
+          { name: "name", type: "string", internalType: "string" },
+          {
+            name: "numOfSamNfts",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "minLocking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "maxLocking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "minLPStaking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "maxLPStaking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+        ],
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "lock",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "lpGauge",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "nft",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "owner",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "removeTier",
+    inputs: [{ name: "tierIndex", type: "uint256", internalType: "uint256" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "renounceOwnership",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "setSources",
+    inputs: [
+      { name: "_nft", type: "address", internalType: "address" },
+      { name: "_lock", type: "address", internalType: "address" },
+      { name: "_lpGauge", type: "address", internalType: "address" },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "tiers",
+    inputs: [{ name: "index", type: "uint256", internalType: "uint256" }],
+    outputs: [
+      { name: "name", type: "string", internalType: "string" },
+      {
+        name: "numOfSamNfts",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      { name: "minLocking", type: "uint256", internalType: "uint256" },
+      { name: "maxLocking", type: "uint256", internalType: "uint256" },
+      {
+        name: "minLPStaking",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      { name: "maxLPStaking", type: "uint256", internalType: "uint256" },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "transferOwnership",
+    inputs: [{ name: "newOwner", type: "address", internalType: "address" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "updateTier",
+    inputs: [
+      { name: "tierIndex", type: "uint256", internalType: "uint256" },
+      { name: "name", type: "string", internalType: "string" },
+      {
+        name: "numOfSamNfts",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      { name: "minLocking", type: "uint256", internalType: "uint256" },
+      { name: "maxLocking", type: "uint256", internalType: "uint256" },
+      {
+        name: "minLPStaking",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      { name: "maxLPStaking", type: "uint256", internalType: "uint256" },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "event",
+    name: "Added",
+    inputs: [
+      {
+        name: "index",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "OwnershipTransferred",
+    inputs: [
+      {
+        name: "previousOwner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "newOwner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Removed",
+    inputs: [
+      {
+        name: "tier",
+        type: "tuple",
+        indexed: false,
+        internalType: "struct ISamuraiTiers.Tier",
+        components: [
+          { name: "name", type: "string", internalType: "string" },
+          {
+            name: "numOfSamNfts",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "minLocking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "maxLocking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "minLPStaking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "maxLPStaking",
+            type: "uint256",
+            internalType: "uint256",
+          },
+        ],
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "SourcesUpdated",
+    inputs: [
+      {
+        name: "nft",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "lock",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "lpGauge",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Updated",
+    inputs: [
+      {
+        name: "index",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "error",
+    name: "OwnableInvalidOwner",
+    inputs: [{ name: "owner", type: "address", internalType: "address" }],
+  },
+  {
+    type: "error",
+    name: "OwnableUnauthorizedAccount",
+    inputs: [{ name: "account", type: "address", internalType: "address" }],
+  },
+  { type: "error", name: "ReentrancyGuardReentrantCall", inputs: [] },
 ];
