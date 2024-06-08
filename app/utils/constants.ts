@@ -114,12 +114,12 @@ export const IDO_LIST: IDO[] = [
   `,
     contract: "0x730B7100590c8205F9Bf22bA28DF6227E0b28E38",
     abi: PARTICIPATOR_V2_2,
-    // images: [
-    //   "/IDOs/orangedx/1.png",
-    //   "/IDOs/orangedx/2.png",
-    //   "/IDOs/orangedx/3.png",
-    //   "/IDOs/orangedx/4.png",
-    // ],
+    images: [
+      "/IDOs/kvants/1.jpeg",
+      "/IDOs/kvants/2.jpeg",
+      "/IDOs/kvants/3.jpeg",
+      "/IDOs/kvants/4.jpeg",
+    ],
     type: "v2",
   },
   {

@@ -666,14 +666,14 @@ export default function Ido() {
                   __html: ido.bigDescription as string,
                 }}
               />
-              <div className="h-56 sm:h-64 xl:h-80 2xl:h-[350px]">
+              <div className="w-[400px] min-w-[400px] h-[400px] min-h-[400px] lg:w-[800px] lg:min-w-[800px] lg:h-[800px] lg:min-h-[800px]">
                 <Carousel leftControl=" " rightControl=" ">
                   {ido?.images?.map((image, index) => (
                     <Image
                       key={index}
                       src={image}
                       width={500}
-                      height={350}
+                      height={500}
                       className="h-full"
                       alt="..."
                     />

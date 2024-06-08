@@ -124,7 +124,7 @@ export default function LaunchpadCard({
               {ido.totalAllocation.toLocaleString("en-us")}{" "}
               {ido.type == "NFT" || ido.type === "NFT-ETH"
                 ? "NFTs"
-                : ido.projectTokenSymbol}
+                : ido.acceptedTokenSymbol}
             </>
           )}
 
