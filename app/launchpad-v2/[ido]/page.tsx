@@ -279,7 +279,7 @@ export default function Ido() {
                     <span>{ido?.projectName}</span> {" | "}
                     {general?.isPublic ? "Pulic Round" : ido?.investmentRound}
                   </div>
-                  <div className="flex flex-row mt-6 lg:mt-10 bg-black-900/90 stroke-white rounded-[8px] text-white border border-white/20 mx-4 lg:mx-8">
+                  <div className="hidden md:flex flex-row mt-6 lg:mt-10 bg-black-900/90 stroke-white rounded-[8px] text-white border border-white/20 mx-4 lg:mx-8">
                     {ido?.simplified &&
                       simplifiedPhasesV2.map((phase, index) => (
                         <Fragment key={index}>
@@ -319,6 +319,14 @@ export default function Ido() {
                     <div className="flex flex-col gap-10 px-8">
                       {/* PARTICIPATION PHASE BLOCK */}
                       <div className="flex justify-start lg:grid lg:grid-cols-2 gap-1 items-center flex-wrap mt-6">
+                        <div className="flex md:hidden items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                          <span className="text-samurai-red">
+                            CURRENT PHASE:
+                          </span>
+                          <p className="text-white/70">
+                            {currentPhase?.toUpperCase()}
+                          </p>
+                        </div>
                         <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
                           <span className="text-samurai-red">IDO START:</span>
                           <p className="text-white/70">
