@@ -303,7 +303,7 @@ export default function Ido() {
                           )}
                           <button
                             disabled
-                            className={`p-2 flex-1  xl:text-xl ${
+                            className={`p-2 flex-1 text-[14px] md:text-normal  xl:text-xl ${
                               phase.title === currentPhase
                                 ? "text-samurai-red"
                                 : "text-white/40"
@@ -666,7 +666,7 @@ export default function Ido() {
                   __html: ido.bigDescription as string,
                 }}
               />
-              <div className="w-[400px] min-w-[400px] h-[400px] min-h-[400px] lg:w-[800px] lg:min-w-[800px] lg:h-[800px] lg:min-h-[800px]">
+              <div className="w-[350px] min-w-[350px] h-[350px] min-h-[350px] lg:w-[800px] lg:min-w-[800px] lg:h-[800px] lg:min-h-[800px]">
                 <Carousel leftControl=" " rightControl=" ">
                   {ido?.images?.map((image, index) => (
                     <Image
