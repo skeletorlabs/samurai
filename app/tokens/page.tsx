@@ -154,7 +154,7 @@ export default function Tokens() {
             <div className="flex flex-col xl:flex-row px-6 lg:px-8 xl:px-20">
               <LockSam />
 
-              <div className="flex flex-col items-center w-full lg:max-w-[580px] mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-[8px] sm:border border-white/10 pt-10 sm:pb-10 xl:py-0 xl:ml-12 2xl:ml-24 sm:shadow-lg">
+              <div className="flex flex-col items-center w-full lg:max-w-[580px] mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-white/10 pt-10 sm:pb-10 xl:py-0 xl:ml-12 2xl:ml-24 sm:shadow-lg">
                 <p className="flex flex-col w-full items-center xl:mt-12">
                   <Image
                     src="/samurai.svg"

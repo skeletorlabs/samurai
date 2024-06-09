@@ -21,7 +21,7 @@ export default function Card({ project }: Card) {
         width={426}
         height={0}
         alt=""
-        className="rounded-2xl border-2 hover:border-samurai-red transition-all w-full"
+        className="rounded-lg border-2 hover:border-samurai-red transition-all w-full"
       />
       {/* </div> */}
 
@@ -31,7 +31,7 @@ export default function Card({ project }: Card) {
             {project.name}
           </h1>
           <button
-            className={`border border-samurai-red text-samurai-red rounded-full w-16 py-1 font-normal text-xs transition-all hover:scale-[1.03] ${inter.className}`}
+            className={`border border-samurai-red text-samurai-red rounded-lg w-16 py-1 font-normal text-xs transition-all hover:scale-[1.03] ${inter.className}`}
           >
             Button
           </button>

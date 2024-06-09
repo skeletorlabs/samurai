@@ -2,7 +2,17 @@ import Image from "next/image";
 import { useCallback, useEffect, useState, Fragment, useContext } from "react";
 import { lockImage } from "@/app/utils/svgs";
 import SSButton from "@/app/components/ssButton";
-import { Dialog, Transition, Tab } from "@headlessui/react";
+import {
+  Dialog,
+  Transition,
+  Tab,
+  DialogPanel,
+  TabList,
+  TabGroup,
+  TabPanels,
+  TabPanel,
+  TransitionChild,
+} from "@headlessui/react";
 import { Tooltip } from "flowbite-react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
@@ -208,7 +218,7 @@ export default function LockSam() {
 
   return (
     <div className="flex flex-col lg:flex-row items-center gap-10 mt-14 relative">
-      <div className="flex flex-col justify-between w-full lg:w-[580px] lg:bg-white/5 lg:border border-samurai-red rounded-[6px] lg:py-10 lg:px-6 lg:shadow-lg shadow-pink-800/50 relative">
+      <div className="flex flex-col justify-between w-full lg:w-[580px] lg:bg-white/5 lg:border border-samurai-red rounded-lg lg:py-10 lg:px-6 lg:shadow-lg shadow-pink-800/50 relative">
         <div className="hidden absolute top-10 left-[50px] bg-lock bg-no-repeat bg-cover w-[500px] h-[500px] text-white/40">
           {lockImage}
         </div>
@@ -231,9 +241,9 @@ export default function LockSam() {
           </div>
         </div>
 
-        <div className="flex items-center rounded-[4px] w-full bg-black/75 backdrop-blur-sm p-6 py-8 text-sm leading-[20px] border border-white/20 lg:mt-8 shadow-md shadow-black/60 z-20 mt-5">
+        <div className="flex items-center rounded-lg w-full bg-black/75 backdrop-blur-sm p-6 py-8 text-sm leading-[20px] border border-white/20 lg:mt-8 shadow-md shadow-black/60 z-20 mt-5">
           {signer ? (
-            <div className="flex flex-col rounded-[4px] w-full gap-3">
+            <div className="flex flex-col rounded-lg w-full gap-3">
               <div>
                 <p className="text-white/40">Samurai Points</p>
                 <span className="text-samurai-red text-xl">
@@ -273,7 +283,7 @@ export default function LockSam() {
           )}
         </div>
 
-        <div className="flex flex-col bg-black/75 backdrop-blur-sm p-6 py-8 rounded-[6px] border border-white/20 shadow-md shadow-black/60 mt-2 z-20">
+        <div className="flex flex-col bg-black/75 backdrop-blur-sm p-6 py-8 rounded-lg border border-white/20 shadow-md shadow-black/60 mt-2 z-20">
           <div className="flex flex-col text-sm">
             <span className="text-white/40">Minimum to lock</span>
             <span className="text-xl">
@@ -288,7 +298,7 @@ export default function LockSam() {
                 <button
                   key={index}
                   onClick={() => setPeriod(item.value)}
-                  className={`text-sm p-1 px-3 rounded-full border shadow-lg min-w-[90px] transition-all hover:scale-105 ${
+                  className={`text-sm p-1 px-3 rounded-lg border shadow-lg min-w-[90px] transition-all hover:scale-105 ${
                     item.value === period
                       ? "bg-samurai-red border-white/50"
                       : "bg-white/20 border-white/20"
@@ -347,7 +357,7 @@ export default function LockSam() {
               value={inputLock}
               type="text"
               placeholder="Amount to lock"
-              className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl rounded-[8px]"
+              className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl rounded-lg mx-1"
             />
             <button
               onClick={onSetMaxForLock}
@@ -435,7 +445,7 @@ export default function LockSam() {
 
             <div className="fixed inset-0 overflow-y-auto">
               <div className="flex min-h-full items-center justify-center p-4 text-center">
-                <Transition.Child
+                <TransitionChild
                   as={Fragment}
                   enter="ease-out duration-300"
                   enterFrom="opacity-0 scale-95"
@@ -444,7 +454,7 @@ export default function LockSam() {
                   leaveFrom="opacity-100 scale-100"
                   leaveTo="opacity-0 scale-95"
                 >
-                  <Dialog.Panel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white/10 p-6 text-left align-middle transition-all border border-white/20 text-white shadow-lg shadow-samurai-red/20">
+                  <DialogPanel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white/10 p-6 text-left align-middle transition-all border border-white/20 text-white shadow-lg shadow-samurai-red/20">
                     <Dialog.Title
                       as="h3"
                       className="text-lg font-medium leading-6 text-white ml-1"
@@ -453,8 +463,8 @@ export default function LockSam() {
                     </Dialog.Title>
 
                     <div className="flex flex-col justify-center self-end w-full mt-4">
-                      <Tab.Group>
-                        <Tab.List>
+                      <TabGroup>
+                        <TabList>
                           <Tab
                             onClick={() => onSelectLock(0, "unlock")}
                             disabled={unlockedsList.length === 0}
@@ -469,9 +479,9 @@ export default function LockSam() {
                           >
                             Active
                           </Tab>
-                        </Tab.List>
-                        <Tab.Panels>
-                          <Tab.Panel>
+                        </TabList>
+                        <TabPanels>
+                          <TabPanel>
                             {unlockedsList.length > 0 && generalLockData && (
                               <SCarousel
                                 type="unlock"
@@ -480,8 +490,8 @@ export default function LockSam() {
                                 onChangeAction={onSelectLock}
                               />
                             )}
-                          </Tab.Panel>
-                          <Tab.Panel>
+                          </TabPanel>
+                          <TabPanel>
                             {activeLocksList.length > 0 && generalLockData && (
                               <SCarousel
                                 type="active"
@@ -490,13 +500,13 @@ export default function LockSam() {
                                 onChangeAction={onSelectLock}
                               />
                             )}
-                          </Tab.Panel>
-                        </Tab.Panels>
-                      </Tab.Group>
+                          </TabPanel>
+                        </TabPanels>
+                      </TabGroup>
                     </div>
                     {canWithdraw ? (
                       <div>
-                        <div className="flex items-center rounded-[5px] gap-3 bg-white/90 shadow-md shadow-black/60 text-black font-normal relative">
+                        <div className="flex items-center rounded-lg gap-3 bg-white/90 shadow-md shadow-black/60 text-black font-normal relative">
                           <input
                             onChange={(e) =>
                               onInputWithdrawChange(e.target.value)
@@ -504,7 +514,7 @@ export default function LockSam() {
                             value={inputWithdraw}
                             type="text"
                             placeholder="Amount to withdraw"
-                            className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl rounded-[8px] mx-1"
+                            className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl rounded-lg mx-1"
                           />
                           <button
                             onClick={onSetMaxForWithdraw}
@@ -546,8 +556,8 @@ export default function LockSam() {
                           : "Not available to withdraw"}
                       </div>
                     )}
-                  </Dialog.Panel>
-                </Transition.Child>
+                  </DialogPanel>
+                </TransitionChild>
               </div>
             </div>
           </Dialog>

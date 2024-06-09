@@ -118,9 +118,9 @@ export default function Home() {
                       key={index}
                       href={item.href}
                       target="_blank"
-                      className="rounded-2xl bg-black border-2 border-samurai-red shadow-lg hover:shadow-2xl hover:shadow-samurai-red shadow-samurai-red/20 transition-all hover:scale-[1.03]"
+                      className="rounded-lg bg-black border-[0.5px] border-samurai-red shadow-lg hover:shadow-2xl hover:shadow-samurai-red shadow-samurai-red/20 transition-all hover:scale-[1.03]"
                     >
-                      <div className="w-full min-h-[220px] rounded-b-2xl  text-white">
+                      <div className="w-full min-h-[220px] rounded-b-lg  text-white">
                         <div className="w-full h-[200px] relative">
                           <Image
                             src={item.image}
@@ -129,7 +129,7 @@ export default function Home() {
                             layout="fill"
                             objectFit="cover"
                             alt=""
-                            className="rounded-t-2xl"
+                            className="rounded-t-lg"
                           />
                         </div>
                         <div className="py-6 px-4">
@@ -233,7 +233,7 @@ export default function Home() {
       {/* SAMURAI SANKA */}
       <div
         id="sanka"
-        className="flex justify-between pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20 bg-samurai-sanka bg-[right_-10rem_top_-20rem] border-t-[1px] border-samurai-red"
+        className="flex justify-between pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20 bg-samurai-sanka bg-[right_-10rem_top_-20rem] border-t-[0.5px] border-samurai-red"
       >
         <div className="flex flex-col">
           <h2 className="text-4xl md:text-6xl font-bold">
@@ -339,7 +339,7 @@ export default function Home() {
               <div
                 key={index}
                 className={`flex flex-col gap-2 text-center bg-black/40 text-white border-[1px] border-samurai-red"
-                }  border border-black p-8 rounded-xl shadow-lg transition-all hover:scale-105`}
+                }  border border-black p-8 rounded-lg shadow-lg transition-all hover:scale-105`}
               >
                 <div className="flex justify-center pb-10">
                   <Image

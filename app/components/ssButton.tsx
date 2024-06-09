@@ -43,7 +43,7 @@ export default function SSButton({
             ? "text-sm md:text-normal px-5 py-0 h-10 md:h-auto md:px-8 md:py-3"
             : "text-lg md:text-normal px-8 py-3"
         }
-        border rounded-[8px]  
+        border-[0.5px] rounded-lg 
         disabled:border-white/20 disabled:text-white/10
       `}
     >
@@ -68,7 +68,7 @@ export default function SSButton({
             ? "text-sm md:text-normal px-5 py-0 h-10 md:h-auto md:px-8 md:py-3"
             : "text-lg md:text-normal px-8 py-3"
         }
-        border rounded-[8px]  
+        border-[0.5px] rounded-lg
         disabled:border-white/20 disabled:text-white/10
       `}
     >
