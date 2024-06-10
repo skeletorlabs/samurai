@@ -62,7 +62,7 @@ export const IDO_LIST: IDO[] = [
     logo: kvants,
     idoImageSrc: "/IDOs/kvants.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "TO BE ANNOUNCED",
+    tokenNetwork: "To be announced",
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
     projectName: "Kvants",
@@ -105,7 +105,6 @@ export const IDO_LIST: IDO[] = [
     ],
     bigDescription: `
       <div style="display: flex; flex-direction: column; gap: 15px;">
-        <h1 style="font-weight: bold; font-size: 1.2em;">Kvants</h1>
         <p>Built by a team of quantitative trading experts with experience at top TradFi institutions, Kvants is a non-custodial Asset Management Platform offering retail investors the chance to invest using institutional-grade trading strategies developed by professional hedge funds.<p>
         <p>These quantitative strategies make use of complex, systematic trading models with algorithms which are constantly optimised through AI-powered machine learning. Such trading models constantly monitor a wide range of market analytics, automatically closing and opening positions based on a predefined set of complex rules.<p>
         <p>These sophisticated trading strategies have traditionally been out of reach of retail crypto investors, but that is about to change. The Kvants platform is built to make investing with institutional-grade trading strategies accessible to the everyday investor.<p>

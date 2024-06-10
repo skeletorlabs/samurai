@@ -52,7 +52,6 @@ export async function generalInfo(index: number) {
 
     const owner = await contract?.owner();
     const isPublic = await contract?.isPublic();
-    // const isPublic = true;
     const acceptedToken = await contract?.acceptedTokens(0);
     const isPaused = await contract?.paused();
     const maxAllocations =
@@ -97,7 +96,6 @@ export async function userInfo(
     const usingETH = await contract?.usingETH();
 
     const isPublic = await contract?.isPublic();
-    // const isPublic = true;
     const range = isPublic
       ? await contract?.getRange(0)
       : await contract?.getWalletRange(signerAdress);
@@ -262,7 +260,6 @@ export async function togglePause(index: number, signer: ethers.Signer) {
 }
 
 export async function getParticipationPhase(index: number) {
-  // return "Participation";
   const ido = IDO_LIST[index];
   const registrationStartsAt = ido.registrationStartsAt;
   const participationStartAt = ido.participationStartsAt;
