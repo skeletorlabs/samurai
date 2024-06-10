@@ -31,6 +31,8 @@ const config: Config = {
         "samurai-sanka": "url('/samurai-sanka-bg.png')",
         "samurai-launchpad": "url('/samurai-launchpad-bg.png')",
         lock: "url('/LockClosed.svg')",
+        "samurai-pattern": "url('/samurai-pattern.png')",
+        "samurai-pattern-2": "url('/samurai-pattern-2.png')",
       },
     },
     clipPath: {

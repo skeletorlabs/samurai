@@ -216,7 +216,7 @@ export default function Ido() {
             </svg>
             <span>{ido?.projectName}</span>
           </div>
-          <div className="flex flex-col xl:flex-row xl:justify-between relative mt-10 text-center xl:text-start">
+          <div className="flex flex-col xl:flex-row xl:justify-between relative mt-4 xl:mt-10 text-justify xl:text-start">
             <div className="relative px-6 lg:px-8 xl:px-20">
               <div className="flex flex-col text-[38px] sm:text-[58px] lg:text-[70px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
                 <div className="flex items-center gap-3 text-5xl justify-center xl:justify-start">
@@ -275,16 +275,16 @@ export default function Ido() {
               </div>
             </div>
 
-            <div className="flex flex-col xl:pr-20 gap-5 mt-10 xl:mt-0 mx-5 xl:mx-0">
+            <div className="flex flex-col xl:pr-20 gap-5 mt-10 xl:mt-0 mx-3 xl:mx-0">
               <div className="flex flex-col">
-                <div className="flex flex-col w-full xl:w-[530px] rounded-lg bg-black/70 pb-6  shadow-xl lg:border border-white/20">
-                  <div className="flex justify-between items-center text-xl xl:text-2xl bg-samurai-red border-b border-white/20 px-7 py-5 rounded-t-lg text-white">
+                <div className="flex flex-col w-full xl:w-[550px] rounded-lg bg-black/70 bg-samurai-pattern pb-6  shadow-xl lg:border border-white/20 mt-10">
+                  <div className="flex justify-between items-center text-lg xl:text-xl bg-samurai-red border-b border-white/20 px-7 py-4 rounded-t-lg text-white">
                     <span>
                       {general?.isPublic ? "Pulic Round" : ido?.investmentRound}
                     </span>
                     {/* TIER */}
                     {signer && account && (
-                      <div className="flex items-center gap-1 text-gray-800">
+                      <div className="flex items-center gap-1 text-black">
                         {tier
                           ? tier?.name === ""
                             ? "Public"
@@ -318,7 +318,7 @@ export default function Ido() {
                           )}
                           <button
                             disabled
-                            className={`p-2 flex-1 font-light text-[14px] md:text-[16px] xl:text-lg ${
+                            className={`p-2 flex-1 text-md ${
                               phase.title === currentPhase
                                 ? "text-samurai-red"
                                 : "text-white/40"
@@ -333,33 +333,33 @@ export default function Ido() {
                   {ido && (
                     <div className="flex flex-col gap-10 px-5 md:px-6">
                       {/* PARTICIPATION PHASE BLOCK */}
-                      <div className="flex justify-start lg:grid lg:grid-cols-2  items-center flex-wrap mt-6">
-                        <div className="flex md:hidden items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">
+                      <div className="grid grid-cols-3 items-center flex-wrap mt-6 text-sm">
+                        <div className="flex md:hidden flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                          <span className="text-neutral-600">
                             Current Phase:
                           </span>
                           <p className="text-white/70">{currentPhase}</p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">IDO Start:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                          <span className="text-neutral-600">IDO Start:</span>
                           <p className="text-white/70">
                             {formattedDate(ido.participationStartsAt)} UTC
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">IDO End:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                          <span className="text-neutral-600">IDO End:</span>
                           <p className="text-white/70">
                             {formattedDate(ido.participationEndsAt)} UTC
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">FCFS Start:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                          <span className="text-neutral-600">FCFS Start:</span>
                           <p className="text-white/70">
                             {formattedDate(ido.publicParticipationStartsAt)} UTC
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">FCFS End:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                          <span className="text-neutral-600">FCFS End:</span>
                           <p className="text-white/70">
                             {formattedDate(
                               ido.publicParticipationEndsAt
@@ -367,31 +367,31 @@ export default function Ido() {
                             UTC
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">TGE Date:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                          <span className="text-neutral-600">TGE Date:</span>
                           <p className="text-white/70">
                             {ido.tgeDate === 0
                               ? "TO BE ANNOUNCED"
                               : formattedDateSimple(ido.tgeDate)}
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                          <span className="text-neutral-600">
                             Token Symbol:
                           </span>
                           <p className="text-white/70">
                             {ido.projectTokenSymbol}
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">Token Price:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                          <span className="text-neutral-600">Token Price:</span>
                           <p className="text-white/70">
                             ${ido.price} {ido.acceptedTokenSymbol}
                           </p>
                         </div>
 
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">Raised:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                          <span className="text-neutral-600">Raised:</span>
                           <p className="text-white/70">
                             $
                             {Number(general?.raised | 0).toLocaleString(
@@ -402,8 +402,8 @@ export default function Ido() {
                         </div>
 
                         {signer && account && (
-                          <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                            <span className="text-samurai-red">Min:</span>
+                          <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                            <span className="text-neutral-600">Min:</span>
                             <p className="text-white/70">
                               $
                               {Number(
@@ -415,8 +415,8 @@ export default function Ido() {
                         )}
 
                         {signer && account && (
-                          <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                            <span className="text-samurai-red">Max:</span>
+                          <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                            <span className="text-neutral-600">Max:</span>
                             <p className="text-white/70">
                               $
                               {Number(
@@ -648,11 +648,11 @@ export default function Ido() {
           </div>
         </div>
       </TopLayout>
-      <div className="flex flex-col xl:flex-row  gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 ">
+      <div className="flex flex-col xl:flex-row  gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 px-3 xl:px-0">
         {ido && (
           <>
-            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/30 shadow-xl lg:border border-white/20 h-max xl:ml-20">
-              <h1 className="text-2xl bg-samurai-red px-6 py-4 rounded-t-lg">
+            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/30 bg-samurai-pattern shadow-xl lg:border border-white/20 h-max xl:ml-20">
+              <h1 className="text-xl bg-samurai-red px-6 py-4 rounded-t-lg">
                 Token Info
               </h1>
               <div className="flex flex-col gap-4  mt-8 text-[15px] xl:text-xl px-6 pb-8">

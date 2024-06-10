@@ -11,7 +11,7 @@ const inter = Inter({
 export default function Projects() {
   return (
     <div
-      className={`flex justify-center lg:justify-start items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
+      className={`flex justify-center lg:justify-start items-center flex-wrap gap-3 leading-normal pt-10 text-xl ${inter.className}`}
     >
       {IDO_LIST.map((ido: IDO, index) => (
         <LaunchpadCardNew key={index} ido={ido} />
