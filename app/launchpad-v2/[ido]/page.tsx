@@ -35,6 +35,7 @@ import {
   Transition,
   TransitionChild,
 } from "@headlessui/react";
+import AdminRanges from "@/app/components/adminRanges";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -886,6 +887,10 @@ export default function Ido() {
                   </SSButton>
                 </div>
               </div>
+
+              {general && general.ranges && (
+                <AdminRanges idoIndex={idoIndex} ranges={general?.ranges} />
+              )}
             </div>
           )}
         </div>

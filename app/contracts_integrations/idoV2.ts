@@ -16,6 +16,12 @@ import { notificateTx } from "@/app/utils/notificateTx";
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const TEST_RPC = "http://127.0.0.1:8545";
 
+export type WalletRange = {
+  name: string;
+  minPerWallet: number;
+  maxPerWallet: number;
+};
+
 async function getContract(index: number, signer?: ethers.Signer) {
   try {
     const ido = IDO_LIST[index];
@@ -60,6 +66,25 @@ export async function generalInfo(index: number) {
 
     const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
 
+    const rangesLength = Number(await contract?.rangesLength());
+    const usingETH = await contract?.usingETH();
+
+    const ranges: WalletRange[] = [];
+    for (let index = 0; index < rangesLength; index++) {
+      const range = await contract?.getRange(index);
+
+      const walletRange: WalletRange = {
+        name: range.name,
+        minPerWallet: Number(
+          formatUnits(range.min.toString(), usingETH ? 18 : 6)
+        ),
+        maxPerWallet: Number(
+          formatUnits(range.max.toString(), usingETH ? 18 : 6)
+        ),
+      };
+      ranges.push(walletRange);
+    }
+
     return {
       owner,
       isPublic,
@@ -67,6 +92,7 @@ export async function generalInfo(index: number) {
       isPaused,
       maxAllocations,
       raised,
+      ranges,
     };
   } catch (e) {
     handleError({ e: e, notificate: true });
@@ -74,12 +100,6 @@ export async function generalInfo(index: number) {
 }
 
 // USER INFOS
-
-export type WalletRange = {
-  name: string;
-  minPerWallet: number;
-  maxPerWallet: number;
-};
 
 export async function userInfo(
   index: number,
@@ -250,6 +270,28 @@ export async function togglePause(index: number, signer: ethers.Signer) {
       const tx = isPaused ? await contract?.unpause() : await contract?.pause();
       await notificateTx(tx, network);
     }
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
+}
+
+export async function updateRanges(
+  index: number,
+  ranges: WalletRange[],
+  signer: ethers.Signer
+) {
+  try {
+    const contract = await getContract(index, signer);
+    const network = await signer.provider?.getNetwork();
+    const formattedRanges: any[] = [];
+
+    ranges.forEach((range) => {
+      const newRange = [range.name, range.minPerWallet, range.maxPerWallet];
+      formattedRanges.push(newRange);
+    });
+
+    const tx = await contract?.setRanges(formattedRanges);
+    await notificateTx(tx, network);
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
