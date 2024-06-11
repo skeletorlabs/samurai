@@ -257,28 +257,28 @@ export async function togglePause(index: number, signer: ethers.Signer) {
 }
 
 export async function getParticipationPhase(index: number) {
-  return "Upcoming";
-  // const ido = IDO_LIST[index];
-  // const registrationStartsAt = ido.registrationStartsAt;
-  // const participationStartAt = ido.participationStartsAt;
-  // const publicEndsAt = ido.publicParticipationEndsAt;
-  // const now = getUnixTime(new Date());
-  // const isPaused = await checkIsPaused(index);
+  // return "Upcoming";
+  const ido = IDO_LIST[index];
+  const registrationStartsAt = ido.registrationStartsAt;
+  const participationStartAt = ido.participationStartsAt;
+  const publicEndsAt = ido.publicParticipationEndsAt;
+  const now = getUnixTime(new Date());
+  const isPaused = await checkIsPaused(index);
 
-  // let phase = "Upcoming";
+  let phase = "Upcoming";
 
-  // if (now >= registrationStartsAt && now <= participationStartAt)
-  //   phase = "Registration";
-  // if (now >= participationStartAt && now <= publicEndsAt)
-  //   phase = "Participation";
+  if (now >= registrationStartsAt && now <= participationStartAt && !isPaused)
+    phase = "Registration";
+  if (now >= participationStartAt && now <= publicEndsAt && !isPaused)
+    phase = "Participation";
   // if (phase !== "Upcoming" && isPaused) phase = "Completed";
 
-  // const contract = await getContract(index, undefined);
+  const contract = await getContract(index, undefined);
 
-  // const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
+  const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
 
   // if (isPaused && raised > 0) phase = "Completed";
   // if (now >= publicEndsAt && isPaused && raised > 0) phase = "Completed";
 
-  // return phase;
+  return phase;
 }
