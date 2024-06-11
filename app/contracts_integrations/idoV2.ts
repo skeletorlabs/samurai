@@ -271,14 +271,12 @@ export async function getParticipationPhase(index: number) {
     phase = "Registration";
   if (now >= participationStartAt && now <= publicEndsAt && !isPaused)
     phase = "Participation";
-  // if (phase !== "Upcoming" && isPaused) phase = "Completed";
 
   const contract = await getContract(index, undefined);
 
   const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
 
-  // if (isPaused && raised > 0) phase = "Completed";
-  // if (now >= publicEndsAt && isPaused && raised > 0) phase = "Completed";
+  if (now >= publicEndsAt && raised > 0) phase = "Completed";
 
   return phase;
 }
