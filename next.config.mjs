@@ -13,6 +13,11 @@ const nextConfig = {
         hostname: "samuraistarter.mypinata.cloud",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "flowbite.s3.amazonaws.com",
+        port: "",
+      },
     ],
   },
   webpack: (config, { isServer }) => {

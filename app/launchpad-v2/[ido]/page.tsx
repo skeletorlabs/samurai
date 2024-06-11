@@ -29,10 +29,67 @@ import {
 import IdoAllocationProgress from "@/app/components/idoAllocationProgress";
 import { Tier, getTier } from "@/app/contracts_integrations/tiers";
 import { getUnixTime } from "date-fns";
+import {
+  Dialog,
+  DialogPanel,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 
 const inter = Inter({
   subsets: ["latin"],
 });
+
+const images = [
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg",
+    alt: "Description of image 1 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg",
+    alt: "Description of image 2 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg",
+    alt: "Description of image 3 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg",
+    alt: "Description of image 4 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg",
+    alt: "Description of image 5 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg",
+    alt: "Description of image 6 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg",
+    alt: "Description of image 7 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg",
+    alt: "Description of image 8 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg",
+    alt: "Description of image 9 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg",
+    alt: "Description of image 10 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg",
+    alt: "Description of image 11 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg",
+    alt: "Description of image 12 (optional)",
+  },
+];
 
 export default function Ido() {
   const [inputValue, setInputValue] = useState("");
@@ -42,6 +99,8 @@ export default function Ido() {
   const [currentPhase, setCurrentPhase] = useState<string | null>(null);
   const [selectedToken, setSelectedToken] = useState("");
   const [tier, setTier] = useState<Tier | null>(null);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [imageSelected, setImageSelected] = useState("");
 
   const { signer, account } = useContext(StateContext);
 
@@ -97,6 +156,15 @@ export default function Ido() {
   // ============================================================================================================
   // USER ACTIONS
   // ============================================================================================================
+
+  const onImageClick = useCallback(
+    async (image: string) => {
+      setGalleryOpen(false);
+      setImageSelected(image);
+      setGalleryOpen(true);
+    },
+    [setGalleryOpen]
+  );
 
   const onInputChange = (value: string) => {
     const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
@@ -218,14 +286,14 @@ export default function Ido() {
           </div>
           <div className="flex flex-col xl:flex-row xl:justify-between relative mt-4 xl:mt-10 text-justify xl:text-start">
             <div className="relative px-6 lg:px-8 xl:px-20">
-              <div className="flex flex-col text-[38px] sm:text-[58px] lg:text-[70px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
-                <div className="flex items-center gap-3 text-5xl justify-center xl:justify-start">
-                  <div className="scale-[0.7]">{ido?.logo}</div>{" "}
-                  {ido?.projectName}
+              <div className="flex flex-col text-[38px] md:text-[58px] lg:text-[70px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
+                <div className="flex ml-[-30px] lg:ml-0 items-center sm:gap-3 xl:text-5xl justify-center xl:justify-start">
+                  <div className="scale-[0.5] sm:scale-[0.7]">{ido?.logo}</div>
+                  <span>{ido?.projectName}</span>
                 </div>
               </div>
               <p
-                className={`xl:pt-6 text-[22px] xl:text-[28px] pb-7 ${inter.className}`}
+                className={`xl:pt-6 text-[18px] md:text-[22px] xl:text-[28px] pb-7 ${inter.className}`}
               >
                 {ido?.projectDescription}
               </p>
@@ -275,9 +343,9 @@ export default function Ido() {
               </div>
             </div>
 
-            <div className="flex flex-col xl:pr-20 gap-5 mt-10 xl:mt-0 mx-3 xl:mx-0">
+            <div className="flex flex-col xl:pr-28 gap-5 mt-10 xl:mt-0 mx-3 xl:mx-0">
               <div className="flex flex-col">
-                <div className="flex flex-col w-full xl:w-[550px] rounded-lg bg-black/70 bg-samurai-pattern pb-6  shadow-xl lg:border border-white/20 mt-10">
+                <div className="flex flex-col w-full xl:w-[550px] rounded-lg bg-black/70 bg-samurai-pattern pb-6 shadow-xl lg:border border-white/20 mt-10">
                   <div className="flex justify-between items-center text-lg xl:text-xl bg-samurai-red border-b border-white/20 px-7 py-4 rounded-t-lg text-white">
                     <span>
                       {general?.isPublic ? "Pulic Round" : ido?.investmentRound}
@@ -333,32 +401,32 @@ export default function Ido() {
                   {ido && (
                     <div className="flex flex-col gap-10 px-5 md:px-6">
                       {/* PARTICIPATION PHASE BLOCK */}
-                      <div className="grid grid-cols-3 items-center flex-wrap mt-6 text-sm">
-                        <div className="flex md:hidden flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                      <div className="grid grid-cols-2 md:grid-cols-3 items-center flex-wrap mt-6 text-sm">
+                        <div className="flex md:hidden flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">
                             Current Phase:
                           </span>
                           <p className="text-white/70">{currentPhase}</p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">IDO Start:</span>
                           <p className="text-white/70">
                             {formattedDate(ido.participationStartsAt)} UTC
                           </p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">IDO End:</span>
                           <p className="text-white/70">
                             {formattedDate(ido.participationEndsAt)} UTC
                           </p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">FCFS Start:</span>
                           <p className="text-white/70">
                             {formattedDate(ido.publicParticipationStartsAt)} UTC
                           </p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">FCFS End:</span>
                           <p className="text-white/70">
                             {formattedDate(
@@ -367,7 +435,7 @@ export default function Ido() {
                             UTC
                           </p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">TGE Date:</span>
                           <p className="text-white/70">
                             {ido.tgeDate === 0
@@ -375,7 +443,7 @@ export default function Ido() {
                               : formattedDateSimple(ido.tgeDate)}
                           </p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">
                             Token Symbol:
                           </span>
@@ -383,14 +451,14 @@ export default function Ido() {
                             {ido.projectTokenSymbol}
                           </p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">Token Price:</span>
                           <p className="text-white/70">
                             ${ido.price} {ido.acceptedTokenSymbol}
                           </p>
                         </div>
 
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">Raised:</span>
                           <p className="text-white/70">
                             $
@@ -402,7 +470,7 @@ export default function Ido() {
                         </div>
 
                         {signer && account && (
-                          <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
                             <span className="text-neutral-600">Min:</span>
                             <p className="text-white/70">
                               $
@@ -415,7 +483,7 @@ export default function Ido() {
                         )}
 
                         {signer && account && (
-                          <div className="flex flex-col py-2 px-2 rounded-md w-max min-w-[300px]">
+                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
                             <span className="text-neutral-600">Max:</span>
                             <p className="text-white/70">
                               $
@@ -655,7 +723,7 @@ export default function Ido() {
               <h1 className="text-xl bg-samurai-red px-6 py-4 rounded-t-lg">
                 Token Info
               </h1>
-              <div className="flex flex-col gap-4  mt-8 text-[15px] xl:text-xl px-6 pb-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 xl:flex xl:flex-col gap-4 mt-8 text-[15px] xl:text-xl px-6 pb-8">
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
                   <span className="text-samurai-red">Token Symbol:</span>
                   <p className="text-white/70">{ido.projectTokenSymbol}</p>
@@ -724,6 +792,98 @@ export default function Ido() {
           </>
         )}
       </div>
+
+      {ido && ido.images && (
+        <div className="flex flex-col w-full bg-white/5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 px-6 lg:px-8 xl:px-20 py-20 self-start">
+            <div className="grid gap-10">
+              <button
+                onClick={() => onImageClick(ido.images![0])}
+                className="transition-all hover:scale-105 relative w-[160px] h-[160px] xl:w-[240px] xl:w-[240px] 2xl:-[340px]"
+              >
+                <Image
+                  fill
+                  className="h-auto max-w-full rounded-lg border border-white/30"
+                  src={ido?.images[0]}
+                  alt=""
+                />
+              </button>
+            </div>
+            <div className="grid gap-10">
+              <button
+                onClick={() => onImageClick(ido?.images![1])}
+                className="transition-all hover:scale-105 relative w-[160px] h-[180px] xl:w-[240px] xl:w-[240px] 2xl:-[300px]"
+              >
+                <Image
+                  fill
+                  className="h-auto max-w-full rounded-lg border border-white/30"
+                  src={ido?.images[1]}
+                  alt=""
+                />
+              </button>
+            </div>
+            <div className="grid gap-10">
+              <button
+                onClick={() => onImageClick(ido?.images![2])}
+                className="transition-all hover:scale-105 relative w-[160px] h-[190px] xl:w-[240px] xl:w-[240px] 2xl:-[390px]"
+              >
+                <Image
+                  fill
+                  className="h-auto max-w-full rounded-lg border border-white/30"
+                  src={ido?.images[2]}
+                  alt=""
+                />
+              </button>
+            </div>
+            <div className="grid gap-10">
+              <button
+                onClick={() => onImageClick(ido?.images![3])}
+                className="transition-all hover:scale-105 relative w-[160px] h-[140px] xl:w-[240px] xl:w-[240px] 2xl:-[340px]"
+              >
+                <Image
+                  fill
+                  className="h-auto max-w-full rounded-lg border border-white/30"
+                  src={ido?.images[3]}
+                  alt=""
+                />
+              </button>
+            </div>
+          </div>
+
+          <Transition appear show={galleryOpen}>
+            <Dialog
+              as="div"
+              className="relative z-10 focus:outline-none bg-black"
+              onClose={() => setGalleryOpen(false)}
+            >
+              <div className="fixed inset-0 bg-black/60" aria-hidden="true" />
+
+              <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+                <div className="flex min-h-full items-center justify-center p-4">
+                  <TransitionChild
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0 transform-[scale(95%)]"
+                    enterTo="opacity-100 transform-[scale(100%)]"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100 transform-[scale(100%)]"
+                    leaveTo="opacity-0 transform-[scale(95%)]"
+                  >
+                    <DialogPanel className="w-full max-w-lg md:max-w-2xl rounded-xl bg-white/5 p-2 md:p-6 backdrop-blur-2xl">
+                      <Image
+                        width={340}
+                        height={340}
+                        className="h-auto w-full max-w-full"
+                        src={imageSelected}
+                        alt=""
+                      />
+                    </DialogPanel>
+                  </TransitionChild>
+                </div>
+              </div>
+            </Dialog>
+          </Transition>
+        </div>
+      )}
 
       {/* ============================================================================================================ */}
       {/* ADMIN AREA */}
