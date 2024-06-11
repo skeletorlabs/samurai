@@ -458,17 +458,6 @@ export default function Ido() {
                           </p>
                         </div>
 
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                          <span className="text-neutral-600">Raised:</span>
-                          <p className="text-white/70">
-                            $
-                            {Number(general?.raised | 0).toLocaleString(
-                              "en-us"
-                            )}{" "}
-                            {ido?.acceptedTokenSymbol}
-                          </p>
-                        </div>
-
                         {signer && account && (
                           <div className="flex flex-col py-2 px-2 rounded-md w-max">
                             <span className="text-neutral-600">Min:</span>
@@ -494,6 +483,17 @@ export default function Ido() {
                             </p>
                           </div>
                         )}
+
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">Raised:</span>
+                          <p className="text-white/70">
+                            $
+                            {Number(general?.raised | 0).toLocaleString(
+                              "en-us"
+                            )}{" "}
+                            {ido?.acceptedTokenSymbol}
+                          </p>
+                        </div>
                       </div>
 
                       {/* REGISTER BUTTON */}
