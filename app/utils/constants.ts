@@ -28,6 +28,7 @@ import {
   kip,
   artx,
   kvants,
+  memepad,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -57,12 +58,76 @@ export const simplifiedPhasesV2 = [
 ];
 
 export const IDO_LIST: IDO[] = [
+  // {
+  //   id: "launchpad-v2/memepad",
+  //   logo: memepad,
+  //   idoImageSrc: "/IDOs/memepad.png",
+  //   acceptedTokenSymbol: "USDC",
+  //   tokenNetwork: "Solana",
+  //   crowdsaleNetwork: "BASE",
+  //   networkImageSrc: "/chain-logos/solana.svg",
+  //   projectName: "MemePad",
+  //   projectListDescription:
+  //     "The Kvants platform makes high-level institutional quantitative trading strategies available to the masses.",
+  //   projectDescription:
+  //     "Kvants is on a mission to democratize investment by creating a self-custodial platform where users can browse and invest in a wide range of complex quant trading strategy pools, allowing each of us to 'invest like the elite' with just a few clicks. $KVAI holders will enjoy effortless access to high-performing institutional investment models.",
+  //   projectTokenSymbol: "$MPAD",
+  //   totalAllocation: 100_000,
+  //   price: "0.40",
+  //   registrationStartsAt: 1718193600,
+  //   participationStartsAt: 1718280000,
+  //   participationEndsAt: 1718323200,
+  //   publicParticipationStartsAt: 1718323200,
+  //   publicParticipationEndsAt: 1718366400,
+  //   simplified: true,
+  //   tgeDate: 1718582400,
+  //   tgePercentage: 10,
+  //   cliff: 0,
+  //   investmentRound: "Strategic",
+  //   fdv: "6000000",
+  //   exchangeListingPrice: 0.6,
+  //   marketCapAtTGE: 294000,
+  //   vesting: "3 months",
+  //   releaseType: "Linear",
+  //   currentPhase: simplifiedPhases[1].title,
+  //   socials: [
+  //     {
+  //       svg: globe,
+  //       href: "https://memepad.ai/",
+  //     },
+  //     {
+  //       svg: twitterX,
+  //       href: "https://twitter.com/MemePadSol",
+  //     },
+  //     {
+  //       svg: telegram,
+  //       href: "https://t.me/Memepad_Community",
+  //     },
+  //   ],
+  //   bigDescription: `
+  //     <div style="display: flex; flex-direction: column; gap: 15px;">
+  //       <p>Built by a team of quantitative trading experts with experience at top TradFi institutions, Kvants is a non-custodial Asset Management Platform offering retail investors the chance to invest using institutional-grade trading strategies developed by professional hedge funds.<p>
+  //       <p>These quantitative strategies make use of complex, systematic trading models with algorithms which are constantly optimised through AI-powered machine learning. Such trading models constantly monitor a wide range of market analytics, automatically closing and opening positions based on a predefined set of complex rules.<p>
+  //       <p>These sophisticated trading strategies have traditionally been out of reach of retail crypto investors, but that is about to change. The Kvants platform is built to make investing with institutional-grade trading strategies accessible to the everyday investor.<p>
+  //       <p>Kvants+ is the platform where all of this action takes place. Here you'll be able to browse a wide range of carefully-audited quantitative trading strategies, each with its own unique algorithms, risk profile, and past performance data. You can then deploy funds directly into DeFi pools which utilise these strategies (and enjoy monthly dividends as a result).<p>
+  //     </div>
+  // `,
+  //   contract: "0x730B7100590c8205F9Bf22bA28DF6227E0b28E38",
+  //   abi: PARTICIPATOR_V2_2,
+  //   images: [
+  //     "/IDOs/memepad/1.png",
+  //     "/IDOs/memepad/2.png",
+  //     "/IDOs/memepad/3.png",
+  //     "/IDOs/memepad/4.png",
+  //   ],
+  //   type: "v2",
+  // },
   {
     id: "launchpad-v2/kvants",
     logo: kvants,
     idoImageSrc: "/IDOs/kvants.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "To be announced",
+    tokenNetwork: "TBA",
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
     projectName: "Kvants",
@@ -126,7 +191,7 @@ export const IDO_LIST: IDO[] = [
     logo: artx,
     idoImageSrc: "/IDOs/artx.png",
     acceptedTokenSymbol: "ETH",
-    tokenNetwork: "TO BE ANNOUNCED",
+    tokenNetwork: "TBA",
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
     projectName: "ARTX - NFT",
@@ -191,7 +256,7 @@ export const IDO_LIST: IDO[] = [
     logo: kip,
     idoImageSrc: "/IDOs/kip-protocol.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "TO BE ANNOUNCED",
+    tokenNetwork: "TBA",
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
     projectName: "KIP Protocol",
@@ -260,7 +325,7 @@ export const IDO_LIST: IDO[] = [
     logo: unibit,
     idoImageSrc: "/IDOs/unibit.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "TO BE ANNOUNCED",
+    tokenNetwork: "TBA",
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
     projectName: "UniBit",
@@ -329,7 +394,7 @@ export const IDO_LIST: IDO[] = [
     logo: interswap,
     idoImageSrc: "/IDOs/interswap.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "TO BE ANNOUNCED",
+    tokenNetwork: "TBA",
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
     projectName: "InterSwap",
@@ -396,7 +461,7 @@ export const IDO_LIST: IDO[] = [
     logo: orangedx,
     idoImageSrc: "/IDOs/orangedx.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "TO BE ANNOUNCED",
+    tokenNetwork: "TBA",
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
     projectName: "OrangeDX",
@@ -468,7 +533,7 @@ export const IDO_LIST: IDO[] = [
     logo: galaxyGamesHauntedSpace,
     idoImageSrc: "/IDOs/hauntedspace-gaga.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "TO BE ANNOUNCED",
+    tokenNetwork: "TBA",
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
     projectName: "Haunted Space",
@@ -544,7 +609,7 @@ export const IDO_LIST: IDO[] = [
     logo: havensCompass,
     idoImageSrc: "/IDOs/havens-compass.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "TO BE ANNOUNCED",
+    tokenNetwork: "TBA",
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/ido-sample.svg",
     projectName: "Haven's Compass",

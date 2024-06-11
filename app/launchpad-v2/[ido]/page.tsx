@@ -235,15 +235,13 @@ export default function Ido() {
             <span>{ido?.projectName}</span>
           </div>
           <div className="flex flex-col xl:flex-row xl:justify-between relative mt-4 xl:mt-10 text-justify xl:text-start">
-            <div className="relative px-6 lg:px-10 2xl:px-20">
-              <div className="flex flex-col text-[38px] md:text-[58px] lg:text-[70px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
-                <div className="flex ml-[-30px] lg:ml-0 items-center sm:gap-3 xl:text-5xl justify-center xl:justify-start">
-                  <div className="scale-[0.5] sm:scale-[0.7]">{ido?.logo}</div>
-                  <span>{ido?.projectName}</span>
-                </div>
+            <div className="flex flex-col relative px-6 lg:px-10 2xl:px-20 w-full">
+              <div className="flex max-w-[350px] self-center xl:self-start">
+                {ido?.logo}
               </div>
+
               <p
-                className={`xl:pt-6 text-[18px] md:text-[22px] 2xl:text-[28px] pb-7 ${inter.className}`}
+                className={`text-[18px] md:text-[22px] 2xl:text-[28px] pt-2 pb-10 ${inter.className}`}
               >
                 {ido?.projectDescription}
               </p>
@@ -266,12 +264,12 @@ export default function Ido() {
                   </Link>
                 ))}
                 <div className="flex items-center gap-4">
-                  {ido?.tokenNetwork !== "To be announced" && (
-                    <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
+                  {ido?.tokenNetwork !== "TBA" && (
+                    <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
                       <span className="text-sm">Project Tokens</span>
                       <Image
-                        src="/chain-logos/polygon.svg"
-                        alt={ido?.projectName || ""}
+                        src={ido?.networkImageSrc || ""}
+                        alt={ido?.tokenNetwork || ""}
                         width={24}
                         height={24}
                         className="p-[1px] bg-white/80 rounded-full"
@@ -448,8 +446,9 @@ export default function Ido() {
                           <span className="text-neutral-600">TGE Date:</span>
                           <p className="text-white/70">
                             {ido.tgeDate === 0
-                              ? "TO BE ANNOUNCED"
-                              : formattedDateSimple(ido.tgeDate)}
+                              ? "TBA"
+                              : formattedDate(ido.tgeDate).toUpperCase()}{" "}
+                            UTC
                           </p>
                         </div>
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
@@ -503,6 +502,17 @@ export default function Ido() {
                             {ido?.acceptedTokenSymbol}
                           </p>
                         </div>
+
+                        {signer && account && (
+                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                            <span className="text-neutral-600">
+                              Registered:
+                            </span>
+                            <p className="text-white/70">
+                              {user?.isWhitelisted ? "Yes" : "No"}
+                            </p>
+                          </div>
+                        )}
                       </div>
 
                       {/* REGISTER BUTTON */}
@@ -709,7 +719,7 @@ export default function Ido() {
                             <p className="text-samurai-red text-[16px]">
                               Token distribution:
                             </p>
-                            To be announced
+                            TBA
                           </div>
                         </>
                       )}
@@ -725,10 +735,10 @@ export default function Ido() {
           </div>
         </div>
       </TopLayout>
-      <div className="flex flex-col xl:flex-row  gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 px-3 xl:px-0">
+      <div className="flex flex-col xl:flex-row gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 px-3 xl:px-0">
         {ido && (
           <>
-            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/30 bg-samurai-pattern shadow-xl lg:border border-white/20 h-max xl:ml-10 2xl:ml-20">
+            <div className="flex flex-col w-full lg:rounded-[8px] bg-black/30 bg-samurai-pattern shadow-xl lg:border border-white/20 h-max xl:ml-10 2xl:ml-20">
               <h1 className="text-xl bg-samurai-red px-6 py-4 rounded-t-lg">
                 Token Info
               </h1>
@@ -760,7 +770,7 @@ export default function Ido() {
                     {Number(ido.exchangeListingPrice).toLocaleString("en-us", {
                       maximumFractionDigits: 4,
                     })}{" "}
-                    {ido.projectTokenSymbol}
+                    {ido.acceptedTokenSymbol}
                   </p>
                 </div>
 
@@ -784,13 +794,13 @@ export default function Ido() {
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
                   <span className="text-samurai-red">Dex Screener:</span>
                   <p className="text-white/70">
-                    To be announced
+                    TBA
                     {/* <Link href="#">{"https://somelink".toUpperCase()}</Link> */}
                   </p>
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-10 px-6 lg:pr-10 2xl:px-20">
+            <div className="flex flex-col gap-10 px-6 lg:pr-10">
               <div
                 className={`flex w-full xl:text-[16px] xl:leading-[1.70rem] 2xl:text-[20px] 2xl:leading-[2rem] text-gray-300 ${inter.className}`}
                 dangerouslySetInnerHTML={{
