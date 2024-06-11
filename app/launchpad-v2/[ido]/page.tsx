@@ -40,57 +40,6 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-const images = [
-  {
-    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg",
-    alt: "Description of image 1 (optional)",
-  },
-  {
-    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg",
-    alt: "Description of image 2 (optional)",
-  },
-  {
-    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg",
-    alt: "Description of image 3 (optional)",
-  },
-  {
-    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg",
-    alt: "Description of image 4 (optional)",
-  },
-  {
-    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg",
-    alt: "Description of image 5 (optional)",
-  },
-  {
-    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg",
-    alt: "Description of image 6 (optional)",
-  },
-  {
-    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg",
-    alt: "Description of image 7 (optional)",
-  },
-  {
-    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg",
-    alt: "Description of image 8 (optional)",
-  },
-  {
-    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg",
-    alt: "Description of image 9 (optional)",
-  },
-  {
-    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg",
-    alt: "Description of image 10 (optional)",
-  },
-  {
-    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg",
-    alt: "Description of image 11 (optional)",
-  },
-  {
-    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg",
-    alt: "Description of image 12 (optional)",
-  },
-];
-
 export default function Ido() {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -259,7 +208,7 @@ export default function Ido() {
         }}
       >
         <div className="flex flex-col">
-          <div className="flex justify-center xl:justify-start items-center gap-2 text-sm font-extralight px-6 xl:px-20 pt-4 xl:pt-24">
+          <div className="flex justify-center xl:justify-start items-center gap-2 text-sm font-extralight px-6 lg:px-10 2xl:px-20 pt-4 xl:pt-24">
             <Link
               href="/launchpad"
               className="transition-all text-white/40 hover:text-white"
@@ -285,7 +234,7 @@ export default function Ido() {
             <span>{ido?.projectName}</span>
           </div>
           <div className="flex flex-col xl:flex-row xl:justify-between relative mt-4 xl:mt-10 text-justify xl:text-start">
-            <div className="relative px-6 lg:px-8 xl:px-20">
+            <div className="relative px-6 lg:px-10 2xl:px-20">
               <div className="flex flex-col text-[38px] md:text-[58px] lg:text-[70px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
                 <div className="flex ml-[-30px] lg:ml-0 items-center sm:gap-3 xl:text-5xl justify-center xl:justify-start">
                   <div className="scale-[0.5] sm:scale-[0.7]">{ido?.logo}</div>
@@ -293,7 +242,7 @@ export default function Ido() {
                 </div>
               </div>
               <p
-                className={`xl:pt-6 text-[18px] md:text-[22px] xl:text-[28px] pb-7 ${inter.className}`}
+                className={`xl:pt-6 text-[18px] md:text-[22px] 2xl:text-[28px] pb-7 ${inter.className}`}
               >
                 {ido?.projectDescription}
               </p>
@@ -329,7 +278,7 @@ export default function Ido() {
                     </div>
                   )}
 
-                  <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20  w-max">
+                  <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
                     <span className="text-sm">Crowdsale</span>
                     <Image
                       src="/chain-logos/Base_Symbol_Blue.svg"
@@ -341,9 +290,68 @@ export default function Ido() {
                   </div>
                 </div>
               </div>
+
+              {ido && ido.images && (
+                <div className="flex flex-col w-full">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-5 pt-10 2xl:pt-14 self-center xl:self-start">
+                    <div className="grid gap-5">
+                      <button
+                        onClick={() => onImageClick(ido.images![0])}
+                        className="transition-all hover:scale-105 relative w-[160px] h-[160px] md:w-[180px] xl:h-[140px] xl:w-[140px] md:h-[180px] 2xl:w-[180px] 2xl:h-[180px]"
+                      >
+                        <Image
+                          fill
+                          className="h-auto max-w-full rounded-lg border border-white/30"
+                          src={ido?.images[0]}
+                          alt=""
+                        />
+                      </button>
+                    </div>
+                    <div className="grid gap-10">
+                      <button
+                        onClick={() => onImageClick(ido?.images![1])}
+                        className="transition-all hover:scale-105 relative w-[160px] h-[160px] md:w-[180px] xl:h-[140px] xl:w-[140px] md:h-[180px] 2xl:w-[180px] 2xl:h-[180px]"
+                      >
+                        <Image
+                          fill
+                          className="h-auto max-w-full rounded-lg border border-white/30"
+                          src={ido?.images[1]}
+                          alt=""
+                        />
+                      </button>
+                    </div>
+                    <div className="grid gap-10">
+                      <button
+                        onClick={() => onImageClick(ido?.images![2])}
+                        className="transition-all hover:scale-105 relative w-[160px] h-[160px] md:w-[180px] xl:h-[140px] xl:w-[140px] md:h-[180px] 2xl:w-[180px] 2xl:h-[180px]"
+                      >
+                        <Image
+                          fill
+                          className="h-auto max-w-full rounded-lg border border-white/30"
+                          src={ido?.images[2]}
+                          alt=""
+                        />
+                      </button>
+                    </div>
+                    <div className="grid gap-10">
+                      <button
+                        onClick={() => onImageClick(ido?.images![3])}
+                        className="transition-all hover:scale-105 relative w-[160px] h-[160px] md:w-[180px] xl:h-[140px] xl:w-[140px] md:h-[180px] 2xl:w-[180px] 2xl:h-[180px]"
+                      >
+                        <Image
+                          fill
+                          className="h-auto max-w-full rounded-lg border border-white/30"
+                          src={ido?.images[3]}
+                          alt=""
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
-            <div className="flex flex-col xl:pr-28 gap-5 mt-10 xl:mt-0 mx-3 xl:mx-0">
+            <div className="flex flex-col xl:pr-[32px] 2xl:pr-28 gap-5 mt-10 xl:mt-0 mx-3 xl:mx-0">
               <div className="flex flex-col">
                 <div className="flex flex-col w-full xl:w-[550px] rounded-lg bg-black/70 bg-samurai-pattern pb-6 shadow-xl lg:border border-white/20 mt-10">
                   <div className="flex justify-between items-center text-lg xl:text-xl bg-samurai-red border-b border-white/20 px-7 py-4 rounded-t-lg text-white">
@@ -719,7 +727,7 @@ export default function Ido() {
       <div className="flex flex-col xl:flex-row  gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 px-3 xl:px-0">
         {ido && (
           <>
-            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/30 bg-samurai-pattern shadow-xl lg:border border-white/20 h-max xl:ml-20">
+            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/30 bg-samurai-pattern shadow-xl lg:border border-white/20 h-max xl:ml-10 2xl:ml-20">
               <h1 className="text-xl bg-samurai-red px-6 py-4 rounded-t-lg">
                 Token Info
               </h1>
@@ -781,9 +789,9 @@ export default function Ido() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-10 px-6 lg:px-8 xl:pr-20">
+            <div className="flex flex-col gap-10 px-6 lg:pr-10 2xl:px-20">
               <div
-                className={`flex w-full xl:text-[1.34rem] text-gray-300 ${inter.className}`}
+                className={`flex w-full xl:text-[16px] xl:leading-[1.70rem] 2xl:text-[20px] 2xl:leading-[2rem] text-gray-300 ${inter.className}`}
                 dangerouslySetInnerHTML={{
                   __html: ido.bigDescription as string,
                 }}
@@ -793,97 +801,38 @@ export default function Ido() {
         )}
       </div>
 
-      {ido && ido.images && (
-        <div className="flex flex-col w-full bg-white/5">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 px-6 lg:px-8 xl:px-20 py-20 self-start">
-            <div className="grid gap-10">
-              <button
-                onClick={() => onImageClick(ido.images![0])}
-                className="transition-all hover:scale-105 relative w-[160px] h-[160px] xl:w-[240px] xl:w-[240px] 2xl:-[340px]"
+      <Transition appear show={galleryOpen}>
+        <Dialog
+          as="div"
+          className="relative focus:outline-none bg-black z-50"
+          onClose={() => setGalleryOpen(false)}
+        >
+          <div className="fixed inset-0 bg-black/60" aria-hidden="true" />
+
+          <div className="fixed inset-0 z-50 w-screen overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4">
+              <TransitionChild
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 transform-[scale(95%)]"
+                enterTo="opacity-100 transform-[scale(100%)]"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 transform-[scale(100%)]"
+                leaveTo="opacity-0 transform-[scale(95%)]"
               >
-                <Image
-                  fill
-                  className="h-auto max-w-full rounded-lg border border-white/30"
-                  src={ido?.images[0]}
-                  alt=""
-                />
-              </button>
-            </div>
-            <div className="grid gap-10">
-              <button
-                onClick={() => onImageClick(ido?.images![1])}
-                className="transition-all hover:scale-105 relative w-[160px] h-[180px] xl:w-[240px] xl:w-[240px] 2xl:-[300px]"
-              >
-                <Image
-                  fill
-                  className="h-auto max-w-full rounded-lg border border-white/30"
-                  src={ido?.images[1]}
-                  alt=""
-                />
-              </button>
-            </div>
-            <div className="grid gap-10">
-              <button
-                onClick={() => onImageClick(ido?.images![2])}
-                className="transition-all hover:scale-105 relative w-[160px] h-[190px] xl:w-[240px] xl:w-[240px] 2xl:-[390px]"
-              >
-                <Image
-                  fill
-                  className="h-auto max-w-full rounded-lg border border-white/30"
-                  src={ido?.images[2]}
-                  alt=""
-                />
-              </button>
-            </div>
-            <div className="grid gap-10">
-              <button
-                onClick={() => onImageClick(ido?.images![3])}
-                className="transition-all hover:scale-105 relative w-[160px] h-[140px] xl:w-[240px] xl:w-[240px] 2xl:-[340px]"
-              >
-                <Image
-                  fill
-                  className="h-auto max-w-full rounded-lg border border-white/30"
-                  src={ido?.images[3]}
-                  alt=""
-                />
-              </button>
+                <DialogPanel className="w-full max-w-lg md:max-w-2xl rounded-xl bg-white/5 p-2 md:p-6 backdrop-blur-2xl">
+                  <Image
+                    width={340}
+                    height={340}
+                    className="h-auto w-full max-w-full"
+                    src={imageSelected}
+                    alt=""
+                  />
+                </DialogPanel>
+              </TransitionChild>
             </div>
           </div>
-
-          <Transition appear show={galleryOpen}>
-            <Dialog
-              as="div"
-              className="relative z-10 focus:outline-none bg-black"
-              onClose={() => setGalleryOpen(false)}
-            >
-              <div className="fixed inset-0 bg-black/60" aria-hidden="true" />
-
-              <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-                <div className="flex min-h-full items-center justify-center p-4">
-                  <TransitionChild
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0 transform-[scale(95%)]"
-                    enterTo="opacity-100 transform-[scale(100%)]"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100 transform-[scale(100%)]"
-                    leaveTo="opacity-0 transform-[scale(95%)]"
-                  >
-                    <DialogPanel className="w-full max-w-lg md:max-w-2xl rounded-xl bg-white/5 p-2 md:p-6 backdrop-blur-2xl">
-                      <Image
-                        width={340}
-                        height={340}
-                        className="h-auto w-full max-w-full"
-                        src={imageSelected}
-                        alt=""
-                      />
-                    </DialogPanel>
-                  </TransitionChild>
-                </div>
-              </div>
-            </Dialog>
-          </Transition>
-        </div>
-      )}
+        </Dialog>
+      </Transition>
 
       {/* ============================================================================================================ */}
       {/* ADMIN AREA */}
