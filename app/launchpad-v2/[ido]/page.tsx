@@ -447,8 +447,8 @@ export default function Ido() {
                           <p className="text-white/70">
                             {ido.tgeDate === 0
                               ? "TBA"
-                              : formattedDate(ido.tgeDate).toUpperCase()}{" "}
-                            UTC
+                              : formattedDate(ido.tgeDate).toUpperCase() +
+                                " UTC"}
                           </p>
                         </div>
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
