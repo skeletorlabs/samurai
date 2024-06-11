@@ -292,5 +292,5 @@ export async function getParticipationPhase(index: number) {
 
   // return phase;
 
-  return "participation";
+  return "Participation";
 }
