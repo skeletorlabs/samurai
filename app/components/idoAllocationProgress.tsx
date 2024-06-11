@@ -21,8 +21,8 @@ export default function IdoAllocationProgress({
     }
   }, [maxAllocations, raised]);
   return (
-    <div className="flex flex-col gap-3 px-4 xl:px-0">
-      <div className="flex flex-row justify-between items-center w-full h-[20px] rounded-full border">
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-row justify-between items-center w-full h-[14px] rounded-full border border-white/20 bg-white/10">
         <div
           className={`flex justify-center items-center h-full bg-gradient-to-r from-samurai-red/60 to-samurai-red ${
             percentage >= 95 ? "rounded-full" : "rounded-l-full"
@@ -34,11 +34,11 @@ export default function IdoAllocationProgress({
       </div>
       <div className="flex justify-between items-center px-1 text-sm">
         <span>
-          RAISED:{" "}
+          Raised:{" "}
           {percentage.toLocaleString("en-us", { maximumFractionDigits: 2 })}%
         </span>
         <span>
-          TOTAL ALLOCATION:{" "}
+          Total Allocation:{" "}
           {useLocale ? maxAllocations.toLocaleString("en-us") : maxAllocations}{" "}
           {extraInfos && extraInfos}
         </span>

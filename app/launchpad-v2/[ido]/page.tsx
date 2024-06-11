@@ -10,7 +10,6 @@ import { Carousel } from "flowbite-react";
 import {
   IDO_LIST,
   TOKENS_TO_SYMBOL,
-  simplifiedPhases,
   simplifiedPhasesV2,
 } from "@/app/utils/constants";
 import { formattedDate, formattedDateSimple } from "@/app/utils/formattedDate";
@@ -30,10 +29,67 @@ import {
 import IdoAllocationProgress from "@/app/components/idoAllocationProgress";
 import { Tier, getTier } from "@/app/contracts_integrations/tiers";
 import { getUnixTime } from "date-fns";
+import {
+  Dialog,
+  DialogPanel,
+  Transition,
+  TransitionChild,
+} from "@headlessui/react";
 
 const inter = Inter({
   subsets: ["latin"],
 });
+
+const images = [
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg",
+    alt: "Description of image 1 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg",
+    alt: "Description of image 2 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg",
+    alt: "Description of image 3 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg",
+    alt: "Description of image 4 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg",
+    alt: "Description of image 5 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg",
+    alt: "Description of image 6 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg",
+    alt: "Description of image 7 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg",
+    alt: "Description of image 8 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg",
+    alt: "Description of image 9 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg",
+    alt: "Description of image 10 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg",
+    alt: "Description of image 11 (optional)",
+  },
+  {
+    src: "https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg",
+    alt: "Description of image 12 (optional)",
+  },
+];
 
 export default function Ido() {
   const [inputValue, setInputValue] = useState("");
@@ -43,6 +99,8 @@ export default function Ido() {
   const [currentPhase, setCurrentPhase] = useState<string | null>(null);
   const [selectedToken, setSelectedToken] = useState("");
   const [tier, setTier] = useState<Tier | null>(null);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [imageSelected, setImageSelected] = useState("");
 
   const { signer, account } = useContext(StateContext);
 
@@ -98,6 +156,15 @@ export default function Ido() {
   // ============================================================================================================
   // USER ACTIONS
   // ============================================================================================================
+
+  const onImageClick = useCallback(
+    async (image: string) => {
+      setGalleryOpen(false);
+      setImageSelected(image);
+      setGalleryOpen(true);
+    },
+    [setGalleryOpen]
+  );
 
   const onInputChange = (value: string) => {
     const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
@@ -191,68 +258,47 @@ export default function Ido() {
           boxShadow: "inset 0px 0px 800px 800px rgba(0, 0, 0, .65)",
         }}
       >
-        <div className="flex flex-col pt-10 lg:pt-14">
-          <div className="flex flex-col xl:flex-row items-center justify-between relative">
-            <div className="relative md:mr-12 xl:max-w-[900px] px-6 lg:px-8 xl:px-20">
-              <Link
-                href="/launchpad"
-                className="transition-all text-white/40 hover:text-white hidden xl:block"
-              >
-                <svg
-                  data-slot="icon"
-                  fill="none"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                  className="xl:w-20 mb-14"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-                  ></path>
-                </svg>
-              </Link>
-
-              <div className="flex flex-col text-[38px] sm:text-[58px] lg:text-[70px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
-                <div className="flex items-center gap-5">
-                  {ido?.logo} {ido?.projectName}
-                </div>
-                <div className="flex items-center gap-4 pt-5">
-                  {ido?.tokenNetwork !== "TO BE ANNOUNCED" && (
-                    <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
-                      <span className="text-sm">Project Tokens</span>
-                      <Image
-                        src="/chain-logos/polygon.svg"
-                        alt={ido?.projectName || ""}
-                        width={24}
-                        height={24}
-                        className="p-[1px] bg-white/80 rounded-full"
-                      />
-                    </div>
-                  )}
-
-                  <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20  w-max">
-                    <span className="text-sm">Crowdsale</span>
-                    <Image
-                      src="/chain-logos/Base_Symbol_Blue.svg"
-                      alt={ido?.projectName || ""}
-                      width={24}
-                      height={24}
-                      className="p-[1px] bg-white/80 rounded-full"
-                    />
-                  </div>
+        <div className="flex flex-col">
+          <div className="flex justify-center xl:justify-start items-center gap-2 text-sm font-extralight px-6 xl:px-20 pt-4 xl:pt-24">
+            <Link
+              href="/launchpad"
+              className="transition-all text-white/40 hover:text-white"
+            >
+              Projects
+            </Link>
+            <svg
+              data-slot="icon"
+              fill="none"
+              strokeWidth="4"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              className="w-2 text-white/40"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m8.25 4.5 7.5 7.5-7.5 7.5"
+              ></path>
+            </svg>
+            <span>{ido?.projectName}</span>
+          </div>
+          <div className="flex flex-col xl:flex-row xl:justify-between relative mt-4 xl:mt-10 text-justify xl:text-start">
+            <div className="relative px-6 lg:px-8 xl:px-20">
+              <div className="flex flex-col text-[38px] md:text-[58px] lg:text-[70px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] relative">
+                <div className="flex ml-[-30px] lg:ml-0 items-center sm:gap-3 xl:text-5xl justify-center xl:justify-start">
+                  <div className="scale-[0.5] sm:scale-[0.7]">{ido?.logo}</div>
+                  <span>{ido?.projectName}</span>
                 </div>
               </div>
               <p
-                className={`leading-normal lg:leading-relaxed font-light pt-6 lg:text-[28px] xl:max-w-[860px] drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] pb-10 ${inter.className}`}
+                className={`xl:pt-6 text-[18px] md:text-[22px] xl:text-[28px] pb-7 ${inter.className}`}
               >
                 {ido?.projectDescription}
               </p>
 
-              <div className="flex items-center w-full gap-8">
+              <div className="flex items-center w-full gap-8 justify-center xl:justify-start">
                 {ido?.socials.map((item, index) => (
                   <Link
                     key={index}
@@ -269,17 +315,54 @@ export default function Ido() {
                     {item.svg}
                   </Link>
                 ))}
+                <div className="flex items-center gap-4">
+                  {ido?.tokenNetwork !== "To be announced" && (
+                    <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
+                      <span className="text-sm">Project Tokens</span>
+                      <Image
+                        src="/chain-logos/polygon.svg"
+                        alt={ido?.projectName || ""}
+                        width={24}
+                        height={24}
+                        className="p-[1px] bg-white/80 rounded-full"
+                      />
+                    </div>
+                  )}
+
+                  <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20  w-max">
+                    <span className="text-sm">Crowdsale</span>
+                    <Image
+                      src="/chain-logos/Base_Symbol_Blue.svg"
+                      alt={ido?.projectName || ""}
+                      width={24}
+                      height={24}
+                      className="p-[1px] bg-white/80 rounded-full"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="flex flex-col lg:pr-20 gap-10">
+            <div className="flex flex-col xl:pr-28 gap-5 mt-10 xl:mt-0 mx-3 xl:mx-0">
               <div className="flex flex-col">
-                <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-14 mt-[70px] xl:mt-[170px] shadow-xl lg:border border-white/20">
-                  <div className="text-xl xl:text-3xl bg-samurai-red px-7 py-3 text-white">
-                    <span>{ido?.projectName}</span> {" | "}
-                    {general?.isPublic ? "Pulic Round" : ido?.investmentRound}
+                <div className="flex flex-col w-full xl:w-[550px] rounded-lg bg-black/70 bg-samurai-pattern pb-6 shadow-xl lg:border border-white/20 mt-10">
+                  <div className="flex justify-between items-center text-lg xl:text-xl bg-samurai-red border-b border-white/20 px-7 py-4 rounded-t-lg text-white">
+                    <span>
+                      {general?.isPublic ? "Pulic Round" : ido?.investmentRound}
+                    </span>
+                    {/* TIER */}
+                    {signer && account && (
+                      <div className="flex items-center gap-1 text-black">
+                        {tier
+                          ? tier?.name === ""
+                            ? "Public"
+                            : tier?.name
+                          : "loading..."}
+                        <span>Tier</span>
+                      </div>
+                    )}
                   </div>
-                  <div className="hidden md:flex flex-row mt-6 lg:mt-10 bg-black-900/90 stroke-white rounded-[8px] text-white border border-white/20 mx-4 lg:mx-8">
+                  <div className="hidden md:flex flex-row mt-6 bg-black-900/90 rounded-lg border border-white/20 mx-4 xl:mx-6">
                     {ido?.simplified &&
                       simplifiedPhasesV2.map((phase, index) => (
                         <Fragment key={index}>
@@ -292,7 +375,7 @@ export default function Ido() {
                               viewBox="0 0 24 24"
                               xmlns="http://www.w3.org/2000/svg"
                               aria-hidden="true"
-                              className="w-2 md:w-6 "
+                              className="w-2 md:w-3 text-white/40 stroke-white/40"
                             >
                               <path
                                 strokeLinecap="round"
@@ -303,7 +386,7 @@ export default function Ido() {
                           )}
                           <button
                             disabled
-                            className={`p-2 flex-1 text-[14px] md:text-normal  xl:text-xl ${
+                            className={`p-2 flex-1 text-md ${
                               phase.title === currentPhase
                                 ? "text-samurai-red"
                                 : "text-white/40"
@@ -316,46 +399,35 @@ export default function Ido() {
                   </div>
 
                   {ido && (
-                    <div className="flex flex-col gap-10 px-5 md:px-8">
+                    <div className="flex flex-col gap-10 px-5 md:px-6">
                       {/* PARTICIPATION PHASE BLOCK */}
-                      <div className="flex justify-start lg:grid lg:grid-cols-2 gap-1 items-center flex-wrap mt-6">
-                        <div className="flex md:hidden items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">
-                            CURRENT PHASE:
+                      <div className="grid grid-cols-2 md:grid-cols-3 items-center flex-wrap mt-6 text-sm">
+                        <div className="flex md:hidden flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">
+                            Current Phase:
                           </span>
+                          <p className="text-white/70">{currentPhase}</p>
+                        </div>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">IDO Start:</span>
                           <p className="text-white/70">
-                            {currentPhase?.toUpperCase()}
+                            {formattedDate(ido.participationStartsAt)} UTC
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">IDO START:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">IDO End:</span>
                           <p className="text-white/70">
-                            {formattedDate(
-                              ido.participationStartsAt
-                            ).toUpperCase()}{" "}
-                            UTC
+                            {formattedDate(ido.participationEndsAt)} UTC
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">IDO END:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">FCFS Start:</span>
                           <p className="text-white/70">
-                            {formattedDate(
-                              ido.participationEndsAt
-                            ).toUpperCase()}{" "}
-                            UTC
+                            {formattedDate(ido.publicParticipationStartsAt)} UTC
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">FCFS START:</span>
-                          <p className="text-white/70">
-                            {formattedDate(
-                              ido.publicParticipationStartsAt
-                            ).toUpperCase()}{" "}
-                            UTC
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">FCFS END:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">FCFS End:</span>
                           <p className="text-white/70">
                             {formattedDate(
                               ido.publicParticipationEndsAt
@@ -363,31 +435,31 @@ export default function Ido() {
                             UTC
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">TGE DATE:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">TGE Date:</span>
                           <p className="text-white/70">
                             {ido.tgeDate === 0
                               ? "TO BE ANNOUNCED"
-                              : formattedDateSimple(ido.tgeDate).toUpperCase()}
+                              : formattedDateSimple(ido.tgeDate)}
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">
-                            TOKEN SYMBOL:
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">
+                            Token Symbol:
                           </span>
                           <p className="text-white/70">
                             {ido.projectTokenSymbol}
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">TOKEN PRICE:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">Token Price:</span>
                           <p className="text-white/70">
                             ${ido.price} {ido.acceptedTokenSymbol}
                           </p>
                         </div>
 
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">RAISED:</span>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">Raised:</span>
                           <p className="text-white/70">
                             $
                             {Number(general?.raised | 0).toLocaleString(
@@ -398,8 +470,8 @@ export default function Ido() {
                         </div>
 
                         {signer && account && (
-                          <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                            <span className="text-samurai-red">MIN:</span>
+                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                            <span className="text-neutral-600">Min:</span>
                             <p className="text-white/70">
                               $
                               {Number(
@@ -411,8 +483,8 @@ export default function Ido() {
                         )}
 
                         {signer && account && (
-                          <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                            <span className="text-samurai-red">MAX:</span>
+                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                            <span className="text-neutral-600">Max:</span>
                             <p className="text-white/70">
                               $
                               {Number(
@@ -557,11 +629,11 @@ export default function Ido() {
                         currentPhase?.toLowerCase() === "completed") &&
                         user?.allocation > 0 && (
                           <div className="flex flex-row justify-between items-center flex-wrap gap-4">
-                            <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
-                              <p className={`text-lg ${inter.className}`}>
+                            <div className="p-3 border border-white/20 rounded-[8px] w-full xl:w-[230px]">
+                              <p className={`text-sm ${inter.className}`}>
                                 MY ALLOCATION
                               </p>
-                              <p className="text-2xl text-samurai-red">
+                              <p className="text-xl text-samurai-red">
                                 $
                                 {user.allocation.toLocaleString("en-us", {
                                   minimumFractionDigits: 2,
@@ -570,11 +642,11 @@ export default function Ido() {
                               </p>
                             </div>
 
-                            <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
-                              <p className={`text-lg ${inter.className}`}>
+                            <div className="p-3 border border-white/20 rounded-[8px] w-full xl:w-[230px]">
+                              <p className={`text-sm ${inter.className}`}>
                                 TOKENS TO RECEIVE
                               </p>
-                              <p className="text-2xl text-samurai-red">
+                              <p className="text-xl text-samurai-red">
                                 {(
                                   Number(user?.allocation) / Number(ido.price)
                                 )?.toLocaleString("en-us", {
@@ -584,11 +656,11 @@ export default function Ido() {
                                 {ido.projectTokenSymbol}
                               </p>
                             </div>
-                            <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
-                              <p className={`text-lg ${inter.className}`}>
+                            <div className="p-3 border border-white/20 rounded-[8px] w-full xl:w-[230px]">
+                              <p className={`text-sm ${inter.className}`}>
                                 {ido.tgePercentage}% TGE RELEASE
                               </p>
-                              <p className="text-2xl text-samurai-red">
+                              <p className="text-xl text-samurai-red">
                                 {(
                                   ((Number(user?.allocation) /
                                     Number(ido.price)) *
@@ -601,11 +673,11 @@ export default function Ido() {
                                 {ido.projectTokenSymbol}
                               </p>
                             </div>
-                            <div className="p-4 px-6 border border-white/20 rounded-[8px] w-[300px]">
-                              <p className={`text-lg ${inter.className}`}>
+                            <div className="p-3 border border-white/20 rounded-[8px] w-full xl:w-[230px]">
+                              <p className={`text-sm ${inter.className}`}>
                                 {100 - ido.tgePercentage}% VESTING RELEASE
                               </p>
-                              <p className="text-2xl text-samurai-red">
+                              <p className="text-xl text-samurai-red">
                                 {(
                                   ((Number(user?.allocation) /
                                     Number(ido.price)) *
@@ -621,34 +693,14 @@ export default function Ido() {
                           </div>
                         )}
 
-                      {/* TIER */}
-                      {signer && account && (
-                        <>
-                          <div
-                            className={`text-2xl text-white/80 pt-10 border-t border-white/20 leading-normal ${inter.className}`}
-                          >
-                            <p className="text-samurai-red text-[16px]">
-                              YOUR TIER:
-                            </p>
-                            {tier
-                              ? tier?.name === ""
-                                ? "PUBLIC"
-                                : tier?.name.toUpperCase()
-                              : "loading..."}
-                          </div>
-                        </>
-                      )}
-
                       {/* TGE PHASE BLOCK */}
                       {currentPhase?.toLowerCase() === "completed" && (
                         <>
-                          <div
-                            className={`text-2xl text-white/80 pt-10 border-t border-white/20 leading-normal ${inter.className}`}
-                          >
+                          <div className="text-xl text-white/80 pt-5 border-t border-white/20 leading-normal">
                             <p className="text-samurai-red text-[16px]">
-                              TOKEN DISTRIBUTION:
+                              Token distribution:
                             </p>
-                            TO BE ANNOUNCED
+                            To be announced
                           </div>
                         </>
                       )}
@@ -664,46 +716,23 @@ export default function Ido() {
           </div>
         </div>
       </TopLayout>
-      <div className="flex flex-col xl:flex-row  gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 ">
+      <div className="flex flex-col xl:flex-row  gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 px-3 xl:px-0">
         {ido && (
           <>
-            <div className="flex flex-col gap-10 px-6 lg:px-8 xl:px-20">
-              <div
-                className={`flex w-full !leading-[28px] font-light lg:text-lg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-gray-300 ${inter.className}`}
-                dangerouslySetInnerHTML={{
-                  __html: ido.bigDescription as string,
-                }}
-              />
-              <div className="w-[350px] min-w-[350px] h-[350px] min-h-[350px] lg:w-[800px] lg:min-w-[800px] lg:h-[800px] lg:min-h-[800px]">
-                <Carousel leftControl=" " rightControl=" ">
-                  {ido?.images?.map((image, index) => (
-                    <Image
-                      key={index}
-                      src={image}
-                      width={500}
-                      height={500}
-                      className="h-full"
-                      alt="..."
-                    />
-                  ))}
-                </Carousel>
-              </div>
-            </div>
-
-            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/70 py-8 lg:py-[50px] shadow-xl lg:border border-white/20 h-max lg:mr-20">
-              <h1 className="text-2xl xl:text-3xl bg-samurai-red px-6 py-3">
-                TOKEN INFO
+            <div className="flex flex-col w-full xl:w-[700px] lg:rounded-[8px] bg-black/30 bg-samurai-pattern shadow-xl lg:border border-white/20 h-max xl:ml-20">
+              <h1 className="text-xl bg-samurai-red px-6 py-4 rounded-t-lg">
+                Token Info
               </h1>
-              <div className="flex flex-col gap-4 xl:gap-8 mt-8 lg:mt-16 text-[15px] xl:text-xl px-6">
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
-                  <span className="text-samurai-red">TOKEN SYMBOL:</span>
+              <div className="grid grid-cols-1 md:grid-cols-3 xl:flex xl:flex-col gap-4 mt-8 text-[15px] xl:text-xl px-6 pb-8">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
+                  <span className="text-samurai-red">Token Symbol:</span>
                   <p className="text-white/70">{ido.projectTokenSymbol}</p>
                 </div>
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
-                  <span className="text-samurai-red">NETWORK:</span>
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
+                  <span className="text-samurai-red">Network:</span>
                   <p className="text-white/70">{ido.tokenNetwork}</p>
                 </div>
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
                   <span className="text-samurai-red">FDV:</span>
                   <p className="text-white/70">
                     $
@@ -714,9 +743,9 @@ export default function Ido() {
                     USD
                   </p>
                 </div>
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
                   <span className="text-samurai-red">
-                    EXCHANGE LISTING PRICE:
+                    Exchange Listing Price:
                   </span>
                   <p className="text-white/70">
                     {Number(ido.exchangeListingPrice).toLocaleString("en-us", {
@@ -726,8 +755,8 @@ export default function Ido() {
                   </p>
                 </div>
 
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
-                  <span className="text-samurai-red">MARKET CAP AT TGE:</span>
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
+                  <span className="text-samurai-red">Market Cap at TGE:</span>
                   <p className="text-white/70">
                     $
                     {Number(ido.marketCapAtTGE).toLocaleString("en-us", {
@@ -738,23 +767,123 @@ export default function Ido() {
                   </p>
                 </div>
 
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md lg:w-max lg:border border-white/10 text-sm lg:text-xl">
-                  <span className="text-samurai-red">VESTING:</span>
-                  <p className="text-white/70">{ido.vesting.toUpperCase()}</p>
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md lg:w-max lg:border border-white/10 text-sm lg:text-lg">
+                  <span className="text-samurai-red">Vesting:</span>
+                  <p className="text-white/70">{ido.vesting}</p>
                 </div>
 
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 lg:px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-xl">
-                  <span className="text-samurai-red">DEX SCREENER:</span>
+                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
+                  <span className="text-samurai-red">Dex Screener:</span>
                   <p className="text-white/70">
-                    TO BE ANNOUNCED
+                    To be announced
                     {/* <Link href="#">{"https://somelink".toUpperCase()}</Link> */}
                   </p>
                 </div>
               </div>
             </div>
+            <div className="flex flex-col gap-10 px-6 lg:px-8 xl:pr-20">
+              <div
+                className={`flex w-full xl:text-[1.34rem] text-gray-300 ${inter.className}`}
+                dangerouslySetInnerHTML={{
+                  __html: ido.bigDescription as string,
+                }}
+              />
+            </div>
           </>
         )}
       </div>
+
+      {ido && ido.images && (
+        <div className="flex flex-col w-full bg-white/5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 px-6 lg:px-8 xl:px-20 py-20 self-start">
+            <div className="grid gap-10">
+              <button
+                onClick={() => onImageClick(ido.images![0])}
+                className="transition-all hover:scale-105 relative w-[160px] h-[160px] xl:w-[240px] xl:w-[240px] 2xl:-[340px]"
+              >
+                <Image
+                  fill
+                  className="h-auto max-w-full rounded-lg border border-white/30"
+                  src={ido?.images[0]}
+                  alt=""
+                />
+              </button>
+            </div>
+            <div className="grid gap-10">
+              <button
+                onClick={() => onImageClick(ido?.images![1])}
+                className="transition-all hover:scale-105 relative w-[160px] h-[180px] xl:w-[240px] xl:w-[240px] 2xl:-[300px]"
+              >
+                <Image
+                  fill
+                  className="h-auto max-w-full rounded-lg border border-white/30"
+                  src={ido?.images[1]}
+                  alt=""
+                />
+              </button>
+            </div>
+            <div className="grid gap-10">
+              <button
+                onClick={() => onImageClick(ido?.images![2])}
+                className="transition-all hover:scale-105 relative w-[160px] h-[190px] xl:w-[240px] xl:w-[240px] 2xl:-[390px]"
+              >
+                <Image
+                  fill
+                  className="h-auto max-w-full rounded-lg border border-white/30"
+                  src={ido?.images[2]}
+                  alt=""
+                />
+              </button>
+            </div>
+            <div className="grid gap-10">
+              <button
+                onClick={() => onImageClick(ido?.images![3])}
+                className="transition-all hover:scale-105 relative w-[160px] h-[140px] xl:w-[240px] xl:w-[240px] 2xl:-[340px]"
+              >
+                <Image
+                  fill
+                  className="h-auto max-w-full rounded-lg border border-white/30"
+                  src={ido?.images[3]}
+                  alt=""
+                />
+              </button>
+            </div>
+          </div>
+
+          <Transition appear show={galleryOpen}>
+            <Dialog
+              as="div"
+              className="relative z-10 focus:outline-none bg-black"
+              onClose={() => setGalleryOpen(false)}
+            >
+              <div className="fixed inset-0 bg-black/60" aria-hidden="true" />
+
+              <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+                <div className="flex min-h-full items-center justify-center p-4">
+                  <TransitionChild
+                    enter="ease-out duration-300"
+                    enterFrom="opacity-0 transform-[scale(95%)]"
+                    enterTo="opacity-100 transform-[scale(100%)]"
+                    leave="ease-in duration-200"
+                    leaveFrom="opacity-100 transform-[scale(100%)]"
+                    leaveTo="opacity-0 transform-[scale(95%)]"
+                  >
+                    <DialogPanel className="w-full max-w-lg md:max-w-2xl rounded-xl bg-white/5 p-2 md:p-6 backdrop-blur-2xl">
+                      <Image
+                        width={340}
+                        height={340}
+                        className="h-auto w-full max-w-full"
+                        src={imageSelected}
+                        alt=""
+                      />
+                    </DialogPanel>
+                  </TransitionChild>
+                </div>
+              </div>
+            </Dialog>
+          </Transition>
+        </div>
+      )}
 
       {/* ============================================================================================================ */}
       {/* ADMIN AREA */}

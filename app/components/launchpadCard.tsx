@@ -45,7 +45,7 @@ export default function LaunchpadCard({
   return (
     <Link
       href={ido.id}
-      className={`flex flex-col rounded-lg border-[0.5px] border-neutral-700 text-start ${
+      className={`flex flex-col rounded-lg border-[0.5px] border-neutral-700 text-start bg-samurai-pattern-2 ${
         type === "dark"
           ? "bg-black/30 hover:bg-black/20"
           : "bg-neutral-700 hover:bg-white/10"
@@ -69,16 +69,16 @@ export default function LaunchpadCard({
 
           {/* </div> */}
 
-          <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-md w-full mt-1 text-[14px] border border-white/20">
+          <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-[14px] border border-white/20">
             {ido.investmentRound.toUpperCase()}
           </div>
-          <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-md w-full mt-1 text-[14px] border border-white/20 text-samurai-red">
+          <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-[14px] border border-white/20 text-samurai-red">
             {phase || "LOADING..."}
           </div>
         </div>
 
         {ido?.tokenNetwork !== "TO BE ANNOUNCED" && (
-          <div className="flex items-center gap-2 bg-black/90 px-2 py-1 rounded-md text-[14px] border border-white/20 absolute top-4 left-4">
+          <div className="flex items-center gap-2 bg-black/90 px-2 py-1 rounded-lg text-[14px] border border-white/20 absolute top-4 left-4">
             <span className="text-sm">Project Tokens</span>
             <Image
               src="/chain-logos/polygon.svg"
@@ -91,7 +91,7 @@ export default function LaunchpadCard({
         )}
 
         <div
-          className={`flex items-center gap-2 bg-black/90 px-2 py-1 rounded-md text-[14px] border border-white/20 absolute ${
+          className={`flex items-center gap-2 bg-black/90 px-2 py-1 rounded-lg text-[14px] border border-white/20 absolute ${
             ido?.tokenNetwork === "TO BE ANNOUNCED" ? "top-4" : "top-14"
           } left-4`}
         >
@@ -114,7 +114,7 @@ export default function LaunchpadCard({
         {ido.projectListDescription}
       </div>
 
-      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md  w-max">
+      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-lg  w-max">
         <span className="text-[14px] text-samurai-red">ALLOCATION:</span>
         <p className="text-white/70">
           {ido?.type === "NFT" ? (
@@ -136,7 +136,7 @@ export default function LaunchpadCard({
         </p>
       </div>
 
-      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-md w-max mt-2">
+      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-lg w-max mt-2">
         <span className="text-[14px] text-samurai-red">PRICE:</span>
         <p className="text-white/70">
           {ido.price} {ido.type === "NFT-ETH" ? "ETH" : ido.acceptedTokenSymbol}{" "}
