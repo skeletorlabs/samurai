@@ -263,32 +263,34 @@ export async function togglePause(index: number, signer: ethers.Signer) {
 
 export async function getParticipationPhase(index: number) {
   // return "Participation";
-  const ido = IDO_LIST[index];
-  const registrationStartsAt = ido.registrationStartsAt;
-  const participationStartAt = ido.participationStartsAt;
-  const publicEndsAt = ido.publicParticipationEndsAt;
-  const now = getUnixTime(new Date());
-  const isPaused = await checkIsPaused(index);
+  // const ido = IDO_LIST[index];
+  // const registrationStartsAt = ido.registrationStartsAt;
+  // const participationStartAt = ido.participationStartsAt;
+  // const publicEndsAt = ido.publicParticipationEndsAt;
+  // const now = getUnixTime(new Date());
+  // const isPaused = await checkIsPaused(index);
 
-  let phase = "Upcoming";
+  // let phase = "Upcoming";
 
-  if (now >= registrationStartsAt && now <= participationStartAt)
-    phase = "Registration";
-  if (now >= participationStartAt && now <= publicEndsAt)
-    phase = "Participation";
-  if (now >= publicEndsAt) phase = "Completed";
-  if (phase !== "Upcoming" && isPaused) phase = "Completed";
+  // if (now >= registrationStartsAt && now <= participationStartAt)
+  //   phase = "Registration";
+  // if (now >= participationStartAt && now <= publicEndsAt)
+  //   phase = "Participation";
+  // if (now >= publicEndsAt) phase = "Completed";
+  // if (phase !== "Upcoming" && isPaused) phase = "Completed";
 
-  const contract = await getContract(index, undefined);
+  // const contract = await getContract(index, undefined);
 
-  const maxAllocations = Number(
-    ethers.formatUnits(await contract?.maxAllocations(), 6)
-  );
+  // const maxAllocations = Number(
+  //   ethers.formatUnits(await contract?.maxAllocations(), 6)
+  // );
 
-  const price = ido.price;
-  const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
+  // const price = ido.price;
+  // const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
 
-  if (maxAllocations - raised < Number(price) * 100) phase = "Completed";
+  // if (maxAllocations - raised < Number(price) * 100) phase = "Completed";
 
-  return phase;
+  // return phase;
+
+  return "participation";
 }
