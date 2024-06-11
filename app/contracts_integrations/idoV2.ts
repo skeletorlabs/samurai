@@ -54,15 +54,11 @@ export async function generalInfo(index: number) {
     const isPublic = await contract?.isPublic();
     const acceptedToken = await contract?.acceptedTokens(0);
     const isPaused = await contract?.paused();
-    const maxAllocations =
-      ido.id === "launchpad/havens-compass"
-        ? Number(50_000)
-        : Number(ethers.formatUnits(await contract?.maxAllocations(), 6));
+    const maxAllocations = Number(
+      ethers.formatUnits(await contract?.maxAllocations(), 6)
+    );
 
-    const raised =
-      ido.id === "launchpad/havens-compass"
-        ? ido.totalAllocation
-        : Number(ethers.formatUnits(await contract?.raised(), 6));
+    const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
 
     return {
       owner,
@@ -269,23 +265,16 @@ export async function getParticipationPhase(index: number) {
 
   let phase = "Upcoming";
 
-  if (now >= registrationStartsAt && now <= participationStartAt)
+  if (now >= registrationStartsAt && now <= participationStartAt && !isPaused)
     phase = "Registration";
-  if (now >= participationStartAt && now <= publicEndsAt)
+  if (now >= participationStartAt && now <= publicEndsAt && !isPaused)
     phase = "Participation";
-  if (now >= publicEndsAt) phase = "Completed";
-  if (phase !== "Upcoming" && isPaused) phase = "Completed";
 
   const contract = await getContract(index, undefined);
 
-  const maxAllocations = Number(
-    ethers.formatUnits(await contract?.maxAllocations(), 6)
-  );
-
-  const price = ido.price;
   const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
 
-  if (maxAllocations - raised < Number(price) * 100) phase = "Completed";
+  if (now >= publicEndsAt && raised > 0) phase = "Completed";
 
   return phase;
 }
