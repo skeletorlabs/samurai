@@ -142,7 +142,7 @@ export const IDO_LIST: IDO[] = [
     participationStartsAt: 1718109000,
     participationEndsAt: 1718152200,
     publicParticipationStartsAt: 1718152200,
-    publicParticipationEndsAt: 1718195400,
+    publicParticipationEndsAt: 1718195400 + 86400 * 3,
     simplified: true,
     tgeDate: 0,
     tgePercentage: 5,
