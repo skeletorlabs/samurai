@@ -85,6 +85,12 @@ export async function generalInfo(index: number) {
       ranges.push(walletRange);
     }
 
+    let usingLinkedWallet = false;
+
+    if (ido.id !== "launchpad-v2/kvants") {
+      usingLinkedWallet = await contract?.usingLinkedWallet();
+    }
+
     return {
       owner,
       isPublic,
@@ -93,6 +99,7 @@ export async function generalInfo(index: number) {
       maxAllocations,
       raised,
       ranges,
+      usingLinkedWallet,
     };
   } catch (e) {
     handleError({ e: e, notificate: true });
@@ -101,11 +108,7 @@ export async function generalInfo(index: number) {
 
 // USER INFOS
 
-export async function userInfo(
-  index: number,
-  signer: ethers.Signer,
-  isPublic: boolean = false
-) {
+export async function userInfo(index: number, signer: ethers.Signer) {
   try {
     const signerAdress = await signer.getAddress();
     const contract = await getContract(index, signer);
@@ -129,6 +132,8 @@ export async function userInfo(
       ethers.formatUnits(await contract?.allocations(signerAdress), 6)
     );
     const isWhitelisted = await contract?.whitelist(signerAdress);
+    const linkedWallet = await contract?.linkedWallets(signerAdress);
+    // const isWhitelisted = false;
     const acceptedToken = await contract?.acceptedTokens(0);
     const balanceEther = await signer.provider?.getBalance(signerAdress);
     const balanceToken = Number(
@@ -149,10 +154,13 @@ export async function userInfo(
       6
     );
 
+    console.log(walletRange.name);
+
     return {
       allocation,
       walletRange,
       isWhitelisted,
+      linkedWallet,
       balanceEther,
       balanceToken,
       acceptedTokenBalance,
@@ -164,11 +172,23 @@ export async function userInfo(
 
 // REGISTER
 
-export async function register(index: number, signer: ethers.Signer) {
+export async function register(
+  index: number,
+  signer: ethers.Signer,
+  linkedWallet?: string
+) {
   try {
     const contract = await getContract(index, signer);
     const network = await signer.provider?.getNetwork();
-    const tx = await contract?.registerToWhitelist();
+
+    const usingLinkedWallet = await contract?.usingLinkedWallet();
+    let tx;
+
+    if (usingLinkedWallet) {
+      tx = await contract?.registerWithLinkedWallet(linkedWallet);
+    } else {
+      tx = await contract?.registerToWhitelist();
+    }
     await notificateTx(tx, network);
   } catch (e) {
     handleError({ e: e, notificate: true });
@@ -286,7 +306,11 @@ export async function updateRanges(
     const formattedRanges: any[] = [];
 
     ranges.forEach((range) => {
-      const newRange = [range.name, range.minPerWallet, range.maxPerWallet];
+      const newRange = [
+        range.name,
+        parseUnits(range.minPerWallet.toString(), 6),
+        parseUnits(range.maxPerWallet.toString(), 6),
+      ];
       formattedRanges.push(newRange);
     });
 

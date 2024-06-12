@@ -58,70 +58,71 @@ export const simplifiedPhasesV2 = [
 ];
 
 export const IDO_LIST: IDO[] = [
-  // {
-  //   id: "launchpad-v2/memepad",
-  //   logo: memepad,
-  //   idoImageSrc: "/IDOs/memepad.png",
-  //   acceptedTokenSymbol: "USDC",
-  //   tokenNetwork: "Solana",
-  //   crowdsaleNetwork: "BASE",
-  //   networkImageSrc: "/chain-logos/solana.svg",
-  //   projectName: "MemePad",
-  //   projectListDescription:
-  //     "The Kvants platform makes high-level institutional quantitative trading strategies available to the masses.",
-  //   projectDescription:
-  //     "Kvants is on a mission to democratize investment by creating a self-custodial platform where users can browse and invest in a wide range of complex quant trading strategy pools, allowing each of us to 'invest like the elite' with just a few clicks. $KVAI holders will enjoy effortless access to high-performing institutional investment models.",
-  //   projectTokenSymbol: "$MPAD",
-  //   totalAllocation: 100_000,
-  //   price: "0.40",
-  //   registrationStartsAt: 1718193600,
-  //   participationStartsAt: 1718280000,
-  //   participationEndsAt: 1718323200,
-  //   publicParticipationStartsAt: 1718323200,
-  //   publicParticipationEndsAt: 1718366400,
-  //   simplified: true,
-  //   tgeDate: 1718582400,
-  //   tgePercentage: 10,
-  //   cliff: 0,
-  //   investmentRound: "Strategic",
-  //   fdv: "6000000",
-  //   exchangeListingPrice: 0.6,
-  //   marketCapAtTGE: 294000,
-  //   vesting: "3 months",
-  //   releaseType: "Linear",
-  //   currentPhase: simplifiedPhases[1].title,
-  //   socials: [
-  //     {
-  //       svg: globe,
-  //       href: "https://memepad.ai/",
-  //     },
-  //     {
-  //       svg: twitterX,
-  //       href: "https://twitter.com/MemePadSol",
-  //     },
-  //     {
-  //       svg: telegram,
-  //       href: "https://t.me/Memepad_Community",
-  //     },
-  //   ],
-  //   bigDescription: `
-  //     <div style="display: flex; flex-direction: column; gap: 15px;">
-  //       <p>Built by a team of quantitative trading experts with experience at top TradFi institutions, Kvants is a non-custodial Asset Management Platform offering retail investors the chance to invest using institutional-grade trading strategies developed by professional hedge funds.<p>
-  //       <p>These quantitative strategies make use of complex, systematic trading models with algorithms which are constantly optimised through AI-powered machine learning. Such trading models constantly monitor a wide range of market analytics, automatically closing and opening positions based on a predefined set of complex rules.<p>
-  //       <p>These sophisticated trading strategies have traditionally been out of reach of retail crypto investors, but that is about to change. The Kvants platform is built to make investing with institutional-grade trading strategies accessible to the everyday investor.<p>
-  //       <p>Kvants+ is the platform where all of this action takes place. Here you'll be able to browse a wide range of carefully-audited quantitative trading strategies, each with its own unique algorithms, risk profile, and past performance data. You can then deploy funds directly into DeFi pools which utilise these strategies (and enjoy monthly dividends as a result).<p>
-  //     </div>
-  // `,
-  //   contract: "0x730B7100590c8205F9Bf22bA28DF6227E0b28E38",
-  //   abi: PARTICIPATOR_V2_2,
-  //   images: [
-  //     "/IDOs/memepad/1.png",
-  //     "/IDOs/memepad/2.png",
-  //     "/IDOs/memepad/3.png",
-  //     "/IDOs/memepad/4.png",
-  //   ],
-  //   type: "v2",
-  // },
+  {
+    id: "launchpad-v2/memepad",
+    logo: memepad,
+    idoImageSrc: "/IDOs/memepad.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "Solana",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/solana.svg",
+    projectName: "MemePad",
+    projectListDescription:
+      "MemePad is set to become the number-one dedicated memecoin launchpad in crypto!",
+    projectDescription:
+      "MemePad is here to bring order to the chaos of the memecoin space. With strict vetting procedures and built-in anti-rug protection, they're creating a secure, high-quality launchpad for the 'hottest memecoins on Solana and beyond' where degens can chase 100x moonshots with confidence.",
+    projectTokenSymbol: "$MPAD",
+    totalAllocation: 100_000,
+    price: "0.40",
+    registrationStartsAt: 1718193600,
+    participationStartsAt: 1718280000,
+    participationEndsAt: 1718323200,
+    publicParticipationStartsAt: 1718323200,
+    publicParticipationEndsAt: 1718366400,
+    simplified: true,
+    tgeDate: 1718582400,
+    tgePercentage: 8,
+    cliff: 0,
+    investmentRound: "Strategic",
+    fdv: "6000000",
+    exchangeListingPrice: 0.6,
+    marketCapAtTGE: 182250,
+    vesting: "10% at TGE, 3 month linear",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      {
+        svg: globe,
+        href: "https://memepad.ai/",
+      },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/MemePadSol",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/Memepad_Community",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <p>MemePad is setting out to solve the trifecta of problems plaguing the memecoin space: low-quality projects, a lack of transparency from teams, and security risks. They do this by sourcing only top-quality projects with doxxed teams, subjecting them to rigorous due diligence, and launching them with built-in protection against rug pulls</p>
+        <p>Only top-tier memecoins are selected to join the MemeVerse (MemePad's line-up of launchpad alumni). To pass initial screening, a project has to have a strong long-term vision for the token growth, community, and utility.</p>
+        <p>MemePad also implements strict security procedures to keep your investments safe. We're talking audits, mandatory KYC, locked team tokens, and more. They will also run their own insurance funds, used to compensate the community in the unlikely event that a MemeVerse project is compromised and goes to zero.</p>
+        <p>$MPAD holders have the option to participate for the main token sales, or go in on exclusive early 'Ape In' rounds with cheaper prices and special bonuses.</p>
+        <p>And as a reward for participating on the platform, holders will also be getting regularly showered with airdrops sourced form MemePad's featured projects!</p>
+      </div>
+  `,
+    contract: "0x669c013F8861B2d00f5C5f417fdc5F66E7DaF65b",
+    abi: PARTICIPATOR_V2_2,
+    images: [
+      "/IDOs/memepad/1.png",
+      "/IDOs/memepad/2.png",
+      "/IDOs/memepad/3.png",
+      "/IDOs/memepad/4.png",
+    ],
+    type: "v2",
+  },
   {
     id: "launchpad-v2/kvants",
     logo: kvants,

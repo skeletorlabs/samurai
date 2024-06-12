@@ -2077,6 +2077,7 @@ export const PARTICIPATOR_V2_2 = [
         ],
       },
       { name: "_usingETH", type: "bool", internalType: "bool" },
+      { name: "_usingLinkedWallet", type: "bool", internalType: "bool" },
     ],
     stateMutability: "nonpayable",
   },
@@ -2187,6 +2188,13 @@ export const PARTICIPATOR_V2_2 = [
   },
   {
     type: "function",
+    name: "linkedWallets",
+    inputs: [{ name: "wallet", type: "address", internalType: "address" }],
+    outputs: [{ name: "linkedWallet", type: "string", internalType: "string" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
     name: "makePublic",
     inputs: [],
     outputs: [],
@@ -2275,6 +2283,13 @@ export const PARTICIPATOR_V2_2 = [
   },
   {
     type: "function",
+    name: "registerWithLinkedWallet",
+    inputs: [{ name: "linkedWallet", type: "string", internalType: "string" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
     name: "renounceOwnership",
     inputs: [],
     outputs: [],
@@ -2335,6 +2350,13 @@ export const PARTICIPATOR_V2_2 = [
   {
     type: "function",
     name: "usingETH",
+    inputs: [],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "usingLinkedWallet",
     inputs: [],
     outputs: [{ name: "", type: "bool", internalType: "bool" }],
     stateMutability: "view",
@@ -2438,6 +2460,25 @@ export const PARTICIPATOR_V2_2 = [
         type: "address",
         indexed: true,
         internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "WhitelistedWithLinkedWallet",
+    inputs: [
+      {
+        name: "wallet",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "linkedWallet",
+        type: "string",
+        indexed: false,
+        internalType: "string",
       },
     ],
     anonymous: false,
