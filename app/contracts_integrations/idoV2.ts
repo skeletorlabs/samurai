@@ -110,6 +110,7 @@ export async function generalInfo(index: number) {
 
 export async function userInfo(index: number, signer: ethers.Signer) {
   try {
+    const ido = IDO_LIST[index];
     const signerAdress = await signer.getAddress();
     const contract = await getContract(index, signer);
     const usingETH = await contract?.usingETH();
@@ -132,8 +133,11 @@ export async function userInfo(index: number, signer: ethers.Signer) {
       ethers.formatUnits(await contract?.allocations(signerAdress), 6)
     );
     const isWhitelisted = await contract?.whitelist(signerAdress);
-    const linkedWallet = await contract?.linkedWallets(signerAdress);
-    // const isWhitelisted = false;
+    let linkedWallet = "";
+    if (ido.id !== "launchpad-v2/kvants") {
+      linkedWallet = await contract?.linkedWallets(signerAdress);
+    }
+
     const acceptedToken = await contract?.acceptedTokens(0);
     const balanceEther = await signer.provider?.getBalance(signerAdress);
     const balanceToken = Number(
@@ -153,8 +157,6 @@ export async function userInfo(index: number, signer: ethers.Signer) {
       ),
       6
     );
-
-    console.log(walletRange.name);
 
     return {
       allocation,
