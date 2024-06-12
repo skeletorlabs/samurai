@@ -65,7 +65,7 @@ export const IDO_LIST: IDO[] = [
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "Solana",
     crowdsaleNetwork: "BASE",
-    networkImageSrc: "/chain-logos/solana.svg",
+    networkImageSrc: "/chain-logos/SOLANA.svg",
     projectName: "MemePad",
     projectListDescription:
       "MemePad is set to become the number-one dedicated memecoin launchpad in crypto!",
