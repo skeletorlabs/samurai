@@ -43,6 +43,7 @@ const inter = Inter({
 
 export default function Ido() {
   const [inputValue, setInputValue] = useState("");
+  const [inputLinkedWallet, setInputLinkedWallet] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [general, setGeneral] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
@@ -116,6 +117,47 @@ export default function Ido() {
     [setGalleryOpen]
   );
 
+  // Function to check if the string starts with "bc1" (Bitcoin)
+  const isBitcoinAddress = (value: string) => value.startsWith("bc1");
+
+  // Function to check for valid EVM address format (with or without 0x prefix)
+  const isEVMAddress = (value: string) => {
+    const re = new RegExp("^(0x)?[0-9a-fA-F]{40}$");
+    return re.test(value);
+  };
+
+  // Function for Solana address validation
+  const isValidSolanaAddress = (value: string) => {
+    const isValidLength = (value: string) =>
+      value.length >= 32 && value.length <= 44;
+    const charSet = "[A-Za-z0-9+/]";
+
+    // Check length
+    if (!isValidLength(value)) {
+      return false;
+    }
+    // Check character set using regex
+    const re = new RegExp(`^${charSet}+$`);
+    return re.test(value);
+  };
+
+  const onPaste = async () => {
+    const value = await navigator.clipboard.readText();
+
+    if (
+      value === "" ||
+      isBitcoinAddress(value) ||
+      isEVMAddress(value) ||
+      isValidSolanaAddress(value)
+    ) {
+      setInputLinkedWallet(value);
+      return true;
+    } else {
+      setInputValue("");
+      return false;
+    }
+  };
+
   const onInputChange = (value: string) => {
     const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
 
@@ -129,13 +171,13 @@ export default function Ido() {
   const onRegister = useCallback(async () => {
     setIsLoading(true);
     if (signer && user && !user.isWhitelisted) {
-      await register(idoIndex, signer);
+      await register(idoIndex, signer, inputLinkedWallet);
       await getGeneralData();
       await getUserInfos();
     }
 
     setIsLoading(false);
-  }, [signer, idoIndex, user, setIsLoading]);
+  }, [signer, idoIndex, user, inputLinkedWallet, setIsLoading]);
 
   const onParticipate = useCallback(async () => {
     setIsLoading(true);
@@ -268,8 +310,8 @@ export default function Ido() {
                     <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
                       <span className="text-sm">Project Tokens</span>
                       <Image
-                        src={ido?.networkImageSrc || ""}
-                        alt={ido?.tokenNetwork || ""}
+                        src={ido!.networkImageSrc || ""}
+                        alt={ido!.tokenNetwork || ""}
                         width={24}
                         height={24}
                         className="p-[1px] bg-white/80 rounded-full"
@@ -436,10 +478,7 @@ export default function Ido() {
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">FCFS End:</span>
                           <p className="text-white/70">
-                            {formattedDate(
-                              ido.publicParticipationEndsAt
-                            ).toUpperCase()}{" "}
-                            UTC
+                            {formattedDate(ido.publicParticipationEndsAt)} UTC
                           </p>
                         </div>
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
@@ -447,8 +486,7 @@ export default function Ido() {
                           <p className="text-white/70">
                             {ido.tgeDate === 0
                               ? "TBA"
-                              : formattedDate(ido.tgeDate).toUpperCase() +
-                                " UTC"}
+                              : formattedDateSimple(ido.tgeDate)}
                           </p>
                         </div>
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
@@ -504,43 +542,120 @@ export default function Ido() {
                         </div>
 
                         {signer && account && (
-                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                            <span className="text-neutral-600">
-                              Registered:
-                            </span>
-                            <p className="text-white/70">
-                              {user?.isWhitelisted ? "Yes" : "No"}
-                            </p>
-                          </div>
+                          <>
+                            <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                              <span className="text-neutral-600">
+                                Registered:
+                              </span>
+                              <p className="text-white/70">
+                                {user?.walletRange?.name
+                                  ?.toString()
+                                  .toLowerCase() === "public"
+                                  ? "NA"
+                                  : user?.isWhitelisted
+                                  ? "Yes"
+                                  : "No"}
+                              </p>
+                            </div>
+                            {general?.usingLinkedWallet && (
+                              <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                                <span className="text-neutral-600">
+                                  Linked Wallet:
+                                </span>
+                                <p className="text-white/70">
+                                  {user?.linkedWallet
+                                    ? `${user?.linkedWallet.substring(
+                                        0,
+                                        5
+                                      )}...${user?.linkedWallet.substring(
+                                        user?.linkedWallet.length - 5,
+                                        user?.linkedWallet.length
+                                      )}`
+                                    : user?.walletRange?.name
+                                        ?.toString()
+                                        .toLowerCase() === "public"
+                                    ? "NA"
+                                    : "Not found"}
+                                </p>
+                              </div>
+                            )}
+                          </>
                         )}
                       </div>
 
                       {/* REGISTER BUTTON */}
 
-                      {(currentPhase?.toLocaleLowerCase() === "registration" ||
-                        currentPhase?.toLocaleLowerCase() ===
-                          "participation") &&
+                      {signer &&
+                        account &&
+                        (currentPhase?.toLocaleLowerCase() === "registration" ||
+                          currentPhase?.toLocaleLowerCase() ===
+                            "participation") &&
                         getUnixTime(new Date()) >= ido.registrationStartsAt &&
                         user?.walletRange.name.toLowerCase() !== "public" &&
                         !user?.isWhitelisted && (
-                          <button
-                            onClick={onRegister}
-                            disabled={
-                              isLoading ||
-                              !general ||
-                              !user ||
-                              general?.isPaused
-                            }
-                            className={`
+                          <div className="flex flex-col gap-1">
+                            {general?.usingLinkedWallet && (
+                              <div className="flex flex-col p-4 border border-white/20 rounded-lg">
+                                <div className="flex flex-col items-center gap-2 text-xs px-1">
+                                  <span className="text-gray-400">
+                                    Linked Wallet:
+                                  </span>
+                                  <span>
+                                    {inputLinkedWallet
+                                      ? inputLinkedWallet
+                                      : "Wallet not linked"}
+                                  </span>
+                                </div>
+                                <button
+                                  onClick={() => onPaste()}
+                                  disabled={
+                                    isLoading ||
+                                    !general ||
+                                    !user ||
+                                    general?.isPaused
+                                  }
+                                  className={`
+                                  ${
+                                    isLoading ||
+                                    !general ||
+                                    !user ||
+                                    general?.isPaused
+                                      ? "bg-black text-white/20"
+                                      : "bg-gray-500 text-white hover:opacity-75"
+                                  }
+                                    rounded-[8px] w-full mt-4 py-2 text-[18px] text-center transition-all `}
+                                >
+                                  {isLoading
+                                    ? "Loading..."
+                                    : `Paste your ${ido.tokenNetwork.toLowerCase()} address`}
+                                </button>
+                              </div>
+                            )}
+                            <button
+                              onClick={onRegister}
+                              disabled={
+                                isLoading ||
+                                !general ||
+                                !user ||
+                                general?.isPaused ||
+                                (general?.usingLinkedWallet &&
+                                  inputLinkedWallet === "")
+                              }
+                              className={`
                       ${
-                        isLoading || !general || !user || general?.isPaused
+                        isLoading ||
+                        !general ||
+                        !user ||
+                        general?.isPaused ||
+                        (general?.usingLinkedWallet && inputLinkedWallet === "")
                           ? "bg-black text-white/20"
                           : "bg-samurai-red text-white hover:opacity-75"
                       }
                          rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
-                          >
-                            {isLoading ? "Loading..." : "REGISTER"}
-                          </button>
+                            >
+                              {isLoading ? "Loading..." : "REGISTER"}
+                            </button>
+                          </div>
                         )}
 
                       {/* PARTICIPATION */}
