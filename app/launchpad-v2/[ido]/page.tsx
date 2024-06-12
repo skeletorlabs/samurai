@@ -872,18 +872,8 @@ export default function Ido() {
 
               <div className="flex flex-col gap-2">
                 <p>
-                  TOTAL {TOKENS_TO_SYMBOL[general.acceptedToken1]}:{" "}
-                  {Number(user?.acceptedToken1Balance | 0).toLocaleString(
-                    "en-us",
-                    {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    }
-                  )}
-                </p>
-                <p>
                   TOTAL {TOKENS_TO_SYMBOL[general.acceptedToken2]}:{" "}
-                  {Number(user?.acceptedToken2Balance | 0).toLocaleString(
+                  {Number(user?.acceptedTokenBalance | 0).toLocaleString(
                     "en-us",
                     {
                       minimumFractionDigits: 2,
