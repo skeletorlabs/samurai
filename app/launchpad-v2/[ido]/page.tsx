@@ -310,8 +310,8 @@ export default function Ido() {
                     <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
                       <span className="text-sm">Project Tokens</span>
                       <Image
-                        src={ido?.networkImageSrc || ""}
-                        alt={ido?.tokenNetwork || ""}
+                        src={ido!.networkImageSrc || ""}
+                        alt={ido!.tokenNetwork || ""}
                         width={24}
                         height={24}
                         className="p-[1px] bg-white/80 rounded-full"
@@ -478,10 +478,7 @@ export default function Ido() {
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">FCFS End:</span>
                           <p className="text-white/70">
-                            {formattedDate(
-                              ido.publicParticipationEndsAt
-                            ).toUpperCase()}{" "}
-                            UTC
+                            {formattedDate(ido.publicParticipationEndsAt)} UTC
                           </p>
                         </div>
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
@@ -489,8 +486,7 @@ export default function Ido() {
                           <p className="text-white/70">
                             {ido.tgeDate === 0
                               ? "TBA"
-                              : formattedDate(ido.tgeDate).toUpperCase() +
-                                " UTC"}
+                              : formattedDateSimple(ido.tgeDate)}
                           </p>
                         </div>
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
