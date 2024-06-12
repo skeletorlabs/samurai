@@ -288,7 +288,7 @@ export default function Ido() {
                 {ido?.projectDescription}
               </p>
 
-              <div className="flex items-center w-full gap-8 justify-center xl:justify-start">
+              <div className="flex items-center w-full gap-8 justify-center xl:justify-start flex-wrap">
                 {ido?.socials.map((item, index) => (
                   <Link
                     key={index}
@@ -305,30 +305,29 @@ export default function Ido() {
                     {item.svg}
                   </Link>
                 ))}
-                <div className="flex items-center gap-4">
-                  {ido?.tokenNetwork !== "TBA" && (
-                    <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
-                      <span className="text-sm">Project Tokens</span>
-                      <Image
-                        src={ido!.networkImageSrc || ""}
-                        alt={ido!.tokenNetwork || ""}
-                        width={24}
-                        height={24}
-                        className="p-[1px] bg-white/80 rounded-full"
-                      />
-                    </div>
-                  )}
 
+                {ido?.tokenNetwork !== "TBA" && (
                   <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
-                    <span className="text-sm">Crowdsale</span>
+                    <span className="text-sm">Project Tokens</span>
                     <Image
-                      src="/chain-logos/Base_Symbol_Blue.svg"
-                      alt={ido?.projectName || ""}
+                      src={ido!.networkImageSrc || ""}
+                      alt={ido!.tokenNetwork || ""}
                       width={24}
                       height={24}
                       className="p-[1px] bg-white/80 rounded-full"
                     />
                   </div>
+                )}
+
+                <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
+                  <span className="text-sm">Crowdsale</span>
+                  <Image
+                    src="/chain-logos/Base_Symbol_Blue.svg"
+                    alt={ido?.projectName || ""}
+                    width={24}
+                    height={24}
+                    className="p-[1px] bg-white/80 rounded-full"
+                  />
                 </div>
               </div>
 
