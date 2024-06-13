@@ -59,7 +59,7 @@ export const simplifiedPhasesV2 = [
 
 export const IDO_LIST: IDO[] = [
   {
-    id: "launchpad-v2/memepad-round2",
+    id: "launchpad-v2/mpad-round2",
     logo: memepad,
     idoImageSrc: "/IDOs/memepad.png",
     acceptedTokenSymbol: "USDC",
