@@ -342,7 +342,7 @@ export async function getParticipationPhase(index: number) {
 
   const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
 
-  if (now >= publicEndsAt && raised > 0) phase = "Completed";
+  if (isPaused && raised > 0) phase = "Completed";
 
   return phase;
 }
