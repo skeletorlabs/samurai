@@ -73,7 +73,7 @@ export const IDO_LIST: IDO[] = [
       "MemePad is here to bring order to the chaos of the memecoin space. With strict vetting procedures and built-in anti-rug protection, they're creating a secure, high-quality launchpad for the 'hottest memecoins on Solana and beyond' where degens can chase 100x moonshots with confidence.",
     projectTokenSymbol: "$MPAD",
     totalAllocation: 100_000,
-    price: "0.40",
+    price: "0.345",
     registrationStartsAt: 1718193600,
     participationStartsAt: 1718280000,
     participationEndsAt: 1718323200,
@@ -87,7 +87,7 @@ export const IDO_LIST: IDO[] = [
     fdv: "6000000",
     exchangeListingPrice: 0.6,
     marketCapAtTGE: 182250,
-    vesting: "10% at TGE, 3 month linear",
+    vesting: "8% TGE + 3 month monthly vesting",
     releaseType: "Linear",
     currentPhase: simplifiedPhases[1].title,
     socials: [
