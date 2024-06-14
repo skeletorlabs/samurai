@@ -171,7 +171,7 @@ export default function Ido() {
   const onRegister = useCallback(async () => {
     setIsLoading(true);
     if (signer && user && !user.isWhitelisted) {
-      await register(idoIndex, signer, inputLinkedWallet);
+      await register(idoIndex, signer);
       await getGeneralData();
       await getUserInfos();
     }
@@ -628,6 +628,32 @@ export default function Ido() {
                                     ? "Loading..."
                                     : `Paste your ${ido.tokenNetwork.toLowerCase()} address`}
                                 </button>
+
+                                <button
+                                  onClick={onRegister}
+                                  disabled={
+                                    isLoading ||
+                                    !general ||
+                                    !user ||
+                                    general?.isPaused ||
+                                    (general?.usingLinkedWallet &&
+                                      inputLinkedWallet === "")
+                                  }
+                                  className={`
+                                ${
+                                  isLoading ||
+                                  !general ||
+                                  !user ||
+                                  general?.isPaused ||
+                                  (general?.usingLinkedWallet &&
+                                    inputLinkedWallet === "")
+                                    ? "bg-black text-white/20"
+                                    : "bg-samurai-red text-white hover:opacity-75"
+                                }
+                                  rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
+                                >
+                                  {isLoading ? "Loading..." : "LINK WALLET"}
+                                </button>
                               </div>
                             )}
                             <button
@@ -641,16 +667,17 @@ export default function Ido() {
                                   inputLinkedWallet === "")
                               }
                               className={`
-                      ${
-                        isLoading ||
-                        !general ||
-                        !user ||
-                        general?.isPaused ||
-                        (general?.usingLinkedWallet && inputLinkedWallet === "")
-                          ? "bg-black text-white/20"
-                          : "bg-samurai-red text-white hover:opacity-75"
-                      }
-                         rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
+                                ${
+                                  isLoading ||
+                                  !general ||
+                                  !user ||
+                                  general?.isPaused ||
+                                  (general?.usingLinkedWallet &&
+                                    inputLinkedWallet === "")
+                                    ? "bg-black text-white/20"
+                                    : "bg-samurai-red text-white hover:opacity-75"
+                                }
+                                  rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
                             >
                               {isLoading ? "Loading..." : "REGISTER"}
                             </button>

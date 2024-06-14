@@ -72,7 +72,18 @@ export default function LaunchpadCard({
           <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-[14px] border border-white/20">
             {ido.investmentRound.toUpperCase()}
           </div>
-          <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-[14px] border border-white/20 text-samurai-red">
+          <div
+            className={`
+              flex justify-center items-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-[14px] border border-white/20 ${
+                phase.toLowerCase() === "registration" ||
+                phase.toLowerCase() === "participation"
+                  ? "text-green-400"
+                  : phase.toLowerCase() === "upcoming"
+                  ? "text-yellow-200"
+                  : "text-samurai-red"
+              }
+            `}
+          >
             {phase || "LOADING..."}
           </div>
         </div>

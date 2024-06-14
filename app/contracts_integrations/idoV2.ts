@@ -108,6 +108,16 @@ export async function generalInfo(index: number) {
 
 // USER INFOS
 
+function parseWalletRange(range: any, decimals: number) {
+  const walletRange: WalletRange = {
+    name: range.name,
+    minPerWallet: Number(formatUnits(range.min.toString(), decimals)),
+    maxPerWallet: Number(formatUnits(range.max.toString(), decimals)),
+  };
+
+  return walletRange;
+}
+
 export async function userInfo(index: number, signer: ethers.Signer) {
   try {
     const ido = IDO_LIST[index];
@@ -119,15 +129,7 @@ export async function userInfo(index: number, signer: ethers.Signer) {
     const range = isPublic
       ? await contract?.getRange(0)
       : await contract?.getWalletRange(signerAdress);
-    const walletRange: WalletRange = {
-      name: range.name,
-      minPerWallet: Number(
-        formatUnits(range.min.toString(), usingETH ? 18 : 6)
-      ),
-      maxPerWallet: Number(
-        formatUnits(range.max.toString(), usingETH ? 18 : 6)
-      ),
-    };
+    const walletRange = parseWalletRange(range, usingETH ? 18 : 6);
 
     const allocation = Number(
       ethers.formatUnits(await contract?.allocations(signerAdress), 6)
@@ -172,25 +174,32 @@ export async function userInfo(index: number, signer: ethers.Signer) {
   }
 }
 
-// REGISTER
-
-export async function register(
+export async function linkWallet(
   index: number,
-  signer: ethers.Signer,
-  linkedWallet?: string
+  linkedWallet: string,
+  signer: ethers.Signer
 ) {
   try {
     const contract = await getContract(index, signer);
     const network = await signer.provider?.getNetwork();
-
     const usingLinkedWallet = await contract?.usingLinkedWallet();
-    let tx;
 
     if (usingLinkedWallet) {
-      tx = await contract?.registerWithLinkedWallet(linkedWallet);
-    } else {
-      tx = await contract?.registerToWhitelist();
+      const tx = await contract?.linkWallet(linkedWallet);
+      await notificateTx(tx, network);
     }
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
+}
+
+// REGISTER
+
+export async function register(index: number, signer: ethers.Signer) {
+  try {
+    const contract = await getContract(index, signer);
+    const network = await signer.provider?.getNetwork();
+    const tx = await contract?.registerToWhitelist();
     await notificateTx(tx, network);
   } catch (e) {
     handleError({ e: e, notificate: true });
@@ -339,9 +348,16 @@ export async function getParticipationPhase(index: number) {
     phase = "Participation";
 
   const contract = await getContract(index, undefined);
+  const publicRange = await contract?.getRange(0);
+  const usingETH = await contract?.usingETH();
+  const range = parseWalletRange(publicRange, usingETH ? 18 : 6);
 
   const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
+  const maxAllocations = Number(
+    ethers.formatUnits(await contract?.maxAllocations(), 6)
+  );
 
+  if (maxAllocations - raised < range.minPerWallet) phase = "Completed";
   if (isPaused && raised > 0) phase = "Completed";
 
   return phase;

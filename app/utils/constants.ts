@@ -59,6 +59,70 @@ export const simplifiedPhasesV2 = [
 
 export const IDO_LIST: IDO[] = [
   {
+    id: "launchpad-v2/kvants",
+    logo: kvants,
+    idoImageSrc: "/IDOs/kvants.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "TBA",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/ido-sample.svg",
+    projectName: "Kvants",
+    projectListDescription:
+      "The Kvants platform makes high-level institutional quantitative trading strategies available to the masses.",
+    projectDescription:
+      "Kvants is on a mission to democratize investment by creating a self-custodial platform where users can browse and invest in a wide range of complex quant trading strategy pools, allowing each of us to 'invest like the elite' with just a few clicks. $KVAI holders will enjoy effortless access to high-performing institutional investment models.",
+    projectTokenSymbol: "$KVAI",
+    totalAllocation: 150_000,
+    price: "0.0115",
+    registrationStartsAt: 1718108260,
+    participationStartsAt: 1718109000,
+    participationEndsAt: 1718152200,
+    publicParticipationStartsAt: 1718152200,
+    publicParticipationEndsAt: 1718195400 + 86400 * 6,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 5,
+    cliff: 86400 * 30,
+    investmentRound: "Private Round",
+    fdv: "15000000",
+    exchangeListingPrice: 0.015,
+    marketCapAtTGE: 336000,
+    vesting: "5% at TGE, 1 month cliff, 9 month linear",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      {
+        svg: globe,
+        href: "http://www.kvants.ai/",
+      },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/KvantsAI",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/kvantsai",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <p>Built by a team of quantitative trading experts with experience at top TradFi institutions, Kvants is a non-custodial Asset Management Platform offering retail investors the chance to invest using institutional-grade trading strategies developed by professional hedge funds.<p>
+        <p>These quantitative strategies make use of complex, systematic trading models with algorithms which are constantly optimised through AI-powered machine learning. Such trading models constantly monitor a wide range of market analytics, automatically closing and opening positions based on a predefined set of complex rules.<p>
+        <p>These sophisticated trading strategies have traditionally been out of reach of retail crypto investors, but that is about to change. The Kvants platform is built to make investing with institutional-grade trading strategies accessible to the everyday investor.<p>
+        <p>Kvants+ is the platform where all of this action takes place. Here you'll be able to browse a wide range of carefully-audited quantitative trading strategies, each with its own unique algorithms, risk profile, and past performance data. You can then deploy funds directly into DeFi pools which utilise these strategies (and enjoy monthly dividends as a result).<p>
+      </div>
+  `,
+    contract: "0x730B7100590c8205F9Bf22bA28DF6227E0b28E38",
+    abi: PARTICIPATOR_V2_2,
+    images: [
+      "/IDOs/kvants/1.jpeg",
+      "/IDOs/kvants/2.jpeg",
+      "/IDOs/kvants/3.jpeg",
+      "/IDOs/kvants/4.jpeg",
+    ],
+    type: "v2",
+  },
+  {
     id: "launchpad-v2/mpad-round2",
     logo: memepad,
     idoImageSrc: "/IDOs/memepad.png",
@@ -185,70 +249,6 @@ export const IDO_LIST: IDO[] = [
       "/IDOs/memepad/2.png",
       "/IDOs/memepad/3.png",
       "/IDOs/memepad/4.png",
-    ],
-    type: "v2",
-  },
-  {
-    id: "launchpad-v2/kvants",
-    logo: kvants,
-    idoImageSrc: "/IDOs/kvants.png",
-    acceptedTokenSymbol: "USDC",
-    tokenNetwork: "TBA",
-    crowdsaleNetwork: "BASE",
-    networkImageSrc: "/ido-sample.svg",
-    projectName: "Kvants",
-    projectListDescription:
-      "The Kvants platform makes high-level institutional quantitative trading strategies available to the masses.",
-    projectDescription:
-      "Kvants is on a mission to democratize investment by creating a self-custodial platform where users can browse and invest in a wide range of complex quant trading strategy pools, allowing each of us to 'invest like the elite' with just a few clicks. $KVAI holders will enjoy effortless access to high-performing institutional investment models.",
-    projectTokenSymbol: "$KVAI",
-    totalAllocation: 150_000,
-    price: "0.0115",
-    registrationStartsAt: 1718108260,
-    participationStartsAt: 1718109000,
-    participationEndsAt: 1718152200,
-    publicParticipationStartsAt: 1718152200,
-    publicParticipationEndsAt: 1718195400 + 86400 * 3,
-    simplified: true,
-    tgeDate: 0,
-    tgePercentage: 5,
-    cliff: 86400 * 30,
-    investmentRound: "Private Round",
-    fdv: "15000000",
-    exchangeListingPrice: 0.015,
-    marketCapAtTGE: 336000,
-    vesting: "5% at TGE, 1 month cliff, 9 month linear",
-    releaseType: "Linear",
-    currentPhase: simplifiedPhases[1].title,
-    socials: [
-      {
-        svg: globe,
-        href: "http://www.kvants.ai/",
-      },
-      {
-        svg: twitterX,
-        href: "https://twitter.com/KvantsAI",
-      },
-      {
-        svg: telegram,
-        href: "https://t.me/kvantsai",
-      },
-    ],
-    bigDescription: `
-      <div style="display: flex; flex-direction: column; gap: 15px;">
-        <p>Built by a team of quantitative trading experts with experience at top TradFi institutions, Kvants is a non-custodial Asset Management Platform offering retail investors the chance to invest using institutional-grade trading strategies developed by professional hedge funds.<p>
-        <p>These quantitative strategies make use of complex, systematic trading models with algorithms which are constantly optimised through AI-powered machine learning. Such trading models constantly monitor a wide range of market analytics, automatically closing and opening positions based on a predefined set of complex rules.<p>
-        <p>These sophisticated trading strategies have traditionally been out of reach of retail crypto investors, but that is about to change. The Kvants platform is built to make investing with institutional-grade trading strategies accessible to the everyday investor.<p>
-        <p>Kvants+ is the platform where all of this action takes place. Here you'll be able to browse a wide range of carefully-audited quantitative trading strategies, each with its own unique algorithms, risk profile, and past performance data. You can then deploy funds directly into DeFi pools which utilise these strategies (and enjoy monthly dividends as a result).<p>
-      </div>
-  `,
-    contract: "0x730B7100590c8205F9Bf22bA28DF6227E0b28E38",
-    abi: PARTICIPATOR_V2_2,
-    images: [
-      "/IDOs/kvants/1.jpeg",
-      "/IDOs/kvants/2.jpeg",
-      "/IDOs/kvants/3.jpeg",
-      "/IDOs/kvants/4.jpeg",
     ],
     type: "v2",
   },
