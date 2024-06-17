@@ -13,7 +13,14 @@ import {
   simplifiedPhasesV2,
 } from "@/app/utils/constants";
 import { formattedDate, formattedDateSimple } from "@/app/utils/formattedDate";
-import { discord, youtube } from "@/app/utils/svgs";
+import {
+  discord,
+  paste,
+  pasted,
+  redo,
+  youtube,
+  linkWallet,
+} from "@/app/utils/svgs";
 import SSButton from "@/app/components/ssButton";
 import { StateContext } from "@/app/context/StateContext";
 import {
@@ -36,6 +43,7 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import AdminRanges from "@/app/components/adminRanges";
+import { link } from "fs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -396,7 +404,9 @@ export default function Ido() {
                 <div className="flex flex-col w-full xl:w-[550px] rounded-lg bg-black/70 bg-samurai-pattern pb-6 shadow-xl lg:border border-white/20 mt-10">
                   <div className="flex justify-between items-center text-lg xl:text-xl bg-samurai-red border-b border-white/20 px-7 py-4 rounded-t-lg text-white">
                     <span>
-                      {general?.isPublic ? "FCFS Round" : ido?.investmentRound}
+                      {general?.isPublic && ido?.id !== "launchpad-v2/kvants"
+                        ? "FCFS Round"
+                        : ido?.investmentRound}
                     </span>
                     {/* TIER */}
                     {signer && account && (
@@ -582,64 +592,145 @@ export default function Ido() {
                         )}
                       </div>
 
-                      {/* REGISTER BUTTON */}
-
                       {signer &&
                         account &&
                         (currentPhase?.toLocaleLowerCase() === "registration" ||
                           currentPhase?.toLocaleLowerCase() ===
-                            "participation") &&
-                        getUnixTime(new Date()) >= ido.registrationStartsAt &&
-                        user?.walletRange.name.toLowerCase() !== "public" &&
-                        !user?.isWhitelisted && (
-                          <div className="flex flex-col gap-1">
-                            {general?.usingLinkedWallet && (
-                              <div className="flex flex-col p-4 border border-white/20 rounded-lg">
-                                <div className="flex flex-col items-center gap-2 text-xs px-1">
-                                  <span className="text-gray-400">
-                                    Linked Wallet:
-                                  </span>
-                                  <span>
-                                    {inputLinkedWallet
-                                      ? inputLinkedWallet
-                                      : "Wallet not linked"}
-                                  </span>
-                                </div>
-                                <button
-                                  onClick={() => onPaste()}
-                                  disabled={
-                                    isLoading ||
-                                    !general ||
-                                    !user ||
-                                    general?.isPaused
-                                  }
-                                  className={`
+                            "participation") && (
+                          <>
+                            {/* LINK WALLET */}
+                            <div className="flex flex-col gap-1 text-[14px]">
+                              {general?.usingLinkedWallet &&
+                                user?.linkedWallet === "" && (
+                                  <div className="flex flex-col p-4 border border-white/20 rounded-lg">
+                                    <p className="text-[16px] text-center">
+                                      Link your
+                                      <span className="text-samurai-red px-[6px]">
+                                        {ido.tokenNetwork.toUpperCase()}
+                                      </span>
+                                      wallet address
+                                    </p>
+
+                                    <div className="flex justify-center gap-10 items-center py-3">
+                                      <button
+                                        onClick={() => onPaste()}
+                                        disabled={
+                                          isLoading ||
+                                          !general ||
+                                          !user ||
+                                          general?.isPaused
+                                        }
+                                        className={`
                                   ${
                                     isLoading ||
                                     !general ||
                                     !user ||
                                     general?.isPaused
-                                      ? "bg-black text-white/20"
-                                      : "bg-gray-500 text-white hover:opacity-75"
+                                      ? "opacity-40"
+                                      : "opacity-100"
                                   }
-                                    rounded-[8px] w-full mt-4 py-2 text-[18px] text-center transition-all `}
-                                >
-                                  {isLoading
-                                    ? "Loading..."
-                                    : `Paste your ${ido.tokenNetwork.toLowerCase()} address`}
-                                </button>
-
-                                <button
-                                  onClick={onRegister}
-                                  disabled={
+                                    font-light flex justify-center items-center gap-2 transition-all hover:scale-110`}
+                                      >
+                                        {isLoading ? (
+                                          "Loading..."
+                                        ) : (
+                                          <>
+                                            <div>
+                                              {inputLinkedWallet
+                                                ? pasted
+                                                : paste}
+                                            </div>
+                                            <span>
+                                              {inputLinkedWallet
+                                                ? "Pasted"
+                                                : "Paste"}
+                                            </span>
+                                          </>
+                                        )}
+                                      </button>
+                                      <button
+                                        onClick={() => setInputLinkedWallet("")}
+                                        disabled={
+                                          isLoading ||
+                                          !general ||
+                                          !user ||
+                                          general?.isPaused
+                                        }
+                                        className={`
+                                  ${
                                     isLoading ||
                                     !general ||
                                     !user ||
-                                    general?.isPaused ||
-                                    (general?.usingLinkedWallet &&
-                                      inputLinkedWallet === "")
+                                    general?.isPaused
+                                      ? "opacity-40"
+                                      : "opacity-100"
                                   }
-                                  className={`
+                                    font-light flex justify-center items-center gap-2 transition-all hover:scale-110`}
+                                      >
+                                        {isLoading ? (
+                                          "Loading..."
+                                        ) : (
+                                          <>
+                                            <div>{redo}</div>
+                                            <span>Clear</span>
+                                          </>
+                                        )}
+                                      </button>
+                                      <button
+                                        onClick={() => onPaste()}
+                                        disabled={
+                                          isLoading ||
+                                          !general ||
+                                          !user ||
+                                          general?.isPaused
+                                        }
+                                        className={`
+                                  ${
+                                    isLoading ||
+                                    !general ||
+                                    !user ||
+                                    general?.isPaused
+                                      ? "opacity-40"
+                                      : "opacity-100"
+                                  }
+                                    font-light flex justify-center items-center gap-2 transition-all hover:scale-110`}
+                                      >
+                                        {isLoading ? (
+                                          "Loading..."
+                                        ) : (
+                                          <>
+                                            <div>
+                                              {inputLinkedWallet
+                                                ? linkWallet
+                                                : linkWallet}
+                                            </div>
+                                            <span>
+                                              {inputLinkedWallet
+                                                ? `${inputLinkedWallet.substring(
+                                                    0,
+                                                    5
+                                                  )}...${inputLinkedWallet.substring(
+                                                    inputLinkedWallet.length -
+                                                      5,
+                                                    inputLinkedWallet.length
+                                                  )}`
+                                                : "Not set"}
+                                            </span>
+                                          </>
+                                        )}
+                                      </button>
+                                    </div>
+                                    <button
+                                      onClick={onRegister}
+                                      disabled={
+                                        isLoading ||
+                                        !general ||
+                                        !user ||
+                                        general?.isPaused ||
+                                        (general?.usingLinkedWallet &&
+                                          inputLinkedWallet === "")
+                                      }
+                                      className={`
                                 ${
                                   isLoading ||
                                   !general ||
@@ -651,37 +742,42 @@ export default function Ido() {
                                     : "bg-samurai-red text-white hover:opacity-75"
                                 }
                                   rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
-                                >
-                                  {isLoading ? "Loading..." : "LINK WALLET"}
-                                </button>
-                              </div>
+                                    >
+                                      {isLoading ? "Loading..." : "LINK WALLET"}
+                                    </button>
+                                  </div>
+                                )}
+                            </div>
+
+                            {/* REGISTER */}
+                            {((!general?.usingLinkedWallet &&
+                              !user?.isWhitelisted) ||
+                              (general?.usingLinkedWallet &&
+                                user?.linkedWallet !== "" &&
+                                !user?.isWhitelisted)) && (
+                              <button
+                                onClick={onRegister}
+                                disabled={
+                                  isLoading ||
+                                  !general ||
+                                  !user ||
+                                  general?.isPaused
+                                }
+                                className={`
+                                ${
+                                  isLoading ||
+                                  !general ||
+                                  !user ||
+                                  general?.isPaused
+                                    ? "bg-black text-white/20"
+                                    : "bg-samurai-red text-white hover:opacity-75"
+                                }
+                                  rounded-[8px] w-full py-4 text-[18px] text-center transition-all`}
+                              >
+                                {isLoading ? "Loading..." : "REGISTER"}
+                              </button>
                             )}
-                            <button
-                              onClick={onRegister}
-                              disabled={
-                                isLoading ||
-                                !general ||
-                                !user ||
-                                general?.isPaused ||
-                                (general?.usingLinkedWallet &&
-                                  inputLinkedWallet === "")
-                              }
-                              className={`
-                                ${
-                                  isLoading ||
-                                  !general ||
-                                  !user ||
-                                  general?.isPaused ||
-                                  (general?.usingLinkedWallet &&
-                                    inputLinkedWallet === "")
-                                    ? "bg-black text-white/20"
-                                    : "bg-samurai-red text-white hover:opacity-75"
-                                }
-                                  rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
-                            >
-                              {isLoading ? "Loading..." : "REGISTER"}
-                            </button>
-                          </div>
+                          </>
                         )}
 
                       {/* PARTICIPATION */}

@@ -58,6 +58,71 @@ export const simplifiedPhasesV2 = [
 ];
 
 export const IDO_LIST: IDO[] = [
+  // {
+  //   id: "launchpad-v2/whatever",
+  //   logo: memepad,
+  //   idoImageSrc: "/IDOs/memepad.png",
+  //   acceptedTokenSymbol: "USDC",
+  //   tokenNetwork: "Solana",
+  //   crowdsaleNetwork: "BASE",
+  //   networkImageSrc: "/chain-logos/SOLANA.svg",
+  //   projectName: "MemePad",
+  //   projectListDescription:
+  //     "MemePad is set to become the number-one dedicated memecoin launchpad in crypto!",
+  //   projectDescription:
+  //     "MemePad is here to bring order to the chaos of the memecoin space. With strict vetting procedures and built-in anti-rug protection, they're creating a secure, high-quality launchpad for the 'hottest memecoins on Solana and beyond' where degens can chase 100x moonshots with confidence.",
+  //   projectTokenSymbol: "$MPAD",
+  //   totalAllocation: 50_000,
+  //   price: "0.345",
+  //   registrationStartsAt: 1718481518,
+  //   participationStartsAt: 1718481518 + 86400 * 2,
+  //   participationEndsAt: 1718481518 + 86400 * 3,
+  //   publicParticipationStartsAt: 1718481518 + 86400 * 3,
+  //   publicParticipationEndsAt: 1718481518 + 86400 * 4,
+  //   simplified: true,
+  //   tgeDate: 1718582400,
+  //   tgePercentage: 8,
+  //   cliff: 0,
+  //   investmentRound: "Round 2",
+  //   fdv: "6000000",
+  //   exchangeListingPrice: 0.6,
+  //   marketCapAtTGE: 182250,
+  //   vesting: "8% TGE + 3 month monthly vesting",
+  //   releaseType: "Linear",
+  //   currentPhase: simplifiedPhases[1].title,
+  //   socials: [
+  //     {
+  //       svg: globe,
+  //       href: "https://memepad.ai/",
+  //     },
+  //     {
+  //       svg: twitterX,
+  //       href: "https://twitter.com/MemePadSol",
+  //     },
+  //     {
+  //       svg: telegram,
+  //       href: "https://t.me/Memepad_Community",
+  //     },
+  //   ],
+  //   bigDescription: `
+  //     <div style="display: flex; flex-direction: column; gap: 15px;">
+  //       <p>MemePad is setting out to solve the trifecta of problems plaguing the memecoin space: low-quality projects, a lack of transparency from teams, and security risks. They do this by sourcing only top-quality projects with doxxed teams, subjecting them to rigorous due diligence, and launching them with built-in protection against rug pulls</p>
+  //       <p>Only top-tier memecoins are selected to join the MemeVerse (MemePad's line-up of launchpad alumni). To pass initial screening, a project has to have a strong long-term vision for the token growth, community, and utility.</p>
+  //       <p>MemePad also implements strict security procedures to keep your investments safe. We're talking audits, mandatory KYC, locked team tokens, and more. They will also run their own insurance funds, used to compensate the community in the unlikely event that a MemeVerse project is compromised and goes to zero.</p>
+  //       <p>$MPAD holders have the option to participate for the main token sales, or go in on exclusive early 'Ape In' rounds with cheaper prices and special bonuses.</p>
+  //       <p>And as a reward for participating on the platform, holders will also be getting regularly showered with airdrops sourced form MemePad's featured projects!</p>
+  //     </div>
+  // `,
+  //   contract: "0x7848a6da9bb576caf244c087cbf55d5555d4abbc",
+  //   abi: PARTICIPATOR_V2_2,
+  //   images: [
+  //     "/IDOs/memepad/1.png",
+  //     "/IDOs/memepad/2.png",
+  //     "/IDOs/memepad/3.png",
+  //     "/IDOs/memepad/4.png",
+  //   ],
+  //   type: "v2",
+  // },
   {
     id: "launchpad-v2/kvants",
     logo: kvants,
@@ -73,7 +138,7 @@ export const IDO_LIST: IDO[] = [
       "Kvants is on a mission to democratize investment by creating a self-custodial platform where users can browse and invest in a wide range of complex quant trading strategy pools, allowing each of us to 'invest like the elite' with just a few clicks. $KVAI holders will enjoy effortless access to high-performing institutional investment models.",
     projectTokenSymbol: "$KVAI",
     totalAllocation: 150_000,
-    price: "0.0115",
+    price: "0.013",
     registrationStartsAt: 1718108260,
     participationStartsAt: 1718109000,
     participationEndsAt: 1718152200,
@@ -83,11 +148,11 @@ export const IDO_LIST: IDO[] = [
     tgeDate: 0,
     tgePercentage: 5,
     cliff: 86400 * 30,
-    investmentRound: "Private Round",
+    investmentRound: "Strategic Round",
     fdv: "15000000",
     exchangeListingPrice: 0.015,
     marketCapAtTGE: 336000,
-    vesting: "5% at TGE, 1 month cliff, 9 month linear",
+    vesting: "8% at TGE, 1 month cliff, 7 months vesting",
     releaseType: "Linear",
     currentPhase: simplifiedPhases[1].title,
     socials: [

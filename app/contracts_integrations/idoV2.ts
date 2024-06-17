@@ -60,6 +60,7 @@ export async function generalInfo(index: number) {
     const isPublic = await contract?.isPublic();
     const acceptedToken = await contract?.acceptedTokens(0);
     const isPaused = await contract?.paused();
+    // const isPaused = false;
     const maxAllocations = Number(
       ethers.formatUnits(await contract?.maxAllocations(), 6)
     );
@@ -126,19 +127,25 @@ export async function userInfo(index: number, signer: ethers.Signer) {
     const usingETH = await contract?.usingETH();
 
     const isPublic = await contract?.isPublic();
+
     const range = isPublic
       ? await contract?.getRange(0)
       : await contract?.getWalletRange(signerAdress);
+
     const walletRange = parseWalletRange(range, usingETH ? 18 : 6);
 
     const allocation = Number(
       ethers.formatUnits(await contract?.allocations(signerAdress), 6)
     );
-    const isWhitelisted = await contract?.whitelist(signerAdress);
+
+    // let linkedWallet = "0xC2a96B13a975c656f60f401a5F72851af4717D4A";
     let linkedWallet = "";
     if (ido.id !== "launchpad-v2/kvants") {
       linkedWallet = await contract?.linkedWallets(signerAdress);
     }
+
+    const isWhitelisted = await contract?.whitelist(signerAdress);
+    // const isWhitelisted = true;
 
     const acceptedToken = await contract?.acceptedTokens(0);
     const balanceEther = await signer.provider?.getBalance(signerAdress);
@@ -339,6 +346,7 @@ export async function getParticipationPhase(index: number) {
   const publicEndsAt = ido.publicParticipationEndsAt;
   const now = getUnixTime(new Date());
   const isPaused = await checkIsPaused(index);
+  // const isPaused = false;
 
   let phase = "Upcoming";
 
@@ -353,6 +361,7 @@ export async function getParticipationPhase(index: number) {
   const range = parseWalletRange(publicRange, usingETH ? 18 : 6);
 
   const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
+  // const raised = 0;
   const maxAllocations = Number(
     ethers.formatUnits(await contract?.maxAllocations(), 6)
   );
