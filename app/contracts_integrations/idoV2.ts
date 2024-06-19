@@ -371,3 +371,72 @@ export async function getParticipationPhase(index: number) {
 
   return phase;
 }
+
+// export type LinkedWalletEvent = {
+//   wallet: string;
+//   linkedWallet: string;
+// };
+
+// // startBlock 15711862
+// export async function getLinkedWalletsEvents(
+//   index: number,
+//   startBlock: number
+// ) {
+//   try {
+//     const contract = await getContract(index);
+//     const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+//     const currentBlock = await provider.getBlockNumber();
+//     const blocksPerFilter = 10000;
+
+//     let allEvents: LinkedWalletEvent[] = []; // Array to store all retrieved events
+
+//     for (
+//       let fromBlock = startBlock;
+//       fromBlock <= currentBlock;
+//       fromBlock += blocksPerFilter
+//     ) {
+//       const toBlock = Math.min(fromBlock + blocksPerFilter - 1, currentBlock); // Ensure toBlock doesn't exceed current block
+//       const eventFilter = contract!.filters.WhitelistedWithLinkedWallet();
+//       const events = await contract!.queryFilter(
+//         eventFilter,
+//         fromBlock,
+//         toBlock
+//       );
+
+//       if (events && events?.length > 0) {
+//         events.forEach(async (event: any) => {
+//           const log = event.args as [string, string];
+//           const wallet = log[0];
+
+//           const index = allEvents.findIndex((event) => event.wallet === wallet);
+
+//           allEvents.push({
+//             wallet: log[0],
+//             linkedWallet: log[1],
+//           });
+//         });
+//       }
+//     }
+
+//     return allEvents;
+//   } catch (error) {
+//     console.error("Error fetching contract log events:", error);
+//     return [];
+//   }
+// }
+
+// export async function getLinkedWallets() {
+//   const events1 = await getLinkedWalletsEvents(2, 15711862);
+//   const events2 = await getLinkedWalletsEvents(1, 15748408);
+//   const events = [...events1];
+
+//   console.log(events1);
+
+//   events2.forEach((item: LinkedWalletEvent, index) => {
+//     if (!events1.find((event1) => event1.wallet === item.wallet)) {
+//       events.push(item);
+//     }
+//   });
+
+//   console.log(events);
+// }

@@ -25,6 +25,7 @@ import SSButton from "@/app/components/ssButton";
 import { StateContext } from "@/app/context/StateContext";
 import {
   generalInfo,
+  // getLinkedWallets,
   getParticipationPhase,
   makePublic,
   participate,
@@ -43,7 +44,6 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import AdminRanges from "@/app/components/adminRanges";
-import { link } from "fs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -243,8 +243,13 @@ export default function Ido() {
     }
   }, [idoIndex, selectedToken, setCurrentPhase]);
 
+  // const onFetchEvents = useCallback(async () => {
+  //   await getLinkedWallets();
+  // }, []);
+
   useEffect(() => {
     getGeneralData();
+    // onFetchEvents();
   }, [idoID]);
 
   return (
