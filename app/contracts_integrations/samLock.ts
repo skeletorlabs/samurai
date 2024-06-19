@@ -324,6 +324,20 @@ export async function getTotalLocked() {
   }
 }
 
+export async function downloadPointsFile() {
+  const lockedEvents = await getLockedEvents();
+
+  const completeEvents = await getLockedCompleteInfos(lockedEvents);
+
+  // Convert completeEvents to a JSON string
+  const jsonData = JSON.stringify(completeEvents, null, 2); // Optional: Indent for readability
+
+  // Create a Blob object with the JSON data and appropriate content type
+  const blob = new Blob([jsonData], { type: "application/json" });
+
+  return blob;
+}
+
 // ADMIN ACTIONS
 
 export async function togglePause(index: number, signer: ethers.Signer) {

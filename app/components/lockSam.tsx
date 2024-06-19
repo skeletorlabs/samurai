@@ -20,6 +20,7 @@ import {
   GeneralLockInfo,
   LockInfo,
   UserInfo,
+  downloadPointsFile,
   generalInfo,
   getEstimatedPoints,
   getTotalLocked,
@@ -40,6 +41,7 @@ const roboto = Roboto({
 
 export default function LockSam() {
   const [loading, setLoading] = useState(false);
+  const [loadingFile, setLoadingFile] = useState(false);
   const [inputLock, setInputLock] = useState("");
   const [inputWithdraw, setInputWithdraw] = useState("");
   const [period, setPeriod] = useState(0);
@@ -56,7 +58,7 @@ export default function LockSam() {
   const [totalLocked, setTotalLocked] = useState(0);
   const [loadingEvents, setLoadingEvents] = useState(false);
 
-  const { signer } = useContext(StateContext);
+  const { signer, account } = useContext(StateContext);
 
   const onInputLockChange = (value: string) => {
     const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
@@ -198,6 +200,22 @@ export default function LockSam() {
     }
   }, [generalLockData]);
 
+  const onDownloadPointsFile = useCallback(async () => {
+    setLoadingFile(true);
+    console.log("started fetching events");
+    const blob = await downloadPointsFile();
+    console.log("blob created");
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "points.json"; // Set a descriptive filename
+    link.click();
+
+    // Remember to revoke the object URL after download to avoid memory leaks
+    URL.revokeObjectURL(url);
+    setLoadingFile(false);
+  }, []);
+
   const onReadLogs = useCallback(async () => {
     setLoadingEvents(true);
     const total = await getTotalLocked();
@@ -224,9 +242,27 @@ export default function LockSam() {
         </div>
 
         <div className="flex flex-col">
-          <span className="flex justify-center md:justify-start items-center relative gap-2">
-            Total Platform Locked
-          </span>
+          <p className="flex justify-center md:justify-start items-center relative gap-2">
+            <span>Total Platform Locked</span>
+            {signer &&
+              account &&
+              account.toLowerCase() ===
+                "0x4C757cd2b603c6fc01DD8dFa7c9d7888e3C05AcD".toLowerCase() && (
+                <button
+                  disabled={loadingFile}
+                  onClick={onDownloadPointsFile}
+                  className={`flex justify-center text-sm py-2 border ${
+                    loadingFile
+                      ? "border-white/10 text-white/10"
+                      : "border-samurai-red text-samurai-red hover:bg-samurai-red hover:text-white"
+                  } rounded-full min-w-[150px] `}
+                >
+                  {loadingFile
+                    ? "Take a seat and wait..."
+                    : "Download Points File"}
+                </button>
+              )}
+          </p>
           <div className="text-sm md:text-lg text-center md:text-start">
             {loadingEvents ? (
               <span className="text-samurai-red pl-1">loading Logs...</span>
