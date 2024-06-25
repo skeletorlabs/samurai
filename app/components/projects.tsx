@@ -8,14 +8,18 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-export default function Projects() {
+export default function Projects({ max }: { max?: number }) {
   return (
     <div
       className={`flex justify-center lg:justify-start items-center flex-wrap gap-3 leading-normal pt-10 text-xl ${inter.className}`}
     >
-      {IDO_LIST.map((ido: IDO, index) => (
-        <LaunchpadCardNew key={index} ido={ido} />
-      ))}
+      {max
+        ? IDO_LIST.slice(0, max).map((ido: IDO, index) => (
+            <LaunchpadCardNew key={index} ido={ido} />
+          ))
+        : IDO_LIST.map((ido: IDO, index) => (
+            <LaunchpadCardNew key={index} ido={ido} />
+          ))}
     </div>
   );
 }

@@ -27,10 +27,11 @@ const latestupdates = [
     image: "/token-guide.png",
   },
   {
-    title: "Samurai Starter — a ve(3,3) DEX Explainer",
-    description: "Time to kickstart the Samurai Starter ve(3,3) flywheel",
-    href: "https://medium.com/samurai-starter/samurai-starter-a-ve-3-3-dex-explainer-612efa18b142",
-    image: "/ve33.png",
+    title: "The Evolution of Single-token Staking",
+    description:
+      "Introducing a revolutionary FIRST in token staking with veAERO rewards",
+    href: "https://medium.com/samurai-starter/samurai-starter-the-evolution-of-single-token-staking-74eff216c949",
+    image: "/sam-staking-veaero.png",
   },
 ];
 
@@ -206,28 +207,26 @@ export default function Home() {
       </div> */}
 
       {/* FEATURED PROJECTS */}
-      <div className="flex flex-col pt-20 pb-10 w-full bg-white/10 px-6 lg:px-8 xl:px-20 text-white border-t-[0.5px] border-samurai-red">
+      <div className="flex flex-col pt-20 pb-14 w-full bg-white/10 px-6 lg:px-8 xl:px-20 text-white border-t-[0.5px] border-samurai-red relative">
         <h2 className="text-4xl md:text-6xl font-bold">
           Featured <span className="text-samurai-red">Projects</span>
         </h2>
         <div className={`text-lg mt-2 inline-flex ${inter.className}`}>
           Learn how to participate{" "}
           <Link
-            href="https://medium.com/samurai-starter"
-            target="_blank"
+            href="/launchpad"
             className="text-samurai-red text-3xl ml-3 mt-[-7px] transition-all hover:scale-125"
           >
             →
           </Link>
         </div>
-        <Projects />
-        {/* <Link
-          href="https://medium.com/samurai-starter"
-          target="_blank"
-          className={`flex justify-end items-center self-end w-max mt-8 text-lg text-samurai-red/70 hover:text-samurai-red font-light ${inter.className}`}
+        <Projects max={4} />
+        <Link
+          href="/launchpad"
+          className={`absolute right-6 bottom-5 md:right-20 flex justify-end items-center self-end w-max mt-8 text-md text-white hover:text-samurai-red font-light ${inter.className}`}
         >
           More +
-        </Link> */}
+        </Link>
       </div>
 
       {/* SAMURAI SANKA */}

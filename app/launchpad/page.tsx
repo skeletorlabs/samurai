@@ -59,6 +59,51 @@ export default function Launchpad() {
       <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted">
         <div className="flex flex-col relative">
           <h2 className="text-4xl lg:text-5xl font-bold">
+            Launchpad <span className="text-samurai-red">Tiers</span>
+          </h2>
+          <p
+            className={`relative mt-3 leading-normal pt-3 text-[20px]  ${inter.className}`}
+          >
+            Hold a{" "}
+            <Link
+              href="https://opensea.io/collection/samuraistarter"
+              target="blank"
+              className="text-samurai-red"
+            >
+              SamNFT
+            </Link>
+            , stake{" "}
+            <Link href="/tokens" className="text-samurai-red">
+              $SAM
+            </Link>
+            , or provide{" "}
+            <Link
+              href="https://aerodrome.finance/connect?to=%2Fdeposit%3Ftoken0%3D0x4200000000000000000000000000000000000006%26token1%3D0xed1779845520339693CDBffec49a74246E7D671b%26type%3D-1"
+              target="blank"
+              className="text-samurai-red"
+            >
+              WETH/SAM LP
+            </Link>{" "}
+            to be eligible to participate in the hottest{" "}
+            <span className="text-samurai-red">token launches</span> in crypto.
+          </p>
+
+          <div className="max-w-full flex flex-col gap-10 flex-wrap mt-14 text-2xl lg:text-3xl">
+            <Image
+              src="/sam-launchpad-tiers.png"
+              width={1}
+              height={1}
+              layout="responsive"
+              alt="samurai launchpad tiers"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* HOW TO PARTICIPATE
+      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted">
+        <div className="flex flex-col relative">
+          <h2 className="text-4xl lg:text-5xl font-bold">
             How to <span className="text-samurai-red">participate</span>
           </h2>
           <p
@@ -143,7 +188,7 @@ export default function Launchpad() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Past */}
       {/* <div className="flex flex-col py-10 md:py-20 w-full bg-white/10 border-t-[1px] border-samurai-red/40">
