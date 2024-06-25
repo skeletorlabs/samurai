@@ -544,16 +544,18 @@ export default function Ido() {
                           </div>
                         )}
 
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                          <span className="text-neutral-600">Raised:</span>
-                          <p className="text-white/70">
-                            $
-                            {Number(general?.raised | 0).toLocaleString(
-                              "en-us"
-                            )}{" "}
-                            {ido?.acceptedTokenSymbol}
-                          </p>
-                        </div>
+                        {ido?.id !== "launchpad-v2/kvants" && (
+                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                            <span className="text-neutral-600">Raised:</span>
+                            <p className="text-white/70">
+                              $
+                              {Number(general?.raised | 0).toLocaleString(
+                                "en-us"
+                              )}{" "}
+                              {ido?.acceptedTokenSymbol}
+                            </p>
+                          </div>
+                        )}
 
                         {signer && account && (
                           <>
@@ -969,10 +971,12 @@ export default function Ido() {
                   )}
                 </div>
               </div>
-              <IdoAllocationProgress
-                maxAllocations={general?.maxAllocations || 0}
-                raised={general?.raised || 0}
-              />
+              {ido?.id !== "launchpad-v2/kvants" && (
+                <IdoAllocationProgress
+                  maxAllocations={general?.maxAllocations || 0}
+                  raised={general?.raised || 0}
+                />
+              )}
             </div>
           </div>
         </div>
