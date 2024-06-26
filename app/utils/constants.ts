@@ -29,6 +29,7 @@ import {
   artx,
   kvants,
   memepad,
+  nexis,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -123,6 +124,61 @@ export const IDO_LIST: IDO[] = [
   //   ],
   //   type: "v2",
   // },
+  {
+    id: "launchpad-v2/nexis",
+    logo: nexis,
+    idoImageSrc: "/IDOs/nexis.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "TBA",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "TBA",
+    projectName: "Nexis Network",
+    projectListDescription:
+      "Nexis Network is an innovative new Layer-1 blockchain, tailored to host the next generation of data-intensive AI and RWA applications.",
+    projectDescription:
+      "Nexis' mission is to build a secure, scalable, lightning-fast blockchain which solves all of the problems currently inhibiting the growth of AI projects in Web3. With block confirmations five times faster than Solana (and for a third of the cost) they’re building the blockchain infrastructure needed to meet the high data demands of next-gen machine learning and RWA projects.",
+    projectTokenSymbol: "$NZT",
+    totalAllocation: 200_000,
+    price: "0.01125",
+    registrationStartsAt: 1719410792,
+    participationStartsAt: 1719489600,
+    participationEndsAt: 1719532800,
+    publicParticipationStartsAt: 1719532800,
+    publicParticipationEndsAt: 1719619200,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 7,
+    cliff: 86400 * 30,
+    investmentRound: "Private Round",
+    fdv: "30000000",
+    exchangeListingPrice: 0.03,
+    marketCapAtTGE: 650250,
+    vesting: "7% at TGE, 1 mo. cliff, 10 month vesting (daily)",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      { svg: globe, href: "https://nexis.network/" },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/Nexis_Network",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/Nexis_Network",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <p>Nexis is an innovative new Layer-1 blockchain, specifically tailored to meet the high throughput demands of AI and RWA projects. It's custom built to host the next generation of AI-powered products, which require cheap, high-volume, lightning-fast transactions.</p>
+        <p>The base layer of the Nexis Network is its EVM-compatible L1 blockchain, developed using Delegated Proof-of-Stake consensus. Running on top of this foundational EVM blockchain is a second tech layer: a parallel zkEVM (Zero-knowledge Ethereum Virtual Machine) chain.</p>
+        <p>This dual-chain architecture allows Nexis Network to offload processing tasks to this parallel chain, increasing the speed of transactions while also allowing developers to utilize the inherent privacy and security of zero-knowledge proofs when processing sensitive data. It also means that Nexis enjoys seamless interoperability with EVM and zkEVM chains, as well as boasting compatibility with Rust-based chains (such as Solana).</p>
+        <p>As a result, Nexis Network smashes the competition on basically every key metric. According to the testnet figures, Nexis is able to exceed Solana's TPS, process blocks over five times faster, and also process transactions for just 30% of the cost!</p>
+      </div>
+  `,
+    contract: "0x071F2d6Fc096da78fcE7918aa5A2a8fd59C6a183",
+    abi: PARTICIPATOR_V2_2,
+    type: "v2",
+  },
   {
     id: "launchpad-v2/kvants",
     logo: kvants,
