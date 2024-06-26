@@ -352,3 +352,17 @@ export const memepad = (
     </defs>
   </svg>
 );
+
+export const nexis = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    style={{ width: "100%", height: "100%" }}
+    viewBox="0 0 262 52"
+    preserveAspectRatio="none"
+    width="100%"
+    height="100%"
+  >
+    <use href="#svg1361133158_3599"></use>
+  </svg>
+);
