@@ -59,16 +59,6 @@ const utilities = [
       "Our loyalty reward token, $SAM, is scheduled to launch Q1 2024 on Base. Purchase a SamNFT during the minting period to be eligible to receive a generous share of the total supply of $SAM tokens. 10% of the entire $SAM supply will be claimed by SamNFT minters!",
   },
   {
-    title: "Cashback Rewards",
-    description:
-      "SamNFT holders who participate in token offerings on Samurai Starter are eligible to receive cashback rewards in the form of $SAM tokens. We love loyalty and want to reward it! The more you participate, the higher you climb the SAM Ladder, the more $SAM rewards you earn. The SAM Ladder shows your ranking among all $SAM earners. Climb The Ladder to earn up to 5% cashback on your token offering purchases.",
-  },
-  {
-    title: "SamNFT Rentals",
-    description:
-      "Not interested in participating in an upcoming token offering? Want to earn some passive income from your SamNFT? Holders can offer their SamNFTs for rent on our in-house SamNFT rental marketplace! Set your desired price and length of time of the rental and lease your SamNFT to non-holders who may want to participate in token offerings, but do not want to risk waiting for the public round. It is a win-win for all!",
-  },
-  {
     title: "VIP Access to Samurai Sanka",
     description:
       "Samurai Sanka is our upcoming community interaction platform. It includes a Partner Quest Platform, Prediction Markets, Lotteries and many more entertaining applications that will allow you to utilize your $SAM rewards and become high-value participants. As a SamNFT holder, you receive special VIP perks including reward boosts for participating on Sanka.",
