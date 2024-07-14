@@ -119,7 +119,7 @@ export default function Ventures() {
         className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white/5 border-t border-samurai-red/50 border-dotted relative"
       >
         <div className="flex flex-col text-white">
-          <div className="flex flex-col text-white text-2xl pb-20">
+          <div className="flex flex-col text-white text-2xl md:pb-20">
             <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-6 lg:px-8 xl:px-20">
               <p className="font-bold text-3xl md:text-5xl md:pb-2 text-center md:text-start mb-10">
                 Samurai <span className="text-samurai-red">Ventures</span>{" "}
@@ -131,7 +131,7 @@ export default function Ventures() {
                 {portfolio.map((item, index) => (
                   <div
                     key={index}
-                    className="flex justify-center items-center p-4 rounded-lg transition-all bg-white/30 hover:bg-samurai-red hover:scale-105 w-[300px] h-[100px] border border-neutral-400 hover:border-none"
+                    className="flex justify-center items-center p-4 rounded-lg transition-all bg-white/30 hover:bg-samurai-red hover:scale-105 w-full md:w-[300px] h-[100px] border border-neutral-400 hover:border-none"
                   >
                     <Image
                       src={item}
