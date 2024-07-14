@@ -100,6 +100,7 @@ export default function Ventures() {
             >
               Contact our team on{" "}
               <Link
+                target="blank"
                 href={
                   SOCIALS.find((social) => social.svg === telegram)?.href || ""
                 }
