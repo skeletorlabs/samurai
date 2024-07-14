@@ -928,6 +928,12 @@ export const NAV = [
     icon: incubation,
     page: Page.incubation,
   },
+  {
+    title: "Ventures",
+    href: "/ventures",
+    icon: incubation,
+    page: Page.incubation,
+  },
 ];
 
 export const SOCIALS = [
