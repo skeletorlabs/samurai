@@ -15,9 +15,9 @@ const inter = Inter({
 const latestupdates = [
   {
     title: "Samurai Starter — SamNFT Final Round UPDATE",
-    description: "Important updates and timelines regarding SamNFT",
-    href: "https://medium.com/samurai-starter/samurai-starter-samnft-final-round-update-c3edebc4c40f",
-    image: "/samnft-article.png",
+    description: "Your gateway to incredible early-round token offerings",
+    href: "https://medium.com/samurai-starter/welcome-to-samurai-ventures-05d97fb63afd",
+    image: "/ventures-article.png",
   },
   {
     title: "Samurai Starter — $SAM Token Guide",
@@ -102,6 +102,9 @@ export default function Home() {
                 </SSButton>
                 <SSButton isLink href="/incubation" flexSize>
                   For Projects
+                </SSButton>
+                <SSButton isLink href="/ventures" flexSize>
+                  Ventures
                 </SSButton>
               </div>
             </div>
