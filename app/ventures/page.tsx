@@ -37,14 +37,19 @@ export default function Ventures() {
           <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24 bg-transparent sm:bg-black/60 2xl:bg-transparent">
             {/* TOP CONTENT */}
             <div className="relative md:mr-12 xl:max-w-[1000px]">
-              <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
+              <h1 className="text-[38px] sm:text-[58px] lg:text-[90px] font-black leading-[48px] sm:leading-[68px] lg:leading-[98px] text-white text-center sm:text-start">
+                <span className="text-samurai-red">Samurai</span> Ventures
+              </h1>
+              <p
+                className={`leading-normal lg:leading-relaxed pt-8 md:pt-16 lg:text-5xl xl:max-w-[900px] text-center sm:text-start ${inter.className}`}
+              >
                 Access{" "}
                 <span className="font-bold text-samurai-red">early-round</span>{" "}
                 token opportunities in the{" "}
                 <span className="font-bold text-samurai-red">hottest</span>{" "}
                 projects in{" "}
                 <span className="font-bold text-samurai-red">crypto</span>.
-              </h1>
+              </p>
             </div>
             <Image
               src="/services/samurai-service-strategy.svg"
