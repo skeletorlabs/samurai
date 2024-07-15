@@ -14,7 +14,7 @@ const inter = Inter({
 
 const latestupdates = [
   {
-    title: "Samurai Starter — SamNFT Final Round UPDATE",
+    title: "Welcome to Samurai Ventures",
     description: "Your gateway to incredible early-round token offerings",
     href: "https://medium.com/samurai-starter/welcome-to-samurai-ventures-05d97fb63afd",
     image: "/ventures-article.png",
