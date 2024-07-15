@@ -544,7 +544,7 @@ export default function Ido() {
                           </div>
                         )}
 
-                        {ido?.id !== "launchpad-v2/kvants" && (
+                        {currentPhase && currentPhase !== "Completed" && (
                           <div className="flex flex-col py-2 px-2 rounded-md w-max">
                             <span className="text-neutral-600">Raised:</span>
                             <p className="text-white/70">
@@ -959,21 +959,22 @@ export default function Ido() {
                         )}
 
                       {/* TGE PHASE BLOCK */}
-                      {currentPhase?.toLowerCase() === "completed" && (
-                        <>
-                          <div className="text-xl text-white/80 pt-5 border-t border-white/20 leading-normal">
-                            <p className="text-samurai-red text-[16px]">
-                              Token distribution:
-                            </p>
-                            TBA
-                          </div>
-                        </>
-                      )}
+                      {currentPhase &&
+                        currentPhase?.toLowerCase() === "completed" && (
+                          <>
+                            <div className="text-xl text-white/80 pt-5 border-t border-white/20 leading-normal">
+                              <p className="text-samurai-red text-[16px]">
+                                Token distribution:
+                              </p>
+                              TBA
+                            </div>
+                          </>
+                        )}
                     </div>
                   )}
                 </div>
               </div>
-              {ido?.id !== "launchpad-v2/kvants" && (
+              {currentPhase !== "Completed" && (
                 <IdoAllocationProgress
                   maxAllocations={general?.maxAllocations || 0}
                   raised={general?.raised || 0}
