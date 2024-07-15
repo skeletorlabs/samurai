@@ -16,6 +16,7 @@ import {
   dexscreener,
   coingecko,
   coinmarketcap,
+  ventures,
 } from "@/app/utils/svgs";
 import { Page } from "./enums";
 import { IDO } from "./interfaces";
@@ -927,6 +928,12 @@ export const NAV = [
     href: "/incubation",
     icon: incubation,
     page: Page.incubation,
+  },
+  {
+    title: "Ventures",
+    href: "/ventures",
+    icon: ventures,
+    page: Page.ventures,
   },
 ];
 

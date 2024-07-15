@@ -5,4 +5,5 @@ export const enum Page {
   sanka,
   tokens,
   incubation,
+  ventures,
 }
