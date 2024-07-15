@@ -37,11 +37,11 @@ export default function Ventures() {
           <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24 bg-transparent sm:bg-black/60 2xl:bg-transparent">
             {/* TOP CONTENT */}
             <div className="relative md:mr-12 xl:max-w-[1000px]">
-              <h1 className="text-[38px] sm:text-[58px] lg:text-[90px] font-black leading-[48px] sm:leading-[68px] lg:leading-[98px] text-white text-center sm:text-start">
+              <h1 className="text-[38px] sm:text-[58px] lg:text-[80px] 2xl:text-[90px] font-black leading-[48px] sm:leading-[68px] lg:leading-[98px] text-white text-center sm:text-start">
                 <span className="text-samurai-red">Samurai</span> Ventures
               </h1>
               <p
-                className={`leading-normal lg:leading-relaxed pt-8 md:pt-16 lg:text-5xl xl:max-w-[900px] text-center sm:text-start ${inter.className}`}
+                className={`leading-normal md:leading-relaxed pt-4 lg:pt-8 text-2xl md:text-4xl 2xl:text-5xl xl:max-w-[900px] text-center sm:text-start ${inter.className}`}
               >
                 Access{" "}
                 <span className="font-bold text-samurai-red">early-round</span>{" "}
@@ -56,7 +56,7 @@ export default function Ventures() {
               width={450}
               height={450}
               alt="incubation"
-              className="rounded-[8px] hidden xl:block opacity-40 xl:opacity-100"
+              className="hidden xl:block opacity-40 xl:opacity-100 w-[350px] h-[350px] xl:w-[450px] 2xl:h-[450px]"
             />
           </div>
         </>
@@ -100,9 +100,7 @@ export default function Ventures() {
                 Provide WETH/SAM LP
               </SSButton>
             </div>
-            <p
-              className={`text-[16px] text-neutral-300 max-w-[820px] px-6 lg:px-8 xl:px-20`}
-            >
+            <p className="text-[16px] text-neutral-300 max-w-[820px] px-6 lg:px-8 xl:px-20 text-center md:text-start">
               Contact our team on{" "}
               <Link
                 target="blank"
