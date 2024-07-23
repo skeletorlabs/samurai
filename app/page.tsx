@@ -97,15 +97,16 @@ export default function Home() {
                 <SSButton isLink href="/launchpad" flexSize>
                   Launchpad
                 </SSButton>
+                <SSButton isLink href="/ventures" flexSize>
+                  Ventures
+                </SSButton>
                 <SSButton isLink href="#sanka" flexSize>
                   Sanka
                 </SSButton>
                 <SSButton isLink href="/incubation" flexSize>
                   For Projects
                 </SSButton>
-                <SSButton isLink href="/ventures" flexSize>
-                  Ventures
-                </SSButton>
+         
               </div>
             </div>
           </div>
