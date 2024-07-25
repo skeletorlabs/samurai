@@ -12,6 +12,7 @@ import {
   TabPanels,
   TabPanel,
   TransitionChild,
+  DialogTitle,
 } from "@headlessui/react";
 import { Tooltip } from "flowbite-react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -467,7 +468,7 @@ export default function LockSam() {
             className={`relative z-20 ${roboto.className}`}
             onClose={() => setWithdrawIsOpen(false)}
           >
-            <Transition.Child
+            <TransitionChild
               as={Fragment}
               enter="ease-out duration-300"
               enterFrom="opacity-0"
@@ -477,7 +478,7 @@ export default function LockSam() {
               leaveTo="opacity-0"
             >
               <div className="fixed inset-0 bg-black/70 backdrop-blur-[16px]" />
-            </Transition.Child>
+            </TransitionChild>
 
             <div className="fixed inset-0 overflow-y-auto">
               <div className="flex min-h-full items-center justify-center p-4 text-center">
@@ -491,12 +492,12 @@ export default function LockSam() {
                   leaveTo="opacity-0 scale-95"
                 >
                   <DialogPanel className="w-full max-w-lg transform overflow-hidden rounded-2xl bg-white/10 p-6 text-left align-middle transition-all border border-white/20 text-white shadow-lg shadow-samurai-red/20">
-                    <Dialog.Title
+                    <DialogTitle
                       as="h3"
                       className="text-lg font-medium leading-6 text-white ml-1"
                     >
                       My <span className="text-samurai-red">$SAM</span> Locks
-                    </Dialog.Title>
+                    </DialogTitle>
 
                     <div className="flex flex-col justify-center self-end w-full mt-4">
                       <TabGroup>

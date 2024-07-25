@@ -121,7 +121,7 @@ export async function userInfo(signer: ethers.Signer) {
     for (let i = 0; i < userLocks.length; i++) {
       const userLock = userLocks[i];
       const lock: LockInfo = {
-        lockIndex: Number(userLock[0]),
+        lockIndex: i,
         lockedAmount: Number(ethers.formatEther(userLock[1])),
         withdrawnAmount: Number(ethers.formatEther(userLock[2])),
         lockedAt: Number(userLock[3]),
