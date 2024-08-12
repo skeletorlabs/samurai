@@ -3128,136 +3128,30 @@ export const SAM_LOCK_ABI = [
 export const SAM_CLAIM_VESTING_ABI = [
   {
     inputs: [
-      {
-        internalType: "uint256",
-        name: "_nonce",
-        type: "uint256",
-      },
-      {
-        components: [
-          {
-            internalType: "uint256",
-            name: "claimId",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "amount",
-            type: "uint256",
-          },
-          {
-            internalType: "bool",
-            name: "isAllClaimed",
-            type: "bool",
-          },
-          {
-            internalType: "bool",
-            name: "isInitialClaimed",
-            type: "bool",
-          },
-          {
-            internalType: "uint256",
-            name: "totalClaimed",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "totalAmount",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "startTime",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "endTime",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "initialReleasePercentage",
-            type: "uint256",
-          },
-        ],
-        internalType: "struct VestingClaim.ClaimInfo[]",
-        name: "claimInfos",
-        type: "tuple[]",
-      },
-      {
-        internalType: "bytes",
-        name: "_signature",
-        type: "bytes",
-      },
-    ],
-    name: "claim",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_token",
-        type: "address",
-      },
-      {
-        internalType: "address",
-        name: "_signerAddress",
-        type: "address",
-      },
+      { internalType: "address", name: "_token", type: "address" },
+      { internalType: "address", name: "_signerAddress", type: "address" },
     ],
     stateMutability: "nonpayable",
     type: "constructor",
   },
+  { inputs: [], name: "ECDSAInvalidSignature", type: "error" },
   {
-    inputs: [],
-    name: "ECDSAInvalidSignature",
-    type: "error",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "length",
-        type: "uint256",
-      },
-    ],
+    inputs: [{ internalType: "uint256", name: "length", type: "uint256" }],
     name: "ECDSAInvalidSignatureLength",
     type: "error",
   },
   {
-    inputs: [
-      {
-        internalType: "bytes32",
-        name: "s",
-        type: "bytes32",
-      },
-    ],
+    inputs: [{ internalType: "bytes32", name: "s", type: "bytes32" }],
     name: "ECDSAInvalidSignatureS",
     type: "error",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "owner",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "owner", type: "address" }],
     name: "OwnableInvalidOwner",
     type: "error",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address",
-      },
-    ],
+    inputs: [{ internalType: "address", name: "account", type: "address" }],
     name: "OwnableUnauthorizedAccount",
     type: "error",
   },
@@ -3279,26 +3173,6 @@ export const SAM_CLAIM_VESTING_ABI = [
     ],
     name: "OwnershipTransferred",
     type: "event",
-  },
-  {
-    inputs: [],
-    name: "renounceOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "newOwner",
-        type: "address",
-      },
-    ],
-    name: "transferOwnership",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
   },
   {
     anonymous: false,
@@ -3333,138 +3207,67 @@ export const SAM_CLAIM_VESTING_ABI = [
   },
   {
     inputs: [
+      { internalType: "uint256", name: "_nonce", type: "uint256" },
       {
-        internalType: "uint256",
-        name: "_amount",
-        type: "uint256",
+        components: [
+          { internalType: "uint256", name: "claimId", type: "uint256" },
+          { internalType: "uint256", name: "amount", type: "uint256" },
+          { internalType: "bool", name: "isAllClaimed", type: "bool" },
+          { internalType: "bool", name: "isInitialClaimed", type: "bool" },
+          { internalType: "uint256", name: "totalClaimed", type: "uint256" },
+          { internalType: "uint256", name: "totalAmount", type: "uint256" },
+          { internalType: "uint256", name: "startTime", type: "uint256" },
+          { internalType: "uint256", name: "endTime", type: "uint256" },
+          {
+            internalType: "uint256",
+            name: "initialReleasePercentage",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct VestingClaim.ClaimInfo[]",
+        name: "claimInfos",
+        type: "tuple[]",
       },
+      { internalType: "bytes", name: "_signature", type: "bytes" },
     ],
-    name: "withdrawTokens",
+    name: "claim",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "bytes",
-        name: "",
-        type: "bytes",
-      },
-    ],
-    name: "claimedSignatures",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_claimId",
-        type: "uint256",
-      },
-    ],
-    name: "getVestedAmount",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
+    inputs: [],
+    name: "owner",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
-    name: "owner",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
-    stateMutability: "view",
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
     inputs: [],
     name: "signerAddress",
-    outputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address",
-      },
-    ],
+    outputs: [{ internalType: "address", name: "", type: "address" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    name: "vestingLimits",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "claimId",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "isAllClaimed",
-        type: "bool",
-      },
-      {
-        internalType: "bool",
-        name: "isInitialClaimed",
-        type: "bool",
-      },
-      {
-        internalType: "uint256",
-        name: "totalClaimed",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "totalAmount",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "startTime",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "endTime",
-        type: "uint256",
-      },
-      {
-        internalType: "uint256",
-        name: "initialReleasePercentage",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
+    inputs: [{ internalType: "address", name: "newOwner", type: "address" }],
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
+    name: "withdrawTokens",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
 ];
