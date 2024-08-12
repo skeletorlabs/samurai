@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import SSButton from "@/app/components/ssButton";
 import TopLayout from "@/app/components/topLayout";
 import Projects from "@/app/components/projects";
+import PastProjects from "../components/pastProjects";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -42,7 +43,7 @@ export default function Launchpad() {
         </div>
       </TopLayout>
 
-      {/* Offerings */}
+      {/* New Offerings */}
       <div
         id="participate"
         className="flex flex-col py-10 md:py-20 w-full bg-white/20 border-t-[1px] border-samurai-red/40"
@@ -52,6 +53,19 @@ export default function Launchpad() {
             <span className="text-samurai-red">Token</span> Offerings
           </h2>
           <Projects />
+        </div>
+      </div>
+
+      {/* Offerings */}
+      <div
+        id="participate"
+        className="flex flex-col py-10 md:py-20 w-full bg-white/20 border-t-[1px] border-samurai-red/40"
+      >
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+          <h2 className="text-4xl lg:text-5xl font-bold">
+            <span className="text-samurai-red">Past</span> Offerings
+          </h2>
+          <PastProjects />
         </div>
       </div>
 
@@ -99,112 +113,6 @@ export default function Launchpad() {
           </div>
         </div>
       </div>
-
-      {/* HOW TO PARTICIPATE
-      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted">
-        <div className="flex flex-col relative">
-          <h2 className="text-4xl lg:text-5xl font-bold">
-            How to <span className="text-samurai-red">participate</span>
-          </h2>
-          <p
-            className={`relative mt-3 leading-normal pt-3 text-[20px]  ${inter.className}`}
-          >
-            Follow these easy steps to become an active member of the Samurai
-            Starter community →
-          </p>
-
-          <div className="w-full flex flex-col gap-10 flex-wrap mt-14 text-2xl lg:text-3xl">
-            <div className="flex items-center gap-3">
-              <span
-                className={`w-[35px] md:w-[50px] text-7xl text-samurai-red ${inter.className}`}
-              >
-                1.
-              </span>
-              <div className="text-xl md:text-2xl bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
-                <Link
-                  href="/nft"
-                  className="text-samurai-red hover:opacity-75 underline"
-                >
-                  Buy
-                </Link>
-                {" or "}
-                <Link
-                  href="#"
-                  className="text-samurai-red hover:opacity-75 underline"
-                >
-                  rent (coming soon)
-                </Link>{" "}
-                a SamNFT to gain token offering access.
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <span
-                className={`w-[35px] md:w-[50px] text-7xl text-samurai-red ${inter.className}`}
-              >
-                2.
-              </span>
-              <div className="text-xl md:text-2xl bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
-                <span className="text-samurai-red">Register</span> your interest
-                in participating in the token offering during the whitelisting
-                period.
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <span
-                className={`w-[35px] md:w-[50px] text-7xl text-samurai-red ${inter.className}`}
-              >
-                3.
-              </span>
-              <div className="text-xl md:text-2xl bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
-                <span className="text-samurai-red">Commit</span> selected
-                payment currency during the participation period.
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <span
-                className={`w-[35px] md:w-[50px] text-7xl text-samurai-red ${inter.className}`}
-              >
-                4.
-              </span>
-              <div className="text-xl md:text-2xl bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
-                <span className="text-samurai-red">Claim</span> your tokens
-                according to each project's vesting terms.
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <span
-                className={`w-[35px] md:w-[50px] text-7xl text-samurai-red ${inter.className}`}
-              >
-                5.
-              </span>
-              <div className="text-xl md:text-2xl bg-gradient-to-r from-transparent to-neutral-800 rounded-r-xl px-8 py-6 shadow-inner">
-                <span className="text-samurai-red">Claim</span> your $SAM
-                rewards after participating in the token offering.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
-      {/* Past */}
-      {/* <div className="flex flex-col py-10 md:py-20 w-full bg-white/10 border-t-[1px] border-samurai-red/40">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
-          <h2 className="text-4xl lg:text-5xl font-bold">
-            <span className="text-white/30">Past</span> Token Offerings
-          </h2>
-          <div
-            className={`flex justify-center lg:justify-start items-center flex-wrap gap-10 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
-          >
-            {idos.map((ido: IDO, index) => (
-              <LaunchpadCard key={index} ido={ido} type="light" />
-            ))}
-          </div>
-        </div>
-      </div> */}
     </>
   );
 }

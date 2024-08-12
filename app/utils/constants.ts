@@ -19,7 +19,7 @@ import {
   ventures,
 } from "@/app/utils/svgs";
 import { Page } from "./enums";
-import { IDO } from "./interfaces";
+import { IDO, IDO_v2 } from "./interfaces";
 import {
   galaxyGamesHauntedSpace,
   havensCompass,
@@ -38,6 +38,7 @@ import {
   PARTICIPATOR_NFT_ABI,
   PARTICIPATOR_NFT_ETH,
   PARTICIPATOR_V2_2,
+  IDO_ABI,
 } from "@/app/contracts_integrations/abis";
 
 export const simplifiedPhases = [
@@ -59,72 +60,80 @@ export const simplifiedPhasesV2 = [
   { title: "Completed", buttonTitle: "" },
 ];
 
+export const phases = [
+  { title: "Upcoming", buttonTitle: "" },
+  { title: "Registration", buttonTitle: "REGISTER" },
+  {
+    title: "Participation",
+    buttonTitle: "PARTICIPATE",
+  },
+  { title: "Vesting", buttonTitle: "" },
+];
+
+export const VestingType: { [key: number]: string } = {
+  0: "Cliff Vesting",
+  1: "Linear",
+  2: "Periodic",
+};
+
+export const NEW_IDOS: IDO_v2[] = [
+  {
+    id: "launchpad-v3/whatever",
+    logo: memepad,
+    idoImageSrc: "/IDOs/memepad.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "Solana",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/SOLANA.svg",
+    projectName: "Whatever",
+    projectListDescription:
+      "MemePad is set to become the number-one dedicated memecoin launchpad in crypto!",
+    projectDescription:
+      "MemePad is here to bring order to the chaos of the memecoin space. With strict vetting procedures and built-in anti-rug protection, they're creating a secure, high-quality launchpad for the 'hottest memecoins on Solana and beyond' where degens can chase 100x moonshots with confidence.",
+    projectTokenSymbol: "$MPAD",
+    projectBigDescription: `
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <p>MemePad is setting out to solve the trifecta of problems plaguing the memecoin space: low-quality projects, a lack of transparency from teams, and security risks. They do this by sourcing only top-quality projects with doxxed teams, subjecting them to rigorous due diligence, and launching them with built-in protection against rug pulls</p>
+      <p>Only top-tier memecoins are selected to join the MemeVerse (MemePad's line-up of launchpad alumni). To pass initial screening, a project has to have a strong long-term vision for the token growth, community, and utility.</p>
+      <p>MemePad also implements strict security procedures to keep your investments safe. We're talking audits, mandatory KYC, locked team tokens, and more. They will also run their own insurance funds, used to compensate the community in the unlikely event that a MemeVerse project is compromised and goes to zero.</p>
+      <p>$MPAD holders have the option to participate for the main token sales, or go in on exclusive early 'Ape In' rounds with cheaper prices and special bonuses.</p>
+      <p>And as a reward for participating on the platform, holders will also be getting regularly showered with airdrops sourced form MemePad's featured projects!</p>
+    </div>
+`,
+    price: 0.1,
+    allocation: 50_000,
+    date: 1723377600,
+    fcfs: 1723377600 + 86400 / 2,
+    investmentRound: "Private",
+    fdv: 6000000,
+    exchangeListingPrice: 0.6,
+    marketCapAtTGE: 182250,
+    socials: [
+      {
+        svg: globe,
+        href: "https://memepad.ai/",
+      },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/MemePadSol",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/Memepad_Community",
+      },
+    ],
+    contract: "0x915Fd4218E1593129c9938a2117dc308632650e8",
+    abi: IDO_ABI,
+    images: [
+      "/IDOs/memepad/1.png",
+      "/IDOs/memepad/2.png",
+      "/IDOs/memepad/3.png",
+      "/IDOs/memepad/4.png",
+    ],
+  },
+];
+
 export const IDO_LIST: IDO[] = [
-  // {
-  //   id: "launchpad-v2/whatever",
-  //   logo: memepad,
-  //   idoImageSrc: "/IDOs/memepad.png",
-  //   acceptedTokenSymbol: "USDC",
-  //   tokenNetwork: "Solana",
-  //   crowdsaleNetwork: "BASE",
-  //   networkImageSrc: "/chain-logos/SOLANA.svg",
-  //   projectName: "MemePad",
-  //   projectListDescription:
-  //     "MemePad is set to become the number-one dedicated memecoin launchpad in crypto!",
-  //   projectDescription:
-  //     "MemePad is here to bring order to the chaos of the memecoin space. With strict vetting procedures and built-in anti-rug protection, they're creating a secure, high-quality launchpad for the 'hottest memecoins on Solana and beyond' where degens can chase 100x moonshots with confidence.",
-  //   projectTokenSymbol: "$MPAD",
-  //   totalAllocation: 50_000,
-  //   price: "0.345",
-  //   registrationStartsAt: 1718481518,
-  //   participationStartsAt: 1718481518 + 86400 * 2,
-  //   participationEndsAt: 1718481518 + 86400 * 3,
-  //   publicParticipationStartsAt: 1718481518 + 86400 * 3,
-  //   publicParticipationEndsAt: 1718481518 + 86400 * 4,
-  //   simplified: true,
-  //   tgeDate: 1718582400,
-  //   tgePercentage: 8,
-  //   cliff: 0,
-  //   investmentRound: "Round 2",
-  //   fdv: "6000000",
-  //   exchangeListingPrice: 0.6,
-  //   marketCapAtTGE: 182250,
-  //   vesting: "8% TGE + 3 month monthly vesting",
-  //   releaseType: "Linear",
-  //   currentPhase: simplifiedPhases[1].title,
-  //   socials: [
-  //     {
-  //       svg: globe,
-  //       href: "https://memepad.ai/",
-  //     },
-  //     {
-  //       svg: twitterX,
-  //       href: "https://twitter.com/MemePadSol",
-  //     },
-  //     {
-  //       svg: telegram,
-  //       href: "https://t.me/Memepad_Community",
-  //     },
-  //   ],
-  //   bigDescription: `
-  //     <div style="display: flex; flex-direction: column; gap: 15px;">
-  //       <p>MemePad is setting out to solve the trifecta of problems plaguing the memecoin space: low-quality projects, a lack of transparency from teams, and security risks. They do this by sourcing only top-quality projects with doxxed teams, subjecting them to rigorous due diligence, and launching them with built-in protection against rug pulls</p>
-  //       <p>Only top-tier memecoins are selected to join the MemeVerse (MemePad's line-up of launchpad alumni). To pass initial screening, a project has to have a strong long-term vision for the token growth, community, and utility.</p>
-  //       <p>MemePad also implements strict security procedures to keep your investments safe. We're talking audits, mandatory KYC, locked team tokens, and more. They will also run their own insurance funds, used to compensate the community in the unlikely event that a MemeVerse project is compromised and goes to zero.</p>
-  //       <p>$MPAD holders have the option to participate for the main token sales, or go in on exclusive early 'Ape In' rounds with cheaper prices and special bonuses.</p>
-  //       <p>And as a reward for participating on the platform, holders will also be getting regularly showered with airdrops sourced form MemePad's featured projects!</p>
-  //     </div>
-  // `,
-  //   contract: "0x7848a6da9bb576caf244c087cbf55d5555d4abbc",
-  //   abi: PARTICIPATOR_V2_2,
-  //   images: [
-  //     "/IDOs/memepad/1.png",
-  //     "/IDOs/memepad/2.png",
-  //     "/IDOs/memepad/3.png",
-  //     "/IDOs/memepad/4.png",
-  //   ],
-  //   type: "v2",
-  // },
   {
     id: "launchpad-v2/nexis",
     logo: nexis,
@@ -982,3 +991,4 @@ export const SAM_ADDRESS = "0xed1779845520339693CDBffec49a74246E7D671b";
 export const SAM_CLAIM_VESTING = "0xDD687b579c5C542A14874e79E404b83E78e6E18a"; // BASE MAINNET
 // export const SAM_CLAIM_VESTING = "0xE42c1929612bBc03572C518bAf05c38147D5d67e"; // BASE SEPOLIA
 export const SAM_TIERS = "0xdB0Ee72eD5190e9ef7eEC288a92f73c5cf3B3c74";
+export const SAM_FACTORY = "0x74D1a23F90eB7b5D6A162d05eF30DC42E5cd35AE";

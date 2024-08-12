@@ -97,3 +97,8 @@
   width: 500px !important;
   height: 200px !important;
 }
+
+form input:invalid {
+  background-color: #ffdddd;
+  border:1px solid #FF284C;
+}

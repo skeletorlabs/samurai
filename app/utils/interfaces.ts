@@ -164,3 +164,30 @@ export interface IDO {
   images?: string[];
   type?: string;
 }
+
+export interface IDO_v2 {
+  id: string;
+  logo: ReactNode;
+  idoImageSrc: string;
+  acceptedTokenSymbol: string;
+  tokenNetwork: string;
+  crowdsaleNetwork: string;
+  networkImageSrc: string;
+  projectName: string;
+  projectListDescription: string;
+  projectDescription: string;
+  projectTokenSymbol: string;
+  projectBigDescription: ReactNode;
+  investmentRound: string;
+  price: number;
+  allocation: number;
+  date: number;
+  fcfs: number;
+  fdv: number;
+  exchangeListingPrice: number;
+  marketCapAtTGE: number;
+  socials: IDO_SOCIAL[];
+  contract: string;
+  abi: any;
+  images?: string[];
+}

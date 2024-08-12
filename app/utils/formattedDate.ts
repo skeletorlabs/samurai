@@ -2,6 +2,8 @@ import { fromUnixTime, format } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 
 export function formattedDate(timestamp: number) {
+  // console.log(fromUnixTime(timestamp));
+  // return timestamp;
   return format(toZonedTime(fromUnixTime(timestamp), "UTC"), "dd MMM, HH:mm");
 }
 
