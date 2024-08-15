@@ -4257,16 +4257,16 @@ export const IDO_ABI = [
             internalType: "uint256",
           },
           {
+            name: "vestingDuration",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
             name: "vestingAt",
             type: "uint256",
             internalType: "uint256",
           },
           { name: "cliff", type: "uint256", internalType: "uint256" },
-          {
-            name: "releaseSchedule",
-            type: "uint8",
-            internalType: "enum IIDO.ReleaseSchedule",
-          },
         ],
       },
       {
@@ -4295,13 +4295,6 @@ export const IDO_ABI = [
       },
     ],
     stateMutability: "nonpayable",
-  },
-  {
-    type: "function",
-    name: "_vestingEndsAt",
-    inputs: [],
-    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
-    stateMutability: "view",
   },
   {
     type: "function",
@@ -4402,25 +4395,6 @@ export const IDO_ABI = [
     inputs: [],
     outputs: [],
     stateMutability: "nonpayable",
-  },
-  {
-    type: "function",
-    name: "getReleaseSchedule",
-    inputs: [
-      {
-        name: "_schedule",
-        type: "uint8",
-        internalType: "enum IIDO.ReleaseSchedule",
-      },
-    ],
-    outputs: [
-      {
-        name: "scheduleTimestamp",
-        type: "uint256",
-        internalType: "uint256",
-      },
-    ],
-    stateMutability: "pure",
   },
   {
     type: "function",
@@ -4578,14 +4552,21 @@ export const IDO_ABI = [
         type: "uint256",
         internalType: "uint256",
       },
+      {
+        name: "vestingDuration",
+        type: "uint256",
+        internalType: "uint256",
+      },
       { name: "vestingAt", type: "uint256", internalType: "uint256" },
       { name: "cliff", type: "uint256", internalType: "uint256" },
-      {
-        name: "releaseSchedule",
-        type: "uint8",
-        internalType: "enum IIDO.ReleaseSchedule",
-      },
     ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "previewClaimableTokens",
+    inputs: [{ name: "wallet", type: "address", internalType: "address" }],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
   },
   {
@@ -4608,7 +4589,7 @@ export const IDO_ABI = [
   {
     type: "function",
     name: "previewVestedTokens",
-    inputs: [{ name: "wallet", type: "address", internalType: "address" }],
+    inputs: [],
     outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
   },
@@ -4738,16 +4719,16 @@ export const IDO_ABI = [
             internalType: "uint256",
           },
           {
+            name: "vestingDuration",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
             name: "vestingAt",
             type: "uint256",
             internalType: "uint256",
           },
           { name: "cliff", type: "uint256", internalType: "uint256" },
-          {
-            name: "releaseSchedule",
-            type: "uint8",
-            internalType: "enum IIDO.ReleaseSchedule",
-          },
         ],
       },
     ],
@@ -4847,6 +4828,13 @@ export const IDO_ABI = [
     name: "usingLinkedWallet",
     inputs: [],
     outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "vestingEndsAt",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
   },
   {
@@ -5049,16 +5037,16 @@ export const IDO_ABI = [
             internalType: "uint256",
           },
           {
+            name: "vestingDuration",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
             name: "vestingAt",
             type: "uint256",
             internalType: "uint256",
           },
           { name: "cliff", type: "uint256", internalType: "uint256" },
-          {
-            name: "releaseSchedule",
-            type: "uint8",
-            internalType: "enum IIDO.ReleaseSchedule",
-          },
         ],
       },
     ],

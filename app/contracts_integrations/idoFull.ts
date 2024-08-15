@@ -13,14 +13,72 @@ import checkApproval from "./check-approval";
 import { getUnixTime } from "date-fns";
 import { notificateTx } from "@/app/utils/notificateTx";
 import { IDO } from "./factory";
+import { DecodedError, ErrorDecoder } from "ethers-decode-error";
+import handleDecodedError from "../utils/handleDecodedError";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 // const TEST_RPC = "http://127.0.0.1:8545";
+
+const errorDecoder = ErrorDecoder.create([IDO_ABI]);
 
 export type WalletRange = {
   name: string;
   minPerWallet: number;
   maxPerWallet: number;
+};
+
+export type IDO_GENERAL_INFO = {
+  // address
+  owner: string;
+  samuraiTiers: string;
+  token: string;
+  acceptedToken: string;
+  // vesting type
+  vestingType: number;
+  // ammounts
+  amounts: {
+    tokenPrice: number;
+    maxAllocations: number;
+    tgeReleasePercent: number;
+  };
+  raised: number;
+  fees: number;
+  totalPurchased: number;
+  // booleans
+  isPaused: boolean;
+  isPublic: boolean;
+  usingETH: boolean;
+  usingLinkedWallet: boolean;
+  // periods
+  periods: {
+    registrationAt: number;
+    participationStartsAt: number;
+    participationEndsAt: number;
+    vestingDuration: number;
+    vestingAt: number;
+    cliff: number;
+    cliffEndsAt: number;
+    vestingEndsAt: number;
+  };
+  // refund
+  refund: {
+    active: boolean;
+    feePercent: number;
+    period: number;
+  };
+  // ranges
+  ranges: WalletRange[];
+};
+
+export type IDO_USER_INFO = {
+  walletRange: WalletRange;
+  isWhitelisted: boolean;
+  linkedWallet: string;
+  balance: number;
+  allocation: number;
+  purchased: number;
+  claimed: number;
+  claimable: number;
 };
 
 async function getContract(index: number, signer?: ethers.Signer) {
@@ -36,7 +94,7 @@ async function getContract(index: number, signer?: ethers.Signer) {
 
     return contract;
   } catch (e) {
-    handleError({ e: e, notificate: true });
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
   }
 }
 
@@ -48,11 +106,13 @@ async function getContract2(address: string, signer?: ethers.Signer) {
 
     return contract;
   } catch (e) {
-    handleError({ e: e, notificate: true });
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
   }
 }
 
-// OVERALL INFOS
+// ========================================================================
+// IS PAUSED ==============================================================
+// ========================================================================
 
 export async function checkIsPaused(index: number) {
   try {
@@ -60,9 +120,13 @@ export async function checkIsPaused(index: number) {
     const isPaused = await contract?.paused();
     return isPaused;
   } catch (e) {
-    handleError({ e: e, notificate: true });
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
   }
 }
+
+// ========================================================================
+// FACTORY IDO RAW ========================================================
+// ========================================================================
 
 export async function idoRaw(address: string, signer: ethers.Signer) {
   const contract = await getContract2(address, signer);
@@ -99,53 +163,69 @@ export async function idoRaw(address: string, signer: ethers.Signer) {
   return raw;
 }
 
+// ========================================================================
+// IDO INFOS ==============================================================
+// ========================================================================
+
 export async function generalInfo(index: number) {
   try {
     const contract = await getContract(index);
 
-    // address
+    // Addresses
     const owner = await contract?.owner();
     const samuraiTiers = await contract?.samuraiTiers();
     const token = await contract?.token();
     const acceptedToken = await contract?.acceptedToken();
+    // const acceptedToken = "0x2a064000D0252d16c57FAFD1586bE7ce5deD8320";
 
-    // booleans
+    // Booleans
     const isPaused = await contract?.paused();
     const isPublic = await contract?.isPublic();
+    // const isPublic = false;
     const usingETH = await contract?.usingETH();
+    const DECIMALS = usingETH ? 18 : 6;
     const usingLinkedWallet = await contract?.usingLinkedWallet();
+    // const usingLinkedWallet = true;
 
     // Vesting Type
     const vestingType = Number(await contract?.vestingType());
 
     // Amounts
     const amounts = await contract?.amounts();
-    const tokenPrice = Number(ethers.formatUnits(amounts[0], 6));
-    const maxAllocations = Number(ethers.formatUnits(amounts[1], 6));
-    const tgeReleasePercent = Number(ethers.formatUnits(amounts[2], 6));
-    console.log("tgeReleasePercent", tgeReleasePercent);
-    const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
-    const fees = Number(ethers.formatUnits(await contract?.raised(), 6));
+    const tokenPrice = Number(ethers.formatUnits(amounts[0], DECIMALS));
+    const maxAllocations = Number(ethers.formatUnits(amounts[1], DECIMALS));
+    const tgeReleasePercent = Number(ethers.formatUnits(amounts[2], DECIMALS));
+    const raised = Number(
+      ethers.formatUnits(await contract?.raised(), DECIMALS)
+    );
+    const fees = Number(ethers.formatUnits(await contract?.raised(), DECIMALS));
+
+    let totalPurchased = 0;
+    if (raised > 0) {
+      totalPurchased = Number(
+        formatEther(
+          await contract?.tokenAmountByParticipation(
+            parseUnits(raised.toString(), DECIMALS)
+          )
+        )
+      );
+    }
 
     // Periods
-    // uint256 registrationAt;
-    // uint256 participationStartsAt;
-    // uint256 participationEndsAt;
-    // uint256 vestingDuration;
-    // uint256 vestingAt;
-    // uint256 cliff;
     const periods = await contract?.periods();
-    const registrationAt = Number(periods[0]);
-    const participationStartsAt = Number(periods[1]);
-    const participationEndsAt = Number(periods[2]);
-    const vestingDuration = Number(periods[3]);
-    const vestingAt = Number(periods[4]);
-    const cliff = Number(periods[5]);
+    const registrationAt = Number(periods[0]); // uint256 registrationAt;
+    const participationStartsAt = Number(periods[1]); // uint256 participationStartsAt;
+    const participationEndsAt = Number(periods[2]); // uint256 participationEndsAt;
+    const vestingDuration = Number(periods[3]); // uint256 vestingDuration;
+    const vestingAt = Number(periods[4]); // uint256 vestingAt;
+    const cliff = Number(periods[5]); // uint256 cliff;
+    const cliffEndsAt = Number(await contract?.cliffEndsAt());
+    const vestingEndsAt = Number(await contract?.vestingEndsAt());
 
     // Refund
     const refund = await contract?.refund();
     const active = refund[0];
-    const feePercent = Number(ethers.formatUnits(refund[1], 6));
+    const feePercent = Number(ethers.formatUnits(refund[1], DECIMALS));
     const period = Number(refund[2]);
 
     // Ranges
@@ -156,12 +236,8 @@ export async function generalInfo(index: number) {
 
       const walletRange: WalletRange = {
         name: range.name,
-        minPerWallet: Number(
-          formatUnits(range.min.toString(), usingETH ? 18 : 6)
-        ),
-        maxPerWallet: Number(
-          formatUnits(range.max.toString(), usingETH ? 18 : 6)
-        ),
+        minPerWallet: Number(formatUnits(range.min.toString(), DECIMALS)),
+        maxPerWallet: Number(formatUnits(range.max.toString(), DECIMALS)),
       };
       ranges.push(walletRange);
     }
@@ -182,6 +258,7 @@ export async function generalInfo(index: number) {
       },
       raised,
       fees,
+      totalPurchased,
       // booleans
       isPaused,
       isPublic,
@@ -195,6 +272,8 @@ export async function generalInfo(index: number) {
         vestingDuration,
         vestingAt,
         cliff,
+        cliffEndsAt,
+        vestingEndsAt,
       },
       // refund
       refund: {
@@ -204,13 +283,15 @@ export async function generalInfo(index: number) {
       },
       // ranges
       ranges,
-    };
+    } as IDO_GENERAL_INFO;
   } catch (e) {
-    handleError({ e: e, notificate: true });
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
   }
 }
 
-// USER INFOS
+// ========================================================================
+// USER INFO ==============================================================
+// ========================================================================
 
 function parseWalletRange(range: any, decimals: number) {
   const walletRange: WalletRange = {
@@ -222,64 +303,107 @@ function parseWalletRange(range: any, decimals: number) {
   return walletRange;
 }
 
-export async function userInfo(index: number, signer: ethers.Signer) {
+export async function userInfo(
+  index: number,
+  generalInfo: IDO_GENERAL_INFO,
+  signer: ethers.Signer
+) {
   try {
-    const ido = NEW_IDOS[index];
     const signerAdress = await signer.getAddress();
     const contract = await getContract(index, signer);
-    const usingETH = await contract?.usingETH();
-    const isPublic = await contract?.isPublic();
+
+    const { usingETH, usingLinkedWallet, isPublic } = generalInfo;
+    const DECIMALS = usingETH ? 18 : 6;
 
     const range = isPublic
       ? await contract?.getRange(0)
       : await contract?.getWalletRange(signerAdress);
 
-    const walletRange = parseWalletRange(range, usingETH ? 18 : 6);
+    const walletRange = parseWalletRange(range, DECIMALS);
 
-    // const allocation = Number(
-    //   ethers.formatUnits(await contract?.allocations(signerAdress), 6)
-    // );
+    let linkedWallet = usingLinkedWallet
+      ? await contract?.linkedWallets(signerAdress)
+      : "";
 
-    const allocation = Number(100);
+    // linkedWallet = "0xcDe00Be56479F95b5e33De136AD820FfaE996009";
 
-    const linkedWallet = await contract?.linkedWallets(signerAdress);
+    const isWhitelisted = await contract?.whitelist(signerAdress);
+    // const isWhitelisted = true;
 
-    // const isWhitelisted = await contract?.whitelist(signerAdress);
-    const isWhitelisted = true;
+    let balance = 0;
 
-    const acceptedToken = await contract?.acceptedToken();
-    const balanceEther = await signer.provider?.getBalance(signerAdress);
-    const balanceToken = Number(
-      ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken, signerAdress, signer),
-        6
-      )
+    if (usingETH) {
+      const ethBalance = await signer.provider?.getBalance(signerAdress);
+      if (ethBalance) balance = Number(formatEther(ethBalance));
+    } else {
+      const acceptedToken = generalInfo?.acceptedToken;
+      balance = Number(
+        formatUnits(
+          await balanceOf(ERC20_ABI, acceptedToken, signerAdress, signer),
+          DECIMALS
+        )
+      );
+    }
+
+    const allocation = Number(
+      ethers.formatUnits(await contract?.allocations(signerAdress), DECIMALS)
     );
 
-    const contractAddress = await contract?.getAddress();
-    const acceptedTokenBalance = ethers.formatUnits(
-      await balanceOf(
-        ERC20_ABI,
-        acceptedToken,
-        contractAddress as string,
-        signer
-      ),
-      6
-    );
+    // const allocation = 100;
+
+    let purchased = 0;
+    let claimed = 0;
+    let claimable = 0;
+
+    if (generalInfo.token !== "0x0000000000000000000000000000000000000000") {
+      purchased = Number(
+        formatEther(await contract?.tokenAmountByParticipation(allocation))
+      );
+      claimed = Number(
+        formatEther(await contract?.tokensClaimed(signerAdress))
+      );
+      claimable = Number(
+        formatEther(await contract?.previewClaimableTokens(signerAdress))
+      );
+    } else {
+      if (allocation > 0) {
+        purchased = allocation / generalInfo.amounts.tokenPrice;
+      }
+    }
 
     return {
-      allocation,
       walletRange,
       isWhitelisted,
       linkedWallet,
-      balanceEther,
-      balanceToken,
-      acceptedTokenBalance,
-    };
+      balance,
+      allocation,
+      purchased,
+      claimed,
+      claimable,
+    } as IDO_USER_INFO;
   } catch (e) {
-    handleError({ e: e, notificate: true });
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
   }
 }
+
+// ========================================================================
+// REGISTER ===============================================================
+// ========================================================================
+
+export async function register(index: number, signer: ethers.Signer) {
+  try {
+    const contract = await getContract(index, signer);
+    const network = await signer.provider?.getNetwork();
+    const tx = await contract?.register();
+    await notificateTx(tx, network);
+  } catch (e) {
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
+  }
+}
+
+// ========================================================================
+// LINK WALLET ============================================================
+// ========================================================================
 
 export async function linkWallet(
   index: number,
@@ -289,31 +413,16 @@ export async function linkWallet(
   try {
     const contract = await getContract(index, signer);
     const network = await signer.provider?.getNetwork();
-    const usingLinkedWallet = await contract?.usingLinkedWallet();
-
-    if (usingLinkedWallet) {
-      const tx = await contract?.linkWallet(linkedWallet);
-      await notificateTx(tx, network);
-    }
-  } catch (e) {
-    handleError({ e: e, notificate: true });
-  }
-}
-
-// REGISTER
-
-export async function register(index: number, signer: ethers.Signer) {
-  try {
-    const contract = await getContract(index, signer);
-    const network = await signer.provider?.getNetwork();
-    const tx = await contract?.registerToWhitelist();
+    const tx = await contract?.linkWallet(linkedWallet);
     await notificateTx(tx, network);
   } catch (e) {
-    handleError({ e: e, notificate: true });
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
   }
 }
 
-// PARTICIPATE IN THE IDO
+// ========================================================================
+// PARTICIPATE ============================================================
+// ========================================================================
 
 export async function participate(
   index: number,
@@ -337,7 +446,7 @@ export async function participate(
 
     await notificateTx(tx, network);
   } catch (e) {
-    handleError({ e: e, notificate: true });
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
   }
 }
 
@@ -356,9 +465,96 @@ export async function participateETH(
 
     await notificateTx(tx, network);
   } catch (e) {
-    handleError({ e: e, notificate: true });
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
   }
 }
+
+// ========================================================================
+// REFUND =================================================================
+// ========================================================================
+
+export async function getRefund(index: number, signer: ethers.Signer) {
+  try {
+    const contract = await getContract(index, signer);
+    const network = await signer.provider?.getNetwork();
+
+    const tx = await contract?.getRefund();
+    await notificateTx(tx, network);
+  } catch (e) {
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
+  }
+}
+
+// ========================================================================
+// CLAIM ==================================================================
+// ========================================================================
+
+export async function claim(index: number, signer: ethers.Signer) {
+  try {
+    const contract = await getContract(index, signer);
+    const network = await signer.provider?.getNetwork();
+
+    const tx = await contract?.claim();
+    await notificateTx(tx, network);
+  } catch (e) {
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
+  }
+}
+
+// ========================================================================
+// CURRENT PHASE ==========================================================
+// ========================================================================
+
+export async function phaseInfo(index: number, generalInfo: IDO_GENERAL_INFO) {
+  // const ido = NEW_IDOS[index];
+  // const contract = await getContract(index, undefined);
+
+  const now = getUnixTime(new Date());
+
+  if (generalInfo.isPaused) {
+    return "Paused";
+  }
+
+  if (now < generalInfo.periods.registrationAt) {
+    return "Upcoming";
+  }
+
+  if (
+    now >= generalInfo.periods.registrationAt &&
+    now <= generalInfo.periods.participationStartsAt
+  ) {
+    return "Registration";
+  }
+
+  if (
+    now >= generalInfo.periods.participationStartsAt &&
+    now <= generalInfo.periods.participationEndsAt
+  ) {
+    return "Participation";
+  }
+
+  if (
+    now >= generalInfo.periods.vestingAt &&
+    now <= generalInfo.periods.cliffEndsAt
+  ) {
+    return "Cliff";
+  }
+
+  if (
+    now > generalInfo.periods.cliffEndsAt &&
+    now <= generalInfo.periods.vestingEndsAt
+  ) {
+    return "Vesting";
+  }
+
+  if (now > generalInfo.periods.vestingEndsAt) {
+    return "Vested";
+  }
+}
+
+//  ========================================================================
+// ADMIN FUNCTIONS =========================================================
+//  ========================================================================
 
 export async function makePublic(index: number, signer: ethers.Signer) {
   try {
@@ -372,7 +568,7 @@ export async function makePublic(index: number, signer: ethers.Signer) {
       await notificateTx(tx, network);
     }
   } catch (e) {
-    handleError({ e: e, notificate: true });
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
   }
 }
 
@@ -388,7 +584,7 @@ export async function withdraw(index: number, signer: ethers.Signer) {
       await notificateTx(tx, network);
     }
   } catch (e) {
-    handleError({ e: e, notificate: true });
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
   }
 }
 
@@ -406,7 +602,7 @@ export async function togglePause(index: number, signer: ethers.Signer) {
       await notificateTx(tx, network);
     }
   } catch (e) {
-    handleError({ e: e, notificate: true });
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
   }
 }
 
@@ -432,37 +628,47 @@ export async function updateRanges(
     const tx = await contract?.setRanges(formattedRanges);
     await notificateTx(tx, network);
   } catch (e) {
-    handleError({ e: e, notificate: true });
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
   }
 }
 
-export async function phaseInfo(index: number) {
-  // const ido = NEW_IDOS[index];
-  // const registrationStartsAt = ido.registrationStartsAt;
-  // const participationStartAt = ido.participationStartsAt;
-  // const publicEndsAt = ido.publicParticipationEndsAt;
-  // const now = getUnixTime(new Date());
-  // const isPaused = await checkIsPaused(index);
+export async function setIDOToken(
+  index: number,
+  tokenAddress: string,
+  signer: ethers.Signer
+) {
+  const contract = await getContract(index, signer);
+  try {
+    const owner = await contract?.owner();
+    const signerAddress = await signer.getAddress();
 
-  let phase = "Participation";
+    if (owner === signerAddress) {
+      const network = await signer.provider?.getNetwork();
+      const tx = await contract?.setIDOToken(tokenAddress);
+      await notificateTx(tx, network);
+    }
+  } catch (e) {
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
+  }
+}
 
-  // if (now >= registrationStartsAt && now <= participationStartAt && !isPaused)
-  //   phase = "Registration";
-  // if (now >= participationStartAt && now <= publicEndsAt && !isPaused)
-  //   phase = "Participation";
+// fillIDOToken(uint256 amount) external
+export async function fillIDOToken(
+  index: number,
+  amount: string,
+  signer: ethers.Signer
+) {
+  const contract = await getContract(index, signer);
+  try {
+    const owner = await contract?.owner();
+    const signerAddress = await signer.getAddress();
 
-  // const contract = await getContract(index, undefined);
-  // const publicRange = await contract?.getRange(0);
-  // const usingETH = await contract?.usingETH();
-  // const range = parseWalletRange(publicRange, usingETH ? 18 : 6);
-
-  // const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
-  // const maxAllocations = Number(
-  //   ethers.formatUnits(await contract?.maxAllocations(), 6)
-  // );
-
-  // if (maxAllocations - raised < range.minPerWallet) phase = "Completed";
-  // if (isPaused && raised > 0) phase = "Completed";
-
-  return phase;
+    if (owner === signerAddress) {
+      const network = await signer.provider?.getNetwork();
+      const tx = await contract?.fillIDOToken(parseEther(amount));
+      await notificateTx(tx, network);
+    }
+  } catch (e) {
+    await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
+  }
 }

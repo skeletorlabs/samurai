@@ -21,3 +21,7 @@ export function formattedDate3(timestamp: number) {
     " UTC"
   );
 }
+
+export function convertDateToUnixTimestamp(date: Date) {
+  return Math.floor(date.getTime() / 1000);
+}

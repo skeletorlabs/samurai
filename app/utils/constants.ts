@@ -31,6 +31,7 @@ import {
   kvants,
   memepad,
   nexis,
+  skywalker,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -77,6 +78,58 @@ export const VestingType: { [key: number]: string } = {
 };
 
 export const NEW_IDOS: IDO_v2[] = [
+  {
+    id: "launchpad-v3/skywalker",
+    logo: skywalker,
+    idoImageSrc: "/IDOs/skywalker.png",
+    acceptedTokenSymbol: "fUSDC",
+    tokenNetwork: "Solana",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/SOLANA.svg",
+    projectName: "Skywalker",
+    projectListDescription:
+      "Introducing Skywalker (SKR), your ticket to the digital cosmos. Join the force and embark on a thrilling journey.",
+    projectDescription:
+      "Unleash the power of Skywalker (SKR). This innovative token is your passport to a new galaxy of opportunities. Experience the future of finance, technology, and community. May the force be with your investments!",
+    projectTokenSymbol: "$SKR",
+    projectBigDescription: `
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <p>Prepare to be amazed as Skywalker (SKR) revolutionizes the way you interact with digital assets. This groundbreaking token is not just about financial gain; it's a gateway to a vibrant community united by a shared vision of innovation.</p>
+      <p>With SKR, you're not just an investor; you're a pioneer exploring uncharted territories. Backed by cutting-edge technology and a dedicated team, Skywalker is poised to become a cornerstone of the digital economy.</p>
+      <p>Embrace the future with SKR. Join a movement that empowers individuals and drives positive change. The possibilities are endless. Are you ready to take flight?</p>
+    </div>
+`,
+    price: 0.008,
+    allocation: 100_000,
+    date: 1723723200,
+    fcfs: 1723723200 + 86400 / 2,
+    investmentRound: "Private",
+    fdv: 6000000,
+    exchangeListingPrice: 0.01,
+    marketCapAtTGE: 182250,
+    socials: [
+      {
+        svg: globe,
+        href: "https://memepad.ai/",
+      },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/MemePadSol",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/Memepad_Community",
+      },
+    ],
+    contract: "0x915Fd4218E1593129c9938a2117dc308632650e8",
+    abi: IDO_ABI,
+    // images: [
+    //   "/IDOs/memepad/1.png",
+    //   "/IDOs/memepad/2.png",
+    //   "/IDOs/memepad/3.png",
+    //   "/IDOs/memepad/4.png",
+    // ],
+  },
   {
     id: "launchpad-v3/whatever",
     logo: memepad,
@@ -899,6 +952,17 @@ export const TOKENS_TO_SYMBOL: Record<string, string> = {
   "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA": "USDbC",
   "0x5FbDB2315678afecb367f032d93F642f64180aa3": "USDC", // MOCKED TOKEN
   "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512": "USDbC", // MOCKED TOKEN
+  "0x888f2e45d3c27d9cae72aca93174c530dfb3d4d8": "SKR", // SKYEWALKER
+  "0x2a064000D0252d16c57FAFD1586bE7ce5deD8320": "fUSDC", // FakeUSDC
+};
+
+export const TOKENS_TO_ICON: Record<string, string> = {
+  "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913": "/usdc-icon.svg",
+  "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA": "usdc-icon.svg",
+  "0x5FbDB2315678afecb367f032d93F642f64180aa3": "/usdc-icon.svg", // MOCKED TOKEN
+  "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512": "/usdc-icon.svg", // MOCKED TOKEN
+  "0x888f2e45d3c27d9cae72aca93174c530dfb3d4d8": "/skr-icon.svg", // SKYEWALKER
+  "0x2a064000D0252d16c57FAFD1586bE7ce5deD8320": "/fusdc-icon.svg", // FakeUSDC
 };
 
 export const NAV = [

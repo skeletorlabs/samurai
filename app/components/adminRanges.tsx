@@ -43,7 +43,7 @@ export default function AdminRanges({ idoIndex, ranges }: AdminRanges) {
       <div className="flex items-center flex-wrap gap-10">
         {walletRanges.map((range, index) => (
           <div key={index} className="flex flex-col mt-5 border-b pb-10">
-            <span className="font-bold bg-samurai-red p-4 mt-5 rounded-lg">
+            <span className="font-bold bg-samurai-red p-4 mt-5">
               {range.name}
             </span>
             <div className="flex items-center gap-3 mt-2">
@@ -52,7 +52,7 @@ export default function AdminRanges({ idoIndex, ranges }: AdminRanges) {
                 <input
                   type="text"
                   placeholder="Enter the wallet you want to blacklist"
-                  className="text-black rounded-[8px]"
+                  className="text-black"
                   onChange={(e) => setRange(index, "min", e.target.value)}
                   value={range.minPerWallet}
                 />
@@ -63,7 +63,7 @@ export default function AdminRanges({ idoIndex, ranges }: AdminRanges) {
                 <input
                   type="text"
                   placeholder="Enter the wallet you want to blacklist"
-                  className="text-black rounded-[8px]"
+                  className="text-black"
                   onChange={(e) => setRange(index, "max", e.target.value)}
                   value={range.maxPerWallet}
                 />
