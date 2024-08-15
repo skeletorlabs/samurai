@@ -101,12 +101,12 @@ export const NEW_IDOS: IDO_v2[] = [
 `,
     price: 0.008,
     allocation: 100_000,
-    date: 1723723200,
-    fcfs: 1723723200 + 86400 / 2,
+    date: 1723809600,
+    fcfs: 1723809600 + 86_400 / 2,
     investmentRound: "Private",
-    fdv: 6000000,
+    fdv: 10_000_000,
     exchangeListingPrice: 0.01,
-    marketCapAtTGE: 182250,
+    marketCapAtTGE: 375_000,
     socials: [
       {
         svg: globe,
@@ -130,60 +130,112 @@ export const NEW_IDOS: IDO_v2[] = [
     //   "/IDOs/memepad/4.png",
     // ],
   },
-  {
-    id: "launchpad-v3/whatever",
-    logo: memepad,
-    idoImageSrc: "/IDOs/memepad.png",
-    acceptedTokenSymbol: "USDC",
-    tokenNetwork: "Solana",
-    crowdsaleNetwork: "BASE",
-    networkImageSrc: "/chain-logos/SOLANA.svg",
-    projectName: "Whatever",
-    projectListDescription:
-      "MemePad is set to become the number-one dedicated memecoin launchpad in crypto!",
-    projectDescription:
-      "MemePad is here to bring order to the chaos of the memecoin space. With strict vetting procedures and built-in anti-rug protection, they're creating a secure, high-quality launchpad for the 'hottest memecoins on Solana and beyond' where degens can chase 100x moonshots with confidence.",
-    projectTokenSymbol: "$MPAD",
-    projectBigDescription: `
-    <div style="display: flex; flex-direction: column; gap: 15px;">
-      <p>MemePad is setting out to solve the trifecta of problems plaguing the memecoin space: low-quality projects, a lack of transparency from teams, and security risks. They do this by sourcing only top-quality projects with doxxed teams, subjecting them to rigorous due diligence, and launching them with built-in protection against rug pulls</p>
-      <p>Only top-tier memecoins are selected to join the MemeVerse (MemePad's line-up of launchpad alumni). To pass initial screening, a project has to have a strong long-term vision for the token growth, community, and utility.</p>
-      <p>MemePad also implements strict security procedures to keep your investments safe. We're talking audits, mandatory KYC, locked team tokens, and more. They will also run their own insurance funds, used to compensate the community in the unlikely event that a MemeVerse project is compromised and goes to zero.</p>
-      <p>$MPAD holders have the option to participate for the main token sales, or go in on exclusive early 'Ape In' rounds with cheaper prices and special bonuses.</p>
-      <p>And as a reward for participating on the platform, holders will also be getting regularly showered with airdrops sourced form MemePad's featured projects!</p>
-    </div>
-`,
-    price: 0.1,
-    allocation: 50_000,
-    date: 1723377600,
-    fcfs: 1723377600 + 86400 / 2,
-    investmentRound: "Private",
-    fdv: 6000000,
-    exchangeListingPrice: 0.6,
-    marketCapAtTGE: 182250,
-    socials: [
-      {
-        svg: globe,
-        href: "https://memepad.ai/",
-      },
-      {
-        svg: twitterX,
-        href: "https://twitter.com/MemePadSol",
-      },
-      {
-        svg: telegram,
-        href: "https://t.me/Memepad_Community",
-      },
-    ],
-    contract: "0x915Fd4218E1593129c9938a2117dc308632650e8",
-    abi: IDO_ABI,
-    images: [
-      "/IDOs/memepad/1.png",
-      "/IDOs/memepad/2.png",
-      "/IDOs/memepad/3.png",
-      "/IDOs/memepad/4.png",
-    ],
-  },
+  //   {
+  //     id: "launchpad-v3/skywalker",
+  //     logo: skywalker,
+  //     idoImageSrc: "/IDOs/skywalker.png",
+  //     acceptedTokenSymbol: "fUSDC",
+  //     tokenNetwork: "Solana",
+  //     crowdsaleNetwork: "BASE",
+  //     networkImageSrc: "/chain-logos/SOLANA.svg",
+  //     projectName: "Skywalker",
+  //     projectListDescription:
+  //       "Introducing Skywalker (SKR), your ticket to the digital cosmos. Join the force and embark on a thrilling journey.",
+  //     projectDescription:
+  //       "Unleash the power of Skywalker (SKR). This innovative token is your passport to a new galaxy of opportunities. Experience the future of finance, technology, and community. May the force be with your investments!",
+  //     projectTokenSymbol: "$SKR",
+  //     projectBigDescription: `
+  //     <div style="display: flex; flex-direction: column; gap: 15px;">
+  //       <p>Prepare to be amazed as Skywalker (SKR) revolutionizes the way you interact with digital assets. This groundbreaking token is not just about financial gain; it's a gateway to a vibrant community united by a shared vision of innovation.</p>
+  //       <p>With SKR, you're not just an investor; you're a pioneer exploring uncharted territories. Backed by cutting-edge technology and a dedicated team, Skywalker is poised to become a cornerstone of the digital economy.</p>
+  //       <p>Embrace the future with SKR. Join a movement that empowers individuals and drives positive change. The possibilities are endless. Are you ready to take flight?</p>
+  //     </div>
+  // `,
+  //     price: 0.008,
+  //     allocation: 100_000,
+  //     date: 1723723200,
+  //     fcfs: 1723723200 + 86400 / 2,
+  //     investmentRound: "Private",
+  //     fdv: 6000000,
+  //     exchangeListingPrice: 0.01,
+  //     marketCapAtTGE: 182250,
+  //     socials: [
+  //       {
+  //         svg: globe,
+  //         href: "https://memepad.ai/",
+  //       },
+  //       {
+  //         svg: twitterX,
+  //         href: "https://twitter.com/MemePadSol",
+  //       },
+  //       {
+  //         svg: telegram,
+  //         href: "https://t.me/Memepad_Community",
+  //       },
+  //     ],
+  //     contract: "0x915Fd4218E1593129c9938a2117dc308632650e8",
+  //     abi: IDO_ABI,
+  //     // images: [
+  //     //   "/IDOs/memepad/1.png",
+  //     //   "/IDOs/memepad/2.png",
+  //     //   "/IDOs/memepad/3.png",
+  //     //   "/IDOs/memepad/4.png",
+  //     // ],
+  //   },
+  //   {
+  //     id: "launchpad-v3/whatever",
+  //     logo: memepad,
+  //     idoImageSrc: "/IDOs/memepad.png",
+  //     acceptedTokenSymbol: "USDC",
+  //     tokenNetwork: "Solana",
+  //     crowdsaleNetwork: "BASE",
+  //     networkImageSrc: "/chain-logos/SOLANA.svg",
+  //     projectName: "Whatever",
+  //     projectListDescription:
+  //       "MemePad is set to become the number-one dedicated memecoin launchpad in crypto!",
+  //     projectDescription:
+  //       "MemePad is here to bring order to the chaos of the memecoin space. With strict vetting procedures and built-in anti-rug protection, they're creating a secure, high-quality launchpad for the 'hottest memecoins on Solana and beyond' where degens can chase 100x moonshots with confidence.",
+  //     projectTokenSymbol: "$MPAD",
+  //     projectBigDescription: `
+  //     <div style="display: flex; flex-direction: column; gap: 15px;">
+  //       <p>MemePad is setting out to solve the trifecta of problems plaguing the memecoin space: low-quality projects, a lack of transparency from teams, and security risks. They do this by sourcing only top-quality projects with doxxed teams, subjecting them to rigorous due diligence, and launching them with built-in protection against rug pulls</p>
+  //       <p>Only top-tier memecoins are selected to join the MemeVerse (MemePad's line-up of launchpad alumni). To pass initial screening, a project has to have a strong long-term vision for the token growth, community, and utility.</p>
+  //       <p>MemePad also implements strict security procedures to keep your investments safe. We're talking audits, mandatory KYC, locked team tokens, and more. They will also run their own insurance funds, used to compensate the community in the unlikely event that a MemeVerse project is compromised and goes to zero.</p>
+  //       <p>$MPAD holders have the option to participate for the main token sales, or go in on exclusive early 'Ape In' rounds with cheaper prices and special bonuses.</p>
+  //       <p>And as a reward for participating on the platform, holders will also be getting regularly showered with airdrops sourced form MemePad's featured projects!</p>
+  //     </div>
+  // `,
+  //     price: 0.1,
+  //     allocation: 50_000,
+  //     date: 1723377600,
+  //     fcfs: 1723377600 + 86400 / 2,
+  //     investmentRound: "Private",
+  //     fdv: 6000000,
+  //     exchangeListingPrice: 0.6,
+  //     marketCapAtTGE: 182250,
+  //     socials: [
+  //       {
+  //         svg: globe,
+  //         href: "https://memepad.ai/",
+  //       },
+  //       {
+  //         svg: twitterX,
+  //         href: "https://twitter.com/MemePadSol",
+  //       },
+  //       {
+  //         svg: telegram,
+  //         href: "https://t.me/Memepad_Community",
+  //       },
+  //     ],
+  //     contract: "0x915Fd4218E1593129c9938a2117dc308632650e8",
+  //     abi: IDO_ABI,
+  //     images: [
+  //       "/IDOs/memepad/1.png",
+  //       "/IDOs/memepad/2.png",
+  //       "/IDOs/memepad/3.png",
+  //       "/IDOs/memepad/4.png",
+  //     ],
+  //   },
 ];
 
 export const IDO_LIST: IDO[] = [
@@ -1053,6 +1105,5 @@ export const SAM_NFT = "0x519eD34150300dC0D04d50a5Ff401177A92b4406";
 export const SAM_LOCK_ADDRESS = "0xfb691697BDAf1857C748C004cC7dab3d234E062E";
 export const SAM_ADDRESS = "0xed1779845520339693CDBffec49a74246E7D671b";
 export const SAM_CLAIM_VESTING = "0xDD687b579c5C542A14874e79E404b83E78e6E18a"; // BASE MAINNET
-// export const SAM_CLAIM_VESTING = "0xE42c1929612bBc03572C518bAf05c38147D5d67e"; // BASE SEPOLIA
 export const SAM_TIERS = "0xdB0Ee72eD5190e9ef7eEC288a92f73c5cf3B3c74";
 export const SAM_FACTORY = "0x74D1a23F90eB7b5D6A162d05eF30DC42E5cd35AE";

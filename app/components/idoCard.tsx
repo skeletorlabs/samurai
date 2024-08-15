@@ -2,9 +2,14 @@ import { IDO, IDO_v2 } from "@/app/utils/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { formattedDate } from "@/app/utils/formattedDate";
-import { IDO_LIST } from "@/app/utils/constants";
+import { NEW_IDOS } from "@/app/utils/constants";
 import { getParticipationPhase } from "@/app/contracts_integrations/ido";
 import { useCallback, useEffect, useState } from "react";
+import {
+  generalInfo,
+  IDO_GENERAL_INFO,
+  phaseInfo,
+} from "../contracts_integrations/idoFull";
 
 export default function IdoCard({
   ido,
@@ -16,13 +21,14 @@ export default function IdoCard({
   const [phase, setPhase] = useState("");
 
   const getPhase = useCallback(async () => {
-    // const contract = IDO_LIST.findIndex(
-    //   (item) => item.contract === ido.contract
-    // );
+    const idoIndex = NEW_IDOS.findIndex(
+      (item) => item.contract === ido.contract
+    );
 
-    // const phase = await getParticipationPhase(contract);
-    const phase = "Upcoming";
-    setPhase(phase.toUpperCase());
+    const general = await generalInfo(idoIndex);
+    const phase = await phaseInfo(idoIndex, general as IDO_GENERAL_INFO);
+
+    if (phase) setPhase(phase.toUpperCase());
   }, [ido]);
 
   useEffect(() => {
@@ -76,8 +82,8 @@ export default function IdoCard({
             <Image
               src={ido.networkImageSrc}
               alt={ido.tokenNetwork}
-              width={24}
-              height={24}
+              width={22}
+              height={22}
               className="p-[1px] bg-white/80 rounded-full"
             />
           </div>
@@ -85,15 +91,15 @@ export default function IdoCard({
 
         <div
           className={`flex items-center gap-2 bg-black/90 px-2 py-1 rounded-lg text-[14px] border border-white/20 absolute ${
-            ido?.tokenNetwork === "TBA" ? "top-4" : "top-14"
+            ido?.tokenNetwork === "TBA" ? "top-4" : "top-[52px]"
           } left-4`}
         >
           <span className="text-sm">Crowdsale</span>
           <Image
             src="/chain-logos/Base_Symbol_Blue.svg"
             alt={ido.projectName}
-            width={24}
-            height={24}
+            width={22}
+            height={22}
             className="p-[1px] bg-white/80 rounded-full"
           />
         </div>
