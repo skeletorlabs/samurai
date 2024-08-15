@@ -38,7 +38,6 @@ const baseURL = process.env.NEXT_PUBLIC_IDEOFUZION_URL;
 const testBscURL = process.env.NEXT_PUBLIC_IDEOFUZION_TEST_URL;
 
 function getUrl(chain: number) {
-  console.log("chain", chain);
   return `${chain === 8453 ? baseURL : testBscURL}/api`;
 }
 
@@ -46,7 +45,6 @@ export async function getClaimInfos(account: string, chain: number) {
   const apiUrl = getUrl(chain);
   const url = `${apiUrl}/vestingschedules/wallet-claims?address=${account}`;
   const response = await fetch(url);
-  console.log(response);
   const json = await response.json();
   const data: VestingSchedule[] = json.data;
 
