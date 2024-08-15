@@ -35,10 +35,15 @@ export type ClaimVestingParams = {
 };
 
 const baseURL = process.env.NEXT_PUBLIC_IDEOFUZION_URL;
+const testBscURL = process.env.NEXT_PUBLIC_IDEOFUZION_TEST_URL;
 
-export async function getClaimInfos(account: string) {
-  const url = `${baseURL}/api/vestingschedules/wallet-claims?address=${account}`;
+function getUrl(chain: number) {
+  return `${chain === 8453 ? baseURL : testBscURL}/api`;
+}
 
+export async function getClaimInfos(account: string, chain: number) {
+  const apiUrl = getUrl(chain);
+  const url = `${apiUrl}/vestingschedules/wallet-claims?address=${account}`;
   const response = await fetch(url);
   const json = await response.json();
   const data: VestingSchedule[] = json.data;
@@ -46,8 +51,13 @@ export async function getClaimInfos(account: string) {
   return data;
 }
 
-async function getClaimVestingParams(claimmAll: boolean, account: string) {
-  const url = `${baseURL}/api/vestingschedules/claim`;
+async function getClaimVestingParams(
+  claimmAll: boolean,
+  account: string,
+  chain: number
+) {
+  const apiUrl = getUrl(chain);
+  const url = `${apiUrl}/vestingschedules/claim`;
 
   try {
     const response = await fetch(url, {
@@ -71,10 +81,15 @@ async function getClaimVestingParams(claimmAll: boolean, account: string) {
 export async function claimVesting(
   claimmAll: boolean,
   account: string,
-  signer: JsonRpcSigner
+  signer: JsonRpcSigner,
+  chain: number
 ) {
   try {
-    const claimVestingParams = await getClaimVestingParams(claimmAll, account);
+    const claimVestingParams = await getClaimVestingParams(
+      claimmAll,
+      account,
+      chain
+    );
 
     if (claimVestingParams) {
       const contract = new ethers.Contract(

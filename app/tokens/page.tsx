@@ -133,7 +133,7 @@ export default function Tokens() {
       </div>
 
       {/* STAKING */}
-      <div
+      {/* <div
         id="lock"
         className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/10 md:bg-white/20 border-t border-samurai-red/50 border-dotted relative"
       >
@@ -191,7 +191,7 @@ export default function Tokens() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <ClaimSam />
     </>
   );
