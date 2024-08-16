@@ -313,6 +313,11 @@ export default function Ido() {
 
   useEffect(() => {
     if (
+      currentPhase?.toUpperCase() == "REGISTRATION" ||
+      currentPhase?.toUpperCase() == "PARTICIPATION"
+    )
+      setTab(1);
+    if (
       currentPhase?.toUpperCase() === "CLIFF" ||
       currentPhase?.toUpperCase() === "VESTING" ||
       currentPhase?.toUpperCase() === "VESTED"
@@ -965,107 +970,103 @@ export default function Ido() {
 
                               {currentPhase?.toLowerCase() ===
                                 "participation" &&
-                                user?.allocation <
-                                  user?.walletRange?.maxPerWallet &&
-                                (user?.isWhitelisted || general?.isPublic) &&
-                                ((general?.usingLinkedWallet &&
-                                  user?.linkedWallet) ||
-                                  !general?.usingLinkedWallet) && (
-                                  <div className="flex flex-col justify-center min-w-full">
-                                    <div className="flex items-center justify-between w-full">
-                                      <span className="self-end text-[10px] lg:text-[12px] mb-1 mr-1">
-                                        MIN{" "}
-                                        {Number(
-                                          user?.walletRange?.minPerWallet
-                                        ).toLocaleString("en-us", {
-                                          minimumFractionDigits: 2,
-                                          maximumFractionDigits: 2,
-                                        })}
-                                        {" / "}
-                                        MAX{" "}
-                                        {Number(
-                                          user?.walletRange?.maxPerWallet
-                                        ).toLocaleString("en-us", {
-                                          minimumFractionDigits: 2,
-                                          maximumFractionDigits: 2,
-                                        })}{" "}
-                                        {TOKENS_TO_SYMBOL[selectedToken]}
-                                      </span>
-                                      <button
-                                        onClick={() =>
-                                          onInputChange(
-                                            (user?.balance || 0).toString()
-                                          )
-                                        }
-                                        className="self-end text-[10px] lg:text-[12px] mb-1 hover:text-samurai-red mr-1"
-                                      >
-                                        BALANCE:{" "}
-                                        {Number(
-                                          user?.balance || 0
-                                        ).toLocaleString("en-us")}{" "}
-                                        {TOKENS_TO_SYMBOL[selectedToken]}
-                                      </button>
-                                    </div>
+                              user?.allocation <
+                                user?.walletRange?.maxPerWallet &&
+                              (user?.isWhitelisted || general?.isPublic) &&
+                              ((general?.usingLinkedWallet &&
+                                user?.linkedWallet) ||
+                                !general?.usingLinkedWallet) ? (
+                                <div className="flex flex-col justify-center min-w-full">
+                                  <div className="flex items-center justify-between w-full">
+                                    <span className="self-end text-[10px] lg:text-[12px] mb-1 mr-1">
+                                      MIN{" "}
+                                      {Number(
+                                        user?.walletRange?.minPerWallet
+                                      ).toLocaleString("en-us", {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                      })}
+                                      {" / "}
+                                      MAX{" "}
+                                      {Number(
+                                        user?.walletRange?.maxPerWallet
+                                      ).toLocaleString("en-us", {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                      })}{" "}
+                                      {TOKENS_TO_SYMBOL[selectedToken]}
+                                    </span>
+                                    <button
+                                      onClick={() =>
+                                        onInputChange(
+                                          (user?.balance || 0).toString()
+                                        )
+                                      }
+                                      className="self-end text-[10px] lg:text-[12px] mb-1 hover:text-samurai-red mr-1"
+                                    >
+                                      BALANCE:{" "}
+                                      {Number(
+                                        user?.balance || 0
+                                      ).toLocaleString("en-us")}{" "}
+                                      {TOKENS_TO_SYMBOL[selectedToken]}
+                                    </button>
+                                  </div>
 
-                                    <div className="relative w-full">
-                                      <input
-                                        type="text"
-                                        placeholder={`${
-                                          TOKENS_TO_SYMBOL[
-                                            general?.acceptedToken
-                                          ]
-                                        } to allocate`}
-                                        className="w-full p-2 lg:p-4 placeholder-black/50 text-black"
-                                        value={inputValue}
-                                        onChange={(e) =>
-                                          onInputChange(e.target.value)
+                                  <div className="relative w-full">
+                                    <input
+                                      type="text"
+                                      placeholder={`${
+                                        TOKENS_TO_SYMBOL[general?.acceptedToken]
+                                      } to allocate`}
+                                      className="w-full p-2 lg:p-4 placeholder-black/50 text-black"
+                                      value={inputValue}
+                                      onChange={(e) =>
+                                        onInputChange(e.target.value)
+                                      }
+                                    />
+                                    <div className="absolute top-[7px] lg:top-[15px] right-2 flex items-center gap-1">
+                                      <Image
+                                        src={
+                                          TOKENS_TO_ICON[general?.acceptedToken]
                                         }
+                                        width={32}
+                                        height={32}
+                                        alt="USDC"
+                                        placeholder="blur"
+                                        blurDataURL="/usdc-icon.svg"
+                                        className="w-6 h-6"
                                       />
-                                      <div className="absolute top-[7px] lg:top-[15px] right-2 flex items-center gap-1">
-                                        <Image
-                                          src={
-                                            TOKENS_TO_ICON[
+                                      <div className="flex items-center text-black/80 mr-2 text-lg font-bold">
+                                        <span>
+                                          {
+                                            TOKENS_TO_SYMBOL[
                                               general?.acceptedToken
                                             ]
                                           }
-                                          width={32}
-                                          height={32}
-                                          alt="USDC"
-                                          placeholder="blur"
-                                          blurDataURL="/usdc-icon.svg"
-                                          className="w-6 h-6"
-                                        />
-                                        <div className="flex items-center text-black/80 mr-2 text-lg font-bold">
-                                          <span>
-                                            {
-                                              TOKENS_TO_SYMBOL[
-                                                general?.acceptedToken
-                                              ]
-                                            }
-                                          </span>
-                                        </div>
+                                        </span>
                                       </div>
                                     </div>
+                                  </div>
 
-                                    {/* PARTICIPATE BUTTON */}
+                                  {/* PARTICIPATE BUTTON */}
 
-                                    <button
-                                      onClick={onParticipate}
-                                      disabled={
-                                        loading ||
-                                        !general ||
-                                        !user ||
-                                        general?.isPaused ||
-                                        (!user?.isWhitelisted &&
-                                          !general?.isPublic) ||
-                                        inputValue === "" ||
-                                        Number(inputValue) === 0 ||
-                                        Number(inputValue) <
-                                          user?.walletRange.minPerWallet ||
-                                        Number(inputValue) >
-                                          user?.walletRange.maxPerWallet
-                                      }
-                                      className={`
+                                  <button
+                                    onClick={onParticipate}
+                                    disabled={
+                                      loading ||
+                                      !general ||
+                                      !user ||
+                                      general?.isPaused ||
+                                      (!user?.isWhitelisted &&
+                                        !general?.isPublic) ||
+                                      inputValue === "" ||
+                                      Number(inputValue) === 0 ||
+                                      Number(inputValue) <
+                                        user?.walletRange.minPerWallet ||
+                                      Number(inputValue) >
+                                        user?.walletRange.maxPerWallet
+                                    }
+                                    className={`
                                         ${
                                           loading ||
                                           !general ||
@@ -1083,19 +1084,25 @@ export default function Ido() {
                                             : "bg-samurai-red text-white hover:opacity-75"
                                         }
                                           rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
-                                    >
-                                      {loading ? (
-                                        <Spinner
-                                          size="md"
-                                          color="gray"
-                                          className="opacity-40"
-                                        />
-                                      ) : (
-                                        "PARTICIPATE"
-                                      )}
-                                    </button>
-                                  </div>
-                                )}
+                                  >
+                                    {loading ? (
+                                      <Spinner
+                                        size="md"
+                                        color="gray"
+                                        className="opacity-40"
+                                      />
+                                    ) : (
+                                      "PARTICIPATE"
+                                    )}
+                                  </button>
+                                </div>
+                              ) : user?.isWhitelisted ? (
+                                <div className="flex min-w-full">
+                                  Please, wait until participation starts
+                                </div>
+                              ) : (
+                                <></>
+                              )}
                             </div>
                           )}
                           {/* VESTING TAB */}
