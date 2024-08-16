@@ -23,6 +23,7 @@ import { parseUnits } from "ethers";
 import { StateContext } from "../context/StateContext";
 import { GET } from "../api/verify";
 import { idoRaw } from "../contracts_integrations/idoFull";
+import { fromUnixTime } from "date-fns";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -442,33 +443,42 @@ export default function FactoryIdo() {
                     htmlFor="registrationAt"
                     className="mt-4 text-white text-lg"
                   >
-                    Registration Starts At
+                    Registration Starts At{" "}
+                    <span className="text-sm text-samurai-red">
+                      ({fromUnixTime(1723824000).toUTCString()})
+                    </span>
                   </label>
                   <input
                     type="text"
                     className="text-black rounded-lg"
                     name="registrationAt"
-                    defaultValue="1723806000"
+                    defaultValue="1723824000"
                     required
                   />
                   <label
                     htmlFor="participationStartsAt"
                     className="mt-4 text-white text-lg"
                   >
-                    Participations Starts At
+                    Participations Starts At{" "}
+                    <span className="text-sm text-samurai-red">
+                      ({fromUnixTime(1723831200).toUTCString()})
+                    </span>
                   </label>
                   <input
                     type="text"
                     className="text-black rounded-lg"
                     name="participationStartsAt"
-                    defaultValue="1723809600"
+                    defaultValue="1723831200"
                     required
                   />
                   <label
                     htmlFor="participationEndsAt"
                     className="mt-4 text-white text-lg"
                   >
-                    Participations Ends At
+                    Participations Ends At{" "}
+                    <span className="text-sm text-samurai-red">
+                      ({fromUnixTime(1723896000).toUTCString()})
+                    </span>
                   </label>
                   <input
                     type="text"
@@ -494,7 +504,10 @@ export default function FactoryIdo() {
                     htmlFor="vestingAt"
                     className="mt-4 text-white text-lg"
                   >
-                    Vesting Starts At (the TGE date)
+                    TGE at (vestingsStartsAt){" "}
+                    <span className="text-sm text-samurai-red">
+                      ({fromUnixTime(1723910400).toUTCString()})
+                    </span>
                   </label>
                   <input
                     type="text"

@@ -101,8 +101,8 @@ export const NEW_IDOS: IDO_v2[] = [
 `,
     price: 0.008,
     allocation: 100_000,
-    date: 1723809600,
-    fcfs: 1723809600 + 86_400 / 2,
+    date: 1723831200,
+    fcfs: 1723831200 + 86_400 / 2,
     investmentRound: "Private",
     fdv: 10_000_000,
     exchangeListingPrice: 0.01,
@@ -121,7 +121,7 @@ export const NEW_IDOS: IDO_v2[] = [
         href: "https://t.me/Memepad_Community",
       },
     ],
-    contract: "0x915Fd4218E1593129c9938a2117dc308632650e8",
+    contract: "0x3f124b180d56a721442c95a81f6d139fe8c91162",
     abi: IDO_ABI,
     // images: [
     //   "/IDOs/memepad/1.png",
@@ -1106,4 +1106,4 @@ export const SAM_LOCK_ADDRESS = "0xfb691697BDAf1857C748C004cC7dab3d234E062E";
 export const SAM_ADDRESS = "0xed1779845520339693CDBffec49a74246E7D671b";
 export const SAM_CLAIM_VESTING = "0xDD687b579c5C542A14874e79E404b83E78e6E18a"; // BASE MAINNET
 export const SAM_TIERS = "0xdB0Ee72eD5190e9ef7eEC288a92f73c5cf3B3c74";
-export const SAM_FACTORY = "0x74D1a23F90eB7b5D6A162d05eF30DC42E5cd35AE";
+export const SAM_FACTORY = "0x9Da8A3AA7eF8FC968b169104f119Ec4522daB742";

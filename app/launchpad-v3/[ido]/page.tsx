@@ -1289,7 +1289,7 @@ export default function Ido() {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}{" "}
-                    USD
+                    {general && TOKENS_TO_SYMBOL[general?.acceptedToken]}
                   </p>
                 </div>
 
