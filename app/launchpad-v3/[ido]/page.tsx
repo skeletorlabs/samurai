@@ -752,6 +752,19 @@ export default function Ido() {
                                       </p>
                                     </div>
                                   )}
+
+                                  <div className="flex flex-col px-2 rounded-md w-max">
+                                    <span className="text-neutral-600">
+                                      Refundable
+                                    </span>
+                                    <p className="text-white/70">
+                                      {general?.refund?.active
+                                        ? `Yes (${
+                                            general?.refund?.period / 60 / 60
+                                          } hours)`
+                                        : "No"}
+                                    </p>
+                                  </div>
                                 </>
                               )}
                             </div>
