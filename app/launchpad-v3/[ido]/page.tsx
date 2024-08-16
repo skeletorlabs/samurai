@@ -611,7 +611,7 @@ export default function Ido() {
                                   {general?.periods?.participationStartsAt
                                     ? formattedDate(
                                         general?.periods?.participationStartsAt
-                                      ) + "UTC"
+                                      ) + " UTC"
                                     : "---"}
                                 </p>
                               </div>
@@ -639,7 +639,7 @@ export default function Ido() {
                                   {general?.periods?.participationEndsAt
                                     ? formattedDate(
                                         general?.periods?.participationEndsAt
-                                      ) + "UTC"
+                                      ) + " UTC"
                                     : "---"}
                                 </p>
                               </div>
@@ -698,20 +698,21 @@ export default function Ido() {
                                 </div>
                               )}
 
-                              {currentPhase && currentPhase !== "Completed" && (
-                                <div className="flex flex-col px-2 rounded-md w-max">
-                                  <span className="text-neutral-600">
-                                    Raised
-                                  </span>
-                                  <p className="text-white/70">
-                                    $
-                                    {Number(general?.raised).toLocaleString(
-                                      "en-us"
-                                    )}{" "}
-                                    {ido?.acceptedTokenSymbol}
-                                  </p>
-                                </div>
-                              )}
+                              {currentPhase &&
+                                currentPhase.toUpperCase() !== "UPCOMING" && (
+                                  <div className="flex flex-col px-2 rounded-md w-max">
+                                    <span className="text-neutral-600">
+                                      Raised
+                                    </span>
+                                    <p className="text-white/70">
+                                      $
+                                      {Number(general?.raised).toLocaleString(
+                                        "en-us"
+                                      )}{" "}
+                                      {ido?.acceptedTokenSymbol}
+                                    </p>
+                                  </div>
+                                )}
 
                               {signer && account && (
                                 <>
@@ -1232,7 +1233,7 @@ export default function Ido() {
                 </div>
               </div>
 
-              {!loading && (
+              {!loading && currentPhase?.toUpperCase() !== "UPCOMING" && (
                 <IdoAllocationProgress
                   maxAllocations={general?.amounts?.maxAllocations || 0}
                   raised={general?.raised || 0}
@@ -1298,8 +1299,10 @@ export default function Ido() {
                   <p className="text-white/70">
                     {general
                       ? `${general?.amounts.tgeReleasePercent * 100}% at TGE, ${
-                          general?.periods.cliff
-                        } months cliff, ${
+                          general?.periods.cliff > 0
+                            ? `${general?.periods.cliff} months cliff`
+                            : "No Cliff"
+                        }, ${
                           general?.periods.vestingDuration
                         } months ${VestingType[
                           general?.vestingType as number
