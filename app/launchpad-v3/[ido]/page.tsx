@@ -1102,8 +1102,8 @@ export default function Ido() {
                                   </button>
                                 </div>
                               ) : user?.isWhitelisted ? (
-                                <div className="flex min-w-full">
-                                  Please, wait until participation starts
+                                <div className="flex min-w-full items-center justify-center text-lg">
+                                  Please, wait until participation starts.
                                 </div>
                               ) : (
                                 <></>
