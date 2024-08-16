@@ -10,6 +10,8 @@ import { HiHome, HiWallet, HiOutlineInformationCircle } from "react-icons/hi2";
 import { BiSolidCoin } from "react-icons/bi";
 
 import {
+  CHAIN_TO_CURRENCY,
+  CHAIN_TO_ICON,
   NEW_IDOS,
   phases,
   TOKENS_TO_ICON,
@@ -44,6 +46,7 @@ import {
   IDO_USER_INFO,
   getRefund,
   claim,
+  participateETH,
 } from "@/app/contracts_integrations/idoFull";
 import IdoAllocationProgress from "@/app/components/idoAllocationProgress";
 import { Tier, getTier } from "@/app/contracts_integrations/tiers";
@@ -93,7 +96,7 @@ export default function Ido() {
   const [imageSelected, setImageSelected] = useState("");
   const [tab, setTab] = useState(0);
 
-  const { signer, account } = useContext(StateContext);
+  const { signer, account, chain } = useContext(StateContext);
 
   const { ido: idoID } = useParams();
 
@@ -230,15 +233,21 @@ export default function Ido() {
   }, [signer, idoIndex, user, inputLinkedWallet, setSecondaryLoading]);
 
   const onParticipate = useCallback(async () => {
-    console.log("start participation");
     setSecondaryLoading(true);
     if (
       signer &&
       user &&
-      general?.acceptedToken &&
+      general &&
       (user?.isWhitelisted || general?.isPublic)
     ) {
-      await participate(idoIndex, signer, inputValue, general?.acceptedToken);
+      general?.usingETH
+        ? await participateETH(idoIndex, signer, inputValue)
+        : await participate(
+            idoIndex,
+            signer,
+            inputValue,
+            general?.acceptedToken
+          );
       await getGeneralData();
       await getUserInfos();
     }
@@ -250,7 +259,7 @@ export default function Ido() {
     setSecondaryLoading(true);
     if (
       signer &&
-      general?.acceptedToken &&
+      general &&
       user &&
       (user?.isWhitelisted || general?.isPublic)
     ) {
@@ -991,10 +1000,12 @@ export default function Ido() {
                                         "en-us",
                                         {
                                           minimumFractionDigits: 2,
-                                          maximumFractionDigits: 2,
+                                          // maximumFractionDigits: 2,
                                         }
                                       )}{" "}
-                                      {ido?.acceptedTokenSymbol}
+                                      {general?.usingETH
+                                        ? CHAIN_TO_CURRENCY[chain]
+                                        : ido?.acceptedTokenSymbol}
                                     </p>
                                     <div className="flex items-center justify-between w-full">
                                       <span className="self-end text-[10px] lg:text-[12px] mb-1 mr-1">
@@ -1003,7 +1014,7 @@ export default function Ido() {
                                           user?.walletRange?.minPerWallet
                                         ).toLocaleString("en-us", {
                                           minimumFractionDigits: 2,
-                                          maximumFractionDigits: 2,
+                                          // maximumFractionDigits: 2,
                                         })}
                                         {" / "}
                                         MAX{" "}
@@ -1011,7 +1022,7 @@ export default function Ido() {
                                           user?.walletRange?.maxPerWallet
                                         ).toLocaleString("en-us", {
                                           minimumFractionDigits: 2,
-                                          maximumFractionDigits: 2,
+                                          // maximumFractionDigits: 2,
                                         })}{" "}
                                         {
                                           TOKENS_TO_SYMBOL[
@@ -1031,11 +1042,11 @@ export default function Ido() {
                                         {Number(
                                           user?.balance || 0
                                         ).toLocaleString("en-us")}{" "}
-                                        {
-                                          TOKENS_TO_SYMBOL[
-                                            general?.acceptedToken
-                                          ]
-                                        }
+                                        {general?.usingETH
+                                          ? CHAIN_TO_CURRENCY[chain]
+                                          : TOKENS_TO_SYMBOL[
+                                              general?.acceptedToken
+                                            ]}
                                       </button>
                                     </div>
 
@@ -1044,9 +1055,11 @@ export default function Ido() {
                                         type="text"
                                         disabled={secondaryLoading}
                                         placeholder={`${
-                                          TOKENS_TO_SYMBOL[
-                                            general?.acceptedToken
-                                          ]
+                                          general?.usingETH
+                                            ? CHAIN_TO_CURRENCY[chain]
+                                            : TOKENS_TO_SYMBOL[
+                                                general?.acceptedToken
+                                              ]
                                         } to allocate`}
                                         className="w-full p-2 lg:p-4 placeholder-black/50 text-black"
                                         value={inputValue}
@@ -1057,24 +1070,30 @@ export default function Ido() {
                                       <div className="absolute top-[7px] lg:top-[15px] right-2 flex items-center gap-[5px]">
                                         <Image
                                           src={
-                                            TOKENS_TO_ICON[
-                                              general?.acceptedToken
-                                            ]
+                                            general?.usingETH
+                                              ? CHAIN_TO_ICON[chain]
+                                              : TOKENS_TO_ICON[
+                                                  general?.acceptedToken
+                                                ]
                                           }
                                           width={32}
                                           height={32}
-                                          alt="USDC"
-                                          placeholder="blur"
-                                          blurDataURL="/usdc-icon.svg"
+                                          alt={
+                                            general?.usingETH
+                                              ? CHAIN_TO_CURRENCY[chain]
+                                              : TOKENS_TO_SYMBOL[
+                                                  general?.acceptedToken
+                                                ]
+                                          }
                                           className="w-6 h-6"
                                         />
                                         <div className="flex items-center text-black/80 mr-2 text-lg font-bold">
                                           <span>
-                                            {
-                                              TOKENS_TO_SYMBOL[
-                                                general?.acceptedToken
-                                              ]
-                                            }
+                                            {general?.usingETH
+                                              ? CHAIN_TO_CURRENCY[chain]
+                                              : TOKENS_TO_SYMBOL[
+                                                  general?.acceptedToken
+                                                ]}
                                           </span>
                                         </div>
                                       </div>
@@ -1337,7 +1356,9 @@ export default function Ido() {
                     {Number(ido.exchangeListingPrice).toLocaleString("en-us", {
                       maximumFractionDigits: 4,
                     })}{" "}
-                    {general && TOKENS_TO_SYMBOL[general?.acceptedToken]}
+                    {general?.usingETH
+                      ? CHAIN_TO_CURRENCY[chain]
+                      : general && TOKENS_TO_SYMBOL[general?.acceptedToken]}
                   </p>
                 </div>
 
@@ -1451,7 +1472,11 @@ export default function Ido() {
 
               <div className="flex flex-col gap-2">
                 <p>
-                  TOTAL {TOKENS_TO_SYMBOL[general.acceptedToken]}:{" "}
+                  TOTAL{" "}
+                  {general?.usingETH
+                    ? CHAIN_TO_CURRENCY[chain]
+                    : TOKENS_TO_SYMBOL[general.acceptedToken]}
+                  :{" "}
                   {Number(general?.raised || 0).toLocaleString("en-us", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,

@@ -49,6 +49,7 @@ export type IDO_GENERAL_INFO = {
   isPublic: boolean;
   usingETH: boolean;
   usingLinkedWallet: boolean;
+  idoTokenDecimals: number;
   // periods
   periods: {
     registrationAt: number;
@@ -265,6 +266,7 @@ export async function generalInfo(index: number) {
       isPublic,
       usingETH,
       usingLinkedWallet,
+      idoTokenDecimals: DECIMALS,
       // periods
       periods: {
         registrationAt,

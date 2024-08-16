@@ -1017,6 +1017,22 @@ export const TOKENS_TO_ICON: Record<string, string> = {
   "0x2a064000D0252d16c57FAFD1586bE7ce5deD8320": "/fusdc-icon.svg", // FakeUSDC
 };
 
+export const CHAIN_TO_ICON: Record<number, string> = {
+  1: "/chain-logos/ETH.png", // ETHEREUM
+  43114: "/chain-logos/AVAX.png", // AVALANCHE
+  137: "/chain-logos/MATIC.png", // POLYGON
+  56: "/chain-logos/BSC.png", // BNB
+  8453: "/chain-logos/Base_Symbol_Blue.svg", // BASE
+};
+
+export const CHAIN_TO_CURRENCY: Record<number, string> = {
+  1: "ETH", // ETHEREUM
+  43114: "AVAX", // AVALANCHE
+  137: "MATIC", // POLYGON
+  56: "BNB", // BNB
+  8453: "ETH", // BASE
+};
+
 export const NAV = [
   {
     title: "Home",
