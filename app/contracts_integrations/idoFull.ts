@@ -182,6 +182,7 @@ export async function generalInfo(index: number) {
     const isPaused = await contract?.paused();
     const isPublic = await contract?.isPublic();
     // const isPublic = false;
+    // const usingETH = await contract?.usingETH();
     const usingETH = await contract?.usingETH();
     const DECIMALS = usingETH ? 18 : 6;
     const usingLinkedWallet = await contract?.usingLinkedWallet();

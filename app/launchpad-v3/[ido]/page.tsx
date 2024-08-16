@@ -982,6 +982,20 @@ export default function Ido() {
                                   user?.linkedWallet) ||
                                   !general?.usingLinkedWallet) && (
                                   <div className="flex flex-col justify-center min-w-full">
+                                    <p className="bg-samurai-red/10 w-max py-1 px-2 mb-5 rounded-full text-samurai-red border border-white/10">
+                                      <span className="text-white/70">
+                                        Your Allocation:
+                                      </span>{" "}
+                                      $
+                                      {user?.allocation.toLocaleString(
+                                        "en-us",
+                                        {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                        }
+                                      )}{" "}
+                                      {ido?.acceptedTokenSymbol}
+                                    </p>
                                     <div className="flex items-center justify-between w-full">
                                       <span className="self-end text-[10px] lg:text-[12px] mb-1 mr-1">
                                         MIN{" "}
@@ -1028,6 +1042,7 @@ export default function Ido() {
                                     <div className="relative w-full">
                                       <input
                                         type="text"
+                                        disabled={secondaryLoading}
                                         placeholder={`${
                                           TOKENS_TO_SYMBOL[
                                             general?.acceptedToken
@@ -1039,7 +1054,7 @@ export default function Ido() {
                                           onInputChange(e.target.value)
                                         }
                                       />
-                                      <div className="absolute top-[7px] lg:top-[15px] right-2 flex items-center gap-1">
+                                      <div className="absolute top-[7px] lg:top-[15px] right-2 flex items-center gap-[5px]">
                                         <Image
                                           src={
                                             TOKENS_TO_ICON[
@@ -1070,7 +1085,7 @@ export default function Ido() {
                                     <button
                                       onClick={onParticipate}
                                       disabled={
-                                        loading ||
+                                        secondaryLoading ||
                                         !general ||
                                         !user ||
                                         general?.isPaused ||
@@ -1081,11 +1096,12 @@ export default function Ido() {
                                         Number(inputValue) <
                                           user?.walletRange.minPerWallet ||
                                         Number(inputValue) >
-                                          user?.walletRange.maxPerWallet
+                                          user?.walletRange.maxPerWallet -
+                                            user?.allocation
                                       }
                                       className={`
                                         ${
-                                          loading ||
+                                          secondaryLoading ||
                                           !general ||
                                           !user ||
                                           general?.isPaused ||
@@ -1096,13 +1112,14 @@ export default function Ido() {
                                           Number(inputValue) <
                                             user?.walletRange.minPerWallet ||
                                           Number(inputValue) >
-                                            user?.walletRange.maxPerWallet
+                                            user?.walletRange.maxPerWallet -
+                                              user?.allocation
                                             ? "bg-black text-white/20"
                                             : "bg-samurai-red text-white hover:opacity-75"
                                         }
                                           rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
                                     >
-                                      {loading ? (
+                                      {secondaryLoading ? (
                                         <Spinner
                                           size="md"
                                           color="gray"
@@ -1320,7 +1337,7 @@ export default function Ido() {
                     {Number(ido.exchangeListingPrice).toLocaleString("en-us", {
                       maximumFractionDigits: 4,
                     })}{" "}
-                    {ido.acceptedTokenSymbol}
+                    {general && TOKENS_TO_SYMBOL[general?.acceptedToken]}
                   </p>
                 </div>
 
@@ -1332,7 +1349,7 @@ export default function Ido() {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}{" "}
-                    {general && TOKENS_TO_SYMBOL[general?.acceptedToken]}
+                    USD
                   </p>
                 </div>
 
@@ -1435,7 +1452,7 @@ export default function Ido() {
               <div className="flex flex-col gap-2">
                 <p>
                   TOTAL {TOKENS_TO_SYMBOL[general.acceptedToken]}:{" "}
-                  {Number(user?.balance || 0).toLocaleString("en-us", {
+                  {Number(general?.raised || 0).toLocaleString("en-us", {
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}
@@ -1449,7 +1466,7 @@ export default function Ido() {
                 </div>
               </div>
 
-              <AdminIDOToken idoIndex={idoIndex} />
+              <AdminIDOToken idoIndex={idoIndex} generalInfo={general} />
 
               {general && general.ranges && (
                 <AdminRanges idoIndex={idoIndex} ranges={general?.ranges} />

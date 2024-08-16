@@ -1,16 +1,22 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { StateContext } from "../context/StateContext";
 import SSButton from "./ssButton";
-import { fillIDOToken, setIDOToken } from "../contracts_integrations/idoFull";
+import {
+  fillIDOToken,
+  IDO_GENERAL_INFO,
+  setIDOToken,
+} from "../contracts_integrations/idoFull";
 
 interface AdminRanges {
   idoIndex: number;
+  generalInfo: IDO_GENERAL_INFO;
 }
 
-export default function AdminIDOToken({ idoIndex }: AdminRanges) {
+export default function AdminIDOToken({ idoIndex, generalInfo }: AdminRanges) {
   const [token, setToken] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
+  const [max, setMax] = useState("");
   const { signer, account } = useContext(StateContext);
 
   const onSetToken = useCallback(async () => {
@@ -25,6 +31,15 @@ export default function AdminIDOToken({ idoIndex }: AdminRanges) {
     setLoading(false);
   }, [account, idoIndex, amount, signer]);
 
+  useEffect(() => {
+    const amountToFill =
+      generalInfo.raised > 0
+        ? generalInfo.raised / generalInfo.amounts.tokenPrice
+        : 0;
+    setAmount(amountToFill.toString());
+    setMax(amountToFill.toString());
+  }, [generalInfo, setAmount]);
+
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center flex-wrap gap-10">
@@ -38,7 +53,14 @@ export default function AdminIDOToken({ idoIndex }: AdminRanges) {
               onChange={(e) => setToken(e.target.value)}
               value={token}
             />
-            <SSButton disabled={loading} click={onSetToken}>
+            <SSButton
+              disabled={
+                loading ||
+                generalInfo.token !==
+                  "0x0000000000000000000000000000000000000000"
+              }
+              click={onSetToken}
+            >
               {loading ? "Loading..." : "Set"}
             </SSButton>
           </div>
@@ -54,7 +76,10 @@ export default function AdminIDOToken({ idoIndex }: AdminRanges) {
               onChange={(e) => setAmount(e.target.value)}
               value={amount}
             />
-            <SSButton disabled={loading} click={onFillContract}>
+            <SSButton
+              disabled={loading || Number(amount) > Number(max)}
+              click={onFillContract}
+            >
               {loading ? "Loading..." : "Fill"}
             </SSButton>
           </div>
