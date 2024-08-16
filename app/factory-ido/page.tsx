@@ -48,28 +48,28 @@ const ranges = [
     name1: "min2",
     defaultValue1: 100,
     name2: "max2",
-    defaultValue2: 300,
+    defaultValue2: 200,
   },
   {
     title: "Goshi",
     name1: "min3",
     defaultValue1: 100,
     name2: "max3",
-    defaultValue2: 500,
+    defaultValue2: 400,
   },
   {
     title: "Hatamoto",
     name1: "min4",
     defaultValue1: 100,
     name2: "max4",
-    defaultValue2: 1000,
+    defaultValue2: 800,
   },
   {
     title: "Shogun",
     name1: "min5",
     defaultValue1: 100,
     name2: "max5",
-    defaultValue2: 2500,
+    defaultValue2: 1500,
   },
 ];
 
@@ -78,7 +78,7 @@ export default function FactoryIdo() {
   const [isUsingETH, setIsUsingETH] = useState(false);
   const [isUsingLinkedWallet, setIsUsingLinkedWallet] = useState(false);
   const [vestingType, setVestingType] = useState(1);
-  const [acceptRefunding, setAcceptRefunding] = useState(false);
+  const [acceptRefunding, setAcceptRefunding] = useState(true);
   const [data, setData] = useState<IDO | null>(null);
   const [verificationResult, setVerificationResult] = useState<any>(null);
   const { signer, account } = useContext(StateContext);
@@ -318,7 +318,7 @@ export default function FactoryIdo() {
                     type="text"
                     className="text-black rounded-lg"
                     name="acceptedToken"
-                    defaultValue="0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+                    defaultValue="0x2a064000D0252d16c57FAFD1586bE7ce5deD8320"
                     required
                   />
 
@@ -397,7 +397,7 @@ export default function FactoryIdo() {
                     type="text"
                     className="text-black rounded-lg"
                     name="tokenPrice"
-                    defaultValue={10}
+                    defaultValue={0.008}
                     required
                   />
 
@@ -411,7 +411,7 @@ export default function FactoryIdo() {
                     type="text"
                     className="text-black rounded-lg"
                     name="maxAllocations"
-                    defaultValue={50000}
+                    defaultValue={100_000}
                     required
                   />
 
@@ -425,7 +425,7 @@ export default function FactoryIdo() {
                     type="text"
                     className="text-black rounded-lg"
                     name="tgeReleasePercent"
-                    defaultValue={0.1}
+                    defaultValue={0.15}
                     required
                   />
                 </div>
@@ -448,7 +448,7 @@ export default function FactoryIdo() {
                     type="text"
                     className="text-black rounded-lg"
                     name="registrationAt"
-                    defaultValue="1723291200"
+                    defaultValue="1723806000"
                     required
                   />
                   <label
@@ -461,7 +461,7 @@ export default function FactoryIdo() {
                     type="text"
                     className="text-black rounded-lg"
                     name="participationStartsAt"
-                    defaultValue="1723377600"
+                    defaultValue="1723809600"
                     required
                   />
                   <label
@@ -474,7 +474,7 @@ export default function FactoryIdo() {
                     type="text"
                     className="text-black rounded-lg"
                     name="participationEndsAt"
-                    defaultValue="1723464000"
+                    defaultValue="1723896000"
                     required
                   />
                   <label
@@ -487,7 +487,7 @@ export default function FactoryIdo() {
                     type="text"
                     className="text-black rounded-lg"
                     name="vestingDuration"
-                    defaultValue="3"
+                    defaultValue="1"
                     required
                   />
                   <label
@@ -500,7 +500,7 @@ export default function FactoryIdo() {
                     type="text"
                     className="text-black rounded-lg"
                     name="vestingAt"
-                    defaultValue="1723723200"
+                    defaultValue="1723910400"
                     required
                   />
                   <label htmlFor="cliff" className="mt-4 text-white text-lg">
@@ -510,7 +510,7 @@ export default function FactoryIdo() {
                     type="text"
                     className="text-black rounded-lg"
                     name="cliff"
-                    defaultValue="2"
+                    defaultValue="0"
                     required
                   />
                 </div>

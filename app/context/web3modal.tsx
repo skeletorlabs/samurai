@@ -22,6 +22,14 @@ const base = {
   rpcUrl: process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string,
 };
 
+const testBsc = {
+  chainId: 97,
+  name: "Base",
+  currency: "ETH",
+  explorerUrl: "https://testnet.bscscan.com",
+  rpcUrl: "https://bsc-testnet.blockpi.network/v1/rpc/public",
+};
+
 // 3. Create a metadata object
 const metadata = {
   name: "Samurai Starter",

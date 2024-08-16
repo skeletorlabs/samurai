@@ -30,7 +30,7 @@ export default function ClaimSam() {
   const [total, setTotal] = useState(0);
   const [claimable, setClaimable] = useState(0);
   const [vesting, setVesting] = useState(0);
-  const { signer, account } = useContext(StateContext);
+  const { signer, account, chain } = useContext(StateContext);
 
   const onClaimVesting = useCallback(
     async (claimAll: boolean) => {
@@ -40,16 +40,17 @@ export default function ClaimSam() {
       if (
         signer &&
         account &&
+        chain > 0 &&
         vestingSchedules &&
         vestingSchedules?.length > 0
       ) {
-        await claimVesting(claimAll, account, signer);
+        await claimVesting(claimAll, account, signer, chain);
         await onGetSamClaimInfos();
       }
       setLoading(false);
     },
 
-    [account, signer, vestingSchedules]
+    [account, signer, vestingSchedules, chain]
   );
 
   useEffect(() => {
@@ -76,16 +77,16 @@ export default function ClaimSam() {
   }, [vestingSchedules, setTotal, setClaimable, setVesting]);
 
   const onGetSamClaimInfos = useCallback(async () => {
-    if (signer && account) {
-      const response = await getClaimInfos(account);
+    if (signer && account && chain > 0) {
+      const response = await getClaimInfos(account, chain);
 
       setVestingSchedules(response);
     }
-  }, [account, signer]);
+  }, [account, signer, chain]);
 
   useEffect(() => {
     onGetSamClaimInfos();
-  }, [account, signer]);
+  }, [account, signer, chain]);
   return (
     <>
       {/* SAM TOKEN CLAIM */}

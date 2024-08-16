@@ -26,6 +26,9 @@ export const StateContext = createContext({
   account: "",
   setAccount: (value: string) => {},
 
+  chain: 0,
+  setChain: (value: number) => {},
+
   projects: [] as Project[] | [],
   setProjects: (value: Project[] | []) => {},
 });
@@ -40,10 +43,11 @@ export const StateProvider = ({ children }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [signer, setSigner] = useState<any>(null);
   const [account, setAccount] = useState("");
+  const [chain, setChain] = useState(0);
   const [projects, setProjects] = useState<Project[] | []>([]);
 
   const { walletProvider } = useWeb3ModalProvider();
-  const { address } = useWeb3ModalAccount();
+  const { address, chainId } = useWeb3ModalAccount();
 
   useEffect(() => {
     const page = NAV.find((item) => item.href === pathname);
@@ -63,6 +67,10 @@ export const StateProvider = ({ children }: Props) => {
     getSigner();
   }, [address]);
 
+  useEffect(() => {
+    if (chainId) setChain(chainId);
+  }, [chainId]);
+
   return (
     <StateContext.Provider
       value={{
@@ -74,6 +82,8 @@ export const StateProvider = ({ children }: Props) => {
         setSigner,
         account,
         setAccount,
+        chain,
+        setChain,
         projects,
         setProjects,
       }}
