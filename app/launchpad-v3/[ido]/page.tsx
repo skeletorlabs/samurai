@@ -287,7 +287,7 @@ export default function Ido() {
         return false;
       }
 
-      if (!signer) return true;
+      if (!signer || !account) return true;
 
       const inPhase = currentPhase?.toUpperCase();
 
@@ -308,22 +308,23 @@ export default function Ido() {
       // Not disabled in case any conditions match
       return false;
     },
-    [currentPhase, signer]
+    [currentPhase, signer, account]
   );
 
   useEffect(() => {
+    if (!signer || !account) return setTab(0);
     if (
       currentPhase?.toUpperCase() == "REGISTRATION" ||
       currentPhase?.toUpperCase() == "PARTICIPATION"
     )
-      setTab(1);
+      return setTab(1);
     if (
       currentPhase?.toUpperCase() === "CLIFF" ||
       currentPhase?.toUpperCase() === "VESTING" ||
       currentPhase?.toUpperCase() === "VESTED"
     )
-      setTab(2);
-  }, [currentPhase, setTab]);
+      return setTab(2);
+  }, [signer, account, currentPhase, setTab]);
 
   // ============================================================================================================
   // FETCHING USER INFOS FROM CONTRACT
@@ -347,6 +348,10 @@ export default function Ido() {
     getUserInfos();
     getTierInfos();
   }, [signer, general]);
+
+  // useEffect(() => {
+  //   if (!account) setTab(0);
+  // }, [account, setTab]);
 
   // ============================================================================================================
   // FETCHING GENERAL DATA FROM CONTRACT
