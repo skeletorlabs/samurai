@@ -88,7 +88,6 @@ export default function Ido() {
   const [general, setGeneral] = useState<IDO_GENERAL_INFO | null>(null);
   const [user, setUser] = useState<IDO_USER_INFO | null>(null);
   const [currentPhase, setCurrentPhase] = useState<string | null>(null);
-  const [selectedToken, setSelectedToken] = useState("");
   const [tier, setTier] = useState<Tier | null>(null);
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [imageSelected, setImageSelected] = useState("");
@@ -231,26 +230,27 @@ export default function Ido() {
   }, [signer, idoIndex, user, inputLinkedWallet, setSecondaryLoading]);
 
   const onParticipate = useCallback(async () => {
+    console.log("start participation");
     setSecondaryLoading(true);
     if (
       signer &&
-      selectedToken !== "" &&
       user &&
+      general?.acceptedToken &&
       (user?.isWhitelisted || general?.isPublic)
     ) {
-      await participate(idoIndex, signer, inputValue, selectedToken);
+      await participate(idoIndex, signer, inputValue, general?.acceptedToken);
       await getGeneralData();
       await getUserInfos();
     }
 
     setSecondaryLoading(false);
-  }, [signer, idoIndex, selectedToken, user, inputValue, setSecondaryLoading]);
+  }, [signer, idoIndex, general, user, inputValue, setSecondaryLoading]);
 
   const onGetRefund = useCallback(async () => {
     setSecondaryLoading(true);
     if (
       signer &&
-      selectedToken !== "" &&
+      general?.acceptedToken &&
       user &&
       (user?.isWhitelisted || general?.isPublic)
     ) {
@@ -260,7 +260,7 @@ export default function Ido() {
     }
 
     setSecondaryLoading(false);
-  }, [signer, idoIndex, selectedToken, user, inputValue, setSecondaryLoading]);
+  }, [signer, idoIndex, general, user, inputValue, setSecondaryLoading]);
 
   const onClaim = useCallback(async () => {
     setSecondaryLoading(true);
@@ -368,7 +368,6 @@ export default function Ido() {
       setGeneral(response as IDO_GENERAL_INFO);
 
       const phase = await phaseInfo(idoIndex, response as IDO_GENERAL_INFO);
-      // console.log(phase.toUpperCase());
       if (phase) setCurrentPhase(phase);
     }
 
@@ -378,7 +377,6 @@ export default function Ido() {
     setFirstLoading(false);
   }, [
     idoIndex,
-    selectedToken,
     firstLoading,
     setCurrentPhase,
     setLoading,
@@ -791,7 +789,9 @@ export default function Ido() {
                                   <div className="flex flex-col w-full justify-center">
                                     {/* REGISTER */}
                                     {!user?.isWhitelisted &&
-                                      !general?.isPublic && (
+                                      !general?.isPublic &&
+                                      user?.walletRange.name.toUpperCase() !==
+                                        "PUBLIC" && (
                                         <div className="flex flex-col gap-4">
                                           <p className="text-center text-lg">
                                             Register before participate the IDO
@@ -975,103 +975,115 @@ export default function Ido() {
 
                               {currentPhase?.toLowerCase() ===
                                 "participation" &&
-                              user?.allocation <
-                                user?.walletRange?.maxPerWallet &&
-                              (user?.isWhitelisted || general?.isPublic) &&
-                              ((general?.usingLinkedWallet &&
-                                user?.linkedWallet) ||
-                                !general?.usingLinkedWallet) ? (
-                                <div className="flex flex-col justify-center min-w-full">
-                                  <div className="flex items-center justify-between w-full">
-                                    <span className="self-end text-[10px] lg:text-[12px] mb-1 mr-1">
-                                      MIN{" "}
-                                      {Number(
-                                        user?.walletRange?.minPerWallet
-                                      ).toLocaleString("en-us", {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                      })}
-                                      {" / "}
-                                      MAX{" "}
-                                      {Number(
-                                        user?.walletRange?.maxPerWallet
-                                      ).toLocaleString("en-us", {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                      })}{" "}
-                                      {TOKENS_TO_SYMBOL[selectedToken]}
-                                    </span>
-                                    <button
-                                      onClick={() =>
-                                        onInputChange(
-                                          (user?.balance || 0).toString()
-                                        )
-                                      }
-                                      className="self-end text-[10px] lg:text-[12px] mb-1 hover:text-samurai-red mr-1"
-                                    >
-                                      BALANCE:{" "}
-                                      {Number(
-                                        user?.balance || 0
-                                      ).toLocaleString("en-us")}{" "}
-                                      {TOKENS_TO_SYMBOL[selectedToken]}
-                                    </button>
-                                  </div>
-
-                                  <div className="relative w-full">
-                                    <input
-                                      type="text"
-                                      placeholder={`${
-                                        TOKENS_TO_SYMBOL[general?.acceptedToken]
-                                      } to allocate`}
-                                      className="w-full p-2 lg:p-4 placeholder-black/50 text-black"
-                                      value={inputValue}
-                                      onChange={(e) =>
-                                        onInputChange(e.target.value)
-                                      }
-                                    />
-                                    <div className="absolute top-[7px] lg:top-[15px] right-2 flex items-center gap-1">
-                                      <Image
-                                        src={
-                                          TOKENS_TO_ICON[general?.acceptedToken]
+                                user?.allocation <
+                                  user?.walletRange?.maxPerWallet &&
+                                (user?.isWhitelisted || general?.isPublic) &&
+                                ((general?.usingLinkedWallet &&
+                                  user?.linkedWallet) ||
+                                  !general?.usingLinkedWallet) && (
+                                  <div className="flex flex-col justify-center min-w-full">
+                                    <div className="flex items-center justify-between w-full">
+                                      <span className="self-end text-[10px] lg:text-[12px] mb-1 mr-1">
+                                        MIN{" "}
+                                        {Number(
+                                          user?.walletRange?.minPerWallet
+                                        ).toLocaleString("en-us", {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                        })}
+                                        {" / "}
+                                        MAX{" "}
+                                        {Number(
+                                          user?.walletRange?.maxPerWallet
+                                        ).toLocaleString("en-us", {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                        })}{" "}
+                                        {
+                                          TOKENS_TO_SYMBOL[
+                                            general?.acceptedToken
+                                          ]
                                         }
-                                        width={32}
-                                        height={32}
-                                        alt="USDC"
-                                        placeholder="blur"
-                                        blurDataURL="/usdc-icon.svg"
-                                        className="w-6 h-6"
+                                      </span>
+                                      <button
+                                        onClick={() =>
+                                          onInputChange(
+                                            (user?.balance || 0).toString()
+                                          )
+                                        }
+                                        className="self-end text-[10px] lg:text-[12px] mb-1 hover:text-samurai-red mr-1"
+                                      >
+                                        BALANCE:{" "}
+                                        {Number(
+                                          user?.balance || 0
+                                        ).toLocaleString("en-us")}{" "}
+                                        {
+                                          TOKENS_TO_SYMBOL[
+                                            general?.acceptedToken
+                                          ]
+                                        }
+                                      </button>
+                                    </div>
+
+                                    <div className="relative w-full">
+                                      <input
+                                        type="text"
+                                        placeholder={`${
+                                          TOKENS_TO_SYMBOL[
+                                            general?.acceptedToken
+                                          ]
+                                        } to allocate`}
+                                        className="w-full p-2 lg:p-4 placeholder-black/50 text-black"
+                                        value={inputValue}
+                                        onChange={(e) =>
+                                          onInputChange(e.target.value)
+                                        }
                                       />
-                                      <div className="flex items-center text-black/80 mr-2 text-lg font-bold">
-                                        <span>
-                                          {
-                                            TOKENS_TO_SYMBOL[
+                                      <div className="absolute top-[7px] lg:top-[15px] right-2 flex items-center gap-1">
+                                        <Image
+                                          src={
+                                            TOKENS_TO_ICON[
                                               general?.acceptedToken
                                             ]
                                           }
-                                        </span>
+                                          width={32}
+                                          height={32}
+                                          alt="USDC"
+                                          placeholder="blur"
+                                          blurDataURL="/usdc-icon.svg"
+                                          className="w-6 h-6"
+                                        />
+                                        <div className="flex items-center text-black/80 mr-2 text-lg font-bold">
+                                          <span>
+                                            {
+                                              TOKENS_TO_SYMBOL[
+                                                general?.acceptedToken
+                                              ]
+                                            }
+                                          </span>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
 
-                                  {/* PARTICIPATE BUTTON */}
+                                    {/* PARTICIPATE BUTTON */}
 
-                                  <button
-                                    onClick={onParticipate}
-                                    disabled={
-                                      loading ||
-                                      !general ||
-                                      !user ||
-                                      general?.isPaused ||
-                                      (!user?.isWhitelisted &&
-                                        !general?.isPublic) ||
-                                      inputValue === "" ||
-                                      Number(inputValue) === 0 ||
-                                      Number(inputValue) <
-                                        user?.walletRange.minPerWallet ||
-                                      Number(inputValue) >
-                                        user?.walletRange.maxPerWallet
-                                    }
-                                    className={`
+                                    <button
+                                      onClick={onParticipate}
+                                      disabled={
+                                        loading ||
+                                        !general ||
+                                        !user ||
+                                        general?.isPaused ||
+                                        (!user?.isWhitelisted &&
+                                          !general?.isPublic) ||
+                                        inputValue === "" ||
+                                        Number(inputValue) === 0 ||
+                                        Number(inputValue) <
+                                          user?.walletRange.minPerWallet ||
+                                        Number(inputValue) >
+                                          user?.walletRange.maxPerWallet
+                                      }
+                                      className={`
                                         ${
                                           loading ||
                                           !general ||
@@ -1089,19 +1101,24 @@ export default function Ido() {
                                             : "bg-samurai-red text-white hover:opacity-75"
                                         }
                                           rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
-                                  >
-                                    {loading ? (
-                                      <Spinner
-                                        size="md"
-                                        color="gray"
-                                        className="opacity-40"
-                                      />
-                                    ) : (
-                                      "PARTICIPATE"
-                                    )}
-                                  </button>
-                                </div>
-                              ) : user?.isWhitelisted ? (
+                                    >
+                                      {loading ? (
+                                        <Spinner
+                                          size="md"
+                                          color="gray"
+                                          className="opacity-40"
+                                        />
+                                      ) : (
+                                        "PARTICIPATE"
+                                      )}
+                                    </button>
+                                  </div>
+                                )}
+                              {/* new Date().getTime() <
+                                general?.periods.participationStartsAt && */}
+                              {(user?.isWhitelisted ||
+                                user?.walletRange.name.toUpperCase()) ===
+                              "PUBLIC" ? (
                                 <div className="flex min-w-full items-center justify-center text-lg">
                                   Please, wait until participation starts.
                                 </div>
