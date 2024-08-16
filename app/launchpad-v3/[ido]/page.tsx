@@ -759,9 +759,9 @@ export default function Ido() {
                                     </span>
                                     <p className="text-white/70">
                                       {general?.refund?.active
-                                        ? `Yes (${
+                                        ? `For ${
                                             general?.refund?.period / 60 / 60
-                                          } hours)`
+                                          } hours`
                                         : "No"}
                                     </p>
                                   </div>
