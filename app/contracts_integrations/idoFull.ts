@@ -363,7 +363,6 @@ export async function userInfo(
         formatEther(await contract?.tokenAmountByParticipation(rawAllocation))
       );
 
-      console.log(purchased);
       claimed = Number(
         formatEther(await contract?.tokensClaimed(signerAddress))
       );
