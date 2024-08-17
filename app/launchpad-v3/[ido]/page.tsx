@@ -1215,7 +1215,6 @@ export default function Ido() {
                                           "en-us",
                                           {
                                             minimumFractionDigits: 2,
-                                            maximumFractionDigits: 2,
                                           }
                                         )}{" "}
                                         {ido?.acceptedTokenSymbol}
@@ -1313,7 +1312,6 @@ export default function Ido() {
                                             "en-us",
                                             {
                                               minimumFractionDigits: 2,
-                                              maximumFractionDigits: 2,
                                             }
                                           )}
                                         </p>
@@ -1331,13 +1329,11 @@ export default function Ido() {
                                                 user?.claimable
                                               ).toLocaleString("en-us", {
                                                 minimumFractionDigits: 2,
-                                                maximumFractionDigits: 2,
                                               })
                                             : Number(0).toLocaleString(
                                                 "en-us",
                                                 {
                                                   minimumFractionDigits: 2,
-                                                  maximumFractionDigits: 2,
                                                 }
                                               )}
                                         </p>
@@ -1352,7 +1348,6 @@ export default function Ido() {
                                             "en-us",
                                             {
                                               minimumFractionDigits: 2,
-                                              maximumFractionDigits: 2,
                                             }
                                           )}
                                         </p>
