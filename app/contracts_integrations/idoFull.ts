@@ -537,6 +537,13 @@ export async function phaseInfo(index: number, generalInfo: IDO_GENERAL_INFO) {
   }
 
   if (
+    now > generalInfo.periods.participationEndsAt &&
+    now < generalInfo.periods.vestingAt
+  ) {
+    return "Waiting for TGE";
+  }
+
+  if (
     now >= generalInfo.periods.vestingAt &&
     now <= generalInfo.periods.cliffEndsAt
   ) {

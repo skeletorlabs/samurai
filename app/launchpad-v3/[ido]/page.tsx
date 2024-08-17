@@ -310,7 +310,8 @@ export default function Ido() {
       }
 
       if (tab === 2) {
-        return inPhase === "CLIFF" ||
+        return inPhase === "WAITING FOR TGE" ||
+          inPhase === "CLIFF" ||
           inPhase === "VESTING" ||
           inPhase === "VESTED"
           ? false
@@ -331,6 +332,7 @@ export default function Ido() {
     )
       return setTab(1);
     if (
+      currentPhase?.toUpperCase() === "WAITING FOR TGE" ||
       currentPhase?.toUpperCase() === "CLIFF" ||
       currentPhase?.toUpperCase() === "VESTING" ||
       currentPhase?.toUpperCase() === "VESTED"
@@ -380,6 +382,7 @@ export default function Ido() {
       setGeneral(response as IDO_GENERAL_INFO);
 
       const phase = await phaseInfo(idoIndex, response as IDO_GENERAL_INFO);
+      // console.log("phase", phase);
       if (phase) setCurrentPhase(phase);
     }
 
@@ -591,6 +594,8 @@ export default function Ido() {
                             {currentPhase?.toUpperCase() !== "PAUSED" &&
                               currentPhase?.toUpperCase() !== "UPCOMING" &&
                               currentPhase?.toUpperCase() !== "VESTED" &&
+                              currentPhase?.toUpperCase() !==
+                                "WAITING FOR TGE" &&
                               "IN"}{" "}
                             {currentPhase?.toUpperCase()}
                           </span>
@@ -1201,45 +1206,56 @@ export default function Ido() {
                                       )}{" "}
                                       {ido?.acceptedTokenSymbol}
                                     </span>
-                                    {general.refund.active && (
-                                      <div className="flex items-center gap-1 mt-[5px]">
-                                        <button
-                                          onClick={onGetRefund}
-                                          className="text-xs px-2 py-[2px] border rounded-full  border-white/20 text-white/60 hover:text-white/50 w-max"
-                                        >
-                                          ASK FOR REFUND
-                                        </button>
-                                        <Tooltip
-                                          content={
-                                            <div className="text-xs leading-relaxed text-white/70">
-                                              <h1 className="text-yellow-300">
-                                                IMPORTANT:
-                                              </h1>
-                                              <p>
-                                                1 - We charge{" "}
-                                                {general.refund.feePercent}% in
-                                                fees for refundings.
-                                              </p>
-                                              <p>
-                                                2 - Refunds are not allowed
-                                                after TGE claims
-                                              </p>
-                                              <p>
-                                                3 - Refunds are not allowed
-                                                after{" "}
-                                                {general.refund.period /
-                                                  60 /
-                                                  60}{" "}
-                                                hours
-                                              </p>
-                                            </div>
-                                          }
-                                          style="dark"
-                                        >
-                                          <HiOutlineInformationCircle color="red" />
-                                        </Tooltip>
-                                      </div>
-                                    )}
+                                    {(general.refund.active &&
+                                      now < general?.periods.vestingAt) ||
+                                      (now >
+                                        general?.periods.vestingAt +
+                                          general.refund.period && (
+                                        <div className="flex items-center gap-1 mt-[5px]">
+                                          <button
+                                            onClick={onGetRefund}
+                                            // disabled={
+                                            //   now <
+                                            //     general?.periods.vestingAt ||
+                                            //   now >
+                                            //     general?.periods.vestingAt +
+                                            //       general.refund.period
+                                            // }
+                                            className="text-xs px-2 py-[2px] border rounded-full  border-white/20 text-white/60 hover:text-white/50 w-max"
+                                          >
+                                            ASK FOR REFUND
+                                          </button>
+                                          <Tooltip
+                                            content={
+                                              <div className="text-xs leading-relaxed text-white/70">
+                                                <h1 className="text-yellow-300">
+                                                  IMPORTANT:
+                                                </h1>
+                                                <p>
+                                                  1 - We charge{" "}
+                                                  {general.refund.feePercent}%
+                                                  in fees for refundings.
+                                                </p>
+                                                <p>
+                                                  2 - Refunds are not allowed
+                                                  after TGE claims
+                                                </p>
+                                                <p>
+                                                  3 - Refunds are not allowed
+                                                  after{" "}
+                                                  {general.refund.period /
+                                                    60 /
+                                                    60}{" "}
+                                                  hours
+                                                </p>
+                                              </div>
+                                            }
+                                            style="dark"
+                                          >
+                                            <HiOutlineInformationCircle color="red" />
+                                          </Tooltip>
+                                        </div>
+                                      ))}
                                   </div>
 
                                   <div className="flex flex-col gap-2">
@@ -1293,14 +1309,22 @@ export default function Ido() {
                                           Vesting
                                         </p>
                                         <p className="text-samurai-red w-max text-[18px]">
-                                          {(
-                                            user?.purchased -
-                                            user?.claimed -
-                                            user?.claimable
-                                          ).toLocaleString("en-us", {
-                                            minimumFractionDigits: 2,
-                                            maximumFractionDigits: 2,
-                                          })}
+                                          {now > general?.periods.cliffEndsAt
+                                            ? (
+                                                user?.purchased -
+                                                user?.claimed -
+                                                user?.claimable
+                                              ).toLocaleString("en-us", {
+                                                minimumFractionDigits: 2,
+                                                maximumFractionDigits: 2,
+                                              })
+                                            : Number(0).toLocaleString(
+                                                "en-us",
+                                                {
+                                                  minimumFractionDigits: 2,
+                                                  maximumFractionDigits: 2,
+                                                }
+                                              )}
                                         </p>
                                       </div>
 
