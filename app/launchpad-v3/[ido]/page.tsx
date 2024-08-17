@@ -992,8 +992,8 @@ export default function Ido() {
                                   user?.linkedWallet) ||
                                   !general?.usingLinkedWallet) && (
                                   <div className="flex flex-col justify-center min-w-full">
-                                    <div className="flex items-center gap-3 flex-wrap">
-                                      <p className="bg-samurai-red/10 w-max py-1 px-2 mb-5 rounded-full text-samurai-red border border-white/10">
+                                    <div className="flex items-center gap-3 flex-wrap mb-8">
+                                      <p className="bg-samurai-red/10 w-max py-1 px-2 rounded-full text-samurai-red border border-white/10">
                                         <span className="text-white/70">
                                           Your Allocation:
                                         </span>{" "}
@@ -1008,7 +1008,7 @@ export default function Ido() {
                                           ? CHAIN_TO_CURRENCY[chain]
                                           : ido?.acceptedTokenSymbol}
                                       </p>
-                                      <p className="bg-white/10 w-max py-1 px-2 mb-5 rounded-full text-samurai-red border border-white/10">
+                                      <p className="bg-white/10 w-max py-1 px-2 rounded-full text-samurai-red border border-white/10">
                                         <span className="text-white/70">
                                           Tokens Purchased:
                                         </span>{" "}
