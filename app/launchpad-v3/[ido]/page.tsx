@@ -62,6 +62,7 @@ import {
 import AdminRanges from "@/app/components/adminRanges";
 import SSButton from "@/app/components/ssButton";
 import AdminIDOToken from "@/app/components/adminIDOToken";
+import { getUnixTime } from "date-fns";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -106,7 +107,7 @@ export default function Ido() {
   );
   const bg = `url("${ido?.idoImageSrc}")`;
 
-  const now = Math.floor(Date.now() / 1000);
+  const now = getUnixTime(new Date());
 
   // ============================================================================================================
   // ADMIN FUNCTIONS

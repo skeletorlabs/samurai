@@ -102,7 +102,7 @@ export const NEW_IDOS: IDO_v2[] = [
     price: 0.008,
     allocation: 100_000,
     date: 1723831200,
-    fcfs: 1723831200 + 86_400 / 2,
+    fcfs: 1723899600,
     investmentRound: "Private",
     fdv: 10_000_000,
     exchangeListingPrice: 0.01,
