@@ -1195,17 +1195,32 @@ export default function Ido() {
                                 // user?.allocation > 0 && (
                                 <div className="flex flex-col justify-between w-full h-full">
                                   <div className="flex flex-col leading-tight">
-                                    <span>
-                                      Allocation: $
-                                      {user?.allocation.toLocaleString(
-                                        "en-us",
-                                        {
-                                          minimumFractionDigits: 2,
-                                          maximumFractionDigits: 2,
-                                        }
-                                      )}{" "}
-                                      {ido?.acceptedTokenSymbol}
-                                    </span>
+                                    <div className="flex items-center gap-4 text-[14px]">
+                                      <p className="px-2 py-1 rounded-full bg-samurai-red/10 border border-samurai-red/40 w-max mb-5">
+                                        {general?.amounts.tgeReleasePercent *
+                                          100}
+                                        % at TGE,{" "}
+                                        {general?.periods.cliff > 0
+                                          ? `${general?.periods.cliff} months cliff`
+                                          : "No Cliff"}
+                                        , {general?.periods.vestingDuration}{" "}
+                                        months{" "}
+                                        {VestingType[
+                                          general?.vestingType as number
+                                        ].toLowerCase()}
+                                      </p>
+                                      <p className="px-2 py-1 rounded-full bg-samurai-red/10 border border-samurai-red/40 w-max mb-5">
+                                        Your Allocation: $
+                                        {user?.allocation.toLocaleString(
+                                          "en-us",
+                                          {
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2,
+                                          }
+                                        )}{" "}
+                                        {ido?.acceptedTokenSymbol}
+                                      </p>
+                                    </div>
                                     {(general.refund.active &&
                                       now < general?.periods.vestingAt) ||
                                       (now >
