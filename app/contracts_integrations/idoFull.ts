@@ -312,8 +312,7 @@ export async function userInfo(
   signer: ethers.Signer
 ) {
   try {
-    // const signerAddress = await signer.getAddress();
-    const signerAddress = "0x5AD17A1A013E6dc9356fa5E047e70d1B5D490BbA";
+    const signerAddress = await signer.getAddress();
     const contract = await getContract(index, signer);
 
     const { usingETH, usingLinkedWallet, isPublic } = generalInfo;
