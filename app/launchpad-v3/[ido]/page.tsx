@@ -50,7 +50,7 @@ import {
 } from "@/app/contracts_integrations/idoFull";
 import IdoAllocationProgress from "@/app/components/idoAllocationProgress";
 import { Tier, getTier } from "@/app/contracts_integrations/tiers";
-import { fromUnixTime, getUnixTime } from "date-fns";
+
 import {
   Dialog,
   DialogPanel,
@@ -105,6 +105,8 @@ export default function Ido() {
     item.id.includes(idoID as string)
   );
   const bg = `url("${ido?.idoImageSrc}")`;
+
+  const now = Math.floor(Date.now() / 1000);
 
   // ============================================================================================================
   // ADMIN FUNCTIONS
@@ -822,7 +824,7 @@ export default function Ido() {
                                             ? "bg-black text-white/20"
                                             : "bg-samurai-red text-white hover:opacity-75"
                                         }
-                                          rounded-[8px] w-full h-[50px] self-center py-4 text-[18px] text-center transition-all`}
+                                          rounded-[8px] w-[300px] h-[50px] self-center py-4 text-[18px] text-center transition-all`}
                                           >
                                             {secondaryLoading ? (
                                               <Spinner
@@ -979,9 +981,7 @@ export default function Ido() {
                                     </div>
                                   </div>
                                 )}
-
                               {/* PARTICIPATION */}
-
                               {currentPhase?.toLowerCase() ===
                                 "participation" &&
                                 user?.allocation <
@@ -1150,17 +1150,21 @@ export default function Ido() {
                                     </button>
                                   </div>
                                 )}
-                              {/* new Date().getTime() <
-                                general?.periods.participationStartsAt && */}
-                              {(user?.isWhitelisted ||
-                                user?.walletRange.name.toUpperCase()) ===
-                              "PUBLIC" ? (
-                                <div className="flex min-w-full items-center justify-center text-lg">
-                                  Please, wait until participation starts.
-                                </div>
-                              ) : (
-                                <></>
-                              )}
+                              {user?.isWhitelisted &&
+                                now <
+                                  general?.periods.participationStartsAt && (
+                                  <div className="flex min-w-full items-center justify-center text-lg">
+                                    Please, wait until participation starts.
+                                  </div>
+                                )}
+
+                              {user?.walletRange.name.toUpperCase() ===
+                                "PUBLIC" &&
+                                now < ido.fcfs && (
+                                  <div className="flex min-w-full items-center justify-center text-lg">
+                                    Please, wait until FCFS starts.
+                                  </div>
+                                )}
                             </div>
                           )}
                           {/* VESTING TAB */}
