@@ -312,7 +312,8 @@ export async function userInfo(
   signer: ethers.Signer
 ) {
   try {
-    const signerAdress = await signer.getAddress();
+    // const signerAddress = await signer.getAddress();
+    const signerAddress = "0x5AD17A1A013E6dc9356fa5E047e70d1B5D490BbA";
     const contract = await getContract(index, signer);
 
     const { usingETH, usingLinkedWallet, isPublic } = generalInfo;
@@ -320,36 +321,36 @@ export async function userInfo(
 
     const range = isPublic
       ? await contract?.getRange(0)
-      : await contract?.getWalletRange(signerAdress);
+      : await contract?.getWalletRange(signerAddress);
 
     const walletRange = parseWalletRange(range, DECIMALS);
 
     let linkedWallet = usingLinkedWallet
-      ? await contract?.linkedWallets(signerAdress)
+      ? await contract?.linkedWallets(signerAddress)
       : "";
 
     // linkedWallet = "0xcDe00Be56479F95b5e33De136AD820FfaE996009";
 
-    const isWhitelisted = await contract?.whitelist(signerAdress);
+    const isWhitelisted = await contract?.whitelist(signerAddress);
     // const isWhitelisted = true;
 
     let balance = 0;
 
     if (usingETH) {
-      const ethBalance = await signer.provider?.getBalance(signerAdress);
+      const ethBalance = await signer.provider?.getBalance(signerAddress);
       if (ethBalance) balance = Number(formatEther(ethBalance));
     } else {
       const acceptedToken = generalInfo?.acceptedToken;
       balance = Number(
         formatUnits(
-          await balanceOf(ERC20_ABI, acceptedToken, signerAdress, signer),
+          await balanceOf(ERC20_ABI, acceptedToken, signerAddress, signer),
           DECIMALS
         )
       );
     }
 
     const allocation = Number(
-      ethers.formatUnits(await contract?.allocations(signerAdress), DECIMALS)
+      ethers.formatUnits(await contract?.allocations(signerAddress), DECIMALS)
     );
 
     // const allocation = 100;
@@ -363,10 +364,10 @@ export async function userInfo(
         formatEther(await contract?.tokenAmountByParticipation(allocation))
       );
       claimed = Number(
-        formatEther(await contract?.tokensClaimed(signerAdress))
+        formatEther(await contract?.tokensClaimed(signerAddress))
       );
       claimable = Number(
-        formatEther(await contract?.previewClaimableTokens(signerAdress))
+        formatEther(await contract?.previewClaimableTokens(signerAddress))
       );
     } else {
       if (allocation > 0) {
