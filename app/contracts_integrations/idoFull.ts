@@ -196,7 +196,8 @@ export async function generalInfo(index: number) {
     const amounts = await contract?.amounts();
     const tokenPrice = Number(ethers.formatUnits(amounts[0], DECIMALS));
     const maxAllocations = Number(ethers.formatUnits(amounts[1], DECIMALS));
-    const tgeReleasePercent = Number(ethers.formatUnits(amounts[2], DECIMALS));
+    const tgeReleasePercent = Number(formatEther(amounts[2]));
+
     const raised = Number(
       ethers.formatUnits(await contract?.raised(), DECIMALS)
     );
@@ -348,9 +349,8 @@ export async function userInfo(
       );
     }
 
-    const allocation = Number(
-      ethers.formatUnits(await contract?.allocations(signerAddress), DECIMALS)
-    );
+    const rawAllocation = await contract?.allocations(signerAddress);
+    const allocation = Number(ethers.formatUnits(rawAllocation, DECIMALS));
 
     // const allocation = 100;
 
@@ -360,8 +360,10 @@ export async function userInfo(
 
     if (generalInfo.token !== "0x0000000000000000000000000000000000000000") {
       purchased = Number(
-        formatEther(await contract?.tokenAmountByParticipation(allocation))
+        formatEther(await contract?.tokenAmountByParticipation(rawAllocation))
       );
+
+      console.log(purchased);
       claimed = Number(
         formatEther(await contract?.tokensClaimed(signerAddress))
       );
@@ -665,6 +667,7 @@ export async function setIDOToken(
 // fillIDOToken(uint256 amount) external
 export async function fillIDOToken(
   index: number,
+  generalInfo: IDO_GENERAL_INFO,
   amount: string,
   signer: ethers.Signer
 ) {
@@ -675,6 +678,13 @@ export async function fillIDOToken(
 
     if (owner === signerAddress) {
       const network = await signer.provider?.getNetwork();
+      const contractAddress = await contract?.getAddress();
+      await checkApproval(
+        generalInfo.token,
+        contractAddress!,
+        signer,
+        parseEther(amount)
+      );
       const tx = await contract?.fillIDOToken(parseEther(amount));
       await notificateTx(tx, network);
     }

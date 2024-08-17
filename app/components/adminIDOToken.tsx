@@ -27,9 +27,9 @@ export default function AdminIDOToken({ idoIndex, generalInfo }: AdminRanges) {
 
   const onFillContract = useCallback(async () => {
     setLoading(true);
-    if (signer && account) fillIDOToken(idoIndex, amount, signer);
+    if (signer && account) fillIDOToken(idoIndex, generalInfo, amount, signer);
     setLoading(false);
-  }, [account, idoIndex, amount, signer]);
+  }, [account, idoIndex, generalInfo, amount, signer]);
 
   useEffect(() => {
     const amountToFill =

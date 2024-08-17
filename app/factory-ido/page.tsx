@@ -19,7 +19,7 @@ import {
   IDO,
   WalletRange,
 } from "../contracts_integrations/factory";
-import { parseUnits } from "ethers";
+import { parseEther, parseUnits } from "ethers";
 import { StateContext } from "../context/StateContext";
 import { GET } from "../api/verify";
 import { idoRaw } from "../contracts_integrations/idoFull";
@@ -130,9 +130,8 @@ export default function FactoryIdo() {
         formData.get("maxAllocations")!.toString(),
         UNITS
       ),
-      tgeReleasePercent: parseUnits(
-        formData.get("tgeReleasePercent")!.toString(),
-        UNITS
+      tgeReleasePercent: parseEther(
+        formData.get("tgeReleasePercent")!.toString()
       ),
     };
 
@@ -175,7 +174,9 @@ export default function FactoryIdo() {
       refund: refund!,
     };
 
-    setData(newIdo);
+    console.log(amounts);
+
+    // setData(newIdo);
   }
 
   useEffect(() => {
