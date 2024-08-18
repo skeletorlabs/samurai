@@ -5,6 +5,7 @@ import {
   fillIDOToken,
   IDO_GENERAL_INFO,
   setIDOToken,
+  totalLeftToFill,
 } from "../contracts_integrations/idoFull";
 
 interface AdminRanges {
@@ -15,9 +16,19 @@ interface AdminRanges {
 export default function AdminIDOToken({ idoIndex, generalInfo }: AdminRanges) {
   const [token, setToken] = useState("");
   const [amount, setAmount] = useState("");
-  const [loading, setLoading] = useState(false);
   const [max, setMax] = useState("");
+  const [loading, setLoading] = useState(false);
   const { signer, account } = useContext(StateContext);
+
+  const onInputChange = (value: string) => {
+    const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
+
+    if (value === "" || re.test(value)) {
+      setAmount(value);
+    }
+
+    return false;
+  };
 
   const onSetToken = useCallback(async () => {
     setLoading(true);
@@ -27,18 +38,27 @@ export default function AdminIDOToken({ idoIndex, generalInfo }: AdminRanges) {
 
   const onFillContract = useCallback(async () => {
     setLoading(true);
-    if (signer && account) fillIDOToken(idoIndex, generalInfo, amount, signer);
+    if (signer && account)
+      fillIDOToken(idoIndex, generalInfo, amount.toString(), signer);
     setLoading(false);
   }, [account, idoIndex, generalInfo, amount, signer]);
 
+  const onLoadAmountToFill = useCallback(async () => {
+    if (generalInfo && signer) {
+      const amountLeftToFill = await totalLeftToFill(
+        idoIndex,
+        generalInfo,
+        signer
+      );
+
+      setAmount(amountLeftToFill.toString());
+      setMax(amountLeftToFill.toString());
+    }
+  }, [idoIndex, generalInfo, signer, setAmount, setMax]);
+
   useEffect(() => {
-    const amountToFill =
-      generalInfo.raised > 0
-        ? generalInfo.raised / generalInfo.amounts.tokenPrice
-        : 0;
-    setAmount(amountToFill.toString());
-    setMax(amountToFill.toString());
-  }, [generalInfo, setAmount]);
+    onLoadAmountToFill();
+  }, [idoIndex, generalInfo, signer]);
 
   return (
     <div className="flex flex-col gap-5">
@@ -73,7 +93,7 @@ export default function AdminIDOToken({ idoIndex, generalInfo }: AdminRanges) {
               type="text"
               placeholder="Enter the amount to fill"
               className="text-black w-[300px]"
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => onInputChange(e.target.value)}
               value={amount}
             />
             <SSButton

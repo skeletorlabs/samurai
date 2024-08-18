@@ -382,7 +382,6 @@ export default function Ido() {
       setGeneral(response as IDO_GENERAL_INFO);
 
       const phase = await phaseInfo(idoIndex, response as IDO_GENERAL_INFO);
-      // console.log("phase", phase);
       if (phase) setCurrentPhase(phase);
     }
 
@@ -1220,7 +1219,7 @@ export default function Ido() {
                                         {ido?.acceptedTokenSymbol}
                                       </p>
                                     </div>
-                                    {(general.refund.active &&
+                                    {/* {(general.refund.active &&
                                       now < general?.periods.vestingAt) ||
                                       (now >
                                         general?.periods.vestingAt +
@@ -1269,7 +1268,7 @@ export default function Ido() {
                                             <HiOutlineInformationCircle color="red" />
                                           </Tooltip>
                                         </div>
-                                      ))}
+                                      ))} */}
                                   </div>
 
                                   <div className="flex flex-col gap-2">

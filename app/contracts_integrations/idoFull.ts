@@ -663,6 +663,25 @@ export async function setIDOToken(
   }
 }
 
+export async function totalLeftToFill(
+  index: number,
+  generalInfo: IDO_GENERAL_INFO,
+  signer: ethers.Signer
+) {
+  const contract = await getContract(index, signer);
+  const contractAddress = await contract?.getAddress();
+  const raised = await contract?.raised();
+  const maxToFill = await contract?.tokenAmountByParticipation(raised);
+  const balance = await balanceOf(
+    ERC20_ABI,
+    generalInfo.token,
+    contractAddress!,
+    signer
+  );
+
+  return Number(formatEther(maxToFill)) - Number(formatEther(balance));
+}
+
 // fillIDOToken(uint256 amount) external
 export async function fillIDOToken(
   index: number,
@@ -671,21 +690,30 @@ export async function fillIDOToken(
   signer: ethers.Signer
 ) {
   const contract = await getContract(index, signer);
+  const contractAddress = await contract?.getAddress();
+
   try {
     const owner = await contract?.owner();
     const signerAddress = await signer.getAddress();
 
     if (owner === signerAddress) {
       const network = await signer.provider?.getNetwork();
-      const contractAddress = await contract?.getAddress();
-      await checkApproval(
-        generalInfo.token,
-        contractAddress!,
-        signer,
-        parseEther(amount)
-      );
-      const tx = await contract?.fillIDOToken(parseEther(amount));
-      await notificateTx(tx, network);
+
+      const totalLeft = await totalLeftToFill(index, generalInfo, signer);
+
+      if (Number(amount) <= totalLeft) {
+        // CHECK ALLOWANCE / APPROVE
+        await checkApproval(
+          generalInfo.token,
+          contractAddress!,
+          signer,
+          parseEther(amount)
+        );
+
+        // FILL CONTRACT WITH AMOUNT
+        const tx = await contract?.fillIDOToken(parseEther(amount));
+        await notificateTx(tx, network);
+      }
     }
   } catch (e) {
     await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
