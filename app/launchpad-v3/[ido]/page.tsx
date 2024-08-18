@@ -1219,42 +1219,36 @@ export default function Ido() {
                                         {ido?.acceptedTokenSymbol}
                                       </p>
                                     </div>
-                                    {/* {(general.refund.active &&
-                                      now < general?.periods.vestingAt) ||
-                                      (now >
+                                    {general.refund.active &&
+                                      !user?.claimedTGE &&
+                                      now > general?.periods.vestingAt &&
+                                      now <=
                                         general?.periods.vestingAt +
                                           general.refund.period && (
                                         <div className="flex items-center gap-1 mt-[5px]">
                                           <button
                                             onClick={onGetRefund}
-                                            // disabled={
-                                            //   now <
-                                            //     general?.periods.vestingAt ||
-                                            //   now >
-                                            //     general?.periods.vestingAt +
-                                            //       general.refund.period
-                                            // }
                                             className="text-xs px-2 py-[2px] border rounded-full  border-white/20 text-white/60 hover:text-white/50 w-max"
                                           >
                                             ASK FOR REFUND
                                           </button>
                                           <Tooltip
                                             content={
-                                              <div className="text-xs leading-relaxed text-white/70">
+                                              <div className="text-sm leading-relaxed text-white/70 py-2">
                                                 <h1 className="text-yellow-300">
                                                   IMPORTANT:
                                                 </h1>
                                                 <p>
-                                                  1 - We charge{" "}
+                                                  * We charge{" "}
                                                   {general.refund.feePercent}%
                                                   in fees for refundings.
                                                 </p>
                                                 <p>
-                                                  2 - Refunds are not allowed
+                                                  ** Refunds are not allowed
                                                   after TGE claims
                                                 </p>
                                                 <p>
-                                                  3 - Refunds are not allowed
+                                                  *** Refunds are not allowed
                                                   after{" "}
                                                   {general.refund.period /
                                                     60 /
@@ -1265,10 +1259,10 @@ export default function Ido() {
                                             }
                                             style="dark"
                                           >
-                                            <HiOutlineInformationCircle color="red" />
+                                            <HiOutlineInformationCircle color="gray" />
                                           </Tooltip>
                                         </div>
-                                      ))} */}
+                                      )}
                                   </div>
 
                                   <div className="flex flex-col gap-2">

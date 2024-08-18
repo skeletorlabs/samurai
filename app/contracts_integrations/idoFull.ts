@@ -80,6 +80,7 @@ export type IDO_USER_INFO = {
   purchased: number;
   claimed: number;
   claimable: number;
+  claimedTGE: boolean;
 };
 
 async function getContract(index: number, signer?: ethers.Signer) {
@@ -357,6 +358,7 @@ export async function userInfo(
     let purchased = 0;
     let claimed = 0;
     let claimable = 0;
+    let claimedTGE = false;
 
     if (generalInfo.token !== "0x0000000000000000000000000000000000000000") {
       purchased = Number(
@@ -369,6 +371,7 @@ export async function userInfo(
       claimable = Number(
         formatEther(await contract?.previewClaimableTokens(signerAddress))
       );
+      claimedTGE = await contract?.hasClaimedTGE(signerAddress);
     } else {
       if (allocation > 0) {
         purchased = allocation / generalInfo.amounts.tokenPrice;
@@ -384,6 +387,7 @@ export async function userInfo(
       purchased,
       claimed,
       claimable,
+      claimedTGE,
     } as IDO_USER_INFO;
   } catch (e) {
     await handleDecodedError({ errorDecoder, e: e as Error, notificate: true });
