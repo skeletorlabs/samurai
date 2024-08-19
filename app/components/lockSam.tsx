@@ -477,7 +477,7 @@ export default function LockSam() {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="fixed inset-0 bg-black/70 backdrop-blur-[16px]" />
+              <div className="fixed inset-0 bg-black/70 !backdrop-blur-[16px]" />
             </TransitionChild>
 
             <div className="fixed inset-0 overflow-y-auto">
