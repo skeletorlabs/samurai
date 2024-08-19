@@ -989,8 +989,6 @@ export default function Ido() {
                               {/* PARTICIPATION */}
                               {currentPhase?.toLowerCase() ===
                                 "participation" &&
-                                // user?.allocation <
-                                //   user?.walletRange?.maxPerWallet &&
                                 (user?.isWhitelisted || general?.isPublic) &&
                                 ((general?.usingLinkedWallet &&
                                   user?.linkedWallet) ||
