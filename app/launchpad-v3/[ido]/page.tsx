@@ -566,7 +566,7 @@ export default function Ido() {
                 <div
                   className={`${
                     loading ? "" : "bg-black/70 shadow-lg shadow-white/30"
-                  } flex flex-col w-full xl:w-[550px] min-h-[398px]`}
+                  } flex flex-col w-full xl:w-[650px] min-h-[398px]`}
                 >
                   {loading && (
                     <div className="flex items-center justify-center w-full h-[460px]">
@@ -601,7 +601,7 @@ export default function Ido() {
                         </div>
                       </div>
 
-                      <div className="flex items-center text-sm bg-white/10 h-16">
+                      <div className="flex items-center text-xs lg:text-sm bg-white/10 h-12 lg:h-16">
                         {tabs.map((item, index) => (
                           <button
                             disabled={tabIsDisabled(index)}
@@ -1192,8 +1192,8 @@ export default function Ido() {
                                 // user?.allocation > 0 && (
                                 <div className="flex flex-col justify-between w-full h-full">
                                   <div className="flex flex-col leading-tight">
-                                    <div className="flex items-center gap-4 text-[14px]">
-                                      <p className="px-2 py-1 rounded-full bg-samurai-red/10 border border-samurai-red/40 w-max mb-5">
+                                    <div className="flex items-center gap-2 lg:gap-4 text-[14px] flex-wrap">
+                                      <p className="flex px-2 py-1 bg-white/10 lg:mb-5">
                                         {general?.amounts.tgeReleasePercent *
                                           100}
                                         % at TGE,{" "}
@@ -1206,7 +1206,7 @@ export default function Ido() {
                                           general?.vestingType as number
                                         ].toLowerCase()}
                                       </p>
-                                      <p className="px-2 py-1 rounded-full bg-samurai-red/10 border border-samurai-red/40 w-max mb-5">
+                                      <p className="flex px-2 py-1 bg-white/10 mb-5">
                                         Your Allocation: $
                                         {user?.allocation.toLocaleString(
                                           "en-us",
@@ -1264,7 +1264,7 @@ export default function Ido() {
                                   </div>
 
                                   <div className="flex flex-col gap-2">
-                                    <div className="flex items-center justify-between border-b border-samurai-red pb-3">
+                                    <div className="flex items-center justify-between border-b border-samurai-red pb-3 flex-wrap">
                                       <span>
                                         Project Tokens -{" "}
                                         {ido?.projectTokenSymbol}
@@ -1278,7 +1278,7 @@ export default function Ido() {
                                       </button>
                                     </div>
 
-                                    <div className="flex justify-between items-center gap-5 bg-samurai-red/10 text-sm p-2">
+                                    <div className="flex justify-between items-center gap-5 bg-samurai-red/10 text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap text-center lg:text-start">
                                       <div className="flex flex-col">
                                         <p className={`${inter.className}`}>
                                           Purchased

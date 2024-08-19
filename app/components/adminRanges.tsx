@@ -46,7 +46,7 @@ export default function AdminRanges({ idoIndex, ranges }: AdminRanges) {
             <span className="font-bold bg-samurai-red p-4 mt-5">
               {range.name}
             </span>
-            <div className="flex items-center gap-3 mt-2">
+            <div className="flex items-center gap-3 mt-2 flex-wrap">
               <div className="flex flex-col">
                 <span>Min</span>
                 <input
