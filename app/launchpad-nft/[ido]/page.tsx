@@ -393,24 +393,32 @@ export default function Ido() {
                             UTC
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">FCFS START:</span>
-                          <p className="text-white/70">
-                            {formattedDate(
-                              ido.publicParticipationStartsAt
-                            ).toUpperCase()}{" "}
-                            UTC
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">FCFS END:</span>
-                          <p className="text-white/70">
-                            {formattedDate(
-                              ido.publicParticipationEndsAt
-                            ).toUpperCase()}{" "}
-                            UTC
-                          </p>
-                        </div>
+                        {ido.publicParticipationStartsAt > 0 && (
+                          <>
+                            <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                              <span className="text-samurai-red">
+                                FCFS START:
+                              </span>
+                              <p className="text-white/70">
+                                {formattedDate(
+                                  ido.publicParticipationStartsAt
+                                ).toUpperCase()}{" "}
+                                UTC
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                              <span className="text-samurai-red">
+                                FCFS END:
+                              </span>
+                              <p className="text-white/70">
+                                {formattedDate(
+                                  ido.publicParticipationEndsAt
+                                ).toUpperCase()}{" "}
+                                UTC
+                              </p>
+                            </div>
+                          </>
+                        )}
                         <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
                           <span className="text-samurai-red">TGE DATE:</span>
                           <p className="text-white/70">

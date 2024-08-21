@@ -7,6 +7,7 @@ import { getParticipationPhase } from "@/app/contracts_integrations/ido";
 import { getParticipationPhase as getParticipationPhaseNft } from "@/app/contracts_integrations/idoNFT";
 import { getParticipationPhase as getParticipationPhaseNftEth } from "../contracts_integrations/idoNFTETH";
 import { getParticipationPhase as getParticipationPhaseV2 } from "../contracts_integrations/idoV2";
+import { getParticipationPhase as getParticipationPhaseNftOpen } from "../contracts_integrations/idoNftOpen";
 import { useCallback, useEffect, useState } from "react";
 
 export default function LaunchpadCard({
@@ -26,12 +27,15 @@ export default function LaunchpadCard({
     const isNft = ido.type === "NFT";
     const isNftEth = ido.type === "NFT-ETH";
     const isV2 = ido.type === "v2";
+    const isNftOpen = ido.type === "NFT-OPEN";
     const phase = isNft
       ? await getParticipationPhaseNft(contract)
       : isNftEth
       ? await getParticipationPhaseNftEth(contract)
       : isV2
       ? await getParticipationPhaseV2(contract)
+      : isNftOpen
+      ? await getParticipationPhaseNftOpen(contract)
       : await getParticipationPhase(contract);
     setPhase(phase.toUpperCase());
   }, [ido]);
@@ -133,7 +137,9 @@ export default function LaunchpadCard({
           ) : (
             <>
               {ido.totalAllocation.toLocaleString("en-us")}{" "}
-              {ido.type == "NFT" || ido.type === "NFT-ETH"
+              {ido.type == "NFT" ||
+              ido.type === "NFT-ETH" ||
+              ido.type === "NFT-OPEN"
                 ? "NFTs"
                 : ido.acceptedTokenSymbol}
             </>
@@ -151,7 +157,10 @@ export default function LaunchpadCard({
         <span className="text-[14px] text-samurai-red">PRICE:</span>
         <p className="text-white/70">
           {ido.price} {ido.type === "NFT-ETH" ? "ETH" : ido.acceptedTokenSymbol}{" "}
-          {(ido.type === "NFT" || ido.type === "NFT-ETH") && "per NFT"}
+          {(ido.type === "NFT" ||
+            ido.type === "NFT-ETH" ||
+            ido.type === "NFT-OPEN") &&
+            "per NFT"}
         </p>
       </div>
 
