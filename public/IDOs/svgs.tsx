@@ -355,14 +355,14 @@ export const memepad = (
 
 export const nexis = (
   <svg
-    width="783"
-    height="155"
+    // width="783"
+    // height="155"
     viewBox="0 0 783 155"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
   >
-    <g clip-path="url(#clip0_9_7)">
+    <g clipPath="url(#clip0_9_7)">
       <rect width="783" height="155" fill="url(#pattern0_9_7)" />
     </g>
     <defs>

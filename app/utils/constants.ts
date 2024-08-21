@@ -38,6 +38,7 @@ import {
   PARTICIPATOR_NFT_ABI,
   PARTICIPATOR_NFT_ETH,
   PARTICIPATOR_V2_2,
+  PARTICIPATOR_NFT_OPEN,
 } from "@/app/contracts_integrations/abis";
 
 export const simplifiedPhases = [
@@ -60,71 +61,67 @@ export const simplifiedPhasesV2 = [
 ];
 
 export const IDO_LIST: IDO[] = [
-  // {
-  //   id: "launchpad-v2/whatever",
-  //   logo: memepad,
-  //   idoImageSrc: "/IDOs/memepad.png",
-  //   acceptedTokenSymbol: "USDC",
-  //   tokenNetwork: "Solana",
-  //   crowdsaleNetwork: "BASE",
-  //   networkImageSrc: "/chain-logos/SOLANA.svg",
-  //   projectName: "MemePad",
-  //   projectListDescription:
-  //     "MemePad is set to become the number-one dedicated memecoin launchpad in crypto!",
-  //   projectDescription:
-  //     "MemePad is here to bring order to the chaos of the memecoin space. With strict vetting procedures and built-in anti-rug protection, they're creating a secure, high-quality launchpad for the 'hottest memecoins on Solana and beyond' where degens can chase 100x moonshots with confidence.",
-  //   projectTokenSymbol: "$MPAD",
-  //   totalAllocation: 50_000,
-  //   price: "0.345",
-  //   registrationStartsAt: 1718481518,
-  //   participationStartsAt: 1718481518 + 86400 * 2,
-  //   participationEndsAt: 1718481518 + 86400 * 3,
-  //   publicParticipationStartsAt: 1718481518 + 86400 * 3,
-  //   publicParticipationEndsAt: 1718481518 + 86400 * 4,
-  //   simplified: true,
-  //   tgeDate: 1718582400,
-  //   tgePercentage: 8,
-  //   cliff: 0,
-  //   investmentRound: "Round 2",
-  //   fdv: "6000000",
-  //   exchangeListingPrice: 0.6,
-  //   marketCapAtTGE: 182250,
-  //   vesting: "8% TGE + 3 month monthly vesting",
-  //   releaseType: "Linear",
-  //   currentPhase: simplifiedPhases[1].title,
-  //   socials: [
-  //     {
-  //       svg: globe,
-  //       href: "https://memepad.ai/",
-  //     },
-  //     {
-  //       svg: twitterX,
-  //       href: "https://twitter.com/MemePadSol",
-  //     },
-  //     {
-  //       svg: telegram,
-  //       href: "https://t.me/Memepad_Community",
-  //     },
-  //   ],
-  //   bigDescription: `
-  //     <div style="display: flex; flex-direction: column; gap: 15px;">
-  //       <p>MemePad is setting out to solve the trifecta of problems plaguing the memecoin space: low-quality projects, a lack of transparency from teams, and security risks. They do this by sourcing only top-quality projects with doxxed teams, subjecting them to rigorous due diligence, and launching them with built-in protection against rug pulls</p>
-  //       <p>Only top-tier memecoins are selected to join the MemeVerse (MemePad's line-up of launchpad alumni). To pass initial screening, a project has to have a strong long-term vision for the token growth, community, and utility.</p>
-  //       <p>MemePad also implements strict security procedures to keep your investments safe. We're talking audits, mandatory KYC, locked team tokens, and more. They will also run their own insurance funds, used to compensate the community in the unlikely event that a MemeVerse project is compromised and goes to zero.</p>
-  //       <p>$MPAD holders have the option to participate for the main token sales, or go in on exclusive early 'Ape In' rounds with cheaper prices and special bonuses.</p>
-  //       <p>And as a reward for participating on the platform, holders will also be getting regularly showered with airdrops sourced form MemePad's featured projects!</p>
-  //     </div>
-  // `,
-  //   contract: "0x7848a6da9bb576caf244c087cbf55d5555d4abbc",
-  //   abi: PARTICIPATOR_V2_2,
-  //   images: [
-  //     "/IDOs/memepad/1.png",
-  //     "/IDOs/memepad/2.png",
-  //     "/IDOs/memepad/3.png",
-  //     "/IDOs/memepad/4.png",
-  //   ],
-  //   type: "v2",
-  // },
+  {
+    id: "launchpad-nft-open/nexis-tier-1",
+    logo: nexis,
+    idoImageSrc: "/IDOs/nexis.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "TBA",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "TBA",
+    projectName: "Nexis Network Nodes",
+    projectListDescription:
+      "Nexis Network is an innovative new Layer-1 blockchain, tailored to host the next generation of data-intensive AI and RWA applications.",
+    projectDescription:
+      "Nexis' mission is to build a secure, scalable, lightning-fast blockchain which solves all of the problems currently inhibiting the growth of AI projects in Web3. With block confirmations five times faster than Solana (and for a third of the cost) they’re building the blockchain infrastructure needed to meet the high data demands of next-gen machine learning and RWA projects.",
+    projectTokenSymbol: "NFT",
+    totalAllocation: 400,
+    price: "50",
+    registrationStartsAt: 1724257821,
+    participationStartsAt: 1724261421,
+    participationEndsAt: 1724261421 + 86400 * 2,
+    publicParticipationStartsAt: 0,
+    publicParticipationEndsAt: 0,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 7,
+    cliff: 86400 * 30,
+    investmentRound: "Tier 1",
+    fdv: "30000000",
+    exchangeListingPrice: 0.03,
+    marketCapAtTGE: 650250,
+    vesting: "NOT APPLIED",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      { svg: globe, href: "https://nexis.network/" },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/Nexis_Network",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/Nexis_Network",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <p>Nexis is an innovative new Layer-1 blockchain, specifically tailored to meet the high throughput demands of AI and RWA projects. It's custom built to host the next generation of AI-powered products, which require cheap, high-volume, lightning-fast transactions.</p>
+        <p>The base layer of the Nexis Network is its EVM-compatible L1 blockchain, developed using Delegated Proof-of-Stake consensus. Running on top of this foundational EVM blockchain is a second tech layer: a parallel zkEVM (Zero-knowledge Ethereum Virtual Machine) chain.</p>
+        <p>This dual-chain architecture allows Nexis Network to offload processing tasks to this parallel chain, increasing the speed of transactions while also allowing developers to utilize the inherent privacy and security of zero-knowledge proofs when processing sensitive data. It also means that Nexis enjoys seamless interoperability with EVM and zkEVM chains, as well as boasting compatibility with Rust-based chains (such as Solana).</p>
+        <p>As a result, Nexis Network smashes the competition on basically every key metric. According to the testnet figures, Nexis is able to exceed Solana's TPS, process blocks over five times faster, and also process transactions for just 30% of the cost!</p>
+      </div>
+  `,
+    contract: "0x69646aD7c46e3B04BD0Db464fB582187112315b2",
+    abi: PARTICIPATOR_NFT_OPEN,
+    // images: [
+    //   "/IDOs/orangedx/1.png",
+    //   "/IDOs/orangedx/2.png",
+    //   "/IDOs/orangedx/3.png",
+    //   "/IDOs/orangedx/4.png",
+    // ],
+    type: "NFT-OPEN",
+  },
   {
     id: "launchpad-v2/nexis",
     logo: nexis,
