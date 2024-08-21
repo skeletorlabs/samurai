@@ -21,6 +21,8 @@ import {
 import {
   convertDateToUnixTimestamp,
   formattedDate,
+  formattedDate3,
+  formattedDate4,
   formattedDateSimple,
 } from "@/app/utils/formattedDate";
 import {
@@ -86,9 +88,7 @@ const tabs = [
 export default function Ido() {
   const [inputValue, setInputValue] = useState("");
   const [inputLinkedWallet, setInputLinkedWallet] = useState("");
-  const [firstLoading, setFirstLoading] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [secondaryLoading, setSecondaryLoading] = useState(false);
   const [general, setGeneral] = useState<IDO_GENERAL_INFO | null>(null);
   const [user, setUser] = useState<IDO_USER_INFO | null>(null);
   const [currentPhase, setCurrentPhase] = useState<string | null>(null);
@@ -114,37 +114,37 @@ export default function Ido() {
   // ============================================================================================================
 
   const onTogglePause = useCallback(async () => {
-    setSecondaryLoading(true);
+    setLoading(true);
     if (account && general && account === general?.owner && signer) {
       await togglePause(idoIndex, signer);
       await getGeneralData();
       await getUserInfos();
     }
 
-    setSecondaryLoading(false);
-  }, [signer, idoIndex, general, account, setSecondaryLoading]);
+    setLoading(false);
+  }, [signer, idoIndex, general, account, setLoading]);
 
   const onWithdraw = useCallback(async () => {
-    setSecondaryLoading(true);
+    setLoading(true);
     if (account && general && account === general?.owner && signer) {
       await withdraw(idoIndex, signer);
       await getGeneralData();
       await getUserInfos();
     }
 
-    setSecondaryLoading(false);
-  }, [signer, idoIndex, general, account, setSecondaryLoading]);
+    setLoading(false);
+  }, [signer, idoIndex, general, account, setLoading]);
 
   const onMakePublic = useCallback(async () => {
-    setSecondaryLoading(true);
+    setLoading(true);
     if (account && general && account === general?.owner && signer) {
       await makePublic(idoIndex, signer);
       await getGeneralData();
       await getUserInfos();
     }
 
-    setSecondaryLoading(false);
-  }, [signer, idoIndex, general, account, setSecondaryLoading]);
+    setLoading(false);
+  }, [signer, idoIndex, general, account, setLoading]);
 
   // ============================================================================================================
   // END ADMIN FUNCTIONS
@@ -215,28 +215,28 @@ export default function Ido() {
   };
 
   const onLinkWallet = useCallback(async () => {
-    setSecondaryLoading(true);
+    setLoading(true);
     if (signer) {
       await linkWallet(idoIndex, inputLinkedWallet, signer);
       await getGeneralData();
       await getUserInfos();
     }
-    setSecondaryLoading(false);
-  }, [signer, idoIndex, inputLinkedWallet, setSecondaryLoading]);
+    setLoading(false);
+  }, [signer, idoIndex, inputLinkedWallet, setLoading]);
 
   const onRegister = useCallback(async () => {
-    setSecondaryLoading(true);
+    setLoading(true);
     if (signer && user && !user.isWhitelisted) {
       await register(idoIndex, signer);
       await getGeneralData();
       await getUserInfos();
     }
 
-    setSecondaryLoading(false);
-  }, [signer, idoIndex, user, inputLinkedWallet, setSecondaryLoading]);
+    setLoading(false);
+  }, [signer, idoIndex, user, inputLinkedWallet, setLoading]);
 
   const onParticipate = useCallback(async () => {
-    setSecondaryLoading(true);
+    setLoading(true);
     if (
       signer &&
       user &&
@@ -255,11 +255,11 @@ export default function Ido() {
       await getUserInfos();
     }
 
-    setSecondaryLoading(false);
-  }, [signer, idoIndex, general, user, inputValue, setSecondaryLoading]);
+    setLoading(false);
+  }, [signer, idoIndex, general, user, inputValue, setLoading]);
 
   const onGetRefund = useCallback(async () => {
-    setSecondaryLoading(true);
+    setLoading(true);
     if (
       signer &&
       general &&
@@ -271,19 +271,19 @@ export default function Ido() {
       await getUserInfos();
     }
 
-    setSecondaryLoading(false);
-  }, [signer, idoIndex, general, user, inputValue, setSecondaryLoading]);
+    setLoading(false);
+  }, [signer, idoIndex, general, user, inputValue, setLoading]);
 
   const onClaim = useCallback(async () => {
-    setSecondaryLoading(true);
+    setLoading(true);
     if (signer) {
       await claim(idoIndex, signer);
       await getGeneralData();
       await getUserInfos();
     }
 
-    setSecondaryLoading(false);
-  }, [signer, idoIndex, setSecondaryLoading]);
+    setLoading(false);
+  }, [signer, idoIndex, setLoading]);
 
   // ============================================================================================================
   // OVERALL CHECKS
@@ -372,11 +372,7 @@ export default function Ido() {
   // ============================================================================================================
 
   const getGeneralData = useCallback(async () => {
-    if (firstLoading) {
-      setLoading(true);
-    }
-
-    setSecondaryLoading(true);
+    setLoading(true);
     if (idoIndex !== -1) {
       const response = await generalInfo(idoIndex);
       setGeneral(response as IDO_GENERAL_INFO);
@@ -385,18 +381,8 @@ export default function Ido() {
       if (phase) setCurrentPhase(phase);
     }
 
-    if (firstLoading) setLoading(false);
-
-    setSecondaryLoading(false);
-    setFirstLoading(false);
-  }, [
-    idoIndex,
-    firstLoading,
-    setCurrentPhase,
-    setLoading,
-    setFirstLoading,
-    setSecondaryLoading,
-  ]);
+    setLoading(false);
+  }, [idoIndex, setCurrentPhase, setLoading]);
 
   // const onFetchEvents = useCallback(async () => {
   //   await getLinkedWallets();
@@ -563,17 +549,8 @@ export default function Ido() {
 
             <div className="flex flex-col xl:pr-[32px] 2xl:pr-28 gap-5 mt-10 xl:mt-0 mx-3 xl:mx-0">
               <div className="flex flex-col">
-                <div
-                  className={`${
-                    loading ? "" : "bg-black/70 shadow-lg shadow-white/30"
-                  } flex flex-col w-full xl:w-[650px] min-h-[398px]`}
-                >
-                  {loading && (
-                    <div className="flex items-center justify-center w-full h-[460px]">
-                      <Spinner size="xl" color="failure" />
-                    </div>
-                  )}
-                  {!loading && general && (
+                <div className="bg-black/70 shadow-lg shadow-white/30 flex flex-col w-full xl:w-[650px] min-h-[428px] relative">
+                  {general && (
                     <>
                       <div className="flex items-center justify-between m-8 mb-4 text-lg xl:text-xl rounded-t-lg relative">
                         <span>
@@ -815,14 +792,14 @@ export default function Ido() {
                                           <button
                                             onClick={onRegister}
                                             disabled={
-                                              secondaryLoading ||
+                                              loading ||
                                               !general ||
                                               !user ||
                                               general?.isPaused
                                             }
                                             className={`
                                         ${
-                                          secondaryLoading ||
+                                          loading ||
                                           !general ||
                                           !user ||
                                           general?.isPaused
@@ -831,7 +808,7 @@ export default function Ido() {
                                         }
                                           rounded-[8px] w-[300px] h-[50px] self-center py-4 text-[18px] text-center transition-all`}
                                           >
-                                            {secondaryLoading ? (
+                                            {loading ? (
                                               <Spinner
                                                 size="md"
                                                 color="gray"
@@ -862,14 +839,14 @@ export default function Ido() {
                                               <button
                                                 onClick={() => onPaste()}
                                                 disabled={
-                                                  secondaryLoading ||
+                                                  loading ||
                                                   !general ||
                                                   !user ||
                                                   general?.isPaused
                                                 }
                                                 className={`
                                                   ${
-                                                    secondaryLoading ||
+                                                    loading ||
                                                     !general ||
                                                     !user ||
                                                     general?.isPaused
@@ -894,14 +871,14 @@ export default function Ido() {
                                                   setInputLinkedWallet("")
                                                 }
                                                 disabled={
-                                                  secondaryLoading ||
+                                                  loading ||
                                                   !general ||
                                                   !user ||
                                                   general?.isPaused
                                                 }
                                                 className={`
                                                   ${
-                                                    secondaryLoading ||
+                                                    loading ||
                                                     !general ||
                                                     !user ||
                                                     general?.isPaused
@@ -916,14 +893,14 @@ export default function Ido() {
                                               <button
                                                 onClick={() => onPaste()}
                                                 disabled={
-                                                  secondaryLoading ||
+                                                  loading ||
                                                   !general ||
                                                   !user ||
                                                   general?.isPaused
                                                 }
                                                 className={`
                                                   ${
-                                                    secondaryLoading ||
+                                                    loading ||
                                                     !general ||
                                                     !user ||
                                                     general?.isPaused
@@ -951,7 +928,7 @@ export default function Ido() {
                                             <button
                                               onClick={onLinkWallet}
                                               disabled={
-                                                secondaryLoading ||
+                                                loading ||
                                                 !general ||
                                                 !user ||
                                                 general?.isPaused ||
@@ -960,7 +937,7 @@ export default function Ido() {
                                               }
                                               className={`
                                                 ${
-                                                  secondaryLoading ||
+                                                  loading ||
                                                   !general ||
                                                   !user ||
                                                   general?.isPaused ||
@@ -971,7 +948,7 @@ export default function Ido() {
                                                 }
                                                   rounded-[8px] w-full h-[50px] mt-4 py-4 text-[18px] text-center transition-all `}
                                             >
-                                              {secondaryLoading ? (
+                                              {loading ? (
                                                 <Spinner
                                                   size="md"
                                                   color="gray"
@@ -1071,7 +1048,7 @@ export default function Ido() {
                                     <div className="relative w-full">
                                       <input
                                         type="text"
-                                        disabled={secondaryLoading}
+                                        disabled={loading}
                                         placeholder={`${
                                           general?.usingETH
                                             ? CHAIN_TO_CURRENCY[chain]
@@ -1122,7 +1099,7 @@ export default function Ido() {
                                     <button
                                       onClick={onParticipate}
                                       disabled={
-                                        secondaryLoading ||
+                                        loading ||
                                         !general ||
                                         !user ||
                                         general?.isPaused ||
@@ -1138,7 +1115,7 @@ export default function Ido() {
                                       }
                                       className={`
                                         ${
-                                          secondaryLoading ||
+                                          loading ||
                                           !general ||
                                           !user ||
                                           general?.isPaused ||
@@ -1156,7 +1133,7 @@ export default function Ido() {
                                         }
                                           rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
                                     >
-                                      {secondaryLoading ? (
+                                      {loading ? (
                                         <Spinner
                                           size="md"
                                           color="gray"
@@ -1191,9 +1168,12 @@ export default function Ido() {
                               {user && (
                                 // user?.allocation > 0 && (
                                 <div className="flex flex-col justify-between w-full h-full">
-                                  <div className="flex flex-col leading-tight">
-                                    <div className="flex items-center gap-2 lg:gap-4 text-[14px] flex-wrap">
-                                      <p className="flex px-2 py-1 bg-white/10 lg:mb-5">
+                                  <div className="flex flex-col leading-tight mb-10">
+                                    <div className="flex items-center gap-2 text-[14px] flex-wrap">
+                                      <p className="flex px-2 py-1 bg-white/10">
+                                        <span className="text-white/60 mr-1">
+                                          Vesting Terms:
+                                        </span>
                                         {general?.amounts.tgeReleasePercent *
                                           100}
                                         % at TGE,{" "}
@@ -1206,76 +1186,98 @@ export default function Ido() {
                                           general?.vestingType as number
                                         ].toLowerCase()}
                                       </p>
-                                      <p className="flex px-2 py-1 bg-white/10 mb-5">
-                                        Your Allocation: $
+                                      <p className="flex px-2 py-1 bg-white/10">
+                                        <span className="text-white/60 mr-1">
+                                          My Allocation:
+                                        </span>
+                                        $
                                         {user?.allocation.toLocaleString(
-                                          "en-us",
-                                          {
-                                            minimumFractionDigits: 2,
-                                          }
+                                          "en-us"
                                         )}{" "}
                                         {ido?.acceptedTokenSymbol}
                                       </p>
+                                      <p className="flex px-2 py-1 bg-white/10">
+                                        <span className="text-white/60 mr-1">
+                                          TGE:
+                                        </span>
+                                        {formattedDate3(
+                                          general?.periods.vestingAt
+                                        )}
+                                      </p>
+                                      <p className="flex px-2 py-1 bg-white/10">
+                                        <span className="text-white/60 mr-1">
+                                          Vesting:
+                                        </span>
+                                        {formattedDate4(
+                                          general?.periods.cliffEndsAt
+                                        )}
+                                        {" - "}
+                                        {formattedDate4(
+                                          general?.periods.vestingEndsAt
+                                        )}
+                                        {" UTC"}
+                                      </p>
                                     </div>
-                                    {general.refund.active &&
-                                      !user?.claimedTGE &&
-                                      now > general?.periods.vestingAt &&
-                                      now <=
-                                        general?.periods.vestingAt +
-                                          general.refund.period && (
-                                        <div className="flex items-center gap-1 mt-[5px]">
-                                          <button
-                                            onClick={onGetRefund}
-                                            className="text-xs px-2 py-[2px] border rounded-full  border-white/20 text-white/60 hover:text-white/50 w-max"
-                                          >
-                                            ASK FOR REFUND
-                                          </button>
-                                          <Tooltip
-                                            content={
-                                              <div className="text-sm leading-relaxed text-white/70 py-2">
-                                                <h1 className="text-yellow-300">
-                                                  IMPORTANT:
-                                                </h1>
-                                                <p>
-                                                  * We charge{" "}
-                                                  {general.refund.feePercent}%
-                                                  in fees for refundings.
-                                                </p>
-                                                <p>
-                                                  ** Refunds are not allowed
-                                                  after TGE claims
-                                                </p>
-                                                <p>
-                                                  *** Refunds are not allowed
-                                                  after{" "}
-                                                  {general.refund.period /
-                                                    60 /
-                                                    60}{" "}
-                                                  hours
-                                                </p>
-                                              </div>
-                                            }
-                                            style="dark"
-                                          >
-                                            <HiOutlineInformationCircle color="gray" />
-                                          </Tooltip>
-                                        </div>
-                                      )}
                                   </div>
 
                                   <div className="flex flex-col gap-2">
-                                    <div className="flex items-center justify-between border-b border-samurai-red pb-3 flex-wrap">
+                                    <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap">
                                       <span>
                                         Project Tokens -{" "}
                                         {ido?.projectTokenSymbol}
                                       </span>
-                                      <button
-                                        onClick={onClaim}
-                                        disabled={user?.claimable === 0}
-                                        className="text-sm py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
-                                      >
-                                        CLAIM
-                                      </button>
+
+                                      <div className="flex items-center gap-2">
+                                        {general.refund.active && (
+                                          <div className="flex items-center gap-1">
+                                            <button
+                                              onClick={onGetRefund}
+                                              className="flex items-center gap-1 text-xs py-1 px-4 bg-black border border-gray-400 text-gray-400 disabled:text-white/20 disabled:border-white/20 hover:enabled:text-black hover:enabled:bg-gray-300 w-max rounded-full"
+                                            >
+                                              <span>ASK FOR REFUND</span>
+                                              {/* <Tooltip
+                                                content={
+                                                  <div className="text-sm leading-relaxed text-white/70 py-2">
+                                                    <h1 className="text-yellow-300">
+                                                      IMPORTANT:
+                                                    </h1>
+                                                    <p>
+                                                      * We charge{" "}
+                                                      {
+                                                        general.refund
+                                                          .feePercent
+                                                      }
+                                                      % in fees for refundings.
+                                                    </p>
+                                                    <p>
+                                                      ** Refunds are not allowed
+                                                      after TGE claims
+                                                    </p>
+                                                    <p>
+                                                      *** Refunds are not
+                                                      allowed after{" "}
+                                                      {general.refund.period /
+                                                        60 /
+                                                        60}{" "}
+                                                      hours
+                                                    </p>
+                                                  </div>
+                                                }
+                                                style="dark"
+                                              >
+                                                <HiOutlineInformationCircle color="yellow" />
+                                              </Tooltip> */}
+                                            </button>
+                                          </div>
+                                        )}
+                                        <button
+                                          onClick={onClaim}
+                                          disabled={user?.claimable === 0}
+                                          className="text-xs py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
+                                        >
+                                          CLAIM
+                                        </button>
+                                      </div>
                                     </div>
 
                                     <div className="flex justify-between items-center gap-5 bg-samurai-red/10 text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap text-center lg:text-start">
@@ -1285,11 +1287,7 @@ export default function Ido() {
                                         </p>
                                         <p className="text-samurai-red w-max text-[18px]">
                                           {user?.purchased?.toLocaleString(
-                                            "en-us",
-                                            {
-                                              minimumFractionDigits: 2,
-                                              maximumFractionDigits: 2,
-                                            }
+                                            "en-us"
                                           )}
                                         </p>
                                       </div>
@@ -1300,10 +1298,7 @@ export default function Ido() {
                                         </p>
                                         <p className="text-samurai-red w-max text-[18px]">
                                           {user?.claimed.toLocaleString(
-                                            "en-us",
-                                            {
-                                              minimumFractionDigits: 2,
-                                            }
+                                            "en-us"
                                           )}
                                         </p>
                                       </div>
@@ -1321,12 +1316,7 @@ export default function Ido() {
                                               ).toLocaleString("en-us", {
                                                 minimumFractionDigits: 2,
                                               })
-                                            : Number(0).toLocaleString(
-                                                "en-us",
-                                                {
-                                                  minimumFractionDigits: 2,
-                                                }
-                                              )}
+                                            : Number(0).toLocaleString("en-us")}
                                         </p>
                                       </div>
 
@@ -1336,10 +1326,7 @@ export default function Ido() {
                                         </p>
                                         <p className="text-samurai-red w-max text-[18px]">
                                           {user?.claimable.toLocaleString(
-                                            "en-us",
-                                            {
-                                              minimumFractionDigits: 2,
-                                            }
+                                            "en-us"
                                           )}
                                         </p>
                                       </div>
@@ -1353,105 +1340,110 @@ export default function Ido() {
                       )}
                     </>
                   )}
+
+                  {loading && (
+                    <div className="absolute top-0 left-0 flex items-center justify-center w-full xl:w-[650px] min-h-[398px] bg-black/70 backdrop-blur-sm">
+                      <Spinner size="xl" color="failure" />
+                    </div>
+                  )}
                 </div>
               </div>
 
-              {!loading && currentPhase?.toUpperCase() !== "UPCOMING" && (
-                <IdoAllocationProgress
-                  maxAllocations={general?.amounts?.maxAllocations || 0}
-                  raised={general?.raised || 0}
-                />
-              )}
+              {currentPhase?.toUpperCase() !== "UPCOMING" &&
+                currentPhase?.toUpperCase() !== "WAITING FOR TGE" &&
+                currentPhase?.toUpperCase() !== "VESTING" &&
+                currentPhase?.toUpperCase() !== "VESTED" && (
+                  <IdoAllocationProgress
+                    maxAllocations={general?.amounts?.maxAllocations || 0}
+                    raised={general?.raised || 0}
+                  />
+                )}
             </div>
           </div>
         </div>
       </TopLayout>
-      <div className="flex flex-col xl:flex-row gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 px-3 xl:px-0">
+      <div className="flex flex-col xl:flex-row gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 px-6 lg:px-10 2xl:px-20">
         {ido && (
           <>
-            <div className="flex flex-col w-full lg:rounded-[8px] bg-black/30 bg-samurai-pattern shadow-xl lg:border border-white/20 h-max xl:ml-10 2xl:ml-20">
-              <h1 className="text-xl bg-samurai-red px-6 py-4 rounded-t-lg">
-                Token Info
-              </h1>
-              <div className="grid grid-cols-1 md:grid-cols-3 xl:flex xl:flex-col gap-4 mt-8 text-[15px] xl:text-xl px-6 pb-8">
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
-                  <span className="text-samurai-red">Token Symbol:</span>
-                  <p className="text-white/70">{ido.projectTokenSymbol}</p>
-                </div>
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
-                  <span className="text-samurai-red">Network:</span>
-                  <p className="text-white/70">{ido.tokenNetwork}</p>
-                </div>
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
-                  <span className="text-samurai-red">FDV:</span>
-                  <p className="text-white/70">
-                    $
-                    {Number(ido.fdv).toLocaleString("en-us", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}{" "}
-                    USD
-                  </p>
-                </div>
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
-                  <span className="text-samurai-red">
-                    Exchange Listing Price:
-                  </span>
-                  <p className="text-white/70">
-                    {Number(ido.exchangeListingPrice).toLocaleString("en-us", {
-                      maximumFractionDigits: 4,
-                    })}{" "}
-                    {general?.usingETH
-                      ? CHAIN_TO_CURRENCY[chain]
-                      : general && TOKENS_TO_SYMBOL[general?.acceptedToken]}
-                  </p>
-                </div>
-
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
-                  <span className="text-samurai-red">Market Cap at TGE:</span>
-                  <p className="text-white/70">
-                    $
-                    {Number(ido.marketCapAtTGE).toLocaleString("en-us", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}{" "}
-                    USD
-                  </p>
-                </div>
-
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md lg:w-max lg:border border-white/10 text-sm lg:text-lg">
-                  <span className="text-samurai-red">Vesting:</span>
-                  <p className="text-white/70">
-                    {general
-                      ? `${general?.amounts.tgeReleasePercent * 100}% at TGE, ${
-                          general?.periods.cliff > 0
-                            ? `${general?.periods.cliff} months cliff`
-                            : "No Cliff"
-                        }, ${
-                          general?.periods.vestingDuration
-                        } months ${VestingType[
-                          general?.vestingType as number
-                        ].toLowerCase()}`
-                      : "---"}
-                  </p>
-                </div>
-
-                <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
-                  <span className="text-samurai-red">Dex Screener:</span>
-                  <p className="text-white/70">
-                    TBA
-                    {/* <Link href="#">{"https://somelink".toUpperCase()}</Link> */}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col gap-10 px-6 lg:pr-10">
+            <div className="flex flex-col gap-10 lg:pr-10">
               <div
                 className={`flex w-full xl:text-[16px] xl:leading-[1.70rem] 2xl:text-[20px] 2xl:leading-[2rem] text-gray-300 ${inter.className}`}
                 dangerouslySetInnerHTML={{
                   __html: ido.projectBigDescription as string,
                 }}
               />
+            </div>
+
+            <div className="flex gap-5 items-center flex-wrap mt-8 text-[15px] xl:text-xl pb-8 max-w-[700px]">
+              <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 p-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
+                <span className="text-samurai-red">Token Symbol:</span>
+                <p className="text-white/70">{ido.projectTokenSymbol}</p>
+              </div>
+              <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 p-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
+                <span className="text-samurai-red">Network:</span>
+                <p className="text-white/70">{ido.tokenNetwork}</p>
+              </div>
+              <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 p-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
+                <span className="text-samurai-red">FDV:</span>
+                <p className="text-white/70">
+                  $
+                  {Number(ido.fdv).toLocaleString("en-us", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}{" "}
+                  USD
+                </p>
+              </div>
+              <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 p-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
+                <span className="text-samurai-red">
+                  Exchange Listing Price:
+                </span>
+                <p className="text-white/70">
+                  {Number(ido.exchangeListingPrice).toLocaleString("en-us", {
+                    maximumFractionDigits: 4,
+                  })}{" "}
+                  {general?.usingETH
+                    ? CHAIN_TO_CURRENCY[chain]
+                    : general && TOKENS_TO_SYMBOL[general?.acceptedToken]}
+                </p>
+              </div>
+
+              <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 p-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
+                <span className="text-samurai-red">Market Cap at TGE:</span>
+                <p className="text-white/70">
+                  $
+                  {Number(ido.marketCapAtTGE).toLocaleString("en-us", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}{" "}
+                  USD
+                </p>
+              </div>
+
+              <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 p-4 lg:rounded-md lg:w-max lg:border border-white/10 text-sm lg:text-lg">
+                <span className="text-samurai-red">Vesting:</span>
+                <p className="text-white/70">
+                  {general
+                    ? `${general?.amounts.tgeReleasePercent * 100}% at TGE, ${
+                        general?.periods.cliff > 0
+                          ? `${general?.periods.cliff} months cliff`
+                          : "No Cliff"
+                      }, ${
+                        general?.periods.vestingDuration
+                      } months ${VestingType[
+                        general?.vestingType as number
+                      ].toLowerCase()}`
+                    : "---"}
+                </p>
+              </div>
+
+              <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 p-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
+                <span className="text-samurai-red">Dex Screener:</span>
+                <p className="text-white/70">
+                  TBA
+                  {/* <Link href="#">{"https://somelink".toUpperCase()}</Link> */}
+                </p>
+              </div>
             </div>
           </>
         )}
@@ -1500,18 +1492,18 @@ export default function Ido() {
             <div className="flex flex-col gap-10">
               <h1 className="text-2xl xl:text-3xl">ADMIN AREA</h1>
               <div className="flex items-center gap-10 flex-wrap">
-                <SSButton disabled={secondaryLoading} click={onTogglePause}>
-                  {secondaryLoading
+                <SSButton disabled={loading} click={onTogglePause}>
+                  {loading
                     ? "Loading..."
                     : general.isPaused
                     ? "Unpause"
                     : "Pause"}
                 </SSButton>
                 <SSButton
-                  disabled={secondaryLoading || general.isPublic}
+                  disabled={loading || general.isPublic}
                   click={onMakePublic}
                 >
-                  {secondaryLoading ? "Loading..." : "Make Public"}
+                  {loading ? "Loading..." : "Make Public"}
                 </SSButton>
               </div>
 
@@ -1528,10 +1520,8 @@ export default function Ido() {
                   })}
                 </p>
                 <div className="w-max">
-                  <SSButton disabled={secondaryLoading} click={onWithdraw}>
-                    {secondaryLoading
-                      ? "Loading..."
-                      : "Withdraw Participations"}
+                  <SSButton disabled={loading} click={onWithdraw}>
+                    {loading ? "Loading..." : "Withdraw Participations"}
                   </SSButton>
                 </div>
               </div>

@@ -22,6 +22,13 @@ export function formattedDate3(timestamp: number) {
   );
 }
 
+export function formattedDate4(timestamp: number) {
+  return format(
+    toZonedTime(fromUnixTime(timestamp), "UTC"),
+    "dd/MM/yyyy HH:mm"
+  );
+}
+
 export function convertDateToUnixTimestamp(date: Date) {
   return Math.floor(date.getTime() / 1000);
 }
