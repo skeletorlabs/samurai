@@ -34,7 +34,6 @@ export default async function checkApproval(
     });
 
     if (typeof approval === "undefined" || approval === "ACTION_REJECTED") {
-      console.log(2);
       rejected = true;
       throw new Error("Approval rejected or encountered an error");
     }
