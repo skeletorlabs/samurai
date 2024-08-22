@@ -139,11 +139,7 @@ export async function participate(
       ethers.parseUnits(amountInTokens, 6)
     );
 
-    const tx = await contract?.sendToken(
-      signerAddress,
-      acceptedToken,
-      ethers.parseUnits(amountInTokens, 6)
-    );
+    const tx = await contract?.sendToken(ethers.parseUnits(amountInTokens, 6));
 
     await notificateTx(tx, network);
   } catch (e) {
