@@ -914,12 +914,12 @@ export const NAV = [
   //   icon: sanka,
   //   page: Page.sanka,
   // },
-  // {
-  //   title: "Tokens",
-  //   href: "/tokens",
-  //   icon: token,
-  //   page: Page.tokens,
-  // },
+  {
+    title: "Tokens",
+    href: "/tokens",
+    icon: token,
+    page: Page.tokens,
+  },
   {
     title: "Incubation",
     href: "/incubation",
@@ -978,7 +978,7 @@ export const SAM_LOCK_ADDRESS = "0xfb691697BDAf1857C748C004cC7dab3d234E062E";
 export const SAM_ADDRESS = "0xed1779845520339693CDBffec49a74246E7D671b";
 // export const SAM_CLAIM_VESTING = "0xc0c3F2c99AD524310EF46BF15d3352480f1E9B4C"; // TEST BSC
 // export const SAM_CLAIM_VESTING = "0xDD687b579c5C542A14874e79E404b83E78e6E18a"; // BASE MAINNET OLD
-export const SAM_CLAIM_VESTING = "0xA75A349a175f31A0eefeAEd438069DC4b8c199f1"; // BASE MAINNET
+export const SAM_CLAIM_VESTING = "0xA6a638858C114Ad2e95BFD787b353EC2C70d78eF"; // BASE MAINNET
 
 // export const SAM_CLAIM_VESTING = "0xE42c1929612bBc03572C518bAf05c38147D5d67e"; // BASE SEPOLIA
 export const SAM_TIERS = "0xdB0Ee72eD5190e9ef7eEC288a92f73c5cf3B3c74";
