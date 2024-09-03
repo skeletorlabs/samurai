@@ -48,7 +48,7 @@ export default function LaunchpadCard({
 
   return (
     <Link
-      href={ido.id}
+      href={ido.url}
       className={`flex flex-col rounded-lg border-[0.5px] border-neutral-700 text-start bg-samurai-pattern-2 ${
         type === "dark"
           ? "bg-black/30 hover:bg-black/20"

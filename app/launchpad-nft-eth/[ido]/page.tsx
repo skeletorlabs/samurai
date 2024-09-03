@@ -46,10 +46,8 @@ export default function Ido() {
   const { signer, account } = useContext(StateContext);
   const { ido: idoID } = useParams();
 
-  const ido = IDO_LIST.find((item) => item.id.includes(idoID as string));
-  const idoIndex = IDO_LIST.findIndex((item) =>
-    item.id.includes(idoID as string)
-  );
+  const ido = IDO_LIST.find((item) => item.id === (idoID as string));
+  const idoIndex = IDO_LIST.findIndex((item) => item.id === (idoID as string));
   const bg = `url("${ido?.idoImageSrc}")`;
 
   // ============================================================================================================

@@ -53,12 +53,12 @@ export async function generalInfo(index: number) {
     const acceptedToken2 = await contract?.acceptedTokens(1);
     const isPaused = await contract?.paused();
     const maxAllocations =
-      ido.id === "launchpad/havens-compass"
+      ido.id === "havens-compass"
         ? Number(50_000)
         : Number(ethers.formatUnits(await contract?.maxAllocations(), 6));
 
     const raised =
-      ido.id === "launchpad/havens-compass"
+      ido.id === "havens-compass"
         ? ido.totalAllocation
         : Number(ethers.formatUnits(await contract?.raised(), 6));
 
@@ -284,12 +284,12 @@ export async function getParticipationPhase(index: number) {
   const contract = await getContract(index, undefined);
 
   const maxAllocations =
-    ido.id === "launchpad/havens-compass"
+    ido.id === "havens-compass"
       ? Number(50_000)
       : Number(ethers.formatUnits(await contract?.maxAllocations(), 6));
 
   const raised =
-    ido.id === "launchpad/havens-compass"
+    ido.id === "havens-compass"
       ? ido.totalAllocation
       : Number(ethers.formatUnits(await contract?.raised(), 6));
 

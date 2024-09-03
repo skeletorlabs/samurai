@@ -27,6 +27,7 @@ async function getContract(index: number, signer?: ethers.Signer) {
     const ido = IDO_LIST[index];
     const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const contractAddress = ido.contract;
+    console.log(contractAddress);
     const contract = new ethers.Contract(
       contractAddress,
       ido.abi,
@@ -88,7 +89,7 @@ export async function generalInfo(index: number) {
 
     let usingLinkedWallet = false;
 
-    if (ido.id !== "launchpad-v2/kvants") {
+    if (ido.id !== "kvants") {
       usingLinkedWallet = await contract?.usingLinkedWallet();
     }
 
@@ -153,7 +154,7 @@ export async function userInfo(
     );
 
     let linkedWallet = "";
-    if (ido.id !== "launchpad-v2/kvants") {
+    if (ido.id !== "kvants") {
       linkedWallet = await contract?.linkedWallets(signerAdress);
     }
 

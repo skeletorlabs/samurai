@@ -50,10 +50,8 @@ export default function Ido() {
 
   const { ido: idoID } = useParams();
 
-  const ido = IDO_LIST.find((item) => item.id.includes(idoID as string));
-  const idoIndex = IDO_LIST.findIndex((item) =>
-    item.id.includes(idoID as string)
-  );
+  const ido = IDO_LIST.find((item) => item.id === (idoID as string));
+  const idoIndex = IDO_LIST.findIndex((item) => item.id === (idoID as string));
   const bg = `url("${ido?.idoImageSrc}")`;
 
   // ============================================================================================================
@@ -342,7 +340,7 @@ export default function Ido() {
 
                   <div
                     className={`${
-                      ido?.id === "launchpad/orangedx" ? "block" : "hidden"
+                      ido?.id === "orangedx" ? "block" : "hidden"
                     } text-xl mt-10 px-10`}
                   >
                     Submit your{" "}

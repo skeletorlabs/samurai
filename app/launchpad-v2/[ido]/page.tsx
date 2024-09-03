@@ -64,11 +64,10 @@ export default function Ido() {
   const { signer, account } = useContext(StateContext);
 
   const { ido: idoID } = useParams();
+  console.log(idoID);
 
-  const ido = IDO_LIST.find((item) => item.id.includes(idoID as string));
-  const idoIndex = IDO_LIST.findIndex((item) =>
-    item.id.includes(idoID as string)
-  );
+  const ido = IDO_LIST.find((item) => item.id === (idoID as string));
+  const idoIndex = IDO_LIST.findIndex((item) => item.id === (idoID as string));
   const bg = `url("${ido?.idoImageSrc}")`;
 
   // ============================================================================================================
@@ -414,7 +413,7 @@ export default function Ido() {
                 <div className="flex flex-col w-full xl:w-[550px] rounded-lg bg-black/70 bg-samurai-pattern pb-6 shadow-xl lg:border border-white/20 mt-10">
                   <div className="flex justify-between items-center text-lg xl:text-xl bg-samurai-red border-b border-white/20 px-7 py-4 rounded-t-lg text-white">
                     <span>
-                      {general?.isPublic && ido?.id !== "launchpad-v2/kvants"
+                      {general?.isPublic && ido?.id !== "kvants"
                         ? "FCFS Round"
                         : ido?.investmentRound}
                     </span>

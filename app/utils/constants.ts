@@ -62,7 +62,8 @@ export const simplifiedPhasesV2 = [
 
 export const IDO_LIST: IDO[] = [
   {
-    id: "launchpad-nft-open/nexis-tier-1",
+    id: "nexis-tier-1",
+    url: "launchpad-nft-open/nexis-tier-1",
     logo: nexis,
     idoImageSrc: "/IDOs/nexis.png",
     acceptedTokenSymbol: "USDC",
@@ -123,7 +124,8 @@ export const IDO_LIST: IDO[] = [
     type: "NFT-OPEN",
   },
   {
-    id: "launchpad-v2/nexis",
+    id: "nexis",
+    url: "launchpad-v2/nexis",
     logo: nexis,
     idoImageSrc: "/IDOs/nexis.png",
     acceptedTokenSymbol: "USDC",
@@ -178,7 +180,8 @@ export const IDO_LIST: IDO[] = [
     type: "v2",
   },
   {
-    id: "launchpad-v2/kvants",
+    id: "kvants",
+    url: "launchpad-v2/kvants",
     logo: kvants,
     idoImageSrc: "/IDOs/kvants.png",
     acceptedTokenSymbol: "USDC",
@@ -242,7 +245,8 @@ export const IDO_LIST: IDO[] = [
     type: "v2",
   },
   {
-    id: "launchpad-v2/mpad-round2",
+    id: "mpad-round2",
+    url: "launchpad-v2/mpad-round2",
     logo: memepad,
     idoImageSrc: "/IDOs/memepad.png",
     acceptedTokenSymbol: "USDC",
@@ -307,7 +311,8 @@ export const IDO_LIST: IDO[] = [
     type: "v2",
   },
   {
-    id: "launchpad-v2/memepad",
+    id: "memepad",
+    url: "launchpad-v2/memepad",
     logo: memepad,
     idoImageSrc: "/IDOs/memepad.png",
     acceptedTokenSymbol: "USDC",
@@ -372,7 +377,8 @@ export const IDO_LIST: IDO[] = [
     type: "v2",
   },
   {
-    id: "launchpad-nft-eth/artx",
+    id: "artx",
+    url: "launchpad-nft-eth/artx",
     logo: artx,
     idoImageSrc: "/IDOs/artx.png",
     acceptedTokenSymbol: "ETH",
@@ -437,7 +443,8 @@ export const IDO_LIST: IDO[] = [
     type: "NFT-ETH",
   },
   {
-    id: "launchpad-nft/kip-protocol",
+    id: "kip-protocol",
+    url: "launchpad-nft/kip-protocol",
     logo: kip,
     idoImageSrc: "/IDOs/kip-protocol.png",
     acceptedTokenSymbol: "USDC",
@@ -506,7 +513,8 @@ export const IDO_LIST: IDO[] = [
     type: "NFT",
   },
   {
-    id: "launchpad/unibit",
+    id: "unibit",
+    url: "launchpad/unibit",
     logo: unibit,
     idoImageSrc: "/IDOs/unibit.png",
     acceptedTokenSymbol: "USDC",
@@ -575,7 +583,8 @@ export const IDO_LIST: IDO[] = [
     // ],
   },
   {
-    id: "launchpad/interswap",
+    id: "interswap",
+    url: "launchpad/interswap",
     logo: interswap,
     idoImageSrc: "/IDOs/interswap.png",
     acceptedTokenSymbol: "USDC",
@@ -642,7 +651,8 @@ export const IDO_LIST: IDO[] = [
     // ],
   },
   {
-    id: "launchpad/orangedx",
+    id: "orangedx",
+    url: "launchpad/orangedx",
     logo: orangedx,
     idoImageSrc: "/IDOs/orangedx.png",
     acceptedTokenSymbol: "USDC",
@@ -714,7 +724,8 @@ export const IDO_LIST: IDO[] = [
     ],
   },
   {
-    id: "launchpad/hauntedspace-gaga",
+    id: "hauntedspace-gaga",
+    url: "launchpad/hauntedspace-gaga",
     logo: galaxyGamesHauntedSpace,
     idoImageSrc: "/IDOs/hauntedspace-gaga.png",
     acceptedTokenSymbol: "USDC",
@@ -790,7 +801,8 @@ export const IDO_LIST: IDO[] = [
     ],
   },
   {
-    id: "launchpad/havens-compass",
+    id: "havens-compass",
+    url: "launchpad/havens-compass",
     logo: havensCompass,
     idoImageSrc: "/IDOs/havens-compass.png",
     acceptedTokenSymbol: "USDC",
