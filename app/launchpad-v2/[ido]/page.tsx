@@ -208,11 +208,11 @@ export default function Ido() {
   // ============================================================================================================
 
   const getUserInfos = useCallback(async () => {
-    if (signer) {
-      const response = await userInfo(idoIndex, signer);
+    if (signer && tier) {
+      const response = await userInfo(idoIndex, signer, tier.name);
       setUser(response);
     }
-  }, [signer, idoIndex]);
+  }, [signer, idoIndex, tier]);
 
   const getTierInfos = useCallback(async () => {
     if (signer) {
@@ -222,7 +222,12 @@ export default function Ido() {
   }, [signer, idoIndex]);
 
   useEffect(() => {
-    getUserInfos();
+    if (tier) {
+      getUserInfos();
+    }
+  }, [tier]);
+
+  useEffect(() => {
     getTierInfos();
   }, [signer]);
 
@@ -974,7 +979,7 @@ export default function Ido() {
                   )}
                 </div>
               </div>
-              {currentPhase !== "Completed" && (
+              {currentPhase && currentPhase !== "Completed" && (
                 <IdoAllocationProgress
                   maxAllocations={general?.maxAllocations || 0}
                   raised={general?.raised || 0}

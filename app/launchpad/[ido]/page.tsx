@@ -762,10 +762,12 @@ export default function Ido() {
                   )}
                 </div>
               </div>
-              <IdoAllocationProgress
-                maxAllocations={general?.maxAllocations || 0}
-                raised={general?.raised || 0}
-              />
+              {currentPhase && currentPhase?.toLowerCase() !== "completed" && (
+                <IdoAllocationProgress
+                  maxAllocations={general?.maxAllocations || 0}
+                  raised={general?.raised || 0}
+                />
+              )}
             </div>
           </div>
         </div>

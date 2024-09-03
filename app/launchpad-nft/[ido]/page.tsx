@@ -867,14 +867,16 @@ export default function Ido() {
                   )}
                 </div>
               </div>
-              {ido?.projectName !== "KIP Protocol" && (
-                <IdoAllocationProgress
-                  maxAllocations={general?.maxAllocations || 0}
-                  raised={general?.raised || 0}
-                  useLocale={false}
-                  extraInfos={ido?.projectTokenSymbol + "S"}
-                />
-              )}
+              {currentPhase &&
+                currentPhase?.toLowerCase() !== "completed" &&
+                ido?.projectName !== "KIP Protocol" && (
+                  <IdoAllocationProgress
+                    maxAllocations={general?.maxAllocations || 0}
+                    raised={general?.raised || 0}
+                    useLocale={false}
+                    extraInfos={ido?.projectTokenSymbol + "S"}
+                  />
+                )}
             </div>
           </div>
         </div>

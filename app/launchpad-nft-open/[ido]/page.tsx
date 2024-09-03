@@ -517,12 +517,15 @@ export default function Ido() {
               </div>
 
               <div className="px-8 lg:px-0">
-                <IdoAllocationProgress
-                  maxAllocations={general?.maxAllocations || 0}
-                  raised={general?.raised || 0}
-                  useLocale={false}
-                  extraInfos={ido?.projectTokenSymbol + "S"}
-                />
+                {currentPhase &&
+                  currentPhase?.toLowerCase() !== "completed" && (
+                    <IdoAllocationProgress
+                      maxAllocations={general?.maxAllocations || 0}
+                      raised={general?.raised || 0}
+                      useLocale={false}
+                      extraInfos={ido?.projectTokenSymbol + "S"}
+                    />
+                  )}
               </div>
             </div>
           </div>
