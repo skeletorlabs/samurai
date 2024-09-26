@@ -50,11 +50,11 @@ export default function RootLayout({
         </StateProvider>
 
         {/* NEWSLETTER */}
-        <script
+        {/* <script
           src="//web.webformscr.com/apps/fc3/build/loader.js"
           async
           sp-form-id="0229cc821b515da43f09d3b34f142798efa2f98d40eb42d322744cb90dca5100"
-        ></script>
+        ></script> */}
       </body>
     </html>
   );
