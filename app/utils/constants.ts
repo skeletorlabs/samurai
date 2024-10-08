@@ -31,6 +31,7 @@ import {
   kvants,
   memepad,
   nexis,
+  xrone,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -39,6 +40,7 @@ import {
   PARTICIPATOR_NFT_ETH,
   PARTICIPATOR_V2_2,
   PARTICIPATOR_NFT_OPEN,
+  PARTICIPATOR_NFT_V2_ABI,
 } from "@/app/contracts_integrations/abis";
 
 export const simplifiedPhases = [
@@ -61,6 +63,73 @@ export const simplifiedPhasesV2 = [
 ];
 
 export const IDO_LIST: IDO[] = [
+  {
+    id: "xrone",
+    url: "launchpad-nodes/xrone",
+    logo: xrone,
+    idoImageSrc: "/IDOs/xrone.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "Arbitrum",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/ARBITRUM.svg",
+    projectName: "XR One",
+    projectListDescription:
+      "An innovative PvP gaming-centric L3 chain, backed by Animoca Brands and the Arbitrum Foundation.",
+    projectDescription:
+      "Become a validator on one of the most promising next-gen gaming blockchains, built from the ground up to support competitive player-driven economies, seamless Web3 onboarding, and AI-integrated experiences. XR One is poised to become “the home to the next wave of high-impact PvP Web3 games.",
+    projectTokenSymbol: "NODE",
+    totalAllocation: 160,
+    price: "637",
+    registrationStartsAt: 1719410792,
+    participationStartsAt: 1728475200,
+    participationEndsAt: 1729080000,
+    publicParticipationStartsAt: 0,
+    publicParticipationEndsAt: 0,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 0,
+    cliff: 0,
+    investmentRound: "XR ONE Hero Nodes",
+    fdv: "NOT APPLIED",
+    exchangeListingPrice: 0.03,
+    marketCapAtTGE: 0,
+    vesting: "NOT APPLIED",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      { svg: globe, href: "https://xrone.network" },
+      {
+        svg: twitterX,
+        href: "https://x.com/XR_Foundation",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/xrfoundation",
+      },
+      {
+        svg: discord,
+        href: "https://discord.com/invite/W4BdM6N8xb",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <p>Created by Saltwater Games and backed by Animoca Brands and the Arbitrum Foundation, XR One is a Layer-3 blockchain custom-built for PvP game ecosystems. The chain boasts plug-and-play eSports integrations: smart contracts allowing anyone to effortlessly set up high-stakes matches, tournaments, and leagues where real assets are on the line.</p>
+        <p>XR One is also pushing the envelope for AI integrations in Web3 gaming, with advanced native AI dApps and plans to build a GPU processing layer. The adrenaline-laced lifeblood powering all of this is the chain's native token: $XR.</p>
+        <p>Hero Nodes are the validators of the XR One blockchain. Operators will enjoy a wealth of rewards in $XR and other assets:</p>
+        <ul style="list-style-type: disc;">
+          <li>$XR Incentives: 15% of the $XR token supply, paid out over the first 30 months.</li>
+          <li>$XR Airdrop: Hero Node holders will get a dedicated 25% cut of the airdrop in Q4.</li>
+          <li>Transaction Fees: 100% of txn fees go to node operators.</li>
+          <li>Ecosystem Airdrops: Free tokens from new projects deploying on XR One.</li>
+          <li>Priority Access: First-dibs access to new XR One features, games, and partner sales.</li>
+          <li>GPU Rewards: In future, node operators will also be able to contribute processing power to the XR One GPU DePIN layer.</li>
+        </ul>
+      </div>
+  `,
+    contract: "0xe0012252B7A08Bc7a2Fcd7F3bE9292da7C2C0063",
+    abi: PARTICIPATOR_NFT_V2_ABI,
+    type: "NODE",
+  },
   {
     id: "nexis-tier-1",
     url: "launchpad-nft-open/nexis-tier-1",

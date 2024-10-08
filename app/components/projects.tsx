@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 
-import LaunchpadCardNew from "@/app/components/launchpadCard";
+import LaunchpadCard from "@/app/components/launchpadCard";
 import { IDO } from "@/app/utils/interfaces";
 import { IDO_LIST } from "@/app/utils/constants";
 
@@ -15,10 +15,10 @@ export default function Projects({ max }: { max?: number }) {
     >
       {max
         ? IDO_LIST.slice(0, max).map((ido: IDO, index) => (
-            <LaunchpadCardNew key={index} ido={ido} />
+            <LaunchpadCard key={index} ido={ido} />
           ))
         : IDO_LIST.map((ido: IDO, index) => (
-            <LaunchpadCardNew key={index} ido={ido} />
+            <LaunchpadCard key={index} ido={ido} />
           ))}
     </div>
   );
