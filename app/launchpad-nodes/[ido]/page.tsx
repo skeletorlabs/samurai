@@ -793,14 +793,6 @@ export default function Ido() {
                     width={340}
                     height={340}
                     className="h-auto w-full max-w-full"
-                    src="/IDOs/xrone/1.jpg"
-                    alt=""
-                  />
-
-                  <Image
-                    width={340}
-                    height={340}
-                    className="h-auto w-full max-w-full"
                     src="/IDOs/xrone/2.png"
                     alt=""
                   />
@@ -811,14 +803,6 @@ export default function Ido() {
                     integrations in Web3 gaming, and eventually the network will
                     feature its very own GPU
                   </p>
-
-                  <Image
-                    width={340}
-                    height={340}
-                    className="h-auto w-full max-w-full"
-                    src="/IDOs/xrone/3.jpg"
-                    alt=""
-                  />
 
                   <p>
                     DePIN layer to handle the processing for these advanced
