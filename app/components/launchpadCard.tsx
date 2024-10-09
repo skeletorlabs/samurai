@@ -8,6 +8,7 @@ import { getParticipationPhase as getParticipationPhaseNft } from "@/app/contrac
 import { getParticipationPhase as getParticipationPhaseNftEth } from "../contracts_integrations/idoNFTETH";
 import { getParticipationPhase as getParticipationPhaseV2 } from "../contracts_integrations/idoV2";
 import { getParticipationPhase as getParticipationPhaseNftOpen } from "../contracts_integrations/idoNftOpen";
+import { getParticipationPhase as getParticipationPhaseNode } from "../contracts_integrations/idoNFTV2";
 import { useCallback, useEffect, useState } from "react";
 
 export default function LaunchpadCard({
@@ -28,6 +29,7 @@ export default function LaunchpadCard({
     const isNftEth = ido.type === "NFT-ETH";
     const isV2 = ido.type === "v2";
     const isNftOpen = ido.type === "NFT-OPEN";
+    const isNode = ido.type === "NODE";
     const phase = isNft
       ? await getParticipationPhaseNft(contract)
       : isNftEth
@@ -36,6 +38,8 @@ export default function LaunchpadCard({
       ? await getParticipationPhaseV2(contract)
       : isNftOpen
       ? await getParticipationPhaseNftOpen(contract)
+      : isNode
+      ? await getParticipationPhaseNode(contract)
       : await getParticipationPhase(contract);
     setPhase(phase.toUpperCase());
   }, [ido]);
@@ -96,7 +100,7 @@ export default function LaunchpadCard({
           <div className="flex items-center gap-2 bg-black/90 px-2 py-1 rounded-lg text-[14px] border border-white/20 absolute top-4 left-4">
             <span className="text-sm">Project Tokens</span>
             <Image
-              src={ido.networkImageSrc}
+              src={ido.networkImageSrc.toLocaleLowerCase()}
               alt={ido.tokenNetwork}
               width={24}
               height={24}
@@ -132,24 +136,21 @@ export default function LaunchpadCard({
       <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-lg  w-max">
         <span className="text-[14px] text-samurai-red">ALLOCATION:</span>
         <p className="text-white/70">
-          {ido?.type === "NFT" ? (
-            <>{ido.totalAllocation} NFTs</>
+          {ido?.id === "xrone" ? (
+            <>TBA</>
           ) : (
             <>
               {ido.totalAllocation.toLocaleString("en-us")}{" "}
               {ido.type == "NFT" ||
               ido.type === "NFT-ETH" ||
-              ido.type === "NFT-OPEN"
-                ? "NFTs"
+              ido.type === "NFT-OPEN" ||
+              ido.type === "NODE"
+                ? ido.type === "NODE"
+                  ? "NODEs"
+                  : "NFTs"
                 : ido.acceptedTokenSymbol}
             </>
           )}
-
-          {/* ({(Number(ido.totalAllocation) / Number(ido.price)).toLocaleString("en-us", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}{" "}
-          {ido.projectTokenSymbol}) */}
         </p>
       </div>
 
@@ -161,6 +162,7 @@ export default function LaunchpadCard({
             ido.type === "NFT-ETH" ||
             ido.type === "NFT-OPEN") &&
             "per NFT"}
+          {ido.type === "NODE" && "per NODE"}
         </p>
       </div>
 
