@@ -180,15 +180,20 @@ export async function participate(
     const network = await signer.provider?.getNetwork();
 
     const contractAddress = await contract?.getAddress();
-    const price = Number(await contract?.pricePerToken());
+
+    const pricePerToken = Number(
+      ethers.formatUnits(await contract?.pricePerToken(), 6)
+    );
+    const amountInTokens = (Number(amount) * pricePerToken).toString();
+
     await checkApproval(
       acceptedToken,
       contractAddress!,
       signer,
-      parseUnits((Number(amount) * price).toString(), 6)
+      ethers.parseUnits(amountInTokens, 6)
     );
 
-    const tx = await contract?.participate(acceptedToken, amount);
+    const tx = await contract?.participate(acceptedToken, Number(amount));
 
     await notificateTx(tx, network);
   } catch (e) {
