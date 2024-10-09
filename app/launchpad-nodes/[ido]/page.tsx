@@ -290,14 +290,14 @@ export default function Ido() {
             </svg>
             <span>{ido?.projectName}</span>
           </div>
-          <div className="flex flex-col xl:flex-row xl:justify-between relative mt-4 xl:mt-10 text-justify xl:text-start">
+          <div className="flex flex-col xl:flex-row xl:justify-between relative mt-4 xl:mt-10 text-center md:text-justify xl:text-start">
             <div className="flex flex-col relative px-6 lg:px-10 2xl:px-20 w-full">
               <div className="flex max-w-[350px] self-center xl:self-start">
                 {ido?.logo}
               </div>
 
               <p
-                className={`text-[18px] md:text-[22px] 2xl:text-[28px] pt-2 pb-10 ${inter.className}`}
+                className={`text-[18px] md:text-[22px] 2xl:text-[28px] pt-4 pb-10 ${inter.className}`}
               >
                 {ido?.projectDescription}
               </p>

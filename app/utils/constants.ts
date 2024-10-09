@@ -116,14 +116,12 @@ export const IDO_LIST: IDO[] = [
         <p>Created by Saltwater Games and backed by Animoca Brands and the Arbitrum Foundation, XR One is a Layer-3 blockchain custom-built for PvP game ecosystems. The chain boasts plug-and-play eSports integrations: smart contracts allowing anyone to effortlessly set up high-stakes matches, tournaments, and leagues where real assets are on the line.</p>
         <p>XR One is also pushing the envelope for AI integrations in Web3 gaming, with advanced native AI dApps and plans to build a GPU processing layer. The adrenaline-laced lifeblood powering all of this is the chain's native token: $XR.</p>
         <p>Hero Nodes are the validators of the XR One blockchain. Operators will enjoy a wealth of rewards in $XR and other assets:</p>
-        <ul style="list-style-type: disc;">
-          <li>$XR Incentives: 15% of the $XR token supply, paid out over the first 30 months.</li>
-          <li>$XR Airdrop: Hero Node holders will get a dedicated 25% cut of the airdrop in Q4.</li>
-          <li>Transaction Fees: 100% of txn fees go to node operators.</li>
-          <li>Ecosystem Airdrops: Free tokens from new projects deploying on XR One.</li>
-          <li>Priority Access: First-dibs access to new XR One features, games, and partner sales.</li>
-          <li>GPU Rewards: In future, node operators will also be able to contribute processing power to the XR One GPU DePIN layer.</li>
-        </ul>
+        <p>- $XR Incentives: 15% of the $XR token supply, paid out over the first 30 months.</p>
+        <p>- $XR Airdrop: Hero Node holders will get a dedicated 25% cut of the airdrop in Q4.</p>
+        <p>- Transaction Fees: 100% of txn fees go to node operators.</p>
+        <p>- Ecosystem Airdrops: Free tokens from new projects deploying on XR One.</p>
+        <p>- Priority Access: First-dibs access to new XR One features, games, and partner sales.</p>
+        <p>- GPU Rewards: In future, node operators will also be able to contribute processing power to the XR One GPU DePIN layer.</p>
       </div>
   `,
     contract: "0xe0012252B7A08Bc7a2Fcd7F3bE9292da7C2C0063",
