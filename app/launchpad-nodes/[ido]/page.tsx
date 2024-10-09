@@ -166,13 +166,13 @@ export default function Ido() {
       user &&
       (user.isWhitelisted || general.isPublic)
     ) {
-      await participate(idoIndex, signer, inputValue, selectedToken);
+      await participate(idoIndex, signer, amountOfNfts, selectedToken);
       await getGeneralData();
       await getUserInfos();
     }
 
     setIsLoading(false);
-  }, [signer, idoIndex, selectedToken, user, inputValue, setIsLoading]);
+  }, [signer, idoIndex, selectedToken, user, amountOfNfts, setIsLoading]);
 
   // ============================================================================================================
   // FETCHING USER INFOS FROM CONTRACT
