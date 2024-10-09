@@ -409,11 +409,12 @@ export default function Ido() {
               <div className="flex flex-col">
                 <div className="flex flex-col w-full xl:w-[550px] rounded-lg bg-black/70 bg-samurai-pattern pb-6 shadow-xl lg:border border-white/20 mt-10">
                   <div className="flex justify-between items-center text-lg xl:text-xl bg-samurai-red border-b border-white/20 px-7 py-4 rounded-t-lg text-white">
-                    <span>
+                    {/* <span>
                       {general?.isPublic && ido?.id !== "kvants"
                         ? "FCFS Round"
                         : ido?.investmentRound}
-                    </span>
+                    </span> */}
+                    <span>{ido?.investmentRound}</span>
                     {/* TIER */}
                     {signer && account && (
                       <div className="flex items-center gap-1 text-black">
@@ -756,10 +757,10 @@ export default function Ido() {
           </div>
         </div>
       </TopLayout>
-      <div className="flex flex-col xl:flex-row gap-10 pt-10 lg:pt-24 pb-10 xl:pb-24 border-t border-white/20 bg-white/10 lg:px-10 2xl:px-14">
+      <div className="flex flex-col xl:flex-row gap-10 pt-10 lg:pt-24 pb-10 xl:pb-24 border-t border-white/20 bg-white/10 lg:px-10 2xl:px-14 w-full">
         {ido && (
           <>
-            <div className="flex flex-col gap-10 px-6 lg:pr-10">
+            <div className="flex flex-col gap-10 px-6 lg:pr-10 w-full">
               {ido.id !== "xrone" ? (
                 <div
                   className={`flex w-full xl:text-[16px] xl:leading-[1.70rem] 2xl:text-[20px] 2xl:leading-[2rem] text-gray-300 ${inter.className}`}
@@ -769,7 +770,7 @@ export default function Ido() {
                 />
               ) : (
                 <div
-                  className={`flex flex-col gap-6 w-full xl:text-[16px] xl:leading-[1.70rem] 2xl:text-[20px] 2xl:leading-[2rem] text-gray-300 ${inter.className}`}
+                  className={`flex flex-col text self-center gap-6 w-full max-w-[1200px] xl:text-[16px] xl:leading-[1.70rem] 2xl:text-[20px] 2xl:leading-[2rem] text-gray-300 ${inter.className}`}
                 >
                   <p>
                     Created by Saltwater Games and backed by Animoca Brands and
