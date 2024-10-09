@@ -181,15 +181,16 @@ export default function Ido() {
   const canParticipate = useCallback(() => {
     if (
       signer &&
+      general &&
       user &&
-      user.isWhitelisted &&
+      (user.isWhitelisted || general?.isPublic) &&
       user.allocation < user?.walletRange?.maxPerWallet
     ) {
       return true;
     }
 
     return false;
-  }, [user, signer]);
+  }, [general, user, signer]);
 
   const getOptionsToBuy = useCallback(() => {
     const optionsToBuy = [];

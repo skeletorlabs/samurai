@@ -110,7 +110,7 @@ export async function userInfo(
   tierName: string
 ) {
   try {
-    const signerAdress = await signer.getAddress();
+    const signerAddress = await signer.getAddress();
     const contract = await getContract(index, signer);
     const usingETH = await contract?.usingETH();
 
@@ -130,13 +130,13 @@ export async function userInfo(
         : ranges.find((item) => item[0].toString() === tierName);
 
     const walletRange = parseWalletRange(range);
-    const isWhitelisted = await contract?.whitelist(signerAdress);
-    const allocation = Number(await contract?.allocations(signerAdress));
+    const isWhitelisted = await contract?.whitelist(signerAddress);
+    const allocation = Number(await contract?.allocations(signerAddress));
     const acceptedToken = await contract?.acceptedTokens(0);
-    const balanceEther = await signer.provider?.getBalance(signerAdress);
+    const balanceEther = await signer.provider?.getBalance(signerAddress);
     const balanceToken = Number(
       ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken, signerAdress, signer),
+        await balanceOf(ERC20_ABI, acceptedToken, signerAddress, signer),
         6
       )
     );
