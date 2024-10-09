@@ -760,12 +760,74 @@ export default function Ido() {
         {ido && (
           <>
             <div className="flex flex-col gap-10 px-6 lg:pr-10">
-              <div
-                className={`flex w-full xl:text-[16px] xl:leading-[1.70rem] 2xl:text-[20px] 2xl:leading-[2rem] text-gray-300 ${inter.className}`}
-                dangerouslySetInnerHTML={{
-                  __html: ido.bigDescription as string,
-                }}
-              />
+              {ido.id !== "xrone" ? (
+                <div
+                  className={`flex w-full xl:text-[16px] xl:leading-[1.70rem] 2xl:text-[20px] 2xl:leading-[2rem] text-gray-300 ${inter.className}`}
+                  dangerouslySetInnerHTML={{
+                    __html: ido.bigDescription as string,
+                  }}
+                />
+              ) : (
+                <div
+                  className={`flex flex-col gap-6 w-full xl:text-[16px] xl:leading-[1.70rem] 2xl:text-[20px] 2xl:leading-[2rem] text-gray-300 ${inter.className}`}
+                >
+                  <p>
+                    Created by Saltwater Games and backed by Animoca Brands and
+                    the Arbitrum Foundation, XR One is a Layer-3 blockchain
+                    custom-built for PvP game ecosystems. The chain boasts
+                    plug-and-play eSports integrations: smart contracts allowing
+                    anyone to effortlessly set up high-stakes matches,
+                    tournaments, and leagues where real assets are on the line.
+                  </p>
+
+                  <p>
+                    These features will be showcased in three AAA flagship
+                    developed by Saltwater Games, with more in the pipeline from
+                    a range of partner developers. The high-octane fuel powering
+                    all of this is the chain's native token: $XR. Hero Node
+                    operators — the network's validators — will enjoy a wealth
+                    of rewards in $XR and other assets:
+                  </p>
+
+                  <Image
+                    width={340}
+                    height={340}
+                    className="h-auto w-full max-w-full"
+                    src="/IDOs/xrone/1.jpg"
+                    alt=""
+                  />
+
+                  <Image
+                    width={340}
+                    height={340}
+                    className="h-auto w-full max-w-full"
+                    src="/IDOs/xrone/2.png"
+                    alt=""
+                  />
+
+                  <p>
+                    As the XR One network evolves, so too will the nodes. The XR
+                    One team is pushing the envelope when it comes to AI
+                    integrations in Web3 gaming, and eventually the network will
+                    feature its very own GPU
+                  </p>
+
+                  <Image
+                    width={340}
+                    height={340}
+                    className="h-auto w-full max-w-full"
+                    src="/IDOs/xrone/3.jpg"
+                    alt=""
+                  />
+
+                  <p>
+                    DePIN layer to handle the processing for these advanced
+                    features. In this phase, Hero Node operators will be able to
+                    dedicate processing power to the network to generate another
+                    stream of income.
+                  </p>
+                </div>
+              )}
             </div>
           </>
         )}
