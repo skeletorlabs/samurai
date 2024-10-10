@@ -71,7 +71,7 @@ export const IDO_LIST: IDO[] = [
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "Arbitrum",
     crowdsaleNetwork: "BASE",
-    networkImageSrc: "/chain-logos/ARBITRUM.svg",
+    networkImageSrc: "/chain-logos/arbitrum.svg",
     projectName: "XR One",
     projectListDescription:
       "An innovative PvP gaming-centric L3 chain, backed by Animoca Brands and the Arbitrum Foundation.",
