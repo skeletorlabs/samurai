@@ -82,7 +82,7 @@ export const IDO_LIST: IDO[] = [
     price: "637",
     registrationStartsAt: 1719410792,
     participationStartsAt: 1728475200,
-    participationEndsAt: 1729684800,
+    participationEndsAt: 1729566000,
     publicParticipationStartsAt: 0,
     publicParticipationEndsAt: 0,
     simplified: true,
