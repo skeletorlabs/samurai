@@ -81,7 +81,7 @@ export const IDO_LIST: IDO[] = [
     projectTokenSymbol: "NODE",
     totalAllocation: 172,
     price: "175",
-    registrationStartsAt: 1729699200,
+    registrationStartsAt: 1729771200,
     participationStartsAt: 1729857600,
     participationEndsAt: 1730116800,
     publicParticipationStartsAt: 0,
@@ -135,6 +135,14 @@ export const IDO_LIST: IDO[] = [
   `,
     contract: "0x677BaEEbcC12fB0efD4D87BCF41e2e7dF15cdbc6",
     abi: PARTICIPATOR_NFT_V2_ABI,
+    images: [
+      "/IDOs/smartnodes/1.png",
+      "/IDOs/smartnodes/2.png",
+      "/IDOs/smartnodes/3.png",
+      "/IDOs/smartnodes/4.png",
+      "/IDOs/smartnodes/5.png",
+      "/IDOs/smartnodes/6.png",
+    ],
     type: "NODE",
   },
   {
