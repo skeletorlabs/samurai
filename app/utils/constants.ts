@@ -32,6 +32,7 @@ import {
   memepad,
   nexis,
   xrone,
+  smartnodes,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -63,6 +64,79 @@ export const simplifiedPhasesV2 = [
 ];
 
 export const IDO_LIST: IDO[] = [
+  {
+    id: "smartnodes",
+    url: "launchpad-nodes/smartnodes",
+    logo: smartnodes,
+    idoImageSrc: "/IDOs/smartnodes.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "Polygon",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/polygon.svg",
+    projectName: "EARN'M SmartNodes",
+    projectListDescription:
+      "A Web3 MobileFi rewards ecosystem that allows you to farm the deflationary $EARNM token as a SmartNode operator.",
+    projectDescription:
+      "EARN'M is the Web3 evolution of one of the world's most successful MobileFi rewards ecosystems. Built by Mode Mobile — ranked as North America's 'fastest growing software company 2023' by Deloitte — the EarnApp and EarnPhone are designed to empower consumers to monetize their attention and engagement, earning rewards for simply using their phone.",
+    projectTokenSymbol: "NODE",
+    totalAllocation: 172,
+    price: "175",
+    registrationStartsAt: 1729699200,
+    participationStartsAt: 1729771200,
+    participationEndsAt: 1730116800,
+    publicParticipationStartsAt: 0,
+    publicParticipationEndsAt: 0,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 0,
+    cliff: 0,
+    investmentRound: "SmartNodes Tier M",
+    fdv: "NOT APPLIED",
+    exchangeListingPrice: 0.03,
+    marketCapAtTGE: 0,
+    vesting: "NOT APPLIED",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      { svg: globe, href: "https://www.earnm.com/" },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/EARNMrewards",
+      },
+      {
+        svg: telegram,
+        href: "https://medium.com/earnm",
+      },
+      {
+        svg: discord,
+        href: "https://discord.com/invite/earnm",
+      },
+      {
+        svg: medium,
+        href: "https://medium.com/earnm",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <p>Next up on the Samurai Starter launchpad is a dual node and token offering in an exciting new Web3 rewards ecosystem, built by the fastest-growing US software company of 2023: Mode Mobile. EARN'M is their MobileFi rewards infrastructure which turns smartphones into EarnPhones. With it, users are able to earn hundreds of dollars a month just by completing everyday activities on their phone: listening to music, watching live streams, trading crypto, and more.</p>
+
+        <p>Meanwhile, companies in both Web2 and Web3 can incentivize engagement by integrating EARN'M rewards into their platform. Already EARN'M has secured a client base which includes some of the very top names in crypto: Binance, Coinbase, Crypto.com and RobinHood. Not to mention support from some top KOLs including PAID Network's Kyle Chasse. Now they're taking this rewards ecosystem on-chain.</p>
+
+        <p>It's the EARN'M SmartNodes which provide the infrastructure for the rewards platform, essentially functioning as a DePIN layer. A crucial part of the nodes' functionality is bridging the gap between Web2 engagement and Web3 rewards by first validating off-chain activity, then subsequently processing the issuance of on-chain rewards. In return, node buyers enjoy:</p>
+        <p>
+        • Massive $EARN'M Airdrop: 10% of the EARN'M supply to be airdropped to node buyers, with 20% TGE unlock.<br />
+        • Platform Rewards: Consistent $EARN'M rewards paid out through the Mystery Box claim/burn mechanism (up to 30% per box processed).<br />
+        • Layer-2 Gas Fees: Once the EARN'M L2 chain is live, node operators will also earn gas fees in addition to their platform rewards.<br />
+        • Governance Rights: A quarter of all DAO voting rights belong to node license holders.<br />
+        • Free Phone: Buy 3 or more nodes and receive a free physical EarnPhone (max one per wallet).<br />
+        • IDO Access: Each node purchased gets you whitelisted for $145 of allocation in our $EARNM token IDO on November 6!
+        </p>
+      </div>
+  `,
+    contract: "0x677BaEEbcC12fB0efD4D87BCF41e2e7dF15cdbc6",
+    abi: PARTICIPATOR_NFT_V2_ABI,
+    type: "NODE",
+  },
   {
     id: "xrone",
     url: "launchpad-nodes/xrone",

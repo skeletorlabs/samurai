@@ -57,7 +57,7 @@ export default function LaunchpadCard({
         type === "dark"
           ? "bg-black/30 hover:bg-black/20"
           : "bg-neutral-700 hover:bg-white/10"
-      }  w-full md:max-w-[360px] xl:max-w-[400px] max-h-[840px] py-4 pb-5 shadow-xl transition-all hover:scale-[1.02] px-4`}
+      }  w-full lg:max-w-[271px] 2xl:max-w-[400px] max-h-[840px] py-4 pb-5 shadow-xl transition-all hover:scale-[1.02] px-4`}
     >
       <div className="flex w-full mb-4 relative">
         <div className="flex w-full h-[260px] relative">
@@ -71,13 +71,8 @@ export default function LaunchpadCard({
           />
         </div>
 
-        <div className="flex justify-between gap-2 w-full absolute bottom-3 px-3">
-          {/* <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-md w-full mt-1 text-[14px] border border-white/20"> */}
-          {/* {ido.acceptedToken} ON {ido.network} */}
-
-          {/* </div> */}
-
-          <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-[14px] border border-white/20">
+        <div className="flex flex-col sm:flex-row lg:flex-col 2xl:flex-row justify-between sm:gap-2 lg:gap-0 2xl:gap-2 w-full absolute bottom-3 px-3">
+          <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-xs md:text-[14px] border border-white/20">
             {ido.investmentRound.toUpperCase()}
           </div>
           <div
@@ -129,7 +124,7 @@ export default function LaunchpadCard({
         <div className="text-samurai-red">{ido.projectName}</div>
       </div>
 
-      <div className="text-white/70 text-[15px] px-1 mb-4 line-clamp-3 text-base min-h-[80px]">
+      <div className="text-white/70 text-[15px] px-1 mb-4 line-clamp-3 text-base min-h-[80px] lg:min-h-[120px] 2xl:min-h-[80px]">
         {ido.projectListDescription}
       </div>
 

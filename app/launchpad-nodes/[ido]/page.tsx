@@ -467,7 +467,7 @@ export default function Ido() {
                   {ido && (
                     <div className="flex flex-col gap-10 px-5 md:px-6">
                       {/* PARTICIPATION PHASE BLOCK */}
-                      <div className="grid grid-cols-2 md:grid-cols-3 items-center flex-wrap mt-6 text-sm">
+                      <div className="grid grid-cols-2 md:grid-cols-3 text-start flex-wrap mt-6 text-sm">
                         <div className="flex md:hidden flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">
                             Current Phase:
