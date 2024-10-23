@@ -349,8 +349,8 @@ export default function Ido() {
               {ido && ido.images && (
                 <div className="flex flex-col w-full">
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-5 pt-10 2xl:pt-14 self-center xl:self-start">
-                    {ido?.images?.map((item) => (
-                      <div className="grid gap-5">
+                    {ido?.images?.map((item, index) => (
+                      <div key={index} className="grid gap-5">
                         <button
                           onClick={() => onImageClick(item)}
                           className="transition-all hover:scale-105 relative w-[160px] h-[160px] md:w-[180px] xl:h-[140px] xl:w-[140px] md:h-[180px] 2xl:w-[180px] 2xl:h-[180px]"
