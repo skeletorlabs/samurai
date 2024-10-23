@@ -82,7 +82,7 @@ export const IDO_LIST: IDO[] = [
     totalAllocation: 172,
     price: "175",
     registrationStartsAt: 1729699200,
-    participationStartsAt: 1729771200,
+    participationStartsAt: 1729857600,
     participationEndsAt: 1730116800,
     publicParticipationStartsAt: 0,
     publicParticipationEndsAt: 0,
