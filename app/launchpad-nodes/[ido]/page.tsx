@@ -345,69 +345,6 @@ export default function Ido() {
                   />
                 </div>
               </div>
-
-              {ido && ido.images && (
-                <div className="flex flex-col w-full">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-5 pt-10 2xl:pt-14 self-center xl:self-start">
-                    {ido?.images?.map((item, index) => (
-                      <div key={index} className="grid gap-5">
-                        <button
-                          onClick={() => onImageClick(item)}
-                          className="transition-all hover:scale-105 relative w-[160px] h-[160px] md:w-[180px] xl:h-[140px] xl:w-[140px] md:h-[180px] 2xl:w-[180px] 2xl:h-[180px]"
-                        >
-                          <Image
-                            fill
-                            className="h-auto max-w-full rounded-lg border border-white/30"
-                            src={item}
-                            objectFit="cover"
-                            alt=""
-                          />
-                        </button>
-                      </div>
-                    ))}
-
-                    {/* <div className="grid gap-10">
-                      <button
-                        onClick={() => onImageClick(ido?.images![1])}
-                        className="transition-all hover:scale-105 relative w-[160px] h-[160px] md:w-[180px] xl:h-[140px] xl:w-[140px] md:h-[180px] 2xl:w-[180px] 2xl:h-[180px]"
-                      >
-                        <Image
-                          fill
-                          className="h-auto max-w-full rounded-lg border border-white/30"
-                          src={ido?.images[1]}
-                          alt=""
-                        />
-                      </button>
-                    </div>
-                    <div className="grid gap-10">
-                      <button
-                        onClick={() => onImageClick(ido?.images![2])}
-                        className="transition-all hover:scale-105 relative w-[160px] h-[160px] md:w-[180px] xl:h-[140px] xl:w-[140px] md:h-[180px] 2xl:w-[180px] 2xl:h-[180px]"
-                      >
-                        <Image
-                          fill
-                          className="h-auto max-w-full rounded-lg border border-white/30"
-                          src={ido?.images[2]}
-                          alt=""
-                        />
-                      </button>
-                    </div>
-                    <div className="grid gap-10">
-                      <button
-                        onClick={() => onImageClick(ido?.images![3])}
-                        className="transition-all hover:scale-105 relative w-[160px] h-[160px] md:w-[180px] xl:h-[140px] xl:w-[140px] md:h-[180px] 2xl:w-[180px] 2xl:h-[180px]"
-                      >
-                        <Image
-                          fill
-                          className="h-auto max-w-full rounded-lg border border-white/30"
-                          src={ido?.images[3]}
-                          alt=""
-                        />
-                      </button>
-                    </div> */}
-                  </div>
-                </div>
-              )}
             </div>
 
             <div className="flex flex-col xl:pr-[32px] 2xl:pr-28 gap-5 mt-10 xl:mt-0 mx-3 xl:mx-0">
@@ -762,10 +699,10 @@ export default function Ido() {
           </div>
         </div>
       </TopLayout>
-      <div className="flex flex-col xl:flex-row gap-10 pt-10 lg:pt-24 pb-10 xl:pb-24 border-t border-white/20 bg-white/10 lg:px-10 2xl:px-14 w-full">
+      <div className="flex flex-col gap-10 pt-10 lg:pt-24 pb-10 xl:pb-24 border-t border-white/20 bg-white/10 lg:px-10 2xl:px-14 w-full">
         {ido && (
           <>
-            <div className="flex flex-col gap-10 px-6 lg:pr-10 w-full">
+            <div className="flex flex-col gap-10 px-6 w-full">
               <div
                 className={`flex w-full xl:text-[16px] xl:leading-[1.70rem] 2xl:text-[20px] 2xl:leading-[2rem] text-gray-300 ${inter.className}`}
                 dangerouslySetInnerHTML={{
@@ -773,6 +710,28 @@ export default function Ido() {
                 }}
               />
             </div>
+            {ido && ido.images && (
+              <div className="flex flex-col w-full px-6">
+                <div className="flex flex-wrap gap-10 pt-4 2xl:pt-8">
+                  {ido?.images?.map((item, index) => (
+                    <div key={index} className="flex gap-5">
+                      <button
+                        onClick={() => onImageClick(item)}
+                        className="transition-all hover:scale-105 relative w-[160px] h-[160px] md:w-[180px] xl:h-[140px] xl:w-[140px] md:h-[180px] 2xl:w-[180px] 2xl:h-[180px]"
+                      >
+                        <Image
+                          fill
+                          className="h-auto max-w-full rounded-lg border border-white/30"
+                          src={item}
+                          objectFit="cover"
+                          alt=""
+                        />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>
