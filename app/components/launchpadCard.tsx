@@ -30,6 +30,7 @@ export default function LaunchpadCard({
     const isV2 = ido.type === "v2";
     const isNftOpen = ido.type === "NFT-OPEN";
     const isNode = ido.type === "NODE";
+    const isPrivate = ido.type === "private";
     const phase = isNft
       ? await getParticipationPhaseNft(contract)
       : isNftEth
@@ -40,6 +41,8 @@ export default function LaunchpadCard({
       ? await getParticipationPhaseNftOpen(contract)
       : isNode
       ? await getParticipationPhaseNode(contract)
+      : isPrivate
+      ? await getParticipationPhaseV2(contract)
       : await getParticipationPhase(contract);
     setPhase(phase.toUpperCase());
   }, [ido]);
