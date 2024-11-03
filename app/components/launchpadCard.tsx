@@ -9,6 +9,7 @@ import { getParticipationPhase as getParticipationPhaseNftEth } from "../contrac
 import { getParticipationPhase as getParticipationPhaseV2 } from "../contracts_integrations/idoV2";
 import { getParticipationPhase as getParticipationPhaseNftOpen } from "../contracts_integrations/idoNftOpen";
 import { getParticipationPhase as getParticipationPhaseNode } from "../contracts_integrations/idoNFTV2";
+import { getParticipationPhase as getParicipationPhasePrivate } from "../contracts_integrations/privateIDO";
 import { useCallback, useEffect, useState } from "react";
 
 export default function LaunchpadCard({
@@ -42,7 +43,7 @@ export default function LaunchpadCard({
       : isNode
       ? await getParticipationPhaseNode(contract)
       : isPrivate
-      ? await getParticipationPhaseV2(contract)
+      ? await getParicipationPhasePrivate(contract)
       : await getParticipationPhase(contract);
     setPhase(phase.toUpperCase());
   }, [ido]);

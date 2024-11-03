@@ -42,6 +42,7 @@ import {
   PARTICIPATOR_V2_2,
   PARTICIPATOR_NFT_OPEN,
   PARTICIPATOR_NFT_V2_ABI,
+  PRIVATE_PARTICIPATOR_ABI,
 } from "@/app/contracts_integrations/abis";
 
 export const simplifiedPhases = [
@@ -126,8 +127,8 @@ export const IDO_LIST: IDO[] = [
         <p>In addition to this base utility, $EARNM can also be staked in large quantities by partner projects to access white-label versions of EARN'M products.</p>
       </div>
   `,
-    contract: "0x071F2d6Fc096da78fcE7918aa5A2a8fd59C6a183",
-    abi: PARTICIPATOR_V2_2,
+    contract: "0x562f715F49a7D9183Ac8b138B2557dbDD2C3D820",
+    abi: PRIVATE_PARTICIPATOR_ABI,
     images: [
       "/IDOs/smartnodes/1.png",
       "/IDOs/smartnodes/2.png",

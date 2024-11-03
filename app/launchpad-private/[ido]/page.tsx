@@ -25,15 +25,13 @@ import SSButton from "@/app/components/ssButton";
 import { StateContext } from "@/app/context/StateContext";
 import {
   generalInfo,
-  // getLinkedWallets,
   getParticipationPhase,
   makePublic,
   participate,
-  register,
   togglePause,
   userInfo,
   withdraw,
-} from "@/app/contracts_integrations/idoV2";
+} from "@/app/contracts_integrations/privateIDO";
 import IdoAllocationProgress from "@/app/components/idoAllocationProgress";
 import { Tier, getTier } from "@/app/contracts_integrations/tiers";
 import { getUnixTime } from "date-fns";
@@ -51,7 +49,6 @@ const inter = Inter({
 
 export default function Ido() {
   const [inputValue, setInputValue] = useState("");
-  const [inputLinkedWallet, setInputLinkedWallet] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [general, setGeneral] = useState<any>(null);
   const [user, setUser] = useState<any>(null);
@@ -64,7 +61,6 @@ export default function Ido() {
   const { signer, account } = useContext(StateContext);
 
   const { ido: idoID } = useParams();
-  console.log(idoID);
 
   const ido = IDO_LIST.find((item) => item.id === (idoID as string));
   const idoIndex = IDO_LIST.findIndex((item) => item.id === (idoID as string));
@@ -124,47 +120,6 @@ export default function Ido() {
     [setGalleryOpen]
   );
 
-  // Function to check if the string starts with "bc1" (Bitcoin)
-  const isBitcoinAddress = (value: string) => value.startsWith("bc1");
-
-  // Function to check for valid EVM address format (with or without 0x prefix)
-  const isEVMAddress = (value: string) => {
-    const re = new RegExp("^(0x)?[0-9a-fA-F]{40}$");
-    return re.test(value);
-  };
-
-  // Function for Solana address validation
-  const isValidSolanaAddress = (value: string) => {
-    const isValidLength = (value: string) =>
-      value.length >= 32 && value.length <= 44;
-    const charSet = "[A-Za-z0-9+/]";
-
-    // Check length
-    if (!isValidLength(value)) {
-      return false;
-    }
-    // Check character set using regex
-    const re = new RegExp(`^${charSet}+$`);
-    return re.test(value);
-  };
-
-  const onPaste = async () => {
-    const value = await navigator.clipboard.readText();
-
-    if (
-      value === "" ||
-      isBitcoinAddress(value) ||
-      isEVMAddress(value) ||
-      isValidSolanaAddress(value)
-    ) {
-      setInputLinkedWallet(value);
-      return true;
-    } else {
-      setInputValue("");
-      return false;
-    }
-  };
-
   const onInputChange = (value: string) => {
     const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
 
@@ -175,24 +130,13 @@ export default function Ido() {
     return false;
   };
 
-  const onRegister = useCallback(async () => {
-    setIsLoading(true);
-    if (signer && user && !user.isWhitelisted) {
-      await register(idoIndex, signer);
-      await getGeneralData();
-      await getUserInfos();
-    }
-
-    setIsLoading(false);
-  }, [signer, idoIndex, user, inputLinkedWallet, setIsLoading]);
-
   const onParticipate = useCallback(async () => {
     setIsLoading(true);
     if (
       signer &&
       selectedToken !== "" &&
       user &&
-      (user.isWhitelisted || general.isPublic)
+      (user.maxPermitted > 0 || general.isPublic)
     ) {
       await participate(idoIndex, signer, inputValue, selectedToken);
       await getGeneralData();
@@ -207,11 +151,11 @@ export default function Ido() {
   // ============================================================================================================
 
   const getUserInfos = useCallback(async () => {
-    if (signer && tier) {
-      const response = await userInfo(idoIndex, signer, tier.name);
+    if (signer) {
+      const response = await userInfo(idoIndex, signer);
       setUser(response);
     }
-  }, [signer, idoIndex, tier]);
+  }, [signer, idoIndex]);
 
   const getTierInfos = useCallback(async () => {
     if (signer) {
@@ -412,11 +356,7 @@ export default function Ido() {
               <div className="flex flex-col">
                 <div className="flex flex-col w-full xl:w-[550px] rounded-lg bg-black/70 bg-samurai-pattern pb-6 shadow-xl lg:border border-white/20 mt-10">
                   <div className="flex justify-between items-center text-lg xl:text-xl bg-samurai-red border-b border-white/20 px-7 py-4 rounded-t-lg text-white">
-                    <span>
-                      {general?.isPublic && ido?.id !== "kvants"
-                        ? "FCFS Round"
-                        : ido?.investmentRound}
-                    </span>
+                    <span>{ido?.investmentRound}</span>
                     {/* TIER */}
                     {signer && account && (
                       <div className="flex items-center gap-1 text-black">
@@ -522,27 +462,27 @@ export default function Ido() {
                           </p>
                         </div>
 
-                        {signer && account && (
+                        {signer && account && general?.maxPerWallet > 0 && (
                           <div className="flex flex-col py-2 px-2 rounded-md w-max">
                             <span className="text-neutral-600">Min:</span>
                             <p className="text-white/70">
                               $
-                              {Number(
-                                user?.walletRange?.minPerWallet | 0
-                              ).toLocaleString("en-us")}{" "}
+                              {Number(general?.minPerWallet | 0).toLocaleString(
+                                "en-us"
+                              )}{" "}
                               {ido?.acceptedTokenSymbol}
                             </p>
                           </div>
                         )}
 
-                        {signer && account && (
+                        {signer && account && general?.maxPerWallet > 0 && (
                           <div className="flex flex-col py-2 px-2 rounded-md w-max">
                             <span className="text-neutral-600">Max:</span>
                             <p className="text-white/70">
                               $
-                              {Number(
-                                user?.walletRange?.maxPerWallet | 0
-                              ).toLocaleString("en-us")}{" "}
+                              {Number(user?.maxPermitted | 0).toLocaleString(
+                                "en-us"
+                              )}{" "}
                               {ido?.acceptedTokenSymbol}
                             </p>
                           </div>
@@ -560,244 +500,13 @@ export default function Ido() {
                             </p>
                           </div>
                         )}
-
-                        {signer && account && (
-                          <>
-                            <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                              <span className="text-neutral-600">
-                                Registered:
-                              </span>
-                              <p className="text-white/70">
-                                {user?.walletRange?.name
-                                  ?.toString()
-                                  .toLowerCase() === "public"
-                                  ? "NA"
-                                  : user?.isWhitelisted
-                                  ? "Yes"
-                                  : "No"}
-                              </p>
-                            </div>
-                            {general?.usingLinkedWallet && (
-                              <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                                <span className="text-neutral-600">
-                                  Linked Wallet:
-                                </span>
-                                <p className="text-white/70">
-                                  {user?.linkedWallet
-                                    ? `${user?.linkedWallet.substring(
-                                        0,
-                                        5
-                                      )}...${user?.linkedWallet.substring(
-                                        user?.linkedWallet.length - 5,
-                                        user?.linkedWallet.length
-                                      )}`
-                                    : user?.walletRange?.name
-                                        ?.toString()
-                                        .toLowerCase() === "public"
-                                    ? "NA"
-                                    : "Not found"}
-                                </p>
-                              </div>
-                            )}
-                          </>
-                        )}
                       </div>
-
-                      {signer &&
-                        account &&
-                        (currentPhase?.toLocaleLowerCase() === "registration" ||
-                          currentPhase?.toLocaleLowerCase() ===
-                            "participation") && (
-                          <>
-                            {/* LINK WALLET */}
-                            <div className="flex flex-col gap-1 text-[14px]">
-                              {general?.usingLinkedWallet &&
-                                user?.linkedWallet === "" && (
-                                  <div className="flex flex-col p-4 border border-white/20 rounded-lg">
-                                    <p className="text-[16px] text-center">
-                                      Link your
-                                      <span className="text-samurai-red px-[6px]">
-                                        {ido.tokenNetwork.toUpperCase()}
-                                      </span>
-                                      wallet address
-                                    </p>
-
-                                    <div className="flex justify-center gap-10 items-center py-3">
-                                      <button
-                                        onClick={() => onPaste()}
-                                        disabled={
-                                          isLoading ||
-                                          !general ||
-                                          !user ||
-                                          general?.isPaused
-                                        }
-                                        className={`
-                                  ${
-                                    isLoading ||
-                                    !general ||
-                                    !user ||
-                                    general?.isPaused
-                                      ? "opacity-40"
-                                      : "opacity-100"
-                                  }
-                                    font-light flex justify-center items-center gap-2 transition-all hover:scale-110`}
-                                      >
-                                        {isLoading ? (
-                                          "Loading..."
-                                        ) : (
-                                          <>
-                                            <div>
-                                              {inputLinkedWallet
-                                                ? pasted
-                                                : paste}
-                                            </div>
-                                            <span>
-                                              {inputLinkedWallet
-                                                ? "Pasted"
-                                                : "Paste"}
-                                            </span>
-                                          </>
-                                        )}
-                                      </button>
-                                      <button
-                                        onClick={() => setInputLinkedWallet("")}
-                                        disabled={
-                                          isLoading ||
-                                          !general ||
-                                          !user ||
-                                          general?.isPaused
-                                        }
-                                        className={`
-                                  ${
-                                    isLoading ||
-                                    !general ||
-                                    !user ||
-                                    general?.isPaused
-                                      ? "opacity-40"
-                                      : "opacity-100"
-                                  }
-                                    font-light flex justify-center items-center gap-2 transition-all hover:scale-110`}
-                                      >
-                                        {isLoading ? (
-                                          "Loading..."
-                                        ) : (
-                                          <>
-                                            <div>{redo}</div>
-                                            <span>Clear</span>
-                                          </>
-                                        )}
-                                      </button>
-                                      <button
-                                        onClick={() => onPaste()}
-                                        disabled={
-                                          isLoading ||
-                                          !general ||
-                                          !user ||
-                                          general?.isPaused
-                                        }
-                                        className={`
-                                  ${
-                                    isLoading ||
-                                    !general ||
-                                    !user ||
-                                    general?.isPaused
-                                      ? "opacity-40"
-                                      : "opacity-100"
-                                  }
-                                    font-light flex justify-center items-center gap-2 transition-all hover:scale-110`}
-                                      >
-                                        {isLoading ? (
-                                          "Loading..."
-                                        ) : (
-                                          <>
-                                            <div>
-                                              {inputLinkedWallet
-                                                ? linkWallet
-                                                : linkWallet}
-                                            </div>
-                                            <span>
-                                              {inputLinkedWallet
-                                                ? `${inputLinkedWallet.substring(
-                                                    0,
-                                                    5
-                                                  )}...${inputLinkedWallet.substring(
-                                                    inputLinkedWallet.length -
-                                                      5,
-                                                    inputLinkedWallet.length
-                                                  )}`
-                                                : "Not set"}
-                                            </span>
-                                          </>
-                                        )}
-                                      </button>
-                                    </div>
-                                    <button
-                                      onClick={onRegister}
-                                      disabled={
-                                        isLoading ||
-                                        !general ||
-                                        !user ||
-                                        general?.isPaused ||
-                                        (general?.usingLinkedWallet &&
-                                          inputLinkedWallet === "")
-                                      }
-                                      className={`
-                                ${
-                                  isLoading ||
-                                  !general ||
-                                  !user ||
-                                  general?.isPaused ||
-                                  (general?.usingLinkedWallet &&
-                                    inputLinkedWallet === "")
-                                    ? "bg-black text-white/20"
-                                    : "bg-samurai-red text-white hover:opacity-75"
-                                }
-                                  rounded-[8px] w-full mt-4 py-4 text-[18px] text-center transition-all `}
-                                    >
-                                      {isLoading ? "Loading..." : "LINK WALLET"}
-                                    </button>
-                                  </div>
-                                )}
-                            </div>
-
-                            {/* REGISTER */}
-                            {((!general?.usingLinkedWallet &&
-                              !user?.isWhitelisted &&
-                              !general?.isPublic) ||
-                              (general?.usingLinkedWallet &&
-                                user?.linkedWallet !== "" &&
-                                !user?.isWhitelisted &&
-                                !general?.isPublic)) && (
-                              <button
-                                onClick={onRegister}
-                                disabled={
-                                  isLoading ||
-                                  !general ||
-                                  !user ||
-                                  general?.isPaused
-                                }
-                                className={`
-                                ${
-                                  isLoading ||
-                                  !general ||
-                                  !user ||
-                                  general?.isPaused
-                                    ? "bg-black text-white/20"
-                                    : "bg-samurai-red text-white hover:opacity-75"
-                                }
-                                  rounded-[8px] w-full py-4 text-[18px] text-center transition-all`}
-                              >
-                                {isLoading ? "Loading..." : "REGISTER"}
-                              </button>
-                            )}
-                          </>
-                        )}
 
                       {/* PARTICIPATION */}
 
                       {currentPhase?.toLowerCase() === "participation" &&
-                        user?.allocation < user?.walletRange?.maxPerWallet &&
-                        (user?.isWhitelisted || general?.isPublic) && (
+                        user?.allocation < user?.maxPermitted &&
+                        (user?.maxPermitted > 0 || general?.isPublic) && (
                           <div className="flex flex-col">
                             <div className="flex items-center justify-between">
                               <span className="self-end text-[10px] lg:text-sm mb-1 mr-1">
@@ -810,12 +519,13 @@ export default function Ido() {
                                 })}
                                 {" / "}
                                 MAX{" "}
-                                {Number(
-                                  user?.walletRange?.maxPerWallet
-                                ).toLocaleString("en-us", {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                })}{" "}
+                                {Number(user?.maxPermitted).toLocaleString(
+                                  "en-us",
+                                  {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  }
+                                )}{" "}
                                 {TOKENS_TO_SYMBOL[selectedToken]}
                               </span>
                               <button
@@ -865,11 +575,12 @@ export default function Ido() {
                                 !general ||
                                 !user ||
                                 general?.isPaused ||
-                                (!user?.isWhitelisted && !general?.isPublic) ||
+                                (user?.maxPermitted == 0 &&
+                                  !general?.isPublic) ||
                                 inputValue === "" ||
                                 Number(inputValue) === 0 ||
                                 Number(inputValue) < general?.minPerWallet ||
-                                Number(inputValue) > general?.maxPerWallet ||
+                                Number(inputValue) > user?.maxPermitted ||
                                 Number(general?.raised >= 150_000)
                               }
                               className={`
@@ -878,11 +589,11 @@ export default function Ido() {
                               !general ||
                               !user ||
                               general?.isPaused ||
-                              (!user.isWhitelisted && !general?.isPublic) ||
+                              (user.maxPermitted === 0 && !general?.isPublic) ||
                               inputValue === "" ||
                               Number(inputValue) === 0 ||
                               Number(inputValue) < general?.minPerWallet ||
-                              Number(inputValue) > general?.maxPerWallet ||
+                              Number(inputValue) > user?.maxPermitted ||
                               Number(general?.raised >= 150_000)
                                 ? "bg-black text-white/20"
                                 : "bg-samurai-red text-white hover:opacity-75"
@@ -986,20 +697,6 @@ export default function Ido() {
               )}
             </div>
           </div>
-          {ido && ido.id === "earnm" && (
-            <video
-              width="320"
-              height="240"
-              controls
-              preload="auto"
-              autoPlay
-              loop
-              className="pt-10 2xl:pt-14 w-full px-6 lg:px-10 2xl:px-20"
-            >
-              <source src="/IDOs/earnm/1.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          )}
         </div>
       </TopLayout>
       <div className="flex flex-col xl:flex-row gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 px-3 xl:px-0">
@@ -1078,6 +775,20 @@ export default function Ido() {
           </>
         )}
       </div>
+
+      {ido && ido.id === "earnm" && (
+        <video
+          width="320"
+          height="240"
+          controls
+          preload="auto"
+          loop
+          className="pt-10 2xl:pt-14 w-full px-6 lg:px-10 2xl:px-20"
+        >
+          <source src="/IDOs/earnm/1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
 
       <Transition appear show={galleryOpen}>
         <Dialog
