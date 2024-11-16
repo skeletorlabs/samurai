@@ -27,7 +27,7 @@ async function getContract(index: number, signer?: ethers.Signer) {
     const ido = IDO_LIST[index];
     const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const contractAddress = ido.contract;
-    console.log(contractAddress);
+
     const contract = new ethers.Contract(
       contractAddress,
       ido.abi,
