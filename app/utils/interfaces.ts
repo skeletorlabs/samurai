@@ -163,6 +163,7 @@ export interface IDO {
   abi: any;
   images?: string[];
   type?: string;
+  vestingContract?: string;
 }
 
 export interface IDO_v2 {
