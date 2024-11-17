@@ -52,10 +52,8 @@ export default function Ido() {
 
   const { ido: idoID } = useParams();
 
-  const ido = IDO_LIST.find((item) => item.id.includes(idoID as string));
-  const idoIndex = IDO_LIST.findIndex((item) =>
-    item.id.includes(idoID as string)
-  );
+  const ido = IDO_LIST.find((item) => item.id === (idoID as string));
+  const idoIndex = IDO_LIST.findIndex((item) => item.id === (idoID as string));
   const bg = `url("${ido?.idoImageSrc}")`;
 
   // ============================================================================================================
@@ -393,24 +391,32 @@ export default function Ido() {
                             UTC
                           </p>
                         </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">FCFS START:</span>
-                          <p className="text-white/70">
-                            {formattedDate(
-                              ido.publicParticipationStartsAt
-                            ).toUpperCase()}{" "}
-                            UTC
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
-                          <span className="text-samurai-red">FCFS END:</span>
-                          <p className="text-white/70">
-                            {formattedDate(
-                              ido.publicParticipationEndsAt
-                            ).toUpperCase()}{" "}
-                            UTC
-                          </p>
-                        </div>
+                        {ido.publicParticipationStartsAt > 0 && (
+                          <>
+                            <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                              <span className="text-samurai-red">
+                                FCFS START:
+                              </span>
+                              <p className="text-white/70">
+                                {formattedDate(
+                                  ido.publicParticipationStartsAt
+                                ).toUpperCase()}{" "}
+                                UTC
+                              </p>
+                            </div>
+                            <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
+                              <span className="text-samurai-red">
+                                FCFS END:
+                              </span>
+                              <p className="text-white/70">
+                                {formattedDate(
+                                  ido.publicParticipationEndsAt
+                                ).toUpperCase()}{" "}
+                                UTC
+                              </p>
+                            </div>
+                          </>
+                        )}
                         <div className="flex items-center gap-2 py-2 px-2 text-[16px] rounded-md w-max min-w-[300px]">
                           <span className="text-samurai-red">TGE DATE:</span>
                           <p className="text-white/70">
@@ -859,14 +865,16 @@ export default function Ido() {
                   )}
                 </div>
               </div>
-              {ido?.projectName !== "KIP Protocol" && (
-                <IdoAllocationProgress
-                  maxAllocations={general?.maxAllocations || 0}
-                  raised={general?.raised || 0}
-                  useLocale={false}
-                  extraInfos={ido?.projectTokenSymbol + "S"}
-                />
-              )}
+              {currentPhase &&
+                currentPhase?.toLowerCase() !== "completed" &&
+                ido?.projectName !== "KIP Protocol" && (
+                  <IdoAllocationProgress
+                    maxAllocations={general?.maxAllocations || 0}
+                    raised={general?.raised || 0}
+                    useLocale={false}
+                    extraInfos={ido?.projectTokenSymbol + "S"}
+                  />
+                )}
             </div>
           </div>
         </div>

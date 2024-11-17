@@ -44,9 +44,6 @@ export async function generalInfo(index: number) {
       ethers.formatEther(await contract?.pricePerToken())
     );
 
-    console.log("pricePerToken", pricePerToken);
-    console.log("pricePerToken locale", pricePerToken.toLocaleString("en-us"));
-
     // prices per wallet ----------------------------------
     const minAPerWallet = Number(await contract?.minA());
     const maxAPerWallet = Number(await contract?.maxA());

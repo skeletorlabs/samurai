@@ -27,6 +27,7 @@ async function getContract(index: number, signer?: ethers.Signer) {
     const ido = IDO_LIST[index];
     const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const contractAddress = ido.contract;
+
     const contract = new ethers.Contract(
       contractAddress,
       ido.abi,
@@ -88,7 +89,7 @@ export async function generalInfo(index: number) {
 
     let usingLinkedWallet = false;
 
-    if (ido.id !== "launchpad-v2/kvants") {
+    if (ido.id !== "kvants") {
       usingLinkedWallet = await contract?.usingLinkedWallet();
     }
 
@@ -119,7 +120,11 @@ function parseWalletRange(range: any, decimals: number) {
   return walletRange;
 }
 
-export async function userInfo(index: number, signer: ethers.Signer) {
+export async function userInfo(
+  index: number,
+  signer: ethers.Signer,
+  tierName: string
+) {
   try {
     const ido = IDO_LIST[index];
     const signerAdress = await signer.getAddress();
@@ -128,9 +133,19 @@ export async function userInfo(index: number, signer: ethers.Signer) {
 
     const isPublic = await contract?.isPublic();
 
-    const range = isPublic
-      ? await contract?.getRange(0)
-      : await contract?.getWalletRange(signerAdress);
+    const range0 = await contract?.getRange(0);
+    const range1 = await contract?.getRange(1);
+    const range2 = await contract?.getRange(2);
+    const range3 = await contract?.getRange(3);
+    const range4 = await contract?.getRange(4);
+    const range5 = await contract?.getRange(5);
+
+    const ranges = [range0, range1, range2, range3, range4, range5];
+
+    const range =
+      isPublic || tierName === ""
+        ? range0
+        : ranges.find((item) => item[0].toString() === tierName);
 
     const walletRange = parseWalletRange(range, usingETH ? 18 : 6);
 
@@ -138,14 +153,12 @@ export async function userInfo(index: number, signer: ethers.Signer) {
       ethers.formatUnits(await contract?.allocations(signerAdress), 6)
     );
 
-    // let linkedWallet = "0xC2a96B13a975c656f60f401a5F72851af4717D4A";
     let linkedWallet = "";
-    if (ido.id !== "launchpad-v2/kvants") {
+    if (ido.id !== "kvants") {
       linkedWallet = await contract?.linkedWallets(signerAdress);
     }
 
     const isWhitelisted = await contract?.whitelist(signerAdress);
-    // const isWhitelisted = true;
 
     const acceptedToken = await contract?.acceptedTokens(0);
     const balanceEther = await signer.provider?.getBalance(signerAdress);

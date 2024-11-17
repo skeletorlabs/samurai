@@ -32,6 +32,8 @@ import {
   memepad,
   nexis,
   skywalker,
+  xrone,
+  smartnodes,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -40,6 +42,9 @@ import {
   PARTICIPATOR_NFT_ETH,
   PARTICIPATOR_V2_2,
   IDO_ABI,
+  PARTICIPATOR_NFT_OPEN,
+  PARTICIPATOR_NFT_V2_ABI,
+  PRIVATE_PARTICIPATOR_ABI,
 } from "@/app/contracts_integrations/abis";
 
 export const simplifiedPhases = [
@@ -240,7 +245,290 @@ export const NEW_IDOS: IDO_v2[] = [
 
 export const IDO_LIST: IDO[] = [
   {
-    id: "launchpad-v2/nexis",
+    id: "earnm",
+    url: "launchpad-private/earnm",
+    logo: smartnodes,
+    idoImageSrc: "/IDOs/earnm.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "Polygon",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/polygon.svg",
+    projectName: "EARN'M",
+    projectListDescription:
+      "A Web3 MobileFi rewards ecosystem that allows you to farm the deflationary $EARNM token as a SmartNode operator.",
+    projectDescription:
+      "$EARNM is a deflationary rewards token from Mode Mobile: the fastest-growing US software company of 2023. Their tech and token is designed for seamless plug-and-play integration with any platform in Web3 or Web2, allowing users to earn for their engagement. Meanwhile, the entire EARN'M ecosystem profits from innovative revenue share and token burn mechanisms.",
+    projectTokenSymbol: "$EARNM",
+    totalAllocation: 25_000,
+    price: "0.01",
+    registrationStartsAt: 1730721600,
+    participationStartsAt: 1730808000,
+    participationEndsAt: 1730894400,
+    publicParticipationStartsAt: 0,
+    publicParticipationEndsAt: 0,
+    simplified: true,
+    tgeDate: 1731456000,
+    tgePercentage: 15,
+    cliff: 0,
+    investmentRound: "Private Tier",
+    fdv: "50000000",
+    exchangeListingPrice: 0.01,
+    marketCapAtTGE: 485000,
+    vesting: "15% TGE unlock, 2-month cliff, 7-month DAILY vesting",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      { svg: globe, href: "https://www.earnm.com/" },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/EARNMrewards",
+      },
+      {
+        svg: telegram,
+        href: "https://medium.com/earnm",
+      },
+      {
+        svg: discord,
+        href: "https://discord.com/invite/earnm",
+      },
+      {
+        svg: medium,
+        href: "https://medium.com/earnm",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <p>EARN'M is an exciting new Web3 rewards ecosystem, built by Deloitte's fastest-growing software company of 2023: Mode Mobile. EARN'M is their MobileFi rewards infrastructure which turns smartphones into EarnPhones. With it, users are able to earn hundreds of dollars a month just by completing everyday activities on their phone: listening to music, watching live streams, trading crypto, and more.</p>
+        <p>Already the Web2 iteration of the ecosystem has generated strong revenues and drawn in huge clients including Binance and Coinbase. Now they're taking this rewards ecosystem on-chain with their very own token: $EARNM!
+        <p>This is the native token of the ecosystem, used for paying out rewards, node operator fees, and platform revenue share rewards. The core mechanism of the EARN'M rewards ecosystem is the Mystery Box: a package earned by platform users which contains vested $EARNM tokens, and can also be pre-loaded with any other custom bonus rewards (both blockchain assets and Web2 prizes).</p>
+        <p>These mystery boxes can be integrated into Web2 and Web3 platforms as a way to gamify participation in any kind of activity: listening to music, watching videos, engaging on social media, using a DApp, and so on. Users earn Mystery Boxes, while EARN'M ecosystem participants profit from a revenue share system whenever the prizes inside these boxes are claimed.</p>
+        <p>Depending on the vesting schedule chosen by the holder, varying amounts of $EARNM are re-distributed among ecosystem participants and/or burned, removing them from circulation. Ultimately, this model is designed to make $EARNM deflationary over time!</p>
+        <p>In addition to this base utility, $EARNM can also be staked in large quantities by partner projects to access white-label versions of EARN'M products.</p>
+      </div>
+  `,
+    contract: "0x562f715F49a7D9183Ac8b138B2557dbDD2C3D820",
+    abi: PRIVATE_PARTICIPATOR_ABI,
+    images: [
+      "/IDOs/smartnodes/1.png",
+      "/IDOs/smartnodes/2.png",
+      "/IDOs/smartnodes/3.png",
+      "/IDOs/smartnodes/4.png",
+      "/IDOs/smartnodes/5.png",
+      "/IDOs/smartnodes/6.png",
+    ],
+    type: "private",
+  },
+  {
+    id: "smartnodes",
+    url: "launchpad-nodes/smartnodes",
+    logo: smartnodes,
+    idoImageSrc: "/IDOs/smartnodes.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "Polygon",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/polygon.svg",
+    projectName: "EARN'M SmartNodes",
+    projectListDescription:
+      "A Web3 MobileFi rewards ecosystem that allows you to farm the deflationary $EARNM token as a SmartNode operator.",
+    projectDescription:
+      "EARN'M is the Web3 evolution of one of the world's most successful MobileFi rewards ecosystems. Built by Mode Mobile — ranked as North America's 'fastest growing software company 2023' by Deloitte — the EarnApp and EarnPhone are designed to empower consumers to monetize their attention and engagement, earning rewards for simply using their phone.",
+    projectTokenSymbol: "NODE",
+    totalAllocation: 172,
+    price: "175",
+    registrationStartsAt: 1729785600,
+    participationStartsAt: 1729857600,
+    participationEndsAt: 1730116800,
+    publicParticipationStartsAt: 0,
+    publicParticipationEndsAt: 0,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 0,
+    cliff: 0,
+    investmentRound: "SmartNodes Tier M",
+    fdv: "NOT APPLIED",
+    exchangeListingPrice: 0.03,
+    marketCapAtTGE: 0,
+    vesting: "NOT APPLIED",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      { svg: globe, href: "https://www.earnm.com/" },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/EARNMrewards",
+      },
+      {
+        svg: telegram,
+        href: "https://medium.com/earnm",
+      },
+      {
+        svg: discord,
+        href: "https://discord.com/invite/earnm",
+      },
+      {
+        svg: medium,
+        href: "https://medium.com/earnm",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <p>Next up on the Samurai Starter launchpad is a dual node and token offering in an exciting new Web3 rewards ecosystem, built by the fastest-growing US software company of 2023: Mode Mobile. EARN'M is their MobileFi rewards infrastructure which turns smartphones into EarnPhones. With it, users are able to earn hundreds of dollars a month just by completing everyday activities on their phone: listening to music, watching live streams, trading crypto, and more.</p>
+
+        <p>Meanwhile, companies in both Web2 and Web3 can incentivize engagement by integrating EARN'M rewards into their platform. Already EARN'M has secured a client base which includes some of the very top names in crypto: Binance, Coinbase, Crypto.com and RobinHood. Not to mention support from some top KOLs including PAID Network's Kyle Chasse. Now they're taking this rewards ecosystem on-chain.</p>
+
+        <p>It's the EARN'M SmartNodes which provide the infrastructure for the rewards platform, essentially functioning as a DePIN layer. A crucial part of the nodes' functionality is bridging the gap between Web2 engagement and Web3 rewards by first validating off-chain activity, then subsequently processing the issuance of on-chain rewards. In return, node buyers enjoy:</p>
+        <p>
+        • Massive $EARN'M Airdrop: 10% of the EARN'M supply to be airdropped to node buyers, with 20% TGE unlock.<br />
+        • Platform Rewards: Consistent $EARN'M rewards paid out through the Mystery Box claim/burn mechanism (up to 30% per box processed).<br />
+        • Layer-2 Gas Fees: Once the EARN'M L2 chain is live, node operators will also earn gas fees in addition to their platform rewards.<br />
+        • Governance Rights: A quarter of all DAO voting rights belong to node license holders.<br />
+        • Free Phone: Buy 3 or more nodes and receive a free physical EarnPhone (max one per wallet).<br />
+        • IDO Access: Each node purchased gets you whitelisted for $145 of allocation in our $EARNM token IDO on November 6!
+        </p>
+      </div>
+  `,
+    contract: "0x677BaEEbcC12fB0efD4D87BCF41e2e7dF15cdbc6",
+    abi: PARTICIPATOR_NFT_V2_ABI,
+    images: [
+      "/IDOs/smartnodes/1.png",
+      "/IDOs/smartnodes/2.png",
+      "/IDOs/smartnodes/3.png",
+      "/IDOs/smartnodes/4.png",
+      "/IDOs/smartnodes/5.png",
+      "/IDOs/smartnodes/6.png",
+    ],
+    type: "NODE",
+  },
+  {
+    id: "xrone",
+    url: "launchpad-nodes/xrone",
+    logo: xrone,
+    idoImageSrc: "/IDOs/xrone.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "Arbitrum",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/arbitrum.svg",
+    projectName: "XR One",
+    projectListDescription:
+      "An innovative PvP gaming-centric L3 chain, backed by Animoca Brands and the Arbitrum Foundation.",
+    projectDescription:
+      "Become a validator on one of the most promising next-gen gaming blockchains, built from the ground up to support competitive player-driven economies, seamless Web3 onboarding, and AI-integrated experiences. XR One is poised to become “the home to the next wave of high-impact PvP Web3 games.",
+    projectTokenSymbol: "NODE",
+    totalAllocation: 160,
+    price: "637",
+    registrationStartsAt: 1719410792,
+    participationStartsAt: 1728475200,
+    participationEndsAt: 1729566000,
+    publicParticipationStartsAt: 0,
+    publicParticipationEndsAt: 0,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 0,
+    cliff: 0,
+    investmentRound: "XR ONE Hero Nodes",
+    fdv: "NOT APPLIED",
+    exchangeListingPrice: 0.03,
+    marketCapAtTGE: 0,
+    vesting: "NOT APPLIED",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      { svg: globe, href: "https://xrone.network" },
+      {
+        svg: twitterX,
+        href: "https://x.com/XR_Foundation",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/xrfoundation",
+      },
+      {
+        svg: discord,
+        href: "https://discord.com/invite/W4BdM6N8xb",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <p>Created by Saltwater Games and backed by Animoca Brands and the Arbitrum Foundation, XR One is a Layer-3 blockchain custom-built for PvP game ecosystems. The chain boasts plug-and-play eSports integrations: smart contracts allowing anyone to effortlessly set up high-stakes matches, tournaments, and leagues where real assets are on the line.</p>
+        <p>XR One is also pushing the envelope for AI integrations in Web3 gaming, with advanced native AI dApps and plans to build a GPU processing layer. The adrenaline-laced lifeblood powering all of this is the chain's native token: $XR.</p>
+        <p>Hero Nodes are the validators of the XR One blockchain. Operators will enjoy a wealth of rewards in $XR and other assets:</p>
+        <p>- $XR Incentives: 15% of the $XR token supply, paid out over the first 30 months.</p>
+        <p>- $XR Airdrop: Hero Node holders will get a dedicated 25% cut of the airdrop in Q4.</p>
+        <p>- Transaction Fees: 100% of txn fees go to node operators.</p>
+        <p>- Ecosystem Airdrops: Free tokens from new projects deploying on XR One.</p>
+        <p>- Priority Access: First-dibs access to new XR One features, games, and partner sales.</p>
+        <p>- GPU Rewards: In future, node operators will also be able to contribute processing power to the XR One GPU DePIN layer.</p>
+      </div>
+  `,
+    contract: "0xe0012252B7A08Bc7a2Fcd7F3bE9292da7C2C0063",
+    abi: PARTICIPATOR_NFT_V2_ABI,
+    type: "NODE",
+  },
+  {
+    id: "nexis-tier-1",
+    url: "launchpad-nft-open/nexis-tier-1",
+    logo: nexis,
+    idoImageSrc: "/IDOs/nexis.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "TBA",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "TBA",
+    projectName: "Nexis Network Nodes",
+    projectListDescription:
+      "Nexis Network is an innovative new Layer-1 blockchain, tailored to host the next generation of data-intensive AI and RWA applications.",
+    projectDescription:
+      "Nexis' mission is to build a secure, scalable, lightning-fast blockchain which solves all of the problems currently inhibiting the growth of AI projects in Web3. With block confirmations five times faster than Solana (and for a third of the cost) they're building the blockchain infrastructure needed to meet the high data demands of next-gen machine learning and RWA projects.",
+    projectTokenSymbol: "NFT",
+    totalAllocation: 400,
+    price: "50",
+    registrationStartsAt: 1724331600,
+    participationStartsAt: 1724335200,
+    participationEndsAt: 1724335200 + 86400 * 4,
+    publicParticipationStartsAt: 0,
+    publicParticipationEndsAt: 0,
+    simplified: true,
+    tgeDate: 0,
+    tgePercentage: 7,
+    cliff: 86400 * 30,
+    investmentRound: "Tier 1",
+    fdv: "30000000",
+    exchangeListingPrice: 0.03,
+    marketCapAtTGE: 650250,
+    vesting: "NOT APPLIED",
+    releaseType: "Linear",
+    currentPhase: simplifiedPhases[1].title,
+    socials: [
+      { svg: globe, href: "https://nexis.network/" },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/Nexis_Network",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/Nexis_Network",
+      },
+    ],
+    bigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <p>Nexis is an innovative new Layer-1 blockchain, specifically tailored to meet the high throughput demands of AI and RWA projects. It's custom built to host the next generation of AI-powered products, which require cheap, high-volume, lightning-fast transactions.</p>
+        <p>The base layer of the Nexis Network is its EVM-compatible L1 blockchain, developed using Delegated Proof-of-Stake consensus. Running on top of this foundational EVM blockchain is a second tech layer: a parallel zkEVM (Zero-knowledge Ethereum Virtual Machine) chain.</p>
+        <p>This dual-chain architecture allows Nexis Network to offload processing tasks to this parallel chain, increasing the speed of transactions while also allowing developers to utilize the inherent privacy and security of zero-knowledge proofs when processing sensitive data. It also means that Nexis enjoys seamless interoperability with EVM and zkEVM chains, as well as boasting compatibility with Rust-based chains (such as Solana).</p>
+        <p>As a result, Nexis Network smashes the competition on basically every key metric. According to the testnet figures, Nexis is able to exceed Solana's TPS, process blocks over five times faster, and also process transactions for just 30% of the cost!</p>
+      </div>
+  `,
+    contract: "0xb5Ef6bd1e7346DcaaDDd3E4d53Cd126f1EF50e1F",
+    abi: PARTICIPATOR_NFT_OPEN,
+    // images: [
+    //   "/IDOs/orangedx/1.png",
+    //   "/IDOs/orangedx/2.png",
+    //   "/IDOs/orangedx/3.png",
+    //   "/IDOs/orangedx/4.png",
+    // ],
+    type: "NFT-OPEN",
+  },
+  {
+    id: "nexis",
+    url: "launchpad-v2/nexis",
     logo: nexis,
     idoImageSrc: "/IDOs/nexis.png",
     acceptedTokenSymbol: "USDC",
@@ -251,7 +539,7 @@ export const IDO_LIST: IDO[] = [
     projectListDescription:
       "Nexis Network is an innovative new Layer-1 blockchain, tailored to host the next generation of data-intensive AI and RWA applications.",
     projectDescription:
-      "Nexis' mission is to build a secure, scalable, lightning-fast blockchain which solves all of the problems currently inhibiting the growth of AI projects in Web3. With block confirmations five times faster than Solana (and for a third of the cost) they’re building the blockchain infrastructure needed to meet the high data demands of next-gen machine learning and RWA projects.",
+      "Nexis' mission is to build a secure, scalable, lightning-fast blockchain which solves all of the problems currently inhibiting the growth of AI projects in Web3. With block confirmations five times faster than Solana (and for a third of the cost) they're building the blockchain infrastructure needed to meet the high data demands of next-gen machine learning and RWA projects.",
     projectTokenSymbol: "$NZT",
     totalAllocation: 200_000,
     price: "0.01125",
@@ -295,7 +583,8 @@ export const IDO_LIST: IDO[] = [
     type: "v2",
   },
   {
-    id: "launchpad-v2/kvants",
+    id: "kvants",
+    url: "launchpad-v2/kvants",
     logo: kvants,
     idoImageSrc: "/IDOs/kvants.png",
     acceptedTokenSymbol: "USDC",
@@ -359,7 +648,8 @@ export const IDO_LIST: IDO[] = [
     type: "v2",
   },
   {
-    id: "launchpad-v2/mpad-round2",
+    id: "mpad-round2",
+    url: "launchpad-v2/mpad-round2",
     logo: memepad,
     idoImageSrc: "/IDOs/memepad.png",
     acceptedTokenSymbol: "USDC",
@@ -424,7 +714,8 @@ export const IDO_LIST: IDO[] = [
     type: "v2",
   },
   {
-    id: "launchpad-v2/memepad",
+    id: "memepad",
+    url: "launchpad-v2/memepad",
     logo: memepad,
     idoImageSrc: "/IDOs/memepad.png",
     acceptedTokenSymbol: "USDC",
@@ -489,7 +780,8 @@ export const IDO_LIST: IDO[] = [
     type: "v2",
   },
   {
-    id: "launchpad-nft-eth/artx",
+    id: "artx",
+    url: "launchpad-nft-eth/artx",
     logo: artx,
     idoImageSrc: "/IDOs/artx.png",
     acceptedTokenSymbol: "ETH",
@@ -554,7 +846,8 @@ export const IDO_LIST: IDO[] = [
     type: "NFT-ETH",
   },
   {
-    id: "launchpad-nft/kip-protocol",
+    id: "kip-protocol",
+    url: "launchpad-nft/kip-protocol",
     logo: kip,
     idoImageSrc: "/IDOs/kip-protocol.png",
     acceptedTokenSymbol: "USDC",
@@ -623,7 +916,8 @@ export const IDO_LIST: IDO[] = [
     type: "NFT",
   },
   {
-    id: "launchpad/unibit",
+    id: "unibit",
+    url: "launchpad/unibit",
     logo: unibit,
     idoImageSrc: "/IDOs/unibit.png",
     acceptedTokenSymbol: "USDC",
@@ -692,7 +986,8 @@ export const IDO_LIST: IDO[] = [
     // ],
   },
   {
-    id: "launchpad/interswap",
+    id: "interswap",
+    url: "launchpad/interswap",
     logo: interswap,
     idoImageSrc: "/IDOs/interswap.png",
     acceptedTokenSymbol: "USDC",
@@ -759,7 +1054,8 @@ export const IDO_LIST: IDO[] = [
     // ],
   },
   {
-    id: "launchpad/orangedx",
+    id: "orangedx",
+    url: "launchpad/orangedx",
     logo: orangedx,
     idoImageSrc: "/IDOs/orangedx.png",
     acceptedTokenSymbol: "USDC",
@@ -770,7 +1066,7 @@ export const IDO_LIST: IDO[] = [
     projectListDescription:
       "OrangeDX is ready to push the envelope for Bitcoin-native DeFi, with a full suite of BRC-20 financial products.",
     projectDescription:
-      "OrangeDX is setting out to conquer the brave new world of Bitcoin-based DeFi and gain first-mover advantage over the competition. They’ve developed a complete range of DeFi solutions to unite the worlds of BRC-20 and ERC-20, all powered by the $O4DX token.",
+      "OrangeDX is setting out to conquer the brave new world of Bitcoin-based DeFi and gain first-mover advantage over the competition. They've developed a complete range of DeFi solutions to unite the worlds of BRC-20 and ERC-20, all powered by the $O4DX token.",
     projectTokenSymbol: "$O4DX",
     totalAllocation: 100_000,
     price: "0.055",
@@ -831,7 +1127,8 @@ export const IDO_LIST: IDO[] = [
     ],
   },
   {
-    id: "launchpad/hauntedspace-gaga",
+    id: "hauntedspace-gaga",
+    url: "launchpad/hauntedspace-gaga",
     logo: galaxyGamesHauntedSpace,
     idoImageSrc: "/IDOs/hauntedspace-gaga.png",
     acceptedTokenSymbol: "USDC",
@@ -907,7 +1204,8 @@ export const IDO_LIST: IDO[] = [
     ],
   },
   {
-    id: "launchpad/havens-compass",
+    id: "havens-compass",
+    url: "launchpad/havens-compass",
     logo: havensCompass,
     idoImageSrc: "/IDOs/havens-compass.png",
     acceptedTokenSymbol: "USDC",
@@ -1120,6 +1418,14 @@ export const SOCIALS = [
 export const SAM_NFT = "0x519eD34150300dC0D04d50a5Ff401177A92b4406";
 export const SAM_LOCK_ADDRESS = "0xfb691697BDAf1857C748C004cC7dab3d234E062E";
 export const SAM_ADDRESS = "0xed1779845520339693CDBffec49a74246E7D671b";
+
 export const SAM_CLAIM_VESTING = "0xDD687b579c5C542A14874e79E404b83E78e6E18a"; // BASE MAINNET
 export const SAM_TIERS = "0xdB0Ee72eD5190e9ef7eEC288a92f73c5cf3B3c74";
 export const SAM_FACTORY = "0x9Da8A3AA7eF8FC968b169104f119Ec4522daB742";
+
+// export const SAM_CLAIM_VESTING = "0xc0c3F2c99AD524310EF46BF15d3352480f1E9B4C"; // TEST BSC
+// export const SAM_CLAIM_VESTING = "0xDD687b579c5C542A14874e79E404b83E78e6E18a"; // BASE MAINNET OLD
+// export const SAM_CLAIM_VESTING = "0xA6a638858C114Ad2e95BFD787b353EC2C70d78eF"; // BASE MAINNET
+
+// export const SAM_CLAIM_VESTING = "0xE42c1929612bBc03572C518bAf05c38147D5d67e"; // BASE SEPOLIA
+// export const SAM_TIERS = "0x2Bb8Fc0196becd84bac853E32c9c252343699186";

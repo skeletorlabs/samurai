@@ -46,10 +46,8 @@ export default function Ido() {
   const { signer, account } = useContext(StateContext);
   const { ido: idoID } = useParams();
 
-  const ido = IDO_LIST.find((item) => item.id.includes(idoID as string));
-  const idoIndex = IDO_LIST.findIndex((item) =>
-    item.id.includes(idoID as string)
-  );
+  const ido = IDO_LIST.find((item) => item.id === (idoID as string));
+  const idoIndex = IDO_LIST.findIndex((item) => item.id === (idoID as string));
   const bg = `url("${ido?.idoImageSrc}")`;
 
   // ============================================================================================================
@@ -626,14 +624,16 @@ export default function Ido() {
                   )}
                 </div>
               </div>
-              {ido?.projectName !== "KIP Protocol" && (
-                <IdoAllocationProgress
-                  maxAllocations={general?.maxAllocations || 0}
-                  raised={general?.raised || 0}
-                  useLocale={false}
-                  extraInfos={ido?.projectTokenSymbol + "S"}
-                />
-              )}
+              {currentPhase &&
+                currentPhase?.toLowerCase() !== "completed" &&
+                ido?.projectName !== "KIP Protocol" && (
+                  <IdoAllocationProgress
+                    maxAllocations={general?.maxAllocations || 0}
+                    raised={general?.raised || 0}
+                    useLocale={false}
+                    extraInfos={ido?.projectTokenSymbol + "S"}
+                  />
+                )}
             </div>
           </div>
         </div>

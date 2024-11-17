@@ -129,6 +129,7 @@ export interface IDO_SOCIAL {
 
 export interface IDO {
   id: string;
+  url: string;
   logo: ReactNode;
   idoImageSrc: string;
   acceptedTokenSymbol: string;
