@@ -7,7 +7,7 @@ import {
 } from "ethers";
 import { ERC20_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
-import { IDO_LIST } from "@/app/utils/constants";
+import { IDOs } from "@/app/utils/constants";
 import { balanceOf } from "./balanceOf";
 import checkApproval from "./check-approval";
 import { getUnixTime } from "date-fns";
@@ -24,9 +24,10 @@ export type WalletRange = {
 
 async function getContract(index: number, signer?: ethers.Signer) {
   try {
-    const ido = IDO_LIST[index];
+    const ido = IDOs[index];
     const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const contractAddress = ido.contract;
+    console.log(ido.abi);
     const contract = new ethers.Contract(
       contractAddress,
       ido.abi,
@@ -54,9 +55,9 @@ export async function checkIsPaused(index: number) {
 export async function generalInfo(index: number) {
   try {
     const contract = await getContract(index);
-    const ido = IDO_LIST[index];
 
     const owner = await contract?.owner();
+
     const isPublic = await contract?.isPublic();
     const acceptedToken = await contract?.acceptedToken();
     const isPaused = await contract?.paused();
@@ -215,17 +216,16 @@ export async function togglePause(index: number, signer: ethers.Signer) {
 }
 
 export async function getParticipationPhase(index: number) {
-  const ido = IDO_LIST[index];
-  const registrationStartsAt = ido.registrationStartsAt;
-  const participationStartAt = ido.participationStartsAt;
+  const ido = IDOs[index];
+
+  const participationStartAt = ido.date;
   const publicEndsAt = ido.publicParticipationEndsAt;
   const now = getUnixTime(new Date());
   const isPaused = await checkIsPaused(index);
 
   let phase = "Upcoming";
 
-  if (now >= registrationStartsAt && now <= participationStartAt && !isPaused)
-    phase = "Registration";
+  if (now < participationStartAt && !isPaused) phase = "Upcoming";
   if (now >= participationStartAt && now <= publicEndsAt && !isPaused)
     phase = "Participation";
 

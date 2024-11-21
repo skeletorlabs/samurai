@@ -193,3 +193,35 @@ export interface IDO_v2 {
   abi: any;
   images?: string[];
 }
+
+export interface IDO_v3 {
+  id: string;
+  logo: ReactNode;
+  idoImageSrc: string;
+  acceptedTokenSymbol: string;
+  tokenNetwork: string;
+  crowdsaleNetwork: string;
+  networkImageSrc: string;
+  projectName: string;
+  projectListDescription: string;
+  projectDescription: string;
+  projectTokenSymbol: string;
+  projectBigDescription: ReactNode;
+  investmentRound: string;
+  price: number;
+  allocation: number;
+  date: number;
+  fcfs: number;
+  fdv: number;
+  exchangeListingPrice: number;
+  marketCapAtTGE: number;
+  socials: IDO_SOCIAL[];
+  contract: string;
+  abi: any;
+  images?: string[];
+  register?: boolean;
+  vesting?: string;
+  type?: string;
+  linkedWallet?: boolean;
+  ether?: boolean;
+}

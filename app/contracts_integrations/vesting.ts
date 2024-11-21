@@ -17,12 +17,6 @@ import { notificateTx } from "@/app/utils/notificateTx";
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const TEST_RPC = "http://127.0.0.1:8545";
 
-export type WalletRange = {
-  name: string;
-  minPerWallet: number;
-  maxPerWallet: number;
-};
-
 async function getContract(index: number, signer?: Signer) {
   try {
     const ido = IDO_LIST[index];
@@ -39,7 +33,23 @@ async function getContract(index: number, signer?: Signer) {
   }
 }
 
-async function general(index: number) {
+export type VESTING_GENERAL_INFO = {
+  totalPurchased: number;
+  totalClaimed: number;
+  totalPoints: number;
+  totalPointsClaimed: number;
+  tgeReleasePercent: number;
+  periods: {
+    vestingDuration: number;
+    vestingAt: number;
+    cliff: number;
+    cliffEndsAt: number;
+    vestingEndsAt: number;
+  };
+  vestingType: number;
+};
+
+export async function generalInfo(index: number) {
   try {
     const contract = await getContract(index);
     const totalPurchased = Number(
@@ -54,20 +64,38 @@ async function general(index: number) {
     const cliffEndsAt = Number(await contract?.cliffEndsAt());
     const vestingEndsAt = Number(await contract?.vestingEndsAt());
 
+    const vestingType = Number(await contract?.vestingType());
+    const tgeReleasePercent = Number(
+      formatEther(await contract?.tgeReleasePercent())
+    );
+
+    const periods = await contract?.periods();
+
+    const vestingDuration = Number(periods[0]);
+    const vestingAt = Number(periods[1]);
+    const cliff = Number(periods[2]);
+
     return {
       totalPurchased,
       totalClaimed,
       totalPoints,
       totalPointsClaimed,
-      cliffEndsAt,
-      vestingEndsAt,
-    };
+      tgeReleasePercent,
+      periods: {
+        vestingDuration,
+        vestingAt,
+        cliff,
+        cliffEndsAt,
+        vestingEndsAt,
+      },
+      vestingType,
+    } as VESTING_GENERAL_INFO;
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
 }
 
-async function getWalletsToRefund(index: number) {
+export async function getWalletsToRefund(index: number) {
   try {
     const contract = await getContract(index);
     const walletsToRefund = await contract?.getWalletsToRefund();
@@ -78,7 +106,7 @@ async function getWalletsToRefund(index: number) {
   }
 }
 
-async function user(index: number, signer: Signer) {
+export async function userInfo(index: number, signer: Signer) {
   try {
     const contract = await getContract(index);
     const signerAddress = await signer.getAddress();
@@ -115,42 +143,43 @@ async function user(index: number, signer: Signer) {
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
+}
 
-  async function askForRefund(index: number, signer: Signer) {
-    try {
-      const contract = await getContract(index);
-      const signerAddress = await signer.getAddress();
-      const network = await signer.provider?.getNetwork();
-      const claimedTGE = await contract?.hasClaimedTGE(signerAddress);
-      const askedRefund = await contract?.askedRefund(signerAddress);
+export async function askForRefund(index: number, signer: Signer) {
+  try {
+    const contract = await getContract(index);
+    const signerAddress = await signer.getAddress();
+    const network = await signer.provider?.getNetwork();
+    const claimedTGE = await contract?.hasClaimedTGE(signerAddress);
+    const askedRefund = await contract?.askedRefund(signerAddress);
 
-      if (!claimedTGE && !askedRefund) {
-        const tx = await contract?.askForRefund();
-        await notificateTx(tx, network);
-      }
-    } catch (e) {
-      handleError({ e: e, notificate: true });
-    }
-  }
-
-  async function claimTokens(index: number, signer: Signer) {
-    try {
-      const contract = await getContract(index);
-      const network = await signer.provider?.getNetwork();
-      const tx = await contract?.claimTokens();
+    if (!claimedTGE && !askedRefund) {
+      const tx = await contract?.askForRefund();
       await notificateTx(tx, network);
-    } catch (e) {
-      handleError({ e: e, notificate: true });
     }
+  } catch (e) {
+    handleError({ e: e, notificate: true });
   }
-  async function claimPoints(index: number, signer: Signer) {
-    try {
-      const contract = await getContract(index);
-      const network = await signer.provider?.getNetwork();
-      const tx = await contract?.claimPoints();
-      await notificateTx(tx, network);
-    } catch (e) {
-      handleError({ e: e, notificate: true });
-    }
+}
+
+export async function claimTokens(index: number, signer: Signer) {
+  try {
+    const contract = await getContract(index);
+    const network = await signer.provider?.getNetwork();
+    const tx = await contract?.claimTokens();
+    await notificateTx(tx, network);
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
+}
+
+export async function claimPoints(index: number, signer: Signer) {
+  try {
+    const contract = await getContract(index);
+    const network = await signer.provider?.getNetwork();
+    const tx = await contract?.claimPoints();
+    await notificateTx(tx, network);
+  } catch (e) {
+    handleError({ e: e, notificate: true });
   }
 }

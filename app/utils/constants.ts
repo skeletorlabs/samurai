@@ -19,7 +19,7 @@ import {
   ventures,
 } from "@/app/utils/svgs";
 import { Page } from "./enums";
-import { IDO, IDO_v2 } from "./interfaces";
+import { IDO, IDO_v2, IDO_v3 } from "./interfaces";
 import {
   galaxyGamesHauntedSpace,
   havensCompass,
@@ -82,6 +82,122 @@ export const VestingType: { [key: number]: string } = {
   2: "Periodic",
 };
 
+export const IDOs: IDO_v3[] = [
+  {
+    id: "launchpad-v4/skywalker",
+    logo: skywalker,
+    idoImageSrc: "/IDOs/skywalker.png",
+    acceptedTokenSymbol: "fUSDC",
+    tokenNetwork: "Solana",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/SOLANA.svg",
+    projectName: "Skywalker",
+    projectListDescription:
+      "Introducing Skywalker (SKR), your ticket to the digital cosmos. Join the force and embark on a thrilling journey.",
+    projectDescription:
+      "Unleash the power of Skywalker (SKR). This innovative token is your passport to a new galaxy of opportunities. Experience the future of finance, technology, and community. May the force be with your investments!",
+    projectTokenSymbol: "$SKR",
+    projectBigDescription: `
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <p>Prepare to be amazed as Skywalker (SKR) revolutionizes the way you interact with digital assets. This groundbreaking token is not just about financial gain; it's a gateway to a vibrant community united by a shared vision of innovation.</p>
+      <p>With SKR, you're not just an investor; you're a pioneer exploring uncharted territories. Backed by cutting-edge technology and a dedicated team, Skywalker is poised to become a cornerstone of the digital economy.</p>
+      <p>Embrace the future with SKR. Join a movement that empowers individuals and drives positive change. The possibilities are endless. Are you ready to take flight?</p>
+    </div>
+`,
+    price: 0.008,
+    allocation: 100_000,
+    date: 1723831200,
+    fcfs: 1723899600,
+    investmentRound: "Private",
+    fdv: 10_000_000,
+    exchangeListingPrice: 0.01,
+    marketCapAtTGE: 375_000,
+    socials: [
+      {
+        svg: globe,
+        href: "https://memepad.ai/",
+      },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/MemePadSol",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/Memepad_Community",
+      },
+    ],
+    contract: "0x3f124b180d56a721442c95a81f6d139fe8c91162",
+    abi: IDO_ABI,
+  },
+  {
+    id: "launchpad-v4/earnm",
+    logo: smartnodes,
+    idoImageSrc: "/IDOs/earnm.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "Polygon",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/polygon.svg",
+    projectName: "EARN'M",
+    projectListDescription:
+      "A Web3 MobileFi rewards ecosystem that allows you to farm the deflationary $EARNM token as a SmartNode operator.",
+    projectDescription:
+      "$EARNM is a deflationary rewards token from Mode Mobile: the fastest-growing US software company of 2023. Their tech and token is designed for seamless plug-and-play integration with any platform in Web3 or Web2, allowing users to earn for their engagement. Meanwhile, the entire EARN'M ecosystem profits from innovative revenue share and token burn mechanisms.",
+    projectTokenSymbol: "$EARNM",
+    projectBigDescription: `
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <p>EARN'M is an exciting new Web3 rewards ecosystem, built by Deloitte's fastest-growing software company of 2023: Mode Mobile. EARN'M is their MobileFi rewards infrastructure which turns smartphones into EarnPhones. With it, users are able to earn hundreds of dollars a month just by completing everyday activities on their phone: listening to music, watching live streams, trading crypto, and more.</p>
+      <p>Already the Web2 iteration of the ecosystem has generated strong revenues and drawn in huge clients including Binance and Coinbase. Now they're taking this rewards ecosystem on-chain with their very own token: $EARNM!
+      <p>This is the native token of the ecosystem, used for paying out rewards, node operator fees, and platform revenue share rewards. The core mechanism of the EARN'M rewards ecosystem is the Mystery Box: a package earned by platform users which contains vested $EARNM tokens, and can also be pre-loaded with any other custom bonus rewards (both blockchain assets and Web2 prizes).</p>
+      <p>These mystery boxes can be integrated into Web2 and Web3 platforms as a way to gamify participation in any kind of activity: listening to music, watching videos, engaging on social media, using a DApp, and so on. Users earn Mystery Boxes, while EARN'M ecosystem participants profit from a revenue share system whenever the prizes inside these boxes are claimed.</p>
+      <p>Depending on the vesting schedule chosen by the holder, varying amounts of $EARNM are re-distributed among ecosystem participants and/or burned, removing them from circulation. Ultimately, this model is designed to make $EARNM deflationary over time!</p>
+      <p>In addition to this base utility, $EARNM can also be staked in large quantities by partner projects to access white-label versions of EARN'M products.</p>
+    </div>
+`,
+    price: 0.01,
+    allocation: 25_000,
+    date: 1730808000,
+    fcfs: 1730894400,
+    investmentRound: "Private Tier",
+    fdv: 50000000,
+    exchangeListingPrice: 0.01,
+    marketCapAtTGE: 485000,
+    socials: [
+      { svg: globe, href: "https://www.earnm.com/" },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/EARNMrewards",
+      },
+      {
+        svg: telegram,
+        href: "https://medium.com/earnm",
+      },
+      {
+        svg: discord,
+        href: "https://discord.com/invite/earnm",
+      },
+      {
+        svg: medium,
+        href: "https://medium.com/earnm",
+      },
+    ],
+    contract: "0x562f715F49a7D9183Ac8b138B2557dbDD2C3D820",
+    abi: PRIVATE_PARTICIPATOR_ABI,
+    images: [
+      "/IDOs/smartnodes/1.png",
+      "/IDOs/smartnodes/2.png",
+      "/IDOs/smartnodes/3.png",
+      "/IDOs/smartnodes/4.png",
+      "/IDOs/smartnodes/5.png",
+      "/IDOs/smartnodes/6.png",
+    ],
+    vesting: "",
+    register: false,
+    type: "private",
+    linkedWallet: false,
+    ether: false,
+  },
+];
+
 export const NEW_IDOS: IDO_v2[] = [
   {
     id: "launchpad-v3/skywalker",
@@ -128,119 +244,7 @@ export const NEW_IDOS: IDO_v2[] = [
     ],
     contract: "0x3f124b180d56a721442c95a81f6d139fe8c91162",
     abi: IDO_ABI,
-    // images: [
-    //   "/IDOs/memepad/1.png",
-    //   "/IDOs/memepad/2.png",
-    //   "/IDOs/memepad/3.png",
-    //   "/IDOs/memepad/4.png",
-    // ],
   },
-  //   {
-  //     id: "launchpad-v3/skywalker",
-  //     logo: skywalker,
-  //     idoImageSrc: "/IDOs/skywalker.png",
-  //     acceptedTokenSymbol: "fUSDC",
-  //     tokenNetwork: "Solana",
-  //     crowdsaleNetwork: "BASE",
-  //     networkImageSrc: "/chain-logos/SOLANA.svg",
-  //     projectName: "Skywalker",
-  //     projectListDescription:
-  //       "Introducing Skywalker (SKR), your ticket to the digital cosmos. Join the force and embark on a thrilling journey.",
-  //     projectDescription:
-  //       "Unleash the power of Skywalker (SKR). This innovative token is your passport to a new galaxy of opportunities. Experience the future of finance, technology, and community. May the force be with your investments!",
-  //     projectTokenSymbol: "$SKR",
-  //     projectBigDescription: `
-  //     <div style="display: flex; flex-direction: column; gap: 15px;">
-  //       <p>Prepare to be amazed as Skywalker (SKR) revolutionizes the way you interact with digital assets. This groundbreaking token is not just about financial gain; it's a gateway to a vibrant community united by a shared vision of innovation.</p>
-  //       <p>With SKR, you're not just an investor; you're a pioneer exploring uncharted territories. Backed by cutting-edge technology and a dedicated team, Skywalker is poised to become a cornerstone of the digital economy.</p>
-  //       <p>Embrace the future with SKR. Join a movement that empowers individuals and drives positive change. The possibilities are endless. Are you ready to take flight?</p>
-  //     </div>
-  // `,
-  //     price: 0.008,
-  //     allocation: 100_000,
-  //     date: 1723723200,
-  //     fcfs: 1723723200 + 86400 / 2,
-  //     investmentRound: "Private",
-  //     fdv: 6000000,
-  //     exchangeListingPrice: 0.01,
-  //     marketCapAtTGE: 182250,
-  //     socials: [
-  //       {
-  //         svg: globe,
-  //         href: "https://memepad.ai/",
-  //       },
-  //       {
-  //         svg: twitterX,
-  //         href: "https://twitter.com/MemePadSol",
-  //       },
-  //       {
-  //         svg: telegram,
-  //         href: "https://t.me/Memepad_Community",
-  //       },
-  //     ],
-  //     contract: "0x915Fd4218E1593129c9938a2117dc308632650e8",
-  //     abi: IDO_ABI,
-  //     // images: [
-  //     //   "/IDOs/memepad/1.png",
-  //     //   "/IDOs/memepad/2.png",
-  //     //   "/IDOs/memepad/3.png",
-  //     //   "/IDOs/memepad/4.png",
-  //     // ],
-  //   },
-  //   {
-  //     id: "launchpad-v3/whatever",
-  //     logo: memepad,
-  //     idoImageSrc: "/IDOs/memepad.png",
-  //     acceptedTokenSymbol: "USDC",
-  //     tokenNetwork: "Solana",
-  //     crowdsaleNetwork: "BASE",
-  //     networkImageSrc: "/chain-logos/SOLANA.svg",
-  //     projectName: "Whatever",
-  //     projectListDescription:
-  //       "MemePad is set to become the number-one dedicated memecoin launchpad in crypto!",
-  //     projectDescription:
-  //       "MemePad is here to bring order to the chaos of the memecoin space. With strict vetting procedures and built-in anti-rug protection, they're creating a secure, high-quality launchpad for the 'hottest memecoins on Solana and beyond' where degens can chase 100x moonshots with confidence.",
-  //     projectTokenSymbol: "$MPAD",
-  //     projectBigDescription: `
-  //     <div style="display: flex; flex-direction: column; gap: 15px;">
-  //       <p>MemePad is setting out to solve the trifecta of problems plaguing the memecoin space: low-quality projects, a lack of transparency from teams, and security risks. They do this by sourcing only top-quality projects with doxxed teams, subjecting them to rigorous due diligence, and launching them with built-in protection against rug pulls</p>
-  //       <p>Only top-tier memecoins are selected to join the MemeVerse (MemePad's line-up of launchpad alumni). To pass initial screening, a project has to have a strong long-term vision for the token growth, community, and utility.</p>
-  //       <p>MemePad also implements strict security procedures to keep your investments safe. We're talking audits, mandatory KYC, locked team tokens, and more. They will also run their own insurance funds, used to compensate the community in the unlikely event that a MemeVerse project is compromised and goes to zero.</p>
-  //       <p>$MPAD holders have the option to participate for the main token sales, or go in on exclusive early 'Ape In' rounds with cheaper prices and special bonuses.</p>
-  //       <p>And as a reward for participating on the platform, holders will also be getting regularly showered with airdrops sourced form MemePad's featured projects!</p>
-  //     </div>
-  // `,
-  //     price: 0.1,
-  //     allocation: 50_000,
-  //     date: 1723377600,
-  //     fcfs: 1723377600 + 86400 / 2,
-  //     investmentRound: "Private",
-  //     fdv: 6000000,
-  //     exchangeListingPrice: 0.6,
-  //     marketCapAtTGE: 182250,
-  //     socials: [
-  //       {
-  //         svg: globe,
-  //         href: "https://memepad.ai/",
-  //       },
-  //       {
-  //         svg: twitterX,
-  //         href: "https://twitter.com/MemePadSol",
-  //       },
-  //       {
-  //         svg: telegram,
-  //         href: "https://t.me/Memepad_Community",
-  //       },
-  //     ],
-  //     contract: "0x915Fd4218E1593129c9938a2117dc308632650e8",
-  //     abi: IDO_ABI,
-  //     images: [
-  //       "/IDOs/memepad/1.png",
-  //       "/IDOs/memepad/2.png",
-  //       "/IDOs/memepad/3.png",
-  //       "/IDOs/memepad/4.png",
-  //     ],
-  //   },
 ];
 
 export const IDO_LIST: IDO[] = [

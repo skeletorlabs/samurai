@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 
-import { IDO_v2 } from "@/app/utils/interfaces";
-import { NEW_IDOS } from "@/app/utils/constants";
+import { IDO_v3 } from "@/app/utils/interfaces";
+import { IDOs, NEW_IDOS } from "@/app/utils/constants";
 import IdoCard from "./idoCard";
 
 import LaunchpadCard from "@/app/components/launchpadCard";
@@ -18,10 +18,10 @@ export default function Projects({ max }: { max?: number }) {
       className={`flex justify-center lg:justify-start items-center flex-wrap gap-3 leading-normal pt-10 text-xl ${inter.className}`}
     >
       {max
-        ? NEW_IDOS.slice(0, max).map((ido: IDO_v2, index) => (
+        ? IDOs.slice(0, max).map((ido: IDO_v3, index) => (
             <IdoCard key={index} ido={ido} />
           ))
-        : NEW_IDOS.map((ido: IDO_v2, index) => (
+        : IDOs.map((ido: IDO_v3, index) => (
             <IdoCard key={index} ido={ido} />
 
             // ? IDO_LIST.slice(0, max).map((ido: IDO, index) => (

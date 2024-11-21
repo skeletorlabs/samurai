@@ -1,4 +1,4 @@
-import { IDO, IDO_v2 } from "@/app/utils/interfaces";
+import { IDO, IDO_v3 } from "@/app/utils/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { formattedDate } from "@/app/utils/formattedDate";
@@ -15,7 +15,7 @@ export default function IdoCard({
   ido,
   type = "dark",
 }: {
-  ido: IDO_v2;
+  ido: IDO_v3;
   type?: string;
 }) {
   const [phase, setPhase] = useState("");
