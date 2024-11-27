@@ -19,3 +19,21 @@ export function formattedDate3(timestamp: number) {
     " UTC"
   );
 }
+
+export function formattedDate4(timestamp: number) {
+  return format(
+    toZonedTime(fromUnixTime(timestamp), "UTC"),
+    "dd/MM/yyyy HH:mm"
+  );
+}
+
+export function formattedDate5(timestamp: number) {
+  return (
+    format(toZonedTime(fromUnixTime(timestamp), "UTC"), "MMM dd, yyyy HH:mm") +
+    " UTC"
+  );
+}
+
+export function convertDateToUnixTimestamp(date: Date) {
+  return Math.floor(date.getTime() / 1000);
+}

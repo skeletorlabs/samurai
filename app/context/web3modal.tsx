@@ -14,7 +14,7 @@ const projectId = "615362a649b8bf6fbed2f4694edf0e91";
 //   rpcUrl: "http://127.0.0.1:8545",
 // };
 
-const base = {
+export const base = {
   chainId: 8453,
   name: "Base",
   currency: "ETH",
