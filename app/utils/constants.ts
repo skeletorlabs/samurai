@@ -86,7 +86,7 @@ export const IDOs: IDO_v3[] = [
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "BASE",
     crowdsaleNetwork: "BASE",
-    networkImageSrc: "/chain-logos/Base_Symbol_Blue.svg",
+    networkImageSrc: "/chain-logos/BASE.svg",
     projectName: "DYOR",
     projectListDescription:
       "DYOR is an integrated 'Web3 command centre' for traders and developers, bringing the best aspects of centralized platforms on chain.",
@@ -149,7 +149,7 @@ export const IDO_LIST: IDO[] = [
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "Polygon",
     crowdsaleNetwork: "BASE",
-    networkImageSrc: "/chain-logos/polygon.svg",
+    networkImageSrc: "/chain-logos/POLYGON.svg",
     projectName: "EARN'M SmartNodes",
     projectListDescription:
       "A Web3 MobileFi rewards ecosystem that allows you to farm the deflationary $EARNM token as a SmartNode operator.",
@@ -230,7 +230,7 @@ export const IDO_LIST: IDO[] = [
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "Arbitrum",
     crowdsaleNetwork: "BASE",
-    networkImageSrc: "/chain-logos/arbitrum.svg",
+    networkImageSrc: "/chain-logos/ARBITRUM.svg",
     projectName: "XR One",
     projectListDescription:
       "An innovative PvP gaming-centric L3 chain, backed by Animoca Brands and the Arbitrum Foundation.",
@@ -478,7 +478,7 @@ export const IDO_LIST: IDO[] = [
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "Solana",
     crowdsaleNetwork: "BASE",
-    networkImageSrc: "/chain-logos/solana.svg",
+    networkImageSrc: "/chain-logos/SOLANA.svg",
     projectName: "MemePad",
     projectListDescription:
       "MemePad is set to become the number-one dedicated memecoin launchpad in crypto!",

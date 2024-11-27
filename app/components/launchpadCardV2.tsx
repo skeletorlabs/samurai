@@ -115,7 +115,7 @@ export default function LaunchpadCardV2({
         >
           <span className="text-sm">Crowdsale</span>
           <Image
-            src="/chain-logos/Base_Symbol_Blue.svg"
+            src="/chain-logos/BASE.svg"
             alt={ido.projectName}
             width={24}
             height={24}

@@ -208,7 +208,7 @@ export default function Ido() {
                   <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20  w-max">
                     <span className="text-sm">Crowdsale</span>
                     <Image
-                      src="/chain-logos/Base_Symbol_Blue.svg"
+                      src="/chain-logos/BASE.svg"
                       alt={ido?.projectName || ""}
                       width={24}
                       height={24}
