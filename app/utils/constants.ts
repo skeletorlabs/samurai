@@ -131,7 +131,7 @@ export const IDOs: IDO_v3[] = [
       },
       { svg: discord, href: "https://discord.gg/PWxkhnAd8A" },
     ],
-    contract: "0x7A046A361006FdF85B17F2d0B7e198272F8badb5",
+    contract: "0xf4801b6fE6B77F8C4e4fc2580D82f4E3E2a5aE09",
     abi: PARTICIPATOR_V2_2,
     register: true,
     vestingDescription: "30% TGE unlock, 1-month cliff, 5-month Linear vesting",
@@ -1222,5 +1222,6 @@ export const SAM_ADDRESS = "0xed1779845520339693CDBffec49a74246E7D671b";
 export const SAM_CLAIM_VESTING = "0xA6a638858C114Ad2e95BFD787b353EC2C70d78eF"; // BASE MAINNET
 
 // export const SAM_CLAIM_VESTING = "0xE42c1929612bBc03572C518bAf05c38147D5d67e"; // BASE SEPOLIA
-export const SAM_TIERS = "0x2Bb8Fc0196becd84bac853E32c9c252343699186";
+// export const SAM_TIERS = "0x2Bb8Fc0196becd84bac853E32c9c252343699186"; // Newest
+export const SAM_TIERS = "0x2Bb8Fc0196becd84bac853E32c9c252343699186"; // with MULTIPLIER
 export const POINTS = "0xDf0fDc572849f01CdaB35b80cA41Ce67051C8Dfe"; // BASE
