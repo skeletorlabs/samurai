@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import SSButton from "@/app/components/ssButton";
 import TopLayout from "@/app/components/topLayout";
 import Projects from "@/app/components/projects";
+import ProjectsV2 from "../components/projectsV2";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,6 +51,12 @@ export default function Launchpad() {
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Token</span> Offerings
+          </h2>
+          <ProjectsV2 />
+        </div>
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white mt-20">
+          <h2 className="text-4xl lg:text-5xl font-bold">
+            <span className="text-samurai-red">Past</span> Offerings
           </h2>
           <Projects />
         </div>

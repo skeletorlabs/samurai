@@ -1,4 +1,4 @@
-import { IDO } from "@/app/utils/interfaces";
+import { IDO, IDO_v3 } from "@/app/utils/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { formattedDate } from "@/app/utils/formattedDate";
@@ -7,15 +7,16 @@ import { getParticipationPhase } from "@/app/contracts_integrations/ido";
 import { getParticipationPhase as getParticipationPhaseNft } from "@/app/contracts_integrations/idoNFT";
 import { getParticipationPhase as getParticipationPhaseNftEth } from "../contracts_integrations/idoNFTETH";
 import { getParticipationPhase as getParticipationPhaseV2 } from "../contracts_integrations/idoV2";
+import { getParticipationPhase as getParticipationPhaseV3 } from "../contracts_integrations/idoV3";
 import { getParticipationPhase as getParticipationPhaseNftOpen } from "../contracts_integrations/idoNftOpen";
 import { getParticipationPhase as getParticipationPhaseNode } from "../contracts_integrations/idoNFTV2";
 import { useCallback, useEffect, useState } from "react";
 
-export default function LaunchpadCard({
+export default function LaunchpadCardV2({
   ido,
   type = "dark",
 }: {
-  ido: IDO;
+  ido: IDO_v3;
   type?: string;
 }) {
   const [phase, setPhase] = useState("");
@@ -28,6 +29,7 @@ export default function LaunchpadCard({
     const isNft = ido.type === "NFT";
     const isNftEth = ido.type === "NFT-ETH";
     const isV2 = ido.type === "v2";
+    const isV3 = ido.type === "v3";
     const isNftOpen = ido.type === "NFT-OPEN";
     const isNode = ido.type === "NODE";
     const phase = isNft
@@ -36,6 +38,8 @@ export default function LaunchpadCard({
       ? await getParticipationPhaseNftEth(contract)
       : isV2
       ? await getParticipationPhaseV2(contract)
+      : isV3
+      ? await getParticipationPhaseV3(0)
       : isNftOpen
       ? await getParticipationPhaseNftOpen(contract)
       : isNode
@@ -135,7 +139,7 @@ export default function LaunchpadCard({
             <>TBA</>
           ) : (
             <>
-              {ido.totalAllocation.toLocaleString("en-us")}{" "}
+              {ido.allocation.toLocaleString("en-us")}{" "}
               {ido.type == "NFT" ||
               ido.type === "NFT-ETH" ||
               ido.type === "NFT-OPEN" ||
@@ -164,9 +168,7 @@ export default function LaunchpadCard({
       <div className="flex justify-between items-center px-1 mt-4">
         <div className="flex flex-col">
           <span className="text-sm text-white/70">IDO DATE</span>
-          <span className="text-[16px]">
-            {formattedDate(ido.participationStartsAt)} UTC
-          </span>
+          <span className="text-[16px]">{formattedDate(ido.date)} UTC</span>
         </div>
       </div>
 
