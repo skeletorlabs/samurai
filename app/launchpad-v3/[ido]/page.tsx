@@ -338,7 +338,7 @@ export default function Ido() {
                   <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
                     <span className="text-sm">Project Tokens</span>
                     <Image
-                      src={ido!.idoImageSrc || ""}
+                      src={ido!.networkImageSrc || ""}
                       alt={ido!.tokenNetwork || ""}
                       width={24}
                       height={24}
