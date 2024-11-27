@@ -43,7 +43,6 @@ export type VESTING_GENERAL_INFO = {
 async function getContract(index: number, signer?: Signer) {
   try {
     const ido = IDOs[index];
-    console.log(ido);
     const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
 
     const contract = new ethers.Contract(
