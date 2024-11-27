@@ -165,13 +165,10 @@ export async function userInfo(
     const linkedWallet = await contract?.linkedWallets(signerAdress);
 
     let isWhitelisted = await contract?.whitelist(signerAdress);
-    // isWhitelisted = false;
 
     let allocation = Number(
       ethers.formatUnits(await contract?.allocations(signerAdress), 6)
     );
-
-    // allocation = 100;
 
     const acceptedToken = await contract?.acceptedTokens(0);
     const balanceEther = await signer.provider?.getBalance(signerAdress);
@@ -366,7 +363,6 @@ export async function updateRanges(
 }
 
 export async function getParticipationPhase(index: number) {
-  // return "Vesting";
   const ido = IDOs[index];
   const start = ido.date;
   const end = ido.end;
