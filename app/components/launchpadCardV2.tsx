@@ -99,7 +99,7 @@ export default function LaunchpadCardV2({
           <div className="flex items-center gap-2 bg-black/90 px-2 py-1 rounded-lg text-[14px] border border-white/20 absolute top-4 left-4">
             <span className="text-sm">Project Tokens</span>
             <Image
-              src={ido.networkImageSrc.toLocaleLowerCase()}
+              src={ido.networkImageSrc}
               alt={ido.tokenNetwork}
               width={24}
               height={24}
