@@ -61,7 +61,7 @@ export default function LaunchpadCardV2({
         type === "dark"
           ? "bg-black/30 hover:bg-black/20"
           : "bg-neutral-700 hover:bg-white/10"
-      }  w-full lg:max-w-[271px] 2xl:max-w-[400px] max-h-[840px] py-4 pb-5 shadow-xl transition-all hover:scale-[1.02] px-4`}
+      }  w-full lg:max-w-[341px] 2xl:max-w-[400px] max-h-[840px] py-4 pb-5 shadow-xl transition-all hover:scale-[1.02] px-4`}
     >
       <div className="flex w-full mb-4 relative">
         <div className="flex w-full h-[260px] relative">
