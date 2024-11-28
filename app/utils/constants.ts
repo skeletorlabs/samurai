@@ -149,7 +149,7 @@ export const IDO_LIST: IDO[] = [
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "Polygon",
     crowdsaleNetwork: "BASE",
-    networkImageSrc: "/chain-logos/POLYGON.svg",
+    networkImageSrc: "/chain-logos/ARBITRUM.svg",
     projectName: "EARN'M SmartNodes",
     projectListDescription:
       "A Web3 MobileFi rewards ecosystem that allows you to farm the deflationary $EARNM token as a SmartNode operator.",

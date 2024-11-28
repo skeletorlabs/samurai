@@ -13,7 +13,7 @@ import {
 } from "../contracts_integrations/vesting";
 import { IDO_v3 } from "../utils/interfaces";
 import { StateContext } from "../context/StateContext";
-import { Spinner, Tooltip } from "flowbite-react";
+import { Tooltip } from "flowbite-react";
 import { HiOutlineInformationCircle } from "react-icons/hi2";
 
 const inter = Inter({
@@ -291,11 +291,6 @@ export default function VestingBox({
               </div>
             </div>
           )}
-        </div>
-      )}
-      {!general && loading && (
-        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
-          <Spinner className="w-16 h-16" />
         </div>
       )}
     </div>
