@@ -1057,7 +1057,10 @@ export default function Ido() {
                     </div>
                   )}
 
-                  {isLoading && <LoadingBox />}
+                  {(!general ||
+                    !currentPhase ||
+                    (signer && !user) ||
+                    isLoading) && <LoadingBox />}
                 </div>
               </div>
               {/* {currentPhase && currentPhase !== "Completed" && (
