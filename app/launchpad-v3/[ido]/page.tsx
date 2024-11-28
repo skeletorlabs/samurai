@@ -71,11 +71,12 @@ export default function Ido() {
   const { signer, account } = useContext(StateContext);
 
   const { ido: idoID } = useParams();
-  // console.log(idoID);
 
   const ido = IDOs.find((item) => item.id === (idoID as string));
   const idoIndex = IDOs.findIndex((item) => item.id === (idoID as string));
   const bg = `url("${ido?.idoImageSrc}")`;
+
+  const now = getUnixTime(new Date());
 
   // ============================================================================================================
   // ADMIN FUNCTIONS
@@ -618,7 +619,8 @@ export default function Ido() {
 
                       {signer &&
                         account &&
-                        (currentPhase?.toLocaleLowerCase() === "registration" ||
+                        ((currentPhase?.toLocaleLowerCase() === "upcoming" &&
+                          now > ido.date - 86400) ||
                           currentPhase?.toLocaleLowerCase() ===
                             "participation") && (
                           <>

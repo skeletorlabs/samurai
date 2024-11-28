@@ -29,10 +29,6 @@ async function getContract(index: number, signer?: ethers.Signer) {
     const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const contractAddress = ido.contract;
 
-    // console.log(ido.abi === LATEST_PARTICIPATOR_TOKENS_ABI);
-    // console.log(ido.contract === "0x7A046A361006FdF85B17F2d0B7e198272F8badb5");
-    // console.log(ido);
-
     const contract = new ethers.Contract(
       contractAddress,
       ido.abi,
@@ -61,26 +57,19 @@ export async function generalInfo(index: number) {
   try {
     const contract = await getContract(index);
     const ido = IDOs[index];
-
     const owner = await contract?.owner();
-    // console.log(1);
     const isPublic = await contract?.isPublic();
-    // console.log(2);
     const acceptedToken = await contract?.acceptedTokens(0);
-    // console.log(3);
     const isPaused = await contract?.paused();
-    // console.log(4);
-    // const isPaused = false;
+
     const maxAllocations = Number(
       ethers.formatUnits(await contract?.maxAllocations(), 6)
     );
-    // console.log(5);
 
     const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
-    // console.log(6);
 
     const rangesLength = Number(await contract?.rangesLength());
-    // console.log(7);
+
     const usingETH = ido.ether ? await contract?.usingETH() : false;
 
     const ranges: WalletRange[] = [];
@@ -98,14 +87,11 @@ export async function generalInfo(index: number) {
       };
       ranges.push(walletRange);
     }
-    // console.log(8);
 
     let usingLinkedWallet = false;
     if (ido.linkedWallet) {
       usingLinkedWallet = await contract?.usingLinkedWallet();
     }
-
-    // console.log(9);
 
     return {
       owner,
