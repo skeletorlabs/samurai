@@ -608,10 +608,10 @@ export default function Ido() {
                             <span className="text-neutral-600">Raised:</span>
                             <p className="text-white/70">
                               $
-                              {/* {Number(general?.raised | 0).toLocaleString(
+                              {Number(general?.raised | 0).toLocaleString(
                                 "en-us"
-                              )}{" "} */}
-                              0 {ido?.acceptedTokenSymbol}
+                              )}{" "}
+                              {ido?.acceptedTokenSymbol}
                             </p>
                           </div>
                         )}
