@@ -104,7 +104,7 @@ export const IDOs: IDO_v3[] = [
     </div>
 `,
     price: 0.0105,
-    tge: 15,
+    tge: 30,
     allocation: 100_000,
     date: 1732795200,
     fcfs: 0,
