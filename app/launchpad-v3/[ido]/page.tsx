@@ -1065,12 +1065,12 @@ export default function Ido() {
                     isLoading) && <LoadingBox />}
                 </div>
               </div>
-              {/* {currentPhase && currentPhase !== "Completed" && (
+              {currentPhase && currentPhase !== "Completed" && (
                 <IdoAllocationProgress
                   maxAllocations={general?.maxAllocations || 0}
                   raised={general?.raised || 0}
                 />
-              )} */}
+              )}
             </div>
           </div>
         </div>
