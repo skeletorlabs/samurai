@@ -150,9 +150,9 @@ export async function userInfo(
     const walletRange = parseWalletRange(range, usingETH ? 18 : 6);
     const linkedWallet = await contract?.linkedWallets(signerAddress);
 
-    let isWhitelisted = await contract?.whitelist(signerAddress);
+    const isWhitelisted = await contract?.whitelist(signerAddress);
 
-    let allocation = Number(
+    const allocation = Number(
       ethers.formatUnits(await contract?.allocations(signerAddress), 6)
     );
 

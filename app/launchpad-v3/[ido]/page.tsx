@@ -51,6 +51,7 @@ import {
 import AdminRanges from "@/app/components/adminRanges";
 import VestingBox from "@/app/components/vestingBox";
 import LoadingBox from "@/app/components/loadingBox";
+import { getMax } from "@/app/utils/max";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -122,6 +123,13 @@ export default function Ido() {
   // ============================================================================================================
   // USER ACTIONS
   // ============================================================================================================
+
+  const onGetMax = useCallback(() => {
+    const { allocation, balanceToken } = user;
+    const { minPerWallet, maxPerWallet } = user.walletRange;
+
+    return getMax(balanceToken, allocation, minPerWallet, maxPerWallet);
+  }, [user]);
 
   const onImageClick = useCallback(
     async (image: string) => {
@@ -834,18 +842,26 @@ export default function Ido() {
                                 })}{" "}
                                 {TOKENS_TO_SYMBOL[selectedToken]}
                               </span>
-                              <button
-                                onClick={() =>
-                                  onInputChange(user.balanceToken.toString())
-                                }
-                                className="self-end text-[10px] lg:text-sm mb-1 hover:text-samurai-red mr-1"
-                              >
-                                BALANCE:{" "}
-                                {Number(user.balanceToken).toLocaleString(
-                                  "en-us"
-                                )}{" "}
-                                {TOKENS_TO_SYMBOL[selectedToken]}
-                              </button>
+                              <div className="flex items-center gap-2">
+                                <button
+                                  onClick={() => onInputChange(onGetMax())}
+                                  className="text-[10px] mb-1 bg-samurai-red rounded-full px-2 py-[1px]"
+                                >
+                                  MAX
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    onInputChange(user.balanceToken.toString())
+                                  }
+                                  className="self-end text-[10px] lg:text-sm mb-1 hover:text-samurai-red mr-1"
+                                >
+                                  BALANCE:{" "}
+                                  {Number(user.balanceToken).toLocaleString(
+                                    "en-us"
+                                  )}{" "}
+                                  {TOKENS_TO_SYMBOL[selectedToken]}
+                                </button>
+                              </div>
                             </div>
 
                             <div className="relative">
