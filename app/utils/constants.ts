@@ -109,7 +109,7 @@ export const IDOs: IDO_v3[] = [
     date: 1732795200,
     fcfs: 0,
     end: 1732795200 + 86400 * 2,
-    investmentRound: "Round 1",
+    investmentRound: "Round 2",
     fdv: 10_500_000,
     exchangeListingPrice: 0.0105,
     marketCapAtTGE: 1_249_000,
