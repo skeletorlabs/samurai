@@ -975,80 +975,86 @@ export default function Ido() {
                         />
                       ) : (
                         <>
-                          {currentPhase?.toLowerCase() === "participation" &&
-                            user?.allocation > 0 && (
-                              <div className="flex flex-col justify-between w-full h-full">
-                                <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap">
-                                  <span>Allocation</span>
+                          {(currentPhase?.toLowerCase() === "participation" &&
+                            user?.allocation > 0) ||
+                            (currentPhase?.toLowerCase() === "vesting" &&
+                              user?.allocation > 0 &&
+                              !ido?.vesting && (
+                                <div className="flex flex-col justify-between w-full h-full">
+                                  <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap">
+                                    <span>Allocation</span>
+                                  </div>
+
+                                  <div className="flex justify-between items-center gap-y-5 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap text-center lg:text-start mt-2">
+                                    <div className="flex flex-col">
+                                      <p className={`${inter.className}`}>
+                                        My Allocation
+                                      </p>
+                                      <p className="text-samurai-red w-max font-bold">
+                                        $
+                                        {user.allocation.toLocaleString(
+                                          "en-us",
+                                          {
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2,
+                                          }
+                                        )}
+                                      </p>
+                                    </div>
+                                    <div className="flex flex-col">
+                                      <p className={`${inter.className}`}>
+                                        Tokens to receive
+                                      </p>
+                                      <p className="text-samurai-red w-max font-bold">
+                                        {(
+                                          Number(user?.allocation) /
+                                          Number(ido.price)
+                                        )?.toLocaleString("en-us", {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                        })}{" "}
+                                        {ido.projectTokenSymbol}
+                                      </p>
+                                    </div>
+
+                                    <div className="flex flex-col">
+                                      <p className={`${inter.className}`}>
+                                        {ido.tge}% TGE Release
+                                      </p>
+                                      <p className="text-samurai-red w-max font-bold">
+                                        {(
+                                          ((Number(user?.allocation) /
+                                            Number(ido.price)) *
+                                            ido.tge) /
+                                          100
+                                        ).toLocaleString("en-us", {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                        })}{" "}
+                                        {ido.projectTokenSymbol}
+                                      </p>
+                                    </div>
+
+                                    <div className="flex flex-col">
+                                      <p className={`${inter.className}`}>
+                                        {100 - ido.tge}% Vesting Release
+                                      </p>
+                                      <p className="text-samurai-red w-max font-bold">
+                                        {(
+                                          ((Number(user?.allocation) /
+                                            Number(ido.price)) *
+                                            (100 - ido.tge)) /
+                                          100
+                                        ).toLocaleString("en-us", {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                        })}{" "}
+                                        {ido.projectTokenSymbol}
+                                      </p>
+                                    </div>
+                                  </div>
                                 </div>
-
-                                <div className="flex justify-between items-center gap-y-5 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap text-center lg:text-start mt-2">
-                                  <div className="flex flex-col">
-                                    <p className={`${inter.className}`}>
-                                      My Allocation
-                                    </p>
-                                    <p className="text-samurai-red w-max font-bold">
-                                      $
-                                      {user.allocation.toLocaleString("en-us", {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                      })}
-                                    </p>
-                                  </div>
-                                  <div className="flex flex-col">
-                                    <p className={`${inter.className}`}>
-                                      Tokens to receive
-                                    </p>
-                                    <p className="text-samurai-red w-max font-bold">
-                                      {(
-                                        Number(user?.allocation) /
-                                        Number(ido.price)
-                                      )?.toLocaleString("en-us", {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                      })}{" "}
-                                      {ido.projectTokenSymbol}
-                                    </p>
-                                  </div>
-
-                                  <div className="flex flex-col">
-                                    <p className={`${inter.className}`}>
-                                      {ido.tge}% TGE Release
-                                    </p>
-                                    <p className="text-samurai-red w-max font-bold">
-                                      {(
-                                        ((Number(user?.allocation) /
-                                          Number(ido.price)) *
-                                          ido.tge) /
-                                        100
-                                      ).toLocaleString("en-us", {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                      })}{" "}
-                                      {ido.projectTokenSymbol}
-                                    </p>
-                                  </div>
-
-                                  <div className="flex flex-col">
-                                    <p className={`${inter.className}`}>
-                                      {100 - ido.tge}% Vesting Release
-                                    </p>
-                                    <p className="text-samurai-red w-max font-bold">
-                                      {(
-                                        ((Number(user?.allocation) /
-                                          Number(ido.price)) *
-                                          (100 - ido.tge)) /
-                                        100
-                                      ).toLocaleString("en-us", {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                      })}{" "}
-                                      {ido.projectTokenSymbol}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            )}
+                              ))}
                           <div className="text-xl text-white/80  leading-normal">
                             <p className="text-samurai-red text-[16px]">
                               Token distribution:

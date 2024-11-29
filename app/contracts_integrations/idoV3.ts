@@ -127,7 +127,7 @@ export async function userInfo(
 ) {
   try {
     const ido = IDOs[index];
-    const signerAdress = await signer.getAddress();
+    const signerAddress = await signer.getAddress();
     const contract = await getContract(index, signer);
     const usingETH = ido.ether ? await contract?.usingETH() : false;
 
@@ -148,19 +148,19 @@ export async function userInfo(
         : ranges.find((item) => item[0].toString() === tierName);
 
     const walletRange = parseWalletRange(range, usingETH ? 18 : 6);
-    const linkedWallet = await contract?.linkedWallets(signerAdress);
+    const linkedWallet = await contract?.linkedWallets(signerAddress);
 
-    let isWhitelisted = await contract?.whitelist(signerAdress);
+    let isWhitelisted = await contract?.whitelist(signerAddress);
 
     let allocation = Number(
-      ethers.formatUnits(await contract?.allocations(signerAdress), 6)
+      ethers.formatUnits(await contract?.allocations(signerAddress), 6)
     );
 
     const acceptedToken = await contract?.acceptedTokens(0);
-    const balanceEther = await signer.provider?.getBalance(signerAdress);
+    const balanceEther = await signer.provider?.getBalance(signerAddress);
     const balanceToken = Number(
       ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken, signerAdress, signer),
+        await balanceOf(ERC20_ABI, acceptedToken, signerAddress, signer),
         6
       )
     );
