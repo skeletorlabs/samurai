@@ -7,6 +7,8 @@ import SSButton from "@/app/components/ssButton";
 import TopLayout from "@/app/components/topLayout";
 import { StateContext } from "@/app/context/StateContext";
 import Projects from "@/app/components/projects";
+import ProjectsV2 from "./components/projectsV2";
+import ProjectsHome from "./components/projectsHome"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -106,7 +108,6 @@ export default function Home() {
                 <SSButton isLink href="/incubation" flexSize>
                   For Projects
                 </SSButton>
-         
               </div>
             </div>
           </div>
@@ -224,7 +225,7 @@ export default function Home() {
             →
           </Link>
         </div>
-        <Projects max={4} />
+        <ProjectsHome maxV2={1} max={3} />
         <Link
           href="/launchpad"
           className={`absolute right-6 bottom-5 md:right-20 flex justify-end items-center self-end w-max mt-8 text-md text-white hover:text-samurai-red font-light ${inter.className}`}

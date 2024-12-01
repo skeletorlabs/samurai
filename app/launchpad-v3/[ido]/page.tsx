@@ -8,11 +8,16 @@ import { useParams } from "next/navigation";
 import { Carousel } from "flowbite-react";
 
 import {
-  IDO_LIST,
+  IDOs,
   TOKENS_TO_SYMBOL,
   simplifiedPhasesV2,
+  simplifiedPhasesV3,
 } from "@/app/utils/constants";
-import { formattedDate, formattedDateSimple } from "@/app/utils/formattedDate";
+import {
+  formattedDate,
+  formattedDate5,
+  formattedDateSimple,
+} from "@/app/utils/formattedDate";
 import {
   discord,
   paste,
@@ -33,7 +38,7 @@ import {
   togglePause,
   userInfo,
   withdraw,
-} from "@/app/contracts_integrations/idoV2";
+} from "@/app/contracts_integrations/idoV3";
 import IdoAllocationProgress from "@/app/components/idoAllocationProgress";
 import { Tier, getTier } from "@/app/contracts_integrations/tiers";
 import { getUnixTime } from "date-fns";
@@ -44,6 +49,9 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import AdminRanges from "@/app/components/adminRanges";
+import VestingBox from "@/app/components/vestingBox";
+import LoadingBox from "@/app/components/loadingBox";
+import { getMax } from "@/app/utils/max";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -64,11 +72,12 @@ export default function Ido() {
   const { signer, account } = useContext(StateContext);
 
   const { ido: idoID } = useParams();
-  console.log(idoID);
 
-  const ido = IDO_LIST.find((item) => item.id === (idoID as string));
-  const idoIndex = IDO_LIST.findIndex((item) => item.id === (idoID as string));
+  const ido = IDOs.find((item) => item.id === (idoID as string));
+  const idoIndex = IDOs.findIndex((item) => item.id === (idoID as string));
   const bg = `url("${ido?.idoImageSrc}")`;
+
+  const now = getUnixTime(new Date());
 
   // ============================================================================================================
   // ADMIN FUNCTIONS
@@ -114,6 +123,13 @@ export default function Ido() {
   // ============================================================================================================
   // USER ACTIONS
   // ============================================================================================================
+
+  const onGetMax = useCallback(() => {
+    const { allocation, balanceToken } = user;
+    const { minPerWallet, maxPerWallet } = user.walletRange;
+
+    return getMax(balanceToken, allocation, minPerWallet, maxPerWallet);
+  }, [user]);
 
   const onImageClick = useCallback(
     async (image: string) => {
@@ -207,11 +223,13 @@ export default function Ido() {
   // ============================================================================================================
 
   const getUserInfos = useCallback(async () => {
+    setIsLoading(true);
     if (signer && tier) {
       const response = await userInfo(idoIndex, signer, tier.name);
       setUser(response);
     }
-  }, [signer, idoIndex, tier]);
+    setIsLoading(false);
+  }, [signer, idoIndex, tier, setIsLoading]);
 
   const getTierInfos = useCallback(async () => {
     if (signer) {
@@ -235,6 +253,7 @@ export default function Ido() {
   // ============================================================================================================
 
   const getGeneralData = useCallback(async () => {
+    setIsLoading(true);
     if (idoIndex !== -1) {
       const response = await generalInfo(idoIndex);
       setGeneral(response);
@@ -245,7 +264,8 @@ export default function Ido() {
       const phase = await getParticipationPhase(idoIndex);
       setCurrentPhase(phase);
     }
-  }, [idoIndex, selectedToken, setCurrentPhase]);
+    setIsLoading(false);
+  }, [idoIndex, selectedToken, setCurrentPhase, setIsLoading]);
 
   // const onFetchEvents = useCallback(async () => {
   //   await getLinkedWallets();
@@ -410,12 +430,11 @@ export default function Ido() {
 
             <div className="flex flex-col xl:pr-[32px] 2xl:pr-28 gap-5 mt-10 xl:mt-0 mx-3 xl:mx-0">
               <div className="flex flex-col">
-                <div className="flex flex-col w-full xl:w-[550px] rounded-lg bg-black/70 bg-samurai-pattern pb-6 shadow-xl lg:border border-white/20 mt-10">
+                <div className="flex flex-col w-full xl:w-[700px] rounded-lg bg-black/70 bg-samurai-pattern pb-6 shadow-xl lg:border border-white/20 mt-10 relative">
                   <div className="flex justify-between items-center text-lg xl:text-xl bg-samurai-red border-b border-white/20 px-7 py-4 rounded-t-lg text-white">
                     <span>
-                      {general?.isPublic && ido?.id !== "kvants"
-                        ? "FCFS Round"
-                        : ido?.investmentRound}
+                      {/* {general?.isPublic ? "FCFS Round" : ido?.investmentRound} */}
+                      {ido?.investmentRound}
                     </span>
                     {/* TIER */}
                     {signer && account && (
@@ -430,45 +449,44 @@ export default function Ido() {
                     )}
                   </div>
                   <div className="hidden md:flex flex-row mt-6 bg-black-900/90 rounded-lg border border-white/20 mx-4 xl:mx-6">
-                    {ido?.simplified &&
-                      simplifiedPhasesV2.map((phase, index) => (
-                        <Fragment key={index}>
-                          {index !== 0 && (
-                            <svg
-                              data-slot="icon"
-                              fill="none"
-                              strokeWidth="4"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                              aria-hidden="true"
-                              className="w-2 md:w-3 text-white/40 stroke-white/40"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                              ></path>
-                            </svg>
-                          )}
-                          <button
-                            disabled
-                            className={`p-2 flex-1 text-md ${
-                              phase.title === currentPhase
-                                ? "text-samurai-red"
-                                : "text-white/40"
-                            }`}
+                    {simplifiedPhasesV3.map((phase, index) => (
+                      <Fragment key={index}>
+                        {index !== 0 && (
+                          <svg
+                            data-slot="icon"
+                            fill="none"
+                            strokeWidth="4"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            className="w-2 md:w-3 text-white/40 stroke-white/40"
                           >
-                            {phase.title}
-                          </button>
-                        </Fragment>
-                      ))}
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                            ></path>
+                          </svg>
+                        )}
+                        <button
+                          disabled
+                          className={`p-2 flex-1 text-md ${
+                            phase.title === currentPhase
+                              ? "text-samurai-red"
+                              : "text-white/40"
+                          }`}
+                        >
+                          {phase.title}
+                        </button>
+                      </Fragment>
+                    ))}
                   </div>
 
                   {ido && (
                     <div className="flex flex-col gap-10 px-5 md:px-6">
                       {/* PARTICIPATION PHASE BLOCK */}
-                      <div className="grid grid-cols-2 md:grid-cols-3 items-center flex-wrap mt-6 text-sm">
+                      <div className="grid grid-cols-2 md:grid-cols-3 items-center flex-wrap mt-6 text-sm bg-white/5 rounded-md p-2">
                         <div className="flex md:hidden flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">
                             Current Phase:
@@ -478,89 +496,36 @@ export default function Ido() {
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">IDO Start:</span>
                           <p className="text-white/70">
-                            {formattedDate(ido.participationStartsAt)} UTC
+                            {formattedDate(ido.date)} UTC
                           </p>
                         </div>
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">IDO End:</span>
                           <p className="text-white/70">
-                            {formattedDate(ido.participationEndsAt)} UTC
+                            {formattedDate(ido.fcfs > 0 ? ido.fcfs : ido.end)}{" "}
+                            UTC
                           </p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                        <div
+                          className={`${
+                            ido.fcfs > 0 ? "flex" : "hidden"
+                          } flex-col py-2 px-2 rounded-md w-max`}
+                        >
                           <span className="text-neutral-600">FCFS Start:</span>
                           <p className="text-white/70">
-                            {formattedDate(ido.publicParticipationStartsAt)} UTC
+                            {formattedDate(ido.fcfs)} UTC
                           </p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                        <div
+                          className={`${
+                            ido.fcfs > 0 ? "flex" : "hidden"
+                          }  flex-col py-2 px-2 rounded-md w-max`}
+                        >
                           <span className="text-neutral-600">FCFS End:</span>
                           <p className="text-white/70">
-                            {formattedDate(ido.publicParticipationEndsAt)} UTC
+                            {formattedDate(ido.end)} UTC
                           </p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                          <span className="text-neutral-600">TGE Date:</span>
-                          <p className="text-white/70">
-                            {ido.tgeDate === 0
-                              ? "TBA"
-                              : formattedDateSimple(ido.tgeDate)}
-                          </p>
-                        </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                          <span className="text-neutral-600">
-                            Token Symbol:
-                          </span>
-                          <p className="text-white/70">
-                            {ido.projectTokenSymbol}
-                          </p>
-                        </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                          <span className="text-neutral-600">Token Price:</span>
-                          <p className="text-white/70">
-                            ${ido.price} {ido.acceptedTokenSymbol}
-                          </p>
-                        </div>
-
-                        {signer && account && (
-                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                            <span className="text-neutral-600">Min:</span>
-                            <p className="text-white/70">
-                              $
-                              {Number(
-                                user?.walletRange?.minPerWallet | 0
-                              ).toLocaleString("en-us")}{" "}
-                              {ido?.acceptedTokenSymbol}
-                            </p>
-                          </div>
-                        )}
-
-                        {signer && account && (
-                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                            <span className="text-neutral-600">Max:</span>
-                            <p className="text-white/70">
-                              $
-                              {Number(
-                                user?.walletRange?.maxPerWallet | 0
-                              ).toLocaleString("en-us")}{" "}
-                              {ido?.acceptedTokenSymbol}
-                            </p>
-                          </div>
-                        )}
-
-                        {currentPhase && currentPhase !== "Completed" && (
-                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                            <span className="text-neutral-600">Raised:</span>
-                            <p className="text-white/70">
-                              $
-                              {Number(general?.raised | 0).toLocaleString(
-                                "en-us"
-                              )}{" "}
-                              {ido?.acceptedTokenSymbol}
-                            </p>
-                          </div>
-                        )}
-
                         {signer && account && (
                           <>
                             <div className="flex flex-col py-2 px-2 rounded-md w-max">
@@ -601,11 +566,70 @@ export default function Ido() {
                             )}
                           </>
                         )}
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">
+                            Token Symbol:
+                          </span>
+                          <p className="text-white/70">
+                            {ido.projectTokenSymbol}
+                          </p>
+                        </div>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">Token Price:</span>
+                          <p className="text-white/70">
+                            ${ido.price} {ido.acceptedTokenSymbol}
+                          </p>
+                        </div>
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">Currency:</span>
+                          <p className="text-white/70">
+                            {ido.acceptedTokenSymbol} on {ido.tokenNetwork}
+                          </p>
+                        </div>
+                        {signer && account && (
+                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                            <span className="text-neutral-600">Min:</span>
+                            <p className="text-white/70">
+                              $
+                              {Number(
+                                user?.walletRange?.minPerWallet | 0
+                              ).toLocaleString("en-us")}{" "}
+                              {ido?.acceptedTokenSymbol}
+                            </p>
+                          </div>
+                        )}
+
+                        {signer && account && (
+                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                            <span className="text-neutral-600">Max:</span>
+                            <p className="text-white/70">
+                              $
+                              {Number(
+                                user?.walletRange?.maxPerWallet | 0
+                              ).toLocaleString("en-us")}{" "}
+                              {ido?.acceptedTokenSymbol}
+                            </p>
+                          </div>
+                        )}
+
+                        {currentPhase && currentPhase !== "Completed" && (
+                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                            <span className="text-neutral-600">Raised:</span>
+                            <p className="text-white/70">
+                              $
+                              {Number(general?.raised | 0).toLocaleString(
+                                "en-us"
+                              )}{" "}
+                              {ido?.acceptedTokenSymbol}
+                            </p>
+                          </div>
+                        )}
                       </div>
 
                       {signer &&
                         account &&
-                        (currentPhase?.toLocaleLowerCase() === "registration" ||
+                        ((currentPhase?.toLocaleLowerCase() === "upcoming" &&
+                          now > ido.date - 86400) ||
                           currentPhase?.toLocaleLowerCase() ===
                             "participation") && (
                           <>
@@ -818,18 +842,26 @@ export default function Ido() {
                                 })}{" "}
                                 {TOKENS_TO_SYMBOL[selectedToken]}
                               </span>
-                              <button
-                                onClick={() =>
-                                  onInputChange(user.balanceToken.toString())
-                                }
-                                className="self-end text-[10px] lg:text-sm mb-1 hover:text-samurai-red mr-1"
-                              >
-                                BALANCE:{" "}
-                                {Number(user.balanceToken).toLocaleString(
-                                  "en-us"
-                                )}{" "}
-                                {TOKENS_TO_SYMBOL[selectedToken]}
-                              </button>
+                              <div className="flex items-center gap-2">
+                                <button
+                                  onClick={() => onInputChange(onGetMax())}
+                                  className="text-[10px] mb-1 bg-samurai-red rounded-full px-2 py-[1px]"
+                                >
+                                  MAX
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    onInputChange(user.balanceToken.toString())
+                                  }
+                                  className="self-end text-[10px] lg:text-sm mb-1 hover:text-samurai-red mr-1"
+                                >
+                                  BALANCE:{" "}
+                                  {Number(user.balanceToken).toLocaleString(
+                                    "en-us"
+                                  )}{" "}
+                                  {TOKENS_TO_SYMBOL[selectedToken]}
+                                </button>
+                              </div>
                             </div>
 
                             <div className="relative">
@@ -894,11 +926,12 @@ export default function Ido() {
                           </div>
                         )}
 
-                      {(currentPhase?.toLowerCase() === "participation" ||
+                      {/* {(currentPhase?.toLowerCase() === "participation" ||
+                        currentPhase?.toLowerCase() === "vesting" ||
                         currentPhase?.toLowerCase() === "completed") &&
                         user?.allocation > 0 && (
-                          <div className="flex flex-row justify-between items-center flex-wrap gap-4">
-                            <div className="p-3 border border-white/20 rounded-[8px] w-full xl:w-[230px]">
+                          <div className="flex flex-row items-center justify-between flex-wrap pt-5 border-t border-white/20">
+                            <div className="p-3 w-full xl:w-[210px]">
                               <p className={`text-sm ${inter.className}`}>
                                 MY ALLOCATION
                               </p>
@@ -911,7 +944,7 @@ export default function Ido() {
                               </p>
                             </div>
 
-                            <div className="p-3 border border-white/20 rounded-[8px] w-full xl:w-[230px]">
+                            <div className="p-3 w-full xl:w-[210px]">
                               <p className={`text-sm ${inter.className}`}>
                                 TOKENS TO RECEIVE
                               </p>
@@ -925,32 +958,15 @@ export default function Ido() {
                                 {ido.projectTokenSymbol}
                               </p>
                             </div>
-                            <div className="p-3 border border-white/20 rounded-[8px] w-full xl:w-[230px]">
+                            <div className="p-3 w-full xl:w-[210px]">
                               <p className={`text-sm ${inter.className}`}>
-                                {ido.tgePercentage}% TGE RELEASE
+                                {ido.tge}% TGE RELEASE
                               </p>
                               <p className="text-xl text-samurai-red">
                                 {(
                                   ((Number(user?.allocation) /
                                     Number(ido.price)) *
-                                    ido.tgePercentage) /
-                                  100
-                                ).toLocaleString("en-us", {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                })}{" "}
-                                {ido.projectTokenSymbol}
-                              </p>
-                            </div>
-                            <div className="p-3 border border-white/20 rounded-[8px] w-full xl:w-[230px]">
-                              <p className={`text-sm ${inter.className}`}>
-                                {100 - ido.tgePercentage}% VESTING RELEASE
-                              </p>
-                              <p className="text-xl text-samurai-red">
-                                {(
-                                  ((Number(user?.allocation) /
-                                    Number(ido.price)) *
-                                    (100 - ido.tgePercentage)) /
+                                    ido.tge) /
                                   100
                                 ).toLocaleString("en-us", {
                                   minimumFractionDigits: 2,
@@ -960,22 +976,116 @@ export default function Ido() {
                               </p>
                             </div>
                           </div>
-                        )}
+                        )} */}
 
-                      {/* TGE PHASE BLOCK */}
+                      {/* VESTING */}
                       {currentPhase &&
-                        currentPhase?.toLowerCase() === "completed" && (
-                          <>
-                            <div className="text-xl text-white/80 pt-5 border-t border-white/20 leading-normal">
-                              <p className="text-samurai-red text-[16px]">
-                                Token distribution:
-                              </p>
-                              TBA
-                            </div>
-                          </>
-                        )}
+                      currentPhase?.toLowerCase() === "vesting" &&
+                      ido.vesting ? (
+                        <VestingBox
+                          ido={ido}
+                          idoIndex={idoIndex}
+                          loading={isLoading}
+                          setLoading={setIsLoading}
+                          allocation={user?.allocation}
+                        />
+                      ) : (
+                        <>
+                          {(currentPhase?.toLowerCase() === "participation" &&
+                            user?.allocation > 0) ||
+                            (currentPhase?.toLowerCase() === "vesting" &&
+                              user?.allocation > 0 &&
+                              !ido?.vesting && (
+                                <div className="flex flex-col justify-between w-full h-full">
+                                  <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap">
+                                    <span>Allocation</span>
+                                  </div>
+
+                                  <div className="flex justify-between items-center gap-y-5 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap text-center lg:text-start mt-2">
+                                    <div className="flex flex-col">
+                                      <p className={`${inter.className}`}>
+                                        My Allocation
+                                      </p>
+                                      <p className="text-samurai-red w-max font-bold">
+                                        $
+                                        {user.allocation.toLocaleString(
+                                          "en-us",
+                                          {
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2,
+                                          }
+                                        )}
+                                      </p>
+                                    </div>
+                                    <div className="flex flex-col">
+                                      <p className={`${inter.className}`}>
+                                        Tokens to receive
+                                      </p>
+                                      <p className="text-samurai-red w-max font-bold">
+                                        {(
+                                          Number(user?.allocation) /
+                                          Number(ido.price)
+                                        )?.toLocaleString("en-us", {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                        })}{" "}
+                                        {ido.projectTokenSymbol}
+                                      </p>
+                                    </div>
+
+                                    <div className="flex flex-col">
+                                      <p className={`${inter.className}`}>
+                                        {ido.tge}% TGE Release
+                                      </p>
+                                      <p className="text-samurai-red w-max font-bold">
+                                        {(
+                                          ((Number(user?.allocation) /
+                                            Number(ido.price)) *
+                                            ido.tge) /
+                                          100
+                                        ).toLocaleString("en-us", {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                        })}{" "}
+                                        {ido.projectTokenSymbol}
+                                      </p>
+                                    </div>
+
+                                    <div className="flex flex-col">
+                                      <p className={`${inter.className}`}>
+                                        {100 - ido.tge}% Vesting Release
+                                      </p>
+                                      <p className="text-samurai-red w-max font-bold">
+                                        {(
+                                          ((Number(user?.allocation) /
+                                            Number(ido.price)) *
+                                            (100 - ido.tge)) /
+                                          100
+                                        ).toLocaleString("en-us", {
+                                          minimumFractionDigits: 2,
+                                          maximumFractionDigits: 2,
+                                        })}{" "}
+                                        {ido.projectTokenSymbol}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                          <div className="text-xl text-white/80  leading-normal">
+                            <p className="text-samurai-red text-[16px]">
+                              Token distribution:
+                            </p>
+                            TBA
+                          </div>
+                        </>
+                      )}
                     </div>
                   )}
+
+                  {(!general ||
+                    !currentPhase ||
+                    (signer && !user) ||
+                    isLoading) && <LoadingBox />}
                 </div>
               </div>
               {currentPhase && currentPhase !== "Completed" && (
@@ -1041,15 +1151,12 @@ export default function Ido() {
 
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md lg:w-max lg:border border-white/10 text-sm lg:text-lg">
                   <span className="text-samurai-red">Vesting:</span>
-                  <p className="text-white/70">{ido.vesting}</p>
+                  <p className="text-white/70">{ido.vestingDescription}</p>
                 </div>
 
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
                   <span className="text-samurai-red">Dex Screener:</span>
-                  <p className="text-white/70">
-                    TBA
-                    {/* <Link href="#">{"https://somelink".toUpperCase()}</Link> */}
-                  </p>
+                  <p className="text-white/70">TBA</p>
                 </div>
               </div>
             </div>
@@ -1057,7 +1164,7 @@ export default function Ido() {
               <div
                 className={`flex w-full xl:text-[16px] xl:leading-[1.70rem] 2xl:text-[20px] 2xl:leading-[2rem] text-gray-300 ${inter.className}`}
                 dangerouslySetInnerHTML={{
-                  __html: ido.bigDescription as string,
+                  __html: ido.projectBigDescription as string,
                 }}
               />
             </div>

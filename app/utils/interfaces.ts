@@ -166,3 +166,47 @@ export interface IDO {
   type?: string;
   vestingContract?: string;
 }
+
+export interface IDO_v3 {
+  id: string;
+  url: string;
+  logo: ReactNode;
+  idoImageSrc: string;
+  acceptedTokenSymbol: string;
+  tokenNetwork: string;
+  crowdsaleNetwork: string;
+  networkImageSrc: string;
+  projectName: string;
+  projectListDescription: string;
+  projectDescription: string;
+  projectTokenSymbol: string;
+  projectBigDescription: ReactNode;
+  investmentRound: string;
+  price: number;
+  tge: number;
+  // tgeDate: number;
+  allocation: number;
+  date: number;
+  fcfs: number;
+  end: number;
+  fdv: number;
+  exchangeListingPrice: number;
+  marketCapAtTGE: number;
+  socials: IDO_SOCIAL[];
+  contract: string;
+  abi: any;
+  images?: string[];
+  register?: boolean;
+  vestingDescription: string;
+  vesting?: string;
+  vestingChain?: {
+    rpcUrl: string;
+    explorerUrl: string;
+    currency: string;
+    name: string;
+    chainId: number;
+  };
+  type?: string;
+  linkedWallet?: boolean;
+  ether?: boolean;
+}

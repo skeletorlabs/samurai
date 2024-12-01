@@ -215,33 +215,5 @@ export async function togglePause(index: number, signer: ethers.Signer) {
 }
 
 export async function getParticipationPhase(index: number) {
-  const ido = IDO_LIST[index];
-  const registrationStartsAt = ido.registrationStartsAt;
-  const participationStartAt = ido.participationStartsAt;
-  const publicEndsAt = ido.publicParticipationEndsAt;
-  const now = getUnixTime(new Date());
-  const isPaused = await checkIsPaused(index);
-
-  let phase = "Upcoming";
-
-  if (now >= registrationStartsAt && now <= participationStartAt && !isPaused)
-    phase = "Registration";
-  if (now >= participationStartAt && now <= publicEndsAt && !isPaused)
-    phase = "Participation";
-
-  const contract = await getContract(index, undefined);
-
-  const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
-  const maxAllocations = Number(
-    ethers.formatUnits(await contract?.maxAllocations(), 6)
-  );
-
-  const minPerWallet = Number(
-    ethers.formatUnits(await contract?.minPerWallet(), 6)
-  );
-
-  if (maxAllocations - raised < minPerWallet) phase = "Completed";
-  if (isPaused && raised > 0) phase = "Completed";
-
-  return phase;
+  return "Upcoming";
 }
