@@ -1,21 +1,11 @@
-import {
-  ethers,
-  Signer,
-  formatEther,
-  formatUnits,
-  parseEther,
-  parseUnits,
-} from "ethers";
-import { ERC20_ABI, VESTING_ABI } from "./abis";
+import { ethers, Signer, formatEther, parseEther } from "ethers";
+import { VESTING_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
-import { IDO_LIST, IDOs } from "@/app/utils/constants";
-import { balanceOf } from "./balanceOf";
+import { IDOs } from "@/app/utils/constants";
 import checkApproval from "./check-approval";
-import { getUnixTime } from "date-fns";
 import { notificateTx } from "@/app/utils/notificateTx";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
-const TEST_RPC = "http://127.0.0.1:8545";
 
 export type WalletRange = {
   name: string;
