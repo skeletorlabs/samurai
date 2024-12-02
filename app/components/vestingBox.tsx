@@ -4,6 +4,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { formattedDate5 } from "../utils/formattedDate";
 import { getUnixTime } from "date-fns";
 import {
+  askForRefund,
   claimPoints,
   claimTokens,
   fillIDOToken,
@@ -39,6 +40,15 @@ export default function VestingBox({
   const [general, setGeneral] = useState<VESTING_GENERAL_INFO | null>(null);
   const [user, setUser] = useState<any>(null);
   const { signer, account, chain } = useContext(StateContext);
+
+  const onGetRefund = useCallback(async () => {
+    setLoading(true);
+    if (signer) {
+      await askForRefund(idoIndex, signer);
+    }
+
+    setLoading(false);
+  }, [signer, idoIndex, setLoading]);
 
   const onFill = useCallback(async () => {
     setLoading(true);
@@ -136,9 +146,12 @@ export default function VestingBox({
             <div className="flex flex-col w-[200px] ">
               <p className={`${inter.className}`}>Vesting Length</p>
               <p className="text-samurai-red w-max font-bold">
-                {(general?.periods.vestingEndsAt - general?.periods.vestingAt) /
-                  86400}{" "}
-                days
+                {(
+                  (general?.periods.vestingEndsAt -
+                    general?.periods.cliffEndsAt) /
+                  2_629_746
+                ).toFixed()}{" "}
+                month(s)
               </p>
             </div>
 
@@ -188,7 +201,7 @@ export default function VestingBox({
                         user?.claimedTGE ||
                         now < general.periods.vestingAt
                       }
-                      // onClick={onGetRefund}
+                      onClick={onGetRefund}
                       className="flex items-center gap-1 text-md py-1 px-4 bg-black border border-gray-400 text-gray-400 disabled:text-white/20 disabled:border-white/20 hover:enabled:text-black hover:enabled:bg-gray-300 w-max rounded-full"
                     >
                       <span>ASK FOR REFUND</span>
