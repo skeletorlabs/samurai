@@ -50,7 +50,7 @@ import { base } from "../context/web3modal";
 export const VestingType: { [key: number]: string } = {
   0: "Cliff Vesting",
   1: "Linear",
-  2: "Periodic",
+  2: "Monthly",
 };
 
 export const simplifiedPhases = [
