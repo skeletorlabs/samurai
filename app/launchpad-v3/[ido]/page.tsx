@@ -985,7 +985,6 @@ export default function Ido() {
                         <VestingBox
                           ido={ido}
                           idoIndex={idoIndex}
-                          loading={isLoading}
                           setLoading={setIsLoading}
                         />
                       ) : (

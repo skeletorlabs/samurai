@@ -24,17 +24,11 @@ const inter = Inter({
 interface VestingBox {
   ido: IDO_v3;
   idoIndex: number;
-  loading: boolean;
   setLoading: any;
   allocation?: number;
 }
 
-export default function VestingBox({
-  ido,
-  idoIndex,
-  loading,
-  setLoading,
-}: VestingBox) {
+export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
   const now = getUnixTime(new Date());
 
   const [general, setGeneral] = useState<VESTING_GENERAL_INFO | null>(null);
@@ -186,8 +180,10 @@ export default function VestingBox({
                   <button
                     onClick={onClaim}
                     disabled={
+                      now < general.periods.vestingAt ||
+                      !user ||
                       user?.claimableTokens === 0 ||
-                      now < general.periods.vestingAt
+                      user?.askedRefund
                     }
                     className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
                   >
@@ -198,6 +194,7 @@ export default function VestingBox({
                     <button
                       disabled={
                         !user ||
+                        user?.askedRefund ||
                         user?.claimedTGE ||
                         now < general.periods.vestingAt
                       }
@@ -280,7 +277,10 @@ export default function VestingBox({
               <button
                 onClick={onClaimPoints}
                 disabled={
-                  user?.claimablePoints === 0 || now < general.periods.vestingAt
+                  now < general.periods.vestingAt ||
+                  !user ||
+                  user?.askedRefund ||
+                  user?.claimablePoints === 0
                 }
                 className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
               >
