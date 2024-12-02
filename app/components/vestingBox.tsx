@@ -169,6 +169,13 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
                 {formattedDate5(general?.periods.vestingEndsAt)}
               </p>
             </div>
+
+            <div className="flex flex-col w-[200px] ml-[8px] flex-1">
+              <p className={`${inter.className}`}>Next Unlock</p>
+              <p className="text-samurai-red w-max font-bold">
+                Feb 03, 2025, 15:00 UTC
+              </p>
+            </div>
           </div>
 
           {user && user?.purchased > 0 && (
