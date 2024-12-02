@@ -133,8 +133,6 @@ export async function userInfo(index: number, signer: Signer) {
       formatEther(await contract?.previewClaimablePoints(signerAddress))
     );
 
-    claimablePoints = 1_000_000;
-
     return {
       purchased,
       claimedTGE,
