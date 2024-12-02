@@ -35,6 +35,37 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
   const [user, setUser] = useState<any>(null);
   const { signer, account, chain } = useContext(StateContext);
 
+  function getNextUnlock(vestingStart: number, vestingEnd: number): number {
+    if (now >= vestingEnd) {
+      return 0; // No more unlocks
+    }
+
+    // Start from the vesting start
+    let currentUnlock = vestingStart;
+
+    // Increment by whole months until the next unlock is found
+    while (currentUnlock <= vestingEnd) {
+      const date = new Date(currentUnlock * 1000); // Convert seconds to milliseconds
+
+      // Handle time increment by explicitly preserving the day and time
+      const newMonth = date.getUTCMonth() + 1; // Increment the month
+      date.setUTCMonth(newMonth);
+
+      // If the month changes incorrectly, adjust it back
+      while (date.getUTCMonth() !== newMonth % 12) {
+        date.setUTCDate(date.getUTCDate() - 1);
+      }
+
+      currentUnlock = Math.floor(date.getTime() / 1000); // Convert back to seconds
+
+      if (currentUnlock > now) {
+        return currentUnlock; // Found the next unlock
+      }
+    }
+
+    return 0; // No more unlocks
+  }
+
   const onGetRefund = useCallback(async () => {
     setLoading(true);
     if (signer) {
@@ -173,7 +204,13 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
             <div className="flex flex-col w-[200px] ml-[8px] flex-1">
               <p className={`${inter.className}`}>Next Unlock</p>
               <p className="text-samurai-red w-max font-bold">
-                Feb 03, 2025, 15:00 UTC
+                {/* Feb 03, 2025, 15:00 UTC */}
+                {formattedDate5(
+                  getNextUnlock(
+                    general?.periods.cliffEndsAt,
+                    general?.periods.vestingEndsAt
+                  )
+                )}
               </p>
             </div>
           </div>
