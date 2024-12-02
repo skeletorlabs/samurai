@@ -172,7 +172,10 @@ export default function VestingBox({
                 <div className="flex items-center gap-2">
                   <button
                     onClick={onClaim}
-                    disabled={user?.claimableTokens === 0}
+                    disabled={
+                      user?.claimableTokens === 0 ||
+                      now < general.periods.vestingAt
+                    }
                     className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
                   >
                     CLAIM
@@ -180,7 +183,11 @@ export default function VestingBox({
 
                   <div className="flex items-center gap-1">
                     <button
-                      disabled={!user || user?.claimedTGE}
+                      disabled={
+                        !user ||
+                        user?.claimedTGE ||
+                        now < general.periods.vestingAt
+                      }
                       // onClick={onGetRefund}
                       className="flex items-center gap-1 text-md py-1 px-4 bg-black border border-gray-400 text-gray-400 disabled:text-white/20 disabled:border-white/20 hover:enabled:text-black hover:enabled:bg-gray-300 w-max rounded-full"
                     >
@@ -259,7 +266,9 @@ export default function VestingBox({
               <span>Samurai Points</span>
               <button
                 onClick={onClaimPoints}
-                disabled={user?.claimablePoints === 0}
+                disabled={
+                  user?.claimablePoints === 0 || now < general.periods.vestingAt
+                }
                 className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
               >
                 CLAIM
