@@ -33,7 +33,6 @@ export default function VestingBox({
   idoIndex,
   loading,
   setLoading,
-  allocation,
 }: VestingBox) {
   const now = getUnixTime(new Date());
 
@@ -144,28 +143,28 @@ export default function VestingBox({
             </div>
 
             <div className="flex flex-col w-[200px] ">
+              <p className={`${inter.className}`}>Vesting Type</p>
+              <p className="text-samurai-red w-max font-bold">
+                {VestingType[general?.vestingType]}
+              </p>
+            </div>
+
+            <div className="flex flex-col w-[200px] ">
               <p className={`${inter.className}`}>Vesting Start</p>
               <p className="text-samurai-red w-max font-bold">
                 {formattedDate5(general?.periods.vestingAt)}
               </p>
             </div>
 
-            <div className="flex flex-col w-[200px] ">
+            <div className="flex flex-col w-[200px] ml-[8px] flex-1">
               <p className={`${inter.className}`}>Vesting End</p>
               <p className="text-samurai-red w-max font-bold">
                 {formattedDate5(general?.periods.vestingEndsAt)}
               </p>
             </div>
-
-            <div className="flex flex-col ml-[8px] flex-1 w-[200px] ">
-              <p className={`${inter.className}`}>Vesting Type</p>
-              <p className="text-samurai-red w-max font-bold">
-                {VestingType[general?.vestingType]}
-              </p>
-            </div>
           </div>
 
-          {user && (
+          {user && user?.purchased > 0 && (
             <div className="flex flex-col gap-2 mt-10">
               <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap">
                 <span>Project Tokens</span>
@@ -227,7 +226,8 @@ export default function VestingBox({
                 <div className="flex flex-col">
                   <p className={`${inter.className}`}>My allocation</p>
                   <p className="text-samurai-red w-max font-bold">
-                    {allocation?.toLocaleString("en-us")} $USDC
+                    {(user?.purchased * ido.price).toLocaleString("en-us")}{" "}
+                    $USDC
                   </p>
                 </div>
                 <div className="flex flex-col">
@@ -254,7 +254,7 @@ export default function VestingBox({
             </div>
           )}
 
-          {user && (
+          {user && user?.purchased > 0 && (
             <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap mt-10">
               <span>Samurai Points</span>
               <button
@@ -267,7 +267,7 @@ export default function VestingBox({
             </div>
           )}
 
-          {user && (
+          {user && user?.purchased > 0 && (
             <div className="flex items-center gap-5 gap-x-14 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap text-center lg:text-start mt-2">
               <div className="flex flex-col">
                 <p className={`${inter.className}`}>Points Earned</p>

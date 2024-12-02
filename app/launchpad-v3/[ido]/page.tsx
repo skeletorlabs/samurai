@@ -987,7 +987,6 @@ export default function Ido() {
                           idoIndex={idoIndex}
                           loading={isLoading}
                           setLoading={setIsLoading}
-                          allocation={user?.allocation}
                         />
                       ) : (
                         <>
