@@ -199,25 +199,26 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
                         now < general.periods.vestingAt
                       }
                       onClick={onGetRefund}
-                      className="flex items-center gap-1 text-md py-1 px-4 bg-black border border-gray-400 text-gray-400 disabled:text-white/20 disabled:border-white/20 hover:enabled:text-black hover:enabled:bg-gray-300 w-max rounded-full"
+                      className="flex items-center gap-1 text-md py-1 px-4 bg-black border border-gray-400 text-gray-400 disabled:text-white/20 disabled:border-white/20 hover:enabled:bg-gray-800 w-max rounded-full"
                     >
                       <span>ASK FOR REFUND</span>
                       <Tooltip
                         content={
-                          <div className="text-[11px] leading-relaxed text-white/70 py-2">
+                          <div className="text-[11px] leading-relaxed text-white/70 py-2 w-max">
                             <h1 className="text-yellow-300 text-sm">
                               IMPORTANT:
                             </h1>
 
-                            <p>** Refunds are not allowed after TGE claims</p>
+                            <p>** Refunds are not allowed after claim TGE</p>
                             <p>
-                              *** Refunds are not allowed after claim points
+                              *** Refunds are not allowed after claim Samurai
+                              Points
                             </p>
                           </div>
                         }
                         style="dark"
                       >
-                        <HiOutlineInformationCircle color="yellow" />
+                        <HiOutlineInformationCircle color="red" />
                       </Tooltip>
                     </button>
                   </div>
