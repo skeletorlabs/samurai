@@ -4,6 +4,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { formattedDate5 } from "../utils/formattedDate";
 import { getUnixTime } from "date-fns";
 import {
+  askForRefund,
   claimPoints,
   claimTokens,
   fillIDOToken,
@@ -23,23 +24,25 @@ const inter = Inter({
 interface VestingBox {
   ido: IDO_v3;
   idoIndex: number;
-  loading: boolean;
   setLoading: any;
   allocation?: number;
 }
 
-export default function VestingBox({
-  ido,
-  idoIndex,
-  loading,
-  setLoading,
-  allocation,
-}: VestingBox) {
+export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
   const now = getUnixTime(new Date());
 
   const [general, setGeneral] = useState<VESTING_GENERAL_INFO | null>(null);
   const [user, setUser] = useState<any>(null);
   const { signer, account, chain } = useContext(StateContext);
+
+  const onGetRefund = useCallback(async () => {
+    setLoading(true);
+    if (signer) {
+      await askForRefund(idoIndex, signer);
+    }
+
+    setLoading(false);
+  }, [signer, idoIndex, setLoading]);
 
   const onFill = useCallback(async () => {
     setLoading(true);
@@ -137,9 +140,19 @@ export default function VestingBox({
             <div className="flex flex-col w-[200px] ">
               <p className={`${inter.className}`}>Vesting Length</p>
               <p className="text-samurai-red w-max font-bold">
-                {(general?.periods.vestingEndsAt - general?.periods.vestingAt) /
-                  86400}{" "}
-                days
+                {(
+                  (general?.periods.vestingEndsAt -
+                    general?.periods.cliffEndsAt) /
+                  2_629_746
+                ).toFixed()}{" "}
+                month(s)
+              </p>
+            </div>
+
+            <div className="flex flex-col w-[200px] ">
+              <p className={`${inter.className}`}>Vesting Type</p>
+              <p className="text-samurai-red w-max font-bold">
+                {VestingType[general?.vestingType]}
               </p>
             </div>
 
@@ -150,22 +163,15 @@ export default function VestingBox({
               </p>
             </div>
 
-            <div className="flex flex-col w-[200px] ">
+            <div className="flex flex-col w-[200px] ml-[8px] flex-1">
               <p className={`${inter.className}`}>Vesting End</p>
               <p className="text-samurai-red w-max font-bold">
                 {formattedDate5(general?.periods.vestingEndsAt)}
               </p>
             </div>
-
-            <div className="flex flex-col ml-[8px] flex-1 w-[200px] ">
-              <p className={`${inter.className}`}>Vesting Type</p>
-              <p className="text-samurai-red w-max font-bold">
-                {VestingType[general?.vestingType]}
-              </p>
-            </div>
           </div>
 
-          {user && (
+          {user && user?.purchased > 0 && (
             <div className="flex flex-col gap-2 mt-10">
               <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap">
                 <span>Project Tokens</span>
@@ -173,7 +179,12 @@ export default function VestingBox({
                 <div className="flex items-center gap-2">
                   <button
                     onClick={onClaim}
-                    disabled={user?.claimableTokens === 0}
+                    disabled={
+                      now < general.periods.vestingAt ||
+                      !user ||
+                      user?.claimableTokens === 0 ||
+                      user?.askedRefund
+                    }
                     className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
                   >
                     CLAIM
@@ -181,27 +192,33 @@ export default function VestingBox({
 
                   <div className="flex items-center gap-1">
                     <button
-                      disabled={!user || user?.claimedTGE}
-                      // onClick={onGetRefund}
-                      className="flex items-center gap-1 text-md py-1 px-4 bg-black border border-gray-400 text-gray-400 disabled:text-white/20 disabled:border-white/20 hover:enabled:text-black hover:enabled:bg-gray-300 w-max rounded-full"
+                      disabled={
+                        !user ||
+                        user?.askedRefund ||
+                        user?.claimedTGE ||
+                        now < general.periods.vestingAt
+                      }
+                      onClick={onGetRefund}
+                      className="flex items-center gap-1 text-md py-1 px-4 bg-black border border-gray-400 text-gray-400 disabled:text-white/20 disabled:border-white/20 hover:enabled:bg-gray-800 w-max rounded-full"
                     >
                       <span>ASK FOR REFUND</span>
                       <Tooltip
                         content={
-                          <div className="text-[11px] leading-relaxed text-white/70 py-2">
+                          <div className="text-[11px] leading-relaxed text-white/70 py-2 w-max">
                             <h1 className="text-yellow-300 text-sm">
                               IMPORTANT:
                             </h1>
 
-                            <p>** Refunds are not allowed after TGE claims</p>
+                            <p>** Refunds are not allowed after claim TGE</p>
                             <p>
-                              *** Refunds are not allowed after claim points
+                              *** Refunds are not allowed after claim Samurai
+                              Points
                             </p>
                           </div>
                         }
                         style="dark"
                       >
-                        <HiOutlineInformationCircle color="yellow" />
+                        <HiOutlineInformationCircle color="red" />
                       </Tooltip>
                     </button>
                   </div>
@@ -227,7 +244,8 @@ export default function VestingBox({
                 <div className="flex flex-col">
                   <p className={`${inter.className}`}>My allocation</p>
                   <p className="text-samurai-red w-max font-bold">
-                    {allocation?.toLocaleString("en-us")} $USDC
+                    {(user?.purchased * ido.price).toLocaleString("en-us")}{" "}
+                    $USDC
                   </p>
                 </div>
                 <div className="flex flex-col">
@@ -254,12 +272,17 @@ export default function VestingBox({
             </div>
           )}
 
-          {user && (
+          {user && user?.purchased > 0 && (
             <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap mt-10">
               <span>Samurai Points</span>
               <button
                 onClick={onClaimPoints}
-                disabled={user?.claimablePoints === 0}
+                disabled={
+                  now < general.periods.vestingAt ||
+                  !user ||
+                  user?.askedRefund ||
+                  user?.claimablePoints === 0
+                }
                 className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
               >
                 CLAIM
@@ -267,7 +290,7 @@ export default function VestingBox({
             </div>
           )}
 
-          {user && (
+          {user && user?.purchased > 0 && (
             <div className="flex items-center gap-5 gap-x-14 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap text-center lg:text-start mt-2">
               <div className="flex flex-col">
                 <p className={`${inter.className}`}>Points Earned</p>

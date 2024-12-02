@@ -5,19 +5,14 @@ import { Inter } from "next/font/google";
 import { useState, Fragment, useContext, useEffect, useCallback } from "react";
 import TopLayout from "@/app/components/topLayout";
 import { useParams } from "next/navigation";
-import { Carousel } from "flowbite-react";
+// import { Carousel } from "flowbite-react";
 
 import {
   IDOs,
   TOKENS_TO_SYMBOL,
-  simplifiedPhasesV2,
   simplifiedPhasesV3,
 } from "@/app/utils/constants";
-import {
-  formattedDate,
-  formattedDate5,
-  formattedDateSimple,
-} from "@/app/utils/formattedDate";
+import { formattedDate } from "@/app/utils/formattedDate";
 import {
   discord,
   paste,
@@ -985,9 +980,7 @@ export default function Ido() {
                         <VestingBox
                           ido={ido}
                           idoIndex={idoIndex}
-                          loading={isLoading}
                           setLoading={setIsLoading}
-                          allocation={user?.allocation}
                         />
                       ) : (
                         <>

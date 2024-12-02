@@ -50,7 +50,7 @@ import { base } from "../context/web3modal";
 export const VestingType: { [key: number]: string } = {
   0: "Cliff Vesting",
   1: "Linear",
-  2: "Periodic",
+  2: "Monthly",
 };
 
 export const simplifiedPhases = [
@@ -131,9 +131,10 @@ export const IDOs: IDO_v3[] = [
     contract: "0xf4801b6fE6B77F8C4e4fc2580D82f4E3E2a5aE09",
     abi: PARTICIPATOR_V2_2,
     register: true,
-    vestingDescription: "30% TGE unlock, 1-month cliff, 5-month Linear vesting",
-    // vesting: "0x0f2f6ec1e113e45ac368a2ffed60c1956975b2a3",
-    // vestingChain: base,
+    vestingDescription:
+      "30% TGE unlock, 1-month cliff, 5-month Monthly vesting",
+    vesting: "0xCFe4E1e1dDB2c5AcaF57Af30271FA2996Bc1aF9F",
+    vestingChain: base,
     type: "v3",
     linkedWallet: false,
     ether: false,
