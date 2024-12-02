@@ -159,7 +159,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
             <div className="flex flex-col w-[200px] ">
               <p className={`${inter.className}`}>Vesting Start</p>
               <p className="text-samurai-red w-max font-bold">
-                {formattedDate5(general?.periods.vestingAt)}
+                {formattedDate5(general?.periods.cliffEndsAt)}
               </p>
             </div>
 
