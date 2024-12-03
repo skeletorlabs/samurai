@@ -78,67 +78,67 @@ export const simplifiedPhasesV3 = [
 ];
 
 export const IDOs: IDO_v3[] = [
-  //   {
-  //     id: "dyor",
-  //     url: "launchpad-v3/dyor",
-  //     logo: dyor,
-  //     idoImageSrc: "/IDOs/dyor.png",
-  //     acceptedTokenSymbol: "USDC",
-  //     tokenNetwork: "BASE",
-  //     crowdsaleNetwork: "BASE",
-  //     networkImageSrc: "/chain-logos/BASE.svg",
-  //     projectName: "DYOR",
-  //     projectListDescription:
-  //       "DYOR is an integrated 'Web3 command centre' for traders and developers, bringing the best aspects of centralized platforms on chain.",
-  //     projectDescription:
-  //       "Designed to enhance the entire on-chain experience for both traders and project developers, DYOR is a next-generation multi-chain trading, research, marketing, and token management dashboard which combines the best aspects of dozens of existing platforms into one. Already they’ve secured backing of over 50 top KOLs with a combined audience of over 26 million!",
-  //     projectTokenSymbol: "$DYOR",
-  //     projectBigDescription: `
-  //     <div style="display: flex; flex-direction: column; gap: 15px;">
-  //       <p>The team at DYOR Labs is raising the bar for on-chain user experience, on a mission to replace all of the many outdated, clunky, and expensive platforms which currently have a stranglehold on Web3.</p>
-  //       <p>To do this, they're building an integrated 'Web3 command centre' which brings all of the best aspects of centralized platforms (live customer support, advanced charting/analytics, limit orders, etc.) on chain. Not only that, they’re also developing a whole suite of features geared towards developers, allowing them to launch, manage, and market their tokens all from within one unified dashboard.</p>
-  //       <p>For traders, this means access to advanced charting and TA tools, with multi-chart layouts and custom presets. The DYOR DEX and DEX aggregator make use of enhanced features like limit orders and anti-honeypot scam prevention, all designed to make the on-chain trading experience as intuitive and secure as on the very best CEXs. All of this while executing cheaper and faster trades than UniSwap and 1inch.</p>
-  //       <p>For developers, DYOR offers a unified dashboard for every aspect of token creation, liquidity provision, project operations, and community growth. These include enterprise-grade services such as audits, market making, and KOL matchmaking built into the platform, as well as a directory of carefully vetted third-party service providers for everything from copywriting to legal services.</p>
-  //       <p>The 'public beta version of the platform' is already live, with more than 37,000 traders participating so far. Also on board is a veritable army of KOLs who have been brought on board to promote DYOR to the masses.</p>
-  //       <p>All in all, over 50 KOLs are signed on with a combined Twitter following of over 26 million! You'll recognize some familiar names on the list: Lark Davis, Crypto Banter, Ivan on Tech, Altcoin Daily, and many, many more.</p>
-  //     </div>
-  // `,
-  //     price: 0.0105,
-  //     tge: 30,
-  //     allocation: 100_000,
-  //     date: 1732795200,
-  //     fcfs: 0,
-  //     end: 1732795200 + 86400 * 2,
-  //     investmentRound: "Round 2",
-  //     fdv: 10_500_000,
-  //     exchangeListingPrice: 0.0105,
-  //     marketCapAtTGE: 1_249_000,
-  //     socials: [
-  //       {
-  //         svg: globe,
-  //         href: "https://dyorlabs.com",
-  //       },
-  //       {
-  //         svg: twitterX,
-  //         href: "https://twitter.com/DyorLabs_",
-  //       },
-  //       {
-  //         svg: telegram,
-  //         href: "dyorlabs.com",
-  //       },
-  //       { svg: discord, href: "https://discord.gg/PWxkhnAd8A" },
-  //     ],
-  //     contract: "0xf4801b6fE6B77F8C4e4fc2580D82f4E3E2a5aE09",
-  //     abi: PARTICIPATOR_V2_2,
-  //     register: true,
-  //     vestingDescription:
-  //       "30% TGE unlock, 1-month cliff, 5-month Monthly vesting",
-  //     vesting: "0xCFe4E1e1dDB2c5AcaF57Af30271FA2996Bc1aF9F",
-  //     vestingChain: base,
-  //     type: "v3",
-  //     linkedWallet: false,
-  //     ether: false,
-  //   },
+  {
+    id: "dyor",
+    url: "launchpad-v3/dyor",
+    logo: dyor,
+    idoImageSrc: "/IDOs/dyor.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "BASE",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/BASE.svg",
+    projectName: "DYOR",
+    projectListDescription:
+      "DYOR is an integrated 'Web3 command centre' for traders and developers, bringing the best aspects of centralized platforms on chain.",
+    projectDescription:
+      "Designed to enhance the entire on-chain experience for both traders and project developers, DYOR is a next-generation multi-chain trading, research, marketing, and token management dashboard which combines the best aspects of dozens of existing platforms into one. Already they’ve secured backing of over 50 top KOLs with a combined audience of over 26 million!",
+    projectTokenSymbol: "$DYOR",
+    projectBigDescription: `
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <p>The team at DYOR Labs is raising the bar for on-chain user experience, on a mission to replace all of the many outdated, clunky, and expensive platforms which currently have a stranglehold on Web3.</p>
+      <p>To do this, they're building an integrated 'Web3 command centre' which brings all of the best aspects of centralized platforms (live customer support, advanced charting/analytics, limit orders, etc.) on chain. Not only that, they’re also developing a whole suite of features geared towards developers, allowing them to launch, manage, and market their tokens all from within one unified dashboard.</p>
+      <p>For traders, this means access to advanced charting and TA tools, with multi-chart layouts and custom presets. The DYOR DEX and DEX aggregator make use of enhanced features like limit orders and anti-honeypot scam prevention, all designed to make the on-chain trading experience as intuitive and secure as on the very best CEXs. All of this while executing cheaper and faster trades than UniSwap and 1inch.</p>
+      <p>For developers, DYOR offers a unified dashboard for every aspect of token creation, liquidity provision, project operations, and community growth. These include enterprise-grade services such as audits, market making, and KOL matchmaking built into the platform, as well as a directory of carefully vetted third-party service providers for everything from copywriting to legal services.</p>
+      <p>The 'public beta version of the platform' is already live, with more than 37,000 traders participating so far. Also on board is a veritable army of KOLs who have been brought on board to promote DYOR to the masses.</p>
+      <p>All in all, over 50 KOLs are signed on with a combined Twitter following of over 26 million! You'll recognize some familiar names on the list: Lark Davis, Crypto Banter, Ivan on Tech, Altcoin Daily, and many, many more.</p>
+    </div>
+`,
+    price: 0.0105,
+    tge: 30,
+    allocation: 100_000,
+    date: 1732795200,
+    fcfs: 0,
+    end: 1732795200 + 86400 * 2,
+    investmentRound: "Round 2",
+    fdv: 10_500_000,
+    exchangeListingPrice: 0.0105,
+    marketCapAtTGE: 1_249_000,
+    socials: [
+      {
+        svg: globe,
+        href: "https://dyorlabs.com",
+      },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/DyorLabs_",
+      },
+      {
+        svg: telegram,
+        href: "dyorlabs.com",
+      },
+      { svg: discord, href: "https://discord.gg/PWxkhnAd8A" },
+    ],
+    contract: "0xf4801b6fE6B77F8C4e4fc2580D82f4E3E2a5aE09",
+    abi: PARTICIPATOR_V2_2,
+    register: true,
+    vestingDescription:
+      "30% TGE unlock, 1-month cliff, 5-month Monthly vesting",
+    vesting: "0xCFe4E1e1dDB2c5AcaF57Af30271FA2996Bc1aF9F",
+    vestingChain: base,
+    type: "v3",
+    linkedWallet: false,
+    ether: false,
+  },
 ];
 
 export const IDO_LIST: IDO[] = [

@@ -48,12 +48,12 @@ export default function Launchpad() {
         id="participate"
         className="flex flex-col py-10 md:py-20 w-full bg-white/20 border-t-[1px] border-samurai-red/40"
       >
-        {/* <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Token</span> Offerings
           </h2>
           <ProjectsV2 />
-        </div> */}
+        </div>
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white mt-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Past</span> Offerings
