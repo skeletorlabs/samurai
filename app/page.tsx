@@ -8,7 +8,7 @@ import TopLayout from "@/app/components/topLayout";
 import { StateContext } from "@/app/context/StateContext";
 import Projects from "@/app/components/projects";
 import ProjectsV2 from "./components/projectsV2";
-import ProjectsHome from "./components/projectsHome"
+import ProjectsHome from "./components/projectsHome";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -225,7 +225,7 @@ export default function Home() {
             →
           </Link>
         </div>
-        <ProjectsHome maxV2={1} max={3} />
+        <ProjectsHome maxV2={0} max={4} />
         <Link
           href="/launchpad"
           className={`absolute right-6 bottom-5 md:right-20 flex justify-end items-center self-end w-max mt-8 text-md text-white hover:text-samurai-red font-light ${inter.className}`}
