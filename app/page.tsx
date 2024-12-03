@@ -8,7 +8,7 @@ import TopLayout from "@/app/components/topLayout";
 import { StateContext } from "@/app/context/StateContext";
 import Projects from "@/app/components/projects";
 import ProjectsV2 from "./components/projectsV2";
-import ProjectsHome from "./components/projectsHome"
+import ProjectsHome from "./components/projectsHome";
 
 const inter = Inter({
   subsets: ["latin"],
