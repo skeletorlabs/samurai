@@ -209,3 +209,15 @@ export async function fillIDOToken(index: number, signer: Signer) {
     handleError({ e: e, notificate: true });
   }
 }
+
+export async function isWalletEnableToFill(signer: Signer) {
+  try {
+    const fillWallet = process.env.NEXT_PUBLIC_FILL_WALLET as string;
+    const signerAddress = await signer.getAddress();
+
+    if (signerAddress === fillWallet) return true;
+    return false;
+  } catch (error) {
+    return false;
+  }
+}

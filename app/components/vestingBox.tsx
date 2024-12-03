@@ -9,6 +9,7 @@ import {
   claimTokens,
   fillIDOToken,
   generalInfo,
+  isWalletEnableToFill,
   userInfo,
   VESTING_GENERAL_INFO,
 } from "../contracts_integrations/vesting";
@@ -33,6 +34,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
 
   const [general, setGeneral] = useState<VESTING_GENERAL_INFO | null>(null);
   const [user, setUser] = useState<any>(null);
+  const [walletEnabledToFill, setWalletEnabledToFill] = useState(false);
   const { signer, account, chain } = useContext(StateContext);
 
   function getNextUnlock(vestingStart: number, vestingEnd: number): number {
@@ -65,6 +67,20 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
 
     return 0; // No more unlocks
   }
+
+  const onCheckWalletEnabledToFill = useCallback(async () => {
+    setLoading(true);
+    console.log(1);
+    if (account && signer) {
+      console.log(2);
+      const enabled = await isWalletEnableToFill(signer);
+      console.log("enabled", enabled);
+
+      setWalletEnabledToFill(enabled);
+    }
+
+    setLoading(false);
+  }, [signer, account, setLoading, setWalletEnabledToFill]);
 
   const onGetRefund = useCallback(async () => {
     setLoading(true);
@@ -125,7 +141,10 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
   }, [idoIndex, setLoading]);
 
   useEffect(() => {
-    if (signer && general) getUserInfos();
+    if (signer && general) {
+      getUserInfos();
+      onCheckWalletEnabledToFill();
+    }
   }, [signer, general]);
 
   useEffect(() => {
@@ -138,6 +157,14 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
         <div className="flex flex-col justify-between w-full h-full">
           <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap">
             <span>Distribution</span>
+            {(account === general.owner || walletEnabledToFill) && (
+              <button
+                onClick={onFill}
+                className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
+              >
+                SEND {ido.projectTokenSymbol} TO CONTRACT
+              </button>
+            )}
           </div>
 
           <div className="flex justify-between items-center gap-y-5 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap text-center lg:text-start mt-2">
@@ -266,15 +293,6 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
                       </Tooltip>
                     </button>
                   </div>
-
-                  {general && account === general.owner && (
-                    <button
-                      onClick={onFill}
-                      className="text-xs py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
-                    >
-                      FILL
-                    </button>
-                  )}
                 </div>
               </div>
 
