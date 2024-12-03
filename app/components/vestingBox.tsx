@@ -157,14 +157,14 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
         <div className="flex flex-col justify-between w-full h-full">
           <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap">
             <span>Distribution</span>
-            {(account === general.owner || walletEnabledToFill) && (
+            {/* {(account === general.owner || walletEnabledToFill) && (
               <button
                 onClick={onFill}
                 className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
               >
                 SEND {ido.projectTokenSymbol} TO CONTRACT
               </button>
-            )}
+            )} */}
           </div>
 
           <div className="flex justify-between items-center gap-y-5 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap text-center lg:text-start mt-2">
