@@ -17,7 +17,7 @@ export default function LaunchpadCardV2({
   const [phase, setPhase] = useState("");
 
   const getPhase = useCallback(async () => {
-    const index = IDOs.findIndex((item) => item.contract === ido.contract);
+    const index = IDOs.findIndex((item) => item.id === ido.id);
 
     const isV3 = ido.type === "v3";
     const isPrivate = ido.type === "private";
