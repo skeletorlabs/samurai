@@ -8,7 +8,7 @@ import { useParams } from "next/navigation";
 import { Carousel } from "flowbite-react";
 
 import {
-  IDO_LIST,
+  IDOs,
   TOKENS_TO_SYMBOL,
   simplifiedPhasesV2,
 } from "@/app/utils/constants";
@@ -62,8 +62,8 @@ export default function Ido() {
 
   const { ido: idoID } = useParams();
 
-  const ido = IDO_LIST.find((item) => item.id === (idoID as string));
-  const idoIndex = IDO_LIST.findIndex((item) => item.id === (idoID as string));
+  const ido = IDOs.find((item) => item.id === (idoID as string));
+  const idoIndex = IDOs.findIndex((item) => item.id === (idoID as string));
   const bg = `url("${ido?.idoImageSrc}")`;
 
   // ============================================================================================================
@@ -166,7 +166,7 @@ export default function Ido() {
 
   useEffect(() => {
     if (tier) {
-      getUserInfos();
+      // getUserInfos();
     }
   }, [tier]);
 
@@ -283,7 +283,7 @@ export default function Ido() {
                 <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
                   <span className="text-sm">Crowdsale</span>
                   <Image
-                    src="/chain-logos/Base_Symbol_Blue.svg"
+                    src="/chain-logos/BASE.svg"
                     alt={ido?.projectName || ""}
                     width={24}
                     height={24}
@@ -370,8 +370,9 @@ export default function Ido() {
                     )}
                   </div>
                   <div className="hidden md:flex flex-row mt-6 bg-black-900/90 rounded-lg border border-white/20 mx-4 xl:mx-6">
-                    {ido?.simplified &&
-                      simplifiedPhasesV2.map((phase, index) => (
+                    {simplifiedPhasesV2
+                      .filter((phase) => phase.title !== "Registration")
+                      .map((phase, index) => (
                         <Fragment key={index}>
                           {index !== 0 && (
                             <svg
@@ -418,33 +419,41 @@ export default function Ido() {
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">IDO Start:</span>
                           <p className="text-white/70">
-                            {formattedDate(ido.participationStartsAt)} UTC
+                            {formattedDate(ido.date)} UTC
                           </p>
                         </div>
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">IDO End:</span>
                           <p className="text-white/70">
-                            {formattedDate(ido.participationEndsAt)} UTC
+                            {formattedDate(ido.fcfs > 0 ? ido.fcfs : ido.end)}{" "}
                           </p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                        <div
+                          className={`${
+                            ido.fcfs > 0 ? "flex" : "hidden"
+                          } flex-col py-2 px-2 rounded-md w-max`}
+                        >
                           <span className="text-neutral-600">FCFS Start:</span>
                           <p className="text-white/70">
-                            {formattedDate(ido.publicParticipationStartsAt)} UTC
+                            {formattedDate(ido.fcfs)} UTC
                           </p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                        <div
+                          className={`${
+                            ido.fcfs > 0 ? "flex" : "hidden"
+                          }  flex-col py-2 px-2 rounded-md w-max`}
+                        >
                           <span className="text-neutral-600">FCFS End:</span>
                           <p className="text-white/70">
-                            {formattedDate(ido.publicParticipationEndsAt)} UTC
+                            {formattedDate(ido.end)} UTC
                           </p>
                         </div>
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">TGE Date:</span>
                           <p className="text-white/70">
-                            {ido.tgeDate === 0
+                            {ido.tge === 0
                               ? "TBA"
-                              : formattedDateSimple(ido.tgeDate)}
+                              : formattedDateSimple(ido.tge)}
                           </p>
                         </div>
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
@@ -636,7 +645,7 @@ export default function Ido() {
                                 {ido.projectTokenSymbol}
                               </p>
                             </div>
-                            <div className="p-3 border border-white/20 rounded-[8px] w-full xl:w-[230px]">
+                            {/* <div className="p-3 border border-white/20 rounded-[8px] w-full xl:w-[230px]">
                               <p className={`text-sm ${inter.className}`}>
                                 {ido.tgePercentage}% TGE RELEASE
                               </p>
@@ -669,7 +678,7 @@ export default function Ido() {
                                 })}{" "}
                                 {ido.projectTokenSymbol}
                               </p>
-                            </div>
+                            </div> */}
                           </div>
                         )}
 
@@ -768,7 +777,7 @@ export default function Ido() {
               <div
                 className={`flex w-full xl:text-[16px] xl:leading-[1.70rem] 2xl:text-[20px] 2xl:leading-[2rem] text-gray-300 ${inter.className}`}
                 dangerouslySetInnerHTML={{
-                  __html: ido.bigDescription as string,
+                  __html: ido.projectBigDescription as string,
                 }}
               />
             </div>

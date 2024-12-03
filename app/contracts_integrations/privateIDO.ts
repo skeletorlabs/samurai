@@ -7,14 +7,13 @@ import {
 } from "ethers";
 import { ERC20_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
-import { IDO_LIST } from "@/app/utils/constants";
+import { IDOs } from "@/app/utils/constants";
 import { balanceOf } from "./balanceOf";
 import checkApproval from "./check-approval";
 import { getUnixTime } from "date-fns";
 import { notificateTx } from "@/app/utils/notificateTx";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
-const TEST_RPC = "http://127.0.0.1:8545";
 
 export type WalletRange = {
   name: string;
@@ -24,7 +23,7 @@ export type WalletRange = {
 
 async function getContract(index: number, signer?: ethers.Signer) {
   try {
-    const ido = IDO_LIST[index];
+    const ido = IDOs[index];
     const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const contractAddress = ido.contract;
     const contract = new ethers.Contract(
@@ -54,22 +53,19 @@ export async function checkIsPaused(index: number) {
 export async function generalInfo(index: number) {
   try {
     const contract = await getContract(index);
-    const ido = IDO_LIST[index];
 
     const owner = await contract?.owner();
     const isPublic = await contract?.isPublic();
     const acceptedToken = await contract?.acceptedToken();
     const isPaused = await contract?.paused();
-    // const isPaused = false;
 
-    const minPerWallet = Number(
-      ethers.formatUnits(await contract?.minPerWallet(), 6)
-    );
+    const minPerWallet = Number(formatUnits(await contract?.minPerWallet(), 6));
+
     const maxAllocations = Number(
-      ethers.formatUnits(await contract?.maxAllocations(), 6)
+      formatUnits(await contract?.maxAllocations(), 6)
     );
 
-    const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
+    const raised = Number(formatUnits(await contract?.raised(), 6));
 
     return {
       owner,
