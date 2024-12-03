@@ -143,7 +143,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
   useEffect(() => {
     if (signer && general) {
       getUserInfos();
-      onCheckWalletEnabledToFill();
+      // onCheckWalletEnabledToFill();
     }
   }, [signer, general]);
 
