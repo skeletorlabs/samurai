@@ -182,7 +182,7 @@ export const IDOs: IDO_v3[] = [
     date: 1733400000,
     fcfs: 0,
     end: 1733486400,
-    investmentRound: "Round 1 - Nodes",
+    investmentRound: "Round 1 - Whitelist",
     fdv: 50_000_000,
     exchangeListingPrice: 0.01,
     marketCapAtTGE: 485_000,
