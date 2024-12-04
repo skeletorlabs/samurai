@@ -111,8 +111,8 @@ export async function getWalletsToRefund(index: number) {
 export async function userInfo(index: number, signer: Signer) {
   try {
     const contract = await getContract(index);
-    // const signerAddress = await signer.getAddress();
-    const signerAddress = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
+    const signerAddress = await signer.getAddress();
+    // const signerAddress = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
 
     const purchased = Number(
       formatEther(await contract?.purchases(signerAddress))
