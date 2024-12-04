@@ -267,28 +267,30 @@ export default function Ido() {
                   </Link>
                 ))}
 
-                {ido?.tokenNetwork !== "TBA" && (
+                <div className="flex gap-3">
+                  {ido?.tokenNetwork !== "TBA" && (
+                    <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
+                      <span className="text-sm">Project Tokens</span>
+                      <Image
+                        src={ido?.networkImageSrc || ""}
+                        alt={ido?.tokenNetwork || ""}
+                        width={24}
+                        height={24}
+                        className="p-[1px] bg-white/80 rounded-full"
+                      />
+                    </div>
+                  )}
+
                   <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
-                    <span className="text-sm">Project Tokens</span>
+                    <span className="text-sm">Crowdsale</span>
                     <Image
-                      src={ido?.networkImageSrc || ""}
-                      alt={ido?.tokenNetwork || ""}
+                      src="/chain-logos/BASE.svg"
+                      alt={ido?.projectName || ""}
                       width={24}
                       height={24}
                       className="p-[1px] bg-white/80 rounded-full"
                     />
                   </div>
-                )}
-
-                <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
-                  <span className="text-sm">Crowdsale</span>
-                  <Image
-                    src="/chain-logos/BASE.svg"
-                    alt={ido?.projectName || ""}
-                    width={24}
-                    height={24}
-                    className="p-[1px] bg-white/80 rounded-full"
-                  />
                 </div>
               </div>
 
@@ -764,7 +766,7 @@ export default function Ido() {
 
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md lg:w-max lg:border border-white/10 text-sm lg:text-lg">
                   <span className="text-samurai-red">Vesting:</span>
-                  <p className="text-white/70">{ido.vesting}</p>
+                  <p className="text-white/70">{ido.vestingDescription}</p>
                 </div>
 
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
