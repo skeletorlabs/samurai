@@ -216,7 +216,7 @@ export const IDOs: IDO_v3[] = [
       "/IDOs/smartnodes/6.png",
     ],
     register: false,
-    vestingDescription: "15% TGE unlock, 2-month cliff, 7-month Linear vesting",
+    vestingDescription: "15% TGE unlock, 2-month cliff, 7-month DAILY vesting",
     // vesting: "0x0f2f6ec1e113e45ac368a2ffed60c1956975b2a3",
     // vestingChain: base,
     type: "private",
