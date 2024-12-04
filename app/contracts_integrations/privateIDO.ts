@@ -89,10 +89,7 @@ export async function userInfo(index: number, signer: ethers.Signer) {
     const contract = await getContract(index, signer);
 
     const maxPermitted = Number(
-      ethers.formatUnits(
-        await contract?.getWalletMaxPermitted(signerAddress),
-        6
-      )
+      ethers.formatUnits(await contract?.walletsMaxPermitted(signerAddress), 6)
     );
 
     const allocation = Number(

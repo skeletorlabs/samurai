@@ -166,7 +166,7 @@ export default function Ido() {
 
   useEffect(() => {
     if (tier) {
-      // getUserInfos();
+      getUserInfos();
     }
   }, [tier]);
 
@@ -448,14 +448,7 @@ export default function Ido() {
                             {formattedDate(ido.end)} UTC
                           </p>
                         </div>
-                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                          <span className="text-neutral-600">TGE Date:</span>
-                          <p className="text-white/70">
-                            {ido.tge === 0
-                              ? "TBA"
-                              : formattedDateSimple(ido.tge)}
-                          </p>
-                        </div>
+
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">
                             Token Symbol:
@@ -471,20 +464,30 @@ export default function Ido() {
                           </p>
                         </div>
 
-                        {signer && account && general?.maxPerWallet > 0 && (
-                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                            <span className="text-neutral-600">Min:</span>
-                            <p className="text-white/70">
-                              $
-                              {Number(general?.minPerWallet | 0).toLocaleString(
-                                "en-us"
-                              )}{" "}
-                              {ido?.acceptedTokenSymbol}
-                            </p>
-                          </div>
-                        )}
+                        <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                          <span className="text-neutral-600">Currency:</span>
+                          <p className="text-white/70">
+                            {ido.acceptedTokenSymbol} on {ido.tokenNetwork}
+                          </p>
+                        </div>
 
-                        {signer && account && general?.maxPerWallet > 0 && (
+                        {signer &&
+                          account &&
+                          user?.maxPermitted > 0 &&
+                          general?.minPerWallet > 0 && (
+                            <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                              <span className="text-neutral-600">Min:</span>
+                              <p className="text-white/70">
+                                $
+                                {Number(
+                                  general?.minPerWallet | 0
+                                ).toLocaleString("en-us")}{" "}
+                                {ido?.acceptedTokenSymbol}
+                              </p>
+                            </div>
+                          )}
+
+                        {signer && account && user?.maxPermitted > 0 && (
                           <div className="flex flex-col py-2 px-2 rounded-md w-max">
                             <span className="text-neutral-600">Max:</span>
                             <p className="text-white/70">
