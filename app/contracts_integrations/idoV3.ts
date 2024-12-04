@@ -15,7 +15,6 @@ import { notificateTx } from "@/app/utils/notificateTx";
 import { generalInfo as generalVestingInfo } from "./vesting";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
-const TEST_RPC = "http://127.0.0.1:8545";
 
 export type WalletRange = {
   name: string;

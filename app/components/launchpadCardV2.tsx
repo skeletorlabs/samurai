@@ -2,15 +2,10 @@ import { IDO, IDO_v3 } from "@/app/utils/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { formattedDate } from "@/app/utils/formattedDate";
-import { IDO_LIST } from "@/app/utils/constants";
-import { getParticipationPhase } from "@/app/contracts_integrations/ido";
-import { getParticipationPhase as getParticipationPhaseNft } from "@/app/contracts_integrations/idoNFT";
-import { getParticipationPhase as getParticipationPhaseNftEth } from "../contracts_integrations/idoNFTETH";
-import { getParticipationPhase as getParticipationPhaseV2 } from "../contracts_integrations/idoV2";
 import { getParticipationPhase as getParticipationPhaseV3 } from "../contracts_integrations/idoV3";
-import { getParticipationPhase as getParticipationPhaseNftOpen } from "../contracts_integrations/idoNftOpen";
-import { getParticipationPhase as getParticipationPhaseNode } from "../contracts_integrations/idoNFTV2";
+import { getParticipationPhase as getParticipationPhasePrivate } from "../contracts_integrations/privateIDO";
 import { useCallback, useEffect, useState } from "react";
+import { IDOs } from "../utils/constants";
 
 export default function LaunchpadCardV2({
   ido,
@@ -22,29 +17,15 @@ export default function LaunchpadCardV2({
   const [phase, setPhase] = useState("");
 
   const getPhase = useCallback(async () => {
-    const contract = IDO_LIST.findIndex(
-      (item) => item.contract === ido.contract
-    );
+    const index = IDOs.findIndex((item) => item.id === ido.id);
 
-    const isNft = ido.type === "NFT";
-    const isNftEth = ido.type === "NFT-ETH";
-    const isV2 = ido.type === "v2";
     const isV3 = ido.type === "v3";
-    const isNftOpen = ido.type === "NFT-OPEN";
-    const isNode = ido.type === "NODE";
-    const phase = isNft
-      ? await getParticipationPhaseNft(contract)
-      : isNftEth
-      ? await getParticipationPhaseNftEth(contract)
-      : isV2
-      ? await getParticipationPhaseV2(contract)
-      : isV3
-      ? await getParticipationPhaseV3(0)
-      : isNftOpen
-      ? await getParticipationPhaseNftOpen(contract)
-      : isNode
-      ? await getParticipationPhaseNode(contract)
-      : await getParticipationPhase(contract);
+    const isPrivate = ido.type === "private";
+    const phase = isV3
+      ? await getParticipationPhaseV3(index)
+      : isPrivate
+      ? await getParticipationPhasePrivate(index)
+      : await getParticipationPhaseV3(index);
     setPhase(phase.toUpperCase());
   }, [ido]);
 
@@ -76,7 +57,7 @@ export default function LaunchpadCardV2({
         </div>
 
         <div className="flex flex-col sm:flex-row lg:flex-col 2xl:flex-row justify-between sm:gap-2 lg:gap-0 2xl:gap-2 w-full absolute bottom-3 px-3">
-          <div className="flex justify-center items-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-xs md:text-[14px] border border-white/20">
+          <div className="flex justify-center items-center text-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-xs md:text-[14px] border border-white/20">
             {ido.investmentRound.toUpperCase()}
           </div>
           <div
@@ -135,33 +116,14 @@ export default function LaunchpadCardV2({
       <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-lg  w-max">
         <span className="text-[14px] text-samurai-red">ALLOCATION:</span>
         <p className="text-white/70">
-          {ido?.id === "xrone" ? (
-            <>TBA</>
-          ) : (
-            <>
-              {ido.allocation.toLocaleString("en-us")}{" "}
-              {ido.type == "NFT" ||
-              ido.type === "NFT-ETH" ||
-              ido.type === "NFT-OPEN" ||
-              ido.type === "NODE"
-                ? ido.type === "NODE"
-                  ? "NODEs"
-                  : "NFTs"
-                : ido.acceptedTokenSymbol}
-            </>
-          )}
+          {ido.allocation.toLocaleString("en-us")} {ido.acceptedTokenSymbol}
         </p>
       </div>
 
       <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-lg w-max mt-2">
         <span className="text-[14px] text-samurai-red">PRICE:</span>
         <p className="text-white/70">
-          {ido.price} {ido.type === "NFT-ETH" ? "ETH" : ido.acceptedTokenSymbol}{" "}
-          {(ido.type === "NFT" ||
-            ido.type === "NFT-ETH" ||
-            ido.type === "NFT-OPEN") &&
-            "per NFT"}
-          {ido.type === "NODE" && "per NODE"}
+          {ido.price} {ido.acceptedTokenSymbol}
         </p>
       </div>
 

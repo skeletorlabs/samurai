@@ -155,7 +155,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
     <div className="flex items-start min-h-[60px] relative text-white/70 p-2">
       {general && (
         <div className="flex flex-col justify-between w-full h-full">
-          <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap">
+          <div className="flex justify-between border-b border-samurai-red pb-3 flex-wrap">
             <span>Distribution</span>
             {/* {(account === general.owner || walletEnabledToFill) && (
               <button
@@ -167,7 +167,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
             )} */}
           </div>
 
-          <div className="flex justify-between items-center gap-y-5 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap text-center lg:text-start mt-2">
+          <div className="flex justify-between lg:items-center gap-y-5 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap mt-2">
             <div className="flex flex-col w-[200px] ">
               <p className={`${inter.className}`}>Network</p>
               <p className="text-samurai-red w-max font-bold">
@@ -221,14 +221,14 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
               </p>
             </div>
 
-            <div className="flex flex-col w-[200px] ml-[8px] flex-1">
+            <div className="flex flex-col w-[200px] lg:ml-[8px] lg:flex-1">
               <p className={`${inter.className}`}>Vesting End</p>
               <p className="text-samurai-red w-max font-bold">
                 {formattedDate5(general?.periods.vestingEndsAt)}
               </p>
             </div>
 
-            <div className="flex flex-col w-[200px] ml-[8px] flex-1">
+            <div className="flex flex-col w-[200px] lg:ml-[8px] lg:flex-1">
               <p className={`${inter.className}`}>Next Unlock</p>
               <p className="text-samurai-red w-max font-bold">
                 {/* Feb 03, 2025, 15:00 UTC */}
@@ -256,7 +256,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
                       user?.claimableTokens === 0 ||
                       user?.askedRefund
                     }
-                    className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
+                    className="text-sm lg:text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
                   >
                     CLAIM
                   </button>
@@ -270,7 +270,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
                         now < general.periods.vestingAt
                       }
                       onClick={onGetRefund}
-                      className="flex items-center gap-1 text-md py-1 px-4 bg-black border border-gray-400 text-gray-400 disabled:text-white/20 disabled:border-white/20 hover:enabled:bg-gray-800 w-max rounded-full"
+                      className="flex items-center gap-1 text-sm lg:text-md py-1 px-4 bg-black border border-gray-400 text-gray-400 disabled:text-white/20 disabled:border-white/20 hover:enabled:bg-gray-800 w-max rounded-full"
                     >
                       <span>ASK FOR REFUND</span>
                       <Tooltip
@@ -296,7 +296,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
                 </div>
               </div>
 
-              <div className="flex justify-between items-center gap-5 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap text-center lg:text-start">
+              <div className="flex flex-col lg:flex-row justify-between lg:items-center gap-5 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap">
                 <div className="flex flex-col">
                   <p className={`${inter.className}`}>Ticker</p>
                   <p className="text-samurai-red w-max font-bold">
@@ -345,7 +345,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
                   user?.askedRefund ||
                   user?.claimablePoints === 0
                 }
-                className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
+                className="text-sm lg:text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
               >
                 CLAIM
               </button>
@@ -353,7 +353,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
           )}
 
           {user && user?.purchased > 0 && (
-            <div className="flex items-center gap-5 gap-x-14 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap text-center lg:text-start mt-2">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-5 gap-x-14 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap mt-2">
               <div className="flex flex-col">
                 <p className={`${inter.className}`}>Points Earned</p>
                 <p className="text-samurai-red w-max font-bold">

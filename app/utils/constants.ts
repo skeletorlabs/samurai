@@ -43,6 +43,7 @@ import {
   PARTICIPATOR_V2_2,
   PARTICIPATOR_NFT_OPEN,
   PARTICIPATOR_NFT_V2_ABI,
+  PRIVATE_PARTICIPATOR_ABI,
   LATEST_PARTICIPATOR_TOKENS_ABI,
 } from "@/app/contracts_integrations/abis";
 import { base } from "../context/web3modal";
@@ -78,6 +79,150 @@ export const simplifiedPhasesV3 = [
 ];
 
 export const IDOs: IDO_v3[] = [
+  // {
+  //   id: "earnm-r2",
+  //   url: "#",
+  //   logo: smartnodes,
+  //   idoImageSrc: "/IDOs/earnm.png",
+  //   acceptedTokenSymbol: "USDC",
+  //   tokenNetwork: "BASE",
+  //   crowdsaleNetwork: "BASE",
+  //   networkImageSrc: "/chain-logos/BASE.svg",
+  //   projectName: "EARN'M",
+  //   projectListDescription:
+  //     "A Web3 MobileFi rewards ecosystem that allows you to farm the deflationary $EARNM token as a SmartNode operator.",
+  //   projectDescription:
+  //     "$EARNM is a deflationary rewards token from Mode Mobile: the fastest-growing US software company of 2023. Their tech and token is designed for seamless plug-and-play integration with any platform in Web3 or Web2, allowing users to earn for their engagement. Meanwhile, the entire EARN'M ecosystem profits from innovative revenue share and token burn mechanisms.",
+  //   projectTokenSymbol: "$EARNM",
+  //   projectBigDescription: `
+  //     <div style="display: flex; flex-direction: column; gap: 15px;">
+  //       <p>EARN'M is an exciting new Web3 rewards ecosystem, built by Deloitte's fastest-growing software company of 2023: Mode Mobile. EARN'M is their MobileFi rewards infrastructure which turns smartphones into EarnPhones. With it, users are able to earn hundreds of dollars a month just by completing everyday activities on their phone: listening to music, watching live streams, trading crypto, and more.</p>
+  //       <p>Already the Web2 iteration of the ecosystem has generated strong revenues and drawn in huge clients including Binance and Coinbase. Now they're taking this rewards ecosystem on-chain with their very own token: $EARNM!
+  //       <p>This is the native token of the ecosystem, used for paying out rewards, node operator fees, and platform revenue share rewards. The core mechanism of the EARN'M rewards ecosystem is the Mystery Box: a package earned by platform users which contains vested $EARNM tokens, and can also be pre-loaded with any other custom bonus rewards (both blockchain assets and Web2 prizes).</p>
+  //       <p>These mystery boxes can be integrated into Web2 and Web3 platforms as a way to gamify participation in any kind of activity: listening to music, watching videos, engaging on social media, using a DApp, and so on. Users earn Mystery Boxes, while EARN'M ecosystem participants profit from a revenue share system whenever the prizes inside these boxes are claimed.</p>
+  //       <p>Depending on the vesting schedule chosen by the holder, varying amounts of $EARNM are re-distributed among ecosystem participants and/or burned, removing them from circulation. Ultimately, this model is designed to make $EARNM deflationary over time!</p>
+  //       <p>In addition to this base utility, $EARNM can also be staked in large quantities by partner projects to access white-label versions of EARN'M products.</p>
+  //     </div>
+  // `,
+  //   price: 0.01,
+  //   tge: 15,
+  //   allocation: 25_000,
+  //   date: 1733486400,
+  //   fcfs: 0,
+  //   end: 1733572800,
+  //   investmentRound: "Round 2 - Tiers",
+  //   fdv: 50_000_000,
+  //   exchangeListingPrice: 0.01,
+  //   marketCapAtTGE: 485_000,
+  //   socials: [
+  //     { svg: globe, href: "https://www.earnm.com/" },
+  //     {
+  //       svg: twitterX,
+  //       href: "https://twitter.com/EARNMrewards",
+  //     },
+  //     {
+  //       svg: telegram,
+  //       href: "https://medium.com/earnm",
+  //     },
+  //     {
+  //       svg: discord,
+  //       href: "https://discord.com/invite/earnm",
+  //     },
+  //     {
+  //       svg: medium,
+  //       href: "https://medium.com/earnm",
+  //     },
+  //   ],
+  //   contract: "0x562f715F49a7D9183Ac8b138B2557dbDD2C3D820",
+  //   abi: PRIVATE_PARTICIPATOR_ABI,
+  //   images: [
+  //     "/IDOs/smartnodes/1.png",
+  //     "/IDOs/smartnodes/2.png",
+  //     "/IDOs/smartnodes/3.png",
+  //     "/IDOs/smartnodes/4.png",
+  //     "/IDOs/smartnodes/5.png",
+  //     "/IDOs/smartnodes/6.png",
+  //   ],
+  //   register: false,
+  //   vestingDescription: "15% TGE unlock, 2-month cliff, 7-month DAILY vesting",
+  //   // vesting: "0x0f2f6ec1e113e45ac368a2ffed60c1956975b2a3",
+  //   // vestingChain: base,
+  //   type: "private",
+  //   linkedWallet: false,
+  //   ether: false,
+  // },
+  {
+    id: "earnm-r1",
+    url: "launchpad-private/earnm-r1",
+    logo: smartnodes,
+    idoImageSrc: "/IDOs/earnm.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "BASE",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/BASE.svg",
+    projectName: "EARN'M",
+    projectListDescription:
+      "A Web3 MobileFi rewards ecosystem that allows you to farm the deflationary $EARNM token as a SmartNode operator.",
+    projectDescription:
+      "$EARNM is a deflationary rewards token from Mode Mobile: the fastest-growing US software company of 2023. Their tech and token is designed for seamless plug-and-play integration with any platform in Web3 or Web2, allowing users to earn for their engagement. Meanwhile, the entire EARN'M ecosystem profits from innovative revenue share and token burn mechanisms.",
+    projectTokenSymbol: "$EARNM",
+    projectBigDescription: `
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <p>EARN'M is an exciting new Web3 rewards ecosystem, built by Deloitte's fastest-growing software company of 2023: Mode Mobile. EARN'M is their MobileFi rewards infrastructure which turns smartphones into EarnPhones. With it, users are able to earn hundreds of dollars a month just by completing everyday activities on their phone: listening to music, watching live streams, trading crypto, and more.</p>
+      <p>Already the Web2 iteration of the ecosystem has generated strong revenues and drawn in huge clients including Binance and Coinbase. Now they're taking this rewards ecosystem on-chain with their very own token: $EARNM!
+      <p>This is the native token of the ecosystem, used for paying out rewards, node operator fees, and platform revenue share rewards. The core mechanism of the EARN'M rewards ecosystem is the Mystery Box: a package earned by platform users which contains vested $EARNM tokens, and can also be pre-loaded with any other custom bonus rewards (both blockchain assets and Web2 prizes).</p>
+      <p>These mystery boxes can be integrated into Web2 and Web3 platforms as a way to gamify participation in any kind of activity: listening to music, watching videos, engaging on social media, using a DApp, and so on. Users earn Mystery Boxes, while EARN'M ecosystem participants profit from a revenue share system whenever the prizes inside these boxes are claimed.</p>
+      <p>Depending on the vesting schedule chosen by the holder, varying amounts of $EARNM are re-distributed among ecosystem participants and/or burned, removing them from circulation. Ultimately, this model is designed to make $EARNM deflationary over time!</p>
+      <p>In addition to this base utility, $EARNM can also be staked in large quantities by partner projects to access white-label versions of EARN'M products.</p>
+    </div>
+`,
+    price: 0.01,
+    tge: 15,
+    allocation: 25_000,
+    date: 1733400000,
+    fcfs: 0,
+    end: 1733486400,
+    investmentRound: "Round 1 - Nodes",
+    fdv: 50_000_000,
+    exchangeListingPrice: 0.01,
+    marketCapAtTGE: 485_000,
+    socials: [
+      { svg: globe, href: "https://www.earnm.com/" },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/EARNMrewards",
+      },
+      {
+        svg: telegram,
+        href: "https://medium.com/earnm",
+      },
+      {
+        svg: discord,
+        href: "https://discord.com/invite/earnm",
+      },
+      {
+        svg: medium,
+        href: "https://medium.com/earnm",
+      },
+    ],
+    contract: "0x562f715F49a7D9183Ac8b138B2557dbDD2C3D820",
+    abi: PRIVATE_PARTICIPATOR_ABI,
+    images: [
+      "/IDOs/smartnodes/1.png",
+      "/IDOs/smartnodes/2.png",
+      "/IDOs/smartnodes/3.png",
+      "/IDOs/smartnodes/4.png",
+      "/IDOs/smartnodes/5.png",
+      "/IDOs/smartnodes/6.png",
+    ],
+    register: false,
+    vestingDescription: "15% TGE unlock, 2-month cliff, 7-month DAILY vesting",
+    // vesting: "0x0f2f6ec1e113e45ac368a2ffed60c1956975b2a3",
+    // vestingChain: base,
+    type: "private",
+    linkedWallet: false,
+    ether: false,
+  },
   {
     id: "dyor",
     url: "launchpad-v3/dyor",
@@ -142,6 +287,80 @@ export const IDOs: IDO_v3[] = [
 ];
 
 export const IDO_LIST: IDO[] = [
+  // {
+  //   id: "earnm",
+  //   url: "launchpad-private/earnm",
+  //   logo: smartnodes,
+  //   idoImageSrc: "/IDOs/earnm.png",
+  //   acceptedTokenSymbol: "USDC",
+  //   tokenNetwork: "Polygon",
+  //   crowdsaleNetwork: "BASE",
+  //   networkImageSrc: "/chain-logos/polygon.svg",
+  //   projectName: "EARN'M",
+  //   projectListDescription:
+  //     "A Web3 MobileFi rewards ecosystem that allows you to farm the deflationary $EARNM token as a SmartNode operator.",
+  //   projectDescription:
+  //     "$EARNM is a deflationary rewards token from Mode Mobile: the fastest-growing US software company of 2023. Their tech and token is designed for seamless plug-and-play integration with any platform in Web3 or Web2, allowing users to earn for their engagement. Meanwhile, the entire EARN'M ecosystem profits from innovative revenue share and token burn mechanisms.",
+  //   projectTokenSymbol: "$EARNM",
+  //   totalAllocation: 25_000,
+  //   price: "0.01",
+  //   registrationStartsAt: 1730721600,
+  //   participationStartsAt: 1730808000,
+  //   participationEndsAt: 1730894400,
+  //   publicParticipationStartsAt: 0,
+  //   publicParticipationEndsAt: 0,
+  //   simplified: true,
+  //   tgeDate: 1731456000,
+  //   tgePercentage: 15,
+  //   cliff: 0,
+  //   investmentRound: "Private Tier",
+  //   fdv: "50000000",
+  //   exchangeListingPrice: 0.01,
+  //   marketCapAtTGE: 485000,
+  //   vesting: "15% TGE unlock, 2-month cliff, 7-month DAILY vesting",
+  //   releaseType: "Linear",
+  //   currentPhase: simplifiedPhases[1].title,
+  //   socials: [
+  //     { svg: globe, href: "https://www.earnm.com/" },
+  //     {
+  //       svg: twitterX,
+  //       href: "https://twitter.com/EARNMrewards",
+  //     },
+  //     {
+  //       svg: telegram,
+  //       href: "https://medium.com/earnm",
+  //     },
+  //     {
+  //       svg: discord,
+  //       href: "https://discord.com/invite/earnm",
+  //     },
+  //     {
+  //       svg: medium,
+  //       href: "https://medium.com/earnm",
+  //     },
+  //   ],
+  //   bigDescription: `
+  //     <div style="display: flex; flex-direction: column; gap: 15px;">
+  //       <p>EARN'M is an exciting new Web3 rewards ecosystem, built by Deloitte's fastest-growing software company of 2023: Mode Mobile. EARN'M is their MobileFi rewards infrastructure which turns smartphones into EarnPhones. With it, users are able to earn hundreds of dollars a month just by completing everyday activities on their phone: listening to music, watching live streams, trading crypto, and more.</p>
+  //       <p>Already the Web2 iteration of the ecosystem has generated strong revenues and drawn in huge clients including Binance and Coinbase. Now they're taking this rewards ecosystem on-chain with their very own token: $EARNM!
+  //       <p>This is the native token of the ecosystem, used for paying out rewards, node operator fees, and platform revenue share rewards. The core mechanism of the EARN'M rewards ecosystem is the Mystery Box: a package earned by platform users which contains vested $EARNM tokens, and can also be pre-loaded with any other custom bonus rewards (both blockchain assets and Web2 prizes).</p>
+  //       <p>These mystery boxes can be integrated into Web2 and Web3 platforms as a way to gamify participation in any kind of activity: listening to music, watching videos, engaging on social media, using a DApp, and so on. Users earn Mystery Boxes, while EARN'M ecosystem participants profit from a revenue share system whenever the prizes inside these boxes are claimed.</p>
+  //       <p>Depending on the vesting schedule chosen by the holder, varying amounts of $EARNM are re-distributed among ecosystem participants and/or burned, removing them from circulation. Ultimately, this model is designed to make $EARNM deflationary over time!</p>
+  //       <p>In addition to this base utility, $EARNM can also be staked in large quantities by partner projects to access white-label versions of EARN'M products.</p>
+  //     </div>
+  // `,
+  //   contract: "0x562f715F49a7D9183Ac8b138B2557dbDD2C3D820",
+  //   abi: PRIVATE_PARTICIPATOR_ABI,
+  //   images: [
+  //     "/IDOs/smartnodes/1.png",
+  //     "/IDOs/smartnodes/2.png",
+  //     "/IDOs/smartnodes/3.png",
+  //     "/IDOs/smartnodes/4.png",
+  //     "/IDOs/smartnodes/5.png",
+  //     "/IDOs/smartnodes/6.png",
+  //   ],
+  //   type: "private",
+  // },
   {
     id: "smartnodes",
     url: "launchpad-nodes/smartnodes",
@@ -301,7 +520,7 @@ export const IDO_LIST: IDO[] = [
     projectListDescription:
       "Nexis Network is an innovative new Layer-1 blockchain, tailored to host the next generation of data-intensive AI and RWA applications.",
     projectDescription:
-      "Nexis' mission is to build a secure, scalable, lightning-fast blockchain which solves all of the problems currently inhibiting the growth of AI projects in Web3. With block confirmations five times faster than Solana (and for a third of the cost) they’re building the blockchain infrastructure needed to meet the high data demands of next-gen machine learning and RWA projects.",
+      "Nexis' mission is to build a secure, scalable, lightning-fast blockchain which solves all of the problems currently inhibiting the growth of AI projects in Web3. With block confirmations five times faster than Solana (and for a third of the cost) they're building the blockchain infrastructure needed to meet the high data demands of next-gen machine learning and RWA projects.",
     projectTokenSymbol: "NFT",
     totalAllocation: 400,
     price: "50",
@@ -363,7 +582,7 @@ export const IDO_LIST: IDO[] = [
     projectListDescription:
       "Nexis Network is an innovative new Layer-1 blockchain, tailored to host the next generation of data-intensive AI and RWA applications.",
     projectDescription:
-      "Nexis' mission is to build a secure, scalable, lightning-fast blockchain which solves all of the problems currently inhibiting the growth of AI projects in Web3. With block confirmations five times faster than Solana (and for a third of the cost) they’re building the blockchain infrastructure needed to meet the high data demands of next-gen machine learning and RWA projects.",
+      "Nexis' mission is to build a secure, scalable, lightning-fast blockchain which solves all of the problems currently inhibiting the growth of AI projects in Web3. With block confirmations five times faster than Solana (and for a third of the cost) they're building the blockchain infrastructure needed to meet the high data demands of next-gen machine learning and RWA projects.",
     projectTokenSymbol: "$NZT",
     totalAllocation: 200_000,
     price: "0.01125",
@@ -890,7 +1109,7 @@ export const IDO_LIST: IDO[] = [
     projectListDescription:
       "OrangeDX is ready to push the envelope for Bitcoin-native DeFi, with a full suite of BRC-20 financial products.",
     projectDescription:
-      "OrangeDX is setting out to conquer the brave new world of Bitcoin-based DeFi and gain first-mover advantage over the competition. They’ve developed a complete range of DeFi solutions to unite the worlds of BRC-20 and ERC-20, all powered by the $O4DX token.",
+      "OrangeDX is setting out to conquer the brave new world of Bitcoin-based DeFi and gain first-mover advantage over the competition. They've developed a complete range of DeFi solutions to unite the worlds of BRC-20 and ERC-20, all powered by the $O4DX token.",
     projectTokenSymbol: "$O4DX",
     totalAllocation: 100_000,
     price: "0.055",
