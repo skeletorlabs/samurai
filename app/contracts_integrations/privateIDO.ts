@@ -86,6 +86,7 @@ export async function generalInfo(index: number) {
 export async function userInfo(index: number, signer: ethers.Signer) {
   try {
     const signerAddress = await signer.getAddress();
+
     const contract = await getContract(index, signer);
 
     const maxPermitted = Number(
@@ -208,5 +209,24 @@ export async function togglePause(index: number, signer: ethers.Signer) {
 }
 
 export async function getParticipationPhase(index: number) {
-  return "Upcoming";
+  const ido = IDOs[index];
+  const start = ido.date;
+  const end = ido.end;
+  const now = getUnixTime(new Date());
+  const isPaused = await checkIsPaused(index);
+
+  let phase = "Upcoming";
+  if (now >= start && now <= end && !isPaused) phase = "Participation";
+
+  const contract = await getContract(index, undefined);
+  const minPerWallet = Number(formatUnits(await contract?.minPerWallet(), 6));
+  const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
+
+  const maxAllocations = Number(
+    ethers.formatUnits(await contract?.maxAllocations(), 6)
+  );
+  if (maxAllocations - raised < minPerWallet) phase = "Completed";
+  if (isPaused && raised > 0) phase = "Completed";
+
+  return phase;
 }

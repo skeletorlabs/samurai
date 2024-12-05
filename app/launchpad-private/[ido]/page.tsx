@@ -42,6 +42,7 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import AdminRanges from "@/app/components/adminRanges";
+import { getMax } from "@/app/utils/max";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -110,6 +111,13 @@ export default function Ido() {
   // ============================================================================================================
   // USER ACTIONS
   // ============================================================================================================
+
+  const onGetMax = useCallback(() => {
+    const { minPerWallet } = general;
+    const { allocation, balanceToken, maxPermitted } = user;
+
+    return getMax(balanceToken, allocation, minPerWallet, maxPermitted);
+  }, [general, user]);
 
   const onImageClick = useCallback(
     async (image: string) => {
@@ -525,12 +533,13 @@ export default function Ido() {
                             <div className="flex items-center justify-between">
                               <span className="self-end text-[10px] lg:text-sm mb-1 mr-1">
                                 MIN{" "}
-                                {Number(
-                                  user?.walletRange?.minPerWallet
-                                ).toLocaleString("en-us", {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                })}
+                                {Number(general?.minPerWallet).toLocaleString(
+                                  "en-us",
+                                  {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  }
+                                )}
                                 {" / "}
                                 MAX{" "}
                                 {Number(user?.maxPermitted).toLocaleString(
@@ -542,18 +551,26 @@ export default function Ido() {
                                 )}{" "}
                                 {TOKENS_TO_SYMBOL[selectedToken]}
                               </span>
-                              <button
-                                onClick={() =>
-                                  onInputChange(user.balanceToken.toString())
-                                }
-                                className="self-end text-[10px] lg:text-sm mb-1 hover:text-samurai-red mr-1"
-                              >
-                                BALANCE:{" "}
-                                {Number(user.balanceToken).toLocaleString(
-                                  "en-us"
-                                )}{" "}
-                                {TOKENS_TO_SYMBOL[selectedToken]}
-                              </button>
+                              <div className="flex items-center gap-2">
+                                <button
+                                  onClick={() => onInputChange(onGetMax())}
+                                  className="text-[10px] mb-1 bg-samurai-red rounded-full px-2 py-[1px]"
+                                >
+                                  MAX
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    onInputChange(user?.balanceToken.toString())
+                                  }
+                                  className="self-end text-[10px] lg:text-sm mb-1 hover:text-samurai-red mr-1"
+                                >
+                                  BALANCE:{" "}
+                                  {Number(user?.balanceToken).toLocaleString(
+                                    "en-us"
+                                  )}{" "}
+                                  {TOKENS_TO_SYMBOL[selectedToken]}
+                                </button>
+                              </div>
                             </div>
 
                             <div className="relative">
@@ -603,7 +620,8 @@ export default function Ido() {
                               !general ||
                               !user ||
                               general?.isPaused ||
-                              (user.maxPermitted === 0 && !general?.isPublic) ||
+                              (user?.maxPermitted === 0 &&
+                                !general?.isPublic) ||
                               inputValue === "" ||
                               Number(inputValue) === 0 ||
                               Number(inputValue) < general?.minPerWallet ||
@@ -629,7 +647,7 @@ export default function Ido() {
                               </p>
                               <p className="text-xl text-samurai-red">
                                 $
-                                {user.allocation.toLocaleString("en-us", {
+                                {user?.allocation.toLocaleString("en-us", {
                                   minimumFractionDigits: 2,
                                   maximumFractionDigits: 2,
                                 })}
