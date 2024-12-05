@@ -147,10 +147,7 @@ export async function participate(
       parseUnits(amount, 6)
     );
 
-    const tx = await contract?.participate(
-      acceptedToken,
-      parseUnits(amount, 6)
-    );
+    const tx = await contract?.participate(parseUnits(amount, 6));
 
     await notificateTx(tx, network);
   } catch (e) {
