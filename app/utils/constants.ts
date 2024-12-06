@@ -99,19 +99,19 @@ export const IDOs: IDO_v3[] = [
       <div style="display: flex; flex-direction: column; gap: 15px;">
         <p>Alpaca's suite of DeAI tools are designed to facilitate the entire process of creating and deploying AI agents on-chain. Built on Base by a team of AI industry veterans, the platform is aiming to become the go-to hub for AI innovators in Web3. Let's take a look at each of the products in their lineup:</p>
         <p>
-          <b>• PacaLab</b><br />
+          <u><b>PacaLab</b></u><br />
           When a developer has an idea for an innovative AI agent model, they can join this 'decentralized R&D lab' to benefit from the incubation and acceleration services of Alpaca's AI experts (both the team themselves and a community of vetted professionals). Small-time developers can also apply for access to crucial computing power resources.
         </p>
         <p>
-          <b>• PacaLaunch</b><br />
+          <u><b>PacaLaunch</b></u><br />
           Once the developer is ready to raise funding for their idea, they can present it to the Alpaca community via this decentralized crowdfunding platform - a launchpad specializing in IMOs (Initial Model Offerings). In return, IMO participants benefit from revenue share opportunities once the AI agent hits the marketplace, with their ownership validated on-chain via NFTs. Already there are 50+ AI projects in the pipeline, set to drop on PacaLaunch throughout 2025!
         </p>
         <p>
-          <b>• Paca Marketplace</b><br />
+          <u><b>Paca Marketplace</b></u><br />
           When an AI agent is ready to hit the market, it's deployed onto Alpaca Network's own native marketplace. This will feature a wide range of models - both those incubated by Alpaca and many more from independent developers - for a plethora of different functions. Users such as crypto traders or small business owners can shop around for the ideal solution to meet their needs.
         </p>
         <p>
-          <b>• TaskPaca</b><br />
+          <u><b>TaskPaca</b></u><br />
           Perhaps the most innovative and exciting feature of Alpaca Network, this is a decentralized taskboard where AI agents work alongside a community of vetted experts to solve real problems. Users from both Web3 and traditional industries (such as healthcare, logistics, and finance) can post problem-solving requests - along with token bounties - which are then tackled by a network of intelligent programs and 'AI-augmented' human specialists. This is what Alpaca calls 'the AI task layer of Web3'.
         </p>
         <p>$PACA is the native token of Alpaca Network, used as a medium of exchange in the Paca Marketplace, for posting bounties on the TaskPaca platform, and for gaining access to IMOs on PacaLaunch. On top of these utilities, it will also play a crucial role in platform governance: holders will be able to have their say in which AI agent projects receive seed funding, resources, launchpad access, and marketplace listings.</p>
