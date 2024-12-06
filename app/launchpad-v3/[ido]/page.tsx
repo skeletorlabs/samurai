@@ -506,7 +506,9 @@ export default function Ido() {
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">IDO End:</span>
                           <p className="text-white/70">
-                            {formattedDate(ido.fcfs > 0 ? ido.fcfs : ido.end)}{" "}
+                            {formattedDate(
+                              ido.fcfs > 0 ? ido.fcfs - 1 : ido.end
+                            )}{" "}
                             UTC
                           </p>
                         </div>

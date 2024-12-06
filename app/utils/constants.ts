@@ -34,6 +34,7 @@ import {
   xrone,
   smartnodes,
   dyor,
+  alpaca,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -79,6 +80,82 @@ export const simplifiedPhasesV3 = [
 ];
 
 export const IDOs: IDO_v3[] = [
+  {
+    id: "alpaca",
+    url: "launchpad-v3/alpaca",
+    logo: alpaca,
+    idoImageSrc: "/IDOs/alpaca.svg",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "BASE",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/BASE.svg",
+    projectName: "ALPACA",
+    projectListDescription:
+      "A platform custom-made for the democratized development and utilization of next-gen AI agent models.",
+    projectDescription:
+      "Alpaca is Base chain's new innovation hub for AI agents, where developers can take their ideas through the whole process of incubation, development, launching, and monetization. At the core of Alpaca Network is a decentralized taskboard where powerful AI agents are deployed in tandem with human experts to solve real-world problems.",
+    projectTokenSymbol: "$PACA",
+    projectBigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <p>Alpaca's suite of DeAI tools are designed to facilitate the entire process of creating and deploying AI agents on-chain. Built on Base by a team of AI industry veterans, the platform is aiming to become the go-to hub for AI innovators in Web3. Let's take a look at each of the products in their lineup:</p>
+        <p>
+          <b>• PacaLab</b><br />
+          When a developer has an idea for an innovative AI agent model, they can join this 'decentralized R&D lab' to benefit from the incubation and acceleration services of Alpaca's AI experts (both the team themselves and a community of vetted professionals). Small-time developers can also apply for access to crucial computing power resources.
+        </p>
+        <p>
+          <b>• PacaLaunch</b><br />
+          Once the developer is ready to raise funding for their idea, they can present it to the Alpaca community via this decentralized crowdfunding platform - a launchpad specializing in IMOs (Initial Model Offerings). In return, IMO participants benefit from revenue share opportunities once the AI agent hits the marketplace, with their ownership validated on-chain via NFTs. Already there are 50+ AI projects in the pipeline, set to drop on PacaLaunch throughout 2025!
+        </p>
+        <p>
+          <b>• Paca Marketplace</b><br />
+          When an AI agent is ready to hit the market, it's deployed onto Alpaca Network's own native marketplace. This will feature a wide range of models - both those incubated by Alpaca and many more from independent developers - for a plethora of different functions. Users such as crypto traders or small business owners can shop around for the ideal solution to meet their needs.
+        </p>
+        <p>
+          <b>• TaskPaca</b><br />
+          Perhaps the most innovative and exciting feature of Alpaca Network, this is a decentralized taskboard where AI agents work alongside a community of vetted experts to solve real problems. Users from both Web3 and traditional industries (such as healthcare, logistics, and finance) can post problem-solving requests - along with token bounties - which are then tackled by a network of intelligent programs and 'AI-augmented' human specialists. This is what Alpaca calls 'the AI task layer of Web3'.
+        </p>
+        <p>$PACA is the native token of Alpaca Network, used as a medium of exchange in the Paca Marketplace, for posting bounties on the TaskPaca platform, and for gaining access to IMOs on PacaLaunch. On top of these utilities, it will also play a crucial role in platform governance: holders will be able to have their say in which AI agent projects receive seed funding, resources, launchpad access, and marketplace listings.</p>
+      </div>
+  `,
+    price: 0.0025,
+    tge: 100,
+    allocation: 100_000,
+    date: 1733832000,
+    fcfs: 1733875200,
+    end: 1733918400,
+    investmentRound: "Public",
+    fdv: 3_000_000,
+    exchangeListingPrice: 0.0025,
+    marketCapAtTGE: 1_360_800,
+    socials: [
+      { svg: globe, href: "https://alpacanetwork.ai" },
+      {
+        svg: twitterX,
+        href: "https://x.com/AlpacaNetworkAI",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/alpacanetworkai",
+      },
+    ],
+    contract: "0x3A76C6e3e6a0B136eE92b66B9Ba25d099BBC5882",
+    abi: LATEST_PARTICIPATOR_TOKENS_ABI,
+    // images: [
+    //   "/IDOs/smartnodes/1.png",
+    //   "/IDOs/smartnodes/2.png",
+    //   "/IDOs/smartnodes/3.png",
+    //   "/IDOs/smartnodes/4.png",
+    //   "/IDOs/smartnodes/5.png",
+    //   "/IDOs/smartnodes/6.png",
+    // ],
+    register: true,
+    vestingDescription: "100% TGE unlock, No cliff, No vesting",
+    // vesting: "0x0f2f6ec1e113e45ac368a2ffed60c1956975b2a3",
+    // vestingChain: base,
+    type: "v3",
+    linkedWallet: false,
+    ether: false,
+  },
   {
     id: "earnm-r2",
     url: "launchpad-v3/earnm-r2",
@@ -236,12 +313,12 @@ export const IDOs: IDO_v3[] = [
     projectListDescription:
       "DYOR is an integrated 'Web3 command centre' for traders and developers, bringing the best aspects of centralized platforms on chain.",
     projectDescription:
-      "Designed to enhance the entire on-chain experience for both traders and project developers, DYOR is a next-generation multi-chain trading, research, marketing, and token management dashboard which combines the best aspects of dozens of existing platforms into one. Already they’ve secured backing of over 50 top KOLs with a combined audience of over 26 million!",
+      "Designed to enhance the entire on-chain experience for both traders and project developers, DYOR is a next-generation multi-chain trading, research, marketing, and token management dashboard which combines the best aspects of dozens of existing platforms into one. Already they've secured backing of over 50 top KOLs with a combined audience of over 26 million!",
     projectTokenSymbol: "$DYOR",
     projectBigDescription: `
     <div style="display: flex; flex-direction: column; gap: 15px;">
       <p>The team at DYOR Labs is raising the bar for on-chain user experience, on a mission to replace all of the many outdated, clunky, and expensive platforms which currently have a stranglehold on Web3.</p>
-      <p>To do this, they're building an integrated 'Web3 command centre' which brings all of the best aspects of centralized platforms (live customer support, advanced charting/analytics, limit orders, etc.) on chain. Not only that, they’re also developing a whole suite of features geared towards developers, allowing them to launch, manage, and market their tokens all from within one unified dashboard.</p>
+      <p>To do this, they're building an integrated 'Web3 command centre' which brings all of the best aspects of centralized platforms (live customer support, advanced charting/analytics, limit orders, etc.) on chain. Not only that, they're also developing a whole suite of features geared towards developers, allowing them to launch, manage, and market their tokens all from within one unified dashboard.</p>
       <p>For traders, this means access to advanced charting and TA tools, with multi-chart layouts and custom presets. The DYOR DEX and DEX aggregator make use of enhanced features like limit orders and anti-honeypot scam prevention, all designed to make the on-chain trading experience as intuitive and secure as on the very best CEXs. All of this while executing cheaper and faster trades than UniSwap and 1inch.</p>
       <p>For developers, DYOR offers a unified dashboard for every aspect of token creation, liquidity provision, project operations, and community growth. These include enterprise-grade services such as audits, market making, and KOL matchmaking built into the platform, as well as a directory of carefully vetted third-party service providers for everything from copywriting to legal services.</p>
       <p>The 'public beta version of the platform' is already live, with more than 37,000 traders participating so far. Also on board is a veritable army of KOLs who have been brought on board to promote DYOR to the masses.</p>
