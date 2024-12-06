@@ -113,7 +113,7 @@ export const IDOs: IDO_v3[] = [
     investmentRound: "Round 2 - Tiers",
     fdv: 50_000_000,
     exchangeListingPrice: 0.01,
-    marketCapAtTGE: 485_000,
+    marketCapAtTGE: 1_113_000,
     socials: [
       { svg: globe, href: "https://www.earnm.com/" },
       {
@@ -185,7 +185,7 @@ export const IDOs: IDO_v3[] = [
     investmentRound: "Round 1 - Whitelist",
     fdv: 50_000_000,
     exchangeListingPrice: 0.01,
-    marketCapAtTGE: 485_000,
+    marketCapAtTGE: 1_113_000,
     socials: [
       { svg: globe, href: "https://www.earnm.com/" },
       {
