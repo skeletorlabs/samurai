@@ -853,18 +853,13 @@ export default function Ido() {
                                 >
                                   MAX
                                 </button>
-                                <button
-                                  onClick={() =>
-                                    onInputChange(user.balanceToken.toString())
-                                  }
-                                  className="self-end text-[10px] lg:text-sm mb-1 hover:text-samurai-red mr-1"
-                                >
+                                <span className="self-end text-[10px] lg:text-sm mb-1 mr-1">
                                   BALANCE:{" "}
                                   {Number(user.balanceToken).toLocaleString(
                                     "en-us"
                                   )}{" "}
                                   {TOKENS_TO_SYMBOL[selectedToken]}
-                                </button>
+                                </span>
                               </div>
                             </div>
 
@@ -1247,7 +1242,11 @@ export default function Ido() {
               </div>
 
               {general && general.ranges && (
-                <AdminRanges idoIndex={idoIndex} ranges={general?.ranges} />
+                <AdminRanges
+                  idoIndex={idoIndex}
+                  ranges={general?.ranges}
+                  version={ido?.type || ""}
+                />
               )}
             </div>
           )}

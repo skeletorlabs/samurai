@@ -134,7 +134,7 @@ export const IDOs: IDO_v3[] = [
       },
     ],
     contract: "0x10fAEe84F27Beb0aAEcAA6aDa97fA67d21Dd61e1",
-    abi: PARTICIPATOR_V2_2,
+    abi: LATEST_PARTICIPATOR_TOKENS_ABI,
     images: [
       "/IDOs/smartnodes/1.png",
       "/IDOs/smartnodes/2.png",

@@ -1,23 +1,37 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { StateContext } from "../context/StateContext";
-import { WalletRange, updateRanges } from "../contracts_integrations/idoV2";
+import {
+  WalletRange,
+  updateRanges as updateRangesV2,
+} from "../contracts_integrations/idoV2";
+
+import { updateRanges as updateRangesV3 } from "../contracts_integrations/idoV3";
 import SSButton from "./ssButton";
 
 interface AdminRanges {
   idoIndex: number;
   ranges: WalletRange[];
+  version?: string;
 }
 
-export default function AdminRanges({ idoIndex, ranges }: AdminRanges) {
+export default function AdminRanges({
+  idoIndex,
+  ranges,
+  version,
+}: AdminRanges) {
   const [walletRanges, setWalletRanges] = useState<WalletRange[] | []>([]);
   const [loading, setLoading] = useState(false);
   const { signer, account } = useContext(StateContext);
 
   const onUpdateRanges = useCallback(async () => {
     setLoading(true);
-    if (signer && account) updateRanges(idoIndex, walletRanges, signer);
+    if (signer && account) {
+      if (!version || version === "v2")
+        updateRangesV2(idoIndex, walletRanges, signer);
+      if (version === "v3") updateRangesV3(idoIndex, walletRanges, signer);
+    }
     setLoading(false);
-  }, [account, idoIndex, walletRanges, signer]);
+  }, [account, idoIndex, walletRanges, version, signer]);
 
   const setRange = useCallback(
     async (index: number, type: string, value: string) => {
