@@ -470,7 +470,14 @@ export default function Ido() {
                           disabled
                           className={`p-2 flex-1 text-md ${
                             phase.title === currentPhase
-                              ? "text-samurai-red"
+                              ? phase.title.toLowerCase() === "registration" ||
+                                phase.title.toLowerCase() === "participation"
+                                ? "text-green-400"
+                                : phase.title.toLowerCase() === "vesting"
+                                ? "text-blue-300"
+                                : phase.title.toLowerCase() === "upcoming"
+                                ? "text-yellow-200"
+                                : "text-samurai-red"
                               : "text-white/40"
                           }`}
                         >

@@ -6,6 +6,7 @@ import { getParticipationPhase as getParticipationPhaseV3 } from "../contracts_i
 import { getParticipationPhase as getParticipationPhasePrivate } from "../contracts_integrations/privateIDO";
 import { useCallback, useEffect, useState } from "react";
 import { IDOs } from "../utils/constants";
+import LoadingBox from "@/app/components/loadingBox";
 
 export default function LaunchpadCardV2({
   ido,
@@ -57,22 +58,24 @@ export default function LaunchpadCardV2({
         </div>
 
         <div className="flex flex-col sm:flex-row lg:flex-col 2xl:flex-row justify-between sm:gap-2 lg:gap-0 2xl:gap-2 w-full absolute bottom-3 px-3">
-          <div className="flex justify-center items-center text-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-xs md:text-[14px] border border-white/20 text-nowrap">
+          <div className="flex justify-center items-center text-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-xs md:text-[14px] border border-white/20 text-nowrap h-9">
             {ido.investmentRound.toUpperCase()}
           </div>
           <div
             className={`
-              flex justify-center items-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-[14px] border border-white/20 ${
+              flex justify-center items-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-[14px] border border-white/20 h-9 ${
                 phase.toLowerCase() === "registration" ||
                 phase.toLowerCase() === "participation"
                   ? "text-green-400"
+                  : phase.toLocaleLowerCase() === "vesting"
+                  ? "text-blue-300"
                   : phase.toLowerCase() === "upcoming"
                   ? "text-yellow-200"
                   : "text-samurai-red"
               }
             `}
           >
-            {phase || "LOADING..."}
+            {phase || <LoadingBox css="flex justify-center items-center" />}
           </div>
         </div>
 
