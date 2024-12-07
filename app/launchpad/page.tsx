@@ -2,10 +2,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import SSButton from "@/app/components/ssButton";
 import TopLayout from "@/app/components/topLayout";
 import Projects from "@/app/components/projects";
 import ProjectsV2 from "../components/projectsV2";
+import {
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
+
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -54,12 +60,27 @@ export default function Launchpad() {
           </h2>
           <ProjectsV2 />
         </div>
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white mt-20">
+
+        <div className="px-6 lg:px-8 xl:px-20 text-white mt-20">
+          <Disclosure>
+            <DisclosureButton className="group flex items-center gap-2">
+              <h2 className="text-4xl lg:text-5xl font-bold">
+                <span className="text-samurai-red">Past</span> Offerings
+              </h2>
+              <ChevronDownIcon className="w-10 h-10 group-data-[open]:rotate-180" />
+            </DisclosureButton>
+            <DisclosurePanel className=" text-white">
+              <Projects />
+            </DisclosurePanel>
+          </Disclosure>
+        </div>
+
+        {/* <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white mt-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Past</span> Offerings
           </h2>
           <Projects />
-        </div>
+        </div> */}
       </div>
 
       {/* HOW TO PARTICIPATE */}
@@ -69,39 +90,40 @@ export default function Launchpad() {
             Launchpad <span className="text-samurai-red">Tiers</span>
           </h2>
           <p
-            className={`relative mt-3 leading-normal pt-3 text-[20px]  ${inter.className}`}
+            className={`relative mt-3 leading-normal pt-3 text-[20px] text-white/70  ${inter.className}`}
           >
             Hold a{" "}
             <Link
               href="https://opensea.io/collection/samuraistarter"
               target="blank"
-              className="text-samurai-red"
+              className="font-bold text-white"
             >
               SamNFT
             </Link>
             , stake{" "}
-            <Link href="/tokens" className="text-samurai-red">
+            <Link href="/tokens" className="font-bold text-white">
               $SAM
             </Link>
             , or provide{" "}
             <Link
               href="https://aerodrome.finance/connect?to=%2Fdeposit%3Ftoken0%3D0x4200000000000000000000000000000000000006%26token1%3D0xed1779845520339693CDBffec49a74246E7D671b%26type%3D-1"
               target="blank"
-              className="text-samurai-red"
+              className="font-bold text-white"
             >
               WETH/SAM LP
             </Link>{" "}
             to be eligible to participate in the hottest{" "}
-            <span className="text-samurai-red">token launches</span> in crypto.
+            <span className="font-bold text-white">token launches</span> in
+            crypto.
           </p>
 
-          <div className="max-w-full flex flex-col gap-10 flex-wrap mt-14 text-2xl lg:text-3xl">
+          <div className="flex flex-col gap-10 flex-wrap mt-14 text-2xl lg:text-3xl relative">
             <Image
               src="/sam-launchpad-tiers.png"
-              width={1}
-              height={1}
-              layout="responsive"
+              width={2200}
+              height={1200}
               alt="samurai launchpad tiers"
+              // className="w-full h-full"
             />
           </div>
         </div>
