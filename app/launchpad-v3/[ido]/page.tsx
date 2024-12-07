@@ -427,7 +427,7 @@ export default function Ido() {
 
             <div className="flex flex-col xl:pr-[32px] 2xl:pr-28 gap-5 mt-10 xl:mt-0 mx-3 xl:mx-0">
               <div className="flex flex-col">
-                <div className="flex flex-col w-full xl:w-[700px] rounded-lg bg-black/70 bg-samurai-pattern pb-6 shadow-xl lg:border border-white/20 mt-10 relative">
+                <div className="flex flex-col w-full xl:w-[700px] rounded-lg bg-[#1E1E1E]/60 bg-samurai-pattern pb-6 shadow-xl mt-10 relative">
                   <div className="flex justify-between items-center text-lg xl:text-xl bg-samurai-red border-b border-white/20 px-7 py-4 rounded-t-lg text-white">
                     <span>
                       {/* {general?.isPublic ? "FCFS Round" : ido?.investmentRound} */}
@@ -445,7 +445,7 @@ export default function Ido() {
                       </div>
                     )}
                   </div>
-                  <div className="hidden md:flex flex-row mt-6 bg-black-900/90 rounded-lg border border-white/20 mx-4 xl:mx-6">
+                  <div className="hidden md:flex flex-row mt-6 bg-black/40 rounded-lg border border-white/10 mx-4 xl:mx-6">
                     {simplifiedPhasesV3.map((phase, index) => (
                       <Fragment key={index}>
                         {index !== 0 && (
@@ -490,7 +490,7 @@ export default function Ido() {
                   {ido && (
                     <div className="flex flex-col gap-10 px-5 md:px-6">
                       {/* PARTICIPATION PHASE BLOCK */}
-                      <div className="grid grid-cols-2 md:grid-cols-3 items-center flex-wrap mt-6 text-sm bg-white/5 rounded-md p-2">
+                      <div className="grid grid-cols-2 md:grid-cols-3 items-center flex-wrap mt-6 text-sm bg-black/40 rounded-md p-2">
                         <div className="flex md:hidden flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">
                             Current Phase:
@@ -634,8 +634,7 @@ export default function Ido() {
 
                       {signer &&
                         account &&
-                        ((currentPhase?.toLocaleLowerCase() === "upcoming" &&
-                          now > ido.date - 86400) ||
+                        (currentPhase?.toLocaleLowerCase() === "upcoming" ||
                           currentPhase?.toLocaleLowerCase() ===
                             "participation") && (
                           <>
