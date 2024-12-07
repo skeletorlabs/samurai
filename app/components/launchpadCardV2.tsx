@@ -58,12 +58,12 @@ export default function LaunchpadCardV2({
         </div>
 
         <div className="flex flex-col sm:flex-row lg:flex-col 2xl:flex-row justify-between sm:gap-2 lg:gap-0 2xl:gap-2 w-full absolute bottom-3 px-3">
-          <div className="flex justify-center items-center text-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-xs md:text-[14px] border border-white/20 text-nowrap h-9">
+          <div className="flex justify-center items-center text-center gap-2 bg-black/90 p-2 rounded-full w-full mt-1 text-xs md:text-[13px] border border-white/20 text-nowrap h-9">
             {ido.investmentRound.toUpperCase()}
           </div>
           <div
             className={`
-              flex justify-center items-center gap-2 bg-black/90 p-2 rounded-lg w-full mt-1 text-[14px] border border-white/20 h-9 ${
+              flex justify-center items-center gap-2 bg-black/90 p-2 rounded-full w-full mt-1 text-[13px] border border-white/20 h-9 ${
                 phase.toLowerCase() === "registration" ||
                 phase.toLowerCase() === "participation"
                   ? "text-green-400"
@@ -80,29 +80,29 @@ export default function LaunchpadCardV2({
         </div>
 
         {ido?.tokenNetwork !== "TBA" && (
-          <div className="flex items-center gap-2 bg-black/90 px-2 py-1 rounded-lg text-[14px] border border-white/20 absolute top-4 left-4">
-            <span className="text-sm">Project Tokens</span>
+          <div className="flex items-center gap-2 bg-black/90 px-2 py-1 rounded-full border border-white/20 absolute top-4 left-4">
+            <span className="text-[12px]">Project Tokens</span>
             <Image
               src={ido.networkImageSrc}
               alt={ido.tokenNetwork}
-              width={24}
-              height={24}
+              width={18}
+              height={18}
               className="p-[1px] bg-white/80 rounded-full"
             />
           </div>
         )}
 
         <div
-          className={`flex items-center gap-2 bg-black/90 px-2 py-1 rounded-lg text-[14px] border border-white/20 absolute ${
-            ido?.tokenNetwork === "TBA" ? "top-4" : "top-14"
+          className={`flex items-center gap-2 bg-black/90 px-2 py-1 rounded-full border border-white/20 absolute ${
+            ido?.tokenNetwork === "TBA" ? "top-4" : "top-12"
           } left-4`}
         >
-          <span className="text-sm">Crowdsale</span>
+          <span className="text-[12px]">Crowdsale</span>
           <Image
             src="/chain-logos/BASE.svg"
             alt={ido.projectName}
-            width={24}
-            height={24}
+            width={18}
+            height={18}
             className="p-[1px] bg-white/80 rounded-full"
           />
         </div>
@@ -116,14 +116,14 @@ export default function LaunchpadCardV2({
         {ido.projectListDescription}
       </div>
 
-      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-lg  w-max">
+      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px]   w-max">
         <span className="text-[14px] text-samurai-red">ALLOCATION:</span>
         <p className="text-white/70">
           {ido.allocation.toLocaleString("en-us")} {ido.acceptedTokenSymbol}
         </p>
       </div>
 
-      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] rounded-lg w-max mt-2">
+      <div className="flex items-center gap-2 bg-black/50 py-2 px-4 text-[16px] w-max mt-2">
         <span className="text-[14px] text-samurai-red">PRICE:</span>
         <p className="text-white/70">
           {ido.price} {ido.acceptedTokenSymbol}

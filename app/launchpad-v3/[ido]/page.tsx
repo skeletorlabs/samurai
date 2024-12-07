@@ -340,25 +340,25 @@ export default function Ido() {
 
                 <div className="flex gap-3">
                   {ido?.tokenNetwork !== "TBA" && (
-                    <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
+                    <div className="flex items-center gap-2 bg-black/20 px-2 pl-3 py-1 rounded-full text-[14px] border border-white/20 w-max">
                       <span className="text-sm">Project Tokens</span>
                       <Image
                         src={ido!.networkImageSrc || ""}
                         alt={ido!.tokenNetwork || ""}
-                        width={24}
-                        height={24}
+                        width={22}
+                        height={22}
                         className="p-[1px] bg-white/80 rounded-full"
                       />
                     </div>
                   )}
 
-                  <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
+                  <div className="flex items-center gap-2 bg-black/20 px-2 pl-3 py-1 rounded-full text-[14px] border border-white/20 w-max">
                     <span className="text-sm">Crowdsale</span>
                     <Image
                       src="/chain-logos/BASE.svg"
                       alt={ido?.projectName || ""}
-                      width={24}
-                      height={24}
+                      width={22}
+                      height={22}
                       className="p-[1px] bg-white/80 rounded-full"
                     />
                   </div>
