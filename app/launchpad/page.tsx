@@ -50,7 +50,7 @@ export default function Launchpad() {
       >
         <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
-            <span className="text-samurai-red">Token</span> Offerings
+            <span className="text-samurai-red">Recent</span> Offerings
           </h2>
           <ProjectsV2 />
         </div>
