@@ -46,7 +46,7 @@ export default function LaunchpadCardV2({
       }  w-full lg:max-w-[365px] 2xl:max-w-[400px] max-h-[840px] py-4 pb-5 shadow-xl transition-all hover:scale-[1.02] px-4`}
     >
       <div className="flex w-full mb-4 relative">
-        <div className="flex w-full h-[260px] relative">
+        <div className="flex w-full h-[260px] relative shadow-lg shadow-black/30">
           <Image
             src={ido.idoImageSrc}
             placeholder="blur"
@@ -67,7 +67,7 @@ export default function LaunchpadCardV2({
                 phase.toLowerCase() === "registration" ||
                 phase.toLowerCase() === "participation"
                   ? "text-green-400"
-                  : phase.toLocaleLowerCase() === "vesting"
+                  : phase.toLowerCase() === "vesting"
                   ? "text-blue-300"
                   : phase.toLowerCase() === "upcoming"
                   ? "text-yellow-200"
