@@ -792,11 +792,13 @@ export default function Ido() {
                             {/* REGISTER */}
                             {((!general?.usingLinkedWallet &&
                               !user?.isWhitelisted &&
-                              !general?.isPublic) ||
+                              !general?.isPublic &&
+                              tier?.name !== "") ||
                               (general?.usingLinkedWallet &&
                                 user?.linkedWallet !== "" &&
                                 !user?.isWhitelisted &&
-                                !general?.isPublic)) && (
+                                !general?.isPublic &&
+                                tier?.name !== "")) && (
                               <button
                                 onClick={onRegister}
                                 disabled={
