@@ -11,7 +11,7 @@ export async function notificateTx(tx: any, network: any) {
     link: txUrl,
   });
 
-  const txReceipt = await tx.wait(3);
+  const txReceipt = await tx.wait(6);
 
   Notificate({
     type: "success",
