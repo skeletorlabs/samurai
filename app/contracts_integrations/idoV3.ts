@@ -178,7 +178,8 @@ export async function userInfo(
 
     const userNftsIds = await getNftsFromUser(signer);
     const blockedNftIds: Number[] = [
-      1462, 502, 1455, 941, 544, 876, 1071, 107, 980, 1073, 831, 2120,
+      107, 502, 544, 831, 876, 877, 941, 980, 1071, 1073, 1154, 1155, 1156,
+      1364, 1455, 1462, 1626, 1627, 1629, 1630, 2120,
     ];
     const blocked = userNftsIds.some((item: Number) =>
       blockedNftIds.includes(item)
