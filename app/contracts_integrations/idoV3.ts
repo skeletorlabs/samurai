@@ -372,14 +372,15 @@ export async function getParticipationPhase(index: number) {
   if (now >= start && now <= end && !isPaused) phase = "Participation";
 
   const contract = await getContract(index, undefined);
-  const publicRange = await contract?.getRange(0);
+  const gokenin = await contract?.getRange(2);
   const usingETH = await contract?.usingETH();
-  const range = parseWalletRange(publicRange, usingETH ? 18 : 6);
+  const range = parseWalletRange(gokenin, usingETH ? 18 : 6);
   const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
 
   const maxAllocations = Number(
     ethers.formatUnits(await contract?.maxAllocations(), 6)
   );
+
   if (maxAllocations - raised < range.minPerWallet) phase = "Vesting";
   if (isPaused && raised > 0) phase = "Vesting";
 
