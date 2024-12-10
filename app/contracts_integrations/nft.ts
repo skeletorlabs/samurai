@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { ethers, Signer } from "ethers";
 import { NFTS_ABI } from "./abis";
 import Notificate from "@/app/components/notificate";
 import handleError from "@/app/utils/handleErrors";
@@ -289,4 +289,21 @@ export async function getNFTData(ipfsUrl: string, tokenUri: string) {
     );
 
   return { metadata, imageUrl };
+}
+
+export async function getNftsFromUser(signer: Signer) {
+  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
+  const signerAddress = await signer.getAddress();
+  const balance = Number(await contract.balanceOf(signerAddress));
+
+  let tokensIds: Number[] = [];
+  for (let index = 0; index < balance; index++) {
+    const tokenId = Number(
+      await contract.tokenOfOwnerByIndex(signerAddress, index)
+    );
+
+    tokensIds.push(tokenId);
+  }
+
+  return tokensIds;
 }

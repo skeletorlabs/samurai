@@ -828,6 +828,7 @@ export default function Ido() {
 
                       {currentPhase?.toLowerCase() === "participation" &&
                         user?.allocation < user?.walletRange?.maxPerWallet &&
+                        !user.blocked &&
                         (user?.isWhitelisted || general?.isPublic) && (
                           <div className="flex flex-col">
                             <div className="flex items-center justify-between">
@@ -901,6 +902,7 @@ export default function Ido() {
                                 general?.isPaused ||
                                 (!user?.isWhitelisted && !general?.isPublic) ||
                                 inputValue === "" ||
+                                user?.blocked ||
                                 Number(inputValue) === 0 ||
                                 Number(inputValue) < general?.minPerWallet ||
                                 Number(inputValue) > general?.maxPerWallet ||
@@ -914,6 +916,7 @@ export default function Ido() {
                               general?.isPaused ||
                               (!user.isWhitelisted && !general?.isPublic) ||
                               inputValue === "" ||
+                              user?.blocked ||
                               Number(inputValue) === 0 ||
                               Number(inputValue) < general?.minPerWallet ||
                               Number(inputValue) > general?.maxPerWallet ||

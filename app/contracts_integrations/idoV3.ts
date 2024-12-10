@@ -13,6 +13,7 @@ import checkApproval from "./check-approval";
 import { getUnixTime } from "date-fns";
 import { notificateTx } from "@/app/utils/notificateTx";
 import { generalInfo as generalVestingInfo } from "./vesting";
+import { getNftsFromUser } from "@/app/contracts_integrations/nft";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
@@ -175,6 +176,9 @@ export async function userInfo(
       6
     );
 
+    const userNftsIds = await getNftsFromUser(signer);
+    const blocked = userNftsIds.some((item: Number) => item === 1462);
+
     return {
       allocation,
       walletRange,
@@ -183,6 +187,7 @@ export async function userInfo(
       balanceEther,
       balanceToken,
       acceptedTokenBalance,
+      blocked,
     };
   } catch (e) {
     handleError({ e: e, notificate: true });
