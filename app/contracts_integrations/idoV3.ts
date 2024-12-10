@@ -177,13 +177,16 @@ export async function userInfo(
     );
 
     const userNftsIds = await getNftsFromUser(signer);
-    const blockedNftIds: Number[] = [
-      107, 502, 544, 831, 876, 877, 941, 980, 1071, 1073, 1154, 1155, 1156,
-      1364, 1455, 1462, 1626, 1627, 1629, 1630, 2120,
-    ];
-    const blocked = userNftsIds.some((item: Number) =>
-      blockedNftIds.includes(item)
-    );
+
+    let blocked = false;
+
+    if (
+      userNftsIds.length > 0 &&
+      ido.nftsToBlock &&
+      ido.nftsToBlock.length > 0
+    ) {
+      blocked = userNftsIds!.some((item) => ido.nftsToBlock!.includes(item));
+    }
 
     return {
       allocation,

@@ -209,4 +209,5 @@ export interface IDO_v3 {
   type?: string;
   linkedWallet?: boolean;
   ether?: boolean;
+  nftsToBlock?: Number[];
 }

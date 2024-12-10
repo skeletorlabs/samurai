@@ -294,6 +294,7 @@ export async function getNFTData(ipfsUrl: string, tokenUri: string) {
 export async function getNftsFromUser(signer: Signer) {
   const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
   const signerAddress = await signer.getAddress();
+
   const balance = Number(await contract.balanceOf(signerAddress));
 
   let tokensIds: Number[] = [];
@@ -301,7 +302,6 @@ export async function getNftsFromUser(signer: Signer) {
     const tokenId = Number(
       await contract.tokenOfOwnerByIndex(signerAddress, index)
     );
-
     tokensIds.push(tokenId);
   }
 
