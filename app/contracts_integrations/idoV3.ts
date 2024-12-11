@@ -66,7 +66,9 @@ export async function generalInfo(index: number) {
       ethers.formatUnits(await contract?.maxAllocations(), 6)
     );
 
-    const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
+    let raised = Number(ethers.formatUnits(await contract?.raised(), 6));
+
+    if (ido.id === "alpaca") raised = maxAllocations;
 
     const rangesLength = Number(await contract?.rangesLength());
 
@@ -375,7 +377,7 @@ export async function getParticipationPhase(index: number) {
   const gokenin = await contract?.getRange(2);
   const usingETH = await contract?.usingETH();
   const range = parseWalletRange(gokenin, usingETH ? 18 : 6);
-  const raised = Number(ethers.formatUnits(await contract?.raised(), 6));
+  let raised = Number(ethers.formatUnits(await contract?.raised(), 6));
 
   const maxAllocations = Number(
     ethers.formatUnits(await contract?.maxAllocations(), 6)

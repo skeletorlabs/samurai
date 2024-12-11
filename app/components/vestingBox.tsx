@@ -188,58 +188,62 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
               </p>
             </div>
 
-            <div className="flex flex-col w-[200px] ">
-              <p className={`${inter.className}`}>Cliff Duration</p>
-              <p className="text-samurai-red w-max font-bold">
-                {general?.periods.cliff} month(s)
-              </p>
-            </div>
+            {VestingType[general.vestingType] !== VestingType[0] && (
+              <>
+                <div className="flex flex-col w-[200px] ">
+                  <p className={`${inter.className}`}>Cliff Duration</p>
+                  <p className="text-samurai-red w-max font-bold">
+                    {general?.periods.cliff} month(s)
+                  </p>
+                </div>
 
-            <div className="flex flex-col w-[200px] ">
-              <p className={`${inter.className}`}>Vesting Length</p>
-              <p className="text-samurai-red w-max font-bold">
-                {(
-                  (general?.periods.vestingEndsAt -
-                    general?.periods.cliffEndsAt) /
-                  2_629_746
-                ).toFixed()}{" "}
-                month(s)
-              </p>
-            </div>
+                <div className="flex flex-col w-[200px] ">
+                  <p className={`${inter.className}`}>Vesting Length</p>
+                  <p className="text-samurai-red w-max font-bold">
+                    {(
+                      (general?.periods.vestingEndsAt -
+                        general?.periods.cliffEndsAt) /
+                      2_629_746
+                    ).toFixed()}{" "}
+                    month(s)
+                  </p>
+                </div>
 
-            <div className="flex flex-col w-[200px] ">
-              <p className={`${inter.className}`}>Vesting Type</p>
-              <p className="text-samurai-red w-max font-bold">
-                {VestingType[general?.vestingType]}
-              </p>
-            </div>
+                <div className="flex flex-col w-[200px] ">
+                  <p className={`${inter.className}`}>Vesting Type</p>
+                  <p className="text-samurai-red w-max font-bold">
+                    {VestingType[general?.vestingType]}
+                  </p>
+                </div>
 
-            <div className="flex flex-col w-[200px] ">
-              <p className={`${inter.className}`}>Vesting Start</p>
-              <p className="text-samurai-red w-max font-bold">
-                {formattedDate5(general?.periods.cliffEndsAt)}
-              </p>
-            </div>
+                <div className="flex flex-col w-[200px] ">
+                  <p className={`${inter.className}`}>Vesting Start</p>
+                  <p className="text-samurai-red w-max font-bold">
+                    {formattedDate5(general?.periods.cliffEndsAt)}
+                  </p>
+                </div>
 
-            <div className="flex flex-col w-[200px] lg:ml-[8px] lg:flex-1">
-              <p className={`${inter.className}`}>Vesting End</p>
-              <p className="text-samurai-red w-max font-bold">
-                {formattedDate5(general?.periods.vestingEndsAt)}
-              </p>
-            </div>
+                <div className="flex flex-col w-[200px] lg:ml-[8px] lg:flex-1">
+                  <p className={`${inter.className}`}>Vesting End</p>
+                  <p className="text-samurai-red w-max font-bold">
+                    {formattedDate5(general?.periods.vestingEndsAt)}
+                  </p>
+                </div>
 
-            <div className="flex flex-col w-[200px] lg:ml-[8px] lg:flex-1">
-              <p className={`${inter.className}`}>Next Unlock</p>
-              <p className="text-samurai-red w-max font-bold">
-                {/* Feb 03, 2025, 15:00 UTC */}
-                {formattedDate5(
-                  getNextUnlock(
-                    general?.periods.cliffEndsAt,
-                    general?.periods.vestingEndsAt
-                  )
-                )}
-              </p>
-            </div>
+                <div className="flex flex-col w-[200px] lg:ml-[8px] lg:flex-1">
+                  <p className={`${inter.className}`}>Next Unlock</p>
+                  <p className="text-samurai-red w-max font-bold">
+                    {/* Feb 03, 2025, 15:00 UTC */}
+                    {formattedDate5(
+                      getNextUnlock(
+                        general?.periods.cliffEndsAt,
+                        general?.periods.vestingEndsAt
+                      )
+                    )}
+                  </p>
+                </div>
+              </>
+            )}
           </div>
 
           {user && user?.purchased > 0 && (

@@ -46,6 +46,8 @@ import {
   PARTICIPATOR_NFT_V2_ABI,
   PRIVATE_PARTICIPATOR_ABI,
   LATEST_PARTICIPATOR_TOKENS_ABI,
+  VESTING_ABI,
+  VESTING_ABI_V2,
 } from "@/app/contracts_integrations/abis";
 import { base } from "../context/web3modal";
 
@@ -150,8 +152,9 @@ export const IDOs: IDO_v3[] = [
     // ],
     register: true,
     vestingDescription: "100% TGE unlock, No cliff, No vesting",
-    // vesting: "0x0f2f6ec1e113e45ac368a2ffed60c1956975b2a3",
-    // vestingChain: base,
+    vesting: "0x8C8Fa0152eFF48700c9e10b64aCa1B81f259F54B",
+    vestingChain: base,
+    vestingABI: VESTING_ABI_V2,
     type: "v3",
     linkedWallet: false,
     ether: false,
@@ -362,6 +365,7 @@ export const IDOs: IDO_v3[] = [
       "30% TGE unlock, 1-month cliff, 5-month Monthly vesting",
     vesting: "0xCFe4E1e1dDB2c5AcaF57Af30271FA2996Bc1aF9F",
     vestingChain: base,
+    vestingABI: VESTING_ABI,
     type: "v3",
     linkedWallet: false,
     ether: false,

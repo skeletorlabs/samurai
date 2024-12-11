@@ -206,6 +206,7 @@ export interface IDO_v3 {
     name: string;
     chainId: number;
   };
+  vestingABI?: any;
   type?: string;
   linkedWallet?: boolean;
   ether?: boolean;

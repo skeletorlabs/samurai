@@ -1,5 +1,4 @@
 import { ethers, Signer, formatEther, parseEther } from "ethers";
-import { VESTING_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
 import { IDOs } from "@/app/utils/constants";
 import checkApproval from "./check-approval";
@@ -37,7 +36,7 @@ async function getContract(index: number, signer?: Signer) {
 
     const contract = new ethers.Contract(
       ido.vesting!,
-      VESTING_ABI,
+      ido.vestingABI,
       signer || provider
     );
     return contract;
