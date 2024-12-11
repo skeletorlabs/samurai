@@ -47,6 +47,7 @@ async function getContract(index: number, signer?: Signer) {
 
 export async function generalInfo(index: number) {
   try {
+    const ido = IDOs[index];
     const contract = await getContract(index);
 
     const owner = await contract?.owner();
@@ -72,7 +73,8 @@ export async function generalInfo(index: number) {
     const periods = await contract?.periods();
 
     const vestingDuration = Number(periods[0]);
-    const vestingAt = Number(periods[1]);
+    const vestingAt =
+      ido.id === "alpaca" ? Number(periods[1]) + 60 * 15 : Number(periods[1]);
     const cliff = Number(periods[2]);
 
     return {
