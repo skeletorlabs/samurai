@@ -10,6 +10,7 @@ import {
   fillIDOToken,
   generalInfo,
   isWalletEnableToFill,
+  togglePause,
   userInfo,
   VESTING_GENERAL_INFO,
 } from "../contracts_integrations/vesting";
@@ -72,9 +73,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
     setLoading(true);
     console.log(1);
     if (account && signer) {
-      console.log(2);
       const enabled = await isWalletEnableToFill(signer);
-      console.log("enabled", enabled);
 
       setWalletEnabledToFill(enabled);
     }
@@ -95,6 +94,17 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
     setLoading(true);
     if (signer) {
       await fillIDOToken(idoIndex, signer);
+    }
+
+    setLoading(false);
+  }, [signer, idoIndex, setLoading]);
+
+  const onTogglePause = useCallback(async () => {
+    setLoading(true);
+    if (signer) {
+      await togglePause(idoIndex, signer);
+      await getGeneralData();
+      await getUserInfos();
     }
 
     setLoading(false);
@@ -165,6 +175,14 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
                 SEND {ido.projectTokenSymbol} TO CONTRACT
               </button>
             )} */}
+            {(account === general.owner || walletEnabledToFill) && (
+              <button
+                onClick={onTogglePause}
+                className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
+              >
+                {general.paused ? "Unpause" : "Pause"}
+              </button>
+            )}
           </div>
 
           <div className="flex justify-between lg:items-center gap-y-5 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap mt-2">

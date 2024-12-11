@@ -14,6 +14,7 @@ export type WalletRange = {
 
 export type VESTING_GENERAL_INFO = {
   owner: string;
+  paused: boolean;
   totalPurchased: number;
   totalClaimed: number;
   totalPoints: number;
@@ -51,6 +52,7 @@ export async function generalInfo(index: number) {
     const contract = await getContract(index);
 
     const owner = await contract?.owner();
+    const paused = await contract?.paused();
 
     const totalPurchased = Number(
       formatEther(await contract?.totalPurchased())
@@ -79,6 +81,7 @@ export async function generalInfo(index: number) {
 
     return {
       owner,
+      paused,
       totalPurchased,
       totalClaimed,
       totalPoints,
@@ -220,5 +223,23 @@ export async function isWalletEnableToFill(signer: Signer) {
     return false;
   } catch (error) {
     return false;
+  }
+}
+
+export async function togglePause(index: number, signer: ethers.Signer) {
+  const contract = await getContract(index, signer);
+
+  try {
+    const owner = await contract?.owner();
+    const signerAddress = await signer.getAddress();
+
+    if (owner === signerAddress) {
+      const network = await signer.provider?.getNetwork();
+      const isPaused = await contract?.paused();
+      const tx = isPaused ? await contract?.unpause() : await contract?.pause();
+      await notificateTx(tx, network);
+    }
+  } catch (e) {
+    handleError({ e: e, notificate: true });
   }
 }

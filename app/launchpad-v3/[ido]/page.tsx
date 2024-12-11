@@ -931,58 +931,6 @@ export default function Ido() {
                           </div>
                         )}
 
-                      {/* {(currentPhase?.toLowerCase() === "participation" ||
-                        currentPhase?.toLowerCase() === "vesting" ||
-                        currentPhase?.toLowerCase() === "completed") &&
-                        user?.allocation > 0 && (
-                          <div className="flex flex-row items-center justify-between flex-wrap pt-5 border-t border-white/20">
-                            <div className="p-3 w-full xl:w-[210px]">
-                              <p className={`text-sm ${inter.className}`}>
-                                MY ALLOCATION
-                              </p>
-                              <p className="text-xl text-samurai-red">
-                                $
-                                {user.allocation.toLocaleString("en-us", {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                })}
-                              </p>
-                            </div>
-
-                            <div className="p-3 w-full xl:w-[210px]">
-                              <p className={`text-sm ${inter.className}`}>
-                                TOKENS TO RECEIVE
-                              </p>
-                              <p className="text-xl text-samurai-red">
-                                {(
-                                  Number(user?.allocation) / Number(ido.price)
-                                )?.toLocaleString("en-us", {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                })}{" "}
-                                {ido.projectTokenSymbol}
-                              </p>
-                            </div>
-                            <div className="p-3 w-full xl:w-[210px]">
-                              <p className={`text-sm ${inter.className}`}>
-                                {ido.tge}% TGE RELEASE
-                              </p>
-                              <p className="text-xl text-samurai-red">
-                                {(
-                                  ((Number(user?.allocation) /
-                                    Number(ido.price)) *
-                                    ido.tge) /
-                                  100
-                                ).toLocaleString("en-us", {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                })}{" "}
-                                {ido.projectTokenSymbol}
-                              </p>
-                            </div>
-                          </div>
-                        )} */}
-
                       {/* VESTING */}
                       {currentPhase &&
                       currentPhase?.toLowerCase() === "vesting" &&
