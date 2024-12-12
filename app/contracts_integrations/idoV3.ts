@@ -388,7 +388,12 @@ export async function getParticipationPhase(index: number) {
 
   if (ido.vesting) {
     const vesting = await generalVestingInfo(index);
-    if (vesting && now > vesting?.periods?.vestingEndsAt) phase = "Completed";
+    if (
+      vesting &&
+      now > vesting?.periods?.vestingAt &&
+      now > vesting?.periods?.vestingEndsAt
+    )
+      phase = "Completed";
   }
 
   return phase;

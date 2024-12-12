@@ -71,7 +71,6 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
 
   const onCheckWalletEnabledToFill = useCallback(async () => {
     setLoading(true);
-    console.log(1);
     if (account && signer) {
       const enabled = await isWalletEnableToFill(signer);
 
@@ -153,7 +152,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
   useEffect(() => {
     if (signer && general) {
       getUserInfos();
-      // onCheckWalletEnabledToFill();
+      onCheckWalletEnabledToFill();
     }
   }, [signer, general]);
 
@@ -165,24 +164,26 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
     <div className="flex items-start min-h-[60px] relative text-white/70 p-2">
       {general && (
         <div className="flex flex-col justify-between w-full h-full">
-          <div className="flex justify-between border-b border-samurai-red pb-3 flex-wrap">
+          <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap">
             <span>Distribution</span>
-            {/* {(account === general.owner || walletEnabledToFill) && (
-              <button
-                onClick={onFill}
-                className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
-              >
-                SEND {ido.projectTokenSymbol} TO CONTRACT
-              </button>
-            )} */}
-            {(account === general.owner || walletEnabledToFill) && (
-              <button
-                onClick={onTogglePause}
-                className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
-              >
-                {general.paused ? "Unpause" : "Pause"}
-              </button>
-            )}
+            <div className="flex justify-between flex-wrap gap-3">
+              {account === general.owner && (
+                <button
+                  onClick={onFill}
+                  className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
+                >
+                  SEND {ido.projectTokenSymbol} TO CONTRACT
+                </button>
+              )}
+              {account === general.owner && (
+                <button
+                  onClick={onTogglePause}
+                  className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
+                >
+                  {general.paused ? "Unpause" : "Pause"}
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="flex justify-between lg:items-center gap-y-5 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap mt-2">
