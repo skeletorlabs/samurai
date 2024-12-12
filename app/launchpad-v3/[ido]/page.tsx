@@ -933,7 +933,8 @@ export default function Ido() {
 
                       {/* VESTING */}
                       {currentPhase &&
-                      currentPhase?.toLowerCase() === "vesting" &&
+                      (currentPhase?.toLowerCase() === "vesting" ||
+                        currentPhase?.toLowerCase() === "completed") &&
                       ido.vesting ? (
                         <VestingBox
                           ido={ido}
@@ -1035,12 +1036,11 @@ export default function Ido() {
                     isLoading) && <LoadingBox />}
                 </div>
               </div>
-              {currentPhase && currentPhase !== "Completed" && (
-                <IdoAllocationProgress
-                  maxAllocations={general?.maxAllocations || 0}
-                  raised={general?.raised || 0}
-                />
-              )}
+
+              <IdoAllocationProgress
+                maxAllocations={general?.maxAllocations || 0}
+                raised={general?.raised || 0}
+              />
             </div>
           </div>
         </div>
