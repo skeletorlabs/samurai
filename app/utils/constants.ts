@@ -19,7 +19,7 @@ import {
   ventures,
 } from "@/app/utils/svgs";
 import { Page } from "./enums";
-import { IDO, IDO_v3 } from "./interfaces";
+import { IDO, IDO_v3, SINGLE_CARD } from "./interfaces";
 import {
   galaxyGamesHauntedSpace,
   havensCompass,
@@ -79,6 +79,29 @@ export const simplifiedPhasesV3 = [
   { title: "Participation", buttonTitle: "PARTICIPATE" },
   { title: "Vesting", buttonTitle: "" },
   { title: "Completed", buttonTitle: "" },
+];
+
+export const IDOs_card: SINGLE_CARD[] = [
+  {
+    id: "bluai",
+    url: "https://bluai.samuraistarter.com",
+    logo: alpaca,
+    idoImageSrc: "/IDOs/bluai.png",
+    acceptedTokenSymbol: "ETH",
+    tokenNetwork: "ARBITRUM",
+    crowdsaleNetwork: "ARBITRUM",
+    networkImageSrc: "/chain-logos/ARBITRUM.svg",
+    projectName: "BLU AI",
+    projectListDescription:
+      "A platform custom-made for the democratized development and utilization of next-gen AI agent models.",
+    investmentRound: "NODES",
+    price: 0.1,
+    allocation: 210,
+    allocationToken: "NODES",
+    date: 1734368400,
+    phase: "upcoming",
+    prices: ["T2: 0.1466 ETH", "T3: 0.1729 ETH", "T4 0.2041 ETH"],
+  },
 ];
 
 export const IDOs: IDO_v3[] = [

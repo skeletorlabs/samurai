@@ -212,3 +212,23 @@ export interface IDO_v3 {
   ether?: boolean;
   nftsToBlock?: Number[];
 }
+
+export interface SINGLE_CARD {
+  id: string;
+  url: string;
+  logo: ReactNode;
+  idoImageSrc: string;
+  acceptedTokenSymbol: string;
+  tokenNetwork: string;
+  crowdsaleNetwork: string;
+  networkImageSrc: string;
+  projectName: string;
+  projectListDescription: string;
+  investmentRound: string;
+  price: number;
+  allocation: number;
+  allocationToken: string;
+  date: number;
+  phase: string;
+  prices?: string[];
+}
