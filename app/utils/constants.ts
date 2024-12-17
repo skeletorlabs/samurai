@@ -92,8 +92,7 @@ export const IDOs_card: SINGLE_CARD[] = [
     crowdsaleNetwork: "ARBITRUM",
     networkImageSrc: "/chain-logos/ARBITRUM.svg",
     projectName: "BLU AI",
-    projectListDescription:
-      "A platform custom-made for the democratized development and utilization of next-gen AI agent models.",
+    projectListDescription: "Web3’s Intelligence Layer - turn your data and your mobile device into your most valuable asset."
     investmentRound: "NODES",
     price: 0.1,
     allocation: 210,
