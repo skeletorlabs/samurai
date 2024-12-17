@@ -4,6 +4,7 @@ import Link from "next/link";
 import { formattedDate } from "@/app/utils/formattedDate";
 import { useCallback, useEffect, useState } from "react";
 import LoadingBox from "@/app/components/loadingBox";
+import { getUnixTime } from "date-fns";
 
 export default function LaunchpadSingleCard({
   ido,
@@ -15,7 +16,14 @@ export default function LaunchpadSingleCard({
   const [phase, setPhase] = useState("");
 
   const getPhase = useCallback(async () => {
-    setPhase(ido.phase.toUpperCase());
+    const now = getUnixTime(new Date());
+    const _phase =
+      now >= ido.date + 86400 * 7
+        ? "completed"
+        : now >= ido.date
+        ? "participation"
+        : "upcoming";
+    setPhase(_phase.toUpperCase());
   }, [ido]);
 
   useEffect(() => {
