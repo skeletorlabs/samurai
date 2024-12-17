@@ -23,7 +23,8 @@ export default function LaunchpadSingleCard({
         : now >= ido.date
         ? "participation"
         : "upcoming";
-    setPhase(_phase.toUpperCase());
+    // setPhase(_phase.toUpperCase());
+    setPhase("UPCOMING");
   }, [ido]);
 
   useEffect(() => {
@@ -34,7 +35,8 @@ export default function LaunchpadSingleCard({
 
   return (
     <Link
-      href={ido.url}
+      // href={ido.url}
+      href=""
       className={`flex flex-col rounded-lg border-[0.5px] border-neutral-700 text-start bg-samurai-pattern-2 ${
         type === "dark"
           ? "bg-black/30 hover:bg-black/20"
@@ -154,7 +156,8 @@ export default function LaunchpadSingleCard({
       >
         <div className="flex flex-col">
           <span className="text-sm text-white/70">IDO DATE</span>
-          <span className="text-[16px]">{formattedDate(ido.date)} UTC</span>
+          {/* <span className="text-[16px]">{formattedDate(ido.date)} UTC</span> */}
+          <span className="text-[16px]">TBA</span>
         </div>
       </div>
     </Link>
