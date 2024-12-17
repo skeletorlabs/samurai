@@ -156,8 +156,7 @@ export default function LaunchpadSingleCard({
       >
         <div className="flex flex-col">
           <span className="text-sm text-white/70">IDO DATE</span>
-          {/* <span className="text-[16px]">{formattedDate(ido.date)} UTC</span> */}
-          <span className="text-[16px]">TBA</span>
+          <span className="text-[16px]">{formattedDate(ido.date)} UTC</span>
         </div>
       </div>
     </Link>

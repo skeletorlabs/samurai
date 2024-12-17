@@ -98,7 +98,7 @@ export const IDOs_card: SINGLE_CARD[] = [
     price: 0.1,
     allocation: 210,
     allocationToken: "NODES",
-    date: 1734436800,
+    date: 1734523200,
     phase: "upcoming",
     prices: ["T2: 0.1466 ETH", "T3: 0.1729 ETH", "T4 0.2041 ETH"],
   },
