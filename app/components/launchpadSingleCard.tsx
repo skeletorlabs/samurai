@@ -14,17 +14,16 @@ export default function LaunchpadSingleCard({
   type?: string;
 }) {
   const [phase, setPhase] = useState("");
+  const now = getUnixTime(new Date());
 
   const getPhase = useCallback(async () => {
-    const now = getUnixTime(new Date());
     const _phase =
       now >= ido.date + 86400 * 7
         ? "completed"
         : now >= ido.date
         ? "participation"
         : "upcoming";
-    // setPhase(_phase.toUpperCase());
-    setPhase("UPCOMING");
+    setPhase(_phase.toUpperCase());
   }, [ido]);
 
   useEffect(() => {
@@ -35,8 +34,7 @@ export default function LaunchpadSingleCard({
 
   return (
     <Link
-      // href={ido.url}
-      href=""
+      href={now >= ido.date ? ido.url : ""}
       className={`flex flex-col rounded-lg border-[0.5px] border-neutral-700 text-start bg-samurai-pattern-2 ${
         type === "dark"
           ? "bg-black/30 hover:bg-black/20"
