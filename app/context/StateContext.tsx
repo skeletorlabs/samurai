@@ -12,6 +12,7 @@ import {
   useWeb3ModalAccount,
   useWeb3ModalProvider,
 } from "@web3modal/ethers/react";
+import { formatPurchases, purchases, wallets } from "../utils/formatPurchases";
 
 export const StateContext = createContext({
   page: Page.home,
@@ -48,6 +49,9 @@ export const StateProvider = ({ children }: Props) => {
 
   const { walletProvider } = useWeb3ModalProvider();
   const { address, chainId } = useWeb3ModalAccount();
+
+  // check purchases list of an ido
+  // const formattedList = formatPurchases(wallets, purchases);
 
   useEffect(() => {
     const page = NAV.find((item) => item.href === pathname);
