@@ -48,13 +48,30 @@ import {
   LATEST_PARTICIPATOR_TOKENS_ABI,
   VESTING_ABI,
   VESTING_ABI_V2,
+  VESTING_ABI_V3,
 } from "@/app/contracts_integrations/abis";
 import { base } from "../context/web3modal";
 
 export const VestingType: { [key: number]: string } = {
   0: "Cliff Vesting",
   1: "Linear",
-  2: "Monthly",
+  2: "Periodic",
+};
+
+export const VestingPeriodType: { [key: number]: string } = {
+  0: "None",
+  1: "Seconds",
+  2: "Days",
+  3: "Weeks",
+  4: "Months",
+};
+
+export const VestingPeriodTranslator: { [key: string]: string } = {
+  None: "",
+  Seconds: "",
+  Days: "Daily",
+  Weeks: "Weekly",
+  Months: "Monthly",
 };
 
 export const simplifiedPhases = [
@@ -253,8 +270,9 @@ export const IDOs: IDO_v3[] = [
     ],
     register: true,
     vestingDescription: "15% TGE unlock, 2-month cliff, 7-month DAILY vesting",
-    // vesting: "0x0f2f6ec1e113e45ac368a2ffed60c1956975b2a3",
-    // vestingChain: base,
+    vesting: "0xC0421C139D8912E68b50523A492Da20aa6C00514",
+    vestingChain: base,
+    vestingABI: VESTING_ABI_V3,
     type: "v3",
     linkedWallet: false,
     ether: false,

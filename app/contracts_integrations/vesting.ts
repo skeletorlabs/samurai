@@ -1,8 +1,13 @@
 import { ethers, Signer, formatEther, parseEther } from "ethers";
 import handleError from "@/app/utils/handleErrors";
-import { IDOs } from "@/app/utils/constants";
+import {
+  IDOs,
+  VestingPeriodTranslator,
+  VestingPeriodType,
+} from "@/app/utils/constants";
 import checkApproval from "./check-approval";
 import { notificateTx } from "@/app/utils/notificateTx";
+import { VESTING_ABI_V3 } from "./abis";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
@@ -28,6 +33,7 @@ export type VESTING_GENERAL_INFO = {
     vestingEndsAt: number;
   };
   vestingType: number;
+  vestingPeriod: string;
 };
 
 async function getContract(index: number, signer?: Signer) {
@@ -68,6 +74,12 @@ export async function generalInfo(index: number) {
     const vestingEndsAt = Number(await contract?.vestingEndsAt());
 
     const vestingType = Number(await contract?.vestingType());
+    let vestingPeriod = "";
+    if (ido.vestingABI === VESTING_ABI_V3) {
+      const rawPeriodType = Number(await contract?.vestingPeriodType());
+      const periodType = VestingPeriodType[rawPeriodType];
+      vestingPeriod = VestingPeriodTranslator[periodType];
+    }
     const tgeReleasePercent = Number(
       formatEther(await contract?.tgeReleasePercent())
     );
@@ -95,6 +107,7 @@ export async function generalInfo(index: number) {
         vestingEndsAt,
       },
       vestingType,
+      vestingPeriod,
     } as VESTING_GENERAL_INFO;
   } catch (e) {
     handleError({ e: e, notificate: true });
