@@ -18,7 +18,7 @@ export default function LaunchpadSingleCard({
 
   const getPhase = useCallback(async () => {
     const _phase =
-      now >= ido.date + 86400 * 7
+      now >= 1735653600
         ? "completed"
         : now >= ido.date
         ? "participation"
