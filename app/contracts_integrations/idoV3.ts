@@ -13,7 +13,7 @@ import checkApproval from "./check-approval";
 import { getUnixTime } from "date-fns";
 import { notificateTx } from "@/app/utils/notificateTx";
 import { generalInfo as generalVestingInfo } from "./vesting";
-import { getNftsFromUser } from "@/app/contracts_integrations/nft";
+import { getTokens } from "@/app/contracts_integrations/nft";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
@@ -178,7 +178,7 @@ export async function userInfo(
       6
     );
 
-    const userNftsIds = await getNftsFromUser(signer);
+    const userNftsIds = await getTokens(signer);
 
     let blocked = false;
 
@@ -187,7 +187,9 @@ export async function userInfo(
       ido.nftsToBlock &&
       ido.nftsToBlock.length > 0
     ) {
-      blocked = userNftsIds!.some((item) => ido.nftsToBlock!.includes(item));
+      blocked = userNftsIds!.some((item) =>
+        ido.nftsToBlock!.includes(item.tokenId)
+      );
     }
 
     return {
