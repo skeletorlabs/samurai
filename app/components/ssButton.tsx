@@ -65,7 +65,7 @@ export default function SSButton({
         }
         ${
           mobile
-            ? "text-sm md:text-normal px-5 py-0 h-10 md:h-auto md:px-8 md:py-3"
+            ? "text-sm md:text-normal px-5 py-0 h-10 md:px-8 md:py-3"
             : "text-lg md:text-normal px-8 py-3"
         }
         border rounded-lg

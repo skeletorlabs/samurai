@@ -20,26 +20,29 @@ import {
   GeneralInfo,
   Nfts,
   WhitelistDataType,
-  UniqueWallet,
+  NFTToken,
+  FormattedNFTToken,
 } from "@/app/utils/interfaces";
-import { getUnixTime, fromUnixTime, formatDistance } from "date-fns";
 
 import useSWR from "swr";
 import { request } from "graphql-request";
-import {
-  SUPPLY_QUERY,
-  MY_NFTS_QUERY,
-  LAST_FIVE_NFTS_QUERY,
-  ALL_WALLETS,
-} from "@/app/queries/nft";
+import { SUPPLY_QUERY, GALLERY_QUERY } from "@/app/queries/nft";
 import TopLayout from "@/app/components/topLayout";
-import { useWeb3ModalAccount } from "@web3modal/ethers/react";
+import { formattedDate3 } from "../utils/formattedDate";
+import { LockOpenIcon, LockClosedIcon } from "@heroicons/react/16/solid";
+import {
+  lockNFT,
+  unlockNFT,
+  generalInfo as generalLockInfos,
+  userInfo,
+} from "../contracts_integrations/nftLock";
+import { currentTime } from "../utils/currentTime";
+import Loading from "../components/loading";
 
 const inter = Inter({
   subsets: ["latin"],
 });
 
-// const images = ["/nfts/1.jpg", "/nfts/2.jpg"];
 const images = ["/cyborg-male.png", "/cyborg-female.png"];
 
 const utilities = [
@@ -76,19 +79,22 @@ const utilities = [
 ];
 
 export default function Nft() {
-  const { account, signer, setIsLoading } = useContext(StateContext);
+  const { account, signer } = useContext(StateContext);
+  const [loading, setLoading] = useState(false);
 
   const [image, setImage] = useState(
     images[Math.floor(Math.random() * images.length)]
   );
   const [generalInfo, setGeneralInfo] = useState<GeneralInfo | null>(null);
   const [supply, setSupply] = useState<SupplyInfo | null>(null);
-  const [userNfts, setUserNfts] = useState<Nfts | []>([]);
+  const [userNfts, setUserNfts] = useState<FormattedNFTToken[] | []>([]);
   const [lastFiveNfts, setLastFiveNfts] = useState<Nfts | []>([]);
   const [numberOfTokens, setNumberOfTokens] = useState(1);
   const [whitelistData, setWhitelistData] = useState<WhitelistDataType | null>(
     null
   );
+  const [nftLockGeneral, setNftLockGeneral] = useState<any>(null);
+  const [lockedNfts, setLockedNfts] = useState<NFTToken[] | null>(null);
 
   const fetcher = (query: string, variables: any) => {
     return request(
@@ -98,191 +104,140 @@ export default function Nft() {
     );
   };
 
-  const myNftsVariables = {
-    wallet: account,
-  };
+  const { data: supplyData } = useSWR([SUPPLY_QUERY], fetcher, {
+    refreshInterval: 5000,
+  });
 
-  const { data: supplyData, error: supplyError } = useSWR(
-    [SUPPLY_QUERY],
-    fetcher,
-    {
-      refreshInterval: 5000,
-    }
+  const { data: lastFiveNftsData } = useSWR([GALLERY_QUERY], fetcher, {
+    refreshInterval: 5000,
+  });
+
+  const getLockedToken = useCallback(
+    (tokenId: number) => {
+      return lockedNfts
+        ? lockedNfts.find(
+            (item) => item.tokenId === tokenId && item.locked === true
+          )
+        : null;
+    },
+    [lockedNfts]
   );
 
-  const { data: myNftsData, error: myNftsDataError } = useSWR(
-    [MY_NFTS_QUERY, myNftsVariables],
-    fetcher,
-    {
-      refreshInterval: 5000,
-    }
+  const canUnlock = useCallback(
+    (tokenId: number) => {
+      const locked = getLockedToken(tokenId);
+      if (!locked) return false;
+      if (nftLockGeneral?.lockPeriodDisabled) return true;
+
+      const now = currentTime();
+      if (locked) return now >= locked.lockedUntil;
+      return false;
+    },
+    [nftLockGeneral, lockedNfts]
   );
-
-  const { data: lastFiveNftsData, error: lastFiveNftsError } = useSWR(
-    [LAST_FIVE_NFTS_QUERY],
-    fetcher,
-    {
-      refreshInterval: 5000,
-    }
-  );
-
-  // const { data: wallets100 } = useSWR(
-  //   [ALL_WALLETS, { first: 100, skip: 0 }],
-  //   fetcher
-  // );
-
-  // const { data: wallets200 } = useSWR(
-  //   [ALL_WALLETS, { first: 100, skip: 100 }],
-  //   fetcher
-  // );
-
-  // const { data: wallets300 } = useSWR(
-  //   [ALL_WALLETS, { first: 100, skip: 200 }],
-  //   fetcher
-  // );
-
-  // const { data: wallets400 } = useSWR(
-  //   [ALL_WALLETS, { first: 100, skip: 300 }],
-  //   fetcher
-  // );
-
-  // const { data: wallets500 } = useSWR(
-  //   [ALL_WALLETS, { first: 100, skip: 400 }],
-  //   fetcher
-  // );
-
-  // const { data: wallets600 } = useSWR(
-  //   [ALL_WALLETS, { first: 100, skip: 500 }],
-  //   fetcher
-  // );
-
-  // const { data: wallets700 } = useSWR(
-  //   [ALL_WALLETS, { first: 100, skip: 600 }],
-  //   fetcher
-  // );
-
-  // const { data: wallets800 } = useSWR(
-  //   [ALL_WALLETS, { first: 100, skip: 700 }],
-  //   fetcher
-  // );
-
-  // const { data: wallets900 } = useSWR(
-  //   [ALL_WALLETS, { first: 100, skip: 800 }],
-  //   fetcher
-  // );
-
-  // const { data: wallets1000 } = useSWR(
-  //   [ALL_WALLETS, { first: 100, skip: 900 }],
-  //   fetcher
-  // );
-
-  // const { data: wallets1100 } = useSWR(
-  //   [ALL_WALLETS, { first: 100, skip: 1000 }],
-  //   fetcher
-  // );
-
-  // useEffect(() => {
-  //   if (
-  //     wallets100 !== undefined &&
-  //     wallets200 !== undefined &&
-  //     wallets300 !== undefined &&
-  //     wallets400 !== undefined &&
-  //     wallets500 !== undefined &&
-  //     wallets600 !== undefined &&
-  //     wallets700 !== undefined &&
-  //     wallets800 !== undefined &&
-  //     wallets900 !== undefined
-  //   ) {
-  //     const list = [
-  //       ...wallets100!.minteds,
-  //       ...wallets200!.minteds,
-  //       ...wallets300!.minteds,
-  //       ...wallets400!.minteds,
-  //       ...wallets500!.minteds,
-  //       ...wallets600!.minteds,
-  //       ...wallets700!.minteds,
-  //       ...wallets800!.minteds,
-  //       ...wallets900!.minteds,
-  //       ...wallets1000!.minteds,
-  //       ...wallets1100!.minteds,
-  //     ];
-
-  //     const uniqueWallets = new Set();
-
-  //     const filteredArray = list.filter((item) => {
-  //       const isUnique = uniqueWallets.has(item.wallet);
-  //       uniqueWallets.add(item.wallet);
-  //       return !isUnique;
-  //     });
-
-  //     console.log(filteredArray);
-  //   }
-  // }, [
-  //   wallets100,
-  //   wallets200,
-  //   wallets300,
-  //   wallets400,
-  //   wallets500,
-  //   wallets600,
-  //   wallets700,
-  //   wallets800,
-  //   wallets900,
-  //   wallets1000,
-  //   wallets1100,
-  // ]);
 
   const getWhiteListInfos = useCallback(async () => {
-    setIsLoading(true);
+    setLoading(true);
     if (signer) {
       const checkWhitelist = await isWhitelisted(signer);
       setWhitelistData(checkWhitelist as WhitelistDataType);
     }
-    setIsLoading(false);
-  }, [signer, setIsLoading, setWhitelistData]);
+    setLoading(false);
+  }, [signer, setLoading, setWhitelistData]);
 
   const getGeneralInfo = useCallback(async () => {
-    setIsLoading(true);
+    setLoading(true);
     const response = await general();
     setGeneralInfo(response as GeneralInfo);
 
-    setIsLoading(false);
-  }, [setGeneralInfo, setIsLoading]);
+    setLoading(false);
+  }, [setGeneralInfo, setLoading]);
+
+  const onGetUserLockInfos = useCallback(async () => {
+    setLoading(true);
+    if (signer) {
+      const response = await userInfo(signer);
+      if (response?.locks) setLockedNfts(response.locks);
+    }
+    setLoading(false);
+  }, [signer, setLoading, setLockedNfts]);
+
+  const onGetGeneralLockInfos = useCallback(async () => {
+    setLoading(true);
+    const response = await generalLockInfos();
+    if (response) setNftLockGeneral(response);
+
+    setLoading(false);
+  }, [setLoading, setNftLockGeneral]);
 
   const mintNFT = useCallback(async () => {
-    setIsLoading(true);
+    setLoading(true);
     if (signer) {
       await mint(numberOfTokens, signer);
     }
 
     await getGeneralInfo();
-    setIsLoading(false);
+    setLoading(false);
   }, [signer, numberOfTokens]);
 
   const freeMintNFT = useCallback(async () => {
-    setIsLoading(true);
+    setLoading(true);
     if (signer) {
       await mint(1, signer! as ethers.Signer, true);
       await getWhiteListInfos();
     }
 
     await getGeneralInfo();
-    setIsLoading(false);
+    setLoading(false);
   }, [signer]);
+
+  const onLockNFT = useCallback(
+    async (tokenId: number) => {
+      setLoading(true);
+      if (signer) {
+        await lockNFT(tokenId, signer);
+        await onGetUserLockInfos();
+      }
+      setLoading(false);
+    },
+    [signer, setLoading]
+  );
+
+  const onUnlockNFT = useCallback(
+    async (tokenId: number) => {
+      setLoading(true);
+      const index = lockedNfts?.findIndex((item) => item.tokenId === tokenId);
+      if (signer && index !== -1) {
+        await unlockNFT(index!, tokenId, signer);
+        await onGetUserLockInfos();
+      }
+      setLoading(false);
+    },
+    [lockedNfts, signer, setLoading]
+  );
 
   useEffect(() => {
     setUserNfts([]);
     const fetchSrcForNfts = async () => {
-      const list = { ...(myNftsData as { minteds: Nfts }) };
-      setUserNfts(list.minteds);
-
-      if (generalInfo && list && list.minteds && list.minteds.length > 0) {
+      if (generalInfo && lockedNfts && lockedNfts.length > 0) {
         const updatedUserNfts = await Promise.all(
-          list.minteds.map(async (nft) => {
+          lockedNfts.map(async (nft, index) => {
             const { imageUrl, metadata } = await getNFTData(
               generalInfo.baseUri,
-              nft.tokenUri
+              `${nft.tokenId}.json`
             );
-            return { ...nft, src: imageUrl, metadata };
+
+            return {
+              id: index.toString(),
+              tokenId: nft.tokenId.toString(),
+              tokenUri: `${nft.tokenId}.json`,
+              wallet: account,
+              src: imageUrl,
+              metadata: metadata,
+              lockedUntil: nft.lockedUntil,
+              locked: nft.locked,
+              lockIndex: nft.lockIndex,
+            };
           })
         );
 
@@ -291,7 +246,7 @@ export default function Nft() {
     };
 
     fetchSrcForNfts();
-  }, [myNftsData, generalInfo]);
+  }, [lockedNfts, generalInfo]);
 
   useEffect(() => {
     const fetchSrcForNfts = async () => {
@@ -331,11 +286,13 @@ export default function Nft() {
   useEffect(() => {
     if (signer) {
       getWhiteListInfos();
+      onGetUserLockInfos();
     }
   }, [signer]);
 
   useEffect(() => {
     getGeneralInfo();
+    onGetGeneralLockInfos();
   }, []);
 
   return (
@@ -368,7 +325,7 @@ export default function Nft() {
                   width={400}
                   height={500}
                   alt={image}
-                  className="rounded-[8px] w-full md:w-[400px] h-[500px]"
+                  className="rounded-[8px] w-full h-auto md:w-[400px] md:h-full"
                   placeholder="blur"
                   blurDataURL="/thumb.png"
                 />
@@ -447,28 +404,92 @@ export default function Nft() {
 
             <div className="flex w-full lg:max-w-[600px] items-center flex-wrap gap-3 md:gap-14 mt-5 2xl:max-h-[830px] 2xl:overflow-scroll">
               {userNfts?.map((nft, index) => (
-                <Link
-                  key={index}
-                  className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
-                  target="blank"
-                  href={`${process.env.NEXT_PUBLIC_OPENSEA_URL as string}/${
-                    nft.tokenId
-                  }`}
-                  // className="transition-all hover:rotate-12"
-                >
-                  <Image
-                    src={nft?.src ? nft?.src : "/loading.gif"}
-                    fill
-                    alt={image}
-                    className="scale-[0.95] rounded-[8px] transition-all hover:scale-[0.99]"
-                  />
-                </Link>
+                <div key={index} className="flex flex-col items-center gap-2">
+                  <Link
+                    className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
+                    target="blank"
+                    href={`${process.env.NEXT_PUBLIC_OPENSEA_URL as string}/${
+                      nft.tokenId
+                    }`}
+                  >
+                    <Image
+                      src={nft?.src ? nft?.src : "/loading.gif"}
+                      fill
+                      sizes="auto"
+                      style={{
+                        objectFit: "cover",
+                      }}
+                      alt={image}
+                      className="scale-[0.95] rounded-[8px] transition-all hover:scale-[0.99]"
+                    />
+                    {nft.locked ? (
+                      <div className="absolute top-3 right-2 flex justify-center items-center bg-black/70 p-1 rounded-full w-8 h-8 shadow-md">
+                        <LockClosedIcon className="w-4 h-4 shadow-md text-white" />
+                      </div>
+                    ) : (
+                      <div className="absolute top-3 right-2 flex justify-center items-center bg-black/70 p-1 rounded-full w-8 h-8 shadow-md">
+                        <LockOpenIcon className="w-4 h-4 shadow-md text-white" />
+                      </div>
+                    )}
+                  </Link>
+                  {nft.locked ? (
+                    <div className="flex flex-col w-full text-center">
+                      {nftLockGeneral?.lockPeriodDisabled ? (
+                        <p className="text-sm">
+                          Lock period currently disabled
+                        </p>
+                      ) : (
+                        <p className="text-sm">
+                          Unlockable at {formattedDate3(nft?.lockedUntil || 0)}{" "}
+                        </p>
+                      )}
+                      <SSButton
+                        flexSize
+                        mobile
+                        disabled={loading || !canUnlock(Number(nft.tokenId))}
+                        click={() => onUnlockNFT(Number(nft.tokenId))}
+                      >
+                        <>UNLOCK #{nft.tokenId}</>
+                      </SSButton>
+                    </div>
+                  ) : (
+                    <SSButton
+                      flexSize
+                      mobile
+                      disabled={loading}
+                      click={() => onLockNFT(Number(nft.tokenId))}
+                    >
+                      {loading ? <Loading /> : <>LOCK #{nft.tokenId}</>}
+                    </SSButton>
+                  )}
+                </div>
               ))}
             </div>
           </div>
         </div>
       </div>
       <div className="flex flex-col w-full">
+        {/* LOCK */}
+        <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
+          <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+            <div className="flex flex-col text-white text-2xl pb-20">
+              <p className="font-bold text-5xl pb-2">
+                Lock <span className="text-samurai-red">SamNFT</span>
+              </p>
+
+              <p
+                className={`text-lg pt-10 lg:pt-0 text-neutral-300 font-light xl:max-w-[1300px] ${inter.className}`}
+              >
+                Lock your SamNFT to get your Samurai Points{" "}
+                <span className="text-samurai-red">boosted</span>.
+              </p>
+              <div className="pt-10 md:pt-[80px] flex flex-col md:flex-row gap-3 md:gap-5">
+                Coming soon...
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* LATEST NFTS MINTED */}
         <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t-[0.5px] border-samurai-red">
           <div className="flex flex-col relative">
@@ -518,6 +539,10 @@ export default function Nft() {
                     <Image
                       src={nft?.src ? nft?.src : "/loading.gif"}
                       fill
+                      sizes="auto"
+                      style={{
+                        objectFit: "cover",
+                      }}
                       alt={image}
                       className="scale-[0.95] rounded-[8px]"
                     />
@@ -530,27 +555,6 @@ export default function Nft() {
             </div>
           </div>
         </div>
-
-        {/* STAKE */}
-        {/* <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
-          <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
-            <div className="flex flex-col text-white text-2xl pb-20">
-              <p className="font-bold text-5xl pb-2">
-                Stake <span className="text-samurai-red">SamNFT</span>
-              </p>
-
-              <p
-                className={`text-lg pt-10 lg:pt-0 text-neutral-300 font-light xl:max-w-[1300px] ${inter.className}`}
-              >
-                Stake your SamNFT to claim your $SAM airdrop which is vested
-                with 20% released at TGE and 10% per month for eight months.
-              </p>
-              <div className="pt-10 md:pt-[80px] flex flex-col md:flex-row gap-3 md:gap-5">
-                Coming soon...
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </>
   );

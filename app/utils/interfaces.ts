@@ -20,6 +20,18 @@ export type GeneralInfo = {
   baseUri: string;
 };
 
+export type FormattedNFTToken = {
+  id: string;
+  tokenId: string;
+  tokenUri: string;
+  wallet: string;
+  src?: string;
+  metadata?: NFTMetadata;
+  lockedUntil?: number;
+  locked?: boolean;
+  lockIndex?: number;
+};
+
 export type Nfts = {
   id: string;
   tokenId: string;
@@ -27,7 +39,17 @@ export type Nfts = {
   wallet: string;
   src?: string;
   metadata?: NFTMetadata;
+  lockedUntil?: number;
+  locked?: boolean;
+  lockIndex?: number;
 }[];
+
+export interface NFTToken {
+  tokenId: number;
+  lockedUntil: number;
+  locked: boolean;
+  lockIndex?: number;
+}
 
 export type Minted = {
   tokenId: string;
