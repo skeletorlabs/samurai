@@ -431,27 +431,31 @@ export default function Nft() {
                         <LockOpenIcon className="w-4 h-4 shadow-md text-white" />
                       </div>
                     )}
+
+                    {nft.locked && (
+                      <div className="absolute bottom-[6px] bg-black p-2 w-[227px] rounded-b-md text-center">
+                        {nftLockGeneral?.lockPeriodDisabled ? (
+                          <p className="text-sm">
+                            Lock period currently disabled
+                          </p>
+                        ) : (
+                          <p className="text-sm">
+                            Unlockable at{" "}
+                            {formattedDate3(nft?.lockedUntil || 0)}{" "}
+                          </p>
+                        )}
+                      </div>
+                    )}
                   </Link>
                   {nft.locked ? (
-                    <div className="flex flex-col w-full text-center">
-                      {nftLockGeneral?.lockPeriodDisabled ? (
-                        <p className="text-sm">
-                          Lock period currently disabled
-                        </p>
-                      ) : (
-                        <p className="text-sm">
-                          Unlockable at {formattedDate3(nft?.lockedUntil || 0)}{" "}
-                        </p>
-                      )}
-                      <SSButton
-                        flexSize
-                        mobile
-                        disabled={loading || !canUnlock(Number(nft.tokenId))}
-                        click={() => onUnlockNFT(Number(nft.tokenId))}
-                      >
-                        <>UNLOCK #{nft.tokenId}</>
-                      </SSButton>
-                    </div>
+                    <SSButton
+                      flexSize
+                      mobile
+                      disabled={loading || !canUnlock(Number(nft.tokenId))}
+                      click={() => onUnlockNFT(Number(nft.tokenId))}
+                    >
+                      <>UNLOCK #{nft.tokenId}</>
+                    </SSButton>
                   ) : (
                     <SSButton
                       flexSize

@@ -65,13 +65,16 @@ export async function generalInfo() {
 
 export async function userInfo(signer: Signer) {
   try {
-    const signerAddress = await signer.getAddress();
+    // const signerAddress = await signer.getAddress();
+    const signerAddress = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
     const contract = await getContract(signer);
 
     const locksCounter = Number(await contract?.locksCounter(signerAddress));
     const minPeriod = Number(await contract?.MIN_MONTHS_LOCKED());
 
     const tokens = await getTokens(signer);
+
+    console.log(tokens);
 
     let locks: NFTToken[] = [];
 
@@ -93,7 +96,7 @@ export async function userInfo(signer: Signer) {
     }
 
     if (locks.length > 0) {
-      locks.concat(tokens);
+      locks = locks.concat(tokens);
     } else {
       locks = tokens;
     }
