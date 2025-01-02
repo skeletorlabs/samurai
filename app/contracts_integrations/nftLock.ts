@@ -73,8 +73,6 @@ export async function userInfo(signer: Signer) {
 
     const tokens = await getTokens(signer);
 
-    console.log(tokens);
-
     let locks: NFTToken[] = [];
 
     for (let index = 0; index < locksCounter; index++) {
