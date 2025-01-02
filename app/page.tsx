@@ -9,6 +9,7 @@ import { StateContext } from "@/app/context/StateContext";
 import Projects from "@/app/components/projects";
 import ProjectsV2 from "./components/projectsV2";
 import ProjectsHome from "./components/projectsHome";
+import KYC from "./components/kyc";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -80,7 +81,7 @@ const edge = [
 
 export default function Home() {
   return (
-    <>
+    <div className="relative">
       <TopLayout background="bg-samurai-cyborg" padding={false}>
         <>
           <div className="px-6 lg:px-8 xl:px-20 relative pt-10 lg:pt-24">
@@ -366,6 +367,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </>
+
+      <KYC />
+    </div>
   );
 }
