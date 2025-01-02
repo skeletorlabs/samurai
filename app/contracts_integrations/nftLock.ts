@@ -65,8 +65,7 @@ export async function generalInfo() {
 
 export async function userInfo(signer: Signer) {
   try {
-    // const signerAddress = await signer.getAddress();
-    const signerAddress = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
+    const signerAddress = await signer.getAddress();
     const contract = await getContract(signer);
 
     const locksCounter = Number(await contract?.locksCounter(signerAddress));
