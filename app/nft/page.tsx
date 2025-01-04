@@ -36,8 +36,12 @@ import {
   generalInfo as generalLockInfos,
   userInfo,
 } from "../contracts_integrations/nftLock";
+
+import { userInfo as pointsUserInfo } from "../contracts_integrations/points";
+
 import { currentTime } from "../utils/currentTime";
 import Loading from "../components/loading";
+import { ArrowLongRightIcon, CheckCircleIcon } from "@heroicons/react/20/solid";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,38 +49,7 @@ const inter = Inter({
 
 const images = ["/cyborg-male.png", "/cyborg-female.png"];
 
-const utilities = [
-  {
-    title: "",
-    description:
-      "Check out the amazing benefits you can expect to enjoy as a proud owner of our SamNFT:",
-  },
-  {
-    title: "Lifetime Launchpad Access",
-    description:
-      "Enjoy lifetime access to all token offerings on Samurai Starter. By holding SamNFT, you enjoy guaranteed whitelisting to amazing token offerings from the most innovative and hyped projects in the Web3 space.",
-  },
-  {
-    title: "$SAM Airdrop",
-    description:
-      "Our loyalty reward token, $SAM, is scheduled to launch Q1 2024 on Base. Purchase a SamNFT during the minting period to be eligible to receive a generous share of the total supply of $SAM tokens. 10% of the entire $SAM supply will be claimed by SamNFT minters!",
-  },
-  {
-    title: "VIP Access to Samurai Sanka",
-    description:
-      "Samurai Sanka is our upcoming community interaction platform. It includes a Partner Quest Platform, Prediction Markets, Lotteries and many more entertaining applications that will allow you to utilize your $SAM rewards and become high-value participants. As a SamNFT holder, you receive special VIP perks including reward boosts for participating on Sanka.",
-  },
-  {
-    title: "Eligibility for special giveaways",
-    description:
-      "When Samurai Starter brings in new projects for either our accelerator, crowdfunding platform, or other services, we always aim to acquire freebies for our community whether they be tokens, NFTs, or some other digital gifts. As a SamNFT holder, you will be immediately eligible to receive such gifts from our partners and others.",
-  },
-  {
-    title: "DAO Governance Rights",
-    description:
-      "As SamNFT holders, the decision to launch a project is in your hands. The number of holders who express interest in a token offering will determine whether we launch the project and the size of the allocation we secure so that everyone who is interested can get the token allotment they desire.",
-  },
-];
+const boosters = ["0.25x", "0.5x", "1x", "2x", "3x"];
 
 export default function Nft() {
   const { account, signer } = useContext(StateContext);
@@ -95,6 +68,8 @@ export default function Nft() {
   );
   const [nftLockGeneral, setNftLockGeneral] = useState<any>(null);
   const [lockedNfts, setLockedNfts] = useState<NFTToken[] | null>(null);
+  const [userLocksBalance, setUserLocksBalance] = useState(0);
+  const [userBoost, setUserBoost] = useState(0);
 
   const fetcher = (query: string, variables: any) => {
     return request(
@@ -158,6 +133,16 @@ export default function Nft() {
     if (signer) {
       const response = await userInfo(signer);
       if (response?.locks) setLockedNfts(response.locks);
+      if (response?.balance) setUserLocksBalance(response.balance);
+    }
+    setLoading(false);
+  }, [signer, setLoading, setLockedNfts]);
+
+  const onGetUserBoost = useCallback(async () => {
+    setLoading(true);
+    if (signer) {
+      const response = await pointsUserInfo(signer);
+      if (response?.boost) setUserBoost(response.boost);
     }
     setLoading(false);
   }, [signer, setLoading, setLockedNfts]);
@@ -287,6 +272,7 @@ export default function Nft() {
     if (signer) {
       getWhiteListInfos();
       onGetUserLockInfos();
+      onGetUserBoost();
     }
   }, [signer]);
 
@@ -304,7 +290,7 @@ export default function Nft() {
           <div className="relative md:mr-12 xl:max-w-[900px] px-6 md:px-0">
             <h1 className="text-[38px] sm:text-[58px] lg:text-[90px] font-black leading-[48px] sm:leading-[68px] lg:leading-[98px] text-white text-center sm:text-start">
               Buy a <span className="text-samurai-red">SamNFT </span>
-              for lifetime VIP access to the hottest launchpad on the market!
+              for lifetime VIP access to the hottest launchpad on the market
             </h1>
             <p
               className={`leading-normal lg:leading-relaxed pt-8 md:pt-16 lg:text-2xl xl:max-w-[900px] text-center sm:text-start ${inter.className}`}
@@ -337,35 +323,60 @@ export default function Nft() {
 
       <div className="flex flex-col w-full">
         {/* CONTENT */}
-        <div className="flex flex-col xl:flex-row gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t border-samurai-red/50 border-dotted">
-          <div className="flex flex-col relative">
-            <div
-              className={`flex flex-col text-lg text-neutral-300 gap-8 lg:gap-8 pb-10 ${inter.className}`}
-            >
-              {utilities.map((item, index) => (
-                <div
-                  key={index}
-                  className={`rounded-[8px] opacity-90 backdrop-blur-[8px] shadow-xl ${
-                    index === 0 && "text-3xl max-w-[700px]"
-                  }`}
-                >
-                  <p className="text-samurai-red font-normal pb-2 text-xl">
-                    {item.title}
-                  </p>
-                  {item.description}
-                </div>
-              ))}
-
-              <p className="font-normal">
-                These are just a few of the utilities provided by the SamNFT. We
-                are delighted that you are going to join us on this journey and
-                we will always strive to bring more and more value and benefits
-                to our early SamNFT supporters.
+        <div className="flex flex-col xl:flex-row xl:justify-between gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t border-samurai-red/50 border-dotted">
+          <div className="flex flex-col relative gap-10">
+            <div className="flex flex-col text-white text-2xl">
+              <p className="font-bold text-5xl pb-2">
+                Lock <span className="text-samurai-red">SamNFT</span>
               </p>
+
+              <p
+                className={`text-lg pt-10 lg:pt-0 text-neutral-300 font-light xl:max-w-[1300px] ${inter.className}`}
+              >
+                Lock SamNFT to lifetime access to all token offerings on Samurai
+                Starter at the highest launchpad tier. Gain guaranteed access to
+                amazing token offerings from the most innovative and hyped
+                projects in the Web3 space.
+              </p>
+            </div>
+            <div className="flex flex-col text-white text-2xl">
+              <p className="font-bold text-4xl pb-2">
+                <span className="text-samurai-red">Samurai</span> Points{" "}
+                <span className="text-samurai-red">Boosters</span>
+              </p>
+
+              <p
+                className={`text-lg pt-10 lg:pt-0 text-neutral-300 font-light xl:max-w-[1300px] ${inter.className}`}
+              >
+                For each SamNFT locked (up to 5), you earn boosters to increase
+                your Samurai Points earned from all platform activities.
+              </p>
+
+              <div className="pt-5 flex flex-col w-full text-lg pb-1">
+                <div className="flex items-center w-full gap-3">
+                  <p className="w-[120px] bg-white/20 px-1 py-1">NFTs Locked</p>
+                  <ArrowLongRightIcon className="w-10 text-white/50" />
+                  <p className="bg-white/30 px-2 py-1">
+                    Samurai Points Booster
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-col w-full text-lg gap-1">
+                {boosters.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`flex items-center w-full gap-3 ${inter.className}`}
+                  >
+                    <p className="w-[120px]">{`${index + 1} SamNFT(s)`}</p>
+                    <ArrowLongRightIcon className="w-10 text-white/50" />
+                    <p className="w-max bg-white/10 px-3 pt-1">{item}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col w-full xl:min-w-[540px] xl:max-w-[540px] gap-3">
+          <div className="flex flex-col w-full xl:min-w-[540px] xl:max-w-[540px] 2xl:max-w-[700px] gap-3">
             <Link
               target="blank"
               href="https://opensea.io/collection/samuraistarter"
@@ -402,11 +413,11 @@ export default function Nft() {
               </div>
             )}
 
-            <div className="flex w-full lg:max-w-[600px] items-center flex-wrap gap-3 md:gap-14 mt-5 2xl:max-h-[830px] 2xl:overflow-scroll">
+            <div className="flex w-full xl:max-w-[600px] 2xl:min-w-[700px] items-center gap-3 md:gap-14 mt-5 2xl:max-h-[830px] overflow-scroll">
               {userNfts?.map((nft, index) => (
                 <div key={index} className="flex flex-col items-center gap-2">
                   <Link
-                    className="flex justify-center items-center w-[100px] h-[100px] md:w-[200px] md:h-[200px] lg:w-[240px] lg:h-[240px] bg-white rounded-[8px] relative"
+                    className="flex justify-center items-center w-[200px] h-[300px] lg:w-[240px] lg:h-[350px] bg-white rounded-[8px] relative"
                     target="blank"
                     href={`${process.env.NEXT_PUBLIC_OPENSEA_URL as string}/${
                       nft.tokenId
@@ -433,9 +444,9 @@ export default function Nft() {
                     )}
 
                     {nft.locked && (
-                      <div className="absolute bottom-[6px] bg-black p-2 w-[227px] rounded-b-md text-center">
+                      <div className="absolute bottom-[6px] bg-black p-2 w-[190px] md:w-[227px] rounded-b-md text-center">
                         {nftLockGeneral?.lockPeriodDisabled ? (
-                          <p className="text-sm">
+                          <p className="text-xs md:text-sm">
                             Lock period currently disabled
                           </p>
                         ) : (
@@ -475,20 +486,51 @@ export default function Nft() {
       <div className="flex flex-col w-full">
         {/* LOCK */}
         <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
-          <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+          <div className="flex flex-col md:flex-row px-6 lg:px-8 xl:px-20 text-white">
             <div className="flex flex-col text-white text-2xl pb-20">
               <p className="font-bold text-5xl pb-2">
-                Lock <span className="text-samurai-red">SamNFT</span>
+                My <span className="text-samurai-red">SamNFT</span> Locks
               </p>
 
               <p
                 className={`text-lg pt-10 lg:pt-0 text-neutral-300 font-light xl:max-w-[1300px] ${inter.className}`}
               >
-                Lock your SamNFT to get your Samurai Points{" "}
-                <span className="text-samurai-red">boosted</span>.
+                Number of SamNFTs Locked:{" "}
+                <span className="text-samurai-red">
+                  {userLocksBalance} SamNFTs
+                </span>
               </p>
-              <div className="pt-10 md:pt-[80px] flex flex-col md:flex-row gap-3 md:gap-5">
-                Coming soon...
+              <div className="pt-10 flex flex-col gap-3">
+                <p
+                  className={`flex items-center gap-2 ${
+                    userLocksBalance > 0 ? "text-white" : "text-white/10"
+                  }`}
+                >
+                  <CheckCircleIcon
+                    className={`w-10 ${
+                      userLocksBalance > 0 ? "text-green-300" : "text-white/10"
+                    } `}
+                  />{" "}
+                  Lifetime Launchpad Access
+                </p>
+                <p
+                  className={`flex items-center gap-2 ${
+                    userLocksBalance > 0 ? "text-white" : "text-white/10"
+                  }`}
+                >
+                  <CheckCircleIcon
+                    className={`w-10 ${
+                      userLocksBalance > 0 ? "text-green-300" : "text-white/10"
+                    } `}
+                  />{" "}
+                  Lifetime Points Booster Obtained:{" "}
+                  <span className="text-samurai-red">{userBoost}x</span>
+                </p>
+              </div>
+              <div className="pt-12 text-lg">
+                Please visit our{" "}
+                <span className="text-samurai-red">Samurai Points</span> page
+                (coming soon) to see your Samurai Points balance.
               </div>
             </div>
           </div>

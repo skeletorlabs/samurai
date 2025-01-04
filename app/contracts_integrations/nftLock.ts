@@ -98,7 +98,7 @@ export async function userInfo(signer: Signer) {
       locks = tokens;
     }
 
-    return { locks };
+    return { locks, balance: locksCounter };
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
