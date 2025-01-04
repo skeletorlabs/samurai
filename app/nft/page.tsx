@@ -513,7 +513,7 @@ export default function Nft() {
                   />{" "}
                   Lifetime Launchpad Access
                 </p>
-                <p
+                <div
                   className={`flex items-center gap-2 ${
                     userLocksBalance > 0 ? "text-white" : "text-white/10"
                   }`}
@@ -523,14 +523,27 @@ export default function Nft() {
                       userLocksBalance > 0 ? "text-green-300" : "text-white/10"
                     } `}
                   />{" "}
-                  Lifetime Points Booster Obtained:{" "}
-                  <span className="text-samurai-red">{userBoost}x</span>
-                </p>
+                  Lifetime Points Booster Obtained
+                  <p
+                    className={`${
+                      userLocksBalance > 0 ? "text-green-300" : "text-white/10"
+                    }`}
+                  >
+                    <span className="transition-all hover:text-samurai-red">
+                      {userLocksBalance > 0 && userBoost + "x"}
+                    </span>
+                  </p>
+                </div>
               </div>
-              <div className="pt-12 text-lg">
+              <div className="pt-12 text-lg text-white/70">
                 Please visit our{" "}
-                <span className="text-samurai-red">Samurai Points</span> page
-                (coming soon) to see your Samurai Points balance.
+                <Link
+                  href="#"
+                  className="text-white underline font-light hover:opacity-75"
+                >
+                  Samurai Points
+                </Link>{" "}
+                page (coming soon) to see your Samurai Points balance.
               </div>
             </div>
           </div>
