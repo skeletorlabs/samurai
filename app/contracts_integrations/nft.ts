@@ -5,6 +5,7 @@ import handleError from "@/app/utils/handleErrors";
 import {
   GeneralInfo,
   NFTMetadata,
+  NFTToken,
   WhitelistDataType,
 } from "@/app/utils/interfaces";
 import { LINKS } from "@/app/utils/constants";
@@ -277,6 +278,8 @@ export async function getNFTData(ipfsUrl: string, tokenUri: string) {
     "/ipfs/" +
     ipfsUrl.substring(ipfsUrl.indexOf("ipfs://") + 7, ipfsUrl.length) +
     tokenUri;
+
+  // console.log(metadataUrl);
   const metadataResponse = await fetch(metadataUrl);
   const metadata: NFTMetadata = await metadataResponse.json();
 
@@ -291,18 +294,18 @@ export async function getNFTData(ipfsUrl: string, tokenUri: string) {
   return { metadata, imageUrl };
 }
 
-export async function getNftsFromUser(signer: Signer) {
+export async function getTokens(signer: Signer) {
   const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
   const signerAddress = await signer.getAddress();
 
   const balance = Number(await contract.balanceOf(signerAddress));
 
-  let tokensIds: Number[] = [];
+  let tokensIds: NFTToken[] = [];
   for (let index = 0; index < balance; index++) {
     const tokenId = Number(
       await contract.tokenOfOwnerByIndex(signerAddress, index)
     );
-    tokensIds.push(tokenId);
+    tokensIds.push({ tokenId: tokenId, lockedUntil: 0, locked: false });
   }
 
   return tokensIds;
