@@ -49,7 +49,7 @@ const inter = Inter({
 
 const images = ["/cyborg-male.png", "/cyborg-female.png"];
 
-const boosters = ["0.25x", "0.5x", "1x", "2x", "3x"];
+const boosters = ["1.25x", "1.5x", "2x", "3x", "4x"];
 
 export default function Nft() {
   const { account, signer } = useContext(StateContext);
@@ -367,7 +367,9 @@ export default function Nft() {
                     key={index}
                     className={`flex items-center w-full gap-3 ${inter.className}`}
                   >
-                    <p className="w-[120px]">{`${index + 1} SamNFT(s)`}</p>
+                    <p className="w-[120px]">
+                      {index + 1} SamNFT{index > 0 && "s"}
+                    </p>
                     <ArrowLongRightIcon className="w-10 text-white/50" />
                     <p className="w-max bg-white/10 px-3 pt-1">{item}</p>
                   </div>
