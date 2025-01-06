@@ -153,7 +153,7 @@ export const IDOs: IDO_v3[] = [
     end: 1736344800,
     investmentRound: "Strategic Round",
     fdv: 15_000_000,
-    exchangeListingPrice: 0.0025,
+    exchangeListingPrice: 0.015,
     marketCapAtTGE: 448_500,
     socials: [
       {
