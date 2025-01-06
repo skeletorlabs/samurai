@@ -534,20 +534,22 @@ export default function Ido() {
                         </div>
                         {signer && account && (
                           <>
-                            <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                              <span className="text-neutral-600">
-                                Registered:
-                              </span>
-                              <p className="text-white/70">
-                                {user?.walletRange?.name
-                                  ?.toString()
-                                  .toLowerCase() === "public"
-                                  ? "NA"
-                                  : user?.isWhitelisted
-                                  ? "Yes"
-                                  : "No"}
-                              </p>
-                            </div>
+                            {ido?.register && (
+                              <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                                <span className="text-neutral-600">
+                                  Registered:
+                                </span>
+                                <p className="text-white/70">
+                                  {user?.walletRange?.name
+                                    ?.toString()
+                                    .toLowerCase() === "public"
+                                    ? "NA"
+                                    : user?.isWhitelisted
+                                    ? "Yes"
+                                    : "No"}
+                                </p>
+                              </div>
+                            )}
                             {general?.usingLinkedWallet && (
                               <div className="flex flex-col py-2 px-2 rounded-md w-max">
                                 <span className="text-neutral-600">
@@ -589,7 +591,7 @@ export default function Ido() {
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">Currency:</span>
                           <p className="text-white/70">
-                            {ido.acceptedTokenSymbol} on {ido.tokenNetwork}
+                            {ido.acceptedTokenSymbol} on {ido.crowdsaleNetwork}
                           </p>
                         </div>
                         {signer && account && (
@@ -793,12 +795,14 @@ export default function Ido() {
                             {((!general?.usingLinkedWallet &&
                               !user?.isWhitelisted &&
                               !general?.isPublic &&
-                              tier?.name !== "") ||
+                              tier?.name !== "" &&
+                              ido?.register) ||
                               (general?.usingLinkedWallet &&
                                 user?.linkedWallet !== "" &&
                                 !user?.isWhitelisted &&
                                 !general?.isPublic &&
-                                tier?.name !== "")) && (
+                                tier?.name !== "" &&
+                                ido?.register)) && (
                               <button
                                 onClick={onRegister}
                                 disabled={
