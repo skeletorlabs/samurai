@@ -123,6 +123,75 @@ export const IDOs_card: SINGLE_CARD[] = [
 
 export const IDOs: IDO_v3[] = [
   {
+    id: "kvants",
+    url: "launchpad-v3/kvants",
+    logo: kvants,
+    idoImageSrc: "/IDOs/kvants.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "BNB",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/BSC.png",
+    projectName: "Kvants",
+    projectListDescription:
+      "The Kvants platform makes high-level institutional quantitative trading strategies available to the masses.",
+    projectDescription:
+      "Kvants is on a mission to democratize investment by creating a self-custodial platform where users can browse and invest in a wide range of complex quant trading strategy pools, allowing each of us to 'invest like the elite' with just a few clicks. $KVAI holders will enjoy effortless access to high-performing institutional investment models.",
+    projectTokenSymbol: "$KVAI",
+    projectBigDescription: `
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <p>Built by a team of quantitative trading experts with experience at top TradFi institutions, Kvants is a non-custodial Asset Management Platform offering retail investors the chance to invest using institutional-grade trading strategies developed by professional hedge funds.<p>
+        <p>These quantitative strategies make use of complex, systematic trading models with algorithms which are constantly optimised through AI-powered machine learning. Such trading models constantly monitor a wide range of market analytics, automatically closing and opening positions based on a predefined set of complex rules.<p>
+        <p>These sophisticated trading strategies have traditionally been out of reach of retail crypto investors, but that is about to change. The Kvants platform is built to make investing with institutional-grade trading strategies accessible to the everyday investor.<p>
+        <p>Kvants+ is the platform where all of this action takes place. Here you'll be able to browse a wide range of carefully-audited quantitative trading strategies, each with its own unique algorithms, risk profile, and past performance data. You can then deploy funds directly into DeFi pools which utilise these strategies (and enjoy monthly dividends as a result).<p>
+      </div>
+  `,
+    price: 0.013,
+    tge: 8,
+    allocation: 100_000,
+    date: 1736172000,
+    fcfs: 0,
+    end: 1736344800,
+    investmentRound: "Strategic Round",
+    fdv: 15_000_000,
+    exchangeListingPrice: 0.015,
+    marketCapAtTGE: 448_500,
+    socials: [
+      {
+        svg: globe,
+        href: "http://www.kvants.ai/",
+      },
+      {
+        svg: twitterX,
+        href: "https://twitter.com/KvantsAI",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/kvantsai",
+      },
+    ],
+    contract: "0x282e96253bf868abc8a0b67ec694acd8750921e7",
+    abi: LATEST_PARTICIPATOR_TOKENS_ABI,
+    images: [
+      "/IDOs/kvants/1.jpeg",
+      "/IDOs/kvants/2.jpeg",
+      "/IDOs/kvants/3.jpeg",
+      "/IDOs/kvants/4.jpeg",
+    ],
+    register: false,
+    vestingDescription: "8% at TGE, 1 month cliff, 7 month linear",
+    // vesting: "0x8C8Fa0152eFF48700c9e10b64aCa1B81f259F54B",
+    // vestingChain: base,
+    // vestingABI: VESTING_ABI_V2,
+    type: "v3",
+    linkedWallet: false,
+    ether: false,
+    // nftsToBlock: [
+    //   107, 212, 213, 214, 215, 216, 217, 218, 502, 544, 831, 876, 877, 941, 980,
+    //   1071, 1073, 1154, 1155, 1156, 1364, 1455, 1462, 1626, 1627, 1629, 1630,
+    //   2120,
+    // ],
+  },
+  {
     id: "alpaca",
     url: "launchpad-v3/alpaca",
     logo: alpaca,
