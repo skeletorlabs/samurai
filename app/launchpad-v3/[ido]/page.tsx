@@ -347,7 +347,11 @@ export default function Ido() {
                         alt={ido!.tokenNetwork || ""}
                         width={22}
                         height={22}
-                        className="p-[1px] bg-white/80 rounded-full"
+                        className={`p-[1px] ${
+                          ido!.tokenNetwork === "BASE"
+                            ? "bg-white/80"
+                            : "bg-black"
+                        } rounded-full`}
                       />
                     </div>
                   )}

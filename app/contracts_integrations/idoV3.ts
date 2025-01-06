@@ -133,6 +133,7 @@ export async function userInfo(
   try {
     const ido = IDOs[index];
     const signerAddress = await signer.getAddress();
+
     const contract = await getContract(index, signer);
     const usingETH = ido.ether ? await contract?.usingETH() : false;
 
