@@ -87,7 +87,9 @@ export default function LaunchpadCardV2({
               alt={ido.tokenNetwork}
               width={18}
               height={18}
-              className="p-[1px] bg-white/80 rounded-full"
+              className={`p-[1px] ${
+                ido.tokenNetwork === "BASE" ? "bg-white/80" : ""
+              } rounded-full`}
             />
           </div>
         )}

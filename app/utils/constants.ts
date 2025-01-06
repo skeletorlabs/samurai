@@ -130,7 +130,7 @@ export const IDOs: IDO_v3[] = [
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "BNB",
     crowdsaleNetwork: "BASE",
-    networkImageSrc: "/chain-logos/BSC.svg",
+    networkImageSrc: "/chain-logos/BSC.png",
     projectName: "Kvants",
     projectListDescription:
       "The Kvants platform makes high-level institutional quantitative trading strategies available to the masses.",
