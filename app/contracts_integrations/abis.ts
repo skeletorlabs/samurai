@@ -3560,7 +3560,7 @@ export const SAM_TIERS_ABI = [
   {
     type: "constructor",
     inputs: [
-      { name: "_nft", type: "address", internalType: "address" },
+      { name: "_nftLock", type: "address", internalType: "address" },
       { name: "_lock", type: "address", internalType: "address" },
       { name: "_lpGauge", type: "address", internalType: "address" },
     ],
@@ -3693,7 +3693,7 @@ export const SAM_TIERS_ABI = [
   },
   {
     type: "function",
-    name: "nft",
+    name: "nftLock",
     inputs: [],
     outputs: [{ name: "", type: "address", internalType: "address" }],
     stateMutability: "view",
@@ -3723,7 +3723,7 @@ export const SAM_TIERS_ABI = [
     type: "function",
     name: "setSources",
     inputs: [
-      { name: "_nft", type: "address", internalType: "address" },
+      { name: "_nftLock", type: "address", internalType: "address" },
       { name: "_lock", type: "address", internalType: "address" },
       { name: "_lpGauge", type: "address", internalType: "address" },
     ],

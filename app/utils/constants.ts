@@ -171,7 +171,7 @@ export const IDOs: IDO_v3[] = [
         href: "https://t.me/estatexofficial",
       },
     ],
-    contract: "0x282e96253bf868abc8a0b67ec694acd8750921e7",
+    contract: "0x9d49A5Ee0F640BD5f1d5eeb3c0487802E59Ef17d",
     abi: LATEST_PARTICIPATOR_TOKENS_ABI,
 
     register: true,
@@ -1702,6 +1702,7 @@ export const SAM_CLAIM_VESTING = "0xA6a638858C114Ad2e95BFD787b353EC2C70d78eF"; /
 
 // export const SAM_CLAIM_VESTING = "0xE42c1929612bBc03572C518bAf05c38147D5d67e"; // BASE SEPOLIA
 // export const SAM_TIERS = "0x2Bb8Fc0196becd84bac853E32c9c252343699186"; // Newest
-export const SAM_TIERS = "0x2Bb8Fc0196becd84bac853E32c9c252343699186"; // with MULTIPLIER
+// export const SAM_TIERS = "0x2Bb8Fc0196becd84bac853E32c9c252343699186"; // with MULTIPLIER
+export const SAM_TIERS = "0x0514ccc3AC1d8C6f78b82d1D2D5B66931874D702"; // with LOCKED NFTS
 export const POINTS = "0xDf0fDc572849f01CdaB35b80cA41Ce67051C8Dfe"; // BASE
 export const NFT_LOCK = "0x45c085699fe78873d5c28b02d153cfd90379e424"; // BASE
