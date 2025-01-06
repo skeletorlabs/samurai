@@ -225,7 +225,7 @@ export default function Home() {
             →
           </Link>
         </div>
-        <ProjectsHome max={1} maxV2={3} />
+        <ProjectsHome max={4} />
         <Link
           href="/launchpad"
           className={`absolute right-6 bottom-5 md:right-20 flex justify-end items-center self-end w-max mt-8 text-md text-white hover:text-samurai-red font-light ${inter.className}`}

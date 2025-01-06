@@ -10,32 +10,26 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-export default function ProjectsHome({
-  max,
-  maxV2,
-}: {
-  max?: number;
-  maxV2?: number;
-}) {
+export default function ProjectsHome({ max }: { max?: number }) {
   return (
     <div
       className={`flex justify-center lg:justify-start items-center flex-wrap gap-3 leading-normal pt-10 text-xl ${inter.className}`}
     >
       {max
-        ? IDOs.slice(0, maxV2).map((ido: IDO_v3, index) => (
+        ? IDOs.slice(0, max).map((ido: IDO_v3, index) => (
             <LaunchpadCardV2 key={index} ido={ido} />
           ))
         : IDOs.map((ido: IDO_v3, index) => (
             <LaunchpadCardV2 key={index} ido={ido} />
           ))}
 
-      {max
+      {/* {max
         ? IDOs_card.slice(0, max).map((ido: SINGLE_CARD, index) => (
             <LaunchpadSingleCard key={index} ido={ido} />
           ))
         : IDOs_card.map((ido: SINGLE_CARD, index) => (
             <LaunchpadSingleCard key={index} ido={ido} />
-          ))}
+          ))} */}
     </div>
   );
 }
