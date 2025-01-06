@@ -14,6 +14,7 @@ import { getUnixTime } from "date-fns";
 import { notificateTx } from "@/app/utils/notificateTx";
 import { generalInfo as generalVestingInfo } from "./vesting";
 import { getTokens } from "@/app/contracts_integrations/nft";
+import { vestingInfos } from "./migrator";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
@@ -57,6 +58,8 @@ export async function generalInfo(index: number) {
   try {
     const contract = await getContract(index);
     const ido = IDOs[index];
+
+    // if (ido.id === "dyor") await vestingInfos(index);
     const owner = await contract?.owner();
     const isPublic = await contract?.isPublic();
     const acceptedToken = await contract?.acceptedTokens(0);
@@ -129,7 +132,8 @@ export async function userInfo(
 ) {
   try {
     const ido = IDOs[index];
-    const signerAddress = await signer.getAddress();
+    // const signerAddress = await signer.getAddress();
+    const signerAddress = "0xcaE8cF1e2119484D6CC3B6EFAad2242aDBDB1Ea8";
     const contract = await getContract(index, signer);
     const usingETH = ido.ether ? await contract?.usingETH() : false;
 
