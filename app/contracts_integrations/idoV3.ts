@@ -59,7 +59,7 @@ export async function generalInfo(index: number) {
     const contract = await getContract(index);
     const ido = IDOs[index];
 
-    // if (ido.id === "dyor") await vestingInfos(index);
+    if (ido.id === "dyor") await vestingInfos(index);
     const owner = await contract?.owner();
     const isPublic = await contract?.isPublic();
     const acceptedToken = await contract?.acceptedTokens(0);

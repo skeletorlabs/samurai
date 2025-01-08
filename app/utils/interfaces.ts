@@ -233,6 +233,7 @@ export interface IDO_v3 {
   linkedWallet?: boolean;
   ether?: boolean;
   nftsToBlock?: Number[];
+  oldVestingContract?: string;
 }
 
 export interface SINGLE_CARD {

@@ -18,6 +18,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xa5f22dadbe1bfbcf9bb4001f419387ad1086d631",
@@ -25,6 +26,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x98843d6baaa4ca7f956ab51f795a666490e15df8",
@@ -32,6 +34,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x1273162b4fe3424bf03d74c88181714bbd263393",
@@ -39,6 +42,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xe4ca74a41694707e19584480f8429a5073b930e2",
@@ -46,6 +50,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x5d9f3079cb204aba84ab34fda277f37a6ef42efd",
@@ -53,6 +58,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xbd53cda492cc4d008c1ed0b7223b674ff0c60f39",
@@ -60,6 +66,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xa0f9bde4da8495bdc24c8184a5d931fd1e142578",
@@ -67,6 +74,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xef4da186884c213be62b136f30f81c498018a1f8",
@@ -74,6 +82,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x5e5a47069dd0c8c78428be27e180acba37e8e622",
@@ -81,6 +90,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x2b92423fdb70c166c7fad664493cda07337e40fd",
@@ -88,6 +98,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x9d26624e43d84c11d9451b7e2d93745095ed9898",
@@ -95,6 +106,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x19a0491be8714ec7661ed41910e3630c3d8ab1a7",
@@ -102,6 +114,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x29e433a7da5ed6cdb2678bb0b4bda234ea2703fa",
@@ -109,6 +122,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x6f0093ac51cf3ba423ae0db1298bc0131f0bab76",
@@ -116,6 +130,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x276f90535dadd16c42f15886eeeaa2864128803e",
@@ -123,6 +138,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x857bb773e87b12977a392fd32d24b3a83e3cb7e2",
@@ -130,6 +146,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x6846576a9f362fb4b23aeb0779a8ce455f253d8d",
@@ -137,6 +154,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x6fd8b5c58acf7f98dd84c047cb099da1fcc75613",
@@ -144,6 +162,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x6b1cbd651a51c25f07b1f0fcf776e1050d1c2c98",
@@ -151,6 +170,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x64deecb9f372acf9c388ca9f045cf211a202f329",
@@ -158,6 +178,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xacd50015d9a7fba1f53f2771307759b28f5f8b9b",
@@ -165,6 +186,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xb1686bf52bf8a58d88fdcf7e9624a23c732ba4bb",
@@ -172,6 +194,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x8ff4c4d45b703ccff3b6d985e9bba9d89af6942b",
@@ -179,6 +202,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x276c3195bb657335c6bf8e39eb1cb01dd36ba547",
@@ -186,6 +210,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x3d1e7d80e7357bbd450ef1e722b4d87674bab2b0",
@@ -193,6 +218,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xb020f0fed0878ea7489f2456b482557723c6d62b",
@@ -200,6 +226,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x5374883897cb3d7a2129413710708318a0b39a9d",
@@ -207,6 +234,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x95263bac044453e7d63347a399f8cdea99f0d531",
@@ -214,6 +242,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x34831fc3c805459ff099924a5e8dcb036ee8e4d5",
@@ -221,6 +250,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x42d14dac314f7bd4948c92b2f03a36befe0ce14f",
@@ -228,6 +258,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x895f18a11948d49c4d455ccfbe94ce0a75319273",
@@ -235,6 +266,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xd2895e8732d550d0a32ad1cda749a07ad1281b8e",
@@ -242,6 +274,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x20fa1852fe0809cbd0566888f81d12b1521cf94c",
@@ -249,6 +282,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x4b229c24894c134ac9eaed34b72d5fb2d2945ab4",
@@ -256,6 +290,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x1a5c1a74d274b318fc93d91ccf72b9e368341cb2",
@@ -263,6 +298,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xa8370cc0a1cec097538cb44f6358da193170ad41",
@@ -270,6 +306,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x6625c700f800ce4764edf91c2c7e6bc0feae4ab2",
@@ -277,6 +314,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xbad73848c943d908c8ed748c54ab6cd5c90d4f79",
@@ -284,6 +322,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x697f56598dbd4a3e1f71d03e7e12b9a696264578",
@@ -291,6 +330,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xedd011efce6f8c8b92493cf84abc445b8e0992dc",
@@ -298,6 +338,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xa06c44151e84a85456a1370cc73a23848d1802ff",
@@ -305,6 +346,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x53d55d5410fa37053c7e6882af9c693d778db7ce",
@@ -312,6 +354,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xd50e622e82137f91b6ae43839d2cc4c8f879c639",
@@ -319,6 +362,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x076eeae11e645d27b4a180d74982332a71feb660",
@@ -326,6 +370,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xc8be6527e44b0db0eb967d21d06c67b85229e606",
@@ -333,6 +378,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x5316133fdd242c44e68b362571dda78758fe1177",
@@ -340,6 +386,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x5b72a062bfcdaefd3ca82639ff6727b6e490c9a2",
@@ -347,6 +394,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x7a9c65966d782da5ea51c85c950dca15257a0f20",
@@ -354,6 +402,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xc6e5c7babe6a0fd8ea77f2c144c2e5331705e0c3",
@@ -361,6 +410,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x8a7a0294e4b80278d07faf8839318421735e02be",
@@ -368,6 +418,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xfb9046deb2ba41fa98744779ad10b3b252d3fced",
@@ -375,6 +426,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x194856b0d232821a75fd572c40f28905028b5613",
@@ -382,6 +434,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xb5d9a773b889d8614c12c9017b018a173fbc885b",
@@ -389,6 +442,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x238d614eff8fd24dbb7233b597e2428280ebec48",
@@ -396,6 +450,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x59459c6cd4611c667f8719ebe6f25f8a9b19e71a",
@@ -403,6 +458,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x75d55b4947aef358201c131ce34d5e4a495e3043",
@@ -410,6 +466,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x389b8bd4fac72ff9aa5fd888a4b3283ac4c14b28",
@@ -417,6 +474,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xc4ff72a7d98222aee8c5a327e19362fd9550ba82",
@@ -424,6 +482,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x496fc41e88e8b40812c426691ee23faa1b3cb910",
@@ -431,6 +490,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x11f7956b8fa1a1c24d122b0f22f266e0f8c058f2",
@@ -438,6 +498,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x7d9fbd459f1b5462aa8aac2f6dfd1a85973e1d68",
@@ -445,6 +506,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x170d2ea8f593fcabdb353dbf92fc9e4a417d688c",
@@ -452,6 +514,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x15ea6f3c3e4f190ab72e86b9d3d75f75d3485c7c",
@@ -459,6 +522,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xcab2aadd8b875f74d5b04f1453d9a9cad2f395cd",
@@ -466,6 +530,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x587efe35bb3a77f4c644ba485b7f8b4ab3b8c498",
@@ -473,6 +538,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x16b04dd860cb316e861051c4d7e8740183c969e9",
@@ -480,6 +546,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xd4c4c02214c765cd485154e8aa3ed6fe9ea6f447",
@@ -487,6 +554,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x2ca2ae442e68ae80d8a4f5e2c57566f7c36e2075",
@@ -494,6 +562,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x1e781a4538a932e628c37d468e53cad749425207",
@@ -501,6 +570,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xc3d4fed7ad9976fb210a85ffeb122e2141050133",
@@ -508,6 +578,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x964f14d320519b4ec81a3037e79f56fcac732353",
@@ -515,6 +586,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x1193448fd3d2ec0ac5587501c81096076d3172d2",
@@ -522,6 +594,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x136f52ee1e47152b163945a8f515924b9718e161",
@@ -529,6 +602,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x60a5b71677d690022f0c0d69069382b9b1c4d849",
@@ -536,6 +610,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x5db8eff3bd353f7f676f3444d4da359c97f554f5",
@@ -543,6 +618,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xe09b073a057ce89e33eedead97f0c4a132ca0c73",
@@ -550,6 +626,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xc505b6fcb0e4693a1db21e861d8341fcc346175c",
@@ -557,6 +634,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xd49ca496615643f70c80785ef10e0b9837368a9e",
@@ -564,6 +642,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xc5119f19620eea91b29e9ef55ea1d387a0d05a06",
@@ -571,6 +650,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x8d1a855f95834ad9f3b6805b44d305fc5f902ae8",
@@ -578,6 +658,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x6a8f1dc16f297249015104bc92a646c1a479c32d",
@@ -585,6 +666,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x464b3c2e6e4aae8e3e6bd0e73ebeae33d057aea8",
@@ -592,6 +674,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xaa2c7dc97a2c90410d2916886e29dfbe3c82c843",
@@ -599,6 +682,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x7f6118314aa6a69a908ac0bab7e5cf24a5eb2af3",
@@ -606,6 +690,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x454e4ce649e5b6d2dcf7268d737567653b018080",
@@ -613,6 +698,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x591e3216cc9429123a3f455c0e1425ab827f3310",
@@ -620,6 +706,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xfa4d7b553b1db8e4a126db4cd074df198e2657e8",
@@ -627,6 +714,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x4ce268f49ef0726d602a8b0f22fcc543aa23bb51",
@@ -634,6 +722,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x02f60fef631ac1691fe3d38191b8e3430930d2f4",
@@ -641,6 +730,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x43e3946b8ad45251232afa860de45f1044cba516",
@@ -648,6 +738,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x2d1f7d7a9cca2fd8ea4b1a46f261a79972452563",
@@ -655,6 +746,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x428232eaeacb6105ec9b4481f6e156cc7817cf65",
@@ -662,6 +754,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xfc0ca4f2534603123a557140a24695d906c18faa",
@@ -669,6 +762,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x843cd8c36328cf18f9c1f1e11f0acf88d99762ac",
@@ -676,6 +770,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x916ab8f0f48096e7c5c6ab2f0537f98376f73131",
@@ -683,6 +778,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xc2e6a15f8b1016942e8af2325446351429182668",
@@ -690,6 +786,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xc7bae2455a6ade972c5647849abaaf72f94a4e5b",
@@ -697,6 +794,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x668cc58e6b704b7dbef30607664599435e6854a9",
@@ -704,6 +802,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xd836d8cd28eac6a8d90923c4e0c9a942e1221c9e",
@@ -711,6 +810,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xc7d77a35ba4316cc1da44feaf82fd6de3172fccc",
@@ -718,6 +818,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xe74b3696c6d93716ce01472125be3b9c74aa378b",
@@ -725,6 +826,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xf3b375a2bcebdef5878e52b29eb2fedc564f1d21",
@@ -732,6 +834,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xa6473cce13f11614745e6bf9cad704646616a9b8",
@@ -739,6 +842,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xe81a37c7b4537f854a4f974a715802218309dd8c",
@@ -746,6 +850,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x246a9b7ee043ca431968febd33917bb3af804921",
@@ -753,6 +858,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x43b513c90cb8a32d34ee213ed94f9655f10550fe",
@@ -760,6 +866,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x173143e501030f4bcdcd1238e69823e5276bb3cd",
@@ -767,6 +874,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x48a881c6c2ff0c962d017b2c4fb9701afbe3c5f4",
@@ -774,6 +882,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xbd5622c171b879920d79d5bd7346c547fc7d4ada",
@@ -781,6 +890,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xcada5a36eea0be9bf125d6ff1f713ad5e1b2d665",
@@ -788,6 +898,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x51e02f63fb09d00dbfb6867660e014d8d21efdae",
@@ -795,6 +906,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x6c529ce2bdd778e8c9d36c75a434e626a583caa9",
@@ -802,6 +914,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x7031e568c911605c14ce9a8f2e9a63a5246748c4",
@@ -809,6 +922,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xd0d2a5966836c2084a89631c5a9835c5af30511a",
@@ -816,6 +930,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x0752adfe7c42d89bf2fb3c22ffa18b7d0871c807",
@@ -823,6 +938,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xc7cde949574112861c81d64a70ca7d4375ef33bf",
@@ -830,6 +946,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x2fccb6f43e9a470440573e514d1cee0296da1d48",
@@ -837,6 +954,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x19775e1817bc7a1e41060f80e0d00eabae2959a7",
@@ -844,6 +962,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x3669dce51dd32165a5749419049457944f48bb35",
@@ -851,6 +970,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x93e467d56bb04fc64a978d584e12da1ea4dc4ce0",
@@ -858,6 +978,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x0a2d3dd46e44acec0da085268502880bb384bcc0",
@@ -865,6 +986,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x8310d0ea5da5a94e0adec01f9ba5c0d6d81e7359",
@@ -872,6 +994,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xfdec0aabcd16f5e3953aa479d6d1dff298483c1e",
@@ -879,6 +1002,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xbfad818edb25dc4eebac8cc44a7533be4652ad6c",
@@ -886,6 +1010,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x148afbce5ce5417e966e92d2c04bd81d8cb0e04e",
@@ -893,6 +1018,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xc3939c3043ab077f254f576b2f4b2f1f0e54d1cc",
@@ -900,6 +1026,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x5bb35d290ecc0f00a8c84b03e66d974b01d64afb",
@@ -907,6 +1034,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x431b5ddb0ace97ebc3d936403ea25831bad832b6",
@@ -914,6 +1042,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x65d69652d9276f75474945f475bc4c62a7baf84b",
@@ -921,6 +1050,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x614550c16857b11a66548d65aa45805659814c93",
@@ -928,6 +1058,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x62c5d2ec2722be908c9ada4c783d1116a240f2da",
@@ -935,6 +1066,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x9951c9ecf194ebc191ca166dc7327cf458cf866a",
@@ -942,6 +1074,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xcbd25a2f3f443640f4906aaf4e3c45fceaacbafc",
@@ -949,6 +1082,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x69eed0da450ce194dcea4317f688315973dcba31",
@@ -956,6 +1090,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xb3e72703f98a30b22a15be2cc439cc2e1f9b64be",
@@ -963,6 +1098,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0x259e9949c46975c3b250a78d25a4d998e5401a44",
@@ -970,6 +1106,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xb8121d3cd32432fbe17a031a212a600c070e8176",
@@ -977,6 +1114,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
   {
     address: "0xd3cdb8e773f72f7ff06a52b1650b76b9e2912c2a",
@@ -984,6 +1122,7 @@ const walletsPurchased = [
     claimedTGE: false,
     claimed: 0,
     newPurchased: 0,
+    tgeAmount: 0,
   },
 ];
 
@@ -1013,9 +1152,14 @@ export async function vestingInfos(index: number) {
       const claimed = Number(
         formatEther(await contract?.tokensClaimed(element.address))
       );
+      const tgeAmount = Number(
+        formatEther(await contract?.previewTGETokens(element.address))
+      );
+
       element.claimedTGE = claimedTGE;
       element.claimed = claimed;
       element.newPurchased = element.purchased - claimed;
+      element.tgeAmount = tgeAmount;
     }
 
     const totalPurchased = walletsPurchased.reduce(
@@ -1023,12 +1167,29 @@ export async function vestingInfos(index: number) {
       0
     );
 
+    const totalAvailable = walletsPurchased.reduce(
+      (acc, curr) => acc + curr.purchased - curr.claimed,
+      0
+    );
+
     const tgeNotClaimedWallets = walletsPurchased.filter(
       (item) => !item.claimedTGE
     );
 
-    console.log(walletsPurchased);
-    // console.log(totalPurchased, tgeNotClaimedWallets);
+    const totalAmountInTGENotClaimed = walletsPurchased
+      .filter((item) => !item.claimedTGE)
+      .reduce((acc, curr) => acc + curr.tgeAmount, 0);
+
+    // console.log(totalPurchased, totalAvailable);
+    console.log(totalAmountInTGENotClaimed);
+
+    return {
+      walletsPurchased,
+      totalPurchased,
+      totalAvailable,
+      tgeNotClaimedWallets,
+      totalAmountInTGENotClaimed,
+    };
   } catch (e) {
     handleError({ e: e, notificate: true });
   }

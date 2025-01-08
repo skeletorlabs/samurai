@@ -545,6 +545,7 @@ export const IDOs: IDO_v3[] = [
     type: "v3",
     linkedWallet: false,
     ether: false,
+    oldVestingContract: "0xCFe4E1e1dDB2c5AcaF57Af30271FA2996Bc1aF9F",
   },
 ];
 

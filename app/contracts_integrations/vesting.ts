@@ -8,6 +8,7 @@ import {
 import checkApproval from "./check-approval";
 import { notificateTx } from "@/app/utils/notificateTx";
 import { VESTING_ABI_V3 } from "./abis";
+import { vestingInfos } from "./migrator";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
@@ -43,6 +44,22 @@ async function getContract(index: number, signer?: Signer) {
 
     const contract = new ethers.Contract(
       ido.vesting!,
+      ido.vestingABI,
+      signer || provider
+    );
+    return contract;
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
+}
+
+async function getOldContract(index: number, signer?: Signer) {
+  try {
+    const ido = IDOs[index];
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+
+    const contract = new ethers.Contract(
+      ido.oldVestingContract!,
       ido.vestingABI,
       signer || provider
     );
@@ -130,25 +147,50 @@ export async function userInfo(index: number, signer: Signer) {
     const contract = await getContract(index);
     const signerAddress = await signer.getAddress();
 
-    const purchased = Number(
+    let purchased = Number(
       formatEther(await contract?.purchases(signerAddress))
     );
 
-    const claimedTGE = await contract?.hasClaimedTGE(signerAddress);
-    const askedRefund = await contract?.askedRefund(signerAddress);
+    let claimedTGE = await contract?.hasClaimedTGE(signerAddress);
+    let askedRefund = await contract?.askedRefund(signerAddress);
 
-    const claimedTokens = Number(
+    let claimedTokens = Number(
       formatEther(await contract?.tokensClaimed(signerAddress))
     );
     const claimableTokens = Number(
       formatEther(await contract?.previewClaimableTokens(signerAddress))
     );
-    const claimedPoints = Number(
+
+    let claimedPoints = Number(
       formatEther(await contract?.pointsClaimed(signerAddress))
     );
     let claimablePoints = Number(
       formatEther(await contract?.previewClaimablePoints(signerAddress))
     );
+
+    const ido = IDOs[index];
+
+    if (ido?.oldVestingContract) {
+      claimedTGE = true; // always true when used in migration
+
+      const oldContract = await getOldContract(index, signer);
+
+      purchased = Number(
+        formatEther(await oldContract?.purchases(signerAddress))
+      );
+
+      claimedTokens += Number(
+        formatEther(await contract?.tokensClaimed(signerAddress))
+      );
+
+      claimedPoints = Number(
+        formatEther(await contract?.pointsClaimed(signerAddress))
+      );
+
+      claimablePoints = Number(
+        formatEther(await contract?.previewClaimablePoints(signerAddress))
+      );
+    }
 
     return {
       purchased,
@@ -194,7 +236,10 @@ export async function claimTokens(index: number, signer: Signer) {
 
 export async function claimPoints(index: number, signer: Signer) {
   try {
-    const contract = await getContract(index, signer);
+    const ido = IDOs[index];
+    const contract = ido?.oldVestingContract
+      ? await getOldContract(index, signer)
+      : await getContract(index, signer);
     const network = await signer.provider?.getNetwork();
     const tx = await contract?.claimPoints();
     await notificateTx(tx, network);
