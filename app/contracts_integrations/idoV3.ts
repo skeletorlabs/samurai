@@ -389,6 +389,7 @@ export async function getParticipationPhase(index: number) {
     ethers.formatUnits(await contract?.maxAllocations(), 6)
   );
 
+  if (ido.end < now) phase = "Vesting";
   if (maxAllocations - raised < range.minPerWallet) phase = "Vesting";
   if (isPaused && raised > 0) phase = "Vesting";
 
