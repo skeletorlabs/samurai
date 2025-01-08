@@ -216,7 +216,7 @@ export const IDOs: IDO_v3[] = [
     allocation: 100_000,
     date: 1736172000,
     fcfs: 0,
-    end: 1736344800,
+    end: 1736344800 + 3600 * 3,
     investmentRound: "Strategic Round",
     fdv: 15_000_000,
     exchangeListingPrice: 0.015,
