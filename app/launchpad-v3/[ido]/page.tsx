@@ -1124,6 +1124,20 @@ export default function Ido() {
         )}
       </div>
 
+      {ido && ido.id === "estatex" && (
+        <video
+          width="320"
+          height="240"
+          controls
+          preload="auto"
+          loop
+          className="py-10 2xl:pt-14 w-full px-6 lg:px-10 2xl:px-20"
+        >
+          <source src="/IDOs/estatex/1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      )}
+
       <Transition appear show={galleryOpen}>
         <Dialog
           as="div"
