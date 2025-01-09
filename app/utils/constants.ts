@@ -182,11 +182,6 @@ export const IDOs: IDO_v3[] = [
     type: "v3",
     linkedWallet: false,
     ether: false,
-    // nftsToBlock: [
-    //   107, 212, 213, 214, 215, 216, 217, 218, 502, 544, 831, 876, 877, 941, 980,
-    //   1071, 1073, 1154, 1155, 1156, 1364, 1455, 1462, 1626, 1627, 1629, 1630,
-    //   2120,
-    // ],
   },
   {
     id: "kvants",
@@ -251,11 +246,6 @@ export const IDOs: IDO_v3[] = [
     type: "v3",
     linkedWallet: false,
     ether: false,
-    // nftsToBlock: [
-    //   107, 212, 213, 214, 215, 216, 217, 218, 502, 544, 831, 876, 877, 941, 980,
-    //   1071, 1073, 1154, 1155, 1156, 1364, 1455, 1462, 1626, 1627, 1629, 1630,
-    //   2120,
-    // ],
   },
   {
     id: "alpaca",
@@ -317,14 +307,6 @@ export const IDOs: IDO_v3[] = [
     ],
     contract: "0x3A76C6e3e6a0B136eE92b66B9Ba25d099BBC5882",
     abi: LATEST_PARTICIPATOR_TOKENS_ABI,
-    // images: [
-    //   "/IDOs/smartnodes/1.png",
-    //   "/IDOs/smartnodes/2.png",
-    //   "/IDOs/smartnodes/3.png",
-    //   "/IDOs/smartnodes/4.png",
-    //   "/IDOs/smartnodes/5.png",
-    //   "/IDOs/smartnodes/6.png",
-    // ],
     register: true,
     vestingDescription: "100% TGE unlock, No cliff, No vesting",
     vesting: "0x8C8Fa0152eFF48700c9e10b64aCa1B81f259F54B",
@@ -333,11 +315,6 @@ export const IDOs: IDO_v3[] = [
     type: "v3",
     linkedWallet: false,
     ether: false,
-    nftsToBlock: [
-      107, 212, 213, 214, 215, 216, 217, 218, 502, 544, 831, 876, 877, 941, 980,
-      1071, 1073, 1154, 1155, 1156, 1364, 1455, 1462, 1626, 1627, 1629, 1630,
-      2120,
-    ],
   },
   {
     id: "earnm-r2",

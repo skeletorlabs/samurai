@@ -186,16 +186,6 @@ export async function userInfo(
 
     let blocked = false;
 
-    if (
-      userNftsIds.length > 0 &&
-      ido.nftsToBlock &&
-      ido.nftsToBlock.length > 0
-    ) {
-      blocked = userNftsIds!.some((item) =>
-        ido.nftsToBlock!.includes(item.tokenId)
-      );
-    }
-
     return {
       allocation,
       walletRange,
@@ -204,7 +194,6 @@ export async function userInfo(
       balanceEther,
       balanceToken,
       acceptedTokenBalance,
-      blocked,
     };
   } catch (e) {
     handleError({ e: e, notificate: true });
