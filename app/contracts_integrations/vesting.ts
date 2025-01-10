@@ -1,15 +1,14 @@
 import { ethers, Signer, formatEther, parseEther } from "ethers";
 import handleError from "@/app/utils/handleErrors";
-import {
-  IDOs,
-  VestingPeriodTranslator,
-  VestingPeriodType,
-} from "@/app/utils/constants";
+import { IDOs, VestingPeriodTranslator } from "@/app/utils/constants";
 import checkApproval from "./check-approval";
 import { notificateTx } from "@/app/utils/notificateTx";
 import { VESTING_ABI_V3 } from "./abis";
+import { getUnixTime } from "date-fns";
+import { VESTING_PERIOD_TYPE } from "../utils/interfaces";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
+const now = getUnixTime(new Date());
 
 export type WalletRange = {
   name: string;
@@ -31,6 +30,7 @@ export type VESTING_GENERAL_INFO = {
     cliff: number;
     cliffEndsAt: number;
     vestingEndsAt: number;
+    nextUnlock: number;
   };
   vestingType: number;
   vestingPeriod: string;
@@ -50,6 +50,123 @@ async function getContract(index: number, signer?: Signer) {
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
+}
+
+enum VestingPeriodType {
+  Days = 2,
+  Weeks = 3,
+  Months = 4,
+}
+
+function getNextUnlock(
+  vestingStart: number,
+  vestingEnd: number,
+  periodType: VestingPeriodType
+): number {
+  if (now >= vestingEnd) {
+    return 0; // No more unlocks
+  }
+
+  const startDate = new Date(vestingStart * 1000);
+  let currentDate = new Date(startDate);
+
+  switch (periodType) {
+    case VestingPeriodType.Days:
+      currentDate.setDate(startDate.getDate() + 1);
+      break;
+    case VestingPeriodType.Weeks:
+      currentDate.setDate(startDate.getDate() + 7);
+      break;
+    case VestingPeriodType.Months:
+      currentDate.setMonth(startDate.getMonth() + 1);
+      break;
+    default:
+      throw new Error(`Invalid periodType: ${periodType}`);
+  }
+
+  while (currentDate <= new Date(vestingEnd * 1000)) {
+    if (currentDate > new Date(now * 1000)) {
+      return Math.floor(currentDate.getTime() / 1000);
+    }
+
+    switch (periodType) {
+      case VestingPeriodType.Days:
+        currentDate.setDate(currentDate.getDate() + 1);
+        break;
+      case VestingPeriodType.Weeks:
+        currentDate.setDate(currentDate.getDate() + 7);
+        break;
+      case VestingPeriodType.Months:
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        break;
+    }
+  }
+
+  return 0; // No more unlocks
+}
+
+function getNextUnlock2(
+  vestingStart: number,
+  vestingEnd: number,
+  periodType: number
+): number {
+  if (now >= vestingEnd) {
+    return 0; // No more unlocks
+  }
+
+  // Start from the vesting start
+  let currentUnlock = vestingStart;
+
+  // currentUnlock = 0;
+
+  // Increment by whole months until the next unlock is found
+  while (currentUnlock <= vestingEnd) {
+    const date = new Date(currentUnlock * 1000); // Convert seconds to milliseconds
+
+    switch (VestingPeriodType[periodType]) {
+      case "Days":
+        // Handle time increment by explicitly preserving the time
+        const newDay = date.getUTCDate() + 1; // Increment the day
+        date.setUTCDate(newDay);
+
+        // If the day changes incorrectly, adjust it back
+        while (date.getUTCDate() !== newDay % 31) {
+          date.setUTCDate(date.getUTCDate() - 1);
+        }
+        break;
+      case "Weeks":
+        // Handle time increment by explicitly preserving the day and time
+        const newWeek = date.getUTCDate() + 7; // Increment the week
+        date.setUTCDate(newWeek);
+
+        // If the week changes incorrectly, adjust it back
+        while (date.getUTCDate() !== newWeek % 31) {
+          date.setUTCDate(date.getUTCDate() - 1);
+        }
+        break;
+      case "Months":
+        // Handle time increment by explicitly preserving the day and time
+        const newMonth = date.getUTCMonth() + 1; // Increment the month
+        date.setUTCMonth(newMonth);
+
+        // If the month changes incorrectly, adjust it back
+        while (date.getUTCMonth() !== newMonth % 12) {
+          date.setUTCDate(date.getUTCDate() - 1);
+        }
+        break;
+
+      default:
+        break;
+    }
+
+    currentUnlock = Math.floor(date.getTime() / 1000); // Convert back to seconds
+
+    if (currentUnlock > now) {
+      return currentUnlock; // Found the next unlock
+    }
+  }
+
+  return 0; // No more unlocks
 }
 
 export async function generalInfo(index: number) {
@@ -75,10 +192,19 @@ export async function generalInfo(index: number) {
 
     const vestingType = Number(await contract?.vestingType());
     let vestingPeriod = "";
+    let rawPeriodType = 0;
     if (ido.vestingABI === VESTING_ABI_V3) {
-      const rawPeriodType = Number(await contract?.vestingPeriodType());
+      rawPeriodType = Number(await contract?.vestingPeriodType());
       const periodType = VestingPeriodType[rawPeriodType];
+
       vestingPeriod = VestingPeriodTranslator[periodType];
+    }
+
+    if (ido.id === "dyor") {
+      rawPeriodType = 4;
+    }
+    if (ido.id === "earnm-r2") {
+      rawPeriodType = 2;
     }
     const tgeReleasePercent = Number(
       formatEther(await contract?.tgeReleasePercent())
@@ -90,6 +216,12 @@ export async function generalInfo(index: number) {
     const vestingAt =
       ido.id === "alpaca" ? Number(periods[1]) + 60 * 15 : Number(periods[1]);
     const cliff = Number(periods[2]);
+
+    let nextUnlock = 0;
+
+    // 2 is the vesting type for periodic vesting
+    if (vestingType === 2)
+      nextUnlock = getNextUnlock(vestingAt, vestingEndsAt, rawPeriodType);
 
     return {
       owner,
@@ -105,6 +237,7 @@ export async function generalInfo(index: number) {
         cliff,
         cliffEndsAt,
         vestingEndsAt,
+        nextUnlock,
       },
       vestingType,
       vestingPeriod,
@@ -125,7 +258,11 @@ export async function getWalletsToRefund(index: number) {
   }
 }
 
-export async function userInfo(index: number, signer: Signer) {
+export async function userInfo(
+  index: number,
+  general: VESTING_GENERAL_INFO,
+  signer: Signer
+) {
   try {
     const contract = await getContract(index);
     const signerAddress = await signer.getAddress();
@@ -140,9 +277,20 @@ export async function userInfo(index: number, signer: Signer) {
     const claimedTokens = Number(
       formatEther(await contract?.tokensClaimed(signerAddress))
     );
-    const claimableTokens = Number(
-      formatEther(await contract?.previewClaimableTokens(signerAddress))
-    );
+    let claimableTokens = 0;
+
+    if (general.vestingType === 2) {
+      if (general.periods.nextUnlock > 0 && now >= general.periods.nextUnlock) {
+        claimableTokens = Number(
+          formatEther(await contract?.previewClaimableTokens(signerAddress))
+        );
+      }
+    } else {
+      claimableTokens = Number(
+        formatEther(await contract?.previewClaimableTokens(signerAddress))
+      );
+    }
+
     const claimedPoints = Number(
       formatEther(await contract?.pointsClaimed(signerAddress))
     );

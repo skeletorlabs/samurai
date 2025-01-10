@@ -254,3 +254,7 @@ export interface SINGLE_CARD {
   phase: string;
   prices?: string[];
 }
+
+export interface VESTING_PERIOD_TYPE {
+  [key: number]: string;
+}

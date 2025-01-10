@@ -624,18 +624,20 @@ export default function Ido() {
                           </div>
                         )}
 
-                        {currentPhase && currentPhase !== "Completed" && (
-                          <div className="flex flex-col py-2 px-2 rounded-md w-max">
-                            <span className="text-neutral-600">Raised:</span>
-                            <p className="text-white/70">
-                              $
-                              {Number(general?.raised | 0).toLocaleString(
-                                "en-us"
-                              )}{" "}
-                              {ido?.acceptedTokenSymbol}
-                            </p>
-                          </div>
-                        )}
+                        {currentPhase &&
+                          currentPhase !== "Vesting" &&
+                          currentPhase !== "Completed" && (
+                            <div className="flex flex-col py-2 px-2 rounded-md w-max">
+                              <span className="text-neutral-600">Raised:</span>
+                              <p className="text-white/70">
+                                $
+                                {Number(general?.raised | 0).toLocaleString(
+                                  "en-us"
+                                )}{" "}
+                                {ido?.acceptedTokenSymbol}
+                              </p>
+                            </div>
+                          )}
                       </div>
 
                       {signer &&
@@ -1045,10 +1047,14 @@ export default function Ido() {
                 </div>
               </div>
 
-              <IdoAllocationProgress
-                maxAllocations={general?.maxAllocations || 0}
-                raised={general?.raised || 0}
-              />
+              {currentPhase &&
+                currentPhase !== "Vesting" &&
+                currentPhase !== "Completed" && (
+                  <IdoAllocationProgress
+                    maxAllocations={general?.maxAllocations || 0}
+                    raised={general?.raised || 0}
+                  />
+                )}
             </div>
           </div>
         </div>
