@@ -19,7 +19,7 @@ import {
   ventures,
 } from "@/app/utils/svgs";
 import { Page } from "./enums";
-import { IDO, IDO_v3, SINGLE_CARD } from "./interfaces";
+import { IDO, IDO_v3, SINGLE_CARD, VESTING_PERIOD_TYPE } from "./interfaces";
 import {
   galaxyGamesHauntedSpace,
   havensCompass,
@@ -59,7 +59,7 @@ export const VestingType: { [key: number]: string } = {
   2: "Periodic",
 };
 
-export const VestingPeriodType: { [key: number]: string } = {
+export const VestingPeriodType: VESTING_PERIOD_TYPE = {
   0: "None",
   1: "Seconds",
   2: "Days",
@@ -152,7 +152,7 @@ export const IDOs: IDO_v3[] = [
     allocation: 100_000,
     date: 1736424000,
     fcfs: 0,
-    end: 1736467200,
+    end: 1736553600,
     investmentRound: "Private",
     fdv: 18_585_000,
     exchangeListingPrice: 0.00295,

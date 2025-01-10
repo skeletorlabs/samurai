@@ -15,6 +15,7 @@ import { notificateTx } from "@/app/utils/notificateTx";
 import { generalInfo as generalVestingInfo } from "./vesting";
 import { getTokens } from "@/app/contracts_integrations/nft";
 import { vestingInfos } from "./migrator";
+import { UTCDate } from "@date-fns/utc";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
@@ -362,7 +363,7 @@ export async function getParticipationPhase(index: number) {
   const ido = IDOs[index];
   const start = ido.date;
   const end = ido.end;
-  const now = getUnixTime(new Date());
+  const now = getUnixTime(new UTCDate());
   const isPaused = await checkIsPaused(index);
 
   let phase = "Upcoming";

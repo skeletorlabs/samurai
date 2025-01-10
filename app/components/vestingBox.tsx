@@ -38,37 +38,6 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
   const [walletEnabledToFill, setWalletEnabledToFill] = useState(false);
   const { signer, account, chain } = useContext(StateContext);
 
-  function getNextUnlock(vestingStart: number, vestingEnd: number): number {
-    if (now >= vestingEnd) {
-      return 0; // No more unlocks
-    }
-
-    // Start from the vesting start
-    let currentUnlock = vestingStart;
-
-    // Increment by whole months until the next unlock is found
-    while (currentUnlock <= vestingEnd) {
-      const date = new Date(currentUnlock * 1000); // Convert seconds to milliseconds
-
-      // Handle time increment by explicitly preserving the day and time
-      const newMonth = date.getUTCMonth() + 1; // Increment the month
-      date.setUTCMonth(newMonth);
-
-      // If the month changes incorrectly, adjust it back
-      while (date.getUTCMonth() !== newMonth % 12) {
-        date.setUTCDate(date.getUTCDate() - 1);
-      }
-
-      currentUnlock = Math.floor(date.getTime() / 1000); // Convert back to seconds
-
-      if (currentUnlock > now) {
-        return currentUnlock; // Found the next unlock
-      }
-    }
-
-    return 0; // No more unlocks
-  }
-
   const onCheckWalletEnabledToFill = useCallback(async () => {
     setLoading(true);
     if (account && signer) {
@@ -134,7 +103,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
   const getUserInfos = useCallback(async () => {
     setLoading(true);
     if (signer && general) {
-      const response = await userInfo(idoIndex, signer);
+      const response = await userInfo(idoIndex, general, signer);
       setUser(response);
     }
     setLoading(false);
@@ -258,17 +227,12 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
                   </p>
                 </div>
 
-                {ido.id !== "earnm-r2" && (
+                {general?.periods.nextUnlock > 0 && (
                   <div className="flex flex-col w-[200px] lg:ml-[8px] lg:flex-1">
                     <p className={`${inter.className}`}>Next Unlock</p>
                     <p className="text-samurai-red w-max font-bold">
                       {/* Feb 03, 2025, 15:00 UTC */}
-                      {formattedDate5(
-                        getNextUnlock(
-                          general?.periods.cliffEndsAt,
-                          general?.periods.vestingEndsAt
-                        )
-                      )}
+                      {formattedDate5(general?.periods.nextUnlock)}
                     </p>
                   </div>
                 )}
