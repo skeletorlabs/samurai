@@ -15,6 +15,7 @@ import { notificateTx } from "@/app/utils/notificateTx";
 import { generalInfo as generalVestingInfo } from "./vesting";
 import { getTokens } from "@/app/contracts_integrations/nft";
 import { vestingInfos } from "./migrator";
+import { UTCDate } from "@date-fns/utc";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
@@ -370,38 +371,36 @@ export async function updateRanges(
 }
 
 export async function getParticipationPhase(index: number) {
-  // const ido = IDOs[index];
-  // const start = ido.date;
-  // const end = ido.end;
-  // const now = getUnixTime(new Date());
-  // const isPaused = await checkIsPaused(index);
+  const ido = IDOs[index];
+  const start = ido.date;
+  const end = ido.end;
+  const now = getUnixTime(new UTCDate());
+  const isPaused = await checkIsPaused(index);
 
-  // let phase = "Upcoming";
-  // if (now >= start && now <= end && !isPaused) phase = "Participation";
+  let phase = "Upcoming";
+  if (now >= start && now <= end && !isPaused) phase = "Participation";
 
-  // const contract = await getContract(index, undefined);
-  // const gokenin = await contract?.getRange(2);
-  // const usingETH = await contract?.usingETH();
-  // const range = parseWalletRange(gokenin, usingETH ? 18 : 6);
-  // let raised = Number(ethers.formatUnits(await contract?.raised(), 6));
+  const contract = await getContract(index, undefined);
+  const gokenin = await contract?.getRange(2);
+  const usingETH = await contract?.usingETH();
+  const range = parseWalletRange(gokenin, usingETH ? 18 : 6);
+  let raised = Number(ethers.formatUnits(await contract?.raised(), 6));
 
-  // const maxAllocations = Number(
-  //   ethers.formatUnits(await contract?.maxAllocations(), 6)
-  // );
+  const maxAllocations = Number(
+    ethers.formatUnits(await contract?.maxAllocations(), 6)
+  );
 
-  // // if (ido.end < now) phase = "Vesting";
-  // // if (maxAllocations - raised < range.minPerWallet) phase = "Vesting";
-  // // if (isPaused && raised > 0) phase = "Vesting";
+  if (ido.end < now) phase = "Vesting";
+  if (maxAllocations - raised < range.minPerWallet) phase = "Vesting";
+  if (isPaused && raised > 0) phase = "Vesting";
 
-  // if (ido.vesting) {
-  //   const vesting = await generalVestingInfo(index);
+  if (ido.vesting) {
+    const vesting = await generalVestingInfo(index);
 
-  //   if (vesting && now > vesting?.periods?.vestingEndsAt) phase = "Completed";
-  // }
+    if (vesting && now > vesting?.periods?.vestingEndsAt) phase = "Completed";
+  }
 
-  // return phase;
-
-  return "Participation";
+  return phase;
 }
 
 // export type LinkedWalletEvent = {

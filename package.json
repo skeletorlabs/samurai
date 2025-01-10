@@ -28,6 +28,7 @@
     "tailwind-clip-path": "^1.0.0"
   },
   "devDependencies": {
+    "@date-fns/utc": "^2.1.0",
     "@heroicons/react": "^2.2.0",
     "@types/node": "^20",
     "@types/react": "^18",
