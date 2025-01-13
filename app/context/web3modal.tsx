@@ -22,6 +22,14 @@ export const base = {
   rpcUrl: process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string,
 };
 
+export const bsc = {
+  chainId: 53,
+  name: "BNB Smart Chain",
+  currency: "BNB",
+  explorerUrl: "https://basescan.org",
+  rpcUrl: process.env.NEXT_PUBLIC_BSC_RPC_HTTPS as string,
+};
+
 const testBsc = {
   chainId: 97,
   name: "Base",
