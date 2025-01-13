@@ -595,7 +595,8 @@ export default function Ido() {
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">Currency:</span>
                           <p className="text-white/70">
-                            {ido.acceptedTokenSymbol} on {ido.crowdsaleNetwork}
+                            {ido.acceptedTokenSymbol} on{" "}
+                            {ido.crowdsaleNetwork.name.toUpperCase()}
                           </p>
                         </div>
                         {signer && account && (

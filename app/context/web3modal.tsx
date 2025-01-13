@@ -23,7 +23,7 @@ export const base = {
 };
 
 export const bsc = {
-  chainId: 53,
+  chainId: 56,
   name: "BNB Smart Chain",
   currency: "BNB",
   explorerUrl: "https://basescan.org",
@@ -62,7 +62,7 @@ const ethersConfig = defaultConfig({
 // 5. Create a Web3Modal instance
 createWeb3Modal({
   ethersConfig,
-  chains: [base],
+  chains: [base, bsc],
   projectId,
 });
 

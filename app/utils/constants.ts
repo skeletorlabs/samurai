@@ -51,7 +51,7 @@ import {
   VESTING_ABI_V2,
   VESTING_ABI_V3,
 } from "@/app/contracts_integrations/abis";
-import { base } from "../context/web3modal";
+import { base, bsc } from "../context/web3modal";
 
 export const VestingType: { [key: number]: string } = {
   0: "Cliff Vesting",
@@ -130,7 +130,7 @@ export const IDOs: IDO_v3[] = [
     idoImageSrc: "/IDOs/estatex.png",
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "BNB",
-    crowdsaleNetwork: "BASE",
+    crowdsaleNetwork: base,
     networkImageSrc: "/chain-logos/BSC.png",
     projectName: "EstateX",
     projectListDescription:
@@ -195,7 +195,7 @@ export const IDOs: IDO_v3[] = [
     idoImageSrc: "/IDOs/kvants.png",
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "BNB",
-    crowdsaleNetwork: "BASE",
+    crowdsaleNetwork: base,
     networkImageSrc: "/chain-logos/BSC.png",
     projectName: "Kvants",
     projectListDescription:
@@ -264,7 +264,7 @@ export const IDOs: IDO_v3[] = [
     idoImageSrc: "/IDOs/alpaca.svg",
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "BASE",
-    crowdsaleNetwork: "BASE",
+    crowdsaleNetwork: base,
     networkImageSrc: "/chain-logos/BASE.svg",
     projectName: "ALPACA",
     projectListDescription:
@@ -346,7 +346,7 @@ export const IDOs: IDO_v3[] = [
     idoImageSrc: "/IDOs/earnm.png",
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "BASE",
-    crowdsaleNetwork: "BASE",
+    crowdsaleNetwork: base,
     networkImageSrc: "/chain-logos/BASE.svg",
     projectName: "EARN'M",
     projectListDescription:
@@ -419,7 +419,7 @@ export const IDOs: IDO_v3[] = [
     idoImageSrc: "/IDOs/earnm.png",
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "BASE",
-    crowdsaleNetwork: "BASE",
+    crowdsaleNetwork: base,
     networkImageSrc: "/chain-logos/BASE.svg",
     projectName: "EARN'M",
     projectListDescription:
@@ -491,7 +491,7 @@ export const IDOs: IDO_v3[] = [
     idoImageSrc: "/IDOs/dyor.png",
     acceptedTokenSymbol: "USDC",
     tokenNetwork: "BASE",
-    crowdsaleNetwork: "BASE",
+    crowdsaleNetwork: base,
     networkImageSrc: "/chain-logos/BASE.svg",
     projectName: "DYOR",
     projectListDescription:

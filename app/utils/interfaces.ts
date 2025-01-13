@@ -189,6 +189,14 @@ export interface IDO {
   vestingContract?: string;
 }
 
+export interface Chain {
+  rpcUrl: string;
+  explorerUrl: string;
+  currency: string;
+  name: string;
+  chainId: number;
+}
+
 export interface IDO_v3 {
   id: string;
   url: string;
@@ -196,7 +204,7 @@ export interface IDO_v3 {
   idoImageSrc: string;
   acceptedTokenSymbol: string;
   tokenNetwork: string;
-  crowdsaleNetwork: string;
+  crowdsaleNetwork: Chain;
   networkImageSrc: string;
   projectName: string;
   projectListDescription: string;
@@ -221,13 +229,7 @@ export interface IDO_v3 {
   register?: boolean;
   vestingDescription: string;
   vesting?: string;
-  vestingChain?: {
-    rpcUrl: string;
-    explorerUrl: string;
-    currency: string;
-    name: string;
-    chainId: number;
-  };
+  vestingChain?: Chain;
   vestingABI?: any;
   type?: string;
   linkedWallet?: boolean;

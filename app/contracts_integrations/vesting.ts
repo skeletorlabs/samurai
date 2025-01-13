@@ -5,9 +5,11 @@ import checkApproval from "./check-approval";
 import { notificateTx } from "@/app/utils/notificateTx";
 import { VESTING_ABI_V3 } from "./abis";
 import { getUnixTime } from "date-fns";
-import { VESTING_PERIOD_TYPE } from "../utils/interfaces";
+import { IDO_v3, VESTING_PERIOD_TYPE, Chain } from "../utils/interfaces";
+import { base } from "../context/web3modal";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
+const BSC_RPC_URL = process.env.NEXT_PUBLIC_BSC_RPC_HTTPS as string;
 const now = getUnixTime(new Date());
 
 export type WalletRange = {
@@ -39,7 +41,8 @@ export type VESTING_GENERAL_INFO = {
 async function getContract(index: number, signer?: Signer) {
   try {
     const ido = IDOs[index];
-    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+    const vestingChain: Chain = ido.vestingChain || base;
+    const provider = new ethers.JsonRpcProvider(vestingChain.rpcUrl);
 
     const contract = new ethers.Contract(
       ido.vesting!,
