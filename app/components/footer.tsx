@@ -17,7 +17,7 @@ export default function Footer() {
   return (
     <div className="w-full h-[300px] lg:h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-700">
       <div className="flex flex-col lg:flex-row gap-10">
-        <div className="flex flex-col items-center lg:items-start">
+        <div className="flex flex-col items-center lg:items-start relative">
           <Link href="/" className="transition-all hover:opacity-75">
             <Image
               src="/logo.svg"
@@ -29,7 +29,13 @@ export default function Footer() {
               className="md:mr-10 mt-10 mb-3 md:mb-6 w-[300px]"
             />
           </Link>
-
+          <Link
+            target="blank"
+            href="mailto:hello@samuraistarter.com"
+            className="hover:border-b max-h-[25px] mt-[-16px] md:mt-[-29px] lg:ml-3 mb-[16px] font-light lg:tracking-[3.7px] text-white/70"
+          >
+            hello@samuraistarter.com
+          </Link>
           <div className="flex items-center justify-center w-full lg:justify-start gap-6 md:gap-10 lg:px-4 flex-wrap lg:flex-nowrap scale-75 md:scale-100">
             {SOCIALS.map((item, index) => (
               <Link

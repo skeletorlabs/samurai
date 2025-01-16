@@ -92,7 +92,7 @@ export default function Launchpad() {
           <p
             className={`relative mt-3 leading-normal pt-3 text-[20px] text-white/70  ${inter.className}`}
           >
-            Hold a{" "}
+            Lock a{" "}
             <Link
               href="https://opensea.io/collection/samuraistarter"
               target="blank"
