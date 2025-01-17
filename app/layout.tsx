@@ -8,7 +8,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "./components/footer";
 import BottomNav from "./components/bottomNav";
-import Footer2 from "./components/footer2";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -45,8 +44,7 @@ export default function RootLayout({
               theme="dark"
             />
             <Web3Modal>{children}</Web3Modal>
-            {/* <Footer /> */}
-            <Footer2 />
+            <Footer />
           </div>
           <BottomNav />
         </StateProvider>
