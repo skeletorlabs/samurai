@@ -1,8 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SOCIALS } from "@/app/utils/constants";
-import { linkedin, twitter } from "@/app/utils/svgs";
+import { linkedin, twitter, twitterX } from "@/app/utils/svgs";
 import SSButton from "./ssButton";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+});
 
 const links = [
   { title: "SamNFT", href: "/nft" },
@@ -15,76 +20,63 @@ const links = [
 
 export default function Footer() {
   return (
-    <div className="w-full h-[300px] lg:h-60 px-4 lg:px-8 border-t-[0.5px] border-zinc-700">
-      <div className="flex flex-col lg:flex-row gap-10">
-        <div className="flex flex-col items-center lg:items-start relative">
-          <Link href="/" className="transition-all hover:opacity-75">
-            <Image
-              src="/logo.svg"
-              // placeholder="blur"
-              // blurDataURL="/logo.svg"
-              width={0}
-              height={0}
-              alt="logo"
-              className="md:mr-10 mt-10 mb-3 md:mb-6 w-[300px]"
-            />
-          </Link>
-          <Link
-            target="blank"
-            href="mailto:hello@samuraistarter.com"
-            className="hover:border-b max-h-[25px] mt-[-16px] md:mt-[-29px] lg:ml-3 mb-[16px] font-light lg:tracking-[3.7px] text-white/70"
-          >
-            hello@samuraistarter.com
-          </Link>
-          <div className="flex items-center justify-center w-full lg:justify-start gap-6 md:gap-10 lg:px-4 flex-wrap lg:flex-nowrap scale-75 md:scale-100">
-            {SOCIALS.map((item, index) => (
-              <Link
-                key={index}
-                href={item.href}
-                className={`transition-all hover:opacity-75 text-white ${
-                  item.svg === linkedin
-                    ? "scale-[1.08]"
-                    : item.svg === twitter
-                    ? "scale-[1.2]"
-                    : "scale-[1.3]"
-                }`}
-                target="blank"
-              >
-                {item.svg}
-              </Link>
-            ))}
-          </div>
-        </div>
-        <div className="flex flex-col h-full w-full lg:mt-[50px] gap-[47px] text-white">
-          <div className="hidden lg:flex h-full justify-end w-full gap-4 font-light text-lg flex-wrap">
-            {links.map((item, index) => (
-              <Link
-                key={index}
-                href={item.href}
-                className="hover:border-b max-h-[25px]"
-              >
-                {item.title}
-              </Link>
-            ))}
+    <div className="flex flex-col justify-center lg:items-center w-full h-[350px] lg:h-[300px] pb-20 pt-4 lg:pb-0 lg:pt-10 lg:h-70 border-t-[0.5px] border-zinc-700">
+      <div className="flex flex-col lg:flex-row justify-center lg:justify-between lg:items-center gap-2 lg:gap-10 w-full px-6 lg:px-8 xl:px-20">
+        <Link
+          href="/"
+          className="transition-all hover:opacity-75 w-full flex justify-center lg:justify-start lg:mt-[-4px]"
+        >
+          <Image
+            src="/logo.svg"
+            width={0}
+            height={0}
+            alt="logo"
+            className="min-w-[300px] lg:min-w-[340px] transition-colors grayscale hover:grayscale-0"
+          />
+        </Link>
+
+        <div className="flex h-full w-full justify-center items-center text-center gap-4 font-light text-xs lg:text-md 2xl:text-xl flex-wrap text-gray-400 mt-5 lg:mt-0">
+          {links.map((item, index) => (
             <Link
-              target="blank"
-              href="https://v1.samuraistarter.com"
+              key={index}
+              href={item.href}
               className="hover:border-b max-h-[25px]"
             >
-              V1
+              {item.title}
             </Link>
-          </div>
-          <div className="flex mt-[-14px] lg:mt-0 lg:ml-3 gap-5 font-light text-md justify-center lg:justify-end">
-            <span>© 2024 Samurai Starter</span>
-            <Link
-              target="blank"
-              href="https://v1.samuraistarter.com"
-              className="lg:hidden hover:border-b max-h-[25px]"
-            >
-              V1
-            </Link>
-          </div>
+          ))}
+          <Link
+            target="blank"
+            href="https://v1.samuraistarter.com"
+            className="hover:border-b max-h-[25px]"
+          >
+            V1
+          </Link>
         </div>
+
+        <div className="flex items-center justify-center lg:justify-end w-full gap-4 flex-wrap lg:flex-nowrap opacity-75">
+          {SOCIALS.map((item, index) => (
+            <Link
+              key={index}
+              href={item.href}
+              className={`transition-all hover:opacity-75 scale-[0.8] lg:scale-[0.9] hover:scale-110 ${
+                item.svg === linkedin ? "scale-[0.7]" : ""
+              }`}
+              target="blank"
+            >
+              {item.svg}
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div
+        className={`flex flex-col items-center justify-center bg-neutral-900 w-full h-full mt-10 text-white/70 ${inter.className}`}
+      >
+        <Link target="blank" href="mailto:hello@samuraistarter.com">
+          Contact us -{" "}
+          <span className="hover:underline">hello@samuraistarter.com</span>
+        </Link>
+        <span className="font-light opacity-75">© 2024 Samurai Starter</span>
       </div>
     </div>
   );
