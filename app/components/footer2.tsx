@@ -3,6 +3,11 @@ import Image from "next/image";
 import { SOCIALS } from "@/app/utils/constants";
 import { linkedin, twitter, twitterX } from "@/app/utils/svgs";
 import SSButton from "./ssButton";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+});
 
 const links = [
   { title: "SamNFT", href: "/nft" },
@@ -64,12 +69,14 @@ export default function Footer2() {
           ))}
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center bg-neutral-700 w-full h-full mt-10 text-black">
+      <div
+        className={`flex flex-col items-center justify-center bg-neutral-900 w-full h-full mt-10 text-white/70 ${inter.className}`}
+      >
         <Link target="blank" href="mailto:hello@samuraistarter.com">
           Contact us -{" "}
           <span className="hover:underline">hello@samuraistarter.com</span>
         </Link>
-        <span className="font-light">© 2024 Samurai Starter</span>
+        <span className="font-light opacity-75">© 2024 Samurai Starter</span>
       </div>
     </div>
   );
