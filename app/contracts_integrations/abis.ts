@@ -9135,6 +9135,56 @@ export const LP_STAKING_ABI = [
   },
   {
     type: "function",
+    name: "stakesOf",
+    inputs: [{ name: "wallet", type: "address", internalType: "address" }],
+    outputs: [
+      {
+        name: "",
+        type: "tuple[]",
+        internalType: "struct ILPStaking.StakeInfo[]",
+        components: [
+          {
+            name: "stakedAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "withdrawnAmount",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "stakedAt",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "withdrawTime",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "stakePeriod",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "claimedPoints",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          {
+            name: "claimedRewards",
+            type: "uint256",
+            internalType: "uint256",
+          },
+        ],
+      },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
     name: "totalStaked",
     inputs: [],
     outputs: [{ name: "", type: "uint256", internalType: "uint256" }],

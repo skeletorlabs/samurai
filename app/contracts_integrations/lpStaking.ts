@@ -4,6 +4,7 @@ import handleError from "@/app/utils/handleErrors";
 import { balanceOf } from "./balanceOf";
 import checkApproval from "./check-approval";
 import { notificateTx } from "@/app/utils/notificateTx";
+import { LP_TOKEN } from "../utils/constants";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
@@ -36,25 +37,6 @@ export async function checkIsPaused() {
 }
 
 export async function generalInfo() {
-  // uint256 public constant MAX_STAKES_PER_WALLET = 5; // Maximum number of stakes per wallet
-  // uint256 public constant MAX_AMOUNT_TO_STAKE = 10_000 ether; // 10,000 LP tokens
-  // uint256 public constant CLAIM_DELAY_PERIOD = 5 minutes; // 5 minutes
-
-  // // Define stake periods (in seconds)
-  // uint256 public constant THREE_MONTHS = 3 * 30 days; // 3 months
-  // uint256 public constant SIX_MONTHS = 6 * 30 days; // 6 months
-  // uint256 public constant NINE_MONTHS = 9 * 30 days; // 9 months
-  // uint256 public constant TWELVE_MONTHS = 12 * 30 days; // 12 months
-
-  // ERC20 public immutable lpToken;
-  // ERC20 public immutable rewardsToken;
-  // IGauge public immutable gauge;
-  // IPoints private immutable iPoints;
-  // uint256 public pointsPerToken;
-
-  // uint256 public totalStaked;
-  // uint256 public totalWithdrawn;
-
   try {
     const contract = await getContract();
 
@@ -85,51 +67,41 @@ export async function generalInfo() {
       { title: "12 Months", value: twelveMonths },
     ];
 
-    // return {
-    //   owner,
-    //   isPaused,
-    //   minToLock,
-    //   periods,
-    // };
+    return {
+      owner,
+      isPaused,
+      maxStakesPerWallet,
+      maxAmountToStake,
+      claimDelayPeriod,
+      periods,
+      totalStaked,
+      totalWithdrawn,
+    };
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
 }
 
-export async function getMultiplierByPeriod(period: number) {
-  const contract = await getContract();
-
-  const multiplier = Number(
-    ethers.formatEther(await contract?.multipliers(period))
-  );
-
-  return multiplier;
-}
-
-export async function getEstimatedPoints(amount: string, period: number) {
-  const multiplier = await getMultiplierByPeriod(period);
-
-  return Number(amount) * multiplier;
-}
-
 // USER INFOS
 
-export type LockInfo = {
-  lockIndex: number;
-  lockedAmount: number;
+export type StakingInfo = {
+  stakedAmount: number;
   withdrawnAmount: number;
-  lockedAt: number;
-  unlockTime: number;
-  lockPeriod: number;
-  multiplier: number;
-  points: number;
+  stakedAt: number;
+  withdrawTime: number;
+  stakePeriod: number;
+  claimedPoints: number;
+  claimablePoints: number;
+  claimedRewards: number;
 };
 
 export type UserInfo = {
-  locks: LockInfo[];
-  totalLocked: number;
-  totalPoints: number;
-  samBalance: number;
+  stakings: StakingInfo[];
+  totalStaked: number;
+  claimedPoints: number;
+  availablePoints: number;
+  lpBalance: number;
+  lastClaim: number;
 };
 
 export async function userInfo(signer: ethers.Signer) {
@@ -138,71 +110,75 @@ export async function userInfo(signer: ethers.Signer) {
     const contract = await getContract(signer);
     const userLocks = await contract?.getLockInfos(signerAdress);
 
-    let locks: LockInfo[] = [];
+    let stakes: StakingInfo[] = [];
     for (let i = 0; i < userLocks.length; i++) {
       const userLock = userLocks[i];
-      const lock: LockInfo = {
-        lockIndex: i,
-        lockedAmount: Number(ethers.formatEther(userLock[1])),
+      const claimablePoints = Number(
+        formatEther(await contract?.previewClaimablePoints(signerAdress, i))
+      );
+      const stake: StakingInfo = {
+        stakedAmount: Number(ethers.formatEther(userLock[1])),
         withdrawnAmount: Number(ethers.formatEther(userLock[2])),
-        lockedAt: Number(userLock[3]),
-        unlockTime: Number(userLock[4]),
-        lockPeriod: Number(userLock[5]),
-        multiplier: Number(ethers.formatEther(userLock[6])),
-        points: Number(
-          ethers.formatEther(await contract?.pointsByLock(signerAdress, i))
-        ),
+        stakedAt: Number(userLock[3]),
+        withdrawTime: Number(userLock[4]),
+        stakePeriod: Number(userLock[5]),
+        claimablePoints: claimablePoints,
+        claimedPoints: Number(formatEther(userLock[6])),
+        claimedRewards: Number(formatEther(userLock[7])),
       };
 
-      locks.push(lock);
+      stakes.push(stake);
     }
 
-    const totalLocked: Number = locks.reduce((acc, curr) => {
-      return acc + curr.lockedAmount - curr.withdrawnAmount;
+    const totalStaked: Number = stakes.reduce((acc, curr) => {
+      return acc + curr.stakedAmount - curr.withdrawnAmount;
     }, 0);
 
-    const totalPoints: Number = locks.reduce((acc, curr) => {
-      return acc + curr.points;
+    const claimedPoints: Number = stakes.reduce((acc, curr) => {
+      return acc + curr.claimedPoints;
     }, 0);
 
-    const samBalance = Number(
+    const availablePoints = stakes.reduce((acc, curr) => {
+      return acc + curr.claimablePoints;
+    }, 0);
+
+    const lpBalance = Number(
       ethers.formatEther(
-        await balanceOf(ERC20_ABI, SAM_ADDRESS, signerAdress, signer)
+        await balanceOf(ERC20_ABI, "0x...", signerAdress, signer)
       )
     );
 
+    const lastClaim = Number(await contract?.lastClaims(signerAdress));
+
     return {
-      locks,
-      totalLocked,
-      totalPoints,
-      samBalance,
+      stakings: stakes,
+      totalStaked,
+      claimedPoints,
+      availablePoints,
+      lpBalance,
+      lastClaim,
     } as UserInfo;
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
 }
 
-export async function lock(
+export async function stake(
   signer: ethers.Signer,
   amount: string,
-  lockPeriod: number
+  stakePeriod: number
 ) {
   try {
     const signerAddress = await signer.getAddress();
     const contract = await getContract(signer);
     const network = await signer.provider?.getNetwork();
 
-    await checkApproval(
-      SAM_ADDRESS,
-      SAM_LOCK_ADDRESS,
-      signer,
-      ethers.parseEther(amount)
-    );
+    await checkApproval(LP_TOKEN, "0x...", signer, ethers.parseEther(amount));
 
-    const tx = await contract?.lock(
+    const tx = await contract?.stake(
       signerAddress,
       ethers.parseEther(amount),
-      lockPeriod
+      stakePeriod
     );
 
     await notificateTx(tx, network);
@@ -233,130 +209,32 @@ export async function withdraw(
   }
 }
 
-export type Event = {
-  wallet: string;
-  amount: number;
-};
-
-export async function getLockedEvents() {
+export async function claimRewards(signer: ethers.Signer) {
   try {
-    const contract = await getContract();
-    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
-    const startBlock = 13253153;
-    const currentBlock = await provider.getBlockNumber();
-    const blocksPerFilter = 10000;
+    const signerAddress = await signer.getAddress();
+    const contract = await getContract(signer);
+    const network = await signer.provider?.getNetwork();
 
-    let allEvents: Event[] = []; // Array to store all retrieved events
+    const tx = await contract?.claimRewards(signerAddress);
 
-    for (
-      let fromBlock = startBlock;
-      fromBlock <= currentBlock;
-      fromBlock += blocksPerFilter
-    ) {
-      const toBlock = Math.min(fromBlock + blocksPerFilter - 1, currentBlock); // Ensure toBlock doesn't exceed current block
-      const eventFilter = contract!.filters.Locked();
-      const events = await contract!.queryFilter(
-        eventFilter,
-        fromBlock,
-        toBlock
-      );
-
-      if (events && events?.length > 0) {
-        events.forEach(async (event: any) => {
-          const log = event.args as [string, number, number];
-          const wallet = log[0];
-
-          const index = allEvents.findIndex((event) => event.wallet === wallet);
-
-          if (index !== -1) {
-            allEvents[index].amount += Number(formatEther(log[1]));
-          } else {
-            allEvents.push({
-              wallet: log[0],
-              amount: Number(formatEther(log[1])),
-            });
-          }
-        });
-      }
-    }
-
-    return allEvents;
-  } catch (error) {
-    console.error("Error fetching contract log events:", error);
-    return [];
+    await notificateTx(tx, network);
+  } catch (e) {
+    handleError({ e: e, notificate: true });
   }
 }
 
-export type EventComplete = {
-  wallet: string;
-  amount: number;
-  points: number;
-};
-
-export async function getLockedCompleteInfos(lockedEvents: Event[]) {
+export async function claimPoints(signer: ethers.Signer) {
   try {
-    const contract = await getContract();
-    const completeEvents: EventComplete[] = [];
+    const signerAddress = await signer.getAddress();
+    const contract = await getContract(signer);
+    const network = await signer.provider?.getNetwork();
 
-    for (let i = 0; i < lockedEvents.length; i++) {
-      const element = lockedEvents[i];
+    const tx = await contract?.claimPoints(signerAddress);
 
-      const lockingsByWallet = await contract?.getLockInfos(element.wallet);
-      let pointsPerWallet = 0;
-
-      for (let ii = 0; ii < lockingsByWallet.length; ii++) {
-        const points = Number(
-          ethers.formatEther(await contract?.pointsByLock(element.wallet, ii))
-        );
-        pointsPerWallet += points;
-      }
-
-      completeEvents.push({
-        wallet: element.wallet,
-        amount: element.amount,
-        points: pointsPerWallet,
-      });
-    }
-
-    return completeEvents;
-  } catch (error) {
-    console.error("Error fetching contract log events:", error);
-    return [];
+    await notificateTx(tx, network);
+  } catch (e) {
+    handleError({ e: e, notificate: true });
   }
-}
-
-export async function getTotalLocked() {
-  try {
-    const lockedEvents = await getLockedEvents();
-
-    // CALL IT TO GET SUMARIZED VALUES ------------------------------------
-    // const completeEvents = await getLockedCompleteInfos(lockedEvents);
-    // console.log(completeEvents);
-    // --------------------------------------------------------------------
-
-    const totalLocked = lockedEvents?.reduce(
-      (acc: number, cur: Event) => acc + cur.amount,
-      0
-    );
-
-    return totalLocked;
-  } catch (error) {
-    return 0;
-  }
-}
-
-export async function downloadPointsFile() {
-  const lockedEvents = await getLockedEvents();
-
-  const completeEvents = await getLockedCompleteInfos(lockedEvents);
-
-  // Convert completeEvents to a JSON string
-  const jsonData = JSON.stringify(completeEvents, null, 2); // Optional: Indent for readability
-
-  // Create a Blob object with the JSON data and appropriate content type
-  const blob = new Blob([jsonData], { type: "application/json" });
-
-  return blob;
 }
 
 // ADMIN ACTIONS
