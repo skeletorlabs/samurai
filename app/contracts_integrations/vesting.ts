@@ -4,7 +4,13 @@ import { IDOs, VestingPeriodTranslator } from "@/app/utils/constants";
 import checkApproval from "./check-approval";
 import { notificateTx } from "@/app/utils/notificateTx";
 import { VESTING_ABI_V3 } from "./abis";
-import { addDays, addMonths, addWeeks, getUnixTime } from "date-fns";
+import {
+  addDays,
+  addMonths,
+  addWeeks,
+  fromUnixTime,
+  getUnixTime,
+} from "date-fns";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const now = getUnixTime(new Date());
@@ -220,23 +226,11 @@ export async function userInfo(
     );
     let claimableTokens = 0;
 
-    // console.log(general.vestingType, general.periods.nextUnlock);
-
-    // if (general.vestingType === 2) {
-    //   if (general.periods.nextUnlock > 0 && now >= general.periods.nextUnlock) {
-    //     claimableTokens = Number(
-    //       formatEther(await contract?.previewClaimableTokens(signerAddress))
-    //     );
-    //   }
-    // } else {
-    //   claimableTokens = Number(
-    //     formatEther(await contract?.previewClaimableTokens(signerAddress))
-    //   );
-    // }
-
-    claimableTokens = Number(
-      formatEther(await contract?.previewClaimableTokens(signerAddress))
-    );
+    try {
+      claimableTokens = Number(
+        formatEther(await contract?.previewClaimableTokens(signerAddress))
+      );
+    } catch (_) {}
 
     const claimedPoints = Number(
       formatEther(await contract?.pointsClaimed(signerAddress))
