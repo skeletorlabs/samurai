@@ -213,19 +213,10 @@ export async function userInfo(
     const claimedTokens = Number(
       formatEther(await contract?.tokensClaimed(signerAddress))
     );
-    let claimableTokens = 0;
 
-    if (general.vestingType === 2) {
-      if (general.periods.nextUnlock > 0 && now >= general.periods.nextUnlock) {
-        claimableTokens = Number(
-          formatEther(await contract?.previewClaimableTokens(signerAddress))
-        );
-      }
-    } else {
-      claimableTokens = Number(
-        formatEther(await contract?.previewClaimableTokens(signerAddress))
-      );
-    }
+    const claimableTokens = Number(
+      formatEther(await contract?.previewClaimableTokens(signerAddress))
+    );
 
     const claimedPoints = Number(
       formatEther(await contract?.pointsClaimed(signerAddress))
