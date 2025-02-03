@@ -8976,6 +8976,13 @@ export const LP_STAKING_ABI = [
   },
   {
     type: "function",
+    name: "WITHDRAW_THRESHOLD_LIMIT",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
     name: "claimPoints",
     inputs: [],
     outputs: [],

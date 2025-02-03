@@ -66,22 +66,24 @@
   /* box-shadow: none !important; */
   text-shadow: none !important;
   font-size: 13px !important;
-  top: 30px !important;
+  top: 26px !important;
   right: 8px !important;
 
 }
 
 .control-dots {
-  top: 20px;
-  /* right: 0px; */
+  /* width: 100% !important; */
+  height: 30px !important;
+  top: 13px;
 }
 
 .control-dots li {
   margin: 0 5px !important;
 }
 
+
 .dot {
-  background-color: red !important;
+  background-color: #FF284C !important;
 }
 
 /* .sp-form[sp-id="223878"] {

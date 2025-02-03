@@ -196,7 +196,7 @@ export default function Tokens() {
       {/* LP STAKING */}
       <div
         id="staking"
-        className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/10 md:bg-white/20 border-t border-samurai-red/50 border-dotted relative"
+        className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/10 md:bg-white/10 border-t border-samurai-red/50 border-dotted relative"
       >
         <div className="flex flex-col text-white">
           <div className="flex flex-col text-white text-2xl pb-20">

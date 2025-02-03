@@ -31,7 +31,7 @@ import {
 } from "@/app/contracts_integrations/samLock";
 import { StateContext } from "@/app/context/StateContext";
 import { Roboto } from "next/font/google";
-import SCarousel from "@/app/components/scarousel";
+import LCarousel from "@/app/components/lcarousel";
 import { getUnixTime } from "date-fns";
 import ConnectButton from "./connectbutton";
 
@@ -520,7 +520,7 @@ export default function LockSam() {
                         <TabPanels>
                           <TabPanel>
                             {unlockedsList.length > 0 && generalLockData && (
-                              <SCarousel
+                              <LCarousel
                                 type="unlock"
                                 locks={unlockedsList}
                                 periods={generalLockData?.periods}
@@ -530,7 +530,7 @@ export default function LockSam() {
                           </TabPanel>
                           <TabPanel>
                             {activeLocksList.length > 0 && generalLockData && (
-                              <SCarousel
+                              <LCarousel
                                 type="active"
                                 locks={activeLocksList}
                                 periods={generalLockData?.periods}

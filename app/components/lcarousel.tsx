@@ -1,42 +1,47 @@
+import { LockInfo } from "@/app/contracts_integrations/samLock";
 import { formattedDate2, formattedDate3 } from "@/app/utils/formattedDate";
 import { Carousel } from "react-responsive-carousel";
-import { StakingInfo } from "../contracts_integrations/lpStaking";
 
-interface SCarousel {
+interface LCarousel {
   type: string;
-  stakes: StakingInfo[];
+  locks: LockInfo[];
   periods: { title: string; value: number }[];
   onChangeAction: (index: number, type: string) => void;
 }
 
 export default function SCarousel({
   type,
-  stakes,
+  locks,
   periods,
   onChangeAction,
-}: SCarousel) {
+}: LCarousel) {
   return (
     <Carousel
       onChange={(e) => onChangeAction(e, type)}
-      className="w-full"
+      className="py-5 w-full"
       showArrows={false}
       swipeable
       autoFocus
       showThumbs={false}
     >
-      {stakes.map((item, index) => (
+      {locks.map((item, index) => (
         <div
           key={index}
           className="flex text-start flex-col border border-white/10 rounded-[8px] text-[16px] w-full min-w-[300px]"
         >
-          <div className="flex flex-col py-6 px-4 bg-black text-white/40 w-full rounded-t-[8px]">
-            Stake Card - {index + 1}
+          <div className="flex flex-col p-4 bg-black w-full rounded-t-[8px]">
+            <div className="flex flex-col">
+              <p className="text-[14px] text-white/40">Current points</p>
+              <p className="text-samurai-red">
+                {item.points.toLocaleString("en-us")}
+              </p>
+            </div>
           </div>
           <div className="flex flex-col p-4 w-full shadow-md gap-3">
             <div className="flex items-center w-full">
               <div className="flex flex-col w-full">
-                <p className="text-[14px] text-white/40">Staked</p>
-                <p>{item.stakedAmount.toLocaleString("en-us")} vAMM-WETH/SAM</p>
+                <p className="text-[14px] text-white/40">Locked</p>
+                <p>{item.lockedAmount.toLocaleString("en-us")} $SAM</p>
               </div>
 
               <div className="flex flex-col text-end">
@@ -45,7 +50,7 @@ export default function SCarousel({
                   {
                     periods.find(
                       (itemPeriod) =>
-                        Number(itemPeriod.value) === Number(item.stakePeriod)
+                        Number(itemPeriod.value) === Number(item.lockPeriod)
                     )?.title
                   }
                 </p>
@@ -54,32 +59,30 @@ export default function SCarousel({
 
             <div className="flex items-center justify-between w-full">
               <div className="flex flex-col">
-                <p className="text-[14px] text-white/40">Staked at</p>
-                <p>{formattedDate2(item.stakedAt)}</p>
+                <p className="text-[14px] text-white/40">Locked at</p>
+                <p>{formattedDate2(item.lockedAt)}</p>
               </div>
 
               <div className="flex flex-col text-end">
-                <p className="text-[14px] text-white/40">Staked Until</p>
-                <p>{formattedDate3(item.withdrawTime)}</p>
+                <p className="text-[14px] text-white/40">Unlock date</p>
+                <p>{formattedDate3(item.unlockTime)}</p>
               </div>
             </div>
           </div>
 
           <div className="flex items-center justify-between bg-white/5 w-full p-4 rounded-b-[8px]">
-            <div className="flex flex-col text-green-200">
-              <p className="text-[14px] text-green-400">Withdrawn</p>
-              <p>
-                {item.withdrawnAmount.toLocaleString("en-us")} vAMM-WETH/SAM
-              </p>
+            <div className="flex flex-col">
+              <p className="text-[14px] text-white/40">Withdrawn</p>
+              <p>{item.withdrawnAmount.toLocaleString("en-us")} $SAM</p>
             </div>
 
-            <div className="flex flex-col text-end text-orange-100">
-              <p className="text-[14px] text-orange-400">Remaining Staked</p>
+            <div className="flex flex-col text-end">
+              <p className="text-[14px] text-white/40">Remaining Locked</p>
               <p>
-                {(item.stakedAmount - item.withdrawnAmount).toLocaleString(
+                {(item.lockedAmount - item.withdrawnAmount).toLocaleString(
                   "en-us"
                 )}{" "}
-                vAMM-WETH/SAM
+                $SAM
               </p>
             </div>
           </div>

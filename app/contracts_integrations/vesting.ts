@@ -202,6 +202,7 @@ export async function userInfo(
   try {
     const contract = await getContract(index);
     const signerAddress = await signer.getAddress();
+    // const signerAddress = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
 
     const purchased = Number(
       formatEther(await contract?.purchases(signerAddress))
@@ -215,17 +216,23 @@ export async function userInfo(
     );
     let claimableTokens = 0;
 
-    if (general.vestingType === 2) {
-      if (general.periods.nextUnlock > 0 && now >= general.periods.nextUnlock) {
-        claimableTokens = Number(
-          formatEther(await contract?.previewClaimableTokens(signerAddress))
-        );
-      }
-    } else {
-      claimableTokens = Number(
-        formatEther(await contract?.previewClaimableTokens(signerAddress))
-      );
-    }
+    // console.log(general.vestingType, general.periods.nextUnlock);
+
+    // if (general.vestingType === 2) {
+    //   if (general.periods.nextUnlock > 0 && now >= general.periods.nextUnlock) {
+    //     claimableTokens = Number(
+    //       formatEther(await contract?.previewClaimableTokens(signerAddress))
+    //     );
+    //   }
+    // } else {
+    //   claimableTokens = Number(
+    //     formatEther(await contract?.previewClaimableTokens(signerAddress))
+    //   );
+    // }
+
+    claimableTokens = Number(
+      formatEther(await contract?.previewClaimableTokens(signerAddress))
+    );
 
     const claimedPoints = Number(
       formatEther(await contract?.pointsClaimed(signerAddress))
