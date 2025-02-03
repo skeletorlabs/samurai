@@ -225,34 +225,11 @@ export async function userInfo(
     );
     let claimableTokens = 0;
 
-    claimableTokens = Number(
-      formatEther(await contract?.previewClaimableTokens(signerAddress))
-    );
-
-    // const lastClaim = Number(
-    //   await contract?.lastClaimTimestamps(signerAddress)
-    // );
-
-    // // Conditionals to check claimable tokens for periodic vesting - 2
-    // let shouldCheck = false;
-    // if (
-    //   general.vestingType === 2 &&
-    //   general.periods.nextUnlock > 0 &&
-    //   now >= general.periods.nextUnlock
-    // ) {
-    //   shouldCheck = true;
-    // }
-    // if (fromUnixTime(now).getDate())
-
-    // if (shouldCheck) {
-    //   claimableTokens = Number(
-    //     formatEther(await contract?.previewClaimableTokens(signerAddress))
-    //   );
-    // } else {
-    //   claimableTokens = Number(
-    //     formatEther(await contract?.previewClaimableTokens(signerAddress))
-    //   );
-    // }
+    try {
+      claimableTokens = Number(
+        formatEther(await contract?.previewClaimableTokens(signerAddress))
+      );
+    } catch (_) {}
 
     const claimedPoints = Number(
       formatEther(await contract?.pointsClaimed(signerAddress))
