@@ -4,8 +4,7 @@ import { IDOs, VestingPeriodTranslator } from "@/app/utils/constants";
 import checkApproval from "./check-approval";
 import { notificateTx } from "@/app/utils/notificateTx";
 import { VESTING_ABI_V3 } from "./abis";
-import { getUnixTime } from "date-fns";
-import { VESTING_PERIOD_TYPE } from "../utils/interfaces";
+import { addDays, addMonths, addWeeks, getUnixTime } from "date-fns";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const now = getUnixTime(new Date());
@@ -58,6 +57,42 @@ enum VestingPeriodType {
   Months = 4,
 }
 
+function getAllUnlocks(
+  vestingStart: number,
+  vestingEnd: number,
+  periodType: VestingPeriodType
+): number[] {
+  const startDate = new Date(vestingStart * 1000);
+  const endDate = new Date(vestingEnd * 1000);
+
+  if (startDate > endDate) {
+    throw new Error("Start date cannot be after end date.");
+  }
+
+  const unlockDates: number[] = [];
+  let currentDate = startDate;
+
+  while (currentDate <= endDate) {
+    unlockDates.push(getUnixTime(currentDate));
+
+    switch (periodType) {
+      case VestingPeriodType.Days:
+        currentDate = addDays(currentDate, 1);
+        break;
+      case VestingPeriodType.Weeks:
+        currentDate = addWeeks(currentDate, 1);
+        break;
+      case VestingPeriodType.Months:
+        currentDate = addMonths(currentDate, 1);
+        break;
+      default:
+        throw new Error(`Invalid periodType: ${periodType}`);
+    }
+  }
+
+  return unlockDates;
+}
+
 function getNextUnlock(
   vestingStart: number,
   vestingEnd: number,
@@ -67,42 +102,11 @@ function getNextUnlock(
     return 0; // No more unlocks
   }
 
-  const startDate = new Date(vestingStart * 1000);
-  let currentDate = new Date(startDate);
+  const allUnlocks = getAllUnlocks(vestingStart, vestingEnd, periodType);
 
-  switch (periodType) {
-    case VestingPeriodType.Days:
-      currentDate.setDate(startDate.getDate() + 1);
-      break;
-    case VestingPeriodType.Weeks:
-      currentDate.setDate(startDate.getDate() + 7);
-      break;
-    case VestingPeriodType.Months:
-      currentDate.setMonth(startDate.getMonth() + 1);
-      break;
-    default:
-      throw new Error(`Invalid periodType: ${periodType}`);
-  }
+  const next = allUnlocks.find((timestamp: number) => timestamp >= now);
 
-  while (currentDate <= new Date(vestingEnd * 1000)) {
-    if (currentDate > new Date(now * 1000)) {
-      return Math.floor(currentDate.getTime() / 1000);
-    }
-
-    switch (periodType) {
-      case VestingPeriodType.Days:
-        currentDate.setDate(currentDate.getDate() + 1);
-        break;
-      case VestingPeriodType.Weeks:
-        currentDate.setDate(currentDate.getDate() + 7);
-        break;
-      case VestingPeriodType.Months:
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        break;
-    }
-  }
-
-  return 0; // No more unlocks
+  return next ? next : 0;
 }
 
 export async function generalInfo(index: number) {
@@ -157,7 +161,7 @@ export async function generalInfo(index: number) {
 
     // 2 is the vesting type for periodic vesting
     if (vestingType === 2)
-      nextUnlock = getNextUnlock(vestingAt, vestingEndsAt, rawPeriodType);
+      nextUnlock = getNextUnlock(cliffEndsAt, vestingEndsAt, rawPeriodType);
 
     return {
       owner,
