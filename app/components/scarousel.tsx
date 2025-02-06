@@ -60,6 +60,8 @@ export default function SCarousel({
       allowed = currentTime > unlockTime && remainingAmountToWithdraw > 0;
     }
 
+    console.log("can withdraw - ", allowed);
+
     return allowed;
   }, []);
 
@@ -153,7 +155,7 @@ export default function SCarousel({
           <div className="pt-2">
             <div className="flex items-center gap-3 bg-white/90 text-black font-normal relative">
               <input
-                disabled={loading}
+                disabled={loading || !canWithdraw(item.index)}
                 onChange={(e) => onInputWithdrawChange(e.target.value)}
                 value={inputWithdraw}
                 type="text"
@@ -161,7 +163,7 @@ export default function SCarousel({
                 className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl disabled:bg-[#262626] disabled:text-white/10"
               />
               <button
-                disabled={loading}
+                disabled={loading || !canWithdraw(item.index)}
                 onClick={() => onSetMaxForWithdraw(item.index)}
                 className="absolute top-[34px] right-[11px] transition-all bg-black/70 rounded-full px-[11px] text-white hover:enabled:bg-samurai-red text-[11px] disabled:opacity-10"
               >
