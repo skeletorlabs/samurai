@@ -56,12 +56,6 @@ export default function Staking() {
 
     let closedPeriod: Period = stakingData?.periods.reduce(
       (prev: Period, curr: Period) => {
-        // console.log(
-        //   Math.abs(Number(curr.value) - currentValue) <
-        //     Math.abs(Number(prev.value) - currentValue)
-        //     ? curr
-        //     : prev
-        // );
         return Math.abs(Number(curr.value) - currentValue) <
           Math.abs(Number(prev.value) - currentValue)
           ? curr
@@ -220,7 +214,7 @@ export default function Staking() {
     <>
       <div className="flex flex-col lg:flex-row items-center gap-10 mt-14 relative">
         <div className="flex flex-col justify-between w-full lg:w-[580px] lg:bg-white/5 lg:border border-white/10 rounded-lg lg:py-10 lg:px-6 lg:shadow-lg shadow-pink-800/50 relative">
-          <div className="flex flex-col pl-1 text-lg text-white/70">
+          <div className="flex flex-col pl-1 text-lg text-white/70 text-center md:text-start">
             Platform TVL
             <div className="text-sm md:text-xl text-center md:text-start text-white">
               {stakingData?.totalStaked.toLocaleString("en-us")}{" "}
@@ -228,10 +222,10 @@ export default function Staking() {
             </div>
           </div>
 
-          <div className="flex items-center rounded-lg w-full bg-black/55 backdrop-blur-sm p-6 py-8 text-sm leading-[20px] border border-white/15 shadow-md shadow-black/60 mt-5">
+          <div className="flex flex-col md:flex-row items-center rounded-lg w-full bg-black/55 backdrop-blur-sm p-6 py-8 text-sm leading-[20px] border border-white/15 shadow-md shadow-black/60 mt-5">
             {signer ? (
               <div className="flex flex-col rounded-lg w-full gap-3">
-                <div>
+                <div className="text-center md:text-start leading-none md:leading-normal">
                   <p className="text-white/40">My TVL</p>
                   <p className="text-lg">
                     {(userInfoData?.totalStaked || 0).toLocaleString("en-us", {
@@ -252,7 +246,7 @@ export default function Staking() {
                   setWithdrawIsOpen(true);
                   onGetUserInfo();
                 }}
-                className={`flex min-w-[200px] justify-center text-sm p-2 self-center ${
+                className={`flex min-w-[200px] justify-center text-sm p-2 self-center mt-2 md:mt-0 ${
                   loading
                     ? "bg-white/10 text-white/10"
                     : "bg-white/90 text-black"
@@ -268,7 +262,7 @@ export default function Staking() {
               <div className="flex flex-col rounded-lg w-full gap-3">
                 <div className="flex items-center gap-4">
                   <div className="flex flex-col gap-1 bg-black rounded-lg p-6 w-full justify-center items-center bg-black/55 backdrop-blur-sm text-sm leading-[20px] border border-white/15 shadow-md shadow-black/60">
-                    <p className="text-lg">
+                    <p className="flex flex-col md:flex-row text-lg text-center md:text-start leading-tight md:leading-normal">
                       {(userInfoData?.availablePoints || 0).toLocaleString(
                         "en-us",
                         {
@@ -285,7 +279,7 @@ export default function Staking() {
                         claimPeriodAllowed === false
                       }
                       onClick={onClaimPoints}
-                      className={`flex w-full justify-center text-sm p-2 self-center ${
+                      className={`flex w-full justify-center text-sm px-2 py-1 md:py-2 self-center mt-1 md:mt-0 ${
                         loading ||
                         userInfoData?.availablePoints === 0 ||
                         claimPeriodAllowed === false
@@ -297,7 +291,7 @@ export default function Staking() {
                     </button>
                   </div>
                   <div className="flex flex-col gap-1 bg-black rounded-lg p-6 w-full justify-center items-center bg-black/55 backdrop-blur-sm text-sm leading-[20px] border border-white/15 shadow-md shadow-black/60">
-                    <p className="text-lg">
+                    <p className="flex flex-col md:flex-row text-lg text-center md:text-start leading-tight md:leading-normal">
                       {(userInfoData?.claimableRewards || 0).toLocaleString(
                         "en-us",
                         {
@@ -314,7 +308,7 @@ export default function Staking() {
                         claimPeriodAllowed === false
                       }
                       onClick={onClaimRewards}
-                      className={`flex w-full justify-center text-sm p-2 self-center ${
+                      className={`flex w-full justify-center text-sm px-2 py-1 md:py-2 self-center mt-1 md:mt-0 ${
                         loading ||
                         userInfoData.claimableRewards === 0 ||
                         claimPeriodAllowed === false
@@ -345,16 +339,18 @@ export default function Staking() {
                 value={inputStake}
                 type="text"
                 placeholder="Amount to lock"
-                className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl rounded-lg mx-1"
+                className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-md md:text-xl rounded-lg mx-1"
               />
               <button
                 onClick={onSetMaxForStake}
-                className="absolute top-[34px] right-[11px] flex items-center justify-center h-4 transition-all bg-black/70 rounded-full px-[11px] text-white hover:bg-samurai-red text-[11px] "
+                className="absolute top-[30px] md:top-[34px] right-[11px] flex items-center justify-center h-4 transition-all bg-black/70 rounded-full px-[11px] text-white hover:bg-samurai-red text-[11px]"
               >
                 MAX
               </button>
-              <div className="flex absolute top-[10px] right-[12px] gap-2">
-                <span className="text-[17px] mt-[-4px]">vAMM-WETH/SAM</span>
+              <div className="flex absolute top-[14px] md:top-[10px] right-[12px] gap-2">
+                <span className="text-sm md:text-[17px] mt-[-4px]">
+                  vAMM-WETH/SAM
+                </span>
               </div>
               {signer && (
                 <div className="absolute top-[-24px] right-2 text-sm text-end transition-all hover:opacity-75 w-max text-white">

@@ -95,7 +95,7 @@ export default function SCarousel({
       {[...stakes].reverse().map((item) => (
         <div
           key={item.index}
-          className="flex text-start flex-col rounded-[8px] text-[16px] w-full min-w-[300px]"
+          className="flex text-start flex-col rounded-[8px] text-sm md:text-[16px] w-full min-w-[300px]"
         >
           <div className="flex flex-col py-6 px-4 bg-black text-white/40 w-full rounded-t-[8px]">
             Stake Card - {item.index + 1}
@@ -136,41 +136,44 @@ export default function SCarousel({
           <div className="flex items-center justify-between bg-white/5 w-full p-4">
             <div className="flex flex-col text-green-200">
               <p className="text-[14px] text-green-400">Withdrawn</p>
-              <p>
-                {item.withdrawnAmount.toLocaleString("en-us")} vAMM-WETH/SAM
+              <p className="flex flex-col md:flex-row md:items-center gap-1">
+                <span>{item.withdrawnAmount.toLocaleString("en-us")}</span>{" "}
+                <span className="text-xs md:text-[16px]">vAMM-WETH/SAM</span>
               </p>
             </div>
 
             <div className="flex flex-col text-end text-orange-100">
               <p className="text-[14px] text-orange-400">Remaining Staked</p>
-              <p>
-                {(item.stakedAmount - item.withdrawnAmount).toLocaleString(
-                  "en-us"
-                )}{" "}
-                vAMM-WETH/SAM
+              <p className="flex flex-col md:flex-row md:items-center gap-1">
+                <span>
+                  {(item.stakedAmount - item.withdrawnAmount).toLocaleString(
+                    "en-us"
+                  )}
+                </span>{" "}
+                <span className="text-xs md:text-[16px]">vAMM-WETH/SAM</span>
               </p>
             </div>
           </div>
 
           <div className="pt-2">
-            <div className="flex items-center gap-3 bg-white/90 text-black font-normal relative">
+            <div className="flex items-center gap-3 text-black font-normal relative">
               <input
                 disabled={loading || !canWithdraw(item.index)}
                 onChange={(e) => onInputWithdrawChange(e.target.value)}
                 value={inputWithdraw}
                 type="text"
                 placeholder="Amount to withdraw"
-                className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl disabled:bg-[#262626] disabled:text-white/10"
+                className="w-full border-transparent enabled:bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-sm md:text-xl disabled:bg-[#262626] disabled:text-white/10"
               />
               <button
                 disabled={loading || !canWithdraw(item.index)}
                 onClick={() => onSetMaxForWithdraw(item.index)}
-                className="absolute top-[34px] right-[11px] transition-all bg-black/70 rounded-full px-[11px] text-white hover:enabled:bg-samurai-red text-[11px] disabled:opacity-10"
+                className="absolute top-[30px] md:top-[34px] right-[11px] flex items-center justify-center h-4 transition-all bg-black/70 rounded-full px-[11px] text-white hover:enabled:bg-samurai-red text-[11px] disabled:opacity-10"
               >
                 MAX
               </button>
               <div className="flex absolute top-[10px] right-[12px] gap-2">
-                <span className="text-[17px]">vAMM-WETH/SAM</span>
+                <span className="text-sm md:text-[17px]">vAMM-WETH/SAM</span>
               </div>
             </div>
 

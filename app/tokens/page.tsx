@@ -223,7 +223,7 @@ export default function Tokens() {
                     width={300}
                     height={300}
                     alt=""
-                    className="mb-10 w-[200px]"
+                    className="mb-10 w-[140px] md:w-[200px]"
                   />
                 </p>
                 <p className="font-bold text-4xl md:text-6xl pb-2 text-center">
