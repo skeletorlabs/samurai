@@ -1,5 +1,5 @@
 import { ethers, formatEther } from "ethers";
-import { ERC20_ABI, LP_STAKING_ABI } from "./abis";
+import { ERC20_ABI, LP_STAKING_ABI, LP_STAKING_ABI_MIN } from "./abis";
 import handleError from "@/app/utils/handleErrors";
 import { balanceOf } from "./balanceOf";
 import checkApproval from "./check-approval";
@@ -14,7 +14,8 @@ async function getContract(signer?: ethers.Signer) {
 
     const contract = new ethers.Contract(
       LP_STAKING,
-      LP_STAKING_ABI,
+      // LP_STAKING_ABI,
+      LP_STAKING_ABI_MIN,
       signer || provider
     );
 
@@ -65,8 +66,7 @@ export async function generalInfo() {
     const maxAmountToStake = Number(
       ethers.formatEther(await contract?.MAX_AMOUNT_TO_STAKE())
     );
-    let claimDelayPeriod = Number(await contract?.CLAIM_DELAY_PERIOD());
-    claimDelayPeriod = 86400 * 5;
+    const claimDelayPeriod = Number(await contract?.CLAIM_DELAY_PERIOD());
 
     const threeMonths = await contract?.THREE_MONTHS();
     const sixMonths = await contract?.SIX_MONTHS();
@@ -80,11 +80,17 @@ export async function generalInfo() {
       ethers.formatEther(await contract?.totalWithdrawn())
     );
 
+    // const periods = [
+    //   { title: "3 Months", value: threeMonths },
+    //   { title: "6 Months", value: sixMonths },
+    //   { title: "9 Months", value: nineMonths },
+    //   { title: "12 Months", value: twelveMonths },
+    // ];
     const periods = [
-      { title: "3 Months", value: threeMonths },
-      { title: "6 Months", value: sixMonths },
-      { title: "9 Months", value: nineMonths },
-      { title: "12 Months", value: twelveMonths },
+      { title: "9 minutes", value: threeMonths },
+      { title: "18 minutes", value: sixMonths },
+      { title: "27 minutes", value: nineMonths },
+      { title: "36 minutes", value: twelveMonths },
     ];
 
     return {
@@ -105,6 +111,7 @@ export async function generalInfo() {
 // USER INFOS
 
 export type StakingInfo = {
+  index: number;
   stakedAmount: number;
   withdrawnAmount: number;
   stakedAt: number;
@@ -123,6 +130,7 @@ export type UserInfo = {
   claimedRewards: number;
   lpBalance: number;
   claimableRewards: number;
+  lastClaim: number;
 };
 
 export async function userInfo(signer: ethers.Signer) {
@@ -140,15 +148,8 @@ export async function userInfo(signer: ethers.Signer) {
         formatEther(await contract?.previewClaimablePoints(signerAddress, i))
       );
 
-      // uint256 stakedAmount;
-      // uint256 withdrawnAmount;
-      // uint256 stakedAt;
-      // uint256 withdrawTime;
-      // uint256 stakePeriod;
-      // uint256 claimedPoints;
-      // uint256 claimedRewards;
-
       const stake: StakingInfo = {
+        index: i,
         stakedAmount: Number(ethers.formatEther(userStake[0])),
         withdrawnAmount: Number(ethers.formatEther(userStake[1])),
         stakedAt: Number(userStake[2]),
@@ -187,6 +188,8 @@ export async function userInfo(signer: ethers.Signer) {
       )
     );
 
+    const lastClaim = Number(await contract?.lastClaims(signerAddress));
+
     return {
       stakings: stakes,
       totalStaked,
@@ -195,6 +198,7 @@ export async function userInfo(signer: ethers.Signer) {
       claimedRewards,
       lpBalance,
       claimableRewards,
+      lastClaim,
     } as UserInfo;
   } catch (e) {
     handleError({ e: e, notificate: true });
@@ -207,7 +211,6 @@ export async function stake(
   stakePeriod: number
 ) {
   try {
-    const signerAddress = await signer.getAddress();
     const contract = await getContract(signer);
     const network = await signer.provider?.getNetwork();
 
@@ -229,17 +232,15 @@ export async function stake(
 export async function withdraw(
   signer: ethers.Signer,
   amount: string,
-  lockIndex: number
+  stakeIndex: number
 ) {
   try {
-    const signerAddress = await signer.getAddress();
     const contract = await getContract(signer);
     const network = await signer.provider?.getNetwork();
 
     const tx = await contract?.withdraw(
-      signerAddress,
       ethers.parseEther(amount),
-      lockIndex.toString()
+      stakeIndex.toString()
     );
 
     await notificateTx(tx, network);

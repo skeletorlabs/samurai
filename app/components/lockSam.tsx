@@ -237,7 +237,7 @@ export default function LockSam() {
 
   return (
     <div className="flex flex-col lg:flex-row items-center gap-10 mt-14 relative">
-      <div className="flex flex-col justify-between w-full lg:w-[580px] lg:bg-white/5 lg:border border-samurai-red rounded-lg lg:py-10 lg:px-6 lg:shadow-lg shadow-pink-800/50 relative">
+      <div className="flex flex-col justify-between w-full lg:w-[580px] lg:bg-white/5 lg:border border-samurai-red/20 rounded-lg lg:py-10 lg:px-6 lg:shadow-lg shadow-pink-800/50 relative">
         <div className="hidden absolute top-10 left-[50px] bg-lock bg-no-repeat bg-cover w-[500px] h-[500px] text-white/40">
           {lockImage}
         </div>
