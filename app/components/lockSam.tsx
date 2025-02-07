@@ -320,7 +320,11 @@ export default function LockSam() {
           )}
         </div>
 
-        <div className="flex flex-col bg-black/75 backdrop-blur-sm p-6 py-8 rounded-lg border border-white/20 shadow-md shadow-black/60 mt-2 z-20">
+        <div
+          className={`flex flex-col bg-black/75 backdrop-blur-sm p-6 py-8 rounded-lg border border-white/20 shadow-md shadow-black/60 mt-2 z-201 ${
+            generalLockData?.isPaused && "opacity-10"
+          }`}
+        >
           <div className="flex flex-col text-sm">
             <span className="text-white/40">Minimum to lock</span>
             <span className="text-xl">
@@ -333,6 +337,7 @@ export default function LockSam() {
             <div className="flex gap-4 items-center flex-wrap">
               {generalLockData?.periods.map((item, index) => (
                 <button
+                  disabled={loading || generalLockData.isPaused}
                   key={index}
                   onClick={() => setPeriod(item.value)}
                   className={`text-sm p-1 px-3 rounded-lg border shadow-lg min-w-[90px] transition-all hover:scale-105 ${
@@ -387,9 +392,14 @@ export default function LockSam() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-5 shadow-lg mt-12 z-20">
+        <div
+          className={`flex flex-col gap-5 shadow-lg mt-12 z-20 ${
+            generalLockData?.isPaused && "opacity-10"
+          }`}
+        >
           <div className="flex text-black relative border border-transparent">
             <input
+              disabled={loading || generalLockData?.isPaused}
               onChange={(e) => onInputLockChange(e.target.value)}
               value={inputLock}
               type="text"
@@ -397,6 +407,7 @@ export default function LockSam() {
               className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-xl rounded-lg mx-1"
             />
             <button
+              disabled={loading || generalLockData?.isPaused}
               onClick={onSetMaxForLock}
               className="absolute top-[34px] right-[11px] flex items-center justify-center h-4 transition-all bg-black/70 rounded-full px-[11px] text-white hover:bg-samurai-red text-[11px] z-20"
             >
@@ -599,6 +610,12 @@ export default function LockSam() {
             </div>
           </Dialog>
         </Transition>
+
+        {generalLockData?.isPaused && (
+          <span className="absolute right-0 left-0 top-[100px] bottom-0 mx-10 justify-center items-center flex self-center text-samurai-red -rotate-[15deg] text-3xl sm:text-4xl !opacity-100 z-30 bg-black/70 backdrop-blur-sm p-2 px-4 shadow-xl">
+            New SAM lock is coming!
+          </span>
+        )}
       </div>
     </div>
   );
