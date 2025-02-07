@@ -31,7 +31,7 @@ import {
 } from "@/app/contracts_integrations/samLock";
 import { StateContext } from "@/app/context/StateContext";
 import { Roboto } from "next/font/google";
-import SCarousel from "@/app/components/scarousel";
+import LCarousel from "@/app/components/lcarousel";
 import { getUnixTime } from "date-fns";
 import ConnectButton from "./connectbutton";
 
@@ -237,7 +237,7 @@ export default function LockSam() {
 
   return (
     <div className="flex flex-col lg:flex-row items-center gap-10 mt-14 relative">
-      <div className="flex flex-col justify-between w-full lg:w-[580px] lg:bg-white/5 lg:border border-samurai-red rounded-lg lg:py-10 lg:px-6 lg:shadow-lg shadow-pink-800/50 relative">
+      <div className="flex flex-col justify-between w-full lg:w-[580px] lg:bg-white/5 lg:border border-samurai-red/20 rounded-lg lg:py-10 lg:px-6 lg:shadow-lg shadow-pink-800/50 relative">
         <div className="hidden absolute top-10 left-[50px] bg-lock bg-no-repeat bg-cover w-[500px] h-[500px] text-white/40">
           {lockImage}
         </div>
@@ -520,7 +520,7 @@ export default function LockSam() {
                         <TabPanels>
                           <TabPanel>
                             {unlockedsList.length > 0 && generalLockData && (
-                              <SCarousel
+                              <LCarousel
                                 type="unlock"
                                 locks={unlockedsList}
                                 periods={generalLockData?.periods}
@@ -530,7 +530,7 @@ export default function LockSam() {
                           </TabPanel>
                           <TabPanel>
                             {activeLocksList.length > 0 && generalLockData && (
-                              <SCarousel
+                              <LCarousel
                                 type="active"
                                 locks={activeLocksList}
                                 periods={generalLockData?.periods}
