@@ -1,5 +1,5 @@
 import { ethers, formatEther } from "ethers";
-import { ERC20_ABI, LP_STAKING_ABI, LP_STAKING_ABI_MIN } from "./abis";
+import { ERC20_ABI, LP_STAKING_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
 import { balanceOf } from "./balanceOf";
 import checkApproval from "./check-approval";
@@ -14,8 +14,7 @@ async function getContract(signer?: ethers.Signer) {
 
     const contract = new ethers.Contract(
       LP_STAKING,
-      // LP_STAKING_ABI,
-      LP_STAKING_ABI_MIN,
+      LP_STAKING_ABI,
       signer || provider
     );
 
@@ -80,17 +79,11 @@ export async function generalInfo() {
       ethers.formatEther(await contract?.totalWithdrawn())
     );
 
-    // const periods = [
-    //   { title: "3 Months", value: threeMonths },
-    //   { title: "6 Months", value: sixMonths },
-    //   { title: "9 Months", value: nineMonths },
-    //   { title: "12 Months", value: twelveMonths },
-    // ];
     const periods = [
-      { title: "9 minutes", value: threeMonths },
-      { title: "18 minutes", value: sixMonths },
-      { title: "27 minutes", value: nineMonths },
-      { title: "36 minutes", value: twelveMonths },
+      { title: "3 Months", value: threeMonths },
+      { title: "6 Months", value: sixMonths },
+      { title: "9 Months", value: nineMonths },
+      { title: "12 Months", value: twelveMonths },
     ];
 
     return {
@@ -136,7 +129,6 @@ export type UserInfo = {
 export async function userInfo(signer: ethers.Signer) {
   try {
     const signerAddress = await signer.getAddress();
-    // const signerAddress = "0xf96Bc096dd1E52dcE4d595B6C4B8c5d2200db1E5";
     const contract = await getContract(signer);
     const userStakes = await contract?.stakesOf(signerAddress);
 
