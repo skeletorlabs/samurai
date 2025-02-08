@@ -423,7 +423,7 @@ export default function Nft() {
 
             <div className="flex flex-col w-full xl:max-w-[600px] 2xl:min-w-[700px] items-center gap-3 md:gap-14 mt-5 2xl:max-h-[830px]">
               <div
-                className={`flex w-full items-center gap-4 px-4 justify-center mb-[-20px] tracking-wider text-gray-400 ${inter.className}`}
+                className={`flex w-full items-center gap-4 px-4 justify-center lg:mb-[-20px] tracking-wider text-gray-400 ${inter.className}`}
               >
                 <ArrowLongLeftIcon width={32} />
                 <span>Slide horizontally to check your NFTs</span>
