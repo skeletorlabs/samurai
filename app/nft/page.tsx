@@ -41,7 +41,13 @@ import { userInfo as pointsUserInfo } from "../contracts_integrations/points";
 
 import { currentTime } from "../utils/currentTime";
 import Loading from "../components/loading";
-import { ArrowLongRightIcon, CheckCircleIcon } from "@heroicons/react/20/solid";
+import {
+  ArrowLeftIcon,
+  ArrowLongLeftIcon,
+  ArrowLongRightIcon,
+  ArrowRightIcon,
+  CheckCircleIcon,
+} from "@heroicons/react/20/solid";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -415,72 +421,81 @@ export default function Nft() {
               </div>
             )}
 
-            <div className="flex w-full xl:max-w-[600px] 2xl:min-w-[700px] items-center gap-3 md:gap-14 mt-5 2xl:max-h-[830px] overflow-scroll">
-              {userNfts?.map((nft, index) => (
-                <div key={index} className="flex flex-col items-center gap-2">
-                  <Link
-                    className="flex justify-center items-center w-[200px] h-[300px] lg:w-[240px] lg:h-[350px] bg-white rounded-[8px] relative"
-                    target="blank"
-                    href={`${process.env.NEXT_PUBLIC_OPENSEA_URL as string}/${
-                      nft.tokenId
-                    }`}
-                  >
-                    <Image
-                      src={nft?.src ? nft?.src : "/loading.gif"}
-                      fill
-                      sizes="auto"
-                      style={{
-                        objectFit: "cover",
-                      }}
-                      alt={image}
-                      className="scale-[0.95] rounded-[8px] transition-all hover:scale-[0.99]"
-                    />
-                    {nft.locked ? (
-                      <div className="absolute top-3 right-2 flex justify-center items-center bg-black/70 p-1 rounded-full w-8 h-8 shadow-md">
-                        <LockClosedIcon className="w-4 h-4 shadow-md text-white" />
-                      </div>
-                    ) : (
-                      <div className="absolute top-3 right-2 flex justify-center items-center bg-black/70 p-1 rounded-full w-8 h-8 shadow-md">
-                        <LockOpenIcon className="w-4 h-4 shadow-md text-white" />
-                      </div>
-                    )}
+            <div className="flex flex-col w-full xl:max-w-[600px] 2xl:min-w-[700px] items-center gap-3 md:gap-14 mt-5 2xl:max-h-[830px]">
+              <div
+                className={`flex w-full items-center gap-4 px-4 justify-center mb-[-20px] tracking-wider text-gray-400 ${inter.className}`}
+              >
+                <ArrowLongLeftIcon width={32} />
+                <span>Slide horizontally to check your NFTs</span>
+                <ArrowLongRightIcon width={32} />
+              </div>
+              <div className="flex w-full xl:max-w-[600px] 2xl:min-w-[700px] items-center gap-3 md:gap-14 2xl:max-h-[830px] overflow-scroll">
+                {userNfts?.map((nft, index) => (
+                  <div key={index} className="flex flex-col items-center gap-2">
+                    <Link
+                      className="flex justify-center items-center w-[200px] h-[300px] lg:w-[240px] lg:h-[350px] bg-white rounded-[8px] relative"
+                      target="blank"
+                      href={`${process.env.NEXT_PUBLIC_OPENSEA_URL as string}/${
+                        nft.tokenId
+                      }`}
+                    >
+                      <Image
+                        src={nft?.src ? nft?.src : "/loading.gif"}
+                        fill
+                        sizes="auto"
+                        style={{
+                          objectFit: "cover",
+                        }}
+                        alt={image}
+                        className="scale-[0.95] rounded-[8px] transition-all hover:scale-[0.99]"
+                      />
+                      {nft.locked ? (
+                        <div className="absolute top-3 right-2 flex justify-center items-center bg-black/70 p-1 rounded-full w-8 h-8 shadow-md">
+                          <LockClosedIcon className="w-4 h-4 shadow-md text-white" />
+                        </div>
+                      ) : (
+                        <div className="absolute top-3 right-2 flex justify-center items-center bg-black/70 p-1 rounded-full w-8 h-8 shadow-md">
+                          <LockOpenIcon className="w-4 h-4 shadow-md text-white" />
+                        </div>
+                      )}
 
-                    {nft.locked && (
-                      <div className="absolute bottom-[6px] bg-black p-2 w-[190px] md:w-[227px] rounded-b-md text-center">
-                        {nftLockGeneral?.lockPeriodDisabled ? (
-                          <p className="text-xs md:text-sm">
-                            Lock period currently disabled
-                          </p>
-                        ) : (
-                          <p className="text-sm">
-                            Unlockable at{" "}
-                            {formattedDate3(nft?.lockedUntil || 0)}{" "}
-                          </p>
-                        )}
-                      </div>
+                      {nft.locked && (
+                        <div className="absolute bottom-[6px] bg-black p-2 w-[190px] md:w-[227px] rounded-b-md text-center">
+                          {nftLockGeneral?.lockPeriodDisabled ? (
+                            <p className="text-xs md:text-sm">
+                              Lock period currently disabled
+                            </p>
+                          ) : (
+                            <p className="text-sm">
+                              Unlockable at{" "}
+                              {formattedDate3(nft?.lockedUntil || 0)}{" "}
+                            </p>
+                          )}
+                        </div>
+                      )}
+                    </Link>
+                    {nft.locked ? (
+                      <SSButton
+                        flexSize
+                        mobile
+                        disabled={loading || !canUnlock(Number(nft.tokenId))}
+                        click={() => onUnlockNFT(Number(nft.tokenId))}
+                      >
+                        <>UNLOCK #{nft.tokenId}</>
+                      </SSButton>
+                    ) : (
+                      <SSButton
+                        flexSize
+                        mobile
+                        disabled={loading}
+                        click={() => onLockNFT(Number(nft.tokenId))}
+                      >
+                        {loading ? <Loading /> : <>LOCK #{nft.tokenId}</>}
+                      </SSButton>
                     )}
-                  </Link>
-                  {nft.locked ? (
-                    <SSButton
-                      flexSize
-                      mobile
-                      disabled={loading || !canUnlock(Number(nft.tokenId))}
-                      click={() => onUnlockNFT(Number(nft.tokenId))}
-                    >
-                      <>UNLOCK #{nft.tokenId}</>
-                    </SSButton>
-                  ) : (
-                    <SSButton
-                      flexSize
-                      mobile
-                      disabled={loading}
-                      click={() => onLockNFT(Number(nft.tokenId))}
-                    >
-                      {loading ? <Loading /> : <>LOCK #{nft.tokenId}</>}
-                    </SSButton>
-                  )}
-                </div>
-              ))}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
