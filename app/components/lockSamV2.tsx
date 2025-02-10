@@ -12,19 +12,19 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import {
   UserInfo,
   claimPoints,
-  claimRewards,
   generalInfo,
   getEstimatedPoints,
-  stake,
+  lock,
   userInfo,
   withdraw,
-} from "@/app/contracts_integrations/lpStaking";
+} from "@/app/contracts_integrations/samLockV2";
 import { StateContext } from "@/app/context/StateContext";
 import { Roboto } from "next/font/google";
 import SCarousel from "@/app/components/scarousel";
 import { formatDistanceToNow, fromUnixTime, getUnixTime } from "date-fns";
 import ConnectButton from "./connectbutton";
 import LoadingBox from "./loadingBox";
+import LCarouselV2 from "./lcarouselV2";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -36,16 +36,16 @@ type Period = {
   value: Number;
 };
 
-export default function Staking() {
+export default function LockSamV2() {
   const [loading, setLoading] = useState(false);
-  const [inputStake, setInputStake] = useState("");
+  const [inputLock, setInputLock] = useState("");
   const [inputWithdraw, setInputWithdraw] = useState("");
   const [period, setPeriod] = useState<Period | null>(null);
   const [withdrawIsOpen, setWithdrawIsOpen] = useState(false);
-  const [stakingData, setStakingData] = useState<any | null>(null);
+  const [lockData, setLockData] = useState<any | null>(null);
   const [userInfoData, setUserInfoData] = useState<UserInfo | null>(null);
   const [estimatedPoints, setEstimatedPoints] = useState(0);
-  const [selectedStakeIndex, setSelectedStakeIndex] = useState(0);
+  const [selectedLockIndex, setSelectedLockIndex] = useState(0);
   const [formattedCountdown, setFormattedCountdown] = useState("");
   const [claimPeriodAllowed, setClaimPeriodAllowed] = useState(false);
 
@@ -54,7 +54,7 @@ export default function Staking() {
   const handleSliderChange = (event: any) => {
     let currentValue: number = event.target.value;
 
-    let closedPeriod: Period = stakingData?.periods.reduce(
+    let closedPeriod: Period = lockData?.periods.reduce(
       (prev: Period, curr: Period) => {
         return Math.abs(Number(curr.value) - currentValue) <
           Math.abs(Number(prev.value) - currentValue)
@@ -67,56 +67,46 @@ export default function Staking() {
     setPeriod(closedPeriod); // Update state with snapped value
   };
 
-  const onInputStakeChange = (value: string) => {
+  const onInputLockChange = (value: string) => {
     const re = new RegExp("^[+]?([0-9]+([.][0-9]*)?|[.][0-9]+)$");
 
     if (value === "" || re.test(value)) {
-      setInputStake(value);
+      setInputLock(value);
     }
 
     return false;
   };
 
-  const onSetMaxForStake = useCallback(() => {
+  const onSetMaxForLock = useCallback(() => {
     if (userInfoData) {
-      onInputStakeChange(userInfoData?.lpBalance.toString());
+      onInputLockChange(userInfoData?.balance.toString());
     }
-  }, [userInfoData, onInputStakeChange]);
+  }, [userInfoData, onInputLockChange]);
 
-  const onStake = useCallback(async () => {
+  const onLock = useCallback(async () => {
     setLoading(true);
     if (signer && period) {
-      await stake(signer, inputStake, Number(period?.value));
+      await lock(signer, inputLock, Number(period?.value));
       await onGetGeneralInfo();
       await onGetUserInfo();
     }
     setLoading(false);
-  }, [signer, inputStake, period, setLoading]);
+  }, [signer, inputLock, period, setLoading]);
 
   const onWithdraw = useCallback(async () => {
     setLoading(true);
     if (signer) {
-      await withdraw(signer, inputWithdraw, selectedStakeIndex);
+      await withdraw(signer, inputWithdraw, selectedLockIndex);
       await onGetGeneralInfo();
       await onGetUserInfo();
     }
     setLoading(false);
-  }, [signer, inputWithdraw, selectedStakeIndex, setLoading]);
+  }, [signer, inputWithdraw, selectedLockIndex, setLoading]);
 
   const onClaimPoints = useCallback(async () => {
     setLoading(true);
     if (signer) {
       await claimPoints(signer);
-      await onGetGeneralInfo();
-      await onGetUserInfo();
-    }
-    setLoading(false);
-  }, [signer, setLoading]);
-
-  const onClaimRewards = useCallback(async () => {
-    setLoading(true);
-    if (signer) {
-      await claimRewards(signer);
       await onGetGeneralInfo();
       await onGetUserInfo();
     }
@@ -129,8 +119,8 @@ export default function Staking() {
       return setFormattedCountdown("0");
     }
 
-    if (stakingData && userInfoData) {
-      const nextClaim = userInfoData.lastClaim + stakingData?.claimDelayPeriod;
+    if (lockData && userInfoData) {
+      const nextClaim = userInfoData.lastClaim + lockData?.claimDelayPeriod;
 
       if (getUnixTime(new Date()) >= nextClaim) {
         setClaimPeriodAllowed(true);
@@ -162,13 +152,13 @@ export default function Staking() {
         }, 45000); // 45 seconds
       }
     }
-  }, [stakingData, userInfoData, setFormattedCountdown, setClaimPeriodAllowed]);
+  }, [lockData, userInfoData, setFormattedCountdown, setClaimPeriodAllowed]);
 
   useEffect(() => {
     const getEstimatedPointsInfo = async () => {
       if (Number(period?.value) > 0) {
         const response = await getEstimatedPoints(
-          inputStake,
+          inputLock,
           Number(period?.value)
         );
         setEstimatedPoints(response);
@@ -176,13 +166,13 @@ export default function Staking() {
     };
 
     getEstimatedPointsInfo();
-  }, [inputStake, period]);
+  }, [inputLock, period]);
 
   useEffect(() => {
-    if (stakingData && userInfoData) {
+    if (lockData && userInfoData) {
       checkCountdown();
     }
-  }, [stakingData, userInfoData, claimPeriodAllowed]);
+  }, [lockData, userInfoData, claimPeriodAllowed]);
 
   const onGetUserInfo = useCallback(async () => {
     if (signer) {
@@ -198,12 +188,12 @@ export default function Staking() {
   const onGetGeneralInfo = useCallback(async () => {
     const response = await generalInfo();
 
-    setStakingData(response);
+    setLockData(response);
     if (response && response?.periods.length > 0) {
       setPeriod(response?.periods[0]);
     }
     setLoading(false);
-  }, [setLoading]);
+  }, [setLoading, setLockData]);
 
   useEffect(() => {
     setLoading(true);
@@ -217,8 +207,10 @@ export default function Staking() {
           <div className="flex flex-col pl-1 text-lg text-white/70 text-center md:text-start">
             Platform TVL
             <div className="text-sm md:text-xl text-center md:text-start text-white">
-              {stakingData?.totalStaked.toLocaleString("en-us")}{" "}
-              <span className="pl-1">vAMM-WETH/SAM</span>
+              {Number(
+                lockData?.totalLocked - lockData?.totalWithdrawn
+              ).toLocaleString("en-us")}{" "}
+              <span className="pl-1">$SAM</span>
             </div>
           </div>
 
@@ -228,10 +220,10 @@ export default function Staking() {
                 <div className="text-center md:text-start leading-none md:leading-normal">
                   <p className="text-white/40">My TVL</p>
                   <p className="text-lg">
-                    {(userInfoData?.totalStaked || 0).toLocaleString("en-us", {
-                      maximumFractionDigits: 5,
+                    {(userInfoData?.totalLocked || 0).toLocaleString("en-us", {
+                      maximumFractionDigits: 2,
                     })}{" "}
-                    vAMM-WETH/SAM
+                    $SAM
                   </p>
                 </div>
               </div>
@@ -239,7 +231,7 @@ export default function Staking() {
               <ConnectButton />
             )}
 
-            {signer && userInfoData && userInfoData?.stakings.length > 0 && (
+            {signer && userInfoData && userInfoData?.locks.length > 0 && (
               <button
                 disabled={loading}
                 onClick={() => {
@@ -252,12 +244,12 @@ export default function Staking() {
                     : "bg-white/90 text-black"
                 } rounded-full hover:opacity-75`}
               >
-                MANAGE STAKES
+                MANAGE LOCKS
               </button>
             )}
           </div>
 
-          {signer && userInfoData && userInfoData?.stakings.length > 0 && (
+          {signer && userInfoData && userInfoData?.locks.length > 0 && (
             <div className="flex items-center pt-8 text-sm leading-[20px] relative">
               <div className="flex flex-col rounded-lg w-full gap-3">
                 <div className="flex items-center gap-4">
@@ -290,35 +282,6 @@ export default function Staking() {
                       CLAIM
                     </button>
                   </div>
-                  <div className="flex flex-col gap-1 bg-black rounded-lg p-6 w-full justify-center items-center bg-black/55 backdrop-blur-sm text-sm leading-[20px] border border-white/15 shadow-md shadow-black/60">
-                    <p className="flex flex-col md:flex-row text-lg text-center md:text-start leading-tight md:leading-normal">
-                      {(userInfoData?.claimableRewards || 0).toLocaleString(
-                        "en-us",
-                        {
-                          maximumFractionDigits: 5,
-                        }
-                      )}
-                      <span className="text-blue-700 ml-1">$AERO</span>
-                    </p>
-
-                    <button
-                      disabled={
-                        loading ||
-                        userInfoData.claimableRewards === 0 ||
-                        claimPeriodAllowed === false
-                      }
-                      onClick={onClaimRewards}
-                      className={`flex w-full justify-center text-sm px-2 py-1 md:py-2 self-center mt-1 md:mt-0 ${
-                        loading ||
-                        userInfoData.claimableRewards === 0 ||
-                        claimPeriodAllowed === false
-                          ? "bg-white/5 text-white/5"
-                          : "bg-blue-700 text-white"
-                      } rounded-full hover:enabled:bg-blue-500 hover:enabled:text-white`}
-                    >
-                      CLAIM
-                    </button>
-                  </div>
                 </div>
               </div>
 
@@ -335,56 +298,61 @@ export default function Staking() {
           <div className="flex flex-col gap-5 shadow-lg mt-12 ">
             <div className="flex text-black relative border border-transparent">
               <input
-                onChange={(e) => onInputStakeChange(e.target.value)}
-                value={inputStake}
+                onChange={(e) => onInputLockChange(e.target.value)}
+                value={inputLock}
                 type="text"
                 placeholder="Amount to lock"
                 className="w-full border-transparent bg-white py-4 focus:border-transparent focus:ring-transparent placeholder-black/60 text-md md:text-xl rounded-lg mx-1"
               />
               <button
-                onClick={onSetMaxForStake}
+                onClick={onSetMaxForLock}
                 className="absolute top-[30px] md:top-[34px] right-[11px] flex items-center justify-center h-4 transition-all bg-black/70 rounded-full px-[11px] text-white hover:bg-samurai-red text-[11px]"
               >
                 MAX
               </button>
               <div className="flex absolute top-[14px] md:top-[10px] right-[12px] gap-2">
-                <span className="text-sm md:text-[17px] mt-[-4px]">
-                  vAMM-WETH/SAM
-                </span>
+                <span className="text-sm md:text-[17px] mt-[-4px]">$SAM</span>
               </div>
               {signer && (
-                <div className="absolute top-[-24px] left-2 text-sm text-end transition-all hover:opacity-75 w-max text-white">
-                  <span className="text-white/70">Balance:</span>{" "}
-                  {userInfoData?.lpBalance.toLocaleString("en-us", {
-                    maximumFractionDigits: 5,
-                  })}{" "}
-                  vAMM-WETH/SAM
-                </div>
+                <>
+                  <div className="absolute top-[-24px] left-2 text-sm text-end transition-all hover:opacity-75 w-max text-white">
+                    <span className="text-white/70">Minimum to lock:</span>{" "}
+                    {lockData?.minToLock.toLocaleString("en-us", {
+                      maximumFractionDigits: 5,
+                    })}{" "}
+                    $SAM
+                  </div>
+                  <div className="absolute top-[-24px] right-2 text-sm text-end transition-all hover:opacity-75 w-max text-white">
+                    <span className="text-white/70">Balance:</span>{" "}
+                    {userInfoData?.balance.toLocaleString("en-us", {
+                      maximumFractionDigits: 18,
+                    })}{" "}
+                    $SAM
+                  </div>
+                </>
               )}
             </div>
           </div>
 
-          {stakingData?.periods && (
+          {lockData?.periods && (
             <div className="flex flex-col bg-black/55 backdrop-blur-sm p-6 py-8 mt-4 rounded-lg border border-white/15 shadow-md shadow-black/60">
               <div className="flex flex-col gap-2 text-sm">
                 <span className="text-white/40">
-                  Slide to select stake period
+                  Slide to select lock period
                 </span>
 
                 <input
                   type="range"
                   onChange={handleSliderChange}
                   value={Number(period?.value)}
-                  min={stakingData?.periods[0].value}
-                  max={
-                    stakingData?.periods[stakingData?.periods.length - 1].value
-                  }
+                  min={lockData?.periods[0].value}
+                  max={lockData?.periods[lockData?.periods.length - 1].value}
                   className="w-[200px]"
                 />
 
                 <span className="text-white text-sm md:text-lg">
                   {period?.value
-                    ? stakingData?.periods.find(
+                    ? lockData?.periods.find(
                         (item: any) => item.value === period?.value
                       ).title
                     : "---"}
@@ -403,11 +371,11 @@ export default function Staking() {
                       <div className="font-medium text-[14px] flex-wrap max-w-[220px]">
                         Points distributed linearly during{" "}
                         {
-                          stakingData?.periods.find(
+                          lockData?.periods.find(
                             (item: any) => Number(item.value) === Number(period)
                           )?.title
                         }{" "}
-                        staked.
+                        locked period.
                       </div>
                     }
                   >
@@ -436,15 +404,16 @@ export default function Staking() {
 
           <div className="w-full mt-4">
             <button
-              onClick={onStake}
+              onClick={onLock}
               disabled={
                 loading ||
                 !signer ||
-                stakingData === null ||
-                stakingData?.isPaused ||
-                Number(inputStake) === 0 ||
+                lockData === null ||
+                lockData?.isPaused ||
+                Number(inputLock) === 0 ||
+                Number(inputLock) < lockData.minToLock ||
                 !userInfoData ||
-                userInfoData?.lpBalance === 0
+                userInfoData?.balance === 0
               }
               className="bg-samurai-red flex justify-center items-center transition-all z-20 w-full text-lg md:text-normal px-8 py-3 
               disabled:bg-black/30 disabled:text-white/10 hover:enabled:opacity-75 rounded-full
@@ -468,7 +437,7 @@ export default function Staking() {
                     ></path>
                   </svg>
                 </div>
-                <span>{loading ? "LOADING..." : "STAKE"}</span>
+                <span>{loading ? "LOADING..." : "LOCK"}</span>
               </div>
             </button>
           </div>
@@ -508,18 +477,17 @@ export default function Staking() {
                         as="h3"
                         className="text-lg font-medium leading-6 text-white ml-1"
                       >
-                        My vAMM-WETH/SAM stakes
+                        My $SAM locks
                       </DialogTitle>
 
                       <div className="flex flex-col justify-center self-end w-full mt-4">
-                        {stakingData && userInfoData && (
-                          <SCarousel
+                        {lockData && userInfoData && (
+                          <LCarouselV2
                             loading={loading}
-                            stakes={userInfoData?.stakings}
-                            periods={stakingData?.periods}
+                            locks={userInfoData?.locks}
+                            periods={lockData?.periods}
                             inputWithdraw={inputWithdraw}
-                            // onChangeAction={onSelectStake}
-                            setSelectedStakeIndex={setSelectedStakeIndex}
+                            setSelectedLockIndex={setSelectedLockIndex}
                             setInputWithdraw={setInputWithdraw}
                             onWithdraw={onWithdraw}
                           />
