@@ -93,8 +93,13 @@ export default function LCarouselV2({
           key={item.index}
           className="flex text-start flex-col rounded-[8px] text-sm md:text-[16px] w-full min-w-[300px]"
         >
-          <div className="flex flex-col py-6 px-4 bg-black text-white/40 w-full rounded-t-[8px]">
-            Lock Card - {item.index + 1}
+          <div className="flex flex-col p-4 bg-black w-full rounded-t-[8px]">
+            <div className="flex flex-col">
+              <p className="text-[14px] text-white/40">Current points</p>
+              <p className="text-samurai-red">
+                {item.claimedPoints.toLocaleString("en-us")}
+              </p>
+            </div>
           </div>
           <div className="flex flex-col p-4 w-full shadow-md gap-3">
             <div className="flex items-center w-full">
