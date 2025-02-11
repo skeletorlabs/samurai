@@ -4,12 +4,9 @@ import handleError from "@/app/utils/handleErrors";
 import { balanceOf } from "./balanceOf";
 import checkApproval from "./check-approval";
 import { notificateTx } from "@/app/utils/notificateTx";
-import {
-  LP_STAKING,
-  LP_TOKEN,
-  SAM_ADDRESS,
-  SAM_LOCK_V2_ADDRESS,
-} from "../utils/constants";
+import { SAM_ADDRESS, SAM_LOCK_V2_ADDRESS } from "../utils/constants";
+
+import { userInfo as pastUserInfo } from "./samLock";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
@@ -129,6 +126,7 @@ export type UserInfo = {
   availablePoints: number;
   balance: number;
   lastClaim: number;
+  pointsToMigrate: number;
 };
 
 export async function userInfo(signer: ethers.Signer) {
@@ -136,6 +134,12 @@ export async function userInfo(signer: ethers.Signer) {
     const signerAddress = await signer.getAddress();
     const contract = await getContract(signer);
     const userLocks = await contract?.locksOf(signerAddress);
+    const pointsMigrated = Number(
+      formatEther(await contract?.pointsMigrated(signerAddress))
+    );
+
+    const pastUserInfos = await pastUserInfo(signer);
+    const pointsToMigrate = pointsMigrated > 0 ? 0 : pastUserInfos?.totalPoints;
 
     let locks: LockInfo[] = [];
 
@@ -185,6 +189,7 @@ export async function userInfo(signer: ethers.Signer) {
       availablePoints,
       balance,
       lastClaim,
+      pointsToMigrate,
     } as UserInfo;
   } catch (e) {
     handleError({ e: e, notificate: true });
@@ -241,6 +246,19 @@ export async function claimPoints(signer: ethers.Signer) {
     const network = await signer.provider?.getNetwork();
 
     const tx = await contract?.claimPoints();
+
+    await notificateTx(tx, network);
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
+}
+
+export async function migratePoints(signer: ethers.Signer) {
+  try {
+    const contract = await getContract(signer);
+    const network = await signer.provider?.getNetwork();
+
+    const tx = await contract?.migrateVirtualPointsToTokens();
 
     await notificateTx(tx, network);
   } catch (e) {
