@@ -77,18 +77,11 @@ export async function generalInfo() {
       ethers.formatEther(await contract?.totalClaimed())
     );
 
-    // const periods = [
-    //   { title: "3 Months", value: threeMonths },
-    //   { title: "6 Months", value: sixMonths },
-    //   { title: "9 Months", value: nineMonths },
-    //   { title: "12 Months", value: twelveMonths },
-    // ];
-
     const periods = [
-      { title: "3 minutes", value: threeMonths },
-      { title: "6 minutes", value: sixMonths },
-      { title: "9 minutes", value: nineMonths },
-      { title: "12 minutes", value: twelveMonths },
+      { title: "3 Months", value: threeMonths },
+      { title: "6 Months", value: sixMonths },
+      { title: "9 Months", value: nineMonths },
+      { title: "12 Months", value: twelveMonths },
     ];
 
     return {
@@ -131,8 +124,7 @@ export type UserInfo = {
 
 export async function userInfo(signer: ethers.Signer) {
   try {
-    let signerAddress = await signer.getAddress();
-    // signerAddress = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
+    const signerAddress = await signer.getAddress();
     const contract = await getContract(signer);
     const userLocks = await contract?.locksOf(signerAddress);
     const pointsMigrated = Number(
