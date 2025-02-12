@@ -131,15 +131,15 @@ export type UserInfo = {
 
 export async function userInfo(signer: ethers.Signer) {
   try {
-    const signerAddress = await signer.getAddress();
+    let signerAddress = await signer.getAddress();
+    // signerAddress = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
     const contract = await getContract(signer);
     const userLocks = await contract?.locksOf(signerAddress);
     const pointsMigrated = Number(
       formatEther(await contract?.pointsMigrated(signerAddress))
     );
-
     const pastUserInfos = await pastUserInfo(signer);
-    const pointsToMigrate = pointsMigrated > 0 ? 0 : pastUserInfos?.totalPoints;
+    const pointsToMigrate = pastUserInfos?.totalPoints || 0 - pointsMigrated;
 
     let locks: LockInfo[] = [];
 
@@ -151,13 +151,13 @@ export async function userInfo(signer: ethers.Signer) {
 
       const lock: LockInfo = {
         index: i,
-        lockedAmount: Number(ethers.formatEther(userLock[1])),
-        withdrawnAmount: Number(ethers.formatEther(userLock[2])),
-        lockedAt: Number(userLock[3]),
-        withdrawTime: Number(userLock[4]),
-        lockPeriod: Number(userLock[5]),
+        lockedAmount: Number(ethers.formatEther(userLock[0])),
+        withdrawnAmount: Number(ethers.formatEther(userLock[1])),
+        lockedAt: Number(userLock[2]),
+        withdrawTime: Number(userLock[3]),
+        lockPeriod: Number(userLock[4]),
         claimablePoints: claimablePoints,
-        claimedPoints: Number(formatEther(userLock[6])),
+        claimedPoints: Number(formatEther(userLock[5])),
       };
       locks.push(lock);
     }

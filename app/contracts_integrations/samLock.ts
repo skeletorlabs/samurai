@@ -113,7 +113,8 @@ export type UserInfo = {
 
 export async function userInfo(signer: ethers.Signer) {
   try {
-    const signerAddress = await signer.getAddress();
+    let signerAddress = await signer.getAddress();
+    // signerAddress = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
     const contract = await getContract(signer);
     const userLocks = await contract?.getLockInfos(signerAddress);
 

@@ -324,7 +324,7 @@ export default function LockSamV2() {
                         : "bg-samurai-red text-white"
                     } rounded-full hover:enabled:bg-opacity-75`}
                   >
-                    CLAIM $SPS
+                    CLAIM POINTS
                   </button>
                 </div>
               </div>
@@ -333,7 +333,7 @@ export default function LockSamV2() {
             <span
               className={`${
                 formattedCountdown === "0" ? "invisible" : "visible"
-              } absolute top-[155px] left-2 text-xs  text-white/50`}
+              } absolute top-[10px] left-2 text-xs  text-white/50`}
             >
               *Remaining time to claim: {formattedCountdown}
             </span>

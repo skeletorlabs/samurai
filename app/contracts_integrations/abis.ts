@@ -9558,7 +9558,6 @@ export const SAM_LOCK_V2_ABI = [
       { name: "", type: "uint256", internalType: "uint256" },
     ],
     outputs: [
-      { name: "lockIndex", type: "uint256", internalType: "uint256" },
       {
         name: "lockedAmount",
         type: "uint256",
@@ -9590,11 +9589,6 @@ export const SAM_LOCK_V2_ABI = [
         type: "tuple[]",
         internalType: "struct ILock.LockInfo[]",
         components: [
-          {
-            name: "lockIndex",
-            type: "uint256",
-            internalType: "uint256",
-          },
           {
             name: "lockedAmount",
             type: "uint256",
@@ -9653,13 +9647,6 @@ export const SAM_LOCK_V2_ABI = [
   },
   {
     type: "function",
-    name: "nextLockIndex",
-    inputs: [],
-    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
-    stateMutability: "view",
-  },
-  {
-    type: "function",
     name: "owner",
     inputs: [],
     outputs: [{ name: "", type: "address", internalType: "address" }],
@@ -9693,7 +9680,7 @@ export const SAM_LOCK_V2_ABI = [
       { name: "wallet", type: "address", internalType: "address" },
       { name: "lockIndex", type: "uint256", internalType: "uint256" },
     ],
-    outputs: [{ name: "points", type: "uint256", internalType: "uint256" }],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
     stateMutability: "view",
   },
   {
@@ -9802,12 +9789,6 @@ export const SAM_LOCK_V2_ABI = [
       },
       {
         name: "amount",
-        type: "uint256",
-        indexed: false,
-        internalType: "uint256",
-      },
-      {
-        name: "lockIndex",
         type: "uint256",
         indexed: false,
         internalType: "uint256",
@@ -9989,20 +9970,6 @@ export const SAM_LOCK_V2_ABI = [
       { name: "x", type: "uint256", internalType: "uint256" },
       { name: "y", type: "uint256", internalType: "uint256" },
     ],
-  },
-  {
-    type: "error",
-    name: "PRBMath_MulDiv_Overflow",
-    inputs: [
-      { name: "x", type: "uint256", internalType: "uint256" },
-      { name: "y", type: "uint256", internalType: "uint256" },
-      { name: "denominator", type: "uint256", internalType: "uint256" },
-    ],
-  },
-  {
-    type: "error",
-    name: "PRBMath_UD60x18_Convert_Overflow",
-    inputs: [{ name: "x", type: "uint256", internalType: "uint256" }],
   },
   { type: "error", name: "ReentrancyGuardReentrantCall", inputs: [] },
   {
