@@ -140,8 +140,15 @@ export default function Tokens() {
         id="staking"
         className="flex flex-col pt-10 md:pt-20 pb-20 w-full bg-white/10 md:bg-white/10 border-t border-samurai-red/50 border-dotted relative"
       >
-        <div className="flex flex-col xl:flex-row px-6 lg:px-8 xl:px-20 xl:gap-24">
+        <div className="flex flex-col xl:flex-row px-6 lg:px-8 xl:px-20 xl:gap-12 2xl:gap-24">
           <div className="flex flex-col">
+            <div className="flex xl:hidden flex-col max-w-[580px] h-[140px] mb-10 items-center md:items-start">
+              {chirppad}
+              <p className="text-2xl mt-2">
+                <span className="text-red-500">$CPAD</span> Launchdrop Staking
+              </p>
+              <p className="italic text-sm">*Feb, 13 - Feb, 20</p>
+            </div>
             <div className="flex flex-col h-[140px]">
               <div className="flex flex-col lg:flex-row w-full justify-between gap-8">
                 <p className="font-bold text-3xl md:text-5xl md:pb-2 text-center md:text-start">
@@ -160,15 +167,15 @@ export default function Tokens() {
           </div>
 
           <div className="flex flex-col mt-16 lg:mt-0">
-            <div className="flex flex-col lg:max-w-[580px] h-[140px] items-center">
+            <div className="hidden xl:flex flex-col max-w-[580px] h-[140px] items-center">
               {chirppad}
               <p className="text-2xl mt-2">
                 <span className="text-red-500">$CPAD</span> Launchdrop Staking
               </p>
               <p className="italic text-sm">*Feb, 13 - Feb, 20</p>
             </div>
-            <div className="flex flex-col items-center w-full xl:min-h-[840px] lg:max-w-[580px] mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-white/15 sm:shadow-lg">
-              <p className="flex flex-col w-full items-center xl:mt-12">
+            <div className="flex flex-col items-center w-full md:min-h-[840px] lg:max-w-[580px] lg:mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-white/15 sm:shadow-lg">
+              <p className="flex flex-col w-full items-center md:mt-12">
                 <Image
                   src="/samurai.svg"
                   width={300}
@@ -226,7 +233,7 @@ export default function Tokens() {
             <div className="flex flex-col xl:flex-row px-6 lg:px-8 xl:px-20">
               <LockSam />
 
-              <div className="flex flex-col items-center w-full lg:max-w-[580px] mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-white/15 pt-10 sm:pb-10 xl:py-0 xl:ml-12 2xl:ml-24 sm:shadow-lg">
+              <div className="hidden xl:flex flex-col items-center w-full lg:max-w-[580px] mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-white/15 pt-10 sm:pb-10 xl:py-0 xl:ml-12 2xl:ml-24 sm:shadow-lg">
                 <p className="flex flex-col w-full items-center xl:mt-12">
                   <Image
                     src="/samurai.svg"
