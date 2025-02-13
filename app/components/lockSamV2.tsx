@@ -26,6 +26,7 @@ import { formatDistanceToNow, fromUnixTime, getUnixTime } from "date-fns";
 import ConnectButton from "./connectbutton";
 import LoadingBox from "./loadingBox";
 import LCarouselV2 from "./lcarouselV2";
+import CustomTooltip from "./customTooltip";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -50,7 +51,7 @@ export default function LockSamV2() {
   const [formattedCountdown, setFormattedCountdown] = useState("");
   const [claimPeriodAllowed, setClaimPeriodAllowed] = useState(false);
 
-  const { signer } = useContext(StateContext);
+  const { signer, account } = useContext(StateContext);
 
   const handleSliderChange = (event: any) => {
     let currentValue: number = event.target.value;
@@ -264,7 +265,11 @@ export default function LockSamV2() {
             <div className="flex flex-col rounded-lg w-full gap-3">
               <div className="flex items-center gap-4">
                 <div className="flex flex-col gap-1 bg-black rounded-lg p-6 w-full justify-center items-center bg-black/55 backdrop-blur-sm text-sm leading-[20px] border border-white/15 shadow-md shadow-black/60">
-                  <p className="flex flex-col md:flex-row text-lg text-center md:text-start leading-tight md:leading-normal">
+                  <p
+                    className={`flex flex-col md:flex-row text-lg text-center md:text-start leading-tight md:leading-normal ${
+                      !account && "text-white/5"
+                    }`}
+                  >
                     {(userInfoData?.pointsToMigrate || 0).toLocaleString(
                       "en-us",
                       {
@@ -281,7 +286,7 @@ export default function LockSamV2() {
                       userInfoData?.pointsToMigrate === 0
                     }
                     onClick={onMigratePoints}
-                    className={`flex w-full justify-center text-sm px-2 py-1 md:py-2 self-center mt-1 md:mt-0 ${
+                    className={`flex w-full items-center gap-2 justify-center text-sm px-2 py-1 md:py-2 self-center mt-1 md:mt-0 ${
                       loading ||
                       !signer ||
                       !userInfoData ||
@@ -290,11 +295,22 @@ export default function LockSamV2() {
                         : "bg-yellow-300 text-black"
                     } rounded-full hover:enabled:bg-opacity-75`}
                   >
-                    MIGRATE POINTS
+                    <CustomTooltip disabled={!account}>
+                      <div className="font-medium text-[14px] flex-wrap max-w-[220px]">
+                        The virutal Samurai Points accrued in Sam Lock season 1,
+                        can be easily migrated to real Samurai Points token by
+                        clicking Migrate Points.
+                      </div>
+                    </CustomTooltip>
+                    <span>MIGRATE POINTS</span>
                   </button>
                 </div>
                 <div className="flex flex-col gap-1 bg-black rounded-lg p-6 w-full justify-center items-center bg-black/55 backdrop-blur-sm text-sm leading-[20px] border border-white/15 shadow-md shadow-black/60">
-                  <p className="flex flex-col md:flex-row text-lg text-center md:text-start leading-tight md:leading-normal">
+                  <p
+                    className={`flex flex-col md:flex-row text-lg text-center md:text-start leading-tight md:leading-normal ${
+                      !account && "text-white/5"
+                    }`}
+                  >
                     {(userInfoData?.availablePoints || 0).toLocaleString(
                       "en-us",
                       {
@@ -330,13 +346,15 @@ export default function LockSamV2() {
               </div>
             </div>
 
-            <span
-              className={`${
-                formattedCountdown === "0" ? "invisible" : "visible"
-              } absolute top-[10px] left-2 text-xs  text-white/50`}
-            >
-              *Remaining time to claim: {formattedCountdown}
-            </span>
+            {signer && (
+              <span
+                className={`${
+                  formattedCountdown === "0" ? "invisible" : "visible"
+                } absolute top-[10px] left-2 text-xs  text-white/50`}
+              >
+                *Remaining time to claim: {formattedCountdown}
+              </span>
+            )}
           </div>
 
           <div className="flex flex-col gap-5 shadow-lg mt-12 ">
@@ -350,11 +368,11 @@ export default function LockSamV2() {
               />
               <button
                 onClick={onSetMaxForLock}
-                className="absolute top-[30px] md:top-[34px] right-[11px] flex items-center justify-center h-4 transition-all bg-black/70 rounded-full px-[11px] text-white hover:bg-samurai-red text-[11px]"
+                className="absolute top-[30px] md:top-[34px] right-[18px] flex items-center justify-center h-4 transition-all bg-black/70 rounded-full px-[11px] text-white hover:bg-samurai-red text-[11px]"
               >
                 MAX
               </button>
-              <div className="flex absolute top-[14px] md:top-[10px] right-[12px] gap-2">
+              <div className="flex absolute top-[14px] md:top-[13px] right-[18px] gap-2">
                 <span className="text-sm md:text-[17px] mt-[-4px]">$SAM</span>
               </div>
               {signer && (
@@ -403,44 +421,14 @@ export default function LockSamV2() {
                 </span>
               </div>
 
-              <div className="flex flex-col gap-1 text-sm mt-5">
+              <div className="flex flex-col text-sm mt-5">
                 <span className="text-white/40">Estimated Points</span>
-                <div className="flex text-xl gap-2">
-                  {estimatedPoints.toLocaleString("en-us", {
-                    maximumFractionDigits: 18,
-                  })}{" "}
-                  <Tooltip
-                    style="dark"
-                    content={
-                      <div className="font-medium text-[14px] flex-wrap max-w-[220px]">
-                        Points distributed linearly during{" "}
-                        {
-                          lockData?.periods.find(
-                            (item: any) => Number(item.value) === Number(period)
-                          )?.title
-                        }{" "}
-                        locked period.
-                      </div>
-                    }
-                  >
-                    <div className="w-6 h-6">
-                      <svg
-                        data-slot="icon"
-                        fill="none"
-                        strokeWidth="1"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"
-                        ></path>
-                      </svg>
-                    </div>
-                  </Tooltip>
+                <div className="flex text-xl gap-2 items-center">
+                  {inputLock !== "" && estimatedPoints > 0
+                    ? estimatedPoints.toLocaleString("en-us", {
+                        maximumFractionDigits: 18,
+                      })
+                    : "---"}
                 </div>
               </div>
             </div>
