@@ -612,7 +612,7 @@ export default function LockSam() {
         </Transition>
 
         {generalLockData?.isPaused && (
-          <span className="absolute right-0 left-0 top-[100px] bottom-0 mx-10 justify-center items-center flex self-center text-samurai-red -rotate-[15deg] text-3xl sm:text-4xl !opacity-100 z-30 bg-black/70 backdrop-blur-sm p-2 px-4 shadow-xl">
+          <span className="absolute right-0 left-0 top-0 bottom-0 justify-center items-center flex self-center text-samurai-red text-3xl sm:text-4xl !opacity-100 z-30 backdrop-blur-sm shadow-xl">
             New SAM lock is coming!
           </span>
         )}
