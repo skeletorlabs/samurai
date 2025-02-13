@@ -145,7 +145,7 @@ export default function Tokens() {
             <div className="flex xl:hidden flex-col max-w-[580px] h-[140px] mb-10 items-center md:items-start">
               {chirppad}
               <p className="text-2xl mt-2">
-                <span className="text-red-500">$CPAD</span> Launchdrop Staking
+                <span className="text-red-500">$CHPD</span> Launchdrop Staking
               </p>
               <p className="italic text-sm">*Feb, 13 - Feb, 20</p>
             </div>
