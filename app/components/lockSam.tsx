@@ -321,7 +321,7 @@ export default function LockSam() {
         </div>
 
         <div
-          className={`flex flex-col bg-black/75 backdrop-blur-sm p-6 py-8 rounded-lg border border-white/20 shadow-md shadow-black/60 mt-2 z-201 ${
+          className={`hidden flex flex-col bg-black/75 backdrop-blur-sm p-6 py-8 rounded-lg border border-white/20 shadow-md shadow-black/60 mt-2 z-201 ${
             generalLockData?.isPaused && "opacity-10"
           }`}
         >
@@ -393,7 +393,7 @@ export default function LockSam() {
         </div>
 
         <div
-          className={`flex flex-col gap-5 shadow-lg mt-12 z-20 ${
+          className={`hidden flex flex-col gap-5 shadow-lg mt-12 z-20 ${
             generalLockData?.isPaused && "opacity-10"
           }`}
         >
@@ -610,12 +610,6 @@ export default function LockSam() {
             </div>
           </Dialog>
         </Transition>
-
-        {generalLockData?.isPaused && (
-          <span className="absolute right-0 left-0 top-0 bottom-0 justify-center items-center flex self-center text-samurai-red text-3xl sm:text-4xl !opacity-100 z-30 backdrop-blur-sm shadow-xl">
-            New SAM lock is coming!
-          </span>
-        )}
       </div>
     </div>
   );
