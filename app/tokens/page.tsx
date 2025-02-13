@@ -9,6 +9,8 @@ import ClaimSam from "@/app/components/claimSam";
 import Link from "next/link";
 import { SOCIALS } from "@/app/utils/constants";
 import Staking from "../components/staking";
+import LockSamV2 from "../components/lockSamV2";
+import { chirppad } from "../utils/svgs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -133,6 +135,82 @@ export default function Tokens() {
         </div>
       </div>
 
+      {/* LOCK V2 */}
+      <div
+        id="staking"
+        className="flex flex-col pt-10 md:pt-20 pb-20 w-full bg-white/10 md:bg-white/10 border-t border-samurai-red/50 border-dotted relative"
+      >
+        <div className="flex flex-col xl:flex-row px-6 lg:px-8 xl:px-20 xl:gap-12 2xl:gap-24">
+          <div className="flex flex-col">
+            <div className="flex xl:hidden flex-col max-w-[580px] h-[140px] mb-10 items-center md:items-start">
+              {chirppad}
+              <p className="text-2xl mt-2">
+                <span className="text-red-500">$CHPD</span> Launchdrop Staking
+              </p>
+              <p className="italic text-sm">*Feb, 13 - Feb, 20</p>
+            </div>
+            <div className="flex flex-col h-[140px]">
+              <div className="flex flex-col lg:flex-row w-full justify-between gap-8">
+                <p className="font-bold text-3xl md:text-5xl md:pb-2 text-center md:text-start">
+                  <span className="text-samurai-red">$SAM</span> Lock - Season 2
+                </p>
+              </div>
+              <p
+                className={`text-lg text-neutral-300 pt-4 max-w-[580px] text-center md:text-start ${inter.className}`}
+              >
+                Lock $SAM for a period of 3, 6, 9, or 12 months to gain
+                launchpad access, ventures entry, and to accumulate Samurai
+                Points.
+              </p>
+            </div>
+            <LockSamV2 />
+          </div>
+
+          <div className="flex flex-col mt-16 lg:mt-0">
+            <div className="hidden xl:flex flex-col max-w-[580px] h-[140px] items-center">
+              {chirppad}
+              <p className="text-2xl mt-2">
+                <span className="text-red-500">$CHPD</span> Launchdrop Staking
+              </p>
+              <p className="italic text-sm">*Feb, 13 - Feb, 20</p>
+            </div>
+            <div className="flex flex-col items-center w-full md:min-h-[840px] lg:max-w-[580px] lg:mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-white/15 sm:shadow-lg">
+              <p className="flex flex-col w-full items-center md:mt-12">
+                <Image
+                  src="/samurai.svg"
+                  width={300}
+                  height={300}
+                  alt=""
+                  className="mb-10 w-[200px] md:w-[300px]"
+                />
+              </p>
+              <p className="font-bold text-4xl md:text-6xl pb-2 text-center">
+                <span className="text-samurai-red">Samurai</span> Points
+              </p>
+              <p
+                className={`text-lg text-neutral-300 pt-1 px-6 lg:px-8 xl:px-20 text-center ${inter.className}`}
+              >
+                Accumulate Samurai Points by participating in token launches,
+                locking $SAM or by participating in Samurai Sanka.
+              </p>
+
+              <p
+                className={`text-2xl text-center text-neutral-100 pt-10 px-6 lg:px-8 xl:px-16 ${inter.className}`}
+              >
+                What can{" "}
+                <span className="text-samurai-red">Samurai Points</span> be used
+                for?
+              </p>
+              <p
+                className={`text-4xl pt-2 font-bold ${inter.className} px-6 lg:px-8 xl:px-20`}
+              >
+                REWARDS!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* SAM LOCK */}
       <div
         id="lock"
@@ -155,7 +233,7 @@ export default function Tokens() {
             <div className="flex flex-col xl:flex-row px-6 lg:px-8 xl:px-20">
               <LockSam />
 
-              <div className="flex flex-col items-center w-full lg:max-w-[580px] mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-white/15 pt-10 sm:pb-10 xl:py-0 xl:ml-12 2xl:ml-24 sm:shadow-lg">
+              <div className="hidden xl:flex flex-col items-center w-full lg:max-w-[580px] mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-white/15 pt-10 sm:pb-10 xl:py-0 xl:ml-12 2xl:ml-24 sm:shadow-lg">
                 <p className="flex flex-col w-full items-center xl:mt-12">
                   <Image
                     src="/samurai.svg"
