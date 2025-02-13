@@ -261,9 +261,9 @@ export default function LockSamV2() {
             )}
           </div>
 
-          <div className="flex items-center pt-8 text-sm leading-[20px] relative">
+          <div className="flex items-center pt-4 sm:pt-8 text-sm leading-[20px] relative">
             <div className="flex flex-col rounded-lg w-full gap-3">
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col items-center gap-4 sm:flex-row">
                 <div className="flex flex-col gap-1 bg-black rounded-lg p-6 w-full justify-center items-center bg-black/55 backdrop-blur-sm text-sm leading-[20px] border border-white/15 shadow-md shadow-black/60">
                   <p
                     className={`flex flex-col md:flex-row text-lg text-center md:text-start leading-tight md:leading-normal ${
@@ -286,7 +286,7 @@ export default function LockSamV2() {
                       userInfoData?.pointsToMigrate === 0
                     }
                     onClick={onMigratePoints}
-                    className={`flex w-full items-center gap-2 justify-center text-sm px-2 py-1 md:py-2 self-center mt-1 md:mt-0 ${
+                    className={`flex w-full items-center gap-2 justify-center text-sm p-2 self-center mt-1 md:mt-0 ${
                       loading ||
                       !signer ||
                       !userInfoData ||
@@ -329,7 +329,7 @@ export default function LockSamV2() {
                       claimPeriodAllowed === false
                     }
                     onClick={onClaimPoints}
-                    className={`flex w-full justify-center text-sm px-2 py-1 md:py-2 self-center mt-1 md:mt-0 ${
+                    className={`flex w-full justify-center text-sm p-2 self-center mt-1 md:mt-0 ${
                       loading ||
                       !signer ||
                       !userInfoData ||

@@ -23,7 +23,7 @@ export default function ConnectButton({ mobile = false }: ConnectButton) {
   }, [address, isConnected]);
 
   return (
-    <SSButton mobile={mobile} click={() => open()}>
+    <SSButton mobile={mobile} flexSize click={() => open()}>
       {text}
     </SSButton>
   );

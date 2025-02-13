@@ -140,7 +140,7 @@ export default function Tokens() {
         id="staking"
         className="flex flex-col pt-10 md:pt-20 pb-20 w-full bg-white/10 md:bg-white/10 border-t border-samurai-red/50 border-dotted relative"
       >
-        <div className="flex flex-col xl:flex-row px-6 lg:px-8 xl:px-20 xl:gap-12 2xl:gap-24">
+        <div className="flex flex-col xl:flex-row px-2 lg:px-8 xl:px-20 xl:gap-12 2xl:gap-24">
           <div className="flex flex-col">
             <div className="flex xl:hidden flex-col max-w-[580px] h-[140px] mb-10 items-center md:items-start">
               {chirppad}
@@ -218,19 +218,19 @@ export default function Tokens() {
       >
         <div className="flex flex-col text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
-            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-6 lg:px-8 xl:px-20">
+            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-2 lg:px-8 xl:px-20">
               <p className="font-bold text-3xl md:text-5xl md:pb-2 text-center md:text-start">
                 Lock <span className="text-samurai-red">$SAM</span>
               </p>
             </div>
             <p
-              className={`text-lg text-neutral-300 pt-4 max-w-[700px] px-6 lg:px-8 xl:px-20  text-center md:text-start ${inter.className}`}
+              className={`text-lg text-neutral-300 pt-4 max-w-[700px] px-2 lg:px-8 xl:px-20  text-center md:text-start ${inter.className}`}
             >
               Lock $SAM for a period of 3, 6, 9, or 12 months to gain launchpad
               access, ventures entry, and to accumulate Samurai Points.
             </p>
 
-            <div className="flex flex-col xl:flex-row px-6 lg:px-8 xl:px-20">
+            <div className="flex flex-col xl:flex-row px-2 lg:px-8 xl:px-20">
               <LockSam />
 
               <div className="hidden xl:flex flex-col items-center w-full lg:max-w-[580px] mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-white/15 pt-10 sm:pb-10 xl:py-0 xl:ml-12 2xl:ml-24 sm:shadow-lg">
@@ -278,20 +278,20 @@ export default function Tokens() {
       >
         <div className="flex flex-col text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
-            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-6 lg:px-8 xl:px-20">
+            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-2 lg:px-8 xl:px-20">
               <p className="font-bold text-3xl md:text-5xl md:pb-2 text-center md:text-start">
                 Stake <span className="text-samurai-red">vAMM-WETH/SAM</span>
               </p>
             </div>
             <p
-              className={`text-lg text-neutral-300 pt-4 max-w-[700px] px-6 lg:px-8 xl:px-20  text-center md:text-start ${inter.className}`}
+              className={`text-lg text-neutral-300 pt-4 max-w-[700px] px-2 lg:px-8 xl:px-20  text-center md:text-start ${inter.className}`}
             >
               Stake vAMM-WETH/SAM for a period of 3, 6, 9, or 12 months to gain
               launchpad access, ventures entry, and to accumulate Samurai
               Points.
             </p>
 
-            <div className="flex flex-col xl:flex-row px-6 lg:px-8 xl:px-20">
+            <div className="flex flex-col xl:flex-row px-2 lg:px-8 xl:px-20">
               <Staking />
 
               <div className="flex flex-col items-center w-full lg:max-w-[580px] mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-samurai-red/20 pt-10 sm:pb-10 xl:py-0 xl:ml-12 2xl:ml-24 sm:shadow-lg">
@@ -308,14 +308,14 @@ export default function Tokens() {
                   <span className="text-samurai-red">Samurai</span> Points
                 </p>
                 <p
-                  className={`text-lg text-neutral-300 pt-1 px-6 lg:px-8 xl:px-20 text-center ${inter.className}`}
+                  className={`text-lg text-neutral-300 pt-1 px-2 lg:px-8 xl:px-20 text-center ${inter.className}`}
                 >
                   Accumulate Samurai Points by participating in token launches,
                   providing SAM liquidity, or by participating in Samurai Sanka.
                 </p>
 
                 <p
-                  className={`text-2xl text-center text-neutral-100 pt-10 px-6 lg:px-8 xl:px-16 ${inter.className}`}
+                  className={`text-2xl text-center text-neutral-100 pt-10 px-2 lg:px-8 xl:px-16 ${inter.className}`}
                 >
                   What can{" "}
                   <span className="text-samurai-red">Samurai Points</span> be

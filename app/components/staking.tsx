@@ -258,9 +258,9 @@ export default function Staking() {
           </div>
 
           {signer && userInfoData && userInfoData?.stakings.length > 0 && (
-            <div className="flex items-center pt-8 text-sm leading-[20px] relative">
+            <div className="flex items-center pt-4 sm:pt-8 text-sm leading-[20px] relative">
               <div className="flex flex-col rounded-lg w-full gap-3">
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col items-center gap-4 sm:flex-row">
                   <div className="flex flex-col gap-1 bg-black rounded-lg p-6 w-full justify-center items-center bg-black/55 backdrop-blur-sm text-sm leading-[20px] border border-white/15 shadow-md shadow-black/60">
                     <p className="flex flex-col md:flex-row text-lg text-center md:text-start leading-tight md:leading-normal">
                       {(userInfoData?.availablePoints || 0).toLocaleString(
@@ -279,7 +279,7 @@ export default function Staking() {
                         claimPeriodAllowed === false
                       }
                       onClick={onClaimPoints}
-                      className={`flex w-full justify-center text-sm px-2 py-1 md:py-2 self-center mt-1 md:mt-0 ${
+                      className={`flex w-full justify-center text-sm p-2 self-center mt-1 md:mt-0 ${
                         loading ||
                         userInfoData?.availablePoints === 0 ||
                         claimPeriodAllowed === false
@@ -308,7 +308,7 @@ export default function Staking() {
                         claimPeriodAllowed === false
                       }
                       onClick={onClaimRewards}
-                      className={`flex w-full justify-center text-sm px-2 py-1 md:py-2 self-center mt-1 md:mt-0 ${
+                      className={`flex w-full justify-center text-sm p-2 self-center mt-1 md:mt-0 ${
                         loading ||
                         userInfoData.claimableRewards === 0 ||
                         claimPeriodAllowed === false

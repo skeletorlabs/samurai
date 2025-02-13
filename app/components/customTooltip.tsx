@@ -25,7 +25,7 @@ const info = (
 
 export default function CustomTooltip({ children, disabled }: CustomTooltip) {
   return disabled ? (
-    <div className="w-5 h-5 text-white/10">{info}</div>
+    <div className="hidden sm:block w-5 h-5 text-white/10">{info}</div>
   ) : (
     <Tooltip style="dark" content={children}>
       <div className="w-5 h-5 text-white/50">{info}</div>
