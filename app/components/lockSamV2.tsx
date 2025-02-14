@@ -242,8 +242,8 @@ export default function LockSamV2() {
                   <div className="text-white/40 flex justify-center sm:justify-start items-center gap-2">
                     <span>Samurai Points</span>{" "}
                     <CustomTooltip disabled={!account} dark={false}>
-                      <div className="font-medium text-[14px] text-center flex-wrap max-w-[220px]">
-                        The amount of Samurai Points in my Wallet.
+                      <div className="font-medium text-[14px] flex-wrap max-w-[220px]">
+                        My Samurai Points wallet balance
                       </div>
                     </CustomTooltip>
                   </div>
