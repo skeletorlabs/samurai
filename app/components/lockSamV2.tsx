@@ -238,6 +238,24 @@ export default function LockSamV2() {
                     $SAM
                   </p>
                 </div>
+                <div className="text-center md:text-start leading-none md:leading-normal">
+                  <div className="text-white/40 flex justify-center sm:justify-start items-center gap-2">
+                    <span>Samurai Points</span>{" "}
+                    <CustomTooltip disabled={!account} dark={false}>
+                      <div className="font-medium text-[14px] text-center flex-wrap max-w-[220px]">
+                        The amount of Samurai Points in my Wallet.
+                      </div>
+                    </CustomTooltip>
+                  </div>
+                  <p className="text-lg">
+                    {(userInfoData?.pointsBalance || 0).toLocaleString(
+                      "en-us",
+                      {
+                        maximumFractionDigits: 2,
+                      }
+                    )}{" "}
+                  </p>
+                </div>
               </div>
             ) : (
               <ConnectButton />
@@ -378,7 +396,7 @@ export default function LockSamV2() {
               {signer && (
                 <>
                   <div className="absolute top-[-24px] left-2 text-sm text-end transition-all hover:opacity-75 w-max text-white">
-                    <span className="text-white/70">Minimum to lock:</span>{" "}
+                    <span className="text-white/70">Min. to lock:</span>{" "}
                     {lockData?.minToLock.toLocaleString("en-us", {
                       maximumFractionDigits: 5,
                     })}{" "}
@@ -387,7 +405,7 @@ export default function LockSamV2() {
                   <div className="absolute top-[-24px] right-2 text-sm text-end transition-all hover:opacity-75 w-max text-white">
                     <span className="text-white/70">Balance:</span>{" "}
                     {userInfoData?.balance.toLocaleString("en-us", {
-                      maximumFractionDigits: 18,
+                      maximumFractionDigits: 5,
                     })}{" "}
                     $SAM
                   </div>

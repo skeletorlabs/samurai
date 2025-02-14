@@ -4,7 +4,7 @@ import handleError from "@/app/utils/handleErrors";
 import { balanceOf } from "./balanceOf";
 import checkApproval from "./check-approval";
 import { notificateTx } from "@/app/utils/notificateTx";
-import { SAM_ADDRESS, SAM_LOCK_V2_ADDRESS } from "../utils/constants";
+import { POINTS, SAM_ADDRESS, SAM_LOCK_V2_ADDRESS } from "../utils/constants";
 
 import { userInfo as pastUserInfo } from "./samLock";
 
@@ -118,6 +118,7 @@ export type UserInfo = {
   claimedPoints: number;
   availablePoints: number;
   balance: number;
+  pointsBalance: number;
   lastClaim: number;
   pointsToMigrate: number;
 };
@@ -174,6 +175,12 @@ export async function userInfo(signer: ethers.Signer) {
       )
     );
 
+    let pointsBalance = Number(
+      ethers.formatEther(
+        await balanceOf(ERC20_ABI, POINTS, signerAddress, signer)
+      )
+    );
+
     const lastClaim = Number(await contract?.lastClaims(signerAddress));
 
     return {
@@ -182,6 +189,7 @@ export async function userInfo(signer: ethers.Signer) {
       claimedPoints,
       availablePoints,
       balance,
+      pointsBalance,
       lastClaim,
       pointsToMigrate,
     } as UserInfo;
