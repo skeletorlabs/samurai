@@ -174,7 +174,7 @@ export default function Tokens() {
               </p>
               <p className="italic text-sm">*Feb, 13 - Feb, 20</p>
             </div>
-            <div className="flex flex-col items-center w-full md:min-h-[840px] lg:max-w-[580px] lg:mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-white/15 sm:shadow-lg">
+            <div className="flex flex-col items-center w-full md:min-h-[890px] lg:max-w-[580px] lg:mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-white/15 sm:shadow-lg">
               <p className="flex flex-col w-full items-center md:mt-12">
                 <Image
                   src="/samurai.svg"
