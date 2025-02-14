@@ -295,7 +295,7 @@ export default function LockSamV2() {
                         : "bg-yellow-300 text-black"
                     } rounded-full hover:enabled:bg-opacity-75`}
                   >
-                    <CustomTooltip disabled={!account}>
+                    <CustomTooltip disabled={!account} dark>
                       <div className="font-medium text-[14px] flex-wrap max-w-[220px]">
                         The virutal Samurai Points accrued in Sam Lock season 1,
                         can be easily migrated to real Samurai Points token by

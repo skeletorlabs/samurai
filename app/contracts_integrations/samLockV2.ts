@@ -124,14 +124,16 @@ export type UserInfo = {
 
 export async function userInfo(signer: ethers.Signer) {
   try {
-    const signerAddress = await signer.getAddress();
+    let signerAddress = await signer.getAddress();
+    signerAddress = "0xcaE8cF1e2119484D6CC3B6EFAad2242aDBDB1Ea8";
     const contract = await getContract(signer);
     const userLocks = await contract?.locksOf(signerAddress);
     const pointsMigrated = Number(
       formatEther(await contract?.pointsMigrated(signerAddress))
     );
+
     const pastUserInfos = await pastUserInfo(signer);
-    const pointsToMigrate = pastUserInfos?.totalPoints || 0 - pointsMigrated;
+    const pointsToMigrate = (pastUserInfos?.totalPoints || 0) - pointsMigrated;
 
     let locks: LockInfo[] = [];
 

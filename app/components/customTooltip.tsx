@@ -3,6 +3,7 @@ import { Tooltip } from "flowbite-react";
 interface CustomTooltip {
   children: React.ReactNode;
   disabled: boolean;
+  dark: boolean;
 }
 
 const info = (
@@ -23,12 +24,18 @@ const info = (
   </svg>
 );
 
-export default function CustomTooltip({ children, disabled }: CustomTooltip) {
+export default function CustomTooltip({
+  children,
+  disabled,
+  dark,
+}: CustomTooltip) {
   return disabled ? (
     <div className="hidden sm:block w-5 h-5 text-white/10">{info}</div>
   ) : (
     <Tooltip style="dark" content={children}>
-      <div className="w-5 h-5 text-white/50">{info}</div>
+      <div className={`w-5 h-5 ${dark ? "text-black" : "text-white/50"}`}>
+        {info}
+      </div>
     </Tooltip>
   );
 }
