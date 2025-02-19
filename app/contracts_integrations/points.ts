@@ -1,9 +1,16 @@
-import { Signer, JsonRpcProvider, Contract, formatEther } from "ethers";
+import {
+  Signer,
+  JsonRpcProvider,
+  Contract,
+  formatEther,
+  parseEther,
+} from "ethers";
 import { SAMURAI_POINTS_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
 import { POINTS } from "@/app/utils/constants";
 
 import { balanceOf } from "./balanceOf";
+import { notificateTx } from "../utils/notificateTx";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
@@ -34,6 +41,30 @@ export async function userInfo(signer: Signer) {
     const boost = Number(formatEther(await contract?.boostOf(signerAddress)));
 
     return { balance, boost };
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
+}
+
+export async function burn(signer: Signer, from: string, amount: string) {
+  try {
+    const network = await signer.provider?.getNetwork();
+    const contract = await getContract(signer);
+    const tx = await contract?.burn(from, parseEther(amount));
+
+    await notificateTx(tx, network);
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
+}
+
+export async function isPointsOwner(signer: Signer) {
+  try {
+    const signerAddress = await signer.getAddress();
+    const contract = await getContract(signer);
+    const owner = await contract?.owner();
+
+    return owner === signerAddress;
   } catch (e) {
     handleError({ e: e, notificate: true });
   }

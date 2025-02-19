@@ -121,16 +121,18 @@ export type UserInfo = {
   pointsBalance: number;
   lastClaim: number;
   pointsToMigrate: number;
+  pointsMigrated: number;
 };
 
-export async function userInfo(signer: ethers.Signer) {
+export async function userInfo(signer: ethers.Signer, account?: string) {
   try {
-    let signerAddress = await signer.getAddress();
+    const signerAddress = await signer.getAddress();
+    const address = account || signerAddress;
 
     const contract = await getContract(signer);
-    const userLocks = await contract?.locksOf(signerAddress);
+    const userLocks = await contract?.locksOf(address);
     const pointsMigrated = Number(
-      formatEther(await contract?.pointsMigrated(signerAddress))
+      formatEther(await contract?.pointsMigrated(address))
     );
 
     const pastUserInfos = await pastUserInfo(signer);
@@ -141,12 +143,12 @@ export async function userInfo(signer: ethers.Signer) {
     for (let i = 0; i < userLocks.length; i++) {
       const userLock = userLocks[i];
       let claimablePoints = Number(
-        formatEther(await contract?.previewClaimablePoints(signerAddress, i))
+        formatEther(await contract?.previewClaimablePoints(address, i))
       );
 
       if (
-        signerAddress === "0x194856b0d232821a75fd572c40f28905028b5613" ||
-        signerAddress === "0x69eed0DA450Ce194DCea4317f688315973Dcba31"
+        address === "0x194856b0d232821a75fd572c40f28905028b5613" ||
+        address === "0x69eed0DA450Ce194DCea4317f688315973Dcba31"
       ) {
         claimablePoints = 0;
       }
@@ -164,8 +166,8 @@ export async function userInfo(signer: ethers.Signer) {
       locks.push(lock);
 
       if (
-        signerAddress === "0x194856b0d232821a75fd572c40f28905028b5613" ||
-        signerAddress === "0x69eed0DA450Ce194DCea4317f688315973Dcba31"
+        address === "0x194856b0d232821a75fd572c40f28905028b5613" ||
+        address === "0x69eed0DA450Ce194DCea4317f688315973Dcba31"
       ) {
         locks[i].claimedPoints = locks[i].lockedAmount;
       }
@@ -185,17 +187,15 @@ export async function userInfo(signer: ethers.Signer) {
 
     let balance = Number(
       ethers.formatEther(
-        await balanceOf(ERC20_ABI, SAM_ADDRESS, signerAddress, signer)
+        await balanceOf(ERC20_ABI, SAM_ADDRESS, address, signer)
       )
     );
 
     let pointsBalance = Number(
-      ethers.formatEther(
-        await balanceOf(ERC20_ABI, POINTS, signerAddress, signer)
-      )
+      ethers.formatEther(await balanceOf(ERC20_ABI, POINTS, address, signer))
     );
 
-    const lastClaim = Number(await contract?.lastClaims(signerAddress));
+    const lastClaim = Number(await contract?.lastClaims(address));
 
     return {
       locks: locks,
@@ -206,6 +206,7 @@ export async function userInfo(signer: ethers.Signer) {
       pointsBalance,
       lastClaim,
       pointsToMigrate,
+      pointsMigrated,
     } as UserInfo;
   } catch (e) {
     handleError({ e: e, notificate: true });
