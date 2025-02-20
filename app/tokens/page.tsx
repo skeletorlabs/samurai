@@ -153,7 +153,7 @@ export default function Tokens() {
               <div className="flex flex-col lg:flex-row w-full justify-between gap-8">
                 <p className="font-bold text-3xl md:text-[2.6rem] md:leading-1 md:pb-2 text-center md:text-start">
                   <span className="text-samurai-red">$SAM</span> Lock - Season
-                  Chippard
+                  ChirpPad
                 </p>
               </div>
               <p
