@@ -6,6 +6,7 @@ import {
   TransitionChild,
   DialogTitle,
 } from "@headlessui/react";
+import { Tooltip } from "flowbite-react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 import {
@@ -16,13 +17,14 @@ import {
   lock,
   userInfo,
   withdraw,
-} from "@/app/contracts_integrations/samLockV2";
+} from "@/app/contracts_integrations/samLockV3";
 import { StateContext } from "@/app/context/StateContext";
 import { Roboto } from "next/font/google";
 import { formatDistanceToNow, fromUnixTime, getUnixTime } from "date-fns";
 import ConnectButton from "./connectbutton";
 import LoadingBox from "./loadingBox";
 import LCarouselV2 from "./lcarouselV2";
+import CustomTooltip from "./customTooltip";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -34,7 +36,7 @@ type Period = {
   value: Number;
 };
 
-export default function LockSamV2() {
+export default function LockSamV3() {
   const [loading, setLoading] = useState(false);
   const [inputLock, setInputLock] = useState("");
   const [inputWithdraw, setInputWithdraw] = useState("");
@@ -201,7 +203,7 @@ export default function LockSamV2() {
   return (
     <>
       <div className="flex flex-col lg:flex-row items-center gap-10 mt-2 relative">
-        <div className="flex flex-col justify-between w-full xl:min-h-[750px] lg:w-[580px] lg:bg-white/5 lg:border border-white/10 rounded-lg lg:py-10 lg:px-6 lg:shadow-lg shadow-pink-800/50 relative">
+        <div className="flex flex-col justify-between w-full xl:min-h-[750px] lg:w-[580px] lg:bg-white/15 lg:border border-white/10 rounded-lg lg:py-10 lg:px-6 lg:shadow-lg shadow-pink-800/50 relative">
           <p className="text-sm md:text-xl text-white/70 text-center md:text-start">
             TVL{" "}
             <span className="text-white">
@@ -211,7 +213,6 @@ export default function LockSamV2() {
               $SAM
             </span>
           </p>
-
           <div className="flex flex-col md:flex-row items-center rounded-lg w-full bg-black/55 backdrop-blur-sm p-6 py-8 text-sm leading-[20px] border border-white/15 shadow-md shadow-black/60 mt-5">
             {signer ? (
               <div className="flex flex-col rounded-lg w-full gap-3">
@@ -242,7 +243,7 @@ export default function LockSamV2() {
             )}
 
             {signer && userInfoData && userInfoData?.locks.length > 0 && (
-              <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-2">
                 <button
                   disabled={loading}
                   onClick={() => {
@@ -296,11 +297,7 @@ export default function LockSamV2() {
             )}
           </div>
 
-          <div
-            className={`flex flex-col gap-5 shadow-lg ${
-              lockData?.isPaused && "opacity-5"
-            }`}
-          >
+          <div className="flex flex-col gap-5 shadow-lg">
             <div className="flex text-black relative border border-transparent">
               <input
                 onChange={(e) => onInputLockChange(e.target.value)}
@@ -340,11 +337,7 @@ export default function LockSamV2() {
           </div>
 
           {lockData?.periods && (
-            <div
-              className={`flex flex-col bg-black/55 backdrop-blur-sm p-6 py-8 mt-4 rounded-lg border border-white/15 shadow-md shadow-black/60 ${
-                lockData?.isPaused && "opacity-5"
-              }`}
-            >
+            <div className="flex flex-col bg-black/55 backdrop-blur-sm p-6 py-8 mt-4 rounded-lg border border-white/15 shadow-md shadow-black/60">
               <div className="flex flex-col gap-2 text-sm">
                 <span className="text-white/40">
                   Slide to select lock period
@@ -381,7 +374,7 @@ export default function LockSamV2() {
             </div>
           )}
 
-          <div className={`w-full mt-4 ${lockData?.isPaused && "opacity-5"}`}>
+          <div className="w-full mt-4">
             <button
               onClick={onLock}
               disabled={
