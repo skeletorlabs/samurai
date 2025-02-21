@@ -111,12 +111,14 @@ export type UserInfo = {
   samBalance: number;
 };
 
-export async function userInfo(signer: ethers.Signer) {
+export async function userInfo(signer: ethers.Signer, account?: string) {
   try {
     let signerAddress = await signer.getAddress();
 
+    const address = account || signerAddress;
+
     const contract = await getContract(signer);
-    const userLocks = await contract?.getLockInfos(signerAddress);
+    const userLocks = await contract?.getLockInfos(address);
 
     let locks: LockInfo[] = [];
     for (let i = 0; i < userLocks.length; i++) {
@@ -130,7 +132,7 @@ export async function userInfo(signer: ethers.Signer) {
         lockPeriod: Number(userLock[5]),
         multiplier: Number(ethers.formatEther(userLock[6])),
         points: Number(
-          ethers.formatEther(await contract?.pointsByLock(signerAddress, i))
+          ethers.formatEther(await contract?.pointsByLock(address, i))
         ),
       };
 
@@ -147,7 +149,7 @@ export async function userInfo(signer: ethers.Signer) {
 
     const samBalance = Number(
       ethers.formatEther(
-        await balanceOf(ERC20_ABI, SAM_ADDRESS, signerAddress, signer)
+        await balanceOf(ERC20_ABI, SAM_ADDRESS, address, signer)
       )
     );
 

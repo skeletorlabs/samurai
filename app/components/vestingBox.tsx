@@ -102,12 +102,12 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
 
   const getUserInfos = useCallback(async () => {
     setLoading(true);
-    if (signer && general) {
-      const response = await userInfo(idoIndex, general, signer);
+    if (signer) {
+      const response = await userInfo(idoIndex, signer);
       setUser(response);
     }
     setLoading(false);
-  }, [signer, idoIndex, general, setLoading]);
+  }, [signer, idoIndex, setLoading]);
 
   const getGeneralData = useCallback(async () => {
     setLoading(true);

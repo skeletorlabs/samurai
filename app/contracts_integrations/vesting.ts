@@ -206,36 +206,36 @@ export async function getWalletsToRefund(index: number) {
 
 export async function userInfo(
   index: number,
-  general: VESTING_GENERAL_INFO,
-  signer: Signer
+  signer: Signer,
+  account?: string
 ) {
   try {
     const contract = await getContract(index);
-    const signerAddress = await signer.getAddress();
+    let signerAddress = await signer.getAddress();
 
-    const purchased = Number(
-      formatEther(await contract?.purchases(signerAddress))
-    );
+    const address = account || signerAddress;
 
-    const claimedTGE = await contract?.hasClaimedTGE(signerAddress);
-    const askedRefund = await contract?.askedRefund(signerAddress);
+    const purchased = Number(formatEther(await contract?.purchases(address)));
+
+    const claimedTGE = await contract?.hasClaimedTGE(address);
+    const askedRefund = await contract?.askedRefund(address);
 
     const claimedTokens = Number(
-      formatEther(await contract?.tokensClaimed(signerAddress))
+      formatEther(await contract?.tokensClaimed(address))
     );
     let claimableTokens = 0;
 
     try {
       claimableTokens = Number(
-        formatEther(await contract?.previewClaimableTokens(signerAddress))
+        formatEther(await contract?.previewClaimableTokens(address))
       );
     } catch (_) {}
 
     const claimedPoints = Number(
-      formatEther(await contract?.pointsClaimed(signerAddress))
+      formatEther(await contract?.pointsClaimed(address))
     );
     let claimablePoints = Number(
-      formatEther(await contract?.previewClaimablePoints(signerAddress))
+      formatEther(await contract?.previewClaimablePoints(address))
     );
 
     return {

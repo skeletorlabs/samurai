@@ -10,7 +10,7 @@ import { userInfo as pastUserInfo } from "./samLock";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
-async function getContract(signer?: ethers.Signer) {
+export async function getContract(signer?: ethers.Signer) {
   try {
     const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
 
@@ -120,23 +120,15 @@ export type UserInfo = {
   balance: number;
   pointsBalance: number;
   lastClaim: number;
-  pointsToMigrate: number;
-  pointsMigrated: number;
 };
 
 export async function userInfo(signer: ethers.Signer, account?: string) {
   try {
-    const signerAddress = await signer.getAddress();
-    const address = account || signerAddress;
+    let signerAddress = await signer.getAddress();
 
+    const address = account || signerAddress;
     const contract = await getContract(signer);
     const userLocks = await contract?.locksOf(address);
-    const pointsMigrated = Number(
-      formatEther(await contract?.pointsMigrated(address))
-    );
-
-    const pastUserInfos = await pastUserInfo(signer);
-    const pointsToMigrate = (pastUserInfos?.totalPoints || 0) - pointsMigrated;
 
     let locks: LockInfo[] = [];
 
@@ -205,8 +197,6 @@ export async function userInfo(signer: ethers.Signer, account?: string) {
       balance,
       pointsBalance,
       lastClaim,
-      pointsToMigrate,
-      pointsMigrated,
     } as UserInfo;
   } catch (e) {
     handleError({ e: e, notificate: true });
@@ -263,19 +253,6 @@ export async function claimPoints(signer: ethers.Signer) {
     const network = await signer.provider?.getNetwork();
 
     const tx = await contract?.claimPoints();
-
-    await notificateTx(tx, network);
-  } catch (e) {
-    handleError({ e: e, notificate: true });
-  }
-}
-
-export async function migratePoints(signer: ethers.Signer) {
-  try {
-    const contract = await getContract(signer);
-    const network = await signer.provider?.getNetwork();
-
-    const tx = await contract?.migrateVirtualPointsToTokens();
 
     await notificateTx(tx, network);
   } catch (e) {

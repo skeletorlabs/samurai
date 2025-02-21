@@ -6,9 +6,17 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import ConnectButton from "../components/connectbutton";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { StateContext } from "../context/StateContext";
-import { userInfo, UserInfo } from "../contracts_integrations/samLockV2";
+// import { userInfo, UserInfo } from "../contracts_integrations/samLockV2";
+// import { userInfo, UserInfo } from "../contracts_integrations/samLockV2";
 import { burn, isPointsOwner } from "../contracts_integrations/points";
+import {
+  userInfo as userInfoLpStaking,
+  UserInfo as UserInfoLPStaking,
+} from "../contracts_integrations/lpStaking";
+
+import { userInfo as userInfoVesting } from "../contracts_integrations/vesting";
 import LoadingBox from "../components/loadingBox";
+import { IDOs } from "../utils/constants";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,7 +28,10 @@ const walletsToBurn = [
 ];
 
 export default function Burner() {
-  const [userInfoData, setUserInfoData] = useState<UserInfo | null>(null);
+  // const [userInfoData, setUserInfoData] = useState<UserInfo | null>(null);
+  const [userInfoDataLPStaking, setUserInfoDataLPStaking] =
+    useState<UserInfoLPStaking | null>(null);
+  const [userInfoDataVesting, setUserInfoDataVesting] = useState(0);
   const [pointsToBurn, setPointsToBurn] = useState(0);
   const [loading, setLoading] = useState(false);
   const [wallet, setWallet] = useState(walletsToBurn[0]);
@@ -35,33 +46,63 @@ export default function Burner() {
     setLoading(false);
   }, [signer, account, wallet, pointsToBurn, setLoading]);
 
-  useEffect(() => {
-    if (userInfoData) {
-      setPointsToBurn(
-        Number(userInfoData.pointsBalance) -
-          Number(userInfoData.claimedPoints) -
-          Number(userInfoData.pointsMigrated)
-      );
-    }
-  }, [userInfoData, setPointsToBurn]);
+  // useEffect(() => {
+  //   if (userInfoData && userInfoDataLPStaking) {
+  //     setPointsToBurn(
+  //       Number(userInfoData.pointsBalance) -
+  //         Number(userInfoData.claimedPoints) -
+  //         Number(userInfoData.pointsMigrated) -
+  //         Number(userInfoDataLPStaking?.claimedPoints) -
+  //         userInfoDataVesting
+  //     );
+  //   }
+  // }, [
+  //   userInfoData,
+  //   userInfoDataLPStaking,
+  //   userInfoDataVesting,
+  //   setPointsToBurn,
+  // ]);
 
-  const onGetUserInfo = useCallback(async () => {
-    setLoading(true);
-    if (signer && wallet) {
-      const response = await userInfo(signer, wallet);
-      setUserInfoData(response as UserInfo);
+  // const onGetUserInfo = useCallback(async () => {
+  //   setLoading(true);
+  //   if (signer && wallet) {
+  //     const dataChirppad = await userInfo(signer, wallet);
+  //     setUserInfoData(dataChirppad as UserInfo);
 
-      const signerIsOwner = await isPointsOwner(signer);
-      setIsOwner(signerIsOwner || false);
-    }
-    setLoading(false);
-  }, [signer, wallet, setLoading]);
+  //     const dataLpStaking = await userInfoLpStaking(signer, wallet);
+  //     setUserInfoDataLPStaking(dataLpStaking as UserInfoLPStaking);
 
-  useEffect(() => {
-    if (signer && account && wallet) {
-      onGetUserInfo();
-    }
-  }, [signer, account, wallet]);
+  //     let vestingPoints = 0;
+
+  //     for (let index = 0; index < IDOs.length; index++) {
+  //       const element = IDOs[index];
+
+  //       if (element.vesting !== undefined) {
+  //         const dataVesting = await userInfoVesting(index, signer, wallet);
+  //         vestingPoints += dataVesting?.claimedPoints || 0;
+  //       }
+  //     }
+
+  //     setUserInfoDataVesting(vestingPoints);
+
+  //     const signerIsOwner = await isPointsOwner(signer);
+  //     setIsOwner(signerIsOwner || false);
+  //   }
+  //   setLoading(false);
+  // }, [
+  //   signer,
+  //   wallet,
+  //   setLoading,
+  //   setUserInfoData,
+  //   setUserInfoDataLPStaking,
+  //   setUserInfoDataVesting,
+  // ]);
+
+  // useEffect(() => {
+  //   if (signer && account && wallet) {
+  //     onGetUserInfo();
+  //   }
+  // }, [signer, account, wallet]);
 
   return (
     <TopLayout background="bg-samurai-cyborg-fem bg-cover bg-top h-screen">
@@ -103,17 +144,36 @@ export default function Burner() {
               <div className="mt-4 leading-[40px] font-mono">
                 <p>
                   <span className="text-yellow-300">- Balance:</span>{" "}
-                  {(userInfoData?.pointsBalance || 0).toLocaleString("en-us")}{" "}
+                  {/* {(userInfoData?.pointsBalance || 0).toLocaleString("en-us")}{" "} */}
                   Samurai Points
                 </p>
 
                 <p>
                   <span className="text-green-300">- Correct amount:</span>{" "}
-                  {Number(
+                  {/* {Number(
                     (userInfoData?.claimedPoints || 0) +
                       (userInfoData?.pointsMigrated || 0)
-                  ).toLocaleString("en-us")}{" "}
+                  ).toLocaleString("en-us")}{" "} */}
                   Samurai Points
+                </p>
+                <p className="flex flex-col leading-tight">
+                  <span>
+                    --- ChirpPad:{" "}
+                    {/* {userInfoData?.claimedPoints.toLocaleString("en-us")} */}
+                  </span>
+                  <span>
+                    --- Migrated:{" "}
+                    {/* {userInfoData?.pointsMigrated.toLocaleString("en-us")} */}
+                  </span>
+                  <span>
+                    --- LP Staking:{" "}
+                    {userInfoDataLPStaking?.claimedPoints.toLocaleString(
+                      "en-us"
+                    )}
+                  </span>
+                  <span>
+                    --- Vestings {userInfoDataVesting.toLocaleString("en-us")}
+                  </span>
                 </p>
 
                 <p>
