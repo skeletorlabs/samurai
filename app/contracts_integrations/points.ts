@@ -80,11 +80,14 @@ export async function burn(signer: Signer, from: string, amount: string) {
 
 export async function isPointsOwner(signer: Signer) {
   try {
-    const signerAddress = await signer.getAddress();
+    let signerAddress = await signer.getAddress();
     const contract = await getContract(signer);
     const owner = await contract?.owner();
+    const isViewer =
+      signerAddress === "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
+    const isOwner = owner === signerAddress;
 
-    return owner === signerAddress;
+    return { isOwner, isViewer };
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
