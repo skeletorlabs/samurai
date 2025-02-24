@@ -215,7 +215,7 @@ export default function Tokens() {
               <span>My Boost</span>{" "}
               <CustomTooltip disabled={!account} dark={false}>
                 <div className="font-medium text-[14px] flex-wrap max-w-[220px]">
-                  My boost multiplier for Samurai Points
+                  Lock SamNFTs for Samurai Points multipliers
                 </div>
               </CustomTooltip>
             </div>
@@ -233,10 +233,8 @@ export default function Tokens() {
                 <span>My Virtual Points</span>{" "}
                 <CustomTooltip disabled={!account} dark={false}>
                   <div className="font-medium text-[14px] flex-wrap max-w-[220px]">
-                    My points accrued in Sam Lock season 1.
-                    <br />
-                    *Important: You can migrate these points to Samurai Points
-                    token
+                    Samurai Points accrued from Season 1. These can be migrated
+                    to Samurai Points tokens
                   </div>
                 </CustomTooltip>
               </div>
@@ -254,9 +252,8 @@ export default function Tokens() {
                 <span>Migrate to Samurai Points</span>{" "}
                 <CustomTooltip disabled={!account} dark={false}>
                   <div className="font-medium text-[14px] flex-wrap max-w-[220px]">
-                    The virutal Samurai Points accrued in Sam Lock season 1 can
-                    be easily migrated to real Samurai Points token by clicking
-                    Migrate Points.
+                    Claim Samurai Points tokens for virtual points earned during
+                    Season 1
                   </div>
                 </CustomTooltip>
               </div>
