@@ -366,11 +366,11 @@ export const IDOs: IDO_v3[] = [
   `,
     price: 0.01,
     tge: 15,
-    allocation: 32_077,
+    allocation: 50_000,
     date: 1733490000,
     fcfs: 1733576400,
     end: 1733662800,
-    investmentRound: "Round 2 - Tiers",
+    investmentRound: "Round 1 - Round 2",
     fdv: 50_000_000,
     exchangeListingPrice: 0.01,
     marketCapAtTGE: 1_113_000,
@@ -412,78 +412,78 @@ export const IDOs: IDO_v3[] = [
     linkedWallet: false,
     ether: false,
   },
-  {
-    id: "earnm-r1",
-    url: "launchpad-private/earnm-r1",
-    logo: smartnodes,
-    idoImageSrc: "/IDOs/earnm.png",
-    acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BASE",
-    crowdsaleNetwork: "BASE",
-    networkImageSrc: "/chain-logos/BASE.svg",
-    projectName: "EARN'M",
-    projectListDescription:
-      "A Web3 MobileFi rewards ecosystem that allows you to farm the deflationary $EARNM token as a SmartNode operator.",
-    projectDescription:
-      "$EARNM is a deflationary rewards token from Mode Mobile: the fastest-growing US software company of 2023. Their tech and token is designed for seamless plug-and-play integration with any platform in Web3 or Web2, allowing users to earn for their engagement. Meanwhile, the entire EARN'M ecosystem profits from innovative revenue share and token burn mechanisms.",
-    projectTokenSymbol: "$EARNM",
-    projectBigDescription: `
-    <div style="display: flex; flex-direction: column; gap: 15px;">
-      <p>EARN'M is an exciting new Web3 rewards ecosystem, built by Deloitte's fastest-growing software company of 2023: Mode Mobile. EARN'M is their MobileFi rewards infrastructure which turns smartphones into EarnPhones. With it, users are able to earn hundreds of dollars a month just by completing everyday activities on their phone: listening to music, watching live streams, trading crypto, and more.</p>
-      <p>Already the Web2 iteration of the ecosystem has generated strong revenues and drawn in huge clients including Binance and Coinbase. Now they're taking this rewards ecosystem on-chain with their very own token: $EARNM!
-      <p>This is the native token of the ecosystem, used for paying out rewards, node operator fees, and platform revenue share rewards. The core mechanism of the EARN'M rewards ecosystem is the Mystery Box: a package earned by platform users which contains vested $EARNM tokens, and can also be pre-loaded with any other custom bonus rewards (both blockchain assets and Web2 prizes).</p>
-      <p>These mystery boxes can be integrated into Web2 and Web3 platforms as a way to gamify participation in any kind of activity: listening to music, watching videos, engaging on social media, using a DApp, and so on. Users earn Mystery Boxes, while EARN'M ecosystem participants profit from a revenue share system whenever the prizes inside these boxes are claimed.</p>
-      <p>Depending on the vesting schedule chosen by the holder, varying amounts of $EARNM are re-distributed among ecosystem participants and/or burned, removing them from circulation. Ultimately, this model is designed to make $EARNM deflationary over time!</p>
-      <p>In addition to this base utility, $EARNM can also be staked in large quantities by partner projects to access white-label versions of EARN'M products.</p>
-    </div>
-`,
-    price: 0.01,
-    tge: 15,
-    allocation: 25_000,
-    date: 1733400000,
-    fcfs: 0,
-    end: 1733486400,
-    investmentRound: "Round 1 - Whitelist",
-    fdv: 50_000_000,
-    exchangeListingPrice: 0.01,
-    marketCapAtTGE: 1_113_000,
-    socials: [
-      { svg: globe, href: "https://www.earnm.com/" },
-      {
-        svg: twitterX,
-        href: "https://twitter.com/EARNMrewards",
-      },
-      {
-        svg: telegram,
-        href: "https://medium.com/earnm",
-      },
-      {
-        svg: discord,
-        href: "https://discord.com/invite/earnm",
-      },
-      {
-        svg: medium,
-        href: "https://medium.com/earnm",
-      },
-    ],
-    contract: "0x562f715F49a7D9183Ac8b138B2557dbDD2C3D820",
-    abi: PRIVATE_PARTICIPATOR_ABI,
-    images: [
-      "/IDOs/smartnodes/1.png",
-      "/IDOs/smartnodes/2.png",
-      "/IDOs/smartnodes/3.png",
-      "/IDOs/smartnodes/4.png",
-      "/IDOs/smartnodes/5.png",
-      "/IDOs/smartnodes/6.png",
-    ],
-    register: false,
-    vestingDescription: "15% TGE unlock, 2-month cliff, 7-month DAILY vesting",
-    // vesting: "0x0f2f6ec1e113e45ac368a2ffed60c1956975b2a3",
-    // vestingChain: base,
-    type: "private",
-    linkedWallet: false,
-    ether: false,
-  },
+  //   {
+  //     id: "earnm-r1",
+  //     url: "launchpad-private/earnm-r1",
+  //     logo: smartnodes,
+  //     idoImageSrc: "/IDOs/earnm.png",
+  //     acceptedTokenSymbol: "USDC",
+  //     tokenNetwork: "BASE",
+  //     crowdsaleNetwork: "BASE",
+  //     networkImageSrc: "/chain-logos/BASE.svg",
+  //     projectName: "EARN'M",
+  //     projectListDescription:
+  //       "A Web3 MobileFi rewards ecosystem that allows you to farm the deflationary $EARNM token as a SmartNode operator.",
+  //     projectDescription:
+  //       "$EARNM is a deflationary rewards token from Mode Mobile: the fastest-growing US software company of 2023. Their tech and token is designed for seamless plug-and-play integration with any platform in Web3 or Web2, allowing users to earn for their engagement. Meanwhile, the entire EARN'M ecosystem profits from innovative revenue share and token burn mechanisms.",
+  //     projectTokenSymbol: "$EARNM",
+  //     projectBigDescription: `
+  //     <div style="display: flex; flex-direction: column; gap: 15px;">
+  //       <p>EARN'M is an exciting new Web3 rewards ecosystem, built by Deloitte's fastest-growing software company of 2023: Mode Mobile. EARN'M is their MobileFi rewards infrastructure which turns smartphones into EarnPhones. With it, users are able to earn hundreds of dollars a month just by completing everyday activities on their phone: listening to music, watching live streams, trading crypto, and more.</p>
+  //       <p>Already the Web2 iteration of the ecosystem has generated strong revenues and drawn in huge clients including Binance and Coinbase. Now they're taking this rewards ecosystem on-chain with their very own token: $EARNM!
+  //       <p>This is the native token of the ecosystem, used for paying out rewards, node operator fees, and platform revenue share rewards. The core mechanism of the EARN'M rewards ecosystem is the Mystery Box: a package earned by platform users which contains vested $EARNM tokens, and can also be pre-loaded with any other custom bonus rewards (both blockchain assets and Web2 prizes).</p>
+  //       <p>These mystery boxes can be integrated into Web2 and Web3 platforms as a way to gamify participation in any kind of activity: listening to music, watching videos, engaging on social media, using a DApp, and so on. Users earn Mystery Boxes, while EARN'M ecosystem participants profit from a revenue share system whenever the prizes inside these boxes are claimed.</p>
+  //       <p>Depending on the vesting schedule chosen by the holder, varying amounts of $EARNM are re-distributed among ecosystem participants and/or burned, removing them from circulation. Ultimately, this model is designed to make $EARNM deflationary over time!</p>
+  //       <p>In addition to this base utility, $EARNM can also be staked in large quantities by partner projects to access white-label versions of EARN'M products.</p>
+  //     </div>
+  // `,
+  //     price: 0.01,
+  //     tge: 15,
+  //     allocation: 25_000,
+  //     date: 1733400000,
+  //     fcfs: 0,
+  //     end: 1733486400,
+  //     investmentRound: "Round 1 - Whitelist",
+  //     fdv: 50_000_000,
+  //     exchangeListingPrice: 0.01,
+  //     marketCapAtTGE: 1_113_000,
+  //     socials: [
+  //       { svg: globe, href: "https://www.earnm.com/" },
+  //       {
+  //         svg: twitterX,
+  //         href: "https://twitter.com/EARNMrewards",
+  //       },
+  //       {
+  //         svg: telegram,
+  //         href: "https://medium.com/earnm",
+  //       },
+  //       {
+  //         svg: discord,
+  //         href: "https://discord.com/invite/earnm",
+  //       },
+  //       {
+  //         svg: medium,
+  //         href: "https://medium.com/earnm",
+  //       },
+  //     ],
+  //     contract: "0x562f715F49a7D9183Ac8b138B2557dbDD2C3D820",
+  //     abi: PRIVATE_PARTICIPATOR_ABI,
+  //     images: [
+  //       "/IDOs/smartnodes/1.png",
+  //       "/IDOs/smartnodes/2.png",
+  //       "/IDOs/smartnodes/3.png",
+  //       "/IDOs/smartnodes/4.png",
+  //       "/IDOs/smartnodes/5.png",
+  //       "/IDOs/smartnodes/6.png",
+  //     ],
+  //     register: false,
+  //     vestingDescription: "15% TGE unlock, 2-month cliff, 7-month DAILY vesting",
+  //     // vesting: "0x0f2f6ec1e113e45ac368a2ffed60c1956975b2a3",
+  //     // vestingChain: base,
+  //     type: "private",
+  //     linkedWallet: false,
+  //     ether: false,
+  //   },
   {
     id: "dyor",
     url: "launchpad-v3/dyor",

@@ -76,7 +76,7 @@ export default function Footer() {
           Contact us -{" "}
           <span className="hover:underline">hello@samuraistarter.com</span>
         </Link>
-        <span className="font-light opacity-75">© 2024 Samurai Starter</span>
+        <span className="font-light opacity-75">© 2025 Samurai Starter</span>
       </div>
     </div>
   );

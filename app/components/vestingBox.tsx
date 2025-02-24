@@ -278,9 +278,9 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
                               IMPORTANT:
                             </h1>
 
-                            <p>** Refunds are not allowed after claim TGE</p>
+                            <p>** Refunds are not allowed after claiming TGE</p>
                             <p>
-                              *** Refunds are not allowed after claim Samurai
+                              *** Refunds are not allowed after claiming Samurai
                               Points
                             </p>
                           </div>
