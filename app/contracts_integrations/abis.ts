@@ -10443,3 +10443,306 @@ export const SAM_LOCK_V3_ABI = [
     inputs: [{ name: "token", type: "address", internalType: "address" }],
   },
 ];
+
+export const GIVEWAYS_ABI = [
+  {
+    type: "constructor",
+    inputs: [{ name: "_points", type: "address", internalType: "address" }],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "create",
+    inputs: [
+      {
+        name: "giveaway",
+        type: "tuple",
+        internalType: "struct IGiveaways.Giveaway",
+        components: [
+          { name: "id", type: "uint256", internalType: "uint256" },
+          { name: "name", type: "string", internalType: "string" },
+          {
+            name: "priceInPoints",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          { name: "tickets", type: "uint256", internalType: "uint256" },
+          {
+            name: "minTickets",
+            type: "uint256",
+            internalType: "uint256",
+          },
+          { name: "startAt", type: "uint256", internalType: "uint256" },
+          { name: "endAt", type: "uint256", internalType: "uint256" },
+          { name: "drawAt", type: "uint256", internalType: "uint256" },
+          {
+            name: "winners",
+            type: "address[]",
+            internalType: "address[]",
+          },
+        ],
+      },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "getIDs",
+    inputs: [],
+    outputs: [{ name: "", type: "uint256[]", internalType: "uint256[]" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "giveaways",
+    inputs: [{ name: "id", type: "uint256", internalType: "uint256" }],
+    outputs: [
+      { name: "id", type: "uint256", internalType: "uint256" },
+      { name: "name", type: "string", internalType: "string" },
+      {
+        name: "priceInPoints",
+        type: "uint256",
+        internalType: "uint256",
+      },
+      { name: "tickets", type: "uint256", internalType: "uint256" },
+      { name: "minTickets", type: "uint256", internalType: "uint256" },
+      { name: "startAt", type: "uint256", internalType: "uint256" },
+      { name: "endAt", type: "uint256", internalType: "uint256" },
+      { name: "drawAt", type: "uint256", internalType: "uint256" },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "ids",
+    inputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    outputs: [{ name: "", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "owner",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "participants",
+    inputs: [
+      { name: "giveawayId", type: "uint256", internalType: "uint256" },
+      { name: "", type: "uint256", internalType: "uint256" },
+    ],
+    outputs: [
+      { name: "participants", type: "address", internalType: "address" },
+    ],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "participantsOf",
+    inputs: [{ name: "giveawayId", type: "uint256", internalType: "uint256" }],
+    outputs: [{ name: "", type: "address[]", internalType: "address[]" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "participate",
+    inputs: [
+      { name: "giveawayId", type: "uint256", internalType: "uint256" },
+      { name: "tickets", type: "uint256", internalType: "uint256" },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "participations",
+    inputs: [
+      { name: "giveawayId", type: "uint256", internalType: "uint256" },
+      { name: "account", type: "address", internalType: "address" },
+    ],
+    outputs: [{ name: "tickets", type: "uint256", internalType: "uint256" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "pause",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "paused",
+    inputs: [],
+    outputs: [{ name: "", type: "bool", internalType: "bool" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "points",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "contract IPoints" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "renounceOwnership",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "setWinner",
+    inputs: [
+      { name: "giveawayId", type: "uint256", internalType: "uint256" },
+      { name: "winners", type: "address[]", internalType: "address[]" },
+    ],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "transferOwnership",
+    inputs: [{ name: "newOwner", type: "address", internalType: "address" }],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "unpause",
+    inputs: [],
+    outputs: [],
+    stateMutability: "nonpayable",
+  },
+  {
+    type: "function",
+    name: "winnersOf",
+    inputs: [{ name: "giveawayId", type: "uint256", internalType: "uint256" }],
+    outputs: [{ name: "", type: "address[]", internalType: "address[]" }],
+    stateMutability: "view",
+  },
+  {
+    type: "event",
+    name: "Created",
+    inputs: [
+      {
+        name: "id",
+        type: "uint256",
+        indexed: true,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Ended",
+    inputs: [
+      {
+        name: "id",
+        type: "uint256",
+        indexed: true,
+        internalType: "uint256",
+      },
+      {
+        name: "winners",
+        type: "address[]",
+        indexed: false,
+        internalType: "address[]",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "OwnershipTransferred",
+    inputs: [
+      {
+        name: "previousOwner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "newOwner",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Participated",
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+        indexed: true,
+        internalType: "address",
+      },
+      {
+        name: "giveawayId",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+      {
+        name: "tickets",
+        type: "uint256",
+        indexed: false,
+        internalType: "uint256",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Paused",
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "Unpaused",
+    inputs: [
+      {
+        name: "account",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+    ],
+    anonymous: false,
+  },
+  { type: "error", name: "EnforcedPause", inputs: [] },
+  { type: "error", name: "ExpectedPause", inputs: [] },
+  {
+    type: "error",
+    name: "IGiveaways__Error",
+    inputs: [{ name: "message", type: "string", internalType: "string" }],
+  },
+  {
+    type: "error",
+    name: "OwnableInvalidOwner",
+    inputs: [{ name: "owner", type: "address", internalType: "address" }],
+  },
+  {
+    type: "error",
+    name: "OwnableUnauthorizedAccount",
+    inputs: [{ name: "account", type: "address", internalType: "address" }],
+  },
+  { type: "error", name: "ReentrancyGuardReentrantCall", inputs: [] },
+];
