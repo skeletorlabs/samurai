@@ -17,6 +17,7 @@ import {
   coingecko,
   coinmarketcap,
   ventures,
+  sanka,
 } from "@/app/utils/svgs";
 import { Page } from "./enums";
 import { IDO, IDO_v3, SINGLE_CARD, VESTING_PERIOD_TYPE } from "./interfaces";
@@ -1586,6 +1587,29 @@ export const IDO_LIST: IDO[] = [
   },
 ];
 
+export type GiveawayListType = {
+  prizes: string;
+  image: string;
+  background: string;
+}[];
+export const GIVEAWAYS_LIST: GiveawayListType = [
+  {
+    prizes: "$5,000 USD + 5 BTC",
+    image: "/IDOs/alpaca.svg",
+    background: "/IDOs/xrone.png",
+  },
+  {
+    prizes: "$10,000 USD",
+    image: "/IDOs/alpaca.svg",
+    background: "/IDOs/xrone.png",
+  },
+  {
+    prizes: "$15,000 USD",
+    image: "/IDOs/alpaca.svg",
+    background: "/IDOs/xrone.png",
+  },
+];
+
 export const LINKS: { [key: number]: string } = {
   1337: "http://localhost:8545",
   5: "https://goerli.etherscan.io",
@@ -1628,12 +1652,12 @@ export const NAV = [
     icon: rocket,
     page: Page.launchpad,
   },
-  // {
-  //   title: 'Sanka',
-  //   href: '#',
-  //   icon: sanka,
-  //   page: Page.sanka,
-  // },
+  {
+    title: "Sanka",
+    href: "/sanka",
+    icon: sanka,
+    page: Page.sanka,
+  },
   {
     title: "Tokens",
     href: "/tokens",
