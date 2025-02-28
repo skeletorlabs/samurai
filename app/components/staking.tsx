@@ -437,15 +437,16 @@ export default function Staking() {
           <div className="w-full mt-4">
             <button
               onClick={onStake}
-              disabled={
-                loading ||
-                !signer ||
-                stakingData === null ||
-                stakingData?.isPaused ||
-                Number(inputStake) === 0 ||
-                !userInfoData ||
-                userInfoData?.lpBalance === 0
-              }
+              disabled
+              // disabled={
+              //   loading ||
+              //   !signer ||
+              //   stakingData === null ||
+              //   stakingData?.isPaused ||
+              //   Number(inputStake) === 0 ||
+              //   !userInfoData ||
+              //   userInfoData?.lpBalance === 0
+              // }
               className="bg-samurai-red flex justify-center items-center transition-all z-20 w-full text-lg md:text-normal px-8 py-3 
               disabled:bg-black/30 disabled:text-white/10 hover:enabled:opacity-75 rounded-full
               "
