@@ -22,6 +22,14 @@ export const base = {
   rpcUrl: process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string,
 };
 
+export const berachain = {
+  chainId: 80094,
+  name: "Berachain",
+  currency: "BERA",
+  explorerUrl: "https://berascan.com/",
+  rpcUrl: process.env.NEXT_PUBLIC_BERACHAIN_RPC_HTTPS as string,
+};
+
 const testBsc = {
   chainId: 97,
   name: "Base",
@@ -54,7 +62,7 @@ const ethersConfig = defaultConfig({
 // 5. Create a Web3Modal instance
 createWeb3Modal({
   ethersConfig,
-  chains: [base],
+  chains: [base, berachain],
   projectId,
 });
 
