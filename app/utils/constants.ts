@@ -181,7 +181,7 @@ export const IDOs: IDO_v3[] = [
         href: "https://discord.gg/grizzyfi",
       },
     ],
-    contract: "0xF0da8931b43C9C5F08809AC120d0A746B0aF5923",
+    contract: "0x6d05a9e6f0Ab89703Af13c4b38725A9D1f3AbF9f",
     abi: LATEST_PARTICIPATOR_TOKENS_ABI,
 
     register: true,
