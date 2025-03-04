@@ -3562,6 +3562,8 @@ export const SAM_TIERS_ABI = [
     inputs: [
       { name: "_nftLock", type: "address", internalType: "address" },
       { name: "_lock", type: "address", internalType: "address" },
+      { name: "_lockV2", type: "address", internalType: "address" },
+      { name: "_lockV3", type: "address", internalType: "address" },
       { name: "_lpGauge", type: "address", internalType: "address" },
     ],
     stateMutability: "nonpayable",
@@ -3686,6 +3688,20 @@ export const SAM_TIERS_ABI = [
   },
   {
     type: "function",
+    name: "lockV2",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
+    name: "lockV3",
+    inputs: [],
+    outputs: [{ name: "", type: "address", internalType: "address" }],
+    stateMutability: "view",
+  },
+  {
+    type: "function",
     name: "lpGauge",
     inputs: [],
     outputs: [{ name: "", type: "address", internalType: "address" }],
@@ -3725,6 +3741,8 @@ export const SAM_TIERS_ABI = [
     inputs: [
       { name: "_nftLock", type: "address", internalType: "address" },
       { name: "_lock", type: "address", internalType: "address" },
+      { name: "_lockV2", type: "address", internalType: "address" },
+      { name: "_lockV3", type: "address", internalType: "address" },
       { name: "_lpGauge", type: "address", internalType: "address" },
     ],
     outputs: [],
@@ -3867,6 +3885,18 @@ export const SAM_TIERS_ABI = [
       },
       {
         name: "lock",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "lockV2",
+        type: "address",
+        indexed: false,
+        internalType: "address",
+      },
+      {
+        name: "lockV3",
         type: "address",
         indexed: false,
         internalType: "address",
