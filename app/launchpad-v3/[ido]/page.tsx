@@ -434,8 +434,8 @@ export default function Ido() {
                 <div className="flex flex-col w-full xl:w-[700px] rounded-lg bg-[#1E1E1E]/60 bg-samurai-pattern pb-6 shadow-xl mt-10 relative">
                   <div className="flex justify-between items-center text-lg xl:text-xl bg-samurai-red border-b border-white/20 px-7 py-4 rounded-t-lg text-white">
                     <span>
-                      {/* {general?.isPublic ? "FCFS Round" : ido?.investmentRound} */}
-                      {ido?.investmentRound}
+                      {general?.isPublic ? "FCFS Round" : ido?.investmentRound}
+                      {/* {ido?.investmentRound} */}
                     </span>
                     {/* TIER */}
                     {signer && account && (
