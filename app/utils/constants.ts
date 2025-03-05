@@ -157,7 +157,7 @@ export const IDOs: IDO_v3[] = [
       <p>One important thing to keep in mind is that tokens locked in vesting will also contribute to your tier level, provided that you stake your entire first unlock.</p>
     </div>
   `,
-    price: 0.13,
+    price: 0.06,
     tge: 50,
     allocation: 12_500,
     date: 1741183200,
