@@ -125,6 +125,75 @@ export const IDOs_card: SINGLE_CARD[] = [
 
 export const IDOs: IDO_v3[] = [
   {
+    id: "grizzy-private",
+    url: "launchpad-v3/grizzy-private",
+    logo: grizzy,
+    idoImageSrc: "/IDOs/grizzy.jpg",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: "BERACHAIN",
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/BERACHAIN.png",
+    projectName: "GrizzyFi",
+    projectListDescription:
+      "A Berachain-native launchpad with five IDOs upcoming in March and April. Secure your launchpad tier by picking up a bag of $GRIZZY.",
+    projectDescription:
+      "We're taking our first strides into one of the most promising new DeFi-centric chains in crypto, by partnering with GrizzyFi: a brand new launchpad and project accelerator with backing from the Berachain Foundation. The $GRIZZY token is set to TGE just two days after our public round sale.",
+    projectTokenSymbol: "$GRIZZY",
+    projectBigDescription: `
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <p>GrizzyFi will be one of the very first chain-exclusive launchpads to plant their flag on Berachain. Their mission is to “incubate the best projects on Berachain and give early price access to investors."</p>
+      <p>Already they've managed to secure support from the Berachain Foundation, gaining official recognition for everything they've been building on the chain and testnet. Along the way, they've also expanded their network to include more than 20 other Berachain-native tech and marketing partners.</p>
+      <p><b style="color: #FF284C">Platform Features</b><br />
+      In addition to participating in sales on the core launchpad, GrizzyFi users will also be able to benefit from DAO membership, platform revenue share features, a novel insurance protocol, and - in the near future - Berachain AI agent token raises (currently in beta testing).</p>
+      <p>Meanwhile, partner projects will gain access to a lineup of DAO and DeFi growth tools; GrizzyFi aims to be not just a launchpad, but a full-service incubator and growth engine for new projects launching on Berachain. These features include staking pools for IDO partner tokens and plug-and-play tools for community growth.</p>
+      <p><b style="color: #FF284C">IDOs and Launchpad Tiers</b><br />
+      Already GrizzyFi has three IDOs locked in for March and a further two lined up for April. These include a Berachain-native AI Agent platform, Berachain DEX, and a Web3 casino project. Each of these projects will launch with modest initial market caps below $500k!</p>
+      <p>$GRIZZY is the token powering the GrizzyFi platform, used for staking, gaining DAO membership, participating in revenue share features, and (of course) securing your launchpad tier. Here's a breakdown of GrizzyFi's three-tier system:
+      <br />
+      <b style="color: #FF284C">• Brown Tier:</b> 2,500 $GRIZZY required. ($325 at launch price)<br />
+      <b style="color: #FF284C">• Polar Tier:</b> 8,500 $GRIZZY required. ($1,105 at launch price)<br />
+      <b style="color: #FF284C">• Grizzy Tier:</b> 20,000 $GRIZZY required. ($2,600 at launch price)<br />
+      </p>
+      <p>One important thing to keep in mind is that tokens locked in vesting will also contribute to your tier level, provided that you stake your entire first unlock.</p>
+    </div>
+  `,
+    price: 0.13,
+    tge: 50,
+    allocation: 12_500,
+    date: 1741183200,
+    fcfs: 0,
+    end: 1741269600,
+    investmentRound: "Private",
+    fdv: 1_300_000,
+    exchangeListingPrice: 0.13,
+    marketCapAtTGE: 308_750,
+    socials: [
+      {
+        svg: globe,
+        href: "https://grizzyfi.com",
+      },
+      {
+        svg: twitterX,
+        href: "https://x.com/grizzyfi",
+      },
+      {
+        svg: discord,
+        href: "https://discord.gg/grizzyfi",
+      },
+    ],
+    contract: "0x1bae5e4a3c0595b2009c35600353583470a61712",
+    abi: LATEST_PARTICIPATOR_TOKENS_ABI,
+
+    register: false,
+    vestingDescription: "15% at TGE, 3-month linear",
+    // vesting: "0x8C8Fa0152eFF48700c9e10b64aCa1B81f259F54B",
+    // vestingChain: base,
+    // vestingABI: VESTING_ABI_V2,
+    type: "v3",
+    linkedWallet: false,
+    ether: false,
+  },
+  {
     id: "grizzy",
     url: "launchpad-v3/grizzy",
     logo: grizzy,
