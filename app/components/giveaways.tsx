@@ -4,6 +4,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { StateContext } from "../context/StateContext";
 import { generalInfo, GiveawayType } from "../contracts_integrations/giveways";
 import GiveawayCard from "./giveawayCard";
+import LoadingBox from "./loadingBox";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,23 +12,30 @@ const inter = Inter({
 
 export default function Giveaways({ max }: { max?: number }) {
   const [giveaways, setGiveaways] = useState<GiveawayType[] | []>([]);
+  const [loading, setLoading] = useState(true);
 
   const { signer } = useContext(StateContext);
 
   const getGiveaways = useCallback(async () => {
+    setLoading(true);
     if (signer) {
       const response = await generalInfo();
       if (response) setGiveaways(response.giveaways as GiveawayType[]);
     }
-  }, [signer, setGiveaways]);
+    setLoading(false);
+  }, [signer, setGiveaways, setLoading]);
 
   useEffect(() => {
     getGiveaways();
   }, [signer]);
 
-  return (
+  return loading ? (
+    <div className="w-full min-h-[800px] mb-8 relative">
+      <LoadingBox css="absolute top-10 left-0 bg-black/80 backdrop-blur-lg !w-[100%] h-[100%] rounded-lg border border-black flex justify-center items-center" />
+    </div>
+  ) : (
     <div
-      className={`flex justify-center lg:justify-start items-center flex-wrap gap-5 leading-normal pt-10 text-xl ${inter.className}`}
+      className={`flex justify-center lg:justify-start items-center flex-wrap gap-5 leading-normal pt-10 text-xl relative ${inter.className}`}
     >
       {max
         ? giveaways
