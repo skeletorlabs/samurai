@@ -8494,16 +8494,16 @@ export const SAMURAI_POINTS_ABI = [
     outputs: [{ name: "", type: "bytes32", internalType: "bytes32" }],
     stateMutability: "view",
   },
-  {
-    type: "function",
-    name: "grantRole",
-    inputs: [
-      { name: "role", type: "bytes32", internalType: "bytes32" },
-      { name: "account", type: "address", internalType: "address" },
-    ],
-    outputs: [],
-    stateMutability: "nonpayable",
-  },
+  // {
+  //   type: "function",
+  //   name: "grantRole",
+  //   inputs: [
+  //     { name: "role", type: "bytes32", internalType: "bytes32" },
+  //     { name: "account", type: "address", internalType: "address" },
+  //   ],
+  //   outputs: [],
+  //   stateMutability: "nonpayable",
+  // },
   {
     type: "function",
     name: "grantRole",
@@ -8587,16 +8587,16 @@ export const SAMURAI_POINTS_ABI = [
     outputs: [],
     stateMutability: "nonpayable",
   },
-  {
-    type: "function",
-    name: "revokeRole",
-    inputs: [
-      { name: "role", type: "bytes32", internalType: "bytes32" },
-      { name: "account", type: "address", internalType: "address" },
-    ],
-    outputs: [],
-    stateMutability: "nonpayable",
-  },
+  // {
+  //   type: "function",
+  //   name: "revokeRole",
+  //   inputs: [
+  //     { name: "role", type: "bytes32", internalType: "bytes32" },
+  //     { name: "account", type: "address", internalType: "address" },
+  //   ],
+  //   outputs: [],
+  //   stateMutability: "nonpayable",
+  // },
   {
     type: "function",
     name: "setBoost",

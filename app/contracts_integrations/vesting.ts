@@ -1,6 +1,10 @@
 import { ethers, Signer, formatEther, parseEther } from "ethers";
 import handleError from "@/app/utils/handleErrors";
-import { IDOs, VestingPeriodTranslator } from "@/app/utils/constants";
+import {
+  CHAIN_ID_TO_RPC_URL,
+  IDOs,
+  VestingPeriodTranslator,
+} from "@/app/utils/constants";
 import checkApproval from "./check-approval";
 import { notificateTx } from "@/app/utils/notificateTx";
 import { VESTING_ABI_V3 } from "./abis";
@@ -13,6 +17,7 @@ import {
 } from "date-fns";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
+const BERA_RPC_URL = process.env.NEXT_PUBLIC_BERACHAIN_RPC_HTTPS as string;
 const now = getUnixTime(new Date());
 
 export type WalletRange = {
@@ -44,7 +49,8 @@ export type VESTING_GENERAL_INFO = {
 async function getContract(index: number, signer?: Signer) {
   try {
     const ido = IDOs[index];
-    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+    const rpc = CHAIN_ID_TO_RPC_URL[ido.vestingChain?.chainId!];
+    const provider = new ethers.JsonRpcProvider(rpc);
 
     const contract = new ethers.Contract(
       ido.vesting!,
@@ -139,10 +145,10 @@ export async function generalInfo(index: number) {
     const vestingType = Number(await contract?.vestingType());
     let vestingPeriod = "";
     let rawPeriodType = 0;
+
     if (ido.vestingABI === VESTING_ABI_V3) {
       rawPeriodType = Number(await contract?.vestingPeriodType());
       const periodType = VestingPeriodType[rawPeriodType];
-
       vestingPeriod = VestingPeriodTranslator[periodType];
     }
 
@@ -169,7 +175,7 @@ export async function generalInfo(index: number) {
     if (vestingType === 2)
       nextUnlock = getNextUnlock(cliffEndsAt, vestingEndsAt, rawPeriodType);
 
-    return {
+    const data = {
       owner,
       paused,
       totalPurchased,
@@ -188,6 +194,10 @@ export async function generalInfo(index: number) {
       vestingType,
       vestingPeriod,
     } as VESTING_GENERAL_INFO;
+
+    console.log(data);
+
+    return data;
   } catch (e) {
     handleError({ e: e, notificate: true });
   }

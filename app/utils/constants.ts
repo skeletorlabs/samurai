@@ -52,7 +52,7 @@ import {
   VESTING_ABI_V2,
   VESTING_ABI_V3,
 } from "@/app/contracts_integrations/abis";
-import { base } from "../context/web3modal";
+import { base, berachain } from "../context/web3modal";
 
 export const VestingType: { [key: number]: string } = {
   0: "Cliff Vesting",
@@ -255,9 +255,9 @@ export const IDOs: IDO_v3[] = [
 
     register: true,
     vestingDescription: "50% at TGE, 50% after one month",
-    // vesting: "0x8C8Fa0152eFF48700c9e10b64aCa1B81f259F54B",
-    // vestingChain: base,
-    // vestingABI: VESTING_ABI_V2,
+    vesting: "0x076C48F1475675De64196181C2B4F267CEc01aA8",
+    vestingChain: berachain,
+    vestingABI: VESTING_ABI_V3,
     type: "v3",
     linkedWallet: false,
     ether: false,
@@ -1731,6 +1731,7 @@ export const LINKS: { [key: number]: string } = {
   11155111: "https://sepolia.etherscan.io",
   8453: "https://basescan.org",
   84532: "https://sepolia.basescan.org",
+  80094: "https://berascan.com/",
 };
 
 export const RPC_URL: { [key: number]: string } = {
@@ -1739,6 +1740,7 @@ export const RPC_URL: { [key: number]: string } = {
   11155111: process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL as string,
   8453: process.env.NEXT_PUBLIC_BASE_RPC_URL as string,
   84532: process.env.NEXT_PUBLIC_BASE_SEPOLIA_RPC_URL as string,
+  80094: process.env.NEXT_PUBLIC_BERACHAIN_RPC_URL as string,
 };
 
 export const TOKENS_TO_SYMBOL: Record<string, string> = {
@@ -1746,6 +1748,14 @@ export const TOKENS_TO_SYMBOL: Record<string, string> = {
   "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA": "USDbC",
   "0x5FbDB2315678afecb367f032d93F642f64180aa3": "USDC", // MOCKED TOKEN
   "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512": "USDbC", // MOCKED TOKEN
+};
+
+const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
+const BERA_RPC_URL = process.env.NEXT_PUBLIC_BERACHAIN_RPC_HTTPS as string;
+
+export const CHAIN_ID_TO_RPC_URL: { [key: number]: string } = {
+  8453: BASE_RPC_URL,
+  80094: BERA_RPC_URL,
 };
 
 export const NAV = [
@@ -1841,7 +1851,10 @@ export const SAM_ADDRESS = "0xed1779845520339693CDBffec49a74246E7D671b";
 export const SAM_CLAIM_VESTING = "0xA6a638858C114Ad2e95BFD787b353EC2C70d78eF"; // BASE MAINNET
 
 export const SAM_TIERS = "0x0E7E40385E9b7e629c504996Bdd36a3b51Ed0525"; // with LOCKED NFTS & RONIN
+
 export const POINTS = "0xDf0fDc572849f01CdaB35b80cA41Ce67051C8Dfe"; // BASE
+export const POINTS_BERA = "0x5f5f2D8C61a507AA6C47f30cc4f76B937C10a8e1"; // BERA CHAIN
+
 export const NFT_LOCK = "0x45c085699fe78873d5c28b02d153cfd90379e424"; // BASE
 export const LP_TOKEN = "0x598299Fb3f3829F7Ba08662948706cDFf7eC2350"; // BASE
 export const LP_STAKING = "0x5eb865bc8bd7c900c511ad7f53971e42152c590d";
