@@ -214,11 +214,11 @@ export default function Ido() {
   }, [signer, idoIndex, tier]);
 
   const getTierInfos = useCallback(async () => {
-    if (signer) {
-      const tier = await getTier(signer);
+    if (signer && account) {
+      const tier = await getTier(account);
       if (tier) setTier(tier);
     }
-  }, [signer, idoIndex]);
+  }, [signer, account, idoIndex]);
 
   useEffect(() => {
     if (tier) {
@@ -228,7 +228,7 @@ export default function Ido() {
 
   useEffect(() => {
     getTierInfos();
-  }, [signer]);
+  }, [signer, account]);
 
   // ============================================================================================================
   // FETCHING GENERAL DATA FROM CONTRACT

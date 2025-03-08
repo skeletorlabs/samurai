@@ -195,7 +195,7 @@ export async function generalInfo(index: number) {
       vestingPeriod,
     } as VESTING_GENERAL_INFO;
 
-    console.log(data);
+    // console.log(data);
 
     return data;
   } catch (e) {
@@ -222,6 +222,7 @@ export async function userInfo(
   try {
     const contract = await getContract(index);
     let signerAddress = await signer.getAddress();
+    signerAddress = "0x25C86f8557D720e6664213BD15f256DbB5C4F53c";
 
     const address = account || signerAddress;
 

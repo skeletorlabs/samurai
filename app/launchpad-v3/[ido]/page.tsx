@@ -227,11 +227,11 @@ export default function Ido() {
   }, [signer, idoIndex, tier, setIsLoading]);
 
   const getTierInfos = useCallback(async () => {
-    if (signer) {
-      const tier = await getTier(signer);
+    if (signer && account) {
+      const tier = await getTier(account);
       if (tier) setTier(tier);
     }
-  }, [signer, idoIndex]);
+  }, [signer, account, idoIndex]);
 
   useEffect(() => {
     if (tier) {
@@ -241,7 +241,7 @@ export default function Ido() {
 
   useEffect(() => {
     getTierInfos();
-  }, [signer]);
+  }, [signer, account]);
 
   // ============================================================================================================
   // FETCHING GENERAL DATA FROM CONTRACT
@@ -1136,7 +1136,6 @@ export default function Ido() {
           </>
         )}
       </div>
-
       {ido && ido.id === "estatex" && (
         <video
           width="320"
@@ -1150,7 +1149,6 @@ export default function Ido() {
           Your browser does not support the video tag.
         </video>
       )}
-
       <Transition appear show={galleryOpen}>
         <Dialog
           as="div"
@@ -1184,10 +1182,8 @@ export default function Ido() {
         </Dialog>
       </Transition>
 
-      {/* ============================================================================================================ */}
       {/* ADMIN AREA */}
       {/* ============================================================================================================ */}
-
       {general && account && general.owner === account && (
         <div className="flex flex-col xl:flex-row  gap-10 pt-24 pb-10 xl:pb-32 px-6 lg:px-8 xl:px-20 border-t border-white/20 w-full">
           {ido && (
