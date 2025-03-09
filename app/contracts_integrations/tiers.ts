@@ -1,7 +1,8 @@
-import { Contract, JsonRpcSigner, formatEther } from "ethers";
-import { SAM_TIERS } from "../utils/constants";
+import { Contract, JsonRpcProvider, JsonRpcSigner, formatEther } from "ethers";
+import { CHAIN_ID_TO_RPC_URL, SAM_TIERS } from "../utils/constants";
 import { SAM_TIERS_ABI } from "./abis";
 import handleError from "../utils/handleErrors";
+import { base } from "../context/web3modal";
 
 export type Tier = {
   name: string;
@@ -12,12 +13,13 @@ export type Tier = {
   maxLPStaking: number;
 };
 
-export async function getTier(signer: JsonRpcSigner) {
-  const contract = new Contract(SAM_TIERS, SAM_TIERS_ABI, signer);
+export async function getTier(account: string) {
+  const rpc = CHAIN_ID_TO_RPC_URL[base.chainId];
+  const provider = new JsonRpcProvider(rpc);
+  const contract = new Contract(SAM_TIERS, SAM_TIERS_ABI, provider);
 
   try {
-    const address = await signer.getAddress();
-    const response = await contract.getTier(address);
+    const response = await contract.getTier(account);
 
     const tier: Tier = {
       name: response[0],
