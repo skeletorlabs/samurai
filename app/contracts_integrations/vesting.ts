@@ -165,8 +165,9 @@ export async function generalInfo(index: number) {
     const periods = await contract?.periods();
 
     const vestingDuration = Number(periods[0]);
-    const vestingAt =
+    let vestingAt =
       ido.id === "alpaca" ? Number(periods[1]) + 60 * 15 : Number(periods[1]);
+    vestingAt = getUnixTime(new Date());
     const cliff = Number(periods[2]);
 
     let nextUnlock = 0;
@@ -222,7 +223,6 @@ export async function userInfo(
   try {
     const contract = await getContract(index);
     let signerAddress = await signer.getAddress();
-    signerAddress = "0x25C86f8557D720e6664213BD15f256DbB5C4F53c";
 
     const address = account || signerAddress;
 
@@ -249,7 +249,7 @@ export async function userInfo(
       formatEther(await contract?.previewClaimablePoints(address))
     );
 
-    return {
+    const data = {
       purchased,
       claimedTGE,
       askedRefund,
@@ -258,6 +258,8 @@ export async function userInfo(
       claimedPoints,
       claimablePoints,
     };
+
+    return data;
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
