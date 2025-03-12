@@ -6,7 +6,7 @@ import { Inter } from "next/font/google";
 import { StateContext } from "@/app/context/StateContext";
 import { Page } from "@/app/utils/enums";
 import SSButton from "./ssButton";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import ConnectButton from "./connectbutton";
 import { base } from "../context/web3modal";
 import { useSwitchNetwork } from "@web3modal/ethers/react";
@@ -21,16 +21,20 @@ export default function Nav() {
   const { ido } = useParams();
   const { switchNetwork } = useSwitchNetwork();
 
-  const openModal = async (chainId: number) => {
-    await switchNetwork(chainId);
+  const getVestingChainId = () => {
+    const currentIDO = IDOs.find((item) => item.id === ido);
+    return currentIDO?.vestingChain?.chainId || -1;
+  };
+
+  const needToSwitchNetwork = (chainId: number) => {
+    return chain !== chainId;
   };
 
   const checkNetwork = async () => {
-    const currentIdo = IDOs.find((item) => item.id === ido);
-    if (chain && currentIdo && currentIdo.vestingChain) {
-      if (chain === base.chainId) {
-        openModal(currentIdo.vestingChain.chainId);
-      }
+    const vestingChainId = getVestingChainId();
+
+    if (vestingChainId !== -1 && needToSwitchNetwork(vestingChainId)) {
+      await switchNetwork(vestingChainId);
     }
   };
 
