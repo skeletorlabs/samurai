@@ -62,7 +62,7 @@ const ethersConfig = defaultConfig({
 // 5. Create a Web3Modal instance
 createWeb3Modal({
   ethersConfig,
-  chains: [base, berachain],
+  chains: [base],
   projectId,
 });
 
