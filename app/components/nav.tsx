@@ -8,8 +8,8 @@ import { Page } from "@/app/utils/enums";
 import SSButton from "./ssButton";
 import { useParams, usePathname } from "next/navigation";
 import ConnectButton from "./connectbutton";
-import { base } from "../context/web3modal";
 import { useSwitchNetwork } from "@web3modal/ethers/react";
+import { base } from "../context/web3modal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,14 +35,17 @@ export default function Nav() {
 
     if (vestingChainId !== -1 && needToSwitchNetwork(vestingChainId)) {
       await switchNetwork(vestingChainId);
+      return;
+    }
+
+    if (chain !== base.chainId) {
+      await switchNetwork(base.chainId);
     }
   };
 
   useEffect(() => {
-    if (chain && ido) {
-      checkNetwork();
-    }
-  }, [ido, chain]);
+    checkNetwork();
+  }, [chain, ido]);
   return (
     <div
       className={`h-20 px-2 lg:px-8 flex flex-col md:flex-row items-center justify-between mt-5 z-10 ${inter.className} h-max`}

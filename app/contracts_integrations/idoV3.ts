@@ -141,7 +141,6 @@ export async function userInfo(
   try {
     const ido = IDOs[index];
     let signerAddress = await signer.getAddress();
-    signerAddress = "0x25C86f8557D720e6664213BD15f256DbB5C4F53c";
     const contract = await getContract(index, signer);
     const usingETH = ido.ether ? await contract?.usingETH() : false;
     const isPublic = await contract?.isPublic();
