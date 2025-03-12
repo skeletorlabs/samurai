@@ -38,7 +38,7 @@ const polygon = {
   rpcUrl: "https://polygon-mainnet.infura.io",
 };
 
-export const chains = [base, berachain, polygon];
+export const chains = [base];
 
 // 3. Create a metadata object
 const metadata = {
