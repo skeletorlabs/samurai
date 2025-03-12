@@ -7,7 +7,11 @@ import {
 } from "ethers";
 import { ERC20_ABI, SAMURAI_POINTS_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
-import { POINTS } from "@/app/utils/constants";
+import {
+  CHAIN_ID_TO_RPC_URL,
+  POINTS,
+  POINTS_BERA,
+} from "@/app/utils/constants";
 import { getContract as getLockV2Contract } from "./samLockV2";
 import { userInfo as pastUserInfo } from "./samLock";
 
@@ -15,13 +19,15 @@ import { balanceOf } from "./balanceOf";
 import { notificateTx } from "../utils/notificateTx";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
+const BERA_RPC_URL = process.env.NEXT_PUBLIC_BERACHAIN_RPC_HTTPS as string;
 
-async function getContract(signer?: Signer) {
+async function getContract(signer?: Signer, chainId?: number) {
   try {
-    const provider = new JsonRpcProvider(BASE_RPC_URL);
+    const rpc = chainId ? CHAIN_ID_TO_RPC_URL[chainId] : BASE_RPC_URL;
+    const provider = new JsonRpcProvider(rpc);
 
     const contract = new Contract(
-      POINTS,
+      chainId ? POINTS_BERA : POINTS,
       SAMURAI_POINTS_ABI,
       signer || provider
     );
@@ -79,10 +85,10 @@ export async function burn(signer: Signer, from: string, amount: string) {
   }
 }
 
-export async function isPointsOwner(signer: Signer) {
+export async function isPointsOwner(signer: Signer, chainId?: number) {
   try {
     let signerAddress = await signer.getAddress();
-    const contract = await getContract(signer);
+    const contract = await getContract(signer, chainId);
     const owner = await contract?.owner();
     const isViewer =
       signerAddress === "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
@@ -100,6 +106,34 @@ export async function migratePoints(signer: Signer) {
     const network = await signer.provider?.getNetwork();
 
     const tx = await lockV2Contract?.migrateVirtualPointsToTokens();
+
+    await notificateTx(tx, network);
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
+}
+
+export async function grantRole(role: number, address: string, signer: Signer) {
+  try {
+    const network = await signer.provider?.getNetwork();
+    const contract = await getContract(signer);
+    const tx = await contract?.grantRole(role, address);
+
+    await notificateTx(tx, network);
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
+}
+
+export async function revokeRole(
+  role: number,
+  address: string,
+  signer: Signer
+) {
+  try {
+    const network = await signer.provider?.getNetwork();
+    const contract = await getContract(signer);
+    const tx = await contract?.revokeRole(role, address);
 
     await notificateTx(tx, network);
   } catch (e) {

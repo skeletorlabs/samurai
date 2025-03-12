@@ -37,6 +37,7 @@ import {
   alpaca,
   estatex,
   grizzy,
+  samurai,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -52,7 +53,7 @@ import {
   VESTING_ABI_V2,
   VESTING_ABI_V3,
 } from "@/app/contracts_integrations/abis";
-import { base } from "../context/web3modal";
+import { base, berachain } from "../context/web3modal";
 
 export const VestingType: { [key: number]: string } = {
   0: "Cliff Vesting",
@@ -124,6 +125,75 @@ export const IDOs_card: SINGLE_CARD[] = [
 ];
 
 export const IDOs: IDO_v3[] = [
+  // {
+  //   id: "samuraitest",
+  //   url: "launchpad-v3/samuraitest",
+  //   logo: samurai,
+  //   idoImageSrc: "/ido-sample.svg",
+  //   acceptedTokenSymbol: "USDC",
+  //   tokenNetwork: "BERACHAIN",
+  //   crowdsaleNetwork: "BASE",
+  //   networkImageSrc: "/chain-logos/BERACHAIN.png",
+  //   projectName: "SamuraiTest",
+  //   projectListDescription:
+  //     "A Berachain-native launchpad with five IDOs upcoming in March and April. Secure your launchpad tier by picking up a bag of $GRIZZY.",
+  //   projectDescription:
+  //     "We're taking our first strides into one of the most promising new DeFi-centric chains in crypto, by partnering with GrizzyFi: a brand new launchpad and project accelerator with backing from the Berachain Foundation. The $GRIZZY token is set to TGE just two days after our public round sale.",
+  //   projectTokenSymbol: "$BERASHIT",
+  //   projectBigDescription: `
+  //   <div style="display: flex; flex-direction: column; gap: 15px;">
+  //     <p>GrizzyFi will be one of the very first chain-exclusive launchpads to plant their flag on Berachain. Their mission is to “incubate the best projects on Berachain and give early price access to investors."</p>
+  //     <p>Already they've managed to secure support from the Berachain Foundation, gaining official recognition for everything they've been building on the chain and testnet. Along the way, they've also expanded their network to include more than 20 other Berachain-native tech and marketing partners.</p>
+  //     <p><b style="color: #FF284C">Platform Features</b><br />
+  //     In addition to participating in sales on the core launchpad, GrizzyFi users will also be able to benefit from DAO membership, platform revenue share features, a novel insurance protocol, and - in the near future - Berachain AI agent token raises (currently in beta testing).</p>
+  //     <p>Meanwhile, partner projects will gain access to a lineup of DAO and DeFi growth tools; GrizzyFi aims to be not just a launchpad, but a full-service incubator and growth engine for new projects launching on Berachain. These features include staking pools for IDO partner tokens and plug-and-play tools for community growth.</p>
+  //     <p><b style="color: #FF284C">IDOs and Launchpad Tiers</b><br />
+  //     Already GrizzyFi has three IDOs locked in for March and a further two lined up for April. These include a Berachain-native AI Agent platform, Berachain DEX, and a Web3 casino project. Each of these projects will launch with modest initial market caps below $500k!</p>
+  //     <p>$GRIZZY is the token powering the GrizzyFi platform, used for staking, gaining DAO membership, participating in revenue share features, and (of course) securing your launchpad tier. Here's a breakdown of GrizzyFi's three-tier system:
+  //     <br />
+  //     <b style="color: #FF284C">• Brown Tier:</b> 2,500 $GRIZZY required. ($325 at launch price)<br />
+  //     <b style="color: #FF284C">• Polar Tier:</b> 8,500 $GRIZZY required. ($1,105 at launch price)<br />
+  //     <b style="color: #FF284C">• Grizzy Tier:</b> 20,000 $GRIZZY required. ($2,600 at launch price)<br />
+  //     </p>
+  //     <p>One important thing to keep in mind is that tokens locked in vesting will also contribute to your tier level, provided that you stake your entire first unlock.</p>
+  //   </div>
+  // `,
+  //   price: 0.13,
+  //   tge: 50,
+  //   allocation: 25_000,
+  //   date: 1741089600,
+  //   fcfs: 1741132800,
+  //   end: 1741176000,
+  //   investmentRound: "Public",
+  //   fdv: 1_300_000,
+  //   exchangeListingPrice: 0.13,
+  //   marketCapAtTGE: 308_750,
+  //   socials: [
+  //     {
+  //       svg: globe,
+  //       href: "https://grizzyfi.com",
+  //     },
+  //     {
+  //       svg: twitterX,
+  //       href: "https://x.com/grizzyfi",
+  //     },
+  //     {
+  //       svg: discord,
+  //       href: "https://discord.gg/grizzyfi",
+  //     },
+  //   ],
+  //   contract: "0x6d05a9e6f0Ab89703Af13c4b38725A9D1f3AbF9f",
+  //   abi: LATEST_PARTICIPATOR_TOKENS_ABI,
+
+  //   register: true,
+  //   vestingDescription: "50% at TGE, 50% after one month",
+  //   vesting: "0xB8D0E922F32CE5F662e5701B3b31ba7c0EC3dDAc",
+  //   vestingChain: berachain,
+  //   vestingABI: VESTING_ABI_V3,
+  //   type: "v3",
+  //   linkedWallet: false,
+  //   ether: false,
+  // },
   {
     id: "grizzy-private",
     url: "launchpad-v3/grizzy-private",
@@ -255,9 +325,9 @@ export const IDOs: IDO_v3[] = [
 
     register: true,
     vestingDescription: "50% at TGE, 50% after one month",
-    // vesting: "0x8C8Fa0152eFF48700c9e10b64aCa1B81f259F54B",
-    // vestingChain: base,
-    // vestingABI: VESTING_ABI_V2,
+    // vesting: "0x076C48F1475675De64196181C2B4F267CEc01aA8",
+    // vestingChain: berachain,
+    // vestingABI: VESTING_ABI_V3,
     type: "v3",
     linkedWallet: false,
     ether: false,
@@ -1731,6 +1801,7 @@ export const LINKS: { [key: number]: string } = {
   11155111: "https://sepolia.etherscan.io",
   8453: "https://basescan.org",
   84532: "https://sepolia.basescan.org",
+  80094: "https://berascan.com/",
 };
 
 export const RPC_URL: { [key: number]: string } = {
@@ -1739,6 +1810,7 @@ export const RPC_URL: { [key: number]: string } = {
   11155111: process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL as string,
   8453: process.env.NEXT_PUBLIC_BASE_RPC_URL as string,
   84532: process.env.NEXT_PUBLIC_BASE_SEPOLIA_RPC_URL as string,
+  80094: process.env.NEXT_PUBLIC_BERACHAIN_RPC_URL as string,
 };
 
 export const TOKENS_TO_SYMBOL: Record<string, string> = {
@@ -1746,6 +1818,14 @@ export const TOKENS_TO_SYMBOL: Record<string, string> = {
   "0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA": "USDbC",
   "0x5FbDB2315678afecb367f032d93F642f64180aa3": "USDC", // MOCKED TOKEN
   "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512": "USDbC", // MOCKED TOKEN
+};
+
+const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
+const BERA_RPC_URL = process.env.NEXT_PUBLIC_BERACHAIN_RPC_HTTPS as string;
+
+export const CHAIN_ID_TO_RPC_URL: { [key: number]: string } = {
+  8453: BASE_RPC_URL,
+  80094: BERA_RPC_URL,
 };
 
 export const NAV = [
@@ -1841,7 +1921,10 @@ export const SAM_ADDRESS = "0xed1779845520339693CDBffec49a74246E7D671b";
 export const SAM_CLAIM_VESTING = "0xA6a638858C114Ad2e95BFD787b353EC2C70d78eF"; // BASE MAINNET
 
 export const SAM_TIERS = "0x0E7E40385E9b7e629c504996Bdd36a3b51Ed0525"; // with LOCKED NFTS & RONIN
+
 export const POINTS = "0xDf0fDc572849f01CdaB35b80cA41Ce67051C8Dfe"; // BASE
+export const POINTS_BERA = "0x5f5f2D8C61a507AA6C47f30cc4f76B937C10a8e1"; // BERA CHAIN
+
 export const NFT_LOCK = "0x45c085699fe78873d5c28b02d153cfd90379e424"; // BASE
 export const LP_TOKEN = "0x598299Fb3f3829F7Ba08662948706cDFf7eC2350"; // BASE
 export const LP_STAKING = "0x5eb865bc8bd7c900c511ad7f53971e42152c590d";
