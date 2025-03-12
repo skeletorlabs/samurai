@@ -9,7 +9,7 @@ import SSButton from "./ssButton";
 import { useParams, usePathname } from "next/navigation";
 import ConnectButton from "./connectbutton";
 import { useSwitchNetwork } from "@web3modal/ethers/react";
-import { base } from "../context/web3modal";
+import { base, chains } from "../context/web3modal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,10 +35,7 @@ export default function Nav() {
 
     if (vestingChainId !== -1 && needToSwitchNetwork(vestingChainId)) {
       await switchNetwork(vestingChainId);
-      return;
-    }
-
-    if (chain !== base.chainId) {
+    } else if (chain !== base.chainId && chains.length > 1) {
       await switchNetwork(base.chainId);
     }
   };

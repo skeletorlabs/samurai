@@ -38,6 +38,8 @@ const polygon = {
   rpcUrl: "https://polygon-mainnet.infura.io",
 };
 
+export const chains = [base, berachain, polygon];
+
 // 3. Create a metadata object
 const metadata = {
   name: "Samurai Starter",
@@ -62,7 +64,7 @@ const ethersConfig = defaultConfig({
 // 5. Create a Web3Modal instance
 createWeb3Modal({
   ethersConfig,
-  chains: [base],
+  chains: chains,
   projectId,
 });
 
