@@ -26,17 +26,19 @@ export const berachain = {
   chainId: 80094,
   name: "Berachain",
   currency: "BERA",
-  explorerUrl: "https://berascan.com/",
-  rpcUrl: process.env.NEXT_PUBLIC_BERACHAIN_RPC_HTTPS as string,
+  explorerUrl: "https://berascan.com",
+  rpcUrl: "https://rpc.berachain.com",
 };
 
-const testBsc = {
-  chainId: 97,
-  name: "Base",
-  currency: "ETH",
-  explorerUrl: "https://testnet.bscscan.com",
-  rpcUrl: "https://bsc-testnet.blockpi.network/v1/rpc/public",
+const polygon = {
+  chainId: 137,
+  name: "Polygon",
+  currency: "POL",
+  explorerUrl: "https://polygonscan.com",
+  rpcUrl: "https://polygon-mainnet.infura.io",
 };
+
+export const chains = [base];
 
 // 3. Create a metadata object
 const metadata = {
@@ -62,7 +64,7 @@ const ethersConfig = defaultConfig({
 // 5. Create a Web3Modal instance
 createWeb3Modal({
   ethersConfig,
-  chains: [base, berachain],
+  chains: chains,
   projectId,
 });
 

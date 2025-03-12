@@ -1,22 +1,48 @@
 import Image from "next/image";
 import Link from "next/link";
-import { NAV } from "@/app/utils/constants";
-import { useContext } from "react";
+import { IDOs, NAV } from "@/app/utils/constants";
+import { useContext, useEffect } from "react";
 import { Inter } from "next/font/google";
 import { StateContext } from "@/app/context/StateContext";
 import { Page } from "@/app/utils/enums";
 import SSButton from "./ssButton";
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import ConnectButton from "./connectbutton";
+import { useSwitchNetwork } from "@web3modal/ethers/react";
+import { base, chains } from "../context/web3modal";
 
 const inter = Inter({
   subsets: ["latin"],
 });
 
 export default function Nav() {
-  const { page, setPage } = useContext(StateContext);
+  const { page, setPage, chain } = useContext(StateContext);
   const pathname = usePathname();
   const { ido } = useParams();
+  const { switchNetwork } = useSwitchNetwork();
+
+  const getVestingChainId = () => {
+    const currentIDO = IDOs.find((item) => item.id === ido);
+    return currentIDO?.vestingChain?.chainId || -1;
+  };
+
+  const needToSwitchNetwork = (chainId: number) => {
+    return chain !== chainId;
+  };
+
+  const checkNetwork = async () => {
+    const vestingChainId = getVestingChainId();
+
+    if (vestingChainId !== -1 && needToSwitchNetwork(vestingChainId)) {
+      await switchNetwork(vestingChainId);
+    } else if (chain !== base.chainId && chains.length > 1) {
+      await switchNetwork(base.chainId);
+    }
+  };
+
+  useEffect(() => {
+    checkNetwork();
+  }, [chain, ido]);
   return (
     <div
       className={`h-20 px-2 lg:px-8 flex flex-col md:flex-row items-center justify-between mt-5 z-10 ${inter.className} h-max`}
@@ -56,7 +82,7 @@ export default function Nav() {
         ))}
       </div>
       <div className="flex gap-5 lg:px-0">
-        {(page === Page.nft || ido !== "") && (
+        {(page === Page.nft || ido) && (
           <div className="flex self-center h-14">
             <ConnectButton mobile />
           </div>
