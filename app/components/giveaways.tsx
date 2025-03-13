@@ -1,7 +1,6 @@
 import { Inter } from "next/font/google";
 
 import { useCallback, useContext, useEffect, useState } from "react";
-import { StateContext } from "../context/StateContext";
 import { generalInfo, GiveawayType } from "../contracts_integrations/giveways";
 import GiveawayCard from "./giveawayCard";
 import LoadingBox from "./loadingBox";
@@ -13,8 +12,6 @@ const inter = Inter({
 export default function Giveaways({ max }: { max?: number }) {
   const [giveaways, setGiveaways] = useState<GiveawayType[] | []>([]);
   const [loading, setLoading] = useState(true);
-
-  const { signer } = useContext(StateContext);
 
   const getGiveaways = useCallback(async () => {
     setLoading(true);

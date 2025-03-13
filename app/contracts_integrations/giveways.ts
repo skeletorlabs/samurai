@@ -96,7 +96,7 @@ export async function generalInfo() {
 
     let giveaways: GiveawayType[] = [];
 
-    for (let index = 0; index < ids.length; index++) {
+    for (let index = 1; index < ids.length; index++) {
       const giveawayRaw = await contract?.giveaways(ids[index]);
       // const participants = await contract?.participants(ids[index]);
       const winners = await contract?.winnersOf(ids[index]);

@@ -237,7 +237,7 @@ export default function GiveawayCard({
         </div>
       </div>
 
-      <div className="flex items-center gap-2 absolute top-20 right-10 bg-black py-2 px-4 rounded-full border border-white/30 shadow-lg">
+      <div className="flex items-center gap-2 absolute top-20 right-10 bg-black py-2 px-4 rounded-full border border-white/30 shadow-lg z-20">
         <span
           className={`bg-gradient-to-tr ${giveawayStatusColors?.from} ${giveawayStatusColors?.to} shadow-lg rounded-full w-4 h-4 animate-pulse`}
         />

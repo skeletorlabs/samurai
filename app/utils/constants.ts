@@ -1812,10 +1812,10 @@ export const GIVEAWAYS_LIST: GiveawayListType = [
     isDrawn: false,
   },
   {
-    prizes: "$10,000 USD",
+    prizes: "20 SAM NFTs",
     prizeValue: 1000,
-    image: "/IDOs/alpaca.svg",
-    background: "/IDOs/xrone.png",
+    image: "/nfts/1.jpg",
+    background: "/giveaways/samurai.png",
     isDrawn: false,
   },
   {
@@ -1879,12 +1879,12 @@ export const NAV = [
     icon: rocket,
     page: Page.launchpad,
   },
-  // {
-  //   title: "Sanka",
-  //   href: "/sanka",
-  //   icon: sanka,
-  //   page: Page.sanka,
-  // },
+  {
+    title: "Sanka",
+    href: "/sanka",
+    icon: sanka,
+    page: Page.sanka,
+  },
   {
     title: "Tokens",
     href: "/tokens",
