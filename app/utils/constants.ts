@@ -1530,7 +1530,7 @@ export const IDO_LIST: IDO[] = [
     fdv: "25000000",
     exchangeListingPrice: 0.25,
     marketCapAtTGE: 285000,
-    vesting: "3% at TGE, 2-month cliff, 12-month monthly vesting",
+    vesting: "20% TGE, 1-month cliff, 3-months vesting",
     releaseType: "Linear",
     currentPhase: simplifiedPhases[1].title,
     socials: [
@@ -1879,12 +1879,12 @@ export const NAV = [
     icon: rocket,
     page: Page.launchpad,
   },
-  {
-    title: "Sanka",
-    href: "/sanka",
-    icon: sanka,
-    page: Page.sanka,
-  },
+  // {
+  //   title: "Sanka",
+  //   href: "/sanka",
+  //   icon: sanka,
+  //   page: Page.sanka,
+  // },
   {
     title: "Tokens",
     href: "/tokens",
