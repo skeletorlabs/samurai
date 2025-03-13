@@ -18,16 +18,14 @@ export default function Giveaways({ max }: { max?: number }) {
 
   const getGiveaways = useCallback(async () => {
     setLoading(true);
-    if (signer) {
-      const response = await generalInfo();
-      if (response) setGiveaways(response.giveaways as GiveawayType[]);
-    }
+    const response = await generalInfo();
+    if (response) setGiveaways(response.giveaways as GiveawayType[]);
     setLoading(false);
-  }, [signer, setGiveaways, setLoading]);
+  }, [setGiveaways, setLoading]);
 
   useEffect(() => {
     getGiveaways();
-  }, [signer]);
+  }, []);
 
   return loading ? (
     <div className="w-full min-h-[800px] mb-8 relative">
@@ -46,6 +44,12 @@ export default function Giveaways({ max }: { max?: number }) {
         : giveaways.map((giveaway: GiveawayType, index) => (
             <GiveawayCard key={index} giveaway={giveaway} />
           ))}
+
+      {giveaways.length === 0 && (
+        <div className="w-full flex items-center text-center">
+          <p>No giveaways available</p>
+        </div>
+      )}
     </div>
   );
 }

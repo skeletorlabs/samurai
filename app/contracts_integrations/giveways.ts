@@ -7,6 +7,60 @@ import { getUnixTime } from "date-fns";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
+export enum GiveawayStatus {
+  UPCOMING = "UPCOMING",
+  ACTIVE = "ACTIVE",
+  FINISHED = "FINISHED",
+  DRAWING = "DRAWING",
+  DRAWN = "DRAWN",
+}
+
+export const STATUS_COLORS = [
+  {
+    status: "UPCOMING",
+    from: "from-yellow-500",
+    to: "to-yellow-300",
+    text: "text-yellow-500",
+  },
+  {
+    status: "ACTIVE",
+    from: "from-green-500",
+    to: "to-green-300",
+    text: "text-green-500",
+  },
+  {
+    status: "FINISHED",
+    from: "from-red-500",
+    to: "to-red-300",
+    text: "text-red-500",
+  },
+  {
+    status: "DRAWING",
+    from: "from-green-500",
+    to: "to-green-300",
+    text: "text-green-500",
+  },
+  {
+    status: "DRAWN",
+    from: "from-blue-500",
+    to: "to-blue-300",
+    text: "text-blue-500",
+  },
+];
+
+export type GiveawayType = {
+  id: number;
+  name: string;
+  priceInPoints: number;
+  tickets: number;
+  minTickets: number;
+  startAt: number;
+  endAt: number;
+  drawAt: number;
+  winners: string[];
+  participants: string[];
+};
+
 async function getContract(signer?: ethers.Signer) {
   try {
     const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
@@ -35,73 +89,32 @@ export async function checkIsPaused() {
   }
 }
 
-const fakeGiveaways: GiveawayType[] = [
-  {
-    id: 0,
-    name: "Foo Bar Giveaway",
-    priceInPoints: 1000,
-    tickets: 0,
-    minTickets: 2,
-    startAt: getUnixTime(new Date()),
-    endAt: getUnixTime(new Date()),
-    drawAt: getUnixTime(new Date()),
-    winners: [],
-    participants: [],
-  },
-  // {
-  //   id: 1,
-  //   name: "Bar",
-  //   priceInPoints: 2000,
-  //   tickets: 0,
-  //   minTickets: 5,
-  //   startAt: getUnixTime(new Date()),
-  //   endAt: getUnixTime(new Date()),
-  //   drawAt: getUnixTime(new Date()),
-  //   winners: [],
-  //   participants: [],
-  // },
-  // {
-  //   id: 2,
-  //   name: "Pow",
-  //   priceInPoints: 3000,
-  //   tickets: 0,
-  //   minTickets: 10,
-  //   startAt: getUnixTime(new Date()),
-  //   endAt: getUnixTime(new Date()),
-  //   drawAt: getUnixTime(new Date()),
-  //   winners: [],
-  //   participants: [],
-  // },
-];
-
 export async function generalInfo() {
   try {
-    // const contract = await getContract();
-    // let ids = await contract?.getIDs();
+    const contract = await getContract();
+    let ids = await contract?.getIDs();
 
     let giveaways: GiveawayType[] = [];
 
-    // for (let index = 0; index < ids.length; index++) {
-    //   const giveawayRaw = await contract?.giveaways(ids[index]);
-    //   const participants = await contract?.participants(ids[index]);
-    //   const winners = await contract?.winnersOf(ids[index]);
+    for (let index = 0; index < ids.length; index++) {
+      const giveawayRaw = await contract?.giveaways(ids[index]);
+      // const participants = await contract?.participants(ids[index]);
+      const winners = await contract?.winnersOf(ids[index]);
 
-    //   giveaways.push({
-    //     id: Number(giveawayRaw[0]),
-    //     name: giveawayRaw[1],
-    //     priceInPoints: Number(formatEther(giveawayRaw[2])),
-    //     tickets: Number(giveawayRaw[3]),
-    //     minTickets: Number(giveawayRaw[4]),
-    //     startAt: Number(giveawayRaw[5]),
-    //     endAt: Number(giveawayRaw[6]),
-    //     drawAt: Number(giveawayRaw[7]),
-    //     winners: winners,
-    //     participants: participants,
-    //   } as GiveawayType);
-    // }
-
-    let ids = [0, 1, 2];
-    giveaways = [...fakeGiveaways];
+      giveaways.push({
+        id: Number(giveawayRaw[0]),
+        name: giveawayRaw[1],
+        priceInPoints: Number(formatEther(giveawayRaw[2])),
+        tickets: Number(giveawayRaw[3]),
+        minTickets: Number(giveawayRaw[4]),
+        startAt: Number(giveawayRaw[5]),
+        endAt: Number(giveawayRaw[6]),
+        drawAt: Number(giveawayRaw[7]),
+        winners: winners,
+        // participants: participants,
+        participants: [],
+      } as GiveawayType);
+    }
 
     return {
       ids,
@@ -172,19 +185,6 @@ export async function togglePause(signer: ethers.Signer) {
     handleError({ e: e, notificate: true });
   }
 }
-
-export type GiveawayType = {
-  id: number;
-  name: string;
-  priceInPoints: number;
-  tickets: number;
-  minTickets: number;
-  startAt: number;
-  endAt: number;
-  drawAt: number;
-  winners: string[];
-  participants: string[];
-};
 
 export async function create(giveaway: GiveawayType, signer: ethers.Signer) {
   try {

@@ -82,7 +82,7 @@ export default function Nav() {
         ))}
       </div>
       <div className="flex gap-5 lg:px-0">
-        {(page === Page.nft || ido) && (
+        {(page === Page.nft || ido || page === Page.sanka) && (
           <div className="flex self-center h-14">
             <ConnectButton mobile />
           </div>
