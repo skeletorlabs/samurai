@@ -17,6 +17,7 @@ import {
   coingecko,
   coinmarketcap,
   ventures,
+  sanka,
 } from "@/app/utils/svgs";
 import { Page } from "./enums";
 import { IDO, IDO_v3, SINGLE_CARD, VESTING_PERIOD_TYPE } from "./interfaces";
@@ -1529,7 +1530,7 @@ export const IDO_LIST: IDO[] = [
     fdv: "25000000",
     exchangeListingPrice: 0.25,
     marketCapAtTGE: 285000,
-    vesting: "3% at TGE, 2-month cliff, 12-month monthly vesting",
+    vesting: "20% TGE, 1-month cliff, 3-months vesting",
     releaseType: "Linear",
     currentPhase: simplifiedPhases[1].title,
     socials: [
@@ -1795,6 +1796,37 @@ export const IDO_LIST: IDO[] = [
   },
 ];
 
+export type GiveawayListType = {
+  prizes: string;
+  prizeValue: number;
+  image: string;
+  background: string;
+  isDrawn: boolean;
+}[];
+export const GIVEAWAYS_LIST: GiveawayListType = [
+  {
+    prizes: "3 Nodes",
+    prizeValue: 1000,
+    image: "/giveaways/xrone.png",
+    background: "/IDOs/xrone.png",
+    isDrawn: false,
+  },
+  {
+    prizes: "$10,000 USD",
+    prizeValue: 1000,
+    image: "/IDOs/alpaca.svg",
+    background: "/IDOs/xrone.png",
+    isDrawn: false,
+  },
+  {
+    prizes: "$15,000 USD",
+    prizeValue: 1000,
+    image: "/IDOs/alpaca.svg",
+    background: "/IDOs/xrone.png",
+    isDrawn: false,
+  },
+];
+
 export const LINKS: { [key: number]: string } = {
   1337: "http://localhost:8545",
   5: "https://goerli.etherscan.io",
@@ -1848,8 +1880,8 @@ export const NAV = [
     page: Page.launchpad,
   },
   // {
-  //   title: 'Sanka',
-  //   href: '#',
+  //   title: "Sanka",
+  //   href: "/sanka",
   //   icon: sanka,
   //   page: Page.sanka,
   // },
@@ -1928,4 +1960,4 @@ export const POINTS_BERA = "0x5f5f2D8C61a507AA6C47f30cc4f76B937C10a8e1"; // BERA
 export const NFT_LOCK = "0x45c085699fe78873d5c28b02d153cfd90379e424"; // BASE
 export const LP_TOKEN = "0x598299Fb3f3829F7Ba08662948706cDFf7eC2350"; // BASE
 export const LP_STAKING = "0x5eb865bc8bd7c900c511ad7f53971e42152c590d";
-export const GIVEAWAYS = "0x0";
+export const GIVEAWAYS = "0xd1E65dF048784200CD1A458615438945a4568b59";

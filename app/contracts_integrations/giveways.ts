@@ -3,8 +3,63 @@ import { GIVEWAYS_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
 import { notificateTx } from "@/app/utils/notificateTx";
 import { GIVEAWAYS } from "../utils/constants";
+import { getUnixTime } from "date-fns";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
+
+export enum GiveawayStatus {
+  UPCOMING = "UPCOMING",
+  ACTIVE = "ACTIVE",
+  FINISHED = "FINISHED",
+  DRAWING = "DRAWING",
+  DRAWN = "DRAWN",
+}
+
+export const STATUS_COLORS = [
+  {
+    status: "UPCOMING",
+    from: "from-yellow-500",
+    to: "to-yellow-300",
+    text: "text-yellow-500",
+  },
+  {
+    status: "ACTIVE",
+    from: "from-green-500",
+    to: "to-green-300",
+    text: "text-green-500",
+  },
+  {
+    status: "FINISHED",
+    from: "from-red-500",
+    to: "to-red-300",
+    text: "text-red-500",
+  },
+  {
+    status: "DRAWING",
+    from: "from-green-500",
+    to: "to-green-300",
+    text: "text-green-500",
+  },
+  {
+    status: "DRAWN",
+    from: "from-blue-500",
+    to: "to-blue-300",
+    text: "text-blue-500",
+  },
+];
+
+export type GiveawayType = {
+  id: number;
+  name: string;
+  priceInPoints: number;
+  tickets: number;
+  minTickets: number;
+  startAt: number;
+  endAt: number;
+  drawAt: number;
+  winners: string[];
+  participants: string[];
+};
 
 async function getContract(signer?: ethers.Signer) {
   try {
@@ -37,13 +92,13 @@ export async function checkIsPaused() {
 export async function generalInfo() {
   try {
     const contract = await getContract();
-    const ids = await contract?.getIDs();
+    let ids = await contract?.getIDs();
 
-    const giveaways: GiveawayType[] = [];
+    let giveaways: GiveawayType[] = [];
 
     for (let index = 0; index < ids.length; index++) {
       const giveawayRaw = await contract?.giveaways(ids[index]);
-      const participants = await contract?.participants(ids[index]);
+      // const participants = await contract?.participants(ids[index]);
       const winners = await contract?.winnersOf(ids[index]);
 
       giveaways.push({
@@ -56,7 +111,8 @@ export async function generalInfo() {
         endAt: Number(giveawayRaw[6]),
         drawAt: Number(giveawayRaw[7]),
         winners: winners,
-        participants: participants,
+        // participants: participants,
+        participants: [],
       } as GiveawayType);
     }
 
@@ -129,19 +185,6 @@ export async function togglePause(signer: ethers.Signer) {
     handleError({ e: e, notificate: true });
   }
 }
-
-export type GiveawayType = {
-  id: number;
-  name: string;
-  priceInPoints: number;
-  tickets: number;
-  minTickets: number;
-  startAt: number;
-  endAt: number;
-  drawAt: number;
-  winners: string[];
-  participants: string[];
-};
 
 export async function create(giveaway: GiveawayType, signer: ethers.Signer) {
   try {
