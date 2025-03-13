@@ -140,9 +140,10 @@ export default function GiveawayCard({
             />
             <div className="flex flex-col items-center lg:items-start gap-2">
               {giveaway.name}
-              <div className="flex items-center gap-1 text-sm">
-                <span className="text-gray-300">TOTAL TICKETS PURCHASED:</span>
-                <span>{giveaway.tickets}</span>
+              <div className="flex items-center gap-1 text-lg">
+                <span className="text-yellow-300">
+                  Total of {giveaway.tickets} tickets purchased
+                </span>
               </div>
             </div>
           </div>
