@@ -5,7 +5,9 @@ import { useCallback, useState, useContext, useEffect } from "react";
 import {
   GiveawayStatus,
   GiveawayType,
+  participate,
   STATUS_COLORS,
+  userInfo,
 } from "../contracts_integrations/giveways";
 import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/20/solid";
 import { GIVEAWAYS_LIST } from "../utils/constants";
@@ -13,7 +15,7 @@ import { GIVEAWAYS_LIST } from "../utils/constants";
 import { Inter } from "next/font/google";
 import delay from "../utils/delay";
 import Loading from "./loading";
-import { userInfo } from "../contracts_integrations/points";
+import { userInfo as pointsUserInfo } from "../contracts_integrations/points";
 import { StateContext } from "../context/StateContext";
 import { currentTime } from "../utils/currentTime";
 import ConnectButton from "./connectbutton";
@@ -36,6 +38,8 @@ export default function GiveawayCard({
     GiveawayStatus.UPCOMING.toString()
   );
   const [giveawayStatusColors, setGiveawayStatusColors] = useState<any>(null);
+  const [userTickets, setUserTickets] = useState(0);
+
   const { prizes, prizeValue, image, background, isDrawn } =
     GIVEAWAYS_LIST[giveaway.id];
 
@@ -48,9 +52,13 @@ export default function GiveawayCard({
 
   const onBuyTickets = useCallback(async () => {
     setLoading(true);
-    await delay(2000);
+
+    if (signer) {
+      await participate(giveaway.id, ticketsToBuy, signer);
+      await getUserTickets();
+    }
     setLoading(false);
-  }, [ticketsToBuy, setLoading]);
+  }, [signer, giveaway, ticketsToBuy, setLoading]);
 
   const onTicketsAmountChange = useCallback(
     (type: ChangeType) => {
@@ -73,8 +81,6 @@ export default function GiveawayCard({
     if (now >= giveaway.drawAt && !isDrawn) status = GiveawayStatus.DRAWING;
     if (isDrawn) status = GiveawayStatus.DRAWN;
 
-    console.log(status, isDrawn);
-
     const statusColors = STATUS_COLORS.find((item) => item.status === status);
 
     setGiveawayStatus(status);
@@ -83,13 +89,21 @@ export default function GiveawayCard({
 
   const getUserBalance = async () => {
     if (signer) {
-      const response = await userInfo(signer);
+      const response = await pointsUserInfo(signer);
       setBalance(response?.balance || 0);
+    }
+  };
+
+  const getUserTickets = async () => {
+    if (signer) {
+      const response = await userInfo([giveaway.id], signer);
+      setUserTickets(response?.participations[0]?.tickets || 0);
     }
   };
 
   useEffect(() => {
     getUserBalance();
+    getUserTickets();
   }, [signer]);
 
   useEffect(() => {
@@ -121,7 +135,13 @@ export default function GiveawayCard({
               className="rounded-lg border border-white/30"
               alt={giveaway.name}
             />
-            {giveaway.name}
+            <div className="flex flex-col items-center lg:items-start gap-2">
+              {giveaway.name}
+              <div className="flex items-center gap-1 text-sm">
+                <span className="text-gray-300">TOTAL TICKETS PURCHASED:</span>
+                <span>{giveaway.tickets}</span>
+              </div>
+            </div>
           </div>
 
           <div className="flex flex-col lg:flex-row items-center lg:justify-end lg:gap-2 w-full text-2xl lg:text-3xl 2xl:text-5xl bg-white/20 lg:bg-transparent p-2 lg:p-0">
@@ -168,7 +188,7 @@ export default function GiveawayCard({
           </div>
           <div className="flex flex-col bg-black/50 py-4 px-6 text-sm border border-white/10">
             <span className="text-samurai-red">MY TICKETS</span>
-            <span className="text-lg">0</span>
+            <span className="text-lg">{userTickets}</span>
           </div>
         </div>
         <div className="w-full h-[1px] lg:w-[1px] lg:h-[300px]  bg-white/10" />
@@ -249,10 +269,6 @@ export default function GiveawayCard({
           <span className={`${giveawayStatusColors?.text} text-sm`}>
             {giveawayStatus}
           </span>
-        </div>
-        <div className="flex items-center gap-2 bg-black py-2 px-4 rounded-full border border-white/30 shadow-lg z-20 text-sm">
-          <span className="text-gray-300">TOTAL TICKETS PURCHASED:</span>
-          <span>0</span>
         </div>
       </div>
     </div>

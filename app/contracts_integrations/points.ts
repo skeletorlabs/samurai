@@ -17,6 +17,7 @@ import { userInfo as pastUserInfo } from "./samLock";
 
 import { balanceOf } from "./balanceOf";
 import { notificateTx } from "../utils/notificateTx";
+import { base, berachain } from "../context/web3modal";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const BERA_RPC_URL = process.env.NEXT_PUBLIC_BERACHAIN_RPC_HTTPS as string;
@@ -26,8 +27,11 @@ async function getContract(signer?: Signer, chainId?: number) {
     const rpc = chainId ? CHAIN_ID_TO_RPC_URL[chainId] : BASE_RPC_URL;
     const provider = new JsonRpcProvider(rpc);
 
+    const contractAddress =
+      chainId === berachain.chainId ? POINTS_BERA : POINTS;
+
     const contract = new Contract(
-      chainId ? POINTS_BERA : POINTS,
+      contractAddress,
       SAMURAI_POINTS_ABI,
       signer || provider
     );
@@ -92,6 +96,7 @@ export async function isPointsOwner(signer: Signer, chainId?: number) {
     const owner = await contract?.owner();
     const isViewer =
       signerAddress === "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
+
     const isOwner = owner === signerAddress;
 
     return { isOwner, isViewer };

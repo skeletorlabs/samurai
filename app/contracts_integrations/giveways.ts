@@ -93,12 +93,10 @@ export async function generalInfo() {
   try {
     const contract = await getContract();
     let ids = await contract?.getIDs();
-
     let giveaways: GiveawayType[] = [];
 
     for (let index = 1; index < ids.length; index++) {
       const giveawayRaw = await contract?.giveaways(ids[index]);
-      // const participants = await contract?.participants(ids[index]);
       const winners = await contract?.winnersOf(ids[index]);
 
       giveaways.push({
@@ -139,7 +137,7 @@ export async function userInfo(ids: number[], signer: Signer) {
 
     for (let index = 0; index < ids.length; index++) {
       const tickets = Number(
-        await contract?.participantions(ids[index], signerAddress)
+        await contract?.participations(ids[index], signerAddress)
       );
 
       participations.push({ id: ids[index], tickets: tickets });
@@ -159,6 +157,7 @@ export async function participate(
   try {
     const contract = await getContract(signer);
     const network = await signer.provider?.getNetwork();
+
     const tx = await contract?.participate(id, tickets);
     await notificateTx(tx, network);
   } catch (e) {
