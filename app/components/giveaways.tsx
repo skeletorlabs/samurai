@@ -12,6 +12,7 @@ const inter = Inter({
 export default function Giveaways({ max }: { max?: number }) {
   const [giveaways, setGiveaways] = useState<GiveawayType[] | []>([]);
   const [loading, setLoading] = useState(true);
+  const [shouldReload, setShouldReload] = useState(false);
 
   const getGiveaways = useCallback(async () => {
     setLoading(true);
@@ -19,6 +20,11 @@ export default function Giveaways({ max }: { max?: number }) {
     if (response) setGiveaways(response.giveaways as GiveawayType[]);
     setLoading(false);
   }, [setGiveaways, setLoading]);
+
+  useEffect(() => {
+    if (shouldReload) getGiveaways();
+    setShouldReload(false);
+  }, [shouldReload]);
 
   useEffect(() => {
     getGiveaways();
@@ -36,10 +42,18 @@ export default function Giveaways({ max }: { max?: number }) {
         ? giveaways
             .slice(0, max)
             .map((giveaway: GiveawayType, index) => (
-              <GiveawayCard key={index} giveaway={giveaway} />
+              <GiveawayCard
+                key={index}
+                giveaway={giveaway}
+                setReload={setShouldReload}
+              />
             ))
         : giveaways.map((giveaway: GiveawayType, index) => (
-            <GiveawayCard key={index} giveaway={giveaway} />
+            <GiveawayCard
+              key={index}
+              giveaway={giveaway}
+              setReload={setShouldReload}
+            />
           ))}
 
       {giveaways.length === 0 && (

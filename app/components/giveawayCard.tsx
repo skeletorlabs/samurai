@@ -26,9 +26,11 @@ const inter = Inter({
 
 export default function GiveawayCard({
   giveaway,
+  setReload,
   type = "dark",
 }: {
   giveaway: GiveawayType;
+  setReload: Function;
   type?: string;
 }) {
   const [ticketsToBuy, setTicketsToBuy] = useState(1);
@@ -56,6 +58,7 @@ export default function GiveawayCard({
     if (signer) {
       await participate(giveaway.id, ticketsToBuy, signer);
       await getUserTickets();
+      setReload(true);
     }
     setLoading(false);
   }, [signer, giveaway, ticketsToBuy, setLoading]);
