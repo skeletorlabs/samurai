@@ -166,6 +166,10 @@ export default function GiveawayCard({
               {formattedDate(giveaway.drawAt)} UTC
             </span>
           </div>
+          <div className="flex flex-col bg-black/50 py-4 px-6 text-sm border border-white/10">
+            <span className="text-samurai-red">MY TICKETS</span>
+            <span className="text-lg">0</span>
+          </div>
         </div>
         <div className="w-full h-[1px] lg:w-[1px] lg:h-[300px]  bg-white/10" />
         <div className="flex flex-col justify-center items-center w-full">
@@ -237,13 +241,19 @@ export default function GiveawayCard({
         </div>
       </div>
 
-      <div className="flex items-center gap-2 absolute top-20 right-10 bg-black py-2 px-4 rounded-full border border-white/30 shadow-lg z-20">
-        <span
-          className={`bg-gradient-to-tr ${giveawayStatusColors?.from} ${giveawayStatusColors?.to} shadow-lg rounded-full w-4 h-4 animate-pulse`}
-        />
-        <span className={`${giveawayStatusColors?.text} text-sm`}>
-          {giveawayStatus}
-        </span>
+      <div className="flex items-center gap-2 absolute top-20 right-10 z-20">
+        <div className="flex items-center gap-2 bg-black py-2 px-4 rounded-full border border-white/30 shadow-lg z-20">
+          <span
+            className={`bg-gradient-to-tr ${giveawayStatusColors?.from} ${giveawayStatusColors?.to} shadow-lg rounded-full w-4 h-4 animate-pulse`}
+          />
+          <span className={`${giveawayStatusColors?.text} text-sm`}>
+            {giveawayStatus}
+          </span>
+        </div>
+        <div className="flex items-center gap-2 bg-black py-2 px-4 rounded-full border border-white/30 shadow-lg z-20 text-sm">
+          <span className="text-gray-300">TOTAL TICKETS PURCHASED:</span>
+          <span>0</span>
+        </div>
       </div>
     </div>
   );

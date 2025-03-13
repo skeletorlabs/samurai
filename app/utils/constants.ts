@@ -1524,7 +1524,7 @@ export const IDO_LIST: IDO[] = [
     publicParticipationEndsAt: 1711753200,
     simplified: true,
     tgeDate: 0,
-    tgePercentage: 3,
+    tgePercentage: 20,
     cliff: 0,
     investmentRound: "Private Round",
     fdv: "25000000",
