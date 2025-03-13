@@ -244,18 +244,19 @@ export default function Ido() {
                   {ido?.logo} {ido?.projectName}
                 </div>
                 <div className="flex items-center gap-4 pt-5">
-                  {ido?.tokenNetwork !== "TO BE ANNOUNCED" && (
-                    <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
-                      <span className="text-sm">Project Tokens</span>
-                      <Image
-                        src="/chain-logos/polygon.svg"
-                        alt={ido?.projectName || ""}
-                        width={24}
-                        height={24}
-                        className="p-[1px] bg-white/80 rounded-full"
-                      />
-                    </div>
-                  )}
+                  {ido?.tokenNetwork !== "TO BE ANNOUNCED" &&
+                    ido?.tokenNetwork !== "TBA" && (
+                      <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
+                        <span className="text-sm">Project Tokens</span>
+                        <Image
+                          src="/chain-logos/polygon.svg"
+                          alt={ido?.projectName || ""}
+                          width={24}
+                          height={24}
+                          className="p-[1px] bg-white/80 rounded-full"
+                        />
+                      </div>
+                    )}
 
                   <div className="flex items-center gap-2 bg-black/90 px-4 py-2 rounded-md text-[14px] border border-white/20  w-max">
                     <span className="text-sm">Crowdsale</span>
