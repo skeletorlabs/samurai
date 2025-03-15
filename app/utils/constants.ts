@@ -1879,12 +1879,12 @@ export const NAV = [
     icon: rocket,
     page: Page.launchpad,
   },
-  // {
-  //   title: "Sanka",
-  //   href: "/sanka",
-  //   icon: sanka,
-  //   page: Page.sanka,
-  // },
+  {
+    title: "Sanka",
+    href: "/sanka",
+    icon: sanka,
+    page: Page.sanka,
+  },
   {
     title: "Tokens",
     href: "/tokens",

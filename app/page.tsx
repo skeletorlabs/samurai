@@ -9,6 +9,7 @@ import { StateContext } from "@/app/context/StateContext";
 import Projects from "@/app/components/projects";
 import ProjectsV2 from "./components/projectsV2";
 import ProjectsHome from "./components/projectsHome";
+import Giveaways from "./components/giveaways";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -256,8 +257,10 @@ export default function Home() {
             earn rewards for participating on our partners' platforms.
           </div>
 
-          <div className="text-samurai-red text-2xl md:text-4xl mt-16">
-            Coming soon!
+          <div className="flex flex-col gap-5 mt-10 w-max">
+            <SSButton isLink href="/sanka">
+              Check last giveaway
+            </SSButton>
           </div>
 
           {/* <Link

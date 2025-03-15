@@ -44,7 +44,7 @@ export default function Sanka() {
       >
         <div className="flex flex-col px-2 lg:px-8 xl:px-20 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold text-center lg:text-start">
-            Recent <span className="text-samurai-red">Giveaways</span>
+            Recent <span className="text-samurai-red">Giveaway</span>
           </h2>
           <Giveaways />
         </div>
