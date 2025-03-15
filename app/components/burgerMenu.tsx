@@ -36,6 +36,7 @@ export default function Burger() {
 
           {NAV.map((item, index) => (
             <Link
+              onClick={() => setOpen(false)}
               key={index}
               href={item.href}
               className={`transition-all ${
