@@ -1903,6 +1903,13 @@ export const NAV = [
     icon: ventures,
     page: Page.ventures,
   },
+
+  {
+    title: "Dashboard",
+    href: "/dashboard",
+    icon: ventures,
+    page: Page.dashboard,
+  },
 ];
 
 export const SOCIALS = [
