@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer base {
   html {
     background-color: black;
@@ -98,4 +96,27 @@
   left: 0 !important;
   width: 500px !important;
   height: 200px !important;
+}
+
+svg.recharts-surface line {
+  /* background-color: white !important; */
+  stroke: transparent !important;
+  /* color: red !important; */
+}
+
+/* g.recharts-layer.recharts-cartesian-axis.recharts-xAxis.xAxis {
+  background-color: white !important;
+  margin: 0 30px !important;
+} */
+
+svg.recharts-surface g.recharts-cartesian-axis-ticks text tspan{
+  /* font-family: Inter !important; */
+  stroke: white !important;
+  font-size: small !important;
+  opacity: 0.8 !important;
+}
+
+svg.recharts-surface g.recharts-layer.recharts-area-dots circle {
+  stroke: white !important;
+  /* border: 100px solid white !important; */
 }

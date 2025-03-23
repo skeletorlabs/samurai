@@ -1,5 +1,6 @@
 import { ReactElement } from "react";
 import Nav from "./nav";
+import SidebarMenu from "./sidebarMenu";
 
 interface TopLayout {
   children: ReactElement;
@@ -21,7 +22,8 @@ export default function TopLayout({
         padding ? "pb-12 lg:pb-24" : ""
       } ${background ? background : "bg-home-art"}`}
     >
-      <Nav />
+      {/* <Nav /> */}
+      {/* <SidebarMenu /> */}
       {children}
     </div>
   );
