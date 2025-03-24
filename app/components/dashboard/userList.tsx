@@ -20,7 +20,7 @@ export default function UserList({ IDOs }: UserList) {
             <th className="p-4 px-2 lg:px-8 xl:px-16 text-samurai-red">
               Project
             </th>
-            <th className="p-4 px-2 lg:px-8 xl:px-16 text-samurai-red">
+            <th className="p-4 px-2 lg:px-8 xl:px-12 text-samurai-red">
               Network
             </th>
             <th className="p-4 px-2 lg:px-8 xl:px-16 text-samurai-red">
@@ -55,7 +55,7 @@ export default function UserList({ IDOs }: UserList) {
                   </p>
                 </div>
               </td>
-              <td className="p-4 lg:px-8 xl:px-16">
+              <td className="p-4 lg:px-8 xl:px-12">
                 <div className="flex items-center gap-3 text-sm font-bold border border-white/20 bg-white/10 rounded-full py-[6px] px-5 w-max">
                   <Image
                     src={ido?.networkImageSrc}
