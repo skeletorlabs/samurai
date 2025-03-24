@@ -40,23 +40,23 @@ export default function UserList({ IDOs }: UserList) {
               key={index}
               className={`odd:bg-neutral-800 even:bg-black/20 border-t border-white/20`}
             >
-              <td className="p-4 flex items-center gap-4 lg:px-8 xl:px-16">
+              <td className="p-4 flex items-center gap-5 lg:px-8 xl:px-16">
                 <Image
                   src={ido?.idoImageSrc}
                   alt={ido?.projectName}
                   width={50}
                   height={50}
-                  className="rounded-full w-[50px] h-[50px] bg-black/60 border border-white/20"
+                  className="rounded-full w-[54px] h-[54px] border border-samurai-red bg-black/50 p-1"
                 />
-                <div>
+                <div className="flex flex-col gap-1">
                   <p className="text-xl font-bold">{ido?.projectName}</p>
-                  <p className="bg-green-400 text-black rounded-full px-3 text-sm border border-white/20 w-max">
+                  <p className="bg-white/10 text-white rounded-full px-3 py-[2px] text-xs border border-white/20 w-max">
                     Vesting
                   </p>
                 </div>
               </td>
               <td className="p-4 lg:px-8 xl:px-16">
-                <div className="flex items-center gap-3 text-sm font-bold border border-white/20 bg-white/30 rounded-full py-[6px] px-5 w-max">
+                <div className="flex items-center gap-3 text-sm font-bold border border-white/20 bg-white/10 rounded-full py-[6px] px-5 w-max">
                   <Image
                     src={ido?.networkImageSrc}
                     alt={ido?.projectName}
