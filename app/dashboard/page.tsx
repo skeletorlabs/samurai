@@ -17,6 +17,7 @@ import {
   CalendarIcon,
   ChartBarIcon,
 } from "@heroicons/react/20/solid";
+import UserList from "../components/dashboard/userList";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -119,14 +120,18 @@ export default function Dashboard() {
             <div className="flex flex-col gap-4">
               {/* Sam Nft */}
               <div className="flex flex-col justify-center bg-samurai-red/50 backdrop-blur-md p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
-                <p className="text-white text-4xl 2xl:text-6xl font-bold">Shogun</p>
+                <p className="text-white text-4xl 2xl:text-6xl font-bold">
+                  Shogun
+                </p>
                 <p className="text-orange-200 text-lg">Tier</p>
               </div>
 
               {/* Sam */}
               <div className="flex flex-col justify-center bg-neutral-500/50 backdrop-blur-md p-8 rounded-3xl w-max h-full border border-white/20  shadow-lg shadow-black/40">
                 <p className="text-white/70 text-sm">Total Tokens</p>
-                <p className="text-white text-4xl 2xl:text-6xl font-bold">500,000</p>
+                <p className="text-white text-4xl 2xl:text-6xl font-bold">
+                  500,000
+                </p>
                 <p className="text-orange-200 text-lg">$SAM</p>
               </div>
 
@@ -169,83 +174,7 @@ export default function Dashboard() {
         </div>
         {/* <div className="flex items-center gap-3 h-[100px] bg-red-300">asdf</div> */}
 
-        <div className={`flex flex-col gap-1 ${inter.className}`}>
-          {IDOs.map((ido, index) => (
-            <div
-              key={index}
-              className="flex flex-row items-center py-10 px-2 lg:px-8 xl:px-16 text-white odd:bg-neutral-800 even:bg-black/20 border-t border-white/20 p-4"
-            >
-              <div className="flex flex-row items-center gap-4 2xl:gap-6 basis-[270px]">
-                <Image
-                  src={ido?.idoImageSrc}
-                  alt={ido?.projectName}
-                  width={70}
-                  height={70}
-                  className="
-                    rounded-full bg-black/60 border border-white/20
-                    min-w-[50px] min-h-[50px] max-w-[50px] max-h-[50px]
-                    2xl:min-w-[70px] 2xl:min-h-[70px] 2xl:max-w-[70px] 2xl:max-h-[70px]
-                  "
-                />
-
-                <div className="flex flex-col gap-1">
-                  <p className="text-xl 2xl:text-2xl font-bold">
-                    {ido?.projectName}
-                  </p>
-                  <p className="flex items-center justify-center bg-green-400 text-black rounded-full w-max px-3 text-sm border border-white/20">
-                    Vesting
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex basis-[270px]">
-                <div className="flex items-center gap-3 text-sm 2xl:text-xl font-bold border border-white/20 bg-white/30 rounded-full py-[6px] px-5 w-max">
-                  <Image
-                    src={ido?.networkImageSrc}
-                    alt={ido?.projectName}
-                    width={30}
-                    height={30}
-                    className="
-                      rounded-full bg-black/60 border border-white/20
-                      min-w-[20px] min-h-[20px] max-w-[20px] max-h-[20px]
-                      2xl:min-w-[30px] 2xl:min-h-[30px] 2xl:max-w-[30px] 2xl:max-h-[30px]
-                    "
-                  />
-                  <span>{ido?.tokenNetwork}</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col basis-[200px]">
-                <p className="text-sm 2xl:text-lg text-samurai-red">
-                  Allocated
-                </p>
-                <p className="text-lg 2xl:text-xl font-bold">
-                  {Number(1000).toLocaleString("en-us")} USDC
-                </p>
-              </div>
-
-              <div className="flex flex-col basis-[200px]">
-                <p className="text-sm 2xl:text-lg text-samurai-red">TGE Date</p>
-                <p className="text-xl font-bold">{formattedDate(ido?.end)}</p>
-              </div>
-
-              <div className="flex flex-col basis-[400px] grow">
-                <p className="text-sm 2xl:text-lg text-samurai-red">
-                  Distribution
-                </p>
-                <p className="text-lg 2xl:text-xl font-bold">
-                  {ido?.vestingDescription}
-                </p>
-              </div>
-
-              {/* <div className="flex justify-end basis-[200px]">
-                <button className="text-xl font-bold border border-white/20 bg-white/30 rounded-full py-2 px-5 w-max transition-all hover:bg-samurai-red">
-                  View
-                </button>
-              </div> */}
-            </div>
-          ))}
-        </div>
+        <UserList IDOs={IDOs} />
       </div>
     </>
   );
