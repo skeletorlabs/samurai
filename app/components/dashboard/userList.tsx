@@ -56,7 +56,7 @@ export default function UserList({ IDOs }: UserList) {
                 </div>
               </td>
               <td className="p-4 lg:px-8 xl:px-12">
-                <div className="flex items-center gap-3 text-sm font-bold border border-white/20 bg-white/10 rounded-full py-[6px] px-5 w-max">
+                <div className="flex items-center gap-3 text-sm border border-white/20 bg-white/10 rounded-full py-[6px] px-5 w-max">
                   <Image
                     src={ido?.networkImageSrc}
                     alt={ido?.projectName}
@@ -67,13 +67,13 @@ export default function UserList({ IDOs }: UserList) {
                   <span>{ido?.tokenNetwork}</span>
                 </div>
               </td>
-              <td className="p-4 text-lg font-bold lg:px-8 xl:px-16">
+              <td className="p-4 text-lg lg:px-8 xl:px-16">
                 {Number(1000).toLocaleString("en-us")} USDC
               </td>
-              <td className="p-4 text-xl font-bold lg:px-8 xl:px-16">
+              <td className="p-4 text-lg lg:px-8 xl:px-16">
                 {formattedDate(ido?.end)}
               </td>
-              <td className="p-4 text-lg font-bold lg:px-8 xl:px-16">
+              <td className="p-4 text-lg lg:px-8 xl:px-16">
                 {ido?.vestingDescription}
               </td>
             </tr>
