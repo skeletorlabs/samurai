@@ -46,7 +46,7 @@ export default function UserList({ IDOs }: UserList) {
                   alt={ido?.projectName}
                   width={50}
                   height={50}
-                  className="rounded-full w-[54px] h-[54px] border border-samurai-red bg-black/50 p-1"
+                  className="rounded-full w-[60px] h-[60px] border border-white/30 bg-black/50 p-1"
                 />
                 <div className="flex flex-col gap-1">
                   <p className="text-xl font-bold">{ido?.projectName}</p>
