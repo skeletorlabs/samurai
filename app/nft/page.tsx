@@ -290,7 +290,7 @@ export default function Nft() {
   return (
     <>
       <TopLayout background="bg-samurai-shadow">
-        <div className="flex flex-col xl:flex-row justify-between xl:items-center gap-6 xl:gap-0 lg:px-8 xl:px-20 pt-10 lg:pt-24">
+        <div className="flex flex-col xl:flex-row justify-between xl:items-center gap-6 xl:gap-0 lg:px-8 xl:px-14 pt-10 lg:pt-me">
           {/* TOP CONTENT */}
 
           <div className="relative md:mr-12 xl:max-w-[900px] px-6 md:px-0">
@@ -329,7 +329,7 @@ export default function Nft() {
 
       <div className="flex flex-col w-full">
         {/* CONTENT */}
-        <div className="flex flex-col xl:flex-row xl:justify-between gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t border-samurai-red/50 border-dotted">
+        <div className="flex flex-col xl:flex-row xl:justify-between gap-12 px-6 lg:px-8 xl:px-14 py-10 pb-20 me:py-20 w-full bg-black text-white border-t border-samurai-red/50 border-dotted">
           <div className="flex flex-col relative gap-10">
             <div className="flex flex-col text-white text-2xl">
               <p className="font-bold text-5xl pb-2">
@@ -503,7 +503,7 @@ export default function Nft() {
       <div className="flex flex-col w-full">
         {/* LOCK */}
         <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted">
-          <div className="flex flex-col md:flex-row px-6 lg:px-8 xl:px-20 text-white">
+          <div className="flex flex-col md:flex-row px-6 lg:px-8 xl:px-14 text-white">
             <div className="flex flex-col text-white text-2xl pb-20">
               <p className="font-bold text-5xl pb-2">
                 My <span className="text-samurai-red">SamNFT</span> Locks
@@ -567,7 +567,7 @@ export default function Nft() {
         </div>
 
         {/* LATEST NFTS MINTED */}
-        <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-10 pb-20 md:py-20 w-full bg-black text-white border-t-[0.5px] border-samurai-red">
+        <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-14 py-10 pb-20 me:py-20 w-full bg-black text-white border-t-[0.5px] border-samurai-red">
           <div className="flex flex-col relative">
             <h2 className="flex items-center text-4xl lg:text-5xl font-bold gap-5 mb-10">
               Gallery

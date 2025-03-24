@@ -132,7 +132,7 @@ export default function Burner() {
   return (
     <TopLayout background="bg-samurai-cyborg-fem bg-cover bg-top h-screen">
       <>
-        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24 bg-transparent sm:bg-black/60 2xl:bg-transparent">
+        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-14 pt-10 lg:pt-24 bg-transparent sm:bg-black/60 2xl:bg-transparent">
           {/* TOP CONTENT */}
           <div className="relative md:mr-12 xl:max-w-[900px]">
             <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">

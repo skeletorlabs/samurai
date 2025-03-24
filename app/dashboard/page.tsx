@@ -28,7 +28,7 @@ export default function Dashboard() {
   return (
     <>
       <TopLayout background="bg-samurai-cyborg-fem">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-14 pt-10 lg:pt-16">
           <div className="flex flex-row justify-between items-center max-w-[1130px]">
             {/* TOP CONTENT */}
             <div className="w-full">
@@ -57,7 +57,7 @@ export default function Dashboard() {
                     <span className="text-white/70">EVM Address</span>
                     <Link
                       href={`https://basescan.org/address/0xcDe00Be56479F95b5e33De136AD820FfaE996009`}
-                      className="text-xl hover:underline hover:opacity-80"
+                      className="2xl:text-xl hover:underline hover:opacity-80"
                       target="_blank"
                     >
                       {shortAddress(
@@ -93,17 +93,23 @@ export default function Dashboard() {
                 <div className="flex flex-row items-center justify-between mt-10 text-center w-full">
                   <div className="flex flex-col w-full">
                     <p className="text-white/70 text-sm">Total IDOs</p>
-                    <p className="text-white text-5xl font-bold">10</p>
+                    <p className="text-white text-3xl 2xl:text-5xl font-bold">
+                      10
+                    </p>
                     <p className="text-orange-200 text-lg">Participated</p>
                   </div>
                   <div className="flex flex-col w-full">
                     <p className="text-white/70 text-sm">Overall Allocation</p>
-                    <p className="text-white text-5xl font-bold">500,000</p>
+                    <p className="text-white text-3xl 2xl:text-5xl font-bold">
+                      500,000
+                    </p>
                     <p className="text-orange-200 text-lg">USDC</p>
                   </div>
                   <div className="flex flex-col w-full">
                     <p className="text-white/70 text-sm">Total Claimed</p>
-                    <p className="text-white text-5xl font-bold">500,000</p>
+                    <p className="text-white text-3xl 2xl:text-5xl font-bold">
+                      500,000
+                    </p>
                     <p className="text-orange-200 text-lg">Vested Tokens</p>
                   </div>
                 </div>
@@ -113,21 +119,21 @@ export default function Dashboard() {
             <div className="flex flex-col gap-4">
               {/* Sam Nft */}
               <div className="flex flex-col justify-center bg-samurai-red/50 backdrop-blur-md p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
-                <p className="text-white text-6xl font-bold">Shogun</p>
+                <p className="text-white text-4xl 2xl:text-6xl font-bold">Shogun</p>
                 <p className="text-orange-200 text-lg">Tier</p>
               </div>
 
               {/* Sam */}
               <div className="flex flex-col justify-center bg-neutral-500/50 backdrop-blur-md p-8 rounded-3xl w-max h-full border border-white/20  shadow-lg shadow-black/40">
                 <p className="text-white/70 text-sm">Total Tokens</p>
-                <p className="text-white text-6xl font-bold">500,000</p>
+                <p className="text-white text-4xl 2xl:text-6xl font-bold">500,000</p>
                 <p className="text-orange-200 text-lg">$SAM</p>
               </div>
 
               {/* Sam Nft */}
               <div className="flex flex-col justify-center bg-yellow-300/50 backdrop-blur-md p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
                 <p className="text-white/70 text-sm">Total NFTs</p>
-                <p className="text-white text-6xl font-bold">10</p>
+                <p className="text-white text-4xl 2xl:text-6xl font-bold">10</p>
                 <p className="text-orange-200 text-lg">SAM NFT</p>
               </div>
             </div>
@@ -137,7 +143,7 @@ export default function Dashboard() {
 
       {/* My Allocations */}
       <div className="flex flex-col py-10 md:py-20 w-full bg-black border-t-[1px] border-samurai-red/40">
-        <div className="flex items-center justify-between px-2 lg:px-8 xl:px-20 text-white mb-10">
+        <div className="flex items-center justify-between px-2 lg:px-8 xl:px-16 text-white mb-10">
           <h2 className="text-4xl lg:text-5xl font-bold text-center lg:text-start">
             My <span className="text-samurai-red">Allocations</span>
           </h2>
@@ -167,19 +173,25 @@ export default function Dashboard() {
           {IDOs.map((ido, index) => (
             <div
               key={index}
-              className="flex flex-row items-center py-10 px-2 lg:px-8 xl:px-20 text-white odd:bg-neutral-800 even:bg-black/20 border-t border-white/20 p-4"
+              className="flex flex-row items-center py-10 px-2 lg:px-8 xl:px-16 text-white odd:bg-neutral-800 even:bg-black/20 border-t border-white/20 p-4"
             >
-              <div className="flex flex-row items-center gap-6 basis-[270px]">
+              <div className="flex flex-row items-center gap-4 2xl:gap-6 basis-[270px]">
                 <Image
                   src={ido?.idoImageSrc}
                   alt={ido?.projectName}
                   width={70}
                   height={70}
-                  className="rounded-full min-w-[70px] min-h-[70px] max-w-[70px] max-h-[70px] bg-black/60 border border-white/20"
+                  className="
+                    rounded-full bg-black/60 border border-white/20
+                    min-w-[50px] min-h-[50px] max-w-[50px] max-h-[50px]
+                    2xl:min-w-[70px] 2xl:min-h-[70px] 2xl:max-w-[70px] 2xl:max-h-[70px]
+                  "
                 />
 
                 <div className="flex flex-col gap-1">
-                  <p className="text-2xl font-bold">{ido?.projectName}</p>
+                  <p className="text-xl 2xl:text-2xl font-bold">
+                    {ido?.projectName}
+                  </p>
                   <p className="flex items-center justify-center bg-green-400 text-black rounded-full w-max px-3 text-sm border border-white/20">
                     Vesting
                   </p>
@@ -187,33 +199,43 @@ export default function Dashboard() {
               </div>
 
               <div className="flex basis-[270px]">
-                <div className="flex items-center gap-3 text-xl font-bold border border-white/20 bg-white/30 rounded-full py-[6px] px-5 w-max">
+                <div className="flex items-center gap-3 text-sm 2xl:text-xl font-bold border border-white/20 bg-white/30 rounded-full py-[6px] px-5 w-max">
                   <Image
                     src={ido?.networkImageSrc}
                     alt={ido?.projectName}
                     width={30}
                     height={30}
-                    className="rounded-full min-w-[30px] min-h-[30px] max-w-[30px] max-h-[30px] bg-black/60 border border-white/20"
+                    className="
+                      rounded-full bg-black/60 border border-white/20
+                      min-w-[20px] min-h-[20px] max-w-[20px] max-h-[20px]
+                      2xl:min-w-[30px] 2xl:min-h-[30px] 2xl:max-w-[30px] 2xl:max-h-[30px]
+                    "
                   />
                   <span>{ido?.tokenNetwork}</span>
                 </div>
               </div>
 
               <div className="flex flex-col basis-[200px]">
-                <p className="text-lg text-samurai-red">Allocated</p>
-                <p className="text-xl font-bold">
+                <p className="text-sm 2xl:text-lg text-samurai-red">
+                  Allocated
+                </p>
+                <p className="text-lg 2xl:text-xl font-bold">
                   {Number(1000).toLocaleString("en-us")} USDC
                 </p>
               </div>
 
               <div className="flex flex-col basis-[200px]">
-                <p className="text-lg text-samurai-red">TGE Date</p>
+                <p className="text-sm 2xl:text-lg text-samurai-red">TGE Date</p>
                 <p className="text-xl font-bold">{formattedDate(ido?.end)}</p>
               </div>
 
               <div className="flex flex-col basis-[400px] grow">
-                <p className="text-lg text-samurai-red">Distribution</p>
-                <p className="text-xl font-bold">{ido?.vestingDescription}</p>
+                <p className="text-sm 2xl:text-lg text-samurai-red">
+                  Distribution
+                </p>
+                <p className="text-lg 2xl:text-xl font-bold">
+                  {ido?.vestingDescription}
+                </p>
               </div>
 
               {/* <div className="flex justify-end basis-[200px]">

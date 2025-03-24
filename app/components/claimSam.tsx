@@ -91,7 +91,7 @@ export default function ClaimSam() {
     <>
       {/* SAM TOKEN CLAIM */}
       <div className="flex flex-col pt-10 md:pt-20 pb-2  w-full bg-white/5 border-t border-samurai-red/50 border-dotted relative">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-14 text-white">
           <div className="flex flex-col text-white text-2xl pb-12 sm:pb-20">
             <p className="font-bold text-4xl sm:text-5xl sm:pb-2">
               <span className="text-samurai-red">$SAM</span> Token Claim

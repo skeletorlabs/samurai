@@ -31,7 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <StateProvider>
-          <div className="flex flex-col w-full h-full items-center text-white/90">
+          <div className="flex flex-col w-full h-full text-white/90">
             <ToastContainer
               containerId="toast-notification"
               position="top-right"
@@ -47,9 +47,9 @@ export default function RootLayout({
             />
 
             <Web3Modal>
-              <div className="flex flex-row ">
+              <div className="flex flex-row">
                 <SidebarMenu />
-                <div className="flex flex-col">{children}</div>
+                <div className="flex flex-col w-full">{children}</div>
               </div>
             </Web3Modal>
 

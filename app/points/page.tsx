@@ -65,7 +65,7 @@ export default function Points() {
 
   return (
     <TopLayout background="bg-samurai-incubator">
-      <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24">
+      <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-14 pt-10 lg:pt-24">
         <div className="relative">
           <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-samurai-red">
             <span className="text-white">Samuria</span> Points

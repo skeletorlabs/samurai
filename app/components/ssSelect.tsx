@@ -19,7 +19,7 @@ export default function SSSelect({
   return (
     <div
       className={classNames({
-        "w-52 font-medium relative": true,
+        "w-46 2xl:w-52 font-medium relative": true,
         "z-50": open,
         "z-0": !open,
       })}

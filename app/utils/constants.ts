@@ -18,6 +18,13 @@ import {
   coinmarketcap,
   ventures,
   sanka,
+  launchpad_menu,
+  incubator_menu,
+  sanka_menu,
+  tokens_menu,
+  dashboard_menu,
+  ventures_menu,
+  nft_menu,
 } from "@/app/utils/svgs";
 import { Page } from "./enums";
 import { IDO, IDO_v3, SINGLE_CARD, VESTING_PERIOD_TYPE } from "./interfaces";
@@ -1868,46 +1875,46 @@ export const NAV = [
     page: Page.home,
   },
   {
-    title: "SamNFT",
-    href: "/nft",
-    icon: nft,
-    page: Page.nft,
-  },
-  {
     title: "Launchpad",
     href: "/launchpad",
-    icon: rocket,
+    icon: launchpad_menu,
     page: Page.launchpad,
   },
-  // {
-  //   title: "Sanka",
-  //   href: "/sanka",
-  //   icon: sanka,
-  //   page: Page.sanka,
-  // },
   {
     title: "Tokens",
     href: "/tokens",
-    icon: token,
+    icon: tokens_menu,
     page: Page.tokens,
+  },
+  {
+    title: "SamNFT",
+    href: "/nft",
+    icon: nft_menu,
+    page: Page.nft,
+  },
+  {
+    title: "Sanka",
+    href: "/sanka",
+    icon: sanka_menu,
+    page: Page.sanka,
+  },
+
+  {
+    title: "Ventures",
+    href: "/ventures",
+    icon: ventures_menu,
+    page: Page.ventures,
   },
   {
     title: "Incubation",
     href: "/incubation",
-    icon: incubation,
+    icon: incubator_menu,
     page: Page.incubation,
   },
   {
-    title: "Ventures",
-    href: "/ventures",
-    icon: ventures,
-    page: Page.ventures,
-  },
-
-  {
     title: "Dashboard",
     href: "/dashboard",
-    icon: ventures,
+    icon: dashboard_menu,
     page: Page.dashboard,
   },
 ];

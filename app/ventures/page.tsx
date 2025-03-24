@@ -34,7 +34,7 @@ export default function Ventures() {
     <>
       <TopLayout background="bg-samurai-incubator">
         <>
-          <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24 bg-transparent sm:bg-black/60 2xl:bg-transparent">
+          <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-14 pt-10 lg:pt-16 bg-transparent sm:bg-black/60 2xl:bg-transparent">
             {/* TOP CONTENT */}
             <div className="relative md:mr-12 xl:max-w-[1000px]">
               <h1 className="text-[38px] sm:text-[58px] lg:text-[80px] 2xl:text-[90px] font-black leading-[48px] sm:leading-[68px] lg:leading-[98px] text-white text-center sm:text-start">
@@ -69,14 +69,14 @@ export default function Ventures() {
       >
         <div className="flex flex-col text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
-            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-6 lg:px-8 xl:px-20">
+            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-6 lg:px-8 xl:px-14">
               <p className="font-bold text-3xl md:text-5xl md:pb-2 text-center md:text-start">
                 How to join <span className="text-samurai-red">Samurai</span>{" "}
                 Ventures
               </p>
             </div>
             <p
-              className={`text-lg text-neutral-300 pt-4 max-w-[820px] px-6 lg:px-8 xl:px-20  text-center md:text-start ${inter.className}`}
+              className={`text-lg text-neutral-300 pt-4 max-w-[820px] px-6 lg:px-8 xl:px-14  text-center md:text-start ${inter.className}`}
             >
               Stake <span className="text-samurai-red">500k $SAM</span> or
               provide an equivalent amount of LP on{" "}
@@ -86,7 +86,7 @@ export default function Ventures() {
               Telegram group.
             </p>
 
-            <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-7 py-8 pt-12 px-6 lg:px-8 xl:px-20">
+            <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-7 py-8 pt-12 px-6 lg:px-8 xl:px-14">
               <SSButton isLink href="/tokens" mobile>
                 Lock $SAM
               </SSButton>
@@ -100,7 +100,7 @@ export default function Ventures() {
                 Provide WETH/SAM LP
               </SSButton>
             </div>
-            <p className="text-[16px] text-neutral-300 max-w-[820px] px-6 lg:px-8 xl:px-20 text-center md:text-start">
+            <p className="text-[16px] text-neutral-300 max-w-[820px] px-6 lg:px-8 xl:px-14 text-center md:text-start">
               Contact our team on{" "}
               <Link
                 target="blank"
@@ -124,13 +124,13 @@ export default function Ventures() {
       >
         <div className="flex flex-col text-white">
           <div className="flex flex-col text-white text-2xl md:pb-20">
-            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-6 lg:px-8 xl:px-20">
+            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-6 lg:px-8 xl:px-14">
               <p className="font-bold text-3xl md:text-5xl md:pb-2 text-center md:text-start mb-10">
                 Samurai <span className="text-samurai-red">Ventures</span>{" "}
                 Portfolio
               </p>
             </div>
-            <div className="pt-4 px-6 lg:px-8 xl:px-20">
+            <div className="pt-4 px-6 lg:px-8 xl:px-14">
               <div className="flex items-center flex-wrap gap-5">
                 {portfolio.map((item, index) => (
                   <div

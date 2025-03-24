@@ -22,8 +22,6 @@ export default function TopLayout({
         padding ? "pb-12 lg:pb-24" : ""
       } ${background ? background : "bg-home-art"}`}
     >
-      {/* <Nav /> */}
-      {/* <SidebarMenu /> */}
       {children}
     </div>
   );

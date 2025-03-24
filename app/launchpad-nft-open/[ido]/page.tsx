@@ -166,7 +166,7 @@ export default function Ido() {
       >
         <div className="flex flex-col pt-10 lg:pt-14">
           <div className="flex flex-col xl:flex-row items-center justify-between relative">
-            <div className="relative md:mr-12 xl:max-w-[900px] px-6 lg:px-8 xl:px-20">
+            <div className="relative md:mr-12 xl:max-w-[900px] px-6 lg:px-8 xl:px-14">
               <Link
                 href="/launchpad"
                 className="transition-all text-white/40 hover:text-white hidden xl:block"
@@ -532,7 +532,7 @@ export default function Ido() {
       <div className="flex flex-col xl:flex-row  gap-10 pt-10 lg:pt-24 pb-10 xl:pb-32 border-t border-white/20 bg-white/10 ">
         {ido && (
           <>
-            <div className="flex flex-col gap-10 px-6 lg:px-8 xl:px-20">
+            <div className="flex flex-col gap-10 px-6 lg:px-8 xl:px-14">
               <div
                 className={`flex w-full !leading-[28px] font-light lg:text-lg drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)] text-gray-300 ${inter.className}`}
                 dangerouslySetInnerHTML={{
@@ -565,7 +565,7 @@ export default function Ido() {
       {/* ============================================================================================================ */}
 
       {general && account && general.owner === account && (
-        <div className="flex flex-col xl:flex-row  gap-10 pt-24 pb-10 xl:pb-32 px-6 lg:px-8 xl:px-20 border-t border-white/20 w-full">
+        <div className="flex flex-col xl:flex-row  gap-10 pt-24 pb-10 xl:pb-32 px-6 lg:px-8 xl:px-14 border-t border-white/20 w-full">
           {ido && (
             <div className="flex flex-col gap-10">
               <h1 className="text-2xl xl:text-3xl">ADMIN AREA</h1>

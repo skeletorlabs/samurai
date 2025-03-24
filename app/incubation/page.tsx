@@ -214,7 +214,7 @@ export default function Incubation() {
   return (
     <>
       <TopLayout background="bg-samurai-incubator">
-        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24">
+        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-14 pt-10 lg:pt-16">
           {/* TOP CONTENT */}
           {/* <div className="sm:pt-10 lg:pt-24 relative">
             <h1 className="text-[48px] sm:text-[58px] font-black leading-[58px] sm:leading-[68px] md:mr-12 xl:max-w-[1000px] text-samurai-red ">
@@ -269,7 +269,7 @@ export default function Incubation() {
       {/* TOKEN LAUNCH */}
       <div
         id="token-launch"
-        className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted"
+        className="flex items-center gap-12 px-6 lg:px-8 xl:px-14 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted"
       >
         <Image
           src="/samurai-launchpad-icon.svg"
@@ -305,7 +305,7 @@ export default function Incubation() {
 
       {/* SERVICES */}
       <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white/20 border-t-[1px] border-yellow-300/40">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-14 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Samurai</span> Services
           </h2>
@@ -351,7 +351,7 @@ export default function Incubation() {
 
       {/* PORTFOLIO */}
       <div className="flex flex-col py-10 md:py-20 w-full bg-white/10 border-t-[1px] border-samurai-red/40">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-14 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">P</span>ortfolio
           </h2>
@@ -381,7 +381,7 @@ export default function Incubation() {
 
       {/* TEAM */}
       <div className="flex flex-col py-10 md:py-20 w-full bg-black border-t-[1px] border-yellow-300/40">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-14">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">T</span>eam
           </h2>
@@ -445,10 +445,10 @@ export default function Incubation() {
       {/* PARTNERS */}
       <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white/10 border-t-[1px] border-samurai-red">
         <div className="flex flex-col text-white">
-          <h2 className="text-4xl lg:text-5xl font-bold px-6 lg:px-8 xl:px-20">
+          <h2 className="text-4xl lg:text-5xl font-bold px-6 lg:px-8 xl:px-14">
             Our <span className="text-samurai-red">Partners</span>
           </h2>
-          <div className="flex flex-col pb-14 w-full overflow-x-scroll px-6 lg:px-8 xl:px-20">
+          <div className="flex flex-col pb-14 w-full overflow-x-scroll px-6 lg:px-8 xl:px-14">
             <div
               className={`flex items-center w-full gap-5 leading-normal pt-10 xl:pt-16 text-xl ${inter.className}`}
             >
@@ -474,7 +474,7 @@ export default function Incubation() {
               })}
             </div>
           </div>
-          <div className="px-6 lg:px-8 xl:px-20">{applyToLaunchpad}</div>
+          <div className="px-6 lg:px-8 xl:px-14">{applyToLaunchpad}</div>
         </div>
       </div>
 
@@ -483,7 +483,7 @@ export default function Incubation() {
         id="contact"
         className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-black border-t border-black/20"
       >
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-14">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Contact</span> Us
           </h2>

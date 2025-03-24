@@ -18,15 +18,25 @@ export default function SidebarMenu() {
 
   return (
     <div
-      className="min-w-[70px] max-w-[200px] bg-black border-r border-white/20 text-white"
+      className="hidden lg:flex bg-black border-r border-white/20 text-white"
       onMouseOver={() => setArrowVisible(true)}
       onMouseOut={() => setArrowVisible(false)}
     >
-      <div className="flex flex-col items-center  pt-10">
+      <div
+        className={classNames({
+          "flex flex-col items-center pt-10 transition-all": true,
+          "w-[60px] 2xl:w-[70px]": !open,
+          "w-[200px] 2xl:w-[220px]": open,
+        })}
+      >
         <div
-          className={`${
-            arrowVisible ? "visible" : "invisible"
-          } flex items-center justify-center w-6 h-6 rounded-full cursor-pointer bg-white/20`}
+          className={classNames({
+            "flex items-center justify-center w-6 h-6 rounded-full cursor-pointer bg-white/20":
+              true,
+            visible: arrowVisible,
+            invisible: !arrowVisible,
+            "self-end mr-2": open,
+          })}
           onClick={() => setOpen(!open)}
         >
           <BiChevronRight
@@ -36,26 +46,43 @@ export default function SidebarMenu() {
         </div>
         <Link
           href="/"
-          className="w-full transition-all hover:scale-110 hover:opacity-90 mb-10"
+          className={classNames({
+            "flex flex-col transition-all hover:scale-110 hover:opacity-90 my-10":
+              true,
+            "w-[50px] 2xl:w-[60px]": !open,
+            "w-[140px] 2xl:w-[160px]": open,
+          })}
         >
           {samurai_xs}
+          {open && (
+            <Image src="/logo-text.svg" width={220} height={0} alt="logo" />
+          )}
         </Link>
         {NAV.map((item, index) => (
           <Link
             key={index}
             href={item.href}
-            className={`flex w-full h-[60px] justify-center items-center hover:border-l border-samurai-red hover:bg-white/20
-              ${
+            className={classNames({
+              "flex w-full h-[55px] 2xl:h-[60px] items-center border-samurai-red hover:bg-white/10 transition-all":
+                true,
+              "text-samurai-red border-l bg-white/10":
                 page === item.page ||
-                (pathname.includes(item.href) && item.href !== "/")
-                  ? "text-samurai-red"
-                  : ""
-              }
-            `}
+                (pathname.includes(item.href) && item.href !== "/"),
+              "justify-center": !open,
+              "gap-5 pl-8": open,
+            })}
             onClick={() => setPage(item.page)}
           >
-            {/* {item.title} */}
-            <div className="w-6">{item.icon}</div>
+            <span className="w-5 h-5 2xl:w-6 2xl:h-6">{item.icon}</span>
+            <span
+              className={classNames({
+                "transition-all": true,
+                flex: open,
+                hidden: !open,
+              })}
+            >
+              {item.title}
+            </span>
           </Link>
         ))}
       </div>

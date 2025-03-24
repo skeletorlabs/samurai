@@ -201,7 +201,7 @@ export default function LockSamV2() {
   return (
     <>
       <div className="flex flex-col lg:flex-row items-center gap-10 mt-2 relative">
-        <div className="flex flex-col justify-between w-full xl:min-h-[750px] lg:w-[580px] lg:bg-white/5 lg:border border-white/10 rounded-lg lg:py-10 lg:px-6 lg:shadow-lg shadow-pink-800/50 relative">
+        <div className="flex flex-col justify-between w-full xl:min-h-[750px] lg:w-[580px] xl:w-[450px] 2xl:w-[580px] lg:bg-white/5 lg:border border-white/10 rounded-lg lg:py-10 lg:px-6 lg:shadow-lg shadow-pink-800/50 relative">
           <p className="text-sm md:text-xl text-white/70 text-center md:text-start">
             TVL{" "}
             <span className="text-white">

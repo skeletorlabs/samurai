@@ -1185,7 +1185,7 @@ export default function Ido() {
       {/* ADMIN AREA */}
       {/* ============================================================================================================ */}
       {general && account && general.owner === account && (
-        <div className="flex flex-col xl:flex-row  gap-10 pt-24 pb-10 xl:pb-32 px-6 lg:px-8 xl:px-20 border-t border-white/20 w-full">
+        <div className="flex flex-col xl:flex-row  gap-10 pt-24 pb-10 xl:pb-32 px-6 lg:px-8 xl:px-14 border-t border-white/20 w-full">
           {ido && (
             <div className="flex flex-col gap-10">
               <h1 className="text-2xl xl:text-3xl">ADMIN AREA</h1>
