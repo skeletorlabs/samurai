@@ -9,7 +9,8 @@ import SSButton from "./ssButton";
 import { useParams, usePathname } from "next/navigation";
 import ConnectButton from "./connectbutton";
 import { useSwitchNetwork } from "@web3modal/ethers/react";
-import { base, chains } from "../context/web3modal";
+import { chains } from "../context/web3modal";
+import { base } from "../utils/chains"
 
 const inter = Inter({
   subsets: ["latin"],

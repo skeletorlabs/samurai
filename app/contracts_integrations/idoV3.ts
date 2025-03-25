@@ -17,7 +17,7 @@ import { generalInfo as generalVestingInfo } from "./vesting";
 import { getTokens } from "@/app/contracts_integrations/nft";
 import { vestingInfos } from "./migrator";
 import { UTCDate } from "@date-fns/utc";
-import { base } from "../context/web3modal";
+import { base } from "../utils/chains";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const BASE_PROVIDER = new JsonRpcProvider(BASE_RPC_URL);

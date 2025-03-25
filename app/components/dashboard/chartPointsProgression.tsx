@@ -12,26 +12,32 @@ import {
 
 const data = [
   {
+    key: 0,
     name: "Sep, 2024",
     points: 45000,
   },
   {
+    key: 1,
     name: "Oct, 2024",
     points: 45000 * 3,
   },
   {
+    key: 2,
     name: "Nov, 2024",
     points: 45000 * 5,
   },
   {
+    key: 3,
     name: "Dec, 2024",
     points: 45000 * 8,
   },
   {
+    key: 4,
     name: "Jan, 2025",
     points: 45000 * 10,
   },
   {
+    key: 5,
     name: "Feb, 2025",
     points: 45000 * 14,
   },

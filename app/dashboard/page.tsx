@@ -7,7 +7,7 @@ import { shortAddress } from "../utils/shortAddress";
 import Link from "next/link";
 import ChartPointsProgression from "../components/dashboard/chartPointsProgression";
 import { useState, Fragment } from "react";
-import { IDOs } from "../utils/constants";
+import { IDO_CHAINS, IDOs } from "../utils/constants";
 import { formattedDate } from "../utils/formattedDate";
 import SSSelect from "../components/ssSelect";
 import ChartPointsUsage from "../components/dashboard/chartPointsUsage.tsx";
@@ -18,6 +18,7 @@ import {
   ChartBarIcon,
 } from "@heroicons/react/20/solid";
 import UserList from "../components/dashboard/userList";
+import { chains } from "../context/web3modal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ const inter = Inter({
 export default function Dashboard() {
   const [chartType, setChartType] = useState("Points Progression");
   const [chartInterval, setChartInterval] = useState("Monthly");
+  const [filterChain, setFilterChain] = useState("All Networks");
   return (
     <>
       <TopLayout background="bg-samurai-cyborg-fem">
@@ -118,7 +120,7 @@ export default function Dashboard() {
             </div>
 
             <div className="flex flex-row lg:flex-col gap-4">
-              {/* Sam Nft */}
+              {/* Tier */}
               <div className="flex flex-col justify-center bg-samurai-red/50 backdrop-blur-md p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
                 <p className="text-white text-4xl 2xl:text-6xl font-bold">
                   Shogun
@@ -133,6 +135,15 @@ export default function Dashboard() {
                   500,000
                 </p>
                 <p className="text-orange-200 text-lg">$SAM</p>
+              </div>
+
+              {/* Points */}
+              <div className="flex flex-col justify-center bg-emerald-300/30 backdrop-blur-md p-8 rounded-3xl w-max h-full border border-white/20  shadow-lg shadow-black/40">
+                <p className="text-white/70 text-sm">Samurai</p>
+                <p className="text-white text-2xl 2xl:text-4xl font-bold">
+                  1500,000
+                </p>
+                <p className="text-orange-200 text-lg">Points</p>
               </div>
 
               {/* Sam Nft */}
@@ -155,8 +166,10 @@ export default function Dashboard() {
           <div className="flex items-center gap-2">
             <span className="w-6 h-6 text-white">{network}</span>
             <SSSelect
-              options={["All Networks", "BASE", "BNB", "BERACHAIN"]}
-              onChange={(value) => {}}
+              options={["All Networks"].concat(
+                IDO_CHAINS.map((item: any) => item?.name)
+              )}
+              onChange={(value) => setFilterChain(value)}
             />
             <span className="w-2" />
             <span className="w-6 h-6 text-white">{distribution}</span>
@@ -174,7 +187,7 @@ export default function Dashboard() {
         </div>
         {/* <div className="flex items-center gap-3 h-[100px] bg-red-300">asdf</div> */}
 
-        <UserList IDOs={IDOs} />
+        <UserList IDOs={IDOs} filterChain={filterChain} />
       </div>
     </>
   );

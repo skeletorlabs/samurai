@@ -2,7 +2,7 @@ import { Contract, JsonRpcProvider, JsonRpcSigner, formatEther } from "ethers";
 import { CHAIN_ID_TO_RPC_URL, SAM_TIERS } from "../utils/constants";
 import { SAM_TIERS_ABI } from "./abis";
 import handleError from "../utils/handleErrors";
-import { base } from "../context/web3modal";
+import { base } from "../utils/chains";
 
 export type Tier = {
   name: string;

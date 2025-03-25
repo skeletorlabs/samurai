@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Chain } from "./chains";
 
 export type SupplyInfo = {
   maxSupply: string;
@@ -195,7 +196,7 @@ export interface IDO_v3 {
   logo: ReactNode;
   idoImageSrc: string;
   acceptedTokenSymbol: string;
-  tokenNetwork: string;
+  tokenNetwork: Chain;
   crowdsaleNetwork: string;
   networkImageSrc: string;
   projectName: string;

@@ -43,6 +43,7 @@ import {
 } from "@headlessui/react";
 import AdminRanges from "@/app/components/adminRanges";
 import { getMax } from "@/app/utils/max";
+import { unknown } from "@/app/utils/chains";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -276,12 +277,12 @@ export default function Ido() {
                 ))}
 
                 <div className="flex gap-3">
-                  {ido?.tokenNetwork !== "TBA" && (
+                  {ido?.tokenNetwork !== unknown && (
                     <div className="flex items-center gap-2 bg-black/20 px-4 py-2 rounded-md text-[14px] border border-white/20 w-max">
                       <span className="text-sm">Project Tokens</span>
                       <Image
                         src={ido?.networkImageSrc || ""}
-                        alt={ido?.tokenNetwork || ""}
+                        alt={ido?.tokenNetwork.name || ""}
                         width={24}
                         height={24}
                         className="p-[1px] bg-white/80 rounded-full"
@@ -477,7 +478,7 @@ export default function Ido() {
                         <div className="flex flex-col py-2 px-2 rounded-md w-max">
                           <span className="text-neutral-600">Currency:</span>
                           <p className="text-white/70">
-                            {ido.acceptedTokenSymbol} on {ido.tokenNetwork}
+                            {ido.acceptedTokenSymbol} on {ido.tokenNetwork.name}
                           </p>
                         </div>
 
@@ -745,7 +746,7 @@ export default function Ido() {
                 </div>
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
                   <span className="text-samurai-red">Network:</span>
-                  <p className="text-white/70">{ido.tokenNetwork}</p>
+                  <p className="text-white/70">{ido.tokenNetwork.name}</p>
                 </div>
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
                   <span className="text-samurai-red">FDV:</span>

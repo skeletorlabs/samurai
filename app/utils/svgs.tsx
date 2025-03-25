@@ -1584,14 +1584,14 @@ export const tokens_menu = (
     >
       <rect fill="white" x="-0.523438" y="56.9629" width="796" height="795" />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M5.47656 473C15.6391 680.713 187.267 846 397.501 846C614.272 846 790.001 670.272 790.001 453.5C790.001 250.061 635.224 82.7713 437.001 62.9629V73.0148C629.691 92.7832 780.001 255.588 780.001 453.5C780.001 664.749 608.75 836 397.501 836C192.791 836 25.6418 675.188 15.4891 473H5.47656Z"
       />
     </mask>
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M5.47656 473C15.6391 680.713 187.267 846 397.501 846C614.272 846 790.001 670.272 790.001 453.5C790.001 250.061 635.224 82.7713 437.001 62.9629V73.0148C629.691 92.7832 780.001 255.588 780.001 453.5C780.001 664.749 608.75 836 397.501 836C192.791 836 25.6418 675.188 15.4891 473H5.47656Z"
       fill="currentColor"
     />
@@ -1628,8 +1628,8 @@ export const dashboard_menu = (
     <path
       d="M2.14844 147.312L83.8411 69.4953L142.78 126.496L225.029 45.5324L254.824 74.4836L327.845 2"
       stroke="currentColor"
-      stroke-width="5.06"
-      stroke-miterlimit="10"
+      strokeWidth="5.06"
+      strokeMiterlimit="10"
     />
   </svg>
 );
@@ -1651,50 +1651,50 @@ export const ventures_menu = (
     <path
       d="M91.5156 36.4902L113.776 58.7602"
       stroke="currentColor"
-      stroke-width="4.56"
-      stroke-miterlimit="10"
+      strokeWidth="4.56"
+      strokeMiterlimit="10"
     />
     <path
       d="M113.776 36.4902L91.5156 58.7602"
       stroke="currentColor"
-      stroke-width="4.56"
-      stroke-miterlimit="10"
+      strokeWidth="4.56"
+      strokeMiterlimit="10"
     />
     <path
       d="M55.0312 100.791L77.2912 123.061"
       stroke="currentColor"
-      stroke-width="4.56"
-      stroke-miterlimit="10"
+      strokeWidth="4.56"
+      strokeMiterlimit="10"
     />
     <path
       d="M77.2912 100.791L55.0312 123.061"
       stroke="currentColor"
-      stroke-width="4.56"
-      stroke-miterlimit="10"
+      strokeWidth="4.56"
+      strokeMiterlimit="10"
     />
     <path
       d="M120.43 123.061L142.69 145.321"
       stroke="currentColor"
-      stroke-width="4.56"
-      stroke-miterlimit="10"
+      strokeWidth="4.56"
+      strokeMiterlimit="10"
     />
     <path
       d="M142.69 123.061L120.43 145.321"
       stroke="currentColor"
-      stroke-width="4.56"
-      stroke-miterlimit="10"
+      strokeWidth="4.56"
+      strokeMiterlimit="10"
     />
     <path
       d="M21.5312 17.3203L43.7912 39.5903"
       stroke="currentColor"
-      stroke-width="4.56"
-      stroke-miterlimit="10"
+      strokeWidth="4.56"
+      strokeMiterlimit="10"
     />
     <path
       d="M43.7912 17.3203L21.5312 39.5903"
       stroke="currentColor"
-      stroke-width="4.56"
-      stroke-miterlimit="10"
+      strokeWidth="4.56"
+      strokeMiterlimit="10"
     />
   </svg>
 );
@@ -1708,7 +1708,7 @@ export const nft_menu = (
     <path
       d="M147.958 13.2178L229.139 59.9117C238.445 65.2643 244.181 75.1814 244.181 85.9169V179.083C244.181 189.819 238.445 199.736 229.139 205.088L147.958 251.782C138.697 257.109 127.303 257.109 118.042 251.782L36.861 205.088C27.5551 199.736 21.8186 189.819 21.8186 179.083V85.9169C21.8186 75.1814 27.5551 65.2643 36.861 59.9117L118.042 13.2178C127.303 7.89136 138.697 7.89136 147.958 13.2178Z"
       stroke="currentColor"
-      stroke-width="8"
+      strokeWidth="8"
     />
   </svg>
 );

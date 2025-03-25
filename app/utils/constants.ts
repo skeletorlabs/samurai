@@ -61,7 +61,8 @@ import {
   VESTING_ABI_V2,
   VESTING_ABI_V3,
 } from "@/app/contracts_integrations/abis";
-import { base, berachain } from "../context/web3modal";
+
+import { base, berachain, bnb, solana } from "../utils/chains";
 
 export const VestingType: { [key: number]: string } = {
   0: "Cliff Vesting",
@@ -108,6 +109,8 @@ export const simplifiedPhasesV3 = [
   { title: "Vesting", buttonTitle: "" },
   { title: "Completed", buttonTitle: "" },
 ];
+
+export const IDO_CHAINS = [base, berachain, bnb, solana];
 
 export const IDOs_card: SINGLE_CARD[] = [
   {
@@ -208,7 +211,7 @@ export const IDOs: IDO_v3[] = [
     logo: grizzy,
     idoImageSrc: "/IDOs/grizzy.jpg",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BERACHAIN",
+    tokenNetwork: berachain,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BERACHAIN.png",
     projectName: "GrizzyFi",
@@ -277,7 +280,7 @@ export const IDOs: IDO_v3[] = [
     logo: grizzy,
     idoImageSrc: "/IDOs/grizzy.jpg",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BERACHAIN",
+    tokenNetwork: berachain,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BERACHAIN.png",
     projectName: "GrizzyFi",
@@ -346,7 +349,7 @@ export const IDOs: IDO_v3[] = [
     logo: estatex,
     idoImageSrc: "/IDOs/estatex.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BNB",
+    tokenNetwork: bnb,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BSC.png",
     projectName: "EstateX",
@@ -411,7 +414,7 @@ export const IDOs: IDO_v3[] = [
     logo: kvants,
     idoImageSrc: "/IDOs/kvants.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BNB",
+    tokenNetwork: bnb,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BSC.png",
     projectName: "Kvants",
@@ -480,7 +483,7 @@ export const IDOs: IDO_v3[] = [
     logo: alpaca,
     idoImageSrc: "/IDOs/alpaca.svg",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BASE",
+    tokenNetwork: base,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BASE.svg",
     projectName: "ALPACA",
@@ -562,7 +565,7 @@ export const IDOs: IDO_v3[] = [
     logo: smartnodes,
     idoImageSrc: "/IDOs/earnm.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BASE",
+    tokenNetwork: base,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BASE.svg",
     projectName: "EARN'M",
@@ -707,7 +710,7 @@ export const IDOs: IDO_v3[] = [
     logo: dyor,
     idoImageSrc: "/IDOs/dyor.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BASE",
+    tokenNetwork: base,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BASE.svg",
     projectName: "DYOR",

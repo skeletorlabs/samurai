@@ -9,9 +9,15 @@ const inter = Inter({
 
 interface UserList {
   IDOs: IDO_v3[];
+  filterChain: string;
 }
 
-export default function UserList({ IDOs }: UserList) {
+export default function UserList({ IDOs, filterChain }: UserList) {
+  const onFilterChain = () => {
+    console.log(filterChain);
+    if (filterChain === "All Networks") return IDOs;
+    return IDOs.filter((item) => item.tokenNetwork?.name === filterChain);
+  };
   return (
     <div className={`overflow-x-auto ${inter.className}`}>
       <table className="w-full text-white border-collapse">
@@ -35,7 +41,7 @@ export default function UserList({ IDOs }: UserList) {
           </tr>
         </thead>
         <tbody>
-          {IDOs.map((ido, index) => (
+          {onFilterChain().map((ido, index) => (
             <tr
               key={index}
               className={`odd:bg-neutral-800 even:bg-black/20 border-t border-white/20`}
@@ -64,7 +70,7 @@ export default function UserList({ IDOs }: UserList) {
                     height={20}
                     className="rounded-full bg-black/60 border border-white/20"
                   />
-                  <span>{ido?.tokenNetwork}</span>
+                  <span>{ido?.tokenNetwork.name}</span>
                 </div>
               </td>
               <td className="p-4 text-lg lg:px-8 xl:px-16">

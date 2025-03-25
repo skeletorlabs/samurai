@@ -17,7 +17,7 @@ import { userInfo as pastUserInfo } from "./samLock";
 
 import { balanceOf } from "./balanceOf";
 import { notificateTx } from "../utils/notificateTx";
-import { base, berachain } from "../context/web3modal";
+import { berachain } from "../utils/chains";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const BERA_RPC_URL = process.env.NEXT_PUBLIC_BERACHAIN_RPC_HTTPS as string;
