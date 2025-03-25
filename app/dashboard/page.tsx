@@ -40,10 +40,10 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <div className="flex mt-8 gap-5">
+          <div className="flex flex-col lg:flex-row mt-8 gap-5">
             {/* Overview */}
             <div
-              className={`flex flex-row justify-between items-center w-full ${inter.className}`}
+              className={`flex flex-col lg:flex-row lg:justify-between lg:items-center w-full ${inter.className}`}
             >
               <div className="flex flex-col bg-black/30 backdrop-blur-md py-8 rounded-3xl w-full min-h-[520px] border border-white/20 shadow-lg shadow-black/40">
                 <div className="flex items-center gap-2 px-8">
@@ -70,7 +70,7 @@ export default function Dashboard() {
                 </div>
 
                 <div className="flex flex-col gap-2 px-10 relative">
-                  <div className="flex items-center gap-2 absolute top-[-50px] right-5 text-sm">
+                  <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:absolute lg:top-[-50px] lg:right-5 text-sm">
                     <ChartBarIcon width={24} height={24} />
                     <SSSelect
                       options={["Points Progression", "Points Usage"]}
@@ -117,7 +117,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-row lg:flex-col gap-4">
               {/* Sam Nft */}
               <div className="flex flex-col justify-center bg-samurai-red/50 backdrop-blur-md p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
                 <p className="text-white text-4xl 2xl:text-6xl font-bold">
@@ -147,7 +147,7 @@ export default function Dashboard() {
       </TopLayout>
 
       {/* My Allocations */}
-      <div className="flex flex-col py-10 md:py-20 w-full bg-black border-t-[1px] border-samurai-red/40">
+      <div className="hidden lg:flex flex-col py-10 md:py-20 w-full bg-black border-t-[1px] border-samurai-red/40">
         <div className="flex items-center justify-between px-2 lg:px-8 xl:px-16 text-white mb-10">
           <h2 className="text-4xl lg:text-5xl font-bold text-center lg:text-start">
             My <span className="text-samurai-red">Allocations</span>
