@@ -25,7 +25,8 @@ import { getTokens } from "./nft";
 export async function userInfo(signer: Signer) {
   try {
     const signerAddress = await signer.getAddress();
-    const walletToCheck = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
+    // const walletToCheck = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
+    const walletToCheck = signerAddress;
     const tier = await getTier(signerAddress);
     const tierName = tier?.name || "Public";
     const samBalance = Number(

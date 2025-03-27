@@ -6,7 +6,7 @@ import TopLayout from "@/app/components/topLayout";
 import { shortAddress } from "../utils/shortAddress";
 import Link from "next/link";
 import ChartPointsProgression from "../components/dashboard/chartPointsProgression";
-import { useState, Fragment, useContext, useEffect } from "react";
+import { useState, Fragment, useContext, useEffect, useCallback } from "react";
 import { IDO_CHAINS, IDOs } from "../utils/constants";
 import { formattedDate } from "../utils/formattedDate";
 import SSSelect from "../components/ssSelect";
@@ -40,6 +40,40 @@ export default function Dashboard() {
 
   const { signer } = useContext(StateContext);
 
+  enum FilterType {
+    ChartType,
+    ChartInterval,
+    FilterChain,
+    FilterStatus,
+  }
+
+  const onChangeFilters = useCallback(
+    (type: FilterType, value: string) => {
+      switch (type) {
+        case FilterType.ChartType:
+          setChartType(value);
+          break;
+        case FilterType.ChartInterval:
+          setChartInterval(value);
+          break;
+        case FilterType.FilterChain:
+          setFilterChain(value);
+          break;
+        case FilterType.FilterStatus:
+          setFilterStatus(value);
+          break;
+        default:
+          break;
+      }
+    },
+    [setChartType, setChartInterval, setFilterChain, setFilterStatus]
+  );
+
+  const resetFilters = useCallback(() => {
+    onChangeFilters(FilterType.FilterChain, "All Networks");
+    onChangeFilters(FilterType.FilterStatus, "All Status");
+  }, [onChangeFilters]);
+
   const getUserInfo = async () => {
     setLoading(true);
     if (signer) {
@@ -53,7 +87,6 @@ export default function Dashboard() {
     getUserInfo();
   }, [signer]);
 
-  console.log(userDetails);
   return (
     <div className="flex flex-col relative">
       <TopLayout background="bg-samurai-cyborg-fem">
@@ -102,14 +135,20 @@ export default function Dashboard() {
                     <ChartBarIcon width={24} height={24} />
                     <SSSelect
                       options={["Points Progression", "Points Usage"]}
-                      onChange={(value) => setChartType(value)}
+                      onChange={(value) =>
+                        onChangeFilters(FilterType.ChartType, value)
+                      }
+                      value={chartType}
                     />
 
                     <span className="w-2" />
                     <CalendarDaysIcon width={24} height={24} />
                     <SSSelect
                       options={["6 months"]}
-                      onChange={(value) => setChartInterval(value)}
+                      onChange={(value) =>
+                        onChangeFilters(FilterType.ChartInterval, value)
+                      }
+                      value={chartInterval}
                     />
                   </div>
                   {chartType === "Points Progression" ? (
@@ -184,7 +223,6 @@ export default function Dashboard() {
           </div>
         </div>
       </TopLayout>
-
       {/* My Allocations */}
       <div className="hidden lg:flex flex-col py-10 md:py-20 w-full bg-black border-t-[1px] border-samurai-red/40">
         <div className="flex items-center justify-between px-2 lg:px-8 xl:px-16 text-white mb-10">
@@ -197,7 +235,10 @@ export default function Dashboard() {
               options={["All Networks"].concat(
                 IDO_CHAINS.map((item: any) => item?.name)
               )}
-              onChange={(value) => setFilterChain(value)}
+              onChange={(value) =>
+                onChangeFilters(FilterType.FilterChain, value)
+              }
+              value={filterChain}
             />
             <span className="w-2" />
             <span className="w-6 h-6 text-white">{distribution}</span>
@@ -209,19 +250,25 @@ export default function Dashboard() {
                 "Vesting",
                 "Completed",
               ]}
-              onChange={(value) => setFilterStatus(value)}
+              onChange={(value) =>
+                onChangeFilters(FilterType.FilterStatus, value)
+              }
+              value={filterStatus}
             />
           </div>
         </div>
         {/* <div className="flex items-center gap-3 h-[100px] bg-red-300">asdf</div> */}
 
-        <UserList
-          IDOs={userDetails?.userIdos || []}
-          allocations={userDetails?.allocations || {}}
-          phases={userDetails?.phases || {}}
-          filterChain={filterChain}
-          filterStatus={filterStatus}
-        />
+        {!loading && (
+          <UserList
+            IDOs={userDetails?.userIdos || []}
+            allocations={userDetails?.allocations || {}}
+            phases={userDetails?.phases || {}}
+            filterChain={filterChain}
+            filterStatus={filterStatus}
+            onResetFilters={resetFilters}
+          />
+        )}
       </div>
 
       {/* Loading */}

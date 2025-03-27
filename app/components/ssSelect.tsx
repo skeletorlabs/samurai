@@ -1,20 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiChevronDown } from "react-icons/bi";
 import classNames from "classnames";
 
 interface SSSelectProps {
   options: string[];
   onChange: (value: string) => void;
-  defaultValue?: string;
+  value: string;
 }
 
-export default function SSSelect({
-  options,
-  onChange,
-  defaultValue,
-}: SSSelectProps) {
+export default function SSSelect({ options, onChange, value }: SSSelectProps) {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(defaultValue || options[0]);
+  const [selected, setSelected] = useState(options[0]);
+
+  useEffect(() => {
+    setSelected(value);
+  }, [value]);
 
   return (
     <div

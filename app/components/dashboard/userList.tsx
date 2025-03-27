@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import { formattedDate, formattedDate2 } from "@/app/utils/formattedDate";
 import Image from "next/image";
 import { IDO_v3, StringToNumber, StringToString } from "@/app/utils/interfaces";
+import { useCallback, useEffect, useState } from "react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,7 +14,7 @@ interface UserList {
   phases: StringToString;
   filterChain: string;
   filterStatus: string;
-  resetFilters?: boolean;
+  onResetFilters: () => void;
 }
 
 export default function UserList({
@@ -22,12 +23,16 @@ export default function UserList({
   phases,
   filterChain,
   filterStatus,
-  resetFilters,
+  onResetFilters,
 }: UserList) {
-  const onFilter = () => {
-    let list = [...IDOs];
+  const [idoList, setIdoList] = useState<IDO_v3[]>([]);
 
-    if (resetFilters) return list;
+  const goToIdo = (url: string) => {
+    window.location.href = url;
+  };
+
+  const filter = useCallback(() => {
+    let list = [...IDOs];
 
     if (filterChain !== "All Networks")
       list = list.filter((item) => item.tokenNetwork?.name === filterChain);
@@ -43,82 +48,98 @@ export default function UserList({
         break;
     }
 
-    return list;
-  };
+    setIdoList(list);
+  }, [filterChain, filterStatus, setIdoList]);
 
-  const goToIdo = (url: string) => {
-    window.location.href = url;
-  };
+  useEffect(() => {
+    filter();
+  }, [filterChain, filterStatus]);
+
+  useEffect(() => {
+    filter();
+  }, []);
 
   return (
     <div className={`overflow-x-auto ${inter.className}`}>
-      <table className="w-full text-white border-collapse">
-        <thead>
-          <tr className="bg-white/10 text-left px-2 lg:px-8 xl:px-16">
-            <th className="p-4 px-2 lg:px-8 xl:px-16 text-samurai-red">
-              Project
-            </th>
-            <th className="p-4 px-2 lg:px-8 xl:px-12 text-samurai-red">
-              Network
-            </th>
-            <th className="p-4 px-2 lg:px-8 xl:px-16 text-samurai-red">
-              Allocated
-            </th>
-            <th className="p-4 px-2 lg:px-8 xl:px-16 text-samurai-red">
-              TGE Date
-            </th>
-            <th className="p-4 px-2 lg:px-8 xl:px-16 text-samurai-red">
-              Distribution
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {onFilter().map((ido, index) => (
-            <tr
-              key={index}
-              className={`odd:bg-neutral-800 even:bg-black/20 border-t border-white/20 transition-all hover:opacity-85 hover:cursor-pointer`}
-              onClick={() => goToIdo(ido.url)}
-            >
-              <td className="p-4 flex items-center gap-5 lg:px-8 xl:px-16">
-                <Image
-                  src={ido?.idoImageSrc}
-                  alt={ido?.projectName}
-                  width={50}
-                  height={50}
-                  className="rounded-full w-[60px] h-[60px] border border-white/30 bg-black/50 p-1"
-                />
-                <div className="flex flex-col gap-1">
-                  <p className="text-xl font-bold">{ido?.projectName}</p>
-                  <p className="bg-white/10 text-white rounded-full px-3 py-[2px] text-xs border border-white/20 w-max">
-                    {phases[ido.id]}
-                  </p>
-                </div>
-              </td>
-              <td className="p-4 lg:px-8 xl:px-12">
-                <div className="flex items-center gap-3 text-sm border border-white/20 bg-white/10 rounded-full py-[6px] px-5 w-max">
-                  <Image
-                    src={ido?.networkImageSrc}
-                    alt={ido?.projectName}
-                    width={20}
-                    height={20}
-                    className="rounded-full bg-black/60 border border-white/20"
-                  />
-                  <span>{ido?.tokenNetwork.name}</span>
-                </div>
-              </td>
-              <td className="p-4 text-lg lg:px-8 xl:px-16">
-                {allocations[ido.id].toLocaleString("en-us")} USDC
-              </td>
-              <td className="p-4 text-lg lg:px-8 xl:px-16">
-                {formattedDate2(ido?.end)}
-              </td>
-              <td className="p-4 text-lg lg:px-8 xl:px-16">
-                {ido?.vestingDescription}
-              </td>
+      {idoList.length > 0 ? (
+        <table className="w-full text-white border-collapse">
+          <thead>
+            <tr className="bg-white/10 text-left px-2 lg:px-8 xl:px-16">
+              <th className="p-4 px-2 lg:px-8 xl:px-16 text-samurai-red">
+                Project
+              </th>
+              <th className="p-4 px-2 lg:px-8 xl:px-12 text-samurai-red">
+                Network
+              </th>
+              <th className="p-4 px-2 lg:px-8 xl:px-16 text-samurai-red">
+                Allocated
+              </th>
+              <th className="p-4 px-2 lg:px-8 xl:px-16 text-samurai-red">
+                TGE Date
+              </th>
+              <th className="p-4 px-2 lg:px-8 xl:px-16 text-samurai-red">
+                Distribution
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {idoList.map((ido, index) => (
+              <tr
+                key={index}
+                className={`odd:bg-neutral-800 even:bg-black/20 border-t border-white/20 transition-all hover:opacity-85 hover:cursor-pointer`}
+                onClick={() => goToIdo(ido.url)}
+              >
+                <td className="p-4 flex items-center gap-5 lg:px-8 xl:px-16">
+                  <Image
+                    src={ido?.idoImageSrc}
+                    alt={ido?.projectName}
+                    width={50}
+                    height={50}
+                    className="rounded-full w-[60px] h-[60px] border border-white/30 bg-black/50 p-1"
+                  />
+                  <div className="flex flex-col gap-1">
+                    <p className="text-xl font-bold">{ido?.projectName}</p>
+                    <p className="bg-white/10 text-white rounded-full px-3 py-[2px] text-xs border border-white/20 w-max">
+                      {phases[ido.id]}
+                    </p>
+                  </div>
+                </td>
+                <td className="p-4 lg:px-8 xl:px-12">
+                  <div className="flex items-center gap-3 text-sm border border-white/20 bg-white/10 rounded-full py-[6px] px-5 w-max">
+                    <Image
+                      src={ido?.networkImageSrc}
+                      alt={ido?.projectName}
+                      width={20}
+                      height={20}
+                      className="rounded-full bg-black/60 border border-white/20"
+                    />
+                    <span>{ido?.tokenNetwork.name}</span>
+                  </div>
+                </td>
+                <td className="p-4 text-lg lg:px-8 xl:px-16">
+                  {allocations[ido.id].toLocaleString("en-us")} USDC
+                </td>
+                <td className="p-4 text-lg lg:px-8 xl:px-16">
+                  {formattedDate2(ido?.end)}
+                </td>
+                <td className="p-4 text-lg lg:px-8 xl:px-16">
+                  {ido?.vestingDescription}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <div className="flex items-center gap-2 px-4 lg:px-8 xl:px-16">
+          <span>No items found, please</span>
+          <button
+            onClick={onResetFilters}
+            className="underline hover:text-samurai-red transition-all"
+          >
+            try reseting your filters
+          </button>
+        </div>
+      )}
     </div>
   );
 }
