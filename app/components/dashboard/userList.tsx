@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
-import { formattedDate } from "@/app/utils/formattedDate";
+import { formattedDate, formattedDate2 } from "@/app/utils/formattedDate";
 import Image from "next/image";
-import { IDO_v3 } from "@/app/utils/interfaces";
+import { IDO_v3, StringToNumber, StringToString } from "@/app/utils/interfaces";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -9,15 +9,47 @@ const inter = Inter({
 
 interface UserList {
   IDOs: IDO_v3[];
+  allocations: StringToNumber;
+  phases: StringToString;
   filterChain: string;
+  filterStatus: string;
+  resetFilters?: boolean;
 }
 
-export default function UserList({ IDOs, filterChain }: UserList) {
-  const onFilterChain = () => {
-    console.log(filterChain);
-    if (filterChain === "All Networks") return IDOs;
-    return IDOs.filter((item) => item.tokenNetwork?.name === filterChain);
+export default function UserList({
+  IDOs,
+  allocations,
+  phases,
+  filterChain,
+  filterStatus,
+  resetFilters,
+}: UserList) {
+  const onFilter = () => {
+    let list = [...IDOs];
+
+    if (resetFilters) return list;
+
+    if (filterChain !== "All Networks")
+      list = list.filter((item) => item.tokenNetwork?.name === filterChain);
+
+    switch (filterStatus) {
+      case "Vesting":
+        list = list.filter((item) => phases[item.id] === "Vesting");
+        break;
+      case "Completed":
+        list = list.filter((item) => phases[item.id] === "Completed");
+        break;
+      default:
+        break;
+    }
+
+    return list;
   };
+
+  const goToIdo = (url: string) => {
+    window.location.href = url;
+  };
+
   return (
     <div className={`overflow-x-auto ${inter.className}`}>
       <table className="w-full text-white border-collapse">
@@ -41,10 +73,11 @@ export default function UserList({ IDOs, filterChain }: UserList) {
           </tr>
         </thead>
         <tbody>
-          {onFilterChain().map((ido, index) => (
+          {onFilter().map((ido, index) => (
             <tr
               key={index}
-              className={`odd:bg-neutral-800 even:bg-black/20 border-t border-white/20`}
+              className={`odd:bg-neutral-800 even:bg-black/20 border-t border-white/20 transition-all hover:opacity-85 hover:cursor-pointer`}
+              onClick={() => goToIdo(ido.url)}
             >
               <td className="p-4 flex items-center gap-5 lg:px-8 xl:px-16">
                 <Image
@@ -57,7 +90,7 @@ export default function UserList({ IDOs, filterChain }: UserList) {
                 <div className="flex flex-col gap-1">
                   <p className="text-xl font-bold">{ido?.projectName}</p>
                   <p className="bg-white/10 text-white rounded-full px-3 py-[2px] text-xs border border-white/20 w-max">
-                    Vesting
+                    {phases[ido.id]}
                   </p>
                 </div>
               </td>
@@ -74,10 +107,10 @@ export default function UserList({ IDOs, filterChain }: UserList) {
                 </div>
               </td>
               <td className="p-4 text-lg lg:px-8 xl:px-16">
-                {Number(1000).toLocaleString("en-us")} USDC
+                {allocations[ido.id].toLocaleString("en-us")} USDC
               </td>
               <td className="p-4 text-lg lg:px-8 xl:px-16">
-                {formattedDate(ido?.end)}
+                {formattedDate2(ido?.end)}
               </td>
               <td className="p-4 text-lg lg:px-8 xl:px-16">
                 {ido?.vestingDescription}

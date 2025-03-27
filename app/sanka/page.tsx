@@ -13,7 +13,7 @@ export default function Sanka() {
   return (
     <>
       <TopLayout background="bg-samurai-sanka">
-        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-14 pt-10 lg:pt-24">
+        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-14 pt-10">
           {/* TOP CONTENT */}
           <div className="relative md:mr-12 w-full xl:max-w-[900px] text-center lg:text-start">
             <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">

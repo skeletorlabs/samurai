@@ -259,3 +259,17 @@ export interface SINGLE_CARD {
 export interface VESTING_PERIOD_TYPE {
   [key: number]: string;
 }
+
+export type StringToString = Record<string, string>;
+export type StringToNumber = Record<string, number>;
+
+export type DashboardUserDetails = {
+  tier: string;
+  samBalance: number;
+  points: number;
+  nftBalance: number;
+  userIdos: IDO_v3[];
+  phases: StringToString;
+  allocations: StringToNumber;
+  totalAllocated: number;
+};

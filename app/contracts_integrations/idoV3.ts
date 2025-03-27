@@ -136,11 +136,14 @@ function parseWalletRange(range: any, decimals: number) {
 export async function userInfo(
   index: number,
   signer: ethers.Signer,
-  tierName: string
+  tierName: string,
+  account?: string
 ) {
   try {
     const ido = IDOs[index];
     let signerAddress = await signer.getAddress();
+    const address = account ? account : signerAddress;
+
     const contract = await getContract(index, signer);
     const usingETH = ido.ether ? await contract?.usingETH() : false;
     const isPublic = await contract?.isPublic();
@@ -160,21 +163,21 @@ export async function userInfo(
         : ranges.find((item) => item[0].toString() === tierName);
 
     const walletRange = parseWalletRange(range, usingETH ? 18 : 6);
-    const linkedWallet = await contract?.linkedWallets(signerAddress);
+    const linkedWallet = await contract?.linkedWallets(address);
 
-    const isWhitelisted = await contract?.whitelist(signerAddress);
+    const isWhitelisted = await contract?.whitelist(address);
 
     const allocation = Number(
-      ethers.formatUnits(await contract?.allocations(signerAddress), 6)
+      ethers.formatUnits(await contract?.allocations(address), 6)
     );
 
     const acceptedToken = await contract?.acceptedTokens(0);
 
-    const balanceEther = await signer.provider?.getBalance(signerAddress);
+    const balanceEther = await signer.provider?.getBalance(address);
 
     const balanceToken = Number(
       ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken, signerAddress, BASE_PROVIDER),
+        await balanceOf(ERC20_ABI, acceptedToken, address, BASE_PROVIDER),
         6
       )
     );

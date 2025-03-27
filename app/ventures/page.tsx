@@ -34,7 +34,7 @@ export default function Ventures() {
     <>
       <TopLayout background="bg-samurai-incubator">
         <>
-          <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-14 pt-10 lg:pt-16 bg-transparent sm:bg-black/60 2xl:bg-transparent">
+          <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-14 pt-10 bg-transparent sm:bg-black/60 2xl:bg-transparent">
             {/* TOP CONTENT */}
             <div className="relative md:mr-12 xl:max-w-[1000px]">
               <h1 className="text-[38px] sm:text-[58px] lg:text-[80px] 2xl:text-[90px] font-black leading-[48px] sm:leading-[68px] lg:leading-[98px] text-white text-center sm:text-start">

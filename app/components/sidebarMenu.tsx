@@ -9,6 +9,7 @@ import { Page } from "../utils/enums";
 import { BiChevronDown, BiChevronRight } from "react-icons/bi";
 import classNames from "classnames";
 import { samurai, samurai_xs } from "@/public/IDOs/svgs";
+import ConnectButton from "./menu/connectButton";
 
 export default function SidebarMenu() {
   const [open, setOpen] = useState(false);
@@ -85,6 +86,18 @@ export default function SidebarMenu() {
             </span>
           </Link>
         ))}
+
+        <div className="flex flex-col items-center mt-10 w-full">
+          <span
+            className={classNames({
+              "border-t border-white/30 pb-10": true,
+              "w-10": !open,
+              "w-32": open,
+            })}
+          />
+
+          <ConnectButton showText={open} />
+        </div>
       </div>
     </div>
   );

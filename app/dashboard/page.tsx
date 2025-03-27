@@ -6,7 +6,7 @@ import TopLayout from "@/app/components/topLayout";
 import { shortAddress } from "../utils/shortAddress";
 import Link from "next/link";
 import ChartPointsProgression from "../components/dashboard/chartPointsProgression";
-import { useState, Fragment } from "react";
+import { useState, Fragment, useContext, useEffect } from "react";
 import { IDO_CHAINS, IDOs } from "../utils/constants";
 import { formattedDate } from "../utils/formattedDate";
 import SSSelect from "../components/ssSelect";
@@ -19,6 +19,10 @@ import {
 } from "@heroicons/react/20/solid";
 import UserList from "../components/dashboard/userList";
 import { chains } from "../context/web3modal";
+import { StateContext } from "../context/StateContext";
+import { userInfo } from "../contracts_integrations/dashboard";
+import LoadingBox from "../components/loadingBox";
+import { DashboardUserDetails } from "../utils/interfaces";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,10 +32,32 @@ export default function Dashboard() {
   const [chartType, setChartType] = useState("Points Progression");
   const [chartInterval, setChartInterval] = useState("Monthly");
   const [filterChain, setFilterChain] = useState("All Networks");
+  const [filterStatus, setFilterStatus] = useState("All Status");
+  const [userDetails, setUserDetails] = useState<DashboardUserDetails | null>(
+    null
+  );
+  const [loading, setLoading] = useState(false);
+
+  const { signer } = useContext(StateContext);
+
+  const getUserInfo = async () => {
+    setLoading(true);
+    if (signer) {
+      const response = await userInfo(signer);
+      if (response) setUserDetails(response);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getUserInfo();
+  }, [signer]);
+
+  console.log(userDetails);
   return (
-    <>
+    <div className="flex flex-col relative">
       <TopLayout background="bg-samurai-cyborg-fem">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-14 pt-10 lg:pt-16">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-14 ">
           <div className="flex flex-row justify-between items-center max-w-[1130px]">
             {/* TOP CONTENT */}
             <div className="w-full">
@@ -97,14 +123,14 @@ export default function Dashboard() {
                   <div className="flex flex-col w-full">
                     <p className="text-white/70 text-sm">Total IDOs</p>
                     <p className="text-white text-3xl 2xl:text-5xl font-bold">
-                      10
+                      {userDetails?.userIdos.length}
                     </p>
                     <p className="text-orange-200 text-lg">Participated</p>
                   </div>
                   <div className="flex flex-col w-full">
                     <p className="text-white/70 text-sm">Overall Allocation</p>
                     <p className="text-white text-3xl 2xl:text-5xl font-bold">
-                      500,000
+                      {userDetails?.totalAllocated.toLocaleString("en-us")}
                     </p>
                     <p className="text-orange-200 text-lg">USDC</p>
                   </div>
@@ -119,11 +145,13 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="flex flex-row lg:flex-col gap-4">
+            <div
+              className={`flex flex-row lg:flex-col gap-4 flex-wrap lg:flex-nowrap`}
+            >
               {/* Tier */}
-              <div className="flex flex-col justify-center bg-samurai-red/50 backdrop-blur-md p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
-                <p className="text-white text-4xl 2xl:text-6xl font-bold">
-                  Shogun
+              <div className="flex flex-col justify-center bg-samurai-red/50 backdrop-blur-md py-5 px-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+                <p className="text-white text-4xl 2xl:text-5xl">
+                  {userDetails?.tier}
                 </p>
                 <p className="text-orange-200 text-lg">Tier</p>
               </div>
@@ -131,25 +159,25 @@ export default function Dashboard() {
               {/* Sam */}
               <div className="flex flex-col justify-center bg-neutral-500/50 backdrop-blur-md p-8 rounded-3xl w-max h-full border border-white/20  shadow-lg shadow-black/40">
                 <p className="text-white/70 text-sm">Total Tokens</p>
-                <p className="text-white text-4xl 2xl:text-6xl font-bold">
-                  500,000
+                <p className="text-white text-4xl 2xl:text-5xl">
+                  {userDetails?.samBalance.toLocaleString("en-us")}
                 </p>
                 <p className="text-orange-200 text-lg">$SAM</p>
               </div>
 
               {/* Points */}
-              <div className="flex flex-col justify-center bg-emerald-300/30 backdrop-blur-md p-8 rounded-3xl w-max h-full border border-white/20  shadow-lg shadow-black/40">
-                <p className="text-white/70 text-sm">Samurai</p>
-                <p className="text-white text-2xl 2xl:text-4xl font-bold">
-                  1500,000
+              <div className="flex flex-col justify-center bg-emerald-300/30 backdrop-blur-md py-5 px-8 rounded-3xl w-max h-full border border-white/20  shadow-lg shadow-black/40">
+                <p className="text-white text-2xl 2xl:text-4xl">
+                  {userDetails?.points.toLocaleString("en-us")}
                 </p>
                 <p className="text-orange-200 text-lg">Points</p>
               </div>
 
               {/* Sam Nft */}
-              <div className="flex flex-col justify-center bg-yellow-300/50 backdrop-blur-md p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
-                <p className="text-white/70 text-sm">Total NFTs</p>
-                <p className="text-white text-4xl 2xl:text-6xl font-bold">10</p>
+              <div className="flex flex-col justify-center bg-yellow-300/50 backdrop-blur-md py-5 px-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+                <p className="text-white text-4xl 2xl:text-5xl">
+                  {userDetails?.nftBalance}
+                </p>
                 <p className="text-orange-200 text-lg">SAM NFT</p>
               </div>
             </div>
@@ -181,14 +209,23 @@ export default function Dashboard() {
                 "Vesting",
                 "Completed",
               ]}
-              onChange={(value) => setChartInterval(value)}
+              onChange={(value) => setFilterStatus(value)}
             />
           </div>
         </div>
         {/* <div className="flex items-center gap-3 h-[100px] bg-red-300">asdf</div> */}
 
-        <UserList IDOs={IDOs} filterChain={filterChain} />
+        <UserList
+          IDOs={userDetails?.userIdos || []}
+          allocations={userDetails?.allocations || {}}
+          phases={userDetails?.phases || {}}
+          filterChain={filterChain}
+          filterStatus={filterStatus}
+        />
       </div>
-    </>
+
+      {/* Loading */}
+      {loading && <LoadingBox />}
+    </div>
   );
 }
