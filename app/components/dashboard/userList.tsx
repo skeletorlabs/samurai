@@ -131,7 +131,7 @@ export default function UserList({
         </table>
       ) : (
         <div className="flex items-center gap-2 px-4 lg:px-8 xl:px-16">
-          <span>No items found, please</span>
+          <span>No allocations found, please</span>
           <button
             onClick={onResetFilters}
             className="underline hover:text-samurai-red transition-all"
