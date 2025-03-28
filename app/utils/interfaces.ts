@@ -262,8 +262,10 @@ export interface VESTING_PERIOD_TYPE {
 
 export type StringToString = Record<string, string>;
 export type StringToNumber = Record<string, number>;
+export type StringToBoolean = Record<string, boolean>;
 
 export type DashboardUserDetails = {
+  account: string;
   tier: string;
   samBalance: number;
   points: number;

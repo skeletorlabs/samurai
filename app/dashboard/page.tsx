@@ -129,14 +129,11 @@ export default function Dashboard() {
                     <div className="flex flex-col text-white leading-tight w-max">
                       <span className="text-white/70">EVM Address</span>
                       <Link
-                        href={`https://basescan.org/address/0xcDe00Be56479F95b5e33De136AD820FfaE996009`}
+                        href={`https://basescan.org/address/${userDetails?.account}`}
                         className="2xl:text-xl hover:underline hover:opacity-80"
                         target="_blank"
                       >
-                        {shortAddress(
-                          "0xcDe00Be56479F95b5e33De136AD820FfaE996009",
-                          8
-                        )}
+                        {shortAddress(userDetails?.account || "", 8)}
                       </Link>
                     </div>
                   </div>
