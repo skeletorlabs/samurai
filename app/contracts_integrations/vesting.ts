@@ -124,6 +124,7 @@ function getNextUnlock(
 export async function generalInfo(index: number) {
   try {
     const ido = IDOs[index];
+    console.log("on vesting ido id", ido.id);
     const contract = await getContract(index);
 
     const owner = await contract?.owner();
@@ -163,11 +164,11 @@ export async function generalInfo(index: number) {
     );
 
     const periods = await contract?.periods();
-
     const vestingDuration = Number(periods[0]);
+
     let vestingAt =
       ido.id === "alpaca" ? Number(periods[1]) + 60 * 15 : Number(periods[1]);
-    vestingAt = getUnixTime(new Date());
+
     const cliff = Number(periods[2]);
 
     let nextUnlock = 0;

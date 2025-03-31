@@ -274,4 +274,7 @@ export type DashboardUserDetails = {
   phases: StringToString;
   allocations: StringToNumber;
   totalAllocated: number;
+  totalClaimed: number;
+  tgesUnlocked: StringToBoolean;
+  tgesClaimed: StringToBoolean;
 };

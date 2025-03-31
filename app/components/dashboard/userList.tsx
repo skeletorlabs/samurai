@@ -1,8 +1,14 @@
 import { Inter } from "next/font/google";
 import { formattedDate, formattedDate2 } from "@/app/utils/formattedDate";
 import Image from "next/image";
-import { IDO_v3, StringToNumber, StringToString } from "@/app/utils/interfaces";
+import {
+  IDO_v3,
+  StringToBoolean,
+  StringToNumber,
+  StringToString,
+} from "@/app/utils/interfaces";
 import { useCallback, useEffect, useState } from "react";
+import classNames from "classnames";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -12,6 +18,8 @@ interface UserList {
   IDOs: IDO_v3[];
   allocations: StringToNumber;
   phases: StringToString;
+  tgesUnlocked: StringToBoolean;
+  tgesClaimed: StringToBoolean;
   filterChain: string;
   filterStatus: string;
   onResetFilters: () => void;
@@ -21,6 +29,8 @@ export default function UserList({
   IDOs,
   allocations,
   phases,
+  tgesUnlocked,
+  tgesClaimed,
   filterChain,
   filterStatus,
   onResetFilters,
@@ -43,6 +53,12 @@ export default function UserList({
         break;
       case "Completed":
         list = list.filter((item) => phases[item.id] === "Completed");
+        break;
+      case "TGE Unlocked":
+        list = list.filter((item) => tgesUnlocked[item.id]);
+        break;
+      case "TGE Claimed":
+        list = list.filter((item) => tgesClaimed[item.id]);
         break;
       default:
         break;
@@ -86,7 +102,7 @@ export default function UserList({
             {idoList.map((ido, index) => (
               <tr
                 key={index}
-                className={`odd:bg-neutral-800 even:bg-black/20 border-t border-white/20 transition-all hover:opacity-85 hover:cursor-pointer`}
+                className={`odd:bg-neutral-800 even:bg-white/5 border-t border-white/20 transition-all odd:hover:opacity-85 even:hover:bg-white/10 hover:cursor-pointer`}
                 onClick={() => goToIdo(ido.url)}
               >
                 <td className="p-4 flex items-center gap-5 lg:px-8 xl:px-16">
@@ -121,6 +137,33 @@ export default function UserList({
                 </td>
                 <td className="p-4 text-lg lg:px-8 xl:px-16">
                   {formattedDate2(ido?.end)}
+                  <br />
+                  {ido.vesting && (
+                    <div className="flex items-center gap-1 text-xs">
+                      <span
+                        className={classNames({
+                          "flex justify-center items-center p-1 px-2 rounded-full":
+                            true,
+                          "bg-green-500": tgesUnlocked[ido.id],
+                          "bg-samurai-red": !tgesUnlocked[ido.id],
+                        })}
+                      >
+                        {tgesUnlocked[ido.id] === true ? "Unlocked" : "Locked"}
+                      </span>
+                      <span
+                        className={classNames({
+                          "flex justify-center items-center p-1 px-2 rounded-full":
+                            true,
+                          "bg-green-500": tgesClaimed[ido.id],
+                          "bg-samurai-red": !tgesClaimed[ido.id],
+                        })}
+                      >
+                        {tgesClaimed[ido.id] === true
+                          ? "Claimed"
+                          : "Not Claimed"}
+                      </span>
+                    </div>
+                  )}
                 </td>
                 <td className="p-4 text-lg lg:px-8 xl:px-16">
                   {ido?.vestingDescription}

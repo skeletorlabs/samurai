@@ -12,38 +12,36 @@ import {
 
 const data = [
   {
-    key: 0,
     name: "Sep, 2024",
     points: 45000,
   },
   {
-    key: 1,
     name: "Oct, 2024",
     points: 45000 * 3,
   },
   {
-    key: 2,
     name: "Nov, 2024",
     points: 45000 * 5,
   },
   {
-    key: 3,
     name: "Dec, 2024",
     points: 45000 * 8,
   },
   {
-    key: 4,
     name: "Jan, 2025",
     points: 45000 * 10,
   },
   {
-    key: 5,
     name: "Feb, 2025",
     points: 45000 * 14,
   },
 ];
 
-export default class ChartPointsProgression extends PureComponent {
+interface ChartPointsProgressionProps {
+  data: { name: string; points: number }[]; // Define the correct type for 'data'
+}
+
+export default class ChartPointsProgression extends PureComponent<ChartPointsProgressionProps> {
   renderDot = (props: any) => {
     const { cx, cy, stroke, payload, r } = props;
 
@@ -75,6 +73,8 @@ export default class ChartPointsProgression extends PureComponent {
   };
 
   render() {
+    const { data } = this.props;
+
     return (
       <ResponsiveContainer
         width="100%"
@@ -86,7 +86,7 @@ export default class ChartPointsProgression extends PureComponent {
           width={730}
           height={250}
           data={data}
-          margin={{ top: 0, right: 50, left: 50, bottom: 0 }}
+          margin={{ top: 10, right: 50, left: 50, bottom: 0 }}
         >
           <defs>
             <linearGradient id="colorAmount" x1="0" y1="0" x2="0" y2="1">

@@ -63,13 +63,14 @@ export async function generalInfo() {
 
 // USER INFOS
 
-export async function userInfo(signer: Signer) {
+export async function userInfo(signer: Signer, account?: string) {
   try {
     let signerAddress = await signer.getAddress();
+    const address = account ? account : signerAddress;
 
     const contract = await getContract(signer);
 
-    const locksCounter = Number(await contract?.locksCounter(signerAddress));
+    const locksCounter = Number(await contract?.locksCounter(address));
     const minPeriod = Number(await contract?.MIN_MONTHS_LOCKED());
 
     const tokens = await getTokens(signer);
@@ -77,9 +78,7 @@ export async function userInfo(signer: Signer) {
     let locks: NFTToken[] = [];
 
     for (let index = 0; index < locksCounter; index++) {
-      const lockedTokenId = Number(
-        await contract?.getTokenId(signerAddress, index)
-      );
+      const lockedTokenId = Number(await contract?.getTokenId(address, index));
       const lockedAt = fromUnixTime(
         Number(await contract?.locksAt(lockedTokenId))
       );

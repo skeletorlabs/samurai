@@ -6,21 +6,18 @@ import TopLayout from "@/app/components/topLayout";
 import { shortAddress } from "../utils/shortAddress";
 import Link from "next/link";
 import ChartPointsProgression from "../components/dashboard/chartPointsProgression";
-import { useState, Fragment, useContext, useEffect, useCallback } from "react";
-import { IDO_CHAINS, IDOs } from "../utils/constants";
-import { formattedDate } from "../utils/formattedDate";
+import { useState, useContext, useEffect, useCallback } from "react";
+import { IDO_CHAINS } from "../utils/constants";
 import SSSelect from "../components/ssSelect";
 import ChartPointsUsage from "../components/dashboard/chartPointsUsage.tsx";
 import { distribution, network } from "../utils/svgs";
-import {
-  CalendarDaysIcon,
-  CalendarIcon,
-  ChartBarIcon,
-} from "@heroicons/react/20/solid";
+import { CalendarDaysIcon, ChartBarIcon } from "@heroicons/react/20/solid";
 import UserList from "../components/dashboard/userList";
-import { chains } from "../context/web3modal";
 import { StateContext } from "../context/StateContext";
-import { userInfo } from "../contracts_integrations/dashboard";
+import {
+  getHistoricalBalances,
+  userInfo,
+} from "../contracts_integrations/dashboard";
 import LoadingBox from "../components/loadingBox";
 import { DashboardUserDetails } from "../utils/interfaces";
 import ConnectButton from "../components/connectbutton";
@@ -30,14 +27,16 @@ const inter = Inter({
 });
 
 export default function Dashboard() {
+  const [loading, setLoading] = useState(false);
   const [chartType, setChartType] = useState("Points Progression");
-  const [chartInterval, setChartInterval] = useState("Monthly");
+  const [chartInterval, setChartInterval] = useState("Latest Months");
   const [filterChain, setFilterChain] = useState("All Networks");
   const [filterStatus, setFilterStatus] = useState("All Status");
   const [userDetails, setUserDetails] = useState<DashboardUserDetails | null>(
     null
   );
-  const [loading, setLoading] = useState(false);
+
+  const [pointsProgressionData, setPointsProgressionData] = useState<any>([]);
 
   const { signer, account } = useContext(StateContext);
 
@@ -84,8 +83,21 @@ export default function Dashboard() {
     setLoading(false);
   };
 
+  const getChartInfo = useCallback(async () => {
+    if (signer) {
+      const response = await getHistoricalBalances(
+        6,
+        signer
+        // "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8"
+      );
+
+      setPointsProgressionData(response);
+    }
+  }, [signer, setPointsProgressionData]);
+
   useEffect(() => {
     getUserInfo();
+    getChartInfo();
   }, [signer]);
 
   return (
@@ -142,7 +154,7 @@ export default function Dashboard() {
                     <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:absolute lg:top-[-50px] lg:right-5 text-sm">
                       <ChartBarIcon width={24} height={24} />
                       <SSSelect
-                        options={["Points Progression", "Points Usage"]}
+                        options={["Points Progression"]}
                         onChange={(value) =>
                           onChangeFilters(FilterType.ChartType, value)
                         }
@@ -152,7 +164,7 @@ export default function Dashboard() {
                       <span className="w-2" />
                       <CalendarDaysIcon width={24} height={24} />
                       <SSSelect
-                        options={["6 months"]}
+                        options={["Latest Months"]}
                         onChange={(value) =>
                           onChangeFilters(FilterType.ChartInterval, value)
                         }
@@ -160,7 +172,7 @@ export default function Dashboard() {
                       />
                     </div>
                     {chartType === "Points Progression" ? (
-                      <ChartPointsProgression />
+                      <ChartPointsProgression data={pointsProgressionData} />
                     ) : (
                       <ChartPointsUsage />
                     )}
@@ -186,7 +198,7 @@ export default function Dashboard() {
                     <div className="flex flex-col w-full">
                       <p className="text-white/70 text-sm">Total Claimed</p>
                       <p className="text-white text-3xl 2xl:text-5xl font-bold">
-                        500,000
+                        {userDetails?.totalClaimed.toLocaleString("en-us")}
                       </p>
                       <p className="text-orange-200 text-lg">Vested Tokens</p>
                     </div>
@@ -224,6 +236,7 @@ export default function Dashboard() {
 
                 {/* Sam Nft */}
                 <div className="flex flex-col justify-center bg-yellow-300/50 backdrop-blur-md py-5 px-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+                  <p className="text-white/70 text-sm">Locked</p>
                   <p className="text-white text-4xl 2xl:text-5xl">
                     {userDetails?.nftBalance}
                   </p>
@@ -277,6 +290,8 @@ export default function Dashboard() {
               IDOs={userDetails?.userIdos || []}
               allocations={userDetails?.allocations || {}}
               phases={userDetails?.phases || {}}
+              tgesUnlocked={userDetails?.tgesUnlocked || {}}
+              tgesClaimed={userDetails?.tgesClaimed || {}}
               filterChain={filterChain}
               filterStatus={filterStatus}
               onResetFilters={resetFilters}

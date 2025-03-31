@@ -34,6 +34,10 @@ export function formattedDate5(timestamp: number) {
   );
 }
 
+export function formattedDateToMonth(timestamp: number) {
+  return format(toZonedTime(fromUnixTime(timestamp), "UTC"), "MMM/yyyy");
+}
+
 export function convertDateToUnixTimestamp(date: Date) {
   return Math.floor(date.getTime() / 1000);
 }
