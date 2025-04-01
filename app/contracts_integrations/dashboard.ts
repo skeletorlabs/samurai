@@ -134,7 +134,7 @@ export async function userInfo(signer: Signer) {
   try {
     const signerAddress = await signer.getAddress();
     let walletToCheck = undefined;
-    // walletToCheck = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
+    walletToCheck = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
 
     const address = walletToCheck ? walletToCheck : signerAddress;
     const tier = await getTier(address);
@@ -154,8 +154,6 @@ export async function userInfo(signer: Signer) {
     const phases: StringToString = {};
     const tgesUnlocked: StringToBoolean = {};
     const tgesClaimed: StringToBoolean = {};
-    let totalAllocated = 0;
-    let totalClaimed = 0;
 
     for (let index = 0; index < IDOs.length; index++) {
       const ido = IDOs[index];
@@ -166,7 +164,6 @@ export async function userInfo(signer: Signer) {
         const allocation = userIdo?.allocation || 0;
 
         allocations[ido.id] = allocation;
-        totalAllocated += allocation;
 
         const idoPhase = await getParticipationPhase(index);
         phases[ido.id] = idoPhase;
@@ -184,7 +181,6 @@ export async function userInfo(signer: Signer) {
           );
 
           tgesClaimed[ido.id] = userVestingInfo?.claimedTGE;
-          totalClaimed += userVestingInfo?.claimedTokens || 0;
         }
       }
     }
@@ -198,8 +194,6 @@ export async function userInfo(signer: Signer) {
       userIdos,
       allocations,
       phases,
-      totalAllocated,
-      totalClaimed,
       tgesUnlocked,
       tgesClaimed,
     } as DashboardUserDetails;

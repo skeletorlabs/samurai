@@ -124,7 +124,6 @@ function getNextUnlock(
 export async function generalInfo(index: number) {
   try {
     const ido = IDOs[index];
-    console.log("on vesting ido id", ido.id);
     const contract = await getContract(index);
 
     const owner = await contract?.owner();
@@ -196,8 +195,6 @@ export async function generalInfo(index: number) {
       vestingType,
       vestingPeriod,
     } as VESTING_GENERAL_INFO;
-
-    // console.log(data);
 
     return data;
   } catch (e) {

@@ -8,6 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   Dot,
+  Cell,
 } from "recharts";
 
 const data = [
@@ -55,21 +56,6 @@ export default class ChartPointsProgression extends PureComponent<ChartPointsPro
         strokeWidth={10}
       />
     );
-
-    // if (payload && payload.Amount > 50000) {
-    //   return (
-    //     <Dot
-    //       cx={cx}
-    //       cy={cy}
-    //       r={r * 5.5}
-    //       fill="#FF284C"
-    //       stroke="#008000"
-    //       strokeWidth={10}
-    //     />
-    //   );
-    // } else {
-    //   return <Dot cx={cx} cy={cy} r={r} fill={stroke} strokeWidth={1} />;
-    // }
   };
 
   render() {
@@ -126,7 +112,8 @@ export default class ChartPointsProgression extends PureComponent<ChartPointsPro
             strokeDashoffset={5}
             fillOpacity={1}
             fill="url(#colorAmount)"
-            dot={this.renderDot}
+            dot
+            // dot={this.renderDot}
           />
         </AreaChart>
       </ResponsiveContainer>

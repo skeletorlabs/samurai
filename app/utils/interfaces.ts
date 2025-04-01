@@ -273,8 +273,6 @@ export type DashboardUserDetails = {
   userIdos: IDO_v3[];
   phases: StringToString;
   allocations: StringToNumber;
-  totalAllocated: number;
-  totalClaimed: number;
   tgesUnlocked: StringToBoolean;
   tgesClaimed: StringToBoolean;
 };

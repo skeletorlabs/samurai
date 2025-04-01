@@ -138,7 +138,9 @@ export default function UserList({
                 <td className="p-4 text-lg lg:px-8 xl:px-16">
                   {formattedDate2(ido?.end)}
                   <br />
-                  {ido.vesting && (
+                  {(ido.vesting ||
+                    ido.id === "grizzy" ||
+                    ido.id === "grizzy-private") && (
                     <div className="flex items-center gap-1 text-xs">
                       <span
                         className={classNames({
@@ -161,6 +163,17 @@ export default function UserList({
                         {tgesClaimed[ido.id] === true
                           ? "Claimed"
                           : "Not Claimed"}
+                      </span>
+                      <span
+                        className={classNames({
+                          "justify-center items-center p-1 px-2 rounded-full bg-green-500":
+                            true,
+                          flex:
+                            ido.id === "grizzy" || ido.id === "grizzy-private",
+                          hidden: ido.id !== "grizzy" || ido.id !== "grizzy",
+                        })}
+                      >
+                        Refunded
                       </span>
                     </div>
                   )}

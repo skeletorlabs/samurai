@@ -87,8 +87,8 @@ export default function Dashboard() {
     if (signer) {
       const response = await getHistoricalBalances(
         6,
-        signer
-        // "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8"
+        signer,
+        "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8"
       );
 
       setPointsProgressionData(response);
@@ -129,56 +129,61 @@ export default function Dashboard() {
               <div
                 className={`flex flex-col lg:flex-row lg:justify-between lg:items-center w-full ${inter.className}`}
               >
-                <div className="flex flex-col bg-black/30 backdrop-blur-md py-8 rounded-3xl w-full min-h-[520px] border border-white/20 shadow-lg shadow-black/40">
-                  <div className="flex items-center gap-2 px-8">
-                    <Image
-                      src="/samurai.svg"
-                      alt="avatar"
-                      width={50}
-                      height={50}
-                      className="bg-black/60 rounded-full p-2 border border-white/20"
-                    />
-                    <div className="flex flex-col text-white leading-tight w-max">
-                      <span className="text-white/70">EVM Address</span>
-                      <Link
-                        href={`https://basescan.org/address/${userDetails?.account}`}
-                        className="2xl:text-xl hover:underline hover:opacity-80"
-                        target="_blank"
-                      >
-                        {shortAddress(userDetails?.account || "", 8)}
-                      </Link>
+                <div className="flex flex-col justify-center bg-black/30 backdrop-blur-md py-8 rounded-3xl w-full min-h-[520px] border border-white/20 shadow-lg shadow-black/40">
+                  <div className="flex items-center justify-between w-full flex-wrap gap-5">
+                    <div className="flex items-center gap-2 px-8">
+                      <Image
+                        src="/samurai.svg"
+                        alt="avatar"
+                        width={42}
+                        height={42}
+                        className="bg-black/60 rounded-full p-2 border border-white/20"
+                      />
+                      <div className="flex flex-col text-white">
+                        <span className="text-white/70 text-sm">
+                          EVM Address
+                        </span>
+                        <Link
+                          href={`https://basescan.org/address/${userDetails?.account}`}
+                          className="2xl:text-[1rem] hover:underline hover:opacity-80"
+                          target="_blank"
+                        >
+                          {shortAddress(userDetails?.account || "", 8)}
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2 px-10 relative">
+                      <div className="flex flex-col xl:flex-row lg:items-center gap-2 xl:gap-5 text-sm">
+                        <div className="flex items-center gap-2">
+                          <ChartBarIcon width={24} height={24} />
+                          <SSSelect
+                            options={["Points Progression"]}
+                            onChange={(value) =>
+                              onChangeFilters(FilterType.ChartType, value)
+                            }
+                            value={chartType}
+                          />
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <CalendarDaysIcon width={24} height={24} />
+                          <SSSelect
+                            options={["Latest Months"]}
+                            onChange={(value) =>
+                              onChangeFilters(FilterType.ChartInterval, value)
+                            }
+                            value={chartInterval}
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-2 px-10 relative">
-                    <div className="flex flex-col lg:flex-row lg:items-center gap-2 lg:absolute lg:top-[-50px] lg:right-5 text-sm">
-                      <ChartBarIcon width={24} height={24} />
-                      <SSSelect
-                        options={["Points Progression"]}
-                        onChange={(value) =>
-                          onChangeFilters(FilterType.ChartType, value)
-                        }
-                        value={chartType}
-                      />
-
-                      <span className="w-2" />
-                      <CalendarDaysIcon width={24} height={24} />
-                      <SSSelect
-                        options={["Latest Months"]}
-                        onChange={(value) =>
-                          onChangeFilters(FilterType.ChartInterval, value)
-                        }
-                        value={chartInterval}
-                      />
-                    </div>
-                    {chartType === "Points Progression" ? (
-                      <ChartPointsProgression data={pointsProgressionData} />
-                    ) : (
-                      <ChartPointsUsage />
-                    )}
-                  </div>
-
-                  <div className="flex flex-row items-center justify-between mt-10 text-center w-full">
+                  {chartType === "Points Progression" ? (
+                    <ChartPointsProgression data={pointsProgressionData} />
+                  ) : (
+                    <ChartPointsUsage />
+                  )}
+                  <div className="hidden lg:flex flex-row items-center justify-between mt-10 text-center w-full flex-wrap lg:flex-nowrap">
                     <div className="flex flex-col w-full">
                       <p className="text-white/70 text-sm">Total IDOs</p>
                       <p className="text-white text-3xl 2xl:text-5xl font-bold">
@@ -186,28 +191,29 @@ export default function Dashboard() {
                       </p>
                       <p className="text-orange-200 text-lg">Participated</p>
                     </div>
+                    {/* EARNED = BALANCE + SPENT */}
                     <div className="flex flex-col w-full">
-                      <p className="text-white/70 text-sm">
-                        Overall Allocation
-                      </p>
+                      <p className="text-white/70 text-sm">Earned</p>
                       <p className="text-white text-3xl 2xl:text-5xl font-bold">
-                        {userDetails?.totalAllocated.toLocaleString("en-us")}
+                        {Number(userDetails?.points || 0 + 0).toLocaleString(
+                          "en-us"
+                        )}
                       </p>
-                      <p className="text-orange-200 text-lg">USDC</p>
+                      <p className="text-orange-200 text-lg">Samurai Points</p>
                     </div>
                     <div className="flex flex-col w-full">
-                      <p className="text-white/70 text-sm">Total Claimed</p>
+                      <p className="text-white/70 text-sm">Spent</p>
                       <p className="text-white text-3xl 2xl:text-5xl font-bold">
-                        {userDetails?.totalClaimed.toLocaleString("en-us")}
+                        0
                       </p>
-                      <p className="text-orange-200 text-lg">Vested Tokens</p>
+                      <p className="text-orange-200 text-lg">Samurai Points</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div
-                className={`flex flex-row lg:flex-col gap-4 flex-wrap lg:flex-nowrap`}
+                className={`hidden lg:flex flex-row lg:flex-col gap-4 flex-wrap lg:flex-nowrap`}
               >
                 {/* Tier */}
                 <div className="flex flex-col justify-center bg-samurai-red/50 backdrop-blur-md py-5 px-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
@@ -228,10 +234,11 @@ export default function Dashboard() {
 
                 {/* Points */}
                 <div className="flex flex-col justify-center bg-emerald-300/30 backdrop-blur-md py-5 px-8 rounded-3xl w-max h-full border border-white/20  shadow-lg shadow-black/40">
+                  <p className="text-white/70 text-sm">Balance</p>
                   <p className="text-white text-2xl 2xl:text-4xl">
                     {userDetails?.points.toLocaleString("en-us")}
                   </p>
-                  <p className="text-orange-200 text-lg">Points</p>
+                  <p className="text-orange-200 text-lg">Samurai Points</p>
                 </div>
 
                 {/* Sam Nft */}
@@ -247,6 +254,67 @@ export default function Dashboard() {
           )}
         </div>
       </TopLayout>
+
+      <div className="flex lg:hidden flex-row items-center justify-between mt-10 text-center w-full">
+        <div className="flex flex-col w-full">
+          <p className="text-white/70 text-sm">Total IDOs</p>
+          <p className="text-white text-3xl 2xl:text-5xl font-bold">
+            {userDetails?.userIdos.length}
+          </p>
+          <p className="text-orange-200 text-lg">Participated</p>
+        </div>
+        {/* EARNED = BALANCE + SPENT */}
+        <div className="flex flex-col w-full">
+          <p className="text-white/70 text-sm">Earned</p>
+          <p className="text-white text-3xl 2xl:text-5xl font-bold">
+            {Number(userDetails?.points || 0 + 0).toLocaleString("en-us")}
+          </p>
+          <p className="text-orange-200 text-lg">Samurai Points</p>
+        </div>
+        <div className="flex flex-col w-full">
+          <p className="text-white/70 text-sm">Spent</p>
+          <p className="text-white text-3xl 2xl:text-5xl font-bold">0</p>
+          <p className="text-orange-200 text-lg">Samurai Points</p>
+        </div>
+      </div>
+      <div
+        className={`flex lg:hidden flex-row lg:flex-col gap-4 flex-wrap lg:flex-nowrap`}
+      >
+        {/* Tier */}
+        <div className="flex flex-col justify-center bg-samurai-red/50 backdrop-blur-md py-5 px-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+          <p className="text-white text-4xl 2xl:text-5xl">
+            {userDetails?.tier}
+          </p>
+          <p className="text-orange-200 text-lg">Tier</p>
+        </div>
+
+        {/* Sam */}
+        <div className="flex flex-col justify-center bg-neutral-500/50 backdrop-blur-md p-8 rounded-3xl w-max h-full border border-white/20  shadow-lg shadow-black/40">
+          <p className="text-white/70 text-sm">Total Tokens</p>
+          <p className="text-white text-4xl 2xl:text-5xl">
+            {userDetails?.samBalance.toLocaleString("en-us")}
+          </p>
+          <p className="text-orange-200 text-lg">$SAM</p>
+        </div>
+
+        {/* Points */}
+        <div className="flex flex-col justify-center bg-emerald-300/30 backdrop-blur-md py-5 px-8 rounded-3xl w-max h-full border border-white/20  shadow-lg shadow-black/40">
+          <p className="text-white/70 text-sm">Balance</p>
+          <p className="text-white text-2xl 2xl:text-4xl">
+            {userDetails?.points.toLocaleString("en-us")}
+          </p>
+          <p className="text-orange-200 text-lg">Samurai Points</p>
+        </div>
+
+        {/* Sam Nft */}
+        <div className="flex flex-col justify-center bg-yellow-300/50 backdrop-blur-md py-5 px-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+          <p className="text-white/70 text-sm">Locked</p>
+          <p className="text-white text-4xl 2xl:text-5xl">
+            {userDetails?.nftBalance}
+          </p>
+          <p className="text-orange-200 text-lg">SAM NFT</p>
+        </div>
+      </div>
 
       {/* My Allocations */}
       {signer && account && (
