@@ -20,7 +20,13 @@ import {
   sanka,
 } from "@/app/utils/svgs";
 import { Page } from "./enums";
-import { IDO, IDO_v3, SINGLE_CARD, VESTING_PERIOD_TYPE } from "./interfaces";
+import {
+  IDO,
+  IDO_v3,
+  INCOMING,
+  SINGLE_CARD,
+  VESTING_PERIOD_TYPE,
+} from "./interfaces";
 import {
   galaxyGamesHauntedSpace,
   havensCompass,
@@ -122,6 +128,24 @@ export const IDOs_card: SINGLE_CARD[] = [
     date: 1734544800,
     phase: "upcoming",
     prices: ["T2: 0.1466 ETH", "T3: 0.1729 ETH", "T4 0.2041 ETH"],
+  },
+];
+
+export const INCOMING_IDOs: INCOMING[] = [
+  {
+    id: "ai-telegraph",
+    name: "AI Telegraph",
+    description:
+      "AI Telegraph is revolutionizing the DeFAI space with a seamless blend of AI Agent curated Crypto Index Solutions and AI Agent News Media Hub",
+    image: "/INCOMING/ai-telegraph.png",
+  },
+
+  {
+    id: "solve3",
+    name: "Solve3",
+    description:
+      "Solve3 is the first MetaDEX on Solana, revolutionizing the decentralized exchange experience for its users.",
+    image: "/INCOMING/solve3.png",
   },
 ];
 
