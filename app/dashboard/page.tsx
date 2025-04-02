@@ -6,7 +6,14 @@ import TopLayout from "@/app/components/topLayout";
 import { shortAddress } from "../utils/shortAddress";
 import Link from "next/link";
 import ChartPointsProgression from "../components/dashboard/chartPointsProgression";
-import { useState, useContext, useEffect, useCallback } from "react";
+import {
+  useState,
+  useContext,
+  useEffect,
+  useCallback,
+  cache,
+  useMemo,
+} from "react";
 import { IDO_CHAINS } from "../utils/constants";
 import SSSelect from "../components/ssSelect";
 import ChartPointsUsage from "../components/dashboard/chartPointsUsage.tsx";
@@ -18,7 +25,7 @@ import {
   getHistoricalBalances,
   userInfo,
 } from "../contracts_integrations/dashboard";
-import LoadingBox from "../components/loadingBox";
+import LoadingBlocker from "../components/loadingBlocker";
 import { DashboardUserDetails } from "../utils/interfaces";
 import ConnectButton from "../components/connectbutton";
 
@@ -256,72 +263,75 @@ export default function Dashboard() {
       </TopLayout>
 
       {/* MOBILE */}
-      <div className={`flex lg:hidden flex-col gap-2 w-full px-2 py-10`}>
-        <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md p-8 rounded-3xl w-full h-full border border-white/20  shadow-lg shadow-black/40">
-          <p className="text-white/70 text-sm">Total IDOs</p>
-          <p className="text-white text-4xl 2xl:text-5xl">
-            {userDetails?.userIdos.length}
-          </p>
-          <p className="text-orange-200 text-lg">Participated</p>
+      <div
+        className={`flex lg:hidden flex-col items-center gap-2 w-full px-2 py-10`}
+      >
+        <div className="flex items-center gap-2">
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+            <p className="text-white/70 text-sm">Total IDOs</p>
+            <p className="text-white text-2xl">
+              {userDetails?.userIdos.length}
+            </p>
+            <p className="text-orange-200 text-lg">Participated</p>
+          </div>
+
+          <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+            <p className="text-white/70 text-sm">Earned</p>
+            <p className="text-white text-2xl">
+              {Number(userDetails?.points || 0 + 0).toLocaleString("en-us")}
+            </p>
+            <p className="text-orange-200 text-lg">Samurai Points</p>
+          </div>
         </div>
 
-        <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md p-8 rounded-3xl w-full h-full border border-white/20  shadow-lg shadow-black/40">
-          <p className="text-white/70 text-sm">Earned</p>
-          <p className="text-white text-4xl 2xl:text-5xl">
-            {Number(userDetails?.points || 0 + 0).toLocaleString("en-us")}
-          </p>
-          <p className="text-orange-200 text-lg">Samurai Points</p>
+        <div className="flex items-center gap-2">
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+            <p className="text-white/70 text-sm">Spent</p>
+            <p className="text-white text-2xl">0</p>
+            <p className="text-orange-200 text-lg">Samurai Points</p>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+              <p className="text-white text-2xl">{userDetails?.tier}</p>
+              <p className="text-orange-200 text-lg">Tier</p>
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md p-8 rounded-3xl w-full h-full border border-white/20  shadow-lg shadow-black/40">
-          <p className="text-white/70 text-sm">Spent</p>
-          <p className="text-white text-4xl 2xl:text-5xl">0</p>
-          <p className="text-orange-200 text-lg">Samurai Points</p>
-        </div>
-        {/* Tier */}
-        <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md py-5 px-8 rounded-3xl w-full border border-white/20  shadow-lg shadow-black/40">
-          <p className="text-white text-4xl 2xl:text-5xl">
-            {userDetails?.tier}
-          </p>
-          <p className="text-orange-200 text-lg">Tier</p>
+        <div className="flex items-center gap-2">
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+            <p className="text-white/70 text-sm">Total Tokens</p>
+            <p className="text-white text-2xl">
+              {userDetails?.samBalance.toLocaleString("en-us")}
+            </p>
+            <p className="text-orange-200 text-lg">$SAM</p>
+          </div>
+
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+            <p className="text-white/70 text-sm">Locked</p>
+            <p className="text-white text-2xl">{userDetails?.nftBalance}</p>
+            <p className="text-orange-200 text-lg">SAM NFT</p>
+          </div>
         </div>
 
-        {/* Sam */}
-        <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md p-8 rounded-3xl w-full h-full border border-white/20  shadow-lg shadow-black/40">
-          <p className="text-white/70 text-sm">Total Tokens</p>
-          <p className="text-white text-4xl 2xl:text-5xl">
-            {userDetails?.samBalance.toLocaleString("en-us")}
-          </p>
-          <p className="text-orange-200 text-lg">$SAM</p>
-        </div>
-
-        {/* Points */}
-        <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md py-5 px-8 rounded-3xl w-full h-full border border-white/20  shadow-lg shadow-black/40">
+        <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
           <p className="text-white/70 text-sm">Balance</p>
-          <p className="text-white text-4xl 2xl:text-5xl">
+          <p className="text-white text-2xl">
             {userDetails?.points.toLocaleString("en-us")}
           </p>
           <p className="text-orange-200 text-lg">Samurai Points</p>
-        </div>
-
-        {/* Sam Nft */}
-        <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md py-5 px-8 rounded-3xl w-full border border-white/20  shadow-lg shadow-black/40">
-          <p className="text-white/70 text-sm">Locked</p>
-          <p className="text-white text-4xl 2xl:text-5xl">
-            {userDetails?.nftBalance}
-          </p>
-          <p className="text-orange-200 text-lg">SAM NFT</p>
         </div>
       </div>
 
       {/* My Allocations */}
       {signer && account && (
         <div className="flex flex-col py-10 md:py-20 w-full bg-black border-t-[1px] border-samurai-red/40">
-          <div className="flex flex-col lg:flex-row items-center justify-between px-2 lg:px-8 xl:px-16 text-white lg:mb-10">
+          <div className="flex flex-col lg:flex-row items-center justify-between lg:px-8 xl:px-16 text-white mb-2 lg:mb-10">
             <h2 className="text-4xl lg:text-5xl font-bold text-center lg:text-start">
               My <span className="text-samurai-red">Allocations</span>
             </h2>
-            <div className="flex items-center gap-2 mt-4 lg:mt-0 bg-white/10 w-full justify-center py-3 lg:bg-transparent lg:w-max lg:justify-start lg:py-0">
+            <div className="flex items-center gap-2 mt-4 lg:mt-0 bg-white/10 w-full justify-center py-3 lg:bg-transparent lg:w-max lg:justify-start lg:py-0 border-t border-white/20">
               <span className="w-4 lg:w-6 h-4 lg:h-6 text-white">
                 {network}
               </span>
@@ -370,7 +380,7 @@ export default function Dashboard() {
       )}
 
       {/* Loading */}
-      {loading && <LoadingBox />}
+      <LoadingBlocker open={loading} />
     </div>
   );
 }

@@ -196,7 +196,7 @@ export default function UserList({
             {idoList.map((ido, index) => (
               <div
                 key={index}
-                className={`flex flex-col odd:bg-neutral-800 even:bg-white/5 border-t border-white/20 transition-all odd:hover:opacity-85 even:hover:bg-white/10 hover:cursor-pointer`}
+                className={`flex flex-col odd:bg-neutral-800 even:bg-white/10 border-t border-white/20 transition-all hover:opacity-85 hover:cursor-pointer py-2`}
                 onClick={() => goToIdo(ido.url)}
               >
                 <p className="p-4 flex items-center gap-5 lg:px-8 xl:px-16">
@@ -229,11 +229,11 @@ export default function UserList({
                   </div>
                 </p>
                 <p className="flex flex-col py-3 px-4 text-lg">
-                  <span className="text-xs">Allocated</span>
+                  <span className="text-xs text-samurai-red">Allocated</span>
                   {allocations[ido.id].toLocaleString("en-us")} USDC
                 </p>
                 <p className="flex flex-col py-3 px-4 text-lg">
-                  <span className="text-xs">TGE Date</span>
+                  <span className="text-xs text-samurai-red">TGE Date</span>
                   {formattedDate2(ido?.end)}
                   <br />
                   {(ido.vesting ||
@@ -277,7 +277,7 @@ export default function UserList({
                   )}
                 </p>
                 <p className="flex flex-col py-3 px-4 text-lg">
-                  <span className="text-xs">Distribution</span>
+                  <span className="text-xs text-samurai-red">Distribution</span>
                   {ido?.vestingDescription}
                 </p>
               </div>
