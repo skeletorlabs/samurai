@@ -28,7 +28,7 @@ export default function SSSelect({ options, onChange, value }: SSSelectProps) {
         className="w-full p-2 px-4 flex items-center justify-between border border-white/20 rounded-full cursor-pointer relative"
         onClick={() => setOpen(!open)}
       >
-        <span>{selected}</span>
+        <span className="text-xs lg:text-sm">{selected}</span>
         <BiChevronDown
           size={20}
           className={classNames({ "rotate-180": open })}
@@ -36,7 +36,7 @@ export default function SSSelect({ options, onChange, value }: SSSelectProps) {
       </div>
       <ul
         className={classNames({
-          "absolute top-9 left-0 w-52 bg-black/50 backdrop-blur-md rounded-lg mt-2 overflow-y-auto":
+          "absolute top-9 left-0 w-40 lg:w-52 bg-black/50 backdrop-blur-md rounded-lg mt-2 overflow-y-auto":
             true,
           "max-h-0": !open,
           "max-h-60": open,
@@ -46,7 +46,7 @@ export default function SSSelect({ options, onChange, value }: SSSelectProps) {
           <li
             key={index}
             className={classNames({
-              "p-4 text-sm cursor-pointer": true,
+              "p-4 text-xs lg:text-sm cursor-pointer": true,
               "bg-black text-samurai-red": option === selected,
               "hover:bg-black/30": option !== selected,
             })}

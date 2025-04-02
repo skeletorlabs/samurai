@@ -12,6 +12,7 @@ import {
 } from "@headlessui/react";
 
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import IncomingProjects from "../components/incomingProjects";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -81,6 +82,14 @@ export default function Launchpad() {
           </h2>
           <Projects />
         </div> */}
+      </div>
+
+      {/* INCOMING PROJECTS */}
+      <div className="flex flex-col pt-20 pb-14 w-full bg-white/5 px-6 lg:px-8 xl:px-20 text-white border-t-[0.5px] border-samurai-red relative">
+        <h2 className="text-4xl md:text-6xl font-bold">
+          Incoming <span className="text-samurai-red">Projects</span>
+        </h2>
+        <IncomingProjects />
       </div>
 
       {/* HOW TO PARTICIPATE */}

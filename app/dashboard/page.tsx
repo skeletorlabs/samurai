@@ -103,10 +103,10 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col relative">
       <TopLayout background="bg-samurai-cyborg-fem">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-14 ">
-          <div className="flex flex-row justify-between items-center max-w-[1130px]">
+        <div className="flex flex-col px-2 lg:px-8 xl:px-14 ">
+          <div className="flex flex-row justify-between items-center max-w-[1130px] mt-10 lg:mt-0">
             {/* TOP CONTENT */}
-            <div className="w-full">
+            <div className="w-full text-center lg:text-start">
               <p className="text-[48px] sm:text-sm lg:text-lg text-white">
                 Samurai
               </p>
@@ -115,8 +115,8 @@ export default function Dashboard() {
           </div>
 
           {(!signer || !account) && (
-            <div className="flex flex-col my-24 gap-5 w-max self-center justify-center items-center h-[40vh]">
-              <span className="text-xl">
+            <div className="flex flex-col my-24 gap-5 lg:w-max self-center justify-center items-center lg:h-[40vh]">
+              <span className="text-center lg:text-start lg:text-xl">
                 Connect your wallet to check your detailed infos
               </span>
               <ConnectButton />
@@ -124,12 +124,12 @@ export default function Dashboard() {
           )}
 
           {signer && account && (
-            <div className="flex flex-col lg:flex-row mt-8 gap-5">
+            <div className="flex flex-col lg:flex-row mt-8 gap-5 ">
               {/* Overview */}
               <div
                 className={`flex flex-col lg:flex-row lg:justify-between lg:items-center w-full ${inter.className}`}
               >
-                <div className="flex flex-col justify-center bg-black/30 backdrop-blur-md py-8 rounded-3xl w-full min-h-[520px] border border-white/20 shadow-lg shadow-black/40">
+                <div className="flex flex-col justify-center bg-black/30 backdrop-blur-md py-8 rounded-3xl w-full lg:min-h-[520px] border border-white/20 shadow-lg shadow-black/40">
                   <div className="flex items-center justify-between w-full flex-wrap gap-5">
                     <div className="flex items-center gap-2 px-8">
                       <Image
@@ -255,33 +255,31 @@ export default function Dashboard() {
         </div>
       </TopLayout>
 
-      <div className="flex lg:hidden flex-row items-center justify-between mt-10 text-center w-full">
-        <div className="flex flex-col w-full">
+      {/* MOBILE */}
+      <div className={`flex lg:hidden flex-col gap-2 w-full px-2 py-10`}>
+        <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md p-8 rounded-3xl w-full h-full border border-white/20  shadow-lg shadow-black/40">
           <p className="text-white/70 text-sm">Total IDOs</p>
-          <p className="text-white text-3xl 2xl:text-5xl font-bold">
+          <p className="text-white text-4xl 2xl:text-5xl">
             {userDetails?.userIdos.length}
           </p>
           <p className="text-orange-200 text-lg">Participated</p>
         </div>
-        {/* EARNED = BALANCE + SPENT */}
-        <div className="flex flex-col w-full">
+
+        <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md p-8 rounded-3xl w-full h-full border border-white/20  shadow-lg shadow-black/40">
           <p className="text-white/70 text-sm">Earned</p>
-          <p className="text-white text-3xl 2xl:text-5xl font-bold">
+          <p className="text-white text-4xl 2xl:text-5xl">
             {Number(userDetails?.points || 0 + 0).toLocaleString("en-us")}
           </p>
           <p className="text-orange-200 text-lg">Samurai Points</p>
         </div>
-        <div className="flex flex-col w-full">
+
+        <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md p-8 rounded-3xl w-full h-full border border-white/20  shadow-lg shadow-black/40">
           <p className="text-white/70 text-sm">Spent</p>
-          <p className="text-white text-3xl 2xl:text-5xl font-bold">0</p>
+          <p className="text-white text-4xl 2xl:text-5xl">0</p>
           <p className="text-orange-200 text-lg">Samurai Points</p>
         </div>
-      </div>
-      <div
-        className={`flex lg:hidden flex-row lg:flex-col gap-4 flex-wrap lg:flex-nowrap`}
-      >
         {/* Tier */}
-        <div className="flex flex-col justify-center bg-samurai-red/50 backdrop-blur-md py-5 px-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+        <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md py-5 px-8 rounded-3xl w-full border border-white/20  shadow-lg shadow-black/40">
           <p className="text-white text-4xl 2xl:text-5xl">
             {userDetails?.tier}
           </p>
@@ -289,7 +287,7 @@ export default function Dashboard() {
         </div>
 
         {/* Sam */}
-        <div className="flex flex-col justify-center bg-neutral-500/50 backdrop-blur-md p-8 rounded-3xl w-max h-full border border-white/20  shadow-lg shadow-black/40">
+        <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md p-8 rounded-3xl w-full h-full border border-white/20  shadow-lg shadow-black/40">
           <p className="text-white/70 text-sm">Total Tokens</p>
           <p className="text-white text-4xl 2xl:text-5xl">
             {userDetails?.samBalance.toLocaleString("en-us")}
@@ -298,16 +296,16 @@ export default function Dashboard() {
         </div>
 
         {/* Points */}
-        <div className="flex flex-col justify-center bg-emerald-300/30 backdrop-blur-md py-5 px-8 rounded-3xl w-max h-full border border-white/20  shadow-lg shadow-black/40">
+        <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md py-5 px-8 rounded-3xl w-full h-full border border-white/20  shadow-lg shadow-black/40">
           <p className="text-white/70 text-sm">Balance</p>
-          <p className="text-white text-2xl 2xl:text-4xl">
+          <p className="text-white text-4xl 2xl:text-5xl">
             {userDetails?.points.toLocaleString("en-us")}
           </p>
           <p className="text-orange-200 text-lg">Samurai Points</p>
         </div>
 
         {/* Sam Nft */}
-        <div className="flex flex-col justify-center bg-yellow-300/50 backdrop-blur-md py-5 px-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+        <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md py-5 px-8 rounded-3xl w-full border border-white/20  shadow-lg shadow-black/40">
           <p className="text-white/70 text-sm">Locked</p>
           <p className="text-white text-4xl 2xl:text-5xl">
             {userDetails?.nftBalance}
@@ -318,13 +316,15 @@ export default function Dashboard() {
 
       {/* My Allocations */}
       {signer && account && (
-        <div className="hidden lg:flex flex-col py-10 md:py-20 w-full bg-black border-t-[1px] border-samurai-red/40">
-          <div className="flex items-center justify-between px-2 lg:px-8 xl:px-16 text-white mb-10">
+        <div className="flex flex-col py-10 md:py-20 w-full bg-black border-t-[1px] border-samurai-red/40">
+          <div className="flex flex-col lg:flex-row items-center justify-between px-2 lg:px-8 xl:px-16 text-white lg:mb-10">
             <h2 className="text-4xl lg:text-5xl font-bold text-center lg:text-start">
               My <span className="text-samurai-red">Allocations</span>
             </h2>
-            <div className="flex items-center gap-2">
-              <span className="w-6 h-6 text-white">{network}</span>
+            <div className="flex items-center gap-2 mt-4 lg:mt-0 bg-white/10 w-full justify-center py-3 lg:bg-transparent lg:w-max lg:justify-start lg:py-0">
+              <span className="w-4 lg:w-6 h-4 lg:h-6 text-white">
+                {network}
+              </span>
               <SSSelect
                 options={["All Networks"].concat(
                   IDO_CHAINS.map((item: any) => item?.name)
@@ -335,7 +335,9 @@ export default function Dashboard() {
                 value={filterChain}
               />
               <span className="w-2" />
-              <span className="w-6 h-6 text-white">{distribution}</span>
+              <span className="w-4 lg:w-6 h-4 lg:h-6 text-white">
+                {distribution}
+              </span>
               <SSSelect
                 options={[
                   "All Status",
@@ -351,7 +353,6 @@ export default function Dashboard() {
               />
             </div>
           </div>
-          {/* <div className="flex items-center gap-3 h-[100px] bg-red-300">asdf</div> */}
 
           {!loading && (
             <UserList

@@ -236,6 +236,13 @@ export interface IDO_v3 {
   nftsToBlock?: Number[];
 }
 
+export interface INCOMING {
+  id: string;
+  image: string;
+  description: string;
+  name: string;
+}
+
 export interface SINGLE_CARD {
   id: string;
   url: string;
