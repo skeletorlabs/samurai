@@ -28,6 +28,7 @@ import {
 import LoadingBlocker from "../components/loadingBlocker";
 import { DashboardUserDetails } from "../utils/interfaces";
 import ConnectButton from "../components/connectbutton";
+import { useQuery } from "@tanstack/react-query";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -53,6 +54,30 @@ export default function Dashboard() {
     FilterChain,
     FilterStatus,
   }
+
+  const { data: userInfoData, isLoading: loadingUser } = useQuery({
+    queryKey: ["userInfo", account], // Query key
+    queryFn: async () => {
+      if (!signer) throw new Error("Signer is not available");
+      return userInfo(signer);
+    },
+    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+    enabled: !!signer, // Only run when signer is available
+  });
+
+  const { data: chartInfoData, isLoading: loadingChart } = useQuery({
+    queryKey: ["getHistoricalBalances", account], // Query key
+    queryFn: async () => {
+      if (!signer) throw new Error("Signer is not available");
+      return getHistoricalBalances(
+        6,
+        signer,
+        // "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8"
+      );
+    },
+    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+    enabled: !!signer, // Only run when signer is available
+  });
 
   const onChangeFilters = useCallback(
     (type: FilterType, value: string) => {
@@ -81,31 +106,13 @@ export default function Dashboard() {
     onChangeFilters(FilterType.FilterStatus, "All Status");
   }, [onChangeFilters]);
 
-  const getUserInfo = async () => {
-    setLoading(true);
-    if (signer) {
-      const response = await userInfo(signer);
-      if (response) setUserDetails(response);
-    }
-    setLoading(false);
-  };
-
-  const getChartInfo = useCallback(async () => {
-    if (signer) {
-      const response = await getHistoricalBalances(
-        6,
-        signer,
-        "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8"
-      );
-
-      setPointsProgressionData(response);
-    }
-  }, [signer, setPointsProgressionData]);
+  useEffect(() => {
+    if (userInfoData) setUserDetails(userInfoData);
+  }, [userInfoData, setUserDetails]);
 
   useEffect(() => {
-    getUserInfo();
-    getChartInfo();
-  }, [signer]);
+    if (chartInfoData) setPointsProgressionData(chartInfoData);
+  }, [chartInfoData, setPointsProgressionData]);
 
   return (
     <div className="flex flex-col relative">
@@ -364,7 +371,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {!loading && (
+          {!!userDetails && (
             <UserList
               IDOs={userDetails?.userIdos || []}
               allocations={userDetails?.allocations || {}}
@@ -380,7 +387,7 @@ export default function Dashboard() {
       )}
 
       {/* Loading */}
-      <LoadingBlocker open={loading} />
+      <LoadingBlocker open={loadingUser || loadingChart} />
     </div>
   );
 }

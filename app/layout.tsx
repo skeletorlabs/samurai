@@ -1,15 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-
 import StateProvider from "@/app/context/StateContext";
-import { Web3Modal } from "@/app/context/web3modal";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Footer from "./components/footer";
-import BottomNav from "./components/bottomNav";
-import Burger from "./components/burgerMenu";
-import SidebarMenu from "./components/sidebarMenu";
+import AppClient from "@/app/context/AppClient"; // Import the client component
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -24,47 +17,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={roboto.className}>
         <StateProvider>
-          <div className="flex flex-col w-full h-full text-white/90">
-            <ToastContainer
-              containerId="toast-notification"
-              position="top-right"
-              autoClose={6000}
-              hideProgressBar={false}
-              newestOnTop
-              closeOnClick={false}
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="dark"
-            />
-
-            <Web3Modal>
-              <div className="flex flex-row">
-                <SidebarMenu />
-                <div className="flex flex-col w-full">{children}</div>
-              </div>
-            </Web3Modal>
-
-            <Footer />
-          </div>
-          {/* <BottomNav /> */}
-          <Burger />
+          <AppClient>{children}</AppClient>{" "}
+          {/* Client-side logic handled here */}
         </StateProvider>
-
-        {/* NEWSLETTER */}
-        {/* <script
-          src="//web.webformscr.com/apps/fc3/build/loader.js"
-          async
-          sp-form-id="0229cc821b515da43f09d3b34f142798efa2f98d40eb42d322744cb90dca5100"
-        ></script> */}
       </body>
     </html>
   );

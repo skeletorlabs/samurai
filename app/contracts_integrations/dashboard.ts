@@ -134,7 +134,7 @@ export async function userInfo(signer: Signer) {
   try {
     const signerAddress = await signer.getAddress();
     let walletToCheck = undefined;
-    walletToCheck = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
+    // walletToCheck = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
 
     const address = walletToCheck ? walletToCheck : signerAddress;
     const tier = await getTier(address);
