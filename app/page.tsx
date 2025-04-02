@@ -212,6 +212,14 @@ export default function Home() {
         </Link>
       </div> */}
 
+      {/* INCOMING PROJECTS */}
+      <div className="flex flex-col pt-20 pb-14 w-full bg-white/10 px-6 lg:px-8 xl:px-20 text-white border-t-[0.5px] border-samurai-red relative">
+        <h2 className="text-4xl md:text-6xl font-bold">
+          Incoming <span className="text-samurai-red">Projects</span>
+        </h2>
+        <IncomingProjects />
+      </div>
+
       {/* FEATURED PROJECTS */}
       <div className="flex flex-col pt-20 pb-14 w-full bg-white/10 px-6 lg:px-8 xl:px-14 text-white border-t-[0.5px] border-samurai-red relative">
         <h2 className="text-4xl md:text-6xl font-bold">
@@ -233,14 +241,6 @@ export default function Home() {
         >
           More +
         </Link>
-      </div>
-
-      {/* INCOMING PROJECTS */}
-      <div className="flex flex-col pt-20 pb-14 w-full bg-white/10 px-6 lg:px-8 xl:px-20 text-white border-t-[0.5px] border-samurai-red relative">
-        <h2 className="text-4xl md:text-6xl font-bold">
-          Incoming <span className="text-samurai-red">Projects</span>
-        </h2>
-        <IncomingProjects />
       </div>
 
       {/* SAMURAI SANKA */}
