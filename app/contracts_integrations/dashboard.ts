@@ -1,8 +1,11 @@
-import { Contract, formatEther, Signer } from "ethers";
+import { Contract, formatEther, JsonRpcProvider, Signer } from "ethers";
+import { MulticallProvider } from "@ethers-ext/provider-multicall";
+
 import handleError from "../utils/handleErrors";
 import { IDOs, POINTS, SAM_ADDRESS } from "../utils/constants";
 import {
   DashboardUserDetails,
+  DashboardUserVestingDetails,
   IDO_v3,
   StringToBoolean,
   StringToNumber,
@@ -131,73 +134,93 @@ export const getHistoricalBalances = async (
 };
 
 export async function userInfo(signer: Signer) {
+  const signerProvider = signer.provider as JsonRpcProvider;
+  const multicallProvider = new MulticallProvider(signerProvider);
+
   try {
     const signerAddress = await signer.getAddress();
-    let walletToCheck = undefined;
+    let walletToCheck;
     // walletToCheck = "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";
+    const address = walletToCheck || signerAddress;
 
-    const address = walletToCheck ? walletToCheck : signerAddress;
-    const tier = await getTier(address);
+    // Collect all read-only calls first
+    const [tier, samBalanceRaw, pointsRaw, lockedNfts] = await Promise.all([
+      getTier(address),
+      balanceOf(ERC20_ABI, SAM_ADDRESS, address, multicallProvider),
+      balanceOf(SAMURAI_POINTS_ABI, POINTS, address, multicallProvider),
+      nftLockUserInfo(signer, address), // Requires signer
+    ]);
+
     const tierName = tier?.name || "Public";
-    const samBalance = Number(
-      formatEther(await balanceOf(ERC20_ABI, SAM_ADDRESS, address, signer))
-    );
-
-    const points = Number(
-      formatEther(await balanceOf(SAMURAI_POINTS_ABI, POINTS, address, signer))
-    );
-
-    const lockedNfts = await nftLockUserInfo(signer, address);
+    const samBalance = Number(formatEther(samBalanceRaw));
+    const points = Number(formatEther(pointsRaw));
 
     const userIdos: IDO_v3[] = [];
     const allocations: StringToNumber = {};
-    const phases: StringToString = {};
-    const tgesUnlocked: StringToBoolean = {};
-    const tgesClaimed: StringToBoolean = {};
 
-    for (let index = 0; index < IDOs.length; index++) {
-      const ido = IDOs[index];
-      const userIdo = await idoV3UserInfo(index, signer, tierName, address);
+    // Fetch user IDO info in parallel
+    const idoInfoResults = await Promise.all(
+      IDOs.map((ido, index) =>
+        idoV3UserInfo(index, signer, tierName, address, multicallProvider)
+      )
+    );
 
-      if (userIdo?.allocation || 0 > 0) {
+    // Filter valid IDOs
+    idoInfoResults.forEach((userIdo, index) => {
+      if ((userIdo?.allocation || 0) > 0) {
+        const ido = IDOs[index];
         userIdos.push(ido);
-        const allocation = userIdo?.allocation || 0;
-
-        allocations[ido.id] = allocation;
-
-        const idoPhase = await getParticipationPhase(index);
-        phases[ido.id] = idoPhase;
-
-        if (ido.vesting) {
-          const vestingInfo = await vestingGeneralInfo(index);
-
-          tgesUnlocked[ido.id] =
-            (vestingInfo?.periods.vestingAt || 0) < currentTime();
-
-          const userVestingInfo = await vestingUserInfo(
-            index,
-            signer,
-            walletToCheck
-          );
-
-          tgesClaimed[ido.id] = userVestingInfo?.claimedTGE;
-        }
+        allocations[ido.id] = userIdo?.allocation || 0;
       }
-    }
+    });
 
     return {
       account: address,
       tier: tierName,
       samBalance,
       points,
-      nftBalance: lockedNfts?.locks.length,
+      nftBalance: lockedNfts?.locks.length || 0,
       userIdos,
       allocations,
-      phases,
-      tgesUnlocked,
-      tgesClaimed,
     } as DashboardUserDetails;
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
+}
+
+export async function fetchVestingDetails(
+  signer: Signer,
+  userIdos: IDO_v3[],
+  walletToCheck?: string
+) {
+  const phases: StringToString = {};
+  const tgesUnlocked: StringToBoolean = {};
+  const tgesClaimed: StringToBoolean = {};
+
+  const signerProvider = signer.provider as JsonRpcProvider;
+  const multicallProvider = new MulticallProvider(signerProvider);
+
+  const vestingPromises = userIdos.map(async (ido) => {
+    const index = IDOs.findIndex((item) => item.id === ido.id);
+    if (!ido.vesting) {
+      phases[ido.id] = await getParticipationPhase(index, multicallProvider);
+      tgesUnlocked[ido.id] = false;
+      tgesClaimed[ido.id] = false;
+      return;
+    }
+
+    const [phase, vestingInfo, userVestingInfo] = await Promise.all([
+      getParticipationPhase(index, multicallProvider),
+      vestingGeneralInfo(index, multicallProvider),
+      vestingUserInfo(index, signer, walletToCheck),
+    ]);
+
+    if (phase) phases[ido.id] = phase;
+    if (vestingInfo)
+      tgesUnlocked[ido.id] = vestingInfo?.periods.vestingAt < currentTime();
+    if (userVestingInfo) tgesClaimed[ido.id] = userVestingInfo?.claimedTGE;
+  });
+
+  await Promise.all(vestingPromises);
+  return { phases, tgesUnlocked, tgesClaimed } as DashboardUserVestingDetails;
 }

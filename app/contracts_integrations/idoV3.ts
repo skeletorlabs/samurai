@@ -18,6 +18,7 @@ import { getTokens } from "@/app/contracts_integrations/nft";
 import { vestingInfos } from "./migrator";
 import { UTCDate } from "@date-fns/utc";
 import { base } from "../utils/chains";
+import { MulticallProvider } from "@ethers-ext/provider-multicall";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const BASE_PROVIDER = new JsonRpcProvider(BASE_RPC_URL);
@@ -28,7 +29,11 @@ export type WalletRange = {
   maxPerWallet: number;
 };
 
-async function getContract(index: number, signer?: ethers.Signer) {
+async function getContract(
+  index: number,
+  signer?: ethers.Signer,
+  multicallProvider?: MulticallProvider
+) {
   try {
     const ido = IDOs[index];
 
@@ -43,7 +48,7 @@ async function getContract(index: number, signer?: ethers.Signer) {
     const contract = new ethers.Contract(
       contractAddress,
       ido.abi,
-      signer && signerIsOnBase ? signer : BASE_PROVIDER
+      signer && signerIsOnBase ? multicallProvider || signer : BASE_PROVIDER
     );
 
     return contract;
@@ -54,9 +59,12 @@ async function getContract(index: number, signer?: ethers.Signer) {
 
 // OVERALL INFOS
 
-export async function checkIsPaused(index: number) {
+export async function checkIsPaused(
+  index: number,
+  multicallProvider?: MulticallProvider
+) {
   try {
-    const contract = await getContract(index);
+    const contract = await getContract(index, undefined, multicallProvider);
     const isPaused = await contract?.paused();
     return isPaused;
   } catch (e) {
@@ -137,14 +145,15 @@ export async function userInfo(
   index: number,
   signer: ethers.Signer,
   tierName: string,
-  account?: string
+  account?: string,
+  multicallProvider?: MulticallProvider
 ) {
   try {
     const ido = IDOs[index];
     let signerAddress = await signer.getAddress();
     const address = account ? account : signerAddress;
 
-    const contract = await getContract(index, signer);
+    const contract = await getContract(index, signer, multicallProvider);
     const usingETH = ido.ether ? await contract?.usingETH() : false;
     const isPublic = await contract?.isPublic();
 
@@ -177,7 +186,12 @@ export async function userInfo(
 
     const balanceToken = Number(
       ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken, address, BASE_PROVIDER),
+        await balanceOf(
+          ERC20_ABI,
+          acceptedToken,
+          address,
+          multicallProvider || BASE_PROVIDER
+        ),
         6
       )
     );
@@ -188,7 +202,7 @@ export async function userInfo(
         ERC20_ABI,
         acceptedToken,
         contractAddress as string,
-        BASE_PROVIDER
+        multicallProvider || BASE_PROVIDER
       ),
       6
     );
@@ -365,17 +379,20 @@ export async function updateRanges(
   }
 }
 
-export async function getParticipationPhase(index: number) {
+export async function getParticipationPhase(
+  index: number,
+  multicallProvider?: MulticallProvider
+) {
   const ido = IDOs[index];
   const start = ido.date;
   const end = ido.end;
   const now = getUnixTime(new UTCDate());
-  const isPaused = await checkIsPaused(index);
+  const isPaused = await checkIsPaused(index, multicallProvider);
 
   let phase = "Upcoming";
   if (now >= start && now <= end && !isPaused) phase = "Participation";
 
-  const contract = await getContract(index, undefined);
+  const contract = await getContract(index, undefined, multicallProvider);
   const gokenin = await contract?.getRange(2);
   const usingETH = await contract?.usingETH();
   const range = parseWalletRange(gokenin, usingETH ? 18 : 6);

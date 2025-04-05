@@ -278,8 +278,11 @@ export type DashboardUserDetails = {
   points: number;
   nftBalance: number;
   userIdos: IDO_v3[];
-  phases: StringToString;
   allocations: StringToNumber;
+};
+
+export type DashboardUserVestingDetails = {
+  phases: StringToString;
   tgesUnlocked: StringToBoolean;
   tgesClaimed: StringToBoolean;
 };

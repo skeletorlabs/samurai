@@ -6,14 +6,7 @@ import TopLayout from "@/app/components/topLayout";
 import { shortAddress } from "../utils/shortAddress";
 import Link from "next/link";
 import ChartPointsProgression from "../components/dashboard/chartPointsProgression";
-import {
-  useState,
-  useContext,
-  useEffect,
-  useCallback,
-  cache,
-  useMemo,
-} from "react";
+import { useState, useContext, useEffect, useCallback } from "react";
 import { IDO_CHAINS } from "../utils/constants";
 import SSSelect from "../components/ssSelect";
 import ChartPointsUsage from "../components/dashboard/chartPointsUsage.tsx";
@@ -22,11 +15,15 @@ import { CalendarDaysIcon, ChartBarIcon } from "@heroicons/react/20/solid";
 import UserList from "../components/dashboard/userList";
 import { StateContext } from "../context/StateContext";
 import {
+  fetchVestingDetails,
   getHistoricalBalances,
   userInfo,
 } from "../contracts_integrations/dashboard";
 import LoadingBlocker from "../components/loadingBlocker";
-import { DashboardUserDetails } from "../utils/interfaces";
+import {
+  DashboardUserDetails,
+  DashboardUserVestingDetails,
+} from "../utils/interfaces";
 import ConnectButton from "../components/connectbutton";
 import { useQuery } from "@tanstack/react-query";
 
@@ -43,6 +40,8 @@ export default function Dashboard() {
   const [userDetails, setUserDetails] = useState<DashboardUserDetails | null>(
     null
   );
+  const [userVestingDetails, setUserVestingDetails] =
+    useState<DashboardUserVestingDetails | null>(null);
 
   const [pointsProgressionData, setPointsProgressionData] = useState<any>([]);
 
@@ -65,13 +64,29 @@ export default function Dashboard() {
     enabled: !!signer, // Only run when signer is available
   });
 
+  const { data: userVestingInfoData, isLoading: loadingUserVesting } = useQuery(
+    {
+      queryKey: ["userInfoVesting", account], // Query key
+      queryFn: async () => {
+        if (!signer) throw new Error("Signer is not available");
+        return fetchVestingDetails(
+          signer,
+          // "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8",
+          userDetails?.userIdos || []
+        );
+      },
+      staleTime: 1000 * 60 * 5, // Cache for 5 minutes
+      enabled: !!signer && !!userDetails?.userIdos, // Only run when signer && userIdos are available
+    }
+  );
+
   const { data: chartInfoData, isLoading: loadingChart } = useQuery({
     queryKey: ["getHistoricalBalances", account], // Query key
     queryFn: async () => {
       if (!signer) throw new Error("Signer is not available");
       return getHistoricalBalances(
         6,
-        signer,
+        signer
         // "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8"
       );
     },
@@ -109,6 +124,13 @@ export default function Dashboard() {
   useEffect(() => {
     if (userInfoData) setUserDetails(userInfoData);
   }, [userInfoData, setUserDetails]);
+
+  useEffect(() => {
+    if (userVestingInfoData) {
+      setUserVestingDetails(userVestingInfoData);
+      // console.log(userVestingInfoData);
+    }
+  }, [userVestingInfoData, setUserVestingDetails]);
 
   useEffect(() => {
     if (chartInfoData) setPointsProgressionData(chartInfoData);
@@ -274,7 +296,7 @@ export default function Dashboard() {
         className={`flex lg:hidden flex-col items-center gap-2 w-full px-2 py-10`}
       >
         <div className="flex items-center gap-2">
-          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
             <p className="text-white/70 text-sm">Total IDOs</p>
             <p className="text-white text-2xl">
               {userDetails?.userIdos.length}
@@ -282,7 +304,7 @@ export default function Dashboard() {
             <p className="text-orange-200 text-lg">Participated</p>
           </div>
 
-          <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+          <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
             <p className="text-white/70 text-sm">Earned</p>
             <p className="text-white text-2xl">
               {Number(userDetails?.points || 0 + 0).toLocaleString("en-us")}
@@ -292,14 +314,14 @@ export default function Dashboard() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
             <p className="text-white/70 text-sm">Spent</p>
             <p className="text-white text-2xl">0</p>
             <p className="text-orange-200 text-lg">Samurai Points</p>
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+            <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
               <p className="text-white text-2xl">{userDetails?.tier}</p>
               <p className="text-orange-200 text-lg">Tier</p>
             </div>
@@ -307,7 +329,7 @@ export default function Dashboard() {
         </div>
 
         <div className="flex items-center gap-2">
-          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
             <p className="text-white/70 text-sm">Total Tokens</p>
             <p className="text-white text-2xl">
               {userDetails?.samBalance.toLocaleString("en-us")}
@@ -315,14 +337,14 @@ export default function Dashboard() {
             <p className="text-orange-200 text-lg">$SAM</p>
           </div>
 
-          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
             <p className="text-white/70 text-sm">Locked</p>
             <p className="text-white text-2xl">{userDetails?.nftBalance}</p>
             <p className="text-orange-200 text-lg">SAM NFT</p>
           </div>
         </div>
 
-        <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max border border-white/20  shadow-lg shadow-black/40">
+        <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[746px] border border-white/20  shadow-lg shadow-black/40">
           <p className="text-white/70 text-sm">Balance</p>
           <p className="text-white text-2xl">
             {userDetails?.points.toLocaleString("en-us")}
@@ -338,7 +360,7 @@ export default function Dashboard() {
             <h2 className="text-4xl lg:text-5xl font-bold text-center lg:text-start">
               My <span className="text-samurai-red">Allocations</span>
             </h2>
-            <div className="flex items-center gap-2 mt-4 lg:mt-0 bg-white/10 w-full justify-center py-3 lg:bg-transparent lg:w-max lg:justify-start lg:py-0 border-t border-white/20">
+            <div className="flex items-center gap-2 mt-4 lg:mt-0 bg-white/10 w-full justify-center py-3 lg:bg-transparent lg:w-max lg:justify-start lg:py-0 border-t lg:border-none border-white/20">
               <span className="w-4 lg:w-6 h-4 lg:h-6 text-white">
                 {network}
               </span>
@@ -375,9 +397,9 @@ export default function Dashboard() {
             <UserList
               IDOs={userDetails?.userIdos || []}
               allocations={userDetails?.allocations || {}}
-              phases={userDetails?.phases || {}}
-              tgesUnlocked={userDetails?.tgesUnlocked || {}}
-              tgesClaimed={userDetails?.tgesClaimed || {}}
+              phases={userVestingDetails?.phases}
+              tgesUnlocked={userVestingDetails?.tgesUnlocked}
+              tgesClaimed={userVestingDetails?.tgesClaimed}
               filterChain={filterChain}
               filterStatus={filterStatus}
               onResetFilters={resetFilters}

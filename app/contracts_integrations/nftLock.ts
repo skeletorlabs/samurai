@@ -7,14 +7,24 @@ import { notificateTx } from "@/app/utils/notificateTx";
 import checkNFTApproval from "./checkNFTApproval";
 import { getTokens } from "./nft";
 import { NFTToken } from "../utils/interfaces";
+import { MulticallProvider } from "@ethers-ext/provider-multicall";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
-async function getContract(signer?: Signer) {
+async function getContract(
+  signer?: Signer,
+  multicallProvider?: MulticallProvider
+) {
   try {
-    const provider = new JsonRpcProvider(BASE_RPC_URL);
+    const provider = multicallProvider
+      ? multicallProvider
+      : new JsonRpcProvider(BASE_RPC_URL);
 
-    const contract = new Contract(NFT_LOCK, NFT_LOCK_ABI, signer || provider);
+    const contract = new Contract(
+      NFT_LOCK,
+      NFT_LOCK_ABI,
+      multicallProvider || signer || provider
+    );
 
     return contract;
   } catch (e) {
@@ -63,12 +73,12 @@ export async function generalInfo() {
 
 // USER INFOS
 
-export async function userInfo(signer: Signer, account?: string) {
+export async function userInfo(signer: Signer, account?: string, multicallProvider?: MulticallProvider) {
   try {
     let signerAddress = await signer.getAddress();
     const address = account ? account : signerAddress;
 
-    const contract = await getContract(signer);
+    const contract = await getContract(signer, multicallProvider);
 
     const locksCounter = Number(await contract?.locksCounter(address));
     const minPeriod = Number(await contract?.MIN_MONTHS_LOCKED());
