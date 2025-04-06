@@ -145,7 +145,7 @@ export interface Project {
   links: ProjectLink[];
 }
 
-export interface IDO_SOCIAL {
+export interface SOCIAL {
   svg: any;
   href: string;
 }
@@ -181,7 +181,7 @@ export interface IDO {
   vesting: string;
   releaseType: string;
   currentPhase: string;
-  socials: IDO_SOCIAL[];
+  socials: SOCIAL[];
   bigDescription: ReactNode;
   contract: string;
   abi: any;
@@ -215,7 +215,7 @@ export interface IDO_v3 {
   fdv: number;
   exchangeListingPrice: number;
   marketCapAtTGE: number;
-  socials: IDO_SOCIAL[];
+  socials: SOCIAL[];
   contract: string;
   abi: any;
   images?: string[];

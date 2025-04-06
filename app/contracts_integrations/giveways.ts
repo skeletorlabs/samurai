@@ -18,9 +18,9 @@ export enum GiveawayStatus {
 export const STATUS_COLORS = [
   {
     status: "UPCOMING",
-    from: "from-yellow-500",
+    from: "from-yellow-100",
     to: "to-yellow-300",
-    text: "text-yellow-500",
+    text: "text-yellow-300",
   },
   {
     status: "ACTIVE",

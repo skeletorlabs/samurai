@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import TopLayout from "@/app/components/topLayout";
 
 import Giveaways from "../components/giveaways";
+import Link from "next/link";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -46,7 +47,20 @@ export default function Sanka() {
           <h2 className="text-4xl lg:text-5xl font-bold text-center lg:text-start">
             Recent <span className="text-samurai-red">Giveaways</span>
           </h2>
-          <Giveaways />
+          <div
+            className={`lg:text-lg mt-2 inline-flex justify-center lg:justify-start ${inter.className}`}
+          >
+            Check out our Amplifi Deep-Dive{" "}
+            <Link
+              href="#"
+              className="text-samurai-red text-3xl ml-3 mt-[-7px] transition-all hover:scale-125"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              →
+            </Link>
+          </div>
+          <Giveaways ids={[2]} />
         </div>
       </div>
     </>
