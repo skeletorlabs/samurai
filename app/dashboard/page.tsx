@@ -128,7 +128,6 @@ export default function Dashboard() {
   useEffect(() => {
     if (userVestingInfoData) {
       setUserVestingDetails(userVestingInfoData);
-      // console.log(userVestingInfoData);
     }
   }, [userVestingInfoData, setUserVestingDetails]);
 
@@ -295,8 +294,8 @@ export default function Dashboard() {
       <div
         className={`flex lg:hidden flex-col items-center gap-2 w-full px-2 py-10`}
       >
-        <div className="flex items-center gap-2">
-          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
+        <div className="flex items-center justify-center gap-2 w-full">
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-full md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
             <p className="text-white/70 text-sm">Total IDOs</p>
             <p className="text-white text-2xl">
               {userDetails?.userIdos.length}
@@ -304,7 +303,7 @@ export default function Dashboard() {
             <p className="text-orange-200 text-lg">Participated</p>
           </div>
 
-          <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
+          <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-full md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
             <p className="text-white/70 text-sm">Earned</p>
             <p className="text-white text-2xl">
               {Number(userDetails?.points || 0 + 0).toLocaleString("en-us")}
@@ -313,23 +312,21 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
+        <div className="flex items-center justify-center gap-2 w-full">
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-full md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
             <p className="text-white/70 text-sm">Spent</p>
             <p className="text-white text-2xl">0</p>
             <p className="text-orange-200 text-lg">Samurai Points</p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
-              <p className="text-white text-2xl">{userDetails?.tier}</p>
-              <p className="text-orange-200 text-lg">Tier</p>
-            </div>
+          <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-full md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
+            <p className="text-white text-2xl">{userDetails?.tier}</p>
+            <p className="text-orange-200 text-lg">Tier</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
+        <div className="flex items-center justify-center gap-2 w-full">
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-full md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
             <p className="text-white/70 text-sm">Total Tokens</p>
             <p className="text-white text-2xl">
               {userDetails?.samBalance.toLocaleString("en-us")}
@@ -337,14 +334,14 @@ export default function Dashboard() {
             <p className="text-orange-200 text-lg">$SAM</p>
           </div>
 
-          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-md h-[140px] p-8 rounded-3xl w-full md:w-[370px] border border-white/20  shadow-lg shadow-black/40">
             <p className="text-white/70 text-sm">Locked</p>
             <p className="text-white text-2xl">{userDetails?.nftBalance}</p>
             <p className="text-orange-200 text-lg">SAM NFT</p>
           </div>
         </div>
 
-        <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md h-[140px] p-8 rounded-3xl w-max md:w-[746px] border border-white/20  shadow-lg shadow-black/40">
+        <div className="flex flex-col justify-center bg-white/5 backdrop-blur-md w-full h-[140px] p-8 rounded-3xl md:w-[746px] border border-white/20  shadow-lg shadow-black/40">
           <p className="text-white/70 text-sm">Balance</p>
           <p className="text-white text-2xl">
             {userDetails?.points.toLocaleString("en-us")}
