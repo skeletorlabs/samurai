@@ -1,6 +1,7 @@
 import { useWeb3ModalAccount, useWeb3Modal } from "@web3modal/ethers/react";
 import { useEffect, useState } from "react";
 import SSButton from "./ssButton";
+import { shortAddress } from "../utils/shortAddress";
 
 interface ConnectButton {
   mobile?: boolean;
@@ -11,15 +12,7 @@ export default function ConnectButton({ mobile = false }: ConnectButton) {
   const { open } = useWeb3Modal();
 
   useEffect(() => {
-    setText(
-      isConnected
-        ? address
-          ? address?.slice(0, 4) +
-            "..." +
-            address?.slice(address.length - 4, address.length)
-          : ""
-        : "CONNECT WALLET"
-    );
+    setText(isConnected ? shortAddress(address || "") : "CONNECT WALLET");
   }, [address, isConnected]);
 
   return (

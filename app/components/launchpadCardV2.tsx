@@ -7,6 +7,7 @@ import { getParticipationPhase as getParticipationPhasePrivate } from "../contra
 import { useCallback, useEffect, useState } from "react";
 import { IDOs } from "../utils/constants";
 import LoadingBox from "@/app/components/loadingBox";
+import { unknown } from "../utils/chains";
 
 export default function LaunchpadCardV2({
   ido,
@@ -79,16 +80,16 @@ export default function LaunchpadCardV2({
           </div>
         </div>
 
-        {ido?.tokenNetwork !== "TBA" && (
+        {ido?.tokenNetwork !== unknown && (
           <div className="flex items-center gap-2 bg-black/90 px-2 py-1 rounded-full border border-white/20 absolute top-4 left-4">
             <span className="text-[12px]">Project Tokens</span>
             <Image
               src={ido.networkImageSrc}
-              alt={ido.tokenNetwork}
+              alt={ido.tokenNetwork.name}
               width={18}
               height={18}
               className={`p-[1px] ${
-                ido.tokenNetwork === "BASE" ? "bg-white/80" : ""
+                ido.tokenNetwork.name === "BASE" ? "bg-white/80" : ""
               } rounded-full`}
             />
           </div>
@@ -96,7 +97,7 @@ export default function LaunchpadCardV2({
 
         <div
           className={`flex items-center gap-2 bg-black/90 px-2 py-1 rounded-full border border-white/20 absolute ${
-            ido?.tokenNetwork === "TBA" ? "top-4" : "top-12"
+            ido?.tokenNetwork === unknown ? "top-4" : "top-12"
           } left-4`}
         >
           <span className="text-[12px]">Crowdsale</span>

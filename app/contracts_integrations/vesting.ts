@@ -15,6 +15,7 @@ import {
   fromUnixTime,
   getUnixTime,
 } from "date-fns";
+import { MulticallProvider } from "@ethers-ext/provider-multicall";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 const BERA_RPC_URL = process.env.NEXT_PUBLIC_BERACHAIN_RPC_HTTPS as string;
@@ -46,7 +47,21 @@ export type VESTING_GENERAL_INFO = {
   vestingPeriod: string;
 };
 
-async function getContract(index: number, signer?: Signer) {
+export type VESTING_USER_INFO = {
+  purchased: number;
+  claimedTGE: boolean;
+  askedRefund: boolean;
+  claimedTokens: number;
+  claimableTokens: number;
+  claimedPoints: number;
+  claimablePoints: number;
+};
+
+async function getContract(
+  index: number,
+  signer?: Signer,
+  multicallProvider?: MulticallProvider
+) {
   try {
     const ido = IDOs[index];
     const rpc = CHAIN_ID_TO_RPC_URL[ido.vestingChain?.chainId!];
@@ -55,7 +70,7 @@ async function getContract(index: number, signer?: Signer) {
     const contract = new ethers.Contract(
       ido.vesting!,
       ido.vestingABI,
-      signer || provider
+      multicallProvider || signer || provider
     );
     return contract;
   } catch (e) {
@@ -121,18 +136,18 @@ function getNextUnlock(
   return next ? next : 0;
 }
 
-export async function generalInfo(index: number) {
+export async function generalInfo(
+  index: number,
+  multicallProvider?: MulticallProvider
+) {
   try {
     const ido = IDOs[index];
-    const contract = await getContract(index);
-
+    const contract = await getContract(index, undefined, multicallProvider);
     const owner = await contract?.owner();
     const paused = await contract?.paused();
-
     const totalPurchased = Number(
       formatEther(await contract?.totalPurchased())
     );
-
     const totalClaimed = Number(formatEther(await contract?.totalClaimed()));
     const totalPoints = Number(formatEther(await contract?.totalPoints()));
     const totalPointsClaimed = Number(
@@ -141,8 +156,8 @@ export async function generalInfo(index: number) {
 
     const cliffEndsAt = Number(await contract?.cliffEndsAt());
     const vestingEndsAt = Number(await contract?.vestingEndsAt());
-
     const vestingType = Number(await contract?.vestingType());
+
     let vestingPeriod = "";
     let rawPeriodType = 0;
 
@@ -163,11 +178,11 @@ export async function generalInfo(index: number) {
     );
 
     const periods = await contract?.periods();
-
     const vestingDuration = Number(periods[0]);
+
     let vestingAt =
       ido.id === "alpaca" ? Number(periods[1]) + 60 * 15 : Number(periods[1]);
-    vestingAt = getUnixTime(new Date());
+
     const cliff = Number(periods[2]);
 
     let nextUnlock = 0;
@@ -196,8 +211,6 @@ export async function generalInfo(index: number) {
       vestingPeriod,
     } as VESTING_GENERAL_INFO;
 
-    // console.log(data);
-
     return data;
   } catch (e) {
     handleError({ e: e, notificate: true });
@@ -218,10 +231,11 @@ export async function getWalletsToRefund(index: number) {
 export async function userInfo(
   index: number,
   signer: Signer,
-  account?: string
+  account?: string,
+  multicallProvider?: MulticallProvider
 ) {
   try {
-    const contract = await getContract(index);
+    const contract = await getContract(index, undefined, multicallProvider);
     let signerAddress = await signer.getAddress();
 
     const address = account || signerAddress;
@@ -257,7 +271,7 @@ export async function userInfo(
       claimableTokens,
       claimedPoints,
       claimablePoints,
-    };
+    } as VESTING_USER_INFO;
 
     return data;
   } catch (e) {

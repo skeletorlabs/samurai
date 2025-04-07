@@ -9,7 +9,13 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-export default function Giveaways({ max }: { max?: number }) {
+export default function Giveaways({
+  ids,
+  max,
+}: {
+  ids?: number[];
+  max?: number;
+}) {
   const [giveaways, setGiveaways] = useState<GiveawayType[] | []>([]);
   const [loading, setLoading] = useState(true);
   const [shouldReload, setShouldReload] = useState(false);
@@ -38,7 +44,17 @@ export default function Giveaways({ max }: { max?: number }) {
     <div
       className={`flex justify-center lg:justify-start items-center flex-wrap gap-5 leading-normal pt-10 text-xl relative ${inter.className}`}
     >
-      {max
+      {ids
+        ? giveaways
+            .filter((giveaway: GiveawayType) => ids.includes(giveaway.id))
+            .map((giveaway: GiveawayType, index) => (
+              <GiveawayCard
+                key={index}
+                giveaway={giveaway}
+                setReload={setShouldReload}
+              />
+            ))
+        : max
         ? giveaways
             .slice(0, max)
             .map((giveaway: GiveawayType, index) => (

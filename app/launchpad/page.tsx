@@ -22,7 +22,7 @@ export default function Launchpad() {
   return (
     <>
       <TopLayout background="bg-samurai-launchpad">
-        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24">
+        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-14 pt-10">
           {/* TOP CONTENT */}
           <div className="relative md:mr-12 xl:max-w-[900px]">
             <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
@@ -63,14 +63,14 @@ export default function Launchpad() {
         id="participate"
         className="flex flex-col py-10 md:py-20 w-full bg-white/20 border-t-[1px] border-samurai-red/40"
       >
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-14 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Recent</span> Offerings
           </h2>
           <ProjectsV2 />
         </div>
 
-        <div className="px-6 lg:px-8 xl:px-20 text-white mt-20">
+        <div className="px-6 lg:px-8 xl:px-14 text-white mt-20">
           <Disclosure>
             <DisclosureButton className="group flex items-center gap-2">
               <h2 className="text-4xl lg:text-5xl font-bold">
@@ -84,7 +84,7 @@ export default function Launchpad() {
           </Disclosure>
         </div>
 
-        {/* <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white mt-20">
+        {/* <div className="flex flex-col px-6 lg:px-8 xl:px-14 text-white mt-20">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-samurai-red">Past</span> Offerings
           </h2>
@@ -93,7 +93,7 @@ export default function Launchpad() {
       </div>
 
       {/* HOW TO PARTICIPATE */}
-      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted">
+      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-14 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted">
         <div className="flex flex-col relative">
           <h2 className="text-4xl lg:text-5xl font-bold">
             Launchpad <span className="text-samurai-red">Tiers</span>
@@ -139,7 +139,7 @@ export default function Launchpad() {
       </div>
 
       {/* HOW TO PARTICIPATE
-      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-20 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted">
+      <div className="flex items-center gap-12 px-6 lg:px-8 xl:px-14 py-24  w-full bg-white/10 text-white border-t border-samurai-red/50 border-dotted">
         <div className="flex flex-col relative">
           <h2 className="text-4xl lg:text-5xl font-bold">
             How to <span className="text-samurai-red">participate</span>
@@ -230,7 +230,7 @@ export default function Launchpad() {
 
       {/* Past */}
       {/* <div className="flex flex-col py-10 md:py-20 w-full bg-white/10 border-t-[1px] border-samurai-red/40">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-14 text-white">
           <h2 className="text-4xl lg:text-5xl font-bold">
             <span className="text-white/30">Past</span> Token Offerings
           </h2>

@@ -1,43 +1,12 @@
 "use client";
 
 import { createWeb3Modal, defaultConfig } from "@web3modal/ethers/react";
+import { base } from "../utils/chains";
 
 // 1. Get projectId at https://cloud.walletconnect.com
 const projectId = "615362a649b8bf6fbed2f4694edf0e91";
 
 // 2. Set chains
-// const localhost = {
-//   chainId: 31337,
-//   name: "Localhost",
-//   currency: "ETH",
-//   explorerUrl: "https://basescan.org",
-//   rpcUrl: "http://127.0.0.1:8545",
-// };
-
-export const base = {
-  chainId: 8453,
-  name: "Base",
-  currency: "ETH",
-  explorerUrl: "https://basescan.org",
-  rpcUrl: process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string,
-};
-
-export const berachain = {
-  chainId: 80094,
-  name: "Berachain",
-  currency: "BERA",
-  explorerUrl: "https://berascan.com",
-  rpcUrl: "https://rpc.berachain.com",
-};
-
-const polygon = {
-  chainId: 137,
-  name: "Polygon",
-  currency: "POL",
-  explorerUrl: "https://polygonscan.com",
-  rpcUrl: "https://polygon-mainnet.infura.io",
-};
-
 export const chains = [base];
 
 // 3. Create a metadata object

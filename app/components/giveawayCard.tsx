@@ -9,7 +9,11 @@ import {
   STATUS_COLORS,
   userInfo,
 } from "../contracts_integrations/giveways";
-import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/20/solid";
+import {
+  MinusCircleIcon,
+  PlusCircleIcon,
+  TrophyIcon,
+} from "@heroicons/react/20/solid";
 import { GIVEAWAYS_LIST } from "../utils/constants";
 
 import { Inter } from "next/font/google";
@@ -19,6 +23,8 @@ import { userInfo as pointsUserInfo } from "../contracts_integrations/points";
 import { StateContext } from "../context/StateContext";
 import { currentTime } from "../utils/currentTime";
 import ConnectButton from "./connectbutton";
+import Link from "next/link";
+import { discord, twitterX, youtube } from "../utils/svgs";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["100", "300", "500", "900"],
@@ -41,11 +47,19 @@ export default function GiveawayCard({
   );
   const [giveawayStatusColors, setGiveawayStatusColors] = useState<any>(null);
   const [userTickets, setUserTickets] = useState(0);
+  const [isWinner, setIsWinner] = useState(false);
 
-  const { prizes, prizeValue, image, background, isDrawn } =
-    GIVEAWAYS_LIST[giveaway.id];
+  const {
+    prizes,
+    prizeValue,
+    ticketsToDraw,
+    image,
+    background,
+    isDrawn,
+    socials,
+  } = GIVEAWAYS_LIST[giveaway.id];
 
-  const { signer } = useContext(StateContext);
+  const { signer, account } = useContext(StateContext);
 
   enum ChangeType {
     INCREASE,
@@ -90,6 +104,10 @@ export default function GiveawayCard({
     setGiveawayStatusColors(statusColors);
   };
 
+  const checkIsWinner = useCallback(() => {
+    setIsWinner(giveaway.winners.includes(account));
+  }, [giveaway, account, setIsWinner]);
+
   const getUserBalance = async () => {
     if (signer) {
       const response = await pointsUserInfo(signer);
@@ -111,6 +129,7 @@ export default function GiveawayCard({
 
   useEffect(() => {
     getStatus();
+    checkIsWinner();
   }, [giveaway]);
 
   return (
@@ -129,7 +148,7 @@ export default function GiveawayCard({
           />
         </div>
 
-        <div className="absolute left-0 bottom-0 flex flex-col lg:flex-row gap-5 lg:gap-0 items-center justify-between bg-black/50 backdrop-blur-sm w-full lg:p-10 py-8 text-white text-3xl 2xl:text-5xl font-bold border-t border-samurai-red">
+        <div className="absolute left-0 bottom-0 flex flex-col lg:flex-row gap-5 lg:gap-0 justify-between bg-black/50 backdrop-blur-sm w-full lg:p-10 py-8 text-white text-3xl 2xl:text-4xl font-bold border-t border-samurai-red">
           <div className="flex flex-col lg:flex-row items-center gap-2 lg:gap-5 w-full">
             <Image
               src={image}
@@ -138,21 +157,47 @@ export default function GiveawayCard({
               className="rounded-lg border border-white/30"
               alt={giveaway.name}
             />
-            <div className="flex flex-col items-center lg:items-start gap-2">
-              {giveaway.name}
-              <div className="flex items-center gap-1 text-lg">
-                <span className="text-yellow-300">
-                  Total of {giveaway.tickets} tickets purchased
-                </span>
+            <div className="flex flex-col items-center gap-4">
+              <div className="flex flex-col gap-1">
+                {giveaway.name}
+                <div className="flex items-center gap-1 text-sm">
+                  <span className="text-yellow-300 w-full text-center lg:text-start">
+                    Total of {giveaway.tickets} tickets purchased
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-center w-full gap-5 justify-center lg:justify-start flex-wrap ml-1">
+                {socials?.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className={`transition-all hover:opacity-75 text-white ${
+                      item.svg === twitterX
+                        ? "scale-[1.3] mr-[-7px]"
+                        : item.svg === discord
+                        ? "scale-[1.8]"
+                        : item.svg === youtube
+                        ? "scale-[1.9]"
+                        : "scale-[1.2]"
+                    }`}
+                    target="_blank"
+                  >
+                    {item.svg}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row items-center lg:justify-end lg:gap-2 w-full text-2xl lg:text-3xl 2xl:text-5xl bg-white/20 lg:bg-transparent p-2 lg:p-0">
-            <span className="text-yellow-300">PRIZES:</span>
-            <p className="text-white flex items-center gap-2">
-              {prizes}{" "}
-              <span className="text-xl">
+          <div className="flex flex-col justify-center items-center lg:gap-2 bg-black/30 py-6 lg:ml-12 lg:w-full lg:border lg:border-white/10 lg:rounded-lg lg:shadow-lg lg:shadow-black/30">
+            <span className="text-yellow-300 w-max text-2xl">
+              GIVEAWAY PRIZES
+            </span>
+            <p className="text-white flex flex-col gap-2 items-center">
+              <span className="text-2xl lg:text-3xl 2xl:text-4xl">
+                {prizes}{" "}
+              </span>
+              <span className="text-xl text-green-300">
                 ~{` $${prizeValue.toLocaleString("en-us")}`} USD
               </span>
             </p>
@@ -169,9 +214,9 @@ export default function GiveawayCard({
             </span>
           </div>
           <div className="flex flex-col bg-black/50 py-4 px-6 text-sm border border-white/10">
-            <span className="text-white/70">MINIMUM TO PARTICIPATE</span>
+            <span className="text-white/70">WINNERS</span>
             <span className="text-lg">
-              {giveaway.minTickets} Ticket{giveaway.minTickets > 1 && "s"}
+              {ticketsToDraw} x ${prizeValue / ticketsToDraw}
             </span>
           </div>
           <div className="flex flex-col bg-black/50 py-4 px-6 text-sm border border-white/10">
@@ -213,7 +258,7 @@ export default function GiveawayCard({
                 {balance.toLocaleString("en-us", { minimumFractionDigits: 2 })}{" "}
                 Points
               </div>
-              <div className="relative w-max">
+              <div className="relative w-max scale-[0.9] sm:scale-100">
                 <input
                   disabled
                   type="text"
@@ -246,7 +291,7 @@ export default function GiveawayCard({
                   balance < ticketsToBuy * giveaway.priceInPoints
                 }
                 onClick={onBuyTickets}
-                className="flex items-center justify-center text-sm lg:text-md h-[50px] disabled:bg-white/10 enabled:bg-samurai-red hover:enabled:opacity-75 disabled:text-white/20 disabled:border-white/20 rounded-full min-w-[380px] max-w-[380px]"
+                className="flex items-center justify-center text-sm lg:text-md h-[50px] disabled:bg-white/10 enabled:bg-samurai-red hover:enabled:opacity-75 disabled:text-white/20 disabled:border-white/20 rounded-full min-w-[380px] max-w-[380px]  scale-[0.9] sm:scale-100"
               >
                 {loading ? (
                   <Loading />
@@ -265,7 +310,19 @@ export default function GiveawayCard({
         </div>
       </div>
 
-      <div className="flex items-center gap-2 absolute top-20 right-10 z-20">
+      <div className="flex flex-col md:flex-row items-center justify-center md:justify-between flex-wrap gap-2 absolute top-20 left-0 z-20 w-full px-10">
+        {isDrawn && isWinner && (
+          <div className="flex items-center gap-3 text-yellow-300 relative bg-black md:bg-transparent py-2 px-2 pr-3 md:px-4 rounded-full shadow-lg md:shadow-transparent z-20">
+            <TrophyIcon
+              width={30}
+              className="w-[40px] md:w-[60px] bg-white/20 md:bg-black/50 p-2 rounded-full"
+            />
+            <span className="text-xl md:text-4xl font-bold text-yellow-300 z-20 box-shadow-lg">
+              You Win!
+            </span>
+          </div>
+        )}
+
         <div className="flex items-center gap-2 bg-black py-2 px-4 rounded-full border border-white/30 shadow-lg z-20">
           <span
             className={`bg-gradient-to-tr ${giveawayStatusColors?.from} ${giveawayStatusColors?.to} shadow-lg rounded-full w-4 h-4 animate-pulse`}

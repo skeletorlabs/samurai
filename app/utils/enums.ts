@@ -6,4 +6,5 @@ export const enum Page {
   tokens,
   incubation,
   ventures,
+  dashboard,
 }

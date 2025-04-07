@@ -21,7 +21,7 @@ const links = [
 export default function Footer() {
   return (
     <div className="flex flex-col justify-center lg:items-center w-full h-[350px] lg:h-[300px] pb-20 pt-4 lg:pb-0 lg:pt-10 lg:h-70 border-t-[0.5px] border-zinc-700">
-      <div className="flex flex-col lg:flex-row justify-center lg:justify-between lg:items-center gap-2 lg:gap-10 w-full px-6 lg:px-8 xl:px-20">
+      <div className="flex flex-col lg:flex-row justify-center lg:justify-between lg:items-center gap-2 lg:gap-10 w-full px-6 lg:px-8 xl:px-14">
         <Link
           href="/"
           className="transition-all hover:opacity-75 w-full flex justify-center lg:justify-start lg:mt-[-4px]"

@@ -294,9 +294,10 @@ export async function getNFTData(ipfsUrl: string, tokenUri: string) {
   return { metadata, imageUrl };
 }
 
-export async function getTokens(signer: Signer) {
+export async function getTokens(signer: Signer, account?: string) {
   const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
   const signerAddress = await signer.getAddress();
+  const address = account ? account : signerAddress;
 
   const balance = Number(await contract.balanceOf(signerAddress));
 

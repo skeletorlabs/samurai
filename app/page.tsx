@@ -84,7 +84,7 @@ export default function Home() {
     <>
       <TopLayout background="bg-samurai-cyborg" padding={false}>
         <>
-          <div className="px-6 lg:px-8 xl:px-20 relative pt-10 lg:pt-24">
+          <div className="px-6 lg:px-8 xl:px-14 relative pt-10 lg:pt-16">
             <div className="relative md:mr-12 xl:max-w-[900px] pb-10">
               <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
                 Invest. Interact. Earn.
@@ -113,7 +113,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-col w-full py-14 md:py-12 bg-black/40 relative">
-            <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+            <div className="flex flex-col px-6 lg:px-8 xl:px-14 text-white">
               <div className="flex flex-col text-white text-2xl">
                 <p className="font-bold text-4xl pb-2 opacity-[0.8]">
                   Latest <span className="text-samurai-red">Updates</span>
@@ -167,7 +167,7 @@ export default function Home() {
       </TopLayout>
 
       {/* LATEST UPDATES */}
-      {/* <div className="flex flex-col pt-20 pb-10 w-full px-6 lg:px-8 xl:px-20 bg-neutral-900/50 border-t border-samurai-red/50 border-dotted">
+      {/* <div className="flex flex-col pt-20 pb-10 w-full px-6 lg:px-8 xl:px-14 bg-neutral-900/50 border-t border-samurai-red/50 border-dotted">
         <h2 className="text-6xl font-bold">
           Latest <span className="text-samurai-red">Updates</span>
         </h2>
@@ -221,7 +221,7 @@ export default function Home() {
       </div>
 
       {/* FEATURED PROJECTS */}
-      <div className="flex flex-col pt-20 pb-14 w-full bg-white/10 px-6 lg:px-8 xl:px-20 text-white border-t-[0.5px] border-samurai-red relative">
+      <div className="flex flex-col pt-20 pb-14 w-full bg-white/10 px-6 lg:px-8 xl:px-14 text-white border-t-[0.5px] border-samurai-red relative">
         <h2 className="text-4xl md:text-6xl font-bold">
           Featured <span className="text-samurai-red">Projects</span>
         </h2>
@@ -246,7 +246,7 @@ export default function Home() {
       {/* SAMURAI SANKA */}
       <div
         id="sanka"
-        className="flex justify-between pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-20 bg-samurai-sanka bg-[right_-10rem_top_-20rem] border-t-[0.5px] border-samurai-red"
+        className="flex justify-between pt-20 bg-[#F91100] pb-20 w-full px-6 lg:px-8 xl:px-14 bg-samurai-sanka bg-[right_-10rem_top_-20rem] border-t-[0.5px] border-samurai-red"
       >
         <div className="flex flex-col">
           <h2 className="text-4xl md:text-6xl font-bold">
@@ -341,7 +341,7 @@ export default function Home() {
 
       {/* SAMURAI EDGE */}
       <div className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white/20 border-t-[1px] border-yellow-300/40">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-14 text-white">
           <h2 className="text-4xl md:text-6xl font-bold">
             The Samurai <span className="text-samurai-red">Edge</span>
           </h2>

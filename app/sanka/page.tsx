@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import TopLayout from "@/app/components/topLayout";
 
 import Giveaways from "../components/giveaways";
+import Link from "next/link";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -13,7 +14,7 @@ export default function Sanka() {
   return (
     <>
       <TopLayout background="bg-samurai-sanka">
-        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24">
+        <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-14 pt-10">
           {/* TOP CONTENT */}
           <div className="relative md:mr-12 w-full xl:max-w-[900px] text-center lg:text-start">
             <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
@@ -46,7 +47,20 @@ export default function Sanka() {
           <h2 className="text-4xl lg:text-5xl font-bold text-center lg:text-start">
             Recent <span className="text-samurai-red">Giveaways</span>
           </h2>
-          <Giveaways />
+          <div
+            className={`lg:text-lg mt-2 inline-flex justify-center lg:justify-start ${inter.className}`}
+          >
+            Check out our Amplifi Deep-Dive{" "}
+            <Link
+              href="https://medium.com/samurai-starter/the-10-000-amplifi-launchdrop-campaign-on-samurai-sanka-402eee477deb"
+              className="text-samurai-red text-3xl ml-3 mt-[-7px] transition-all hover:scale-125"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              →
+            </Link>
+          </div>
+          <Giveaways ids={[2]} />
         </div>
       </div>
     </>

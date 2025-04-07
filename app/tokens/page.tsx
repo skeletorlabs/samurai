@@ -56,7 +56,7 @@ export default function Tokens() {
     <>
       <TopLayout background="bg-samurai-cyborg-fem bg-cover bg-top">
         <>
-          <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-20 pt-10 lg:pt-24 bg-transparent sm:bg-black/60 2xl:bg-transparent">
+          <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-16 pt-10 bg-transparent sm:bg-black/60 2xl:bg-transparent">
             {/* TOP CONTENT */}
             <div className="relative md:mr-12 xl:max-w-[900px]">
               <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
@@ -114,7 +114,7 @@ export default function Tokens() {
 
       {/* TOKENOMICS */}
       <div className="flex flex-col py-10 md:py-20 w-full bg-white/5 border-t border-samurai-red/50 border-dotted relative">
-        <div className="flex flex-col px-6 lg:px-8 xl:px-20 text-white">
+        <div className="flex flex-col px-6 lg:px-8 xl:px-16 text-white">
           <div className="flex flex-col text-white text-2xl">
             <div className="flex flex-col md:flex-row items-center gap-3">
               <p className="font-bold text-4xl pb-2 opacity-[0.8] md:w-[400px] text-center md:text-start">
@@ -169,7 +169,7 @@ export default function Tokens() {
           </div>
         </div>
 
-        <div className="flex items-center w-full lg:max-w-[1024px] gap-14 mt-20 px-6 lg:px-8 xl:px-20">
+        <div className="flex items-center w-full lg:max-w-[1024px] gap-14 mt-20 px-6 lg:px-8 xl:px-16">
           {/* <p className="flex flex-col items-center w-max">
             <Image
               src="/samurai.svg"
@@ -193,7 +193,7 @@ export default function Tokens() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row md:items-center gap-10 mt-10 px-6 lg:px-8 xl:px-20">
+        <div className="flex flex-col md:flex-row md:items-center gap-10 mt-10 px-6 lg:px-8 xl:px-16">
           <div className="text-center md:text-start leading-none md:leading-normal">
             <div className="text-white/40 flex justify-center sm:justify-start items-center gap-2">
               <span>My Samurai Points</span>{" "}
@@ -287,7 +287,7 @@ export default function Tokens() {
         id="staking"
         className="flex flex-col pt-10 md:pt-20 pb-20 w-full bg-white/10 md:bg-white/10 border-t border-samurai-red/50 border-dotted relative"
       >
-        <div className="flex flex-col px-2 lg:px-8 xl:px-20">
+        <div className="flex flex-col px-2 lg:px-8 xl:pl-16 xl:pr-0">
           <div className="flex flex-col lg:flex-row w-full justify-between gap-8">
             <p className="font-bold text-3xl md:text-5xl text-center md:text-start">
               <span className="text-samurai-red">$SAM</span> Lock - Season 2
@@ -300,7 +300,7 @@ export default function Tokens() {
             access, ventures entry, and to accumulate Samurai Points.
           </p>
         </div>
-        <div className="flex flex-col xl:flex-row px-2 lg:px-8 xl:px-20 xl:gap-12 2xl:gap-24">
+        <div className="flex flex-col xl:flex-row px-2 lg:px-8 xl:px-16 xl:gap-8 2xl:gap-24">
           {/* v3 */}
           <div className="flex flex-col">
             <p className="text-2xl text-white/70 text-center md:text-start w-full mt-14">
@@ -322,23 +322,23 @@ export default function Tokens() {
       {/* SAM LOCK - SEASON 1 */}
       <div
         id="lock"
-        className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/10 md:bg-white/20 border-t border-samurai-red/50 border-dotted relative"
+        className="flex flex-col pt-10 md:pt-20 pb-10 w-full bg-white/10 md:bg-white/20 border-t border-samurai-red/50 border-dotted relative"
       >
         <div className="flex flex-col text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
-            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-2 lg:px-8 xl:px-20">
+            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-2 lg:px-8 xl:px-16">
               <p className="font-bold text-3xl md:text-5xl text-center md:text-start">
                 <span className="text-samurai-red">$SAM</span> Lock - Season 1
               </p>
             </div>
             <p
-              className={`text-lg text-neutral-300 pt-4 max-w-[700px] px-2 lg:px-8 xl:px-20  text-center md:text-start ${inter.className}`}
+              className={`text-lg text-neutral-300 pt-4 max-w-[700px] px-2 lg:px-8 xl:px-16 text-center md:text-start ${inter.className}`}
             >
               Lock $SAM for a period of 3, 6, 9, or 12 months to gain launchpad
               access, ventures entry, and to accumulate Samurai Points.
             </p>
 
-            <div className="flex flex-col xl:flex-row px-2 lg:px-8 xl:px-20">
+            <div className="flex flex-col xl:flex-row px-2 lg:px-8 xl:px-16">
               <LockSam />
             </div>
           </div>
@@ -352,23 +352,23 @@ export default function Tokens() {
       >
         <div className="flex flex-col text-white">
           <div className="flex flex-col text-white text-2xl pb-20">
-            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-2 lg:px-8 xl:px-20">
+            <div className="flex flex-col lg:flex-row w-full justify-between gap-8 px-2 lg:px-8 xl:px-16">
               <p className="font-bold text-3xl md:text-5xl md:pb-2 text-center md:text-start">
                 Stake <span className="text-samurai-red">vAMM-WETH/SAM</span>
               </p>
             </div>
             <p
-              className={`text-lg text-neutral-300 pt-4 max-w-[700px] px-2 lg:px-8 xl:px-20  text-center md:text-start ${inter.className}`}
+              className={`text-lg text-neutral-300 pt-4 max-w-[700px] px-2 lg:px-8 xl:px-16  text-center md:text-start ${inter.className}`}
             >
               Stake vAMM-WETH/SAM for a period of 3, 6, 9, or 12 months to gain
               launchpad access, ventures entry, and to accumulate Samurai
               Points.
             </p>
 
-            <div className="flex flex-col xl:flex-row px-2 lg:px-8 xl:px-20">
+            <div className="flex flex-col 2xl:flex-row px-2 lg:px-8 xl:px-16">
               <Staking />
 
-              <div className="flex flex-col items-center w-full lg:max-w-[580px] mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-samurai-red/20 pt-10 sm:pb-10 xl:py-0 xl:ml-12 2xl:ml-24 sm:shadow-lg">
+              <div className="flex flex-col items-center w-full lg:max-w-[580px] mt-14 sm:bg-gradient-to-b from-black/30 to-black/60 sm:rounded-lg sm:border border-samurai-red/20 pt-10 sm:pb-10 2xl:ml-24 sm:shadow-lg">
                 <p className="flex flex-col w-full items-center xl:mt-12">
                   <Image
                     src="/aerodrome.svg"
@@ -396,7 +396,7 @@ export default function Tokens() {
                   used for?
                 </p>
                 <p
-                  className={`text-4xl pt-2 font-bold ${inter.className} px-6 lg:px-8 xl:px-20`}
+                  className={`text-4xl pt-2 font-bold ${inter.className} px-6 lg:px-8 xl:px-14`}
                 >
                   REWARDS!
                 </p>
@@ -405,7 +405,6 @@ export default function Tokens() {
           </div>
         </div>
       </div>
-      {/* <ClaimSam /> */}
     </>
   );
 }

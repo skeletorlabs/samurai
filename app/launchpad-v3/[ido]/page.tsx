@@ -47,6 +47,7 @@ import AdminRanges from "@/app/components/adminRanges";
 import VestingBox from "@/app/components/vestingBox";
 import LoadingBox from "@/app/components/loadingBox";
 import { getMax } from "@/app/utils/max";
+import { unknown } from "@/app/utils/chains";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -339,16 +340,16 @@ export default function Ido() {
                 ))}
 
                 <div className="flex gap-3">
-                  {ido?.tokenNetwork !== "TBA" && (
+                  {ido?.tokenNetwork !== unknown && (
                     <div className="flex items-center gap-2 bg-black/20 px-2 pl-3 py-1 rounded-full text-[14px] border border-white/20 w-max">
                       <span className="text-sm">Project Tokens</span>
                       <Image
                         src={ido!.networkImageSrc || ""}
-                        alt={ido!.tokenNetwork || ""}
+                        alt={ido!.tokenNetwork.name || ""}
                         width={22}
                         height={22}
                         className={`p-[1px] ${
-                          ido!.tokenNetwork === "BASE"
+                          ido!.tokenNetwork.name === "BASE"
                             ? "bg-white/80"
                             : "bg-black"
                         } rounded-full`}
@@ -658,7 +659,7 @@ export default function Ido() {
                                     <p className="text-[16px] text-center">
                                       Link your
                                       <span className="text-samurai-red px-[6px]">
-                                        {ido.tokenNetwork.toUpperCase()}
+                                        {ido.tokenNetwork.name.toUpperCase()}
                                       </span>
                                       wallet address
                                     </p>
@@ -1077,7 +1078,7 @@ export default function Ido() {
                 </div>
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
                   <span className="text-samurai-red">Network:</span>
-                  <p className="text-white/70">{ido.tokenNetwork}</p>
+                  <p className="text-white/70">{ido.tokenNetwork.name}</p>
                 </div>
                 <div className="flex flex-col lg:flex-row lg:items-center gap-2 bg-black/50 py-2 px-4 lg:rounded-md w-max lg:border border-white/10 text-sm lg:text-lg">
                   <span className="text-samurai-red">FDV:</span>
@@ -1185,7 +1186,7 @@ export default function Ido() {
       {/* ADMIN AREA */}
       {/* ============================================================================================================ */}
       {general && account && general.owner === account && (
-        <div className="flex flex-col xl:flex-row  gap-10 pt-24 pb-10 xl:pb-32 px-6 lg:px-8 xl:px-20 border-t border-white/20 w-full">
+        <div className="flex flex-col xl:flex-row  gap-10 pt-24 pb-10 xl:pb-32 px-6 lg:px-8 xl:px-14 border-t border-white/20 w-full">
           {ido && (
             <div className="flex flex-col gap-10">
               <h1 className="text-2xl xl:text-3xl">ADMIN AREA</h1>

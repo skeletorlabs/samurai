@@ -18,6 +18,13 @@ import {
   coinmarketcap,
   ventures,
   sanka,
+  launchpad_menu,
+  incubator_menu,
+  sanka_menu,
+  tokens_menu,
+  dashboard_menu,
+  ventures_menu,
+  nft_menu,
 } from "@/app/utils/svgs";
 import { Page } from "./enums";
 import {
@@ -25,6 +32,7 @@ import {
   IDO_v3,
   INCOMING,
   SINGLE_CARD,
+  SOCIAL,
   VESTING_PERIOD_TYPE,
 } from "./interfaces";
 import {
@@ -60,7 +68,8 @@ import {
   VESTING_ABI_V2,
   VESTING_ABI_V3,
 } from "@/app/contracts_integrations/abis";
-import { base, berachain } from "../context/web3modal";
+
+import { base, berachain, bnb, solana } from "../utils/chains";
 
 export const VestingType: { [key: number]: string } = {
   0: "Cliff Vesting",
@@ -107,6 +116,8 @@ export const simplifiedPhasesV3 = [
   { title: "Vesting", buttonTitle: "" },
   { title: "Completed", buttonTitle: "" },
 ];
+
+export const IDO_CHAINS = [base, berachain, bnb, solana];
 
 export const IDOs_card: SINGLE_CARD[] = [
   {
@@ -225,7 +236,7 @@ export const IDOs: IDO_v3[] = [
     logo: grizzy,
     idoImageSrc: "/IDOs/grizzy.jpg",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BERACHAIN",
+    tokenNetwork: berachain,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BERACHAIN.png",
     projectName: "GrizzyFi",
@@ -294,7 +305,7 @@ export const IDOs: IDO_v3[] = [
     logo: grizzy,
     idoImageSrc: "/IDOs/grizzy.jpg",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BERACHAIN",
+    tokenNetwork: berachain,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BERACHAIN.png",
     projectName: "GrizzyFi",
@@ -363,7 +374,7 @@ export const IDOs: IDO_v3[] = [
     logo: estatex,
     idoImageSrc: "/IDOs/estatex.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BNB",
+    tokenNetwork: bnb,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BSC.png",
     projectName: "EstateX",
@@ -428,7 +439,7 @@ export const IDOs: IDO_v3[] = [
     logo: kvants,
     idoImageSrc: "/IDOs/kvants.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BNB",
+    tokenNetwork: bnb,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BSC.png",
     projectName: "Kvants",
@@ -497,7 +508,7 @@ export const IDOs: IDO_v3[] = [
     logo: alpaca,
     idoImageSrc: "/IDOs/alpaca.svg",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BASE",
+    tokenNetwork: base,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BASE.svg",
     projectName: "ALPACA",
@@ -579,7 +590,7 @@ export const IDOs: IDO_v3[] = [
     logo: smartnodes,
     idoImageSrc: "/IDOs/earnm.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BASE",
+    tokenNetwork: base,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BASE.svg",
     projectName: "EARN'M",
@@ -724,7 +735,7 @@ export const IDOs: IDO_v3[] = [
     logo: dyor,
     idoImageSrc: "/IDOs/dyor.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: "BASE",
+    tokenNetwork: base,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BASE.svg",
     projectName: "DYOR",
@@ -1821,33 +1832,54 @@ export const IDO_LIST: IDO[] = [
 ];
 
 export type GiveawayListType = {
+  id: number;
   prizes: string;
   prizeValue: number;
+  ticketsToDraw: number;
   image: string;
   background: string;
   isDrawn: boolean;
+  socials?: SOCIAL[];
 }[];
 export const GIVEAWAYS_LIST: GiveawayListType = [
   {
+    id: 0,
     prizes: "3 Nodes",
     prizeValue: 1000,
+    ticketsToDraw: 0,
     image: "/giveaways/xrone.png",
     background: "/IDOs/xrone.png",
     isDrawn: false,
   },
   {
+    id: 1,
     prizes: "20 SAM NFTs",
     prizeValue: 1000,
+    ticketsToDraw: 0,
     image: "/nfts/1.jpg",
     background: "/giveaways/samurai.png",
-    isDrawn: false,
+    isDrawn: true,
   },
   {
-    prizes: "$15,000 USD",
-    prizeValue: 1000,
-    image: "/IDOs/alpaca.svg",
-    background: "/IDOs/xrone.png",
+    id: 2,
+    prizes: "$AIFI Allocations",
+    prizeValue: 10000,
+    ticketsToDraw: 500,
+    image: "/giveaways/amplify-logo.png",
+    background: "/giveaways/amplify-bg.png",
     isDrawn: false,
+    socials: [
+      {
+        svg: twitterX,
+        href: "https://x.com/amplifi_fi",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/Amplifi_Community",
+      },
+      { svg: discord, href: "https://discord.gg/amplifi" },
+      { svg: medium, href: "https://amplifi-fi.medium.com/" },
+    ],
   },
 ];
 
@@ -1892,40 +1924,47 @@ export const NAV = [
     page: Page.home,
   },
   {
-    title: "SamNFT",
-    href: "/nft",
-    icon: nft,
-    page: Page.nft,
-  },
-  {
     title: "Launchpad",
     href: "/launchpad",
-    icon: rocket,
+    icon: launchpad_menu,
     page: Page.launchpad,
   },
-  // {
-  //   title: "Sanka",
-  //   href: "/sanka",
-  //   icon: sanka,
-  //   page: Page.sanka,
-  // },
   {
     title: "Tokens",
     href: "/tokens",
-    icon: token,
+    icon: tokens_menu,
     page: Page.tokens,
+  },
+  {
+    title: "SamNFT",
+    href: "/nft",
+    icon: nft_menu,
+    page: Page.nft,
+  },
+  {
+    title: "Sanka",
+    href: "/sanka",
+    icon: sanka_menu,
+    page: Page.sanka,
+  },
+
+  {
+    title: "Ventures",
+    href: "/ventures",
+    icon: ventures_menu,
+    page: Page.ventures,
   },
   {
     title: "Incubation",
     href: "/incubation",
-    icon: incubation,
+    icon: incubator_menu,
     page: Page.incubation,
   },
   {
-    title: "Ventures",
-    href: "/ventures",
-    icon: ventures,
-    page: Page.ventures,
+    title: "Dashboard",
+    href: "/dashboard",
+    icon: dashboard_menu,
+    page: Page.dashboard,
   },
 ];
 

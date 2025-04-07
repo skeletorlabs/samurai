@@ -9,7 +9,8 @@ import SSButton from "./ssButton";
 import { useParams, usePathname } from "next/navigation";
 import ConnectButton from "./connectbutton";
 import { useSwitchNetwork } from "@web3modal/ethers/react";
-import { base, chains } from "../context/web3modal";
+import { chains } from "../context/web3modal";
+import { base } from "../utils/chains";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,9 +46,9 @@ export default function Nav() {
   }, [chain, ido]);
   return (
     <div
-      className={`h-20 px-2 lg:px-8 flex flex-col md:flex-row items-center justify-between mt-5 z-10 ${inter.className} h-max`}
+      className={`h-20 px-2 lg:px-8 flex flex-col md:flex-row items-center justify-center lg:justify-end mt-5 z-10 ${inter.className} h-max`}
     >
-      <div className="flex items-center gap-4 2xl:gap-6 font-bold text-[16px] 2xl:text-xl">
+      {/* <div className="flex items-center gap-4 2xl:gap-6 font-bold text-[16px] 2xl:text-xl">
         <Link
           href="/"
           className="transition-all hover:opacity-75"
@@ -80,13 +81,14 @@ export default function Nav() {
             {item.title}
           </Link>
         ))}
-      </div>
+      </div> */}
       <div className="flex gap-5 lg:px-0">
         {(page === Page.nft ||
           page === Page.launchpad ||
           ido ||
           page === Page.tokens ||
-          page === Page.sanka) && (
+          page === Page.sanka ||
+          page === Page.dashboard) && (
           <div className="flex self-center h-14">
             <ConnectButton mobile />
           </div>
@@ -98,7 +100,7 @@ export default function Nav() {
           href="https://basescan.org/token/0xed1779845520339693CDBffec49a74246E7D671b"
           mobile
         >
-          CA: 0xe...71b
+          <span>CA: 0xe...71b</span>
         </SSButton>
       </div>
     </div>
