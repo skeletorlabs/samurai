@@ -52,7 +52,7 @@ export default function Sanka() {
           >
             Check out our Amplifi Deep-Dive{" "}
             <Link
-              href="#"
+              href="https://medium.com/samurai-starter/the-10-000-amplifi-launchdrop-campaign-on-samurai-sanka-402eee477deb"
               className="text-samurai-red text-3xl ml-3 mt-[-7px] transition-all hover:scale-125"
               target="_blank"
               rel="noopener noreferrer"
