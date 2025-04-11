@@ -103,7 +103,7 @@ export default function Home() {
                 <SSButton isLink href="/ventures" flexSize>
                   Ventures
                 </SSButton>
-                <SSButton isLink href="#sanka" flexSize>
+                <SSButton isLink href="/sanka" flexSize>
                   Sanka
                 </SSButton>
                 <SSButton isLink href="/incubation" flexSize>
