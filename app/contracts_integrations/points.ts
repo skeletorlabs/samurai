@@ -52,7 +52,6 @@ export type UserPoints = {
 export async function userInfo(signer: Signer, account?: string) {
   try {
     let signerAddress = await signer.getAddress();
-
     const address = account || signerAddress;
     const contract = await getContract(signer);
 
@@ -61,7 +60,6 @@ export async function userInfo(signer: Signer, account?: string) {
     );
 
     const boost = Number(formatEther(await contract?.boostOf(address))) + 1;
-
     const lockV2Contract = await getLockV2Contract(signer);
 
     const pointsMigrated = Number(

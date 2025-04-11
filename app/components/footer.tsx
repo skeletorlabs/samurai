@@ -12,7 +12,7 @@ const inter = Inter({
 const links = [
   { title: "SamNFT", href: "/nft" },
   { title: "Launchpad", href: "/launchpad" },
-  { title: "Sanka", href: "/#sanka" },
+  { title: "Sanka", href: "/sanka" },
   { title: "Tokens", href: "/tokens" },
   // { title: "$SAM Liquidity", href: "#" },
   { title: "Incubation", href: "/incubation" },

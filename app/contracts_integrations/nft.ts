@@ -297,15 +297,13 @@ export async function getNFTData(ipfsUrl: string, tokenUri: string) {
 export async function getTokens(signer: Signer, account?: string) {
   const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
   const signerAddress = await signer.getAddress();
-  const address = account ? account : signerAddress;
+  const address = account || signerAddress;
 
-  const balance = Number(await contract.balanceOf(signerAddress));
+  const balance = Number(await contract.balanceOf(address));
 
   let tokensIds: NFTToken[] = [];
   for (let index = 0; index < balance; index++) {
-    const tokenId = Number(
-      await contract.tokenOfOwnerByIndex(signerAddress, index)
-    );
+    const tokenId = Number(await contract.tokenOfOwnerByIndex(address, index));
     tokensIds.push({ tokenId: tokenId, lockedUntil: 0, locked: false });
   }
 

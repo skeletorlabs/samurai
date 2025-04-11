@@ -151,7 +151,7 @@ export async function userInfo(
   try {
     const ido = IDOs[index];
     let signerAddress = await signer.getAddress();
-    const address = account ? account : signerAddress;
+    const address = account || signerAddress;
 
     const contract = await getContract(index, signer, multicallProvider);
     const usingETH = ido.ether ? await contract?.usingETH() : false;
