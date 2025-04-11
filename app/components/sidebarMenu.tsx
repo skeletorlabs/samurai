@@ -14,7 +14,8 @@ import ConnectButton from "./menu/connectButton";
 export default function SidebarMenu() {
   const [open, setOpen] = useState(false);
   const [arrowVisible, setArrowVisible] = useState(false);
-  const { page, setPage, chain } = useContext(StateContext);
+  const [hovered, setHovered] = useState("");
+  const { page, setPage } = useContext(StateContext);
   const pathname = usePathname();
 
   return (
@@ -64,7 +65,7 @@ export default function SidebarMenu() {
             key={index}
             href={item.href}
             className={classNames({
-              "flex w-full h-[55px] 2xl:h-[60px] items-center border-samurai-red hover:bg-white/10 transition-all":
+              "flex w-full h-[55px] 2xl:h-[60px] items-center border-samurai-red hover:bg-white/10 transition-all relative":
                 true,
               "text-samurai-red border-l bg-white/10":
                 page === item.page ||
@@ -73,6 +74,8 @@ export default function SidebarMenu() {
               "gap-5 pl-8": open,
             })}
             onClick={() => setPage(item.page)}
+            onMouseEnter={() => setHovered(item.title)}
+            onMouseLeave={() => setHovered("")}
           >
             <span className="w-5 h-5 2xl:w-6 2xl:h-6">{item.icon}</span>
             <span
@@ -80,6 +83,17 @@ export default function SidebarMenu() {
                 "transition-all": true,
                 flex: open,
                 hidden: !open,
+              })}
+            >
+              {item.title}
+            </span>
+
+            <span
+              className={classNames({
+                "absolute left-14 top-5 bg-black rounded-full px-4 border border-white/10 transition-all z-50":
+                  true,
+                block: hovered === item.title && !open,
+                hidden: hovered !== item.title || open,
               })}
             >
               {item.title}
