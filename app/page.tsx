@@ -265,8 +265,10 @@ export default function Home() {
             earn rewards for participating on our partners' platforms.
           </div>
 
-          <div className="text-samurai-red text-2xl md:text-4xl mt-16">
-            Coming soon!
+          <div className="mt-10 w-max">
+            <SSButton isLink href="/sanka">
+              Check it out
+            </SSButton>
           </div>
 
           {/* <Link
