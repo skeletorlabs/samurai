@@ -73,11 +73,14 @@ export async function generalInfo() {
 
 // USER INFOS
 
-export async function userInfo(signer: Signer, account?: string, multicallProvider?: MulticallProvider) {
+export async function userInfo(
+  signer: Signer,
+  account?: string,
+  multicallProvider?: MulticallProvider
+) {
   try {
     let signerAddress = await signer.getAddress();
-    const address = account ? account : signerAddress;
-
+    const address = account || signerAddress;
     const contract = await getContract(signer, multicallProvider);
 
     const locksCounter = Number(await contract?.locksCounter(address));

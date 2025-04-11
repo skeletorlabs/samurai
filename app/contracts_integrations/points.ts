@@ -52,7 +52,6 @@ export type UserPoints = {
 export async function userInfo(signer: Signer, account?: string) {
   try {
     let signerAddress = await signer.getAddress();
-
     const address = account || signerAddress;
     const contract = await getContract(signer);
 
