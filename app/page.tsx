@@ -267,7 +267,7 @@ export default function Home() {
 
           <div className="mt-10 w-max">
             <SSButton isLink href="/sanka">
-              Check it out
+              Check it Out
             </SSButton>
           </div>
 
