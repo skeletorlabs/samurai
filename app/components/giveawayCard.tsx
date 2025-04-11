@@ -25,6 +25,8 @@ import { currentTime } from "../utils/currentTime";
 import ConnectButton from "./connectbutton";
 import Link from "next/link";
 import { discord, twitterX, youtube } from "../utils/svgs";
+import SocialModal from "./sanka/modal";
+import hasEngaged from "../integrations/x";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["100", "300", "500", "900"],
@@ -48,6 +50,7 @@ export default function GiveawayCard({
   const [giveawayStatusColors, setGiveawayStatusColors] = useState<any>(null);
   const [userTickets, setUserTickets] = useState(0);
   const [isWinner, setIsWinner] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const {
     prizes,
@@ -65,6 +68,25 @@ export default function GiveawayCard({
     INCREASE,
     DECREASE,
   }
+
+  const onCheckEngagement = useCallback(
+    async (username: string) => {
+      setLoading(true);
+      if (signer) {
+        const response = await fetch(
+          `/api/twitter?tweetId=1910349054095278415&username=${encodeURIComponent(
+            username
+          )}`
+        );
+        // const data = await response.json();
+        // const engaged = data.engaged;
+
+        // console.log(data);
+        // if (engaged) {
+      }
+    },
+    [signer]
+  );
 
   const onBuyTickets = useCallback(async () => {
     setLoading(true);
@@ -332,6 +354,12 @@ export default function GiveawayCard({
           </span>
         </div>
       </div>
+
+      <SocialModal
+        open={true}
+        setOpen={() => {}}
+        onSubmit={onCheckEngagement}
+      />
     </div>
   );
 }
