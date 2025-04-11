@@ -188,6 +188,7 @@ export default function Nft() {
       if (signer) {
         await lockNFT(tokenId, signer);
         await onGetUserLockInfos();
+        await onGetUserBoost();
       }
       setLoading(false);
     },
@@ -201,6 +202,7 @@ export default function Nft() {
       if (signer && index !== -1) {
         await unlockNFT(index!, tokenId, signer);
         await onGetUserLockInfos();
+        await onGetUserBoost();
       }
       setLoading(false);
     },

@@ -60,7 +60,6 @@ export async function userInfo(signer: Signer, account?: string) {
     );
 
     const boost = Number(formatEther(await contract?.boostOf(address))) + 1;
-
     const lockV2Contract = await getLockV2Contract(signer);
 
     const pointsMigrated = Number(
