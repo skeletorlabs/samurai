@@ -85,9 +85,10 @@ export async function userInfo(index: number, signer: ethers.Signer) {
     const allocation = Number(await contract?.allocations(signerAdress));
 
     const acceptedToken = await contract?.acceptedToken();
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const balanceToken = Number(
       ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken, signerAdress, signer),
+        await balanceOf(ERC20_ABI, acceptedToken, signerAdress, provider),
         6
       )
     );
@@ -98,7 +99,7 @@ export async function userInfo(index: number, signer: ethers.Signer) {
         ERC20_ABI,
         acceptedToken,
         contractAddress as string,
-        signer
+        provider
       ),
       6
     );

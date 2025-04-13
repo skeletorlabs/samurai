@@ -25,7 +25,7 @@ export async function giveApproval({
       signer
     );
 
-    const tx = await contract.approve(spender, amount);
+    const tx = await contract?.approve(spender, amount);
     const txUrl = LINKS[Number(network?.chainId)] + "/tx/" + tx.hash.toString();
 
     Notificate({

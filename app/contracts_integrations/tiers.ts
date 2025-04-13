@@ -19,7 +19,7 @@ export async function getTier(account: string) {
   const contract = new Contract(SAM_TIERS, SAM_TIERS_ABI, provider);
 
   try {
-    const response = await contract.getTier(account);
+    const response = await contract?.getTier(account);
 
     const tier: Tier = {
       name: response[0],

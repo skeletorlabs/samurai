@@ -81,7 +81,7 @@ export async function userInfo(
   try {
     let signerAddress = await signer.getAddress();
     const address = account || signerAddress;
-    const contract = await getContract(signer, multicallProvider);
+    const contract = await getContract(undefined, multicallProvider);
 
     const locksCounter = Number(await contract?.locksCounter(address));
     const minPeriod = Number(await contract?.MIN_MONTHS_LOCKED());
