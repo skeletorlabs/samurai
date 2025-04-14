@@ -39,7 +39,6 @@ const checkAvailableMonths = async () => {
     (now - earliestTimestamp) / (30 * 24 * 60 * 60)
   ); // Convert seconds to months
 
-  console.log(`You can fetch up to ~${monthsAvailable} months of history.`);
   return monthsAvailable;
 };
 
