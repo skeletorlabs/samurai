@@ -17,21 +17,21 @@ export async function general() {
   try {
     const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, provider);
-    const owner = await contract.owner();
-    const isPaused = await contract.paused();
+    const owner = await contract?.owner();
+    const isPaused = await contract?.paused();
 
-    const totalSupply = Number(await contract.totalSupply());
-    const totalSupplyPublic = Number(await contract.totalSupplyPublic());
-    const totalSupplyWhitelist = Number(await contract.totalSupplyWhitelist());
-    const totalSupplyRetained = Number(await contract.totalSupplyRetained());
+    const totalSupply = Number(await contract?.totalSupply());
+    const totalSupplyPublic = Number(await contract?.totalSupplyPublic());
+    const totalSupplyWhitelist = Number(await contract?.totalSupplyWhitelist());
+    const totalSupplyRetained = Number(await contract?.totalSupplyRetained());
 
-    const maxSupplyPublic = Number(await contract.MAX_SUPPLY_PUBLIC());
-    const maxSupplyWhitelist = Number(await contract.MAX_SUPPLY_WHITELIST());
-    const maxSupplyRetained = Number(await contract.MAX_SUPPLY_RETAINED());
-    const maxSupplyReleased = Number(await contract.MAX_SUPPLY_RELEASED());
+    const maxSupplyPublic = Number(await contract?.MAX_SUPPLY_PUBLIC());
+    const maxSupplyWhitelist = Number(await contract?.MAX_SUPPLY_WHITELIST());
+    const maxSupplyRetained = Number(await contract?.MAX_SUPPLY_RETAINED());
+    const maxSupplyReleased = Number(await contract?.MAX_SUPPLY_RELEASED());
 
-    const baseUri = await contract.baseURI();
-    const unitPrice = Number(ethers.formatEther(await contract.UNIT_PRICE()));
+    const baseUri = await contract?.baseURI();
+    const unitPrice = Number(ethers.formatEther(await contract?.UNIT_PRICE()));
 
     return {
       owner,
@@ -55,14 +55,14 @@ export async function general() {
 export async function togglePause(signer: ethers.Signer) {
   try {
     const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-    const owner = await contract.owner();
+    const owner = await contract?.owner();
     const signerAddress = await signer.getAddress();
 
     if (owner === signerAddress) {
-      const isPaused = await contract.paused();
+      const isPaused = await contract?.paused();
       let tx: any;
 
-      tx = isPaused ? await contract.unpause() : await contract.pause();
+      tx = isPaused ? await contract?.unpause() : await contract?.pause();
 
       const txUrl = "https://goerli.etherscan.io/tx/" + tx.hash.toString();
 
@@ -89,14 +89,15 @@ export async function togglePause(signer: ethers.Signer) {
 
 export async function isWhitelisted(signer: ethers.Signer) {
   try {
-    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+    const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, provider);
     const signerAddress = await signer.getAddress();
 
-    const isWhitelisted: boolean = await contract.isWhitelisted(signerAddress);
-    const hasUsedFreeMint: boolean = await contract.hasUsedFreeMint(
+    const isWhitelisted: boolean = await contract?.isWhitelisted(signerAddress);
+    const hasUsedFreeMint: boolean = await contract?.hasUsedFreeMint(
       signerAddress
     );
-    const whitelistFinishAt = Number(await contract.whitelistRoundFinishAt());
+    const whitelistFinishAt = Number(await contract?.whitelistRoundFinishAt());
 
     return {
       isWhitelisted,
@@ -114,12 +115,12 @@ export async function releaseWhitelistAssets(
 ) {
   try {
     const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-    const owner = await contract.owner();
+    const owner = await contract?.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();
 
     if (owner === signerAddress) {
-      const tx = await contract.releaseWhitelistAssets(percentage);
+      const tx = await contract?.releaseWhitelistAssets(percentage);
 
       const txUrl =
         LINKS[Number(network?.chainId)] + "/tx/" + tx.hash.toString();
@@ -148,12 +149,12 @@ export async function releaseWhitelistAssets(
 export async function startWhitelistRound(signer: ethers.Signer) {
   try {
     const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-    const owner = await contract.owner();
+    const owner = await contract?.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();
 
     if (owner === signerAddress) {
-      const tx = await contract.setWhitelistRound();
+      const tx = await contract?.setWhitelistRound();
       const txUrl =
         LINKS[Number(network?.chainId)] + "/tx/" + tx.hash.toString();
 
@@ -184,7 +185,7 @@ export async function addToWhitelist(
 ) {
   try {
     const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
-    const owner = await contract.owner();
+    const owner = await contract?.owner();
     const signerAddress = await signer.getAddress();
     const network = await signer.provider?.getNetwork();
 
@@ -193,8 +194,8 @@ export async function addToWhitelist(
 
       tx =
         addresses.length === 1
-          ? await contract.addToWhitelist(addresses[0])
-          : await contract.addBatchToWhitelist(addresses);
+          ? await contract?.addToWhitelist(addresses[0])
+          : await contract?.addBatchToWhitelist(addresses);
 
       const txUrl =
         LINKS[Number(network?.chainId)] + "/tx/" + tx.hash.toString();
@@ -233,17 +234,19 @@ export async function mint(
     let tx: any;
 
     if (free) {
-      const isWhitelisted = await contract.isWhitelisted(signerAddress);
-      const hasUsedFreeMint = await contract.hasUsedFreeMint(signerAddress);
+      const isWhitelisted = await contract?.isWhitelisted(signerAddress);
+      const hasUsedFreeMint = await contract?.hasUsedFreeMint(signerAddress);
 
       if (isWhitelisted && !hasUsedFreeMint) {
-        tx = await contract.freeMint(signerAddress);
+        tx = await contract?.freeMint(signerAddress);
       }
     } else {
-      const unitPrice = Number(ethers.formatEther(await contract.UNIT_PRICE()));
+      const unitPrice = Number(
+        ethers.formatEther(await contract?.UNIT_PRICE())
+      );
 
       const amount = ethers.parseEther((unitPrice * numberOftokens).toString());
-      tx = await contract.mint(signerAddress, numberOftokens, {
+      tx = await contract?.mint(signerAddress, numberOftokens, {
         value: amount,
       });
     }
@@ -295,15 +298,16 @@ export async function getNFTData(ipfsUrl: string, tokenUri: string) {
 }
 
 export async function getTokens(signer: Signer, account?: string) {
-  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, signer);
+  const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+  const contract = new ethers.Contract(CONTRACT_ADDRESS, NFTS_ABI, provider);
   const signerAddress = await signer.getAddress();
   const address = account || signerAddress;
 
-  const balance = Number(await contract.balanceOf(address));
+  const balance = Number(await contract?.balanceOf(address));
 
   let tokensIds: NFTToken[] = [];
   for (let index = 0; index < balance; index++) {
-    const tokenId = Number(await contract.tokenOfOwnerByIndex(address, index));
+    const tokenId = Number(await contract?.tokenOfOwnerByIndex(address, index));
     tokensIds.push({ tokenId: tokenId, lockedUntil: 0, locked: false });
   }
 

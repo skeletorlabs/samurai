@@ -27,9 +27,11 @@ import { currentTime } from "../utils/currentTime";
 import { formattedDateToMonth } from "../utils/formattedDate";
 
 const TOKEN_DEPLOYMENT_BLOCK = 22754558;
+const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
-const checkAvailableMonths = async (signer: Signer) => {
-  const earliestBlock = await signer.provider?.getBlock(TOKEN_DEPLOYMENT_BLOCK);
+const checkAvailableMonths = async () => {
+  const provider = new JsonRpcProvider(BASE_RPC_URL);
+  const earliestBlock = await provider?.getBlock(TOKEN_DEPLOYMENT_BLOCK);
   const earliestTimestamp = earliestBlock?.timestamp || 0;
 
   const now = Math.floor(Date.now() / 1000); // Current timestamp
@@ -37,7 +39,6 @@ const checkAvailableMonths = async (signer: Signer) => {
     (now - earliestTimestamp) / (30 * 24 * 60 * 60)
   ); // Convert seconds to months
 
-  console.log(`You can fetch up to ~${monthsAvailable} months of history.`);
   return monthsAvailable;
 };
 
@@ -55,9 +56,10 @@ const getMonthlyTimestamps = (monthsBack: number) => {
   }
 };
 
-const getBlockByTimestamp = async (signer: Signer, timestamp: number) => {
+const getBlockByTimestamp = async (timestamp: number) => {
+  const provider = new JsonRpcProvider(BASE_RPC_URL);
   try {
-    let latestBlock = await signer?.provider?.getBlock("latest");
+    let latestBlock = await provider?.getBlock("latest");
     let latestTimestamp = latestBlock?.timestamp || 0;
     let latestBlockNumber = latestBlock?.number || 0;
 
@@ -74,7 +76,7 @@ const getBlockByTimestamp = async (signer: Signer, timestamp: number) => {
 
     while (low < high) {
       let mid = Math.floor((low + high) / 2);
-      let midBlock = (await signer?.provider?.getBlock(mid)) || {
+      let midBlock = (await provider?.getBlock(mid)) || {
         timestamp: 0,
       };
       if (midBlock.timestamp < timestamp) {
@@ -96,8 +98,9 @@ const getBalanceAtBlock = async (
 ) => {
   try {
     const address = account ? account : await signer.getAddress();
-    const contract = new Contract(POINTS, SAMURAI_POINTS_ABI, signer);
-    const balance = await contract.balanceOf(address, {
+    const provider = new JsonRpcProvider(BASE_RPC_URL);
+    const contract = new Contract(POINTS, SAMURAI_POINTS_ABI, provider);
+    const balance = await contract?.balanceOf(address, {
       blockTag: blockNumber,
     });
     return formatEther(balance);
@@ -112,14 +115,14 @@ export const getHistoricalBalances = async (
   account?: string
 ) => {
   try {
-    let availableMonths = await checkAvailableMonths(signer);
+    let availableMonths = await checkAvailableMonths();
     monthsBack = Math.min(monthsBack, availableMonths);
 
     const timestamps = getMonthlyTimestamps(monthsBack) || [];
     const balances = [];
 
     for (let timestamp of timestamps) {
-      let blockNumber = (await getBlockByTimestamp(signer, timestamp)) || 0;
+      let blockNumber = (await getBlockByTimestamp(timestamp)) || 0;
       let balance = await getBalanceAtBlock(blockNumber, signer, account);
       balances.push({
         name: formattedDateToMonth(timestamp),
@@ -134,8 +137,8 @@ export const getHistoricalBalances = async (
 };
 
 export async function userInfo(signer: Signer) {
-  const signerProvider = signer.provider as JsonRpcProvider;
-  const multicallProvider = new MulticallProvider(signerProvider);
+  const provider = new JsonRpcProvider(BASE_RPC_URL);
+  const multicallProvider = new MulticallProvider(provider);
 
   try {
     const signerAddress = await signer.getAddress();

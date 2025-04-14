@@ -131,7 +131,7 @@ export async function userInfo(signer: ethers.Signer, account?: string) {
     let signerAddress = await signer.getAddress();
 
     const address = account || signerAddress;
-    const contract = await getContract(signer);
+    const contract = await getContract();
     const userStakes = await contract?.stakesOf(address);
 
     let stakes: StakingInfo[] = [];
@@ -176,8 +176,11 @@ export async function userInfo(signer: ethers.Signer, account?: string) {
       return acc + curr.claimedRewards;
     }, 0);
 
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     let lpBalance = Number(
-      ethers.formatEther(await balanceOf(ERC20_ABI, LP_TOKEN, address, signer))
+      ethers.formatEther(
+        await balanceOf(ERC20_ABI, LP_TOKEN, address, provider)
+      )
     );
 
     const lastClaim = Number(await contract?.lastClaims(address));
@@ -269,7 +272,7 @@ export async function claimPoints(signer: ethers.Signer) {
 
 // ADMIN ACTIONS
 
-export async function togglePause(index: number, signer: ethers.Signer) {
+export async function togglePause(signer: ethers.Signer) {
   const contract = await getContract(signer);
 
   try {

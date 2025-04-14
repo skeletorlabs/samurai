@@ -1,6 +1,8 @@
 import { ethers } from "ethers";
 import { ERC20_ABI } from "./abis";
 
+const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
+
 export async function getAllowance({
   owner,
   spender,
@@ -13,14 +15,15 @@ export async function getAllowance({
   customAbi?: any;
 }): Promise<ethers.BigNumberish> {
   const signerAddress = await signer.getAddress();
+  const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
   const contract = new ethers.Contract(
     owner,
     customAbi ? customAbi : ERC20_ABI,
-    signer
+    provider
   );
 
   try {
-    const allowance: ethers.BigNumberish = await contract.allowance(
+    const allowance: ethers.BigNumberish = await contract?.allowance(
       signerAddress,
       spender
     );
