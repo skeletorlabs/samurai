@@ -127,7 +127,7 @@ export async function userInfo(signer: ethers.Signer, account?: string) {
     let signerAddress = await signer.getAddress();
 
     const address = account || signerAddress;
-    const contract = await getContract(signer);
+    const contract = await getContract();
     const userLocks = await contract?.locksOf(address);
 
     let locks: LockInfo[] = [];
@@ -177,14 +177,16 @@ export async function userInfo(signer: ethers.Signer, account?: string) {
       return acc + curr.claimablePoints;
     }, 0);
 
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+
     let balance = Number(
       ethers.formatEther(
-        await balanceOf(ERC20_ABI, SAM_ADDRESS, address, signer)
+        await balanceOf(ERC20_ABI, SAM_ADDRESS, address, provider)
       )
     );
 
     let pointsBalance = Number(
-      ethers.formatEther(await balanceOf(ERC20_ABI, POINTS, address, signer))
+      ethers.formatEther(await balanceOf(ERC20_ABI, POINTS, address, provider))
     );
 
     const lastClaim = Number(await contract?.lastClaims(address));

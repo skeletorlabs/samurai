@@ -53,14 +53,19 @@ export async function userInfo(signer: Signer, account?: string) {
   try {
     let signerAddress = await signer.getAddress();
     const address = account || signerAddress;
-    const contract = await getContract(signer);
+    const contract = await getContract();
 
+    const network = await signer.provider?.getNetwork();
+    const chainId = Number(network?.chainId);
+
+    const rpc = chainId ? CHAIN_ID_TO_RPC_URL[chainId] : BASE_RPC_URL;
+    const provider = new JsonRpcProvider(rpc);
     const balance = Number(
-      formatEther(await balanceOf(ERC20_ABI, POINTS, address, signer))
+      formatEther(await balanceOf(ERC20_ABI, POINTS, address, provider))
     );
 
     const boost = Number(formatEther(await contract?.boostOf(address))) + 1;
-    const lockV2Contract = await getLockV2Contract(signer);
+    const lockV2Contract = await getLockV2Contract();
 
     const pointsMigrated = Number(
       formatEther(await lockV2Contract?.pointsMigrated(address))
@@ -90,7 +95,7 @@ export async function burn(signer: Signer, from: string, amount: string) {
 export async function isPointsOwner(signer: Signer, chainId?: number) {
   try {
     let signerAddress = await signer.getAddress();
-    const contract = await getContract(signer, chainId);
+    const contract = await getContract(undefined, chainId);
     const owner = await contract?.owner();
     const isViewer =
       signerAddress === "0xcae8cf1e2119484d6cc3b6efaad2242adbdb1ea8";

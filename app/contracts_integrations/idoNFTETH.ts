@@ -95,7 +95,7 @@ export async function generalInfo(index: number) {
 export async function userInfo(index: number, signer: ethers.Signer) {
   try {
     const signerAdress = await signer.getAddress();
-    const provider = signer.provider;
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     let balance = 0;
 
     if (provider) {

@@ -21,7 +21,7 @@ export async function giveNFTApproval({
     const signerAddress = await signer.getAddress();
 
     // console.log(samNftAddress, signerAddress, tokenId);
-    const tx = await contract.approve(spender, tokenId);
+    const tx = await contract?.approve(spender, tokenId);
     const txUrl = LINKS[Number(network?.chainId)] + "/tx/" + tx.hash.toString();
 
     Notificate({

@@ -153,7 +153,8 @@ export async function userInfo(
     let signerAddress = await signer.getAddress();
     const address = account || signerAddress;
 
-    const contract = await getContract(index, signer, multicallProvider);
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+    const contract = await getContract(index, undefined, multicallProvider);
     const usingETH = ido.ether ? await contract?.usingETH() : false;
     const isPublic = await contract?.isPublic();
 
@@ -182,7 +183,7 @@ export async function userInfo(
 
     const acceptedToken = await contract?.acceptedTokens(0);
 
-    const balanceEther = await signer.provider?.getBalance(address);
+    const balanceEther = await provider.getBalance(address);
 
     const balanceToken = Number(
       ethers.formatUnits(

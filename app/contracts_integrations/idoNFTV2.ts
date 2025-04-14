@@ -111,7 +111,7 @@ export async function userInfo(
 ) {
   try {
     const signerAddress = await signer.getAddress();
-    const contract = await getContract(index, signer);
+    const contract = await getContract(index);
     const usingETH = await contract?.usingETH();
 
     const isPublic = await contract?.isPublic();
@@ -133,10 +133,12 @@ export async function userInfo(
     const isWhitelisted = await contract?.whitelist(signerAddress);
     const allocation = Number(await contract?.allocations(signerAddress));
     const acceptedToken = await contract?.acceptedTokens(0);
-    const balanceEther = await signer.provider?.getBalance(signerAddress);
+
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
+    const balanceEther = await provider.getBalance(signerAddress);
     const balanceToken = Number(
       ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken, signerAddress, signer),
+        await balanceOf(ERC20_ABI, acceptedToken, signerAddress, provider),
         6
       )
     );

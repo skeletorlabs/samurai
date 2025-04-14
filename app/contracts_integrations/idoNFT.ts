@@ -103,16 +103,17 @@ export async function userInfo(index: number, signer: ethers.Signer) {
     const isBlacklisted = await contract?.blacklist(signerAdress);
     const acceptedToken1 = await contract?.acceptedTokens(0);
     const acceptedToken2 = await contract?.acceptedTokens(1);
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const balanceToken1 = Number(
       ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken1, signerAdress, signer),
+        await balanceOf(ERC20_ABI, acceptedToken1, signerAdress, provider),
         6
       )
     );
 
     const balanceToken2 = Number(
       ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken2, signerAdress, signer),
+        await balanceOf(ERC20_ABI, acceptedToken2, signerAdress, provider),
         6
       )
     );
@@ -123,7 +124,7 @@ export async function userInfo(index: number, signer: ethers.Signer) {
         ERC20_ABI,
         acceptedToken1,
         contractAddress as string,
-        signer
+        provider
       ),
       6
     );
@@ -133,7 +134,7 @@ export async function userInfo(index: number, signer: ethers.Signer) {
         ERC20_ABI,
         acceptedToken2,
         contractAddress as string,
-        signer
+        provider
       ),
       6
     );

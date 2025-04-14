@@ -86,7 +86,7 @@ export async function generalInfo(index: number) {
 export async function userInfo(index: number, signer: ethers.Signer) {
   try {
     const signerAddress = await signer.getAddress();
-
+    const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const contract = await getContract(index, signer);
 
     const maxPermitted = Number(
@@ -100,7 +100,7 @@ export async function userInfo(index: number, signer: ethers.Signer) {
     const acceptedToken = await contract?.acceptedToken();
     const balanceToken = Number(
       ethers.formatUnits(
-        await balanceOf(ERC20_ABI, acceptedToken, signerAddress, signer),
+        await balanceOf(ERC20_ABI, acceptedToken, signerAddress, provider),
         6
       )
     );
@@ -111,7 +111,7 @@ export async function userInfo(index: number, signer: ethers.Signer) {
         ERC20_ABI,
         acceptedToken,
         contractAddress as string,
-        signer
+        provider
       ),
       6
     );
