@@ -6,6 +6,8 @@ import {
   GiveawayStatus,
   GiveawayType,
   participate,
+  pickWinners,
+  setWinners,
   STATUS_COLORS,
   userInfo,
 } from "../contracts_integrations/giveways";
@@ -14,10 +16,9 @@ import {
   PlusCircleIcon,
   TrophyIcon,
 } from "@heroicons/react/20/solid";
-import { GIVEAWAYS_LIST } from "../utils/constants";
+import { Giveaway, GIVEAWAYS_LIST, Winner } from "../utils/constants/sanka";
 
 import { Inter } from "next/font/google";
-import delay from "../utils/delay";
 import Loading from "./loading";
 import { userInfo as pointsUserInfo } from "../contracts_integrations/points";
 import { StateContext } from "../context/StateContext";
@@ -26,7 +27,8 @@ import ConnectButton from "./connectbutton";
 import Link from "next/link";
 import { discord, twitterX, youtube } from "../utils/svgs";
 import SocialModal from "./sanka/modal";
-import hasEngaged from "../integrations/x";
+import { TwitterEngagement } from "../api/twitter/route";
+import { set } from "date-fns";
 const inter = Inter({
   subsets: ["latin"],
   weight: ["100", "300", "500", "900"],
@@ -49,8 +51,11 @@ export default function GiveawayCard({
   );
   const [giveawayStatusColors, setGiveawayStatusColors] = useState<any>(null);
   const [userTickets, setUserTickets] = useState(0);
-  const [isWinner, setIsWinner] = useState(false);
+  const [winner, setWinner] = useState<Winner | null>(null);
   const [open, setOpen] = useState(false);
+  const [twitterData, setTwitterData] = useState<TwitterEngagement | null>(
+    null
+  );
 
   const {
     prizes,
@@ -58,9 +63,11 @@ export default function GiveawayCard({
     ticketsToDraw,
     image,
     background,
-    isDrawn,
     socials,
-  } = GIVEAWAYS_LIST[giveaway.id];
+    winners,
+  } =
+    GIVEAWAYS_LIST.find((item) => item.id === giveaway.id) ||
+    GIVEAWAYS_LIST[giveaway.id];
 
   const { signer, account } = useContext(StateContext);
 
@@ -72,21 +79,54 @@ export default function GiveawayCard({
   const onCheckEngagement = useCallback(
     async (username: string) => {
       setLoading(true);
+
+      // Check if the user is already engaged and saved on storage
+      const storedEngagement = localStorage.getItem(
+        `twitter-engagement-${giveaway.id}-${username}-${account}`
+      );
+
+      if (storedEngagement) {
+        console.log("engagement found");
+        const engagement = JSON.parse(storedEngagement);
+        setTwitterData(engagement);
+        setLoading(false);
+        if (engagement.engaged) setOpen(false);
+        return;
+      }
+
       if (signer) {
+        console.log("checking engagement");
         const response = await fetch(
           `/api/twitter?tweetId=1910349054095278415&username=${encodeURIComponent(
             username
           )}`
         );
-        // const data = await response.json();
-        // const engaged = data.engaged;
-
-        // console.log(data);
-        // if (engaged) {
+        const data = await response.json();
+        if (data) {
+          setTwitterData(data);
+          setLoading(false);
+        }
+        if (data.engaged) {
+          // Save the engagement on storage
+          localStorage.setItem(
+            `twitter-engagement-${giveaway.id}-${username}-${account}`,
+            JSON.stringify(data)
+          );
+          console.log("engagement saved");
+          setOpen(false);
+        }
       }
     },
-    [signer]
+    [account, signer, setOpen, setLoading]
   );
+
+  const onPickWinners = useCallback(async () => {
+    setLoading(true);
+    if (signer) {
+      await pickWinners(giveaway.id);
+    }
+    setLoading(false);
+  }, [giveaway, signer, setLoading]);
 
   const onBuyTickets = useCallback(async () => {
     setLoading(true);
@@ -117,8 +157,8 @@ export default function GiveawayCard({
       status = GiveawayStatus.ACTIVE;
     if (now >= giveaway.endAt && now < giveaway.drawAt)
       status = GiveawayStatus.FINISHED;
-    if (now >= giveaway.drawAt && !isDrawn) status = GiveawayStatus.DRAWING;
-    if (isDrawn) status = GiveawayStatus.DRAWN;
+    if (now >= giveaway.drawAt && !winners) status = GiveawayStatus.DRAWING;
+    if (winners) status = GiveawayStatus.DRAWN;
 
     const statusColors = STATUS_COLORS.find((item) => item.status === status);
 
@@ -127,8 +167,11 @@ export default function GiveawayCard({
   };
 
   const checkIsWinner = useCallback(() => {
-    setIsWinner(giveaway.winners.includes(account));
-  }, [giveaway, account, setIsWinner]);
+    if (winners) {
+      const winner = winners?.find((item) => item.address === account);
+      if (winner) setWinner(winner);
+    }
+  }, [giveaway, account, setWinner]);
 
   const getUserBalance = async () => {
     if (signer) {
@@ -170,7 +213,7 @@ export default function GiveawayCard({
           />
         </div>
 
-        <div className="absolute left-0 bottom-0 flex flex-col lg:flex-row gap-5 lg:gap-0 justify-between bg-black/50 backdrop-blur-sm w-full lg:p-10 py-8 text-white text-3xl 2xl:text-4xl font-bold border-t border-samurai-red">
+        <div className="absolute left-0 top-[100px] lg:top-auto lg:bottom-0 flex flex-col lg:flex-row gap-5 lg:gap-0 justify-between bg-black/50 backdrop-blur-sm w-full lg:p-10 py-8 text-white text-3xl 2xl:text-4xl font-bold lg:border-t border-samurai-red">
           <div className="flex flex-col lg:flex-row items-center gap-2 lg:gap-5 w-full">
             <Image
               src={image}
@@ -332,34 +375,50 @@ export default function GiveawayCard({
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-center justify-center md:justify-between flex-wrap gap-2 absolute top-20 left-0 z-20 w-full px-10">
-        {isDrawn && isWinner && (
-          <div className="flex items-center gap-3 text-yellow-300 relative bg-black md:bg-transparent py-2 px-2 pr-3 md:px-4 rounded-full shadow-lg md:shadow-transparent z-20">
+      <div className="flex flex-row justify-between items-center lg:items-start flex-wrap gap-2 absolute top-20 left-0 z-20 w-full px-10">
+        {winner && (
+          <div className="flex items-center gap-1 text-yellow-300 relative bg-black md:bg-transparent py-2 lg:py-0 px-2 pr-3 md:px-0 rounded-full shadow-lg md:shadow-transparent z-20">
             <TrophyIcon
               width={30}
-              className="w-[40px] md:w-[60px] bg-white/20 md:bg-black/50 p-2 rounded-full"
+              className="w-[40px] md:w-[64px] bg-white/20 md:bg-black/50 p-2 rounded-full"
             />
-            <span className="text-xl md:text-4xl font-bold text-yellow-300 z-20 box-shadow-lg">
-              You Win!
-            </span>
+            <div className="flex flex-col">
+              <span className="text-xl md:text-2xl font-bold text-yellow-300 z-20 box-shadow-lg">
+                You Win!
+              </span>
+              <span className="text-sm text-white/70 mt-[-5px]">
+                {winner?.sortedWins +
+                  " sorted tickets -> $" +
+                  winner?.winAmount.toLocaleString("en-us")}
+              </span>
+            </div>
           </div>
         )}
 
-        <div className="flex items-center gap-2 bg-black py-2 px-4 rounded-full border border-white/30 shadow-lg z-20">
-          <span
-            className={`bg-gradient-to-tr ${giveawayStatusColors?.from} ${giveawayStatusColors?.to} shadow-lg rounded-full w-4 h-4 animate-pulse`}
-          />
-          <span className={`${giveawayStatusColors?.text} text-sm`}>
-            {giveawayStatus}
-          </span>
+        <div className="flex flex-col gap-5">
+          <div className="flex items-center gap-2 bg-black py-2 px-4 rounded-full border border-white/30 shadow-lg z-20">
+            <span
+              className={`bg-gradient-to-tr ${giveawayStatusColors?.from} ${giveawayStatusColors?.to} shadow-lg rounded-full w-4 h-4 animate-pulse`}
+            />
+            <span className={`${giveawayStatusColors?.text} text-sm`}>
+              {giveawayStatus}
+            </span>
+          </div>
+          {/* <button
+            onClick={onPickWinners}
+            className="flex items-center justify-center text-sm lg:text-md h-[50px] disabled:bg-white/10 enabled:bg-samurai-red hover:enabled:opacity-75 disabled:text-white/20 disabled:border-white/20 rounded-full scale-[0.9] sm:scale-100"
+          >
+            Pick Winners
+          </button> */}
         </div>
       </div>
 
-      <SocialModal
-        open={true}
+      {/* <SocialModal
+        open={!twitterData || !twitterData?.engaged}
         setOpen={() => {}}
         onSubmit={onCheckEngagement}
-      />
+        twitterEngagement={twitterData || undefined}
+      /> */}
     </div>
   );
 }

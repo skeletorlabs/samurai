@@ -2,6 +2,7 @@ import { ethers, formatEther, Signer } from "ethers";
 import { GIVEWAYS_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
 import { notificateTx } from "@/app/utils/notificateTx";
+import { GIVEAWAYS_LIST } from "../utils/constants/sanka";
 import { GIVEAWAYS } from "../utils/constants";
 import { getUnixTime } from "date-fns";
 
@@ -201,17 +202,82 @@ export async function create(giveaway: GiveawayType, signer: ethers.Signer) {
   }
 }
 
-export async function setWinner(
+export async function pickWinners(id: number) {
+  try {
+    const currentGiveaway = GIVEAWAYS_LIST.find(
+      (giveaway) => giveaway.id === id
+    );
+
+    const maxWinnerTickets = currentGiveaway?.ticketsToDraw || 0;
+    const amountPerRandomChoice =
+      (currentGiveaway?.prizeValue || 0) /
+      (currentGiveaway?.ticketsToDraw || 0);
+    const maxSingleWalletCanWin = 25;
+    const contract = await getContract();
+    const participants = await contract?.participantsOf(id);
+    const candidates: { address: string; tickets: number }[] = [];
+    let totalWinnersSelected = 0;
+    const winners: {
+      address: string;
+      tickets: number;
+      sortedWins: number;
+      winAmount: number;
+    }[] = [];
+
+    for (let index = 0; index < participants.length; index++) {
+      const tickets = Number(
+        await contract?.participations(id, participants[index])
+      );
+
+      candidates.push({ address: participants[index], tickets: tickets });
+    }
+
+    while (totalWinnersSelected < maxWinnerTickets) {
+      const randomIndex = Math.floor(Math.random() * candidates.length);
+      const candidate = candidates[randomIndex];
+      const winnerIndex = winners.findIndex(
+        (winner) => winner.address === candidate.address
+      );
+
+      // Avoid winners that won the maximum amount
+      if (
+        winnerIndex !== -1 &&
+        winners[winnerIndex]?.sortedWins === maxSingleWalletCanWin
+      ) {
+        continue;
+      }
+
+      if (winnerIndex !== -1) {
+        winners[winnerIndex].sortedWins++;
+        winners[winnerIndex].winAmount =
+          amountPerRandomChoice * winners[winnerIndex].sortedWins;
+      } else {
+        winners.push({
+          address: candidate.address,
+          tickets: candidate.tickets,
+          sortedWins: 1,
+          winAmount: amountPerRandomChoice,
+        });
+      }
+
+      totalWinnersSelected++;
+    }
+
+    return winners;
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
+}
+
+export async function setWinners(
   id: number,
   winners: string[],
   signer: ethers.Signer
 ) {
   const contract = await getContract(signer);
-
   try {
     const owner = await contract?.owner();
     const signerAddress = await signer.getAddress();
-
     if (owner === signerAddress) {
       const network = await signer.provider?.getNetwork();
       const tx = await contract?.setWinner(id, winners);

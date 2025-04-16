@@ -6,11 +6,23 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { Roboto } from "next/font/google";
-import { Fragment, useCallback, useState } from "react";
-import SSButton from "../ssButton";
+import { Fragment, useState } from "react";
 import { Tweet } from "react-tweet";
 import { CheckCircleIcon } from "@heroicons/react/16/solid";
 import classNames from "classnames";
+import { TwitterEngagement } from "@/app/api/twitter/route";
+import {
+  TwitterTimelineEmbed,
+  TwitterShareButton,
+  TwitterFollowButton,
+  TwitterHashtagButton,
+  TwitterMentionButton,
+  TwitterTweetEmbed,
+  TwitterMomentShare,
+  TwitterDMButton,
+  TwitterVideoEmbed,
+  TwitterOnAirButton,
+} from "react-twitter-embed";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -21,12 +33,14 @@ export type SocialModalProps = {
   open: boolean;
   setOpen: (open: boolean) => void;
   onSubmit: (username: string) => void;
+  twitterEngagement?: TwitterEngagement;
 };
 
 export default function SocialModal({
   open,
   setOpen,
   onSubmit,
+  twitterEngagement,
 }: SocialModalProps) {
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
@@ -75,8 +89,10 @@ export default function SocialModal({
                         className={classNames({
                           "flex items-center gap-2 border rounded-lg p-1 px-3":
                             true,
-                          "text-white/20 border-white/10": false,
-                          "text-green-500 border-green-500 bg-white": true,
+                          "text-white/20 border-white/10":
+                            !twitterEngagement || !twitterEngagement.liked,
+                          "text-green-500 border-green-500 bg-white":
+                            twitterEngagement && twitterEngagement.liked,
                         })}
                       >
                         <CheckCircleIcon width={18} height={18} />
@@ -87,8 +103,10 @@ export default function SocialModal({
                         className={classNames({
                           "flex items-center gap-2 border rounded-lg p-1 px-3":
                             true,
-                          "text-white/20 border-white/10": false,
-                          "text-green-500 border-green-500 bg-white": true,
+                          "text-white/20 border-white/10":
+                            !twitterEngagement || !twitterEngagement.retweeted,
+                          "text-green-500 border-green-500 bg-white":
+                            twitterEngagement && twitterEngagement.retweeted,
                         })}
                       >
                         <CheckCircleIcon width={18} height={18} />

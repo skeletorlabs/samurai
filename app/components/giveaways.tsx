@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { generalInfo, GiveawayType } from "../contracts_integrations/giveways";
 import GiveawayCard from "./giveawayCard";
 import LoadingBox from "./loadingBox";

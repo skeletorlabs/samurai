@@ -1831,58 +1831,6 @@ export const IDO_LIST: IDO[] = [
   },
 ];
 
-export type GiveawayListType = {
-  id: number;
-  prizes: string;
-  prizeValue: number;
-  ticketsToDraw: number;
-  image: string;
-  background: string;
-  isDrawn: boolean;
-  socials?: SOCIAL[];
-}[];
-export const GIVEAWAYS_LIST: GiveawayListType = [
-  {
-    id: 0,
-    prizes: "3 Nodes",
-    prizeValue: 1000,
-    ticketsToDraw: 0,
-    image: "/giveaways/xrone.png",
-    background: "/IDOs/xrone.png",
-    isDrawn: false,
-  },
-  {
-    id: 1,
-    prizes: "20 SAM NFTs",
-    prizeValue: 1000,
-    ticketsToDraw: 0,
-    image: "/nfts/1.jpg",
-    background: "/giveaways/samurai.png",
-    isDrawn: true,
-  },
-  {
-    id: 2,
-    prizes: "$AIFI Allocations",
-    prizeValue: 10000,
-    ticketsToDraw: 500,
-    image: "/giveaways/amplify-logo.png",
-    background: "/giveaways/amplify-bg.png",
-    isDrawn: false,
-    socials: [
-      {
-        svg: twitterX,
-        href: "https://x.com/amplifi_fi",
-      },
-      {
-        svg: telegram,
-        href: "https://t.me/Amplifi_Community",
-      },
-      { svg: discord, href: "https://discord.gg/amplifi" },
-      { svg: medium, href: "https://amplifi-fi.medium.com/" },
-    ],
-  },
-];
-
 export const LINKS: { [key: number]: string } = {
   1337: "http://localhost:8545",
   5: "https://goerli.etherscan.io",
