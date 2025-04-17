@@ -17,13 +17,18 @@ export default function Giveaways({
   max?: number;
 }) {
   const [giveaways, setGiveaways] = useState<GiveawayType[] | []>([]);
+  const [owner, setOwner] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [shouldReload, setShouldReload] = useState(false);
 
   const getGiveaways = useCallback(async () => {
     setLoading(true);
     const response = await generalInfo();
-    if (response) setGiveaways(response.giveaways as GiveawayType[]);
+
+    if (response) {
+      setOwner(response.owner);
+      setGiveaways(response.giveaways as GiveawayType[]);
+    }
     setLoading(false);
   }, [setGiveaways, setLoading]);
 
@@ -50,6 +55,7 @@ export default function Giveaways({
             .map((giveaway: GiveawayType, index) => (
               <GiveawayCard
                 key={index}
+                owner={owner}
                 giveaway={giveaway}
                 setReload={setShouldReload}
               />
@@ -60,6 +66,7 @@ export default function Giveaways({
             .map((giveaway: GiveawayType, index) => (
               <GiveawayCard
                 key={index}
+                owner={owner}
                 giveaway={giveaway}
                 setReload={setShouldReload}
               />
@@ -67,6 +74,7 @@ export default function Giveaways({
         : giveaways.map((giveaway: GiveawayType, index) => (
             <GiveawayCard
               key={index}
+              owner={owner}
               giveaway={giveaway}
               setReload={setShouldReload}
             />

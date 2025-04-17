@@ -15,6 +15,7 @@ import {
   MinusCircleIcon,
   PlusCircleIcon,
   TrophyIcon,
+  XCircleIcon,
 } from "@heroicons/react/20/solid";
 import { Giveaway, GIVEAWAYS_LIST, Winner } from "../utils/constants/sanka";
 
@@ -35,10 +36,12 @@ const inter = Inter({
 });
 
 export default function GiveawayCard({
+  owner,
   giveaway,
   setReload,
   type = "dark",
 }: {
+  owner: string | null;
   giveaway: GiveawayType;
   setReload: Function;
   type?: string;
@@ -376,23 +379,42 @@ export default function GiveawayCard({
       </div>
 
       <div className="flex flex-row justify-between items-center lg:items-start flex-wrap gap-2 absolute top-20 left-0 z-20 w-full px-10">
-        {winner && (
-          <div className="flex items-center gap-1 text-yellow-300 relative bg-black md:bg-transparent py-2 lg:py-0 px-2 pr-3 md:px-0 rounded-full shadow-lg md:shadow-transparent z-20">
-            <TrophyIcon
-              width={30}
-              className="w-[40px] md:w-[64px] bg-white/20 md:bg-black/50 p-2 rounded-full"
-            />
-            <div className="flex flex-col">
-              <span className="text-xl md:text-2xl font-bold text-yellow-300 z-20 box-shadow-lg">
-                You Win!
-              </span>
-              <span className="text-sm text-white/70 mt-[-5px]">
-                {winner?.sortedWins +
-                  " sorted tickets -> $" +
-                  winner?.winAmount.toLocaleString("en-us")}
-              </span>
-            </div>
-          </div>
+        {winners && (
+          <>
+            {winner ? (
+              <div className="flex items-center gap-1 text-yellow-300 relative bg-black md:bg-transparent py-2 lg:py-0 px-2 pr-3 md:px-0 rounded-full shadow-lg md:shadow-transparent z-20">
+                <TrophyIcon
+                  width={30}
+                  className="w-[40px] md:w-[64px] bg-white/20 md:bg-black/50 p-2 rounded-full"
+                />
+                <div className="flex flex-col">
+                  <span className="text-xl md:text-2xl font-bold text-yellow-300 z-20 box-shadow-lg">
+                    You Win!
+                  </span>
+                  <span className="text-sm text-white/70 mt-[-5px]">
+                    {winner?.sortedWins +
+                      " sorted tickets -> $" +
+                      winner?.winAmount.toLocaleString("en-us")}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center gap-1 text-red-400 relative bg-black md:bg-transparent py-2 lg:py-0 px-2 pr-3 md:px-0 rounded-full shadow-lg md:shadow-transparent z-20">
+                <XCircleIcon
+                  width={30}
+                  className="w-[40px] md:w-[64px] bg-white/20 md:bg-black/50 p-2 rounded-full"
+                />
+                <div className="flex flex-col">
+                  <span className="text-xl md:text-2xl font-bold text-red-400 z-20 box-shadow-lg">
+                    You didn't win this time...
+                  </span>
+                  <span className="text-sm text-white/70 mt-[-5px]">
+                    Be aware of the next giveaway!
+                  </span>
+                </div>
+              </div>
+            )}
+          </>
         )}
 
         <div className="flex flex-col gap-5">
@@ -404,12 +426,15 @@ export default function GiveawayCard({
               {giveawayStatus}
             </span>
           </div>
-          {/* <button
-            onClick={onPickWinners}
-            className="flex items-center justify-center text-sm lg:text-md h-[50px] disabled:bg-white/10 enabled:bg-samurai-red hover:enabled:opacity-75 disabled:text-white/20 disabled:border-white/20 rounded-full scale-[0.9] sm:scale-100"
-          >
-            Pick Winners
-          </button> */}
+          {owner && owner === account && (
+            <button
+              disabled={loading}
+              onClick={onPickWinners}
+              className="flex items-center justify-center text-sm lg:text-md py-2 disabled:bg-white/10 enabled:bg-samurai-red hover:enabled:opacity-75 disabled:text-white/20 disabled:border-white/20 rounded-full scale-[0.9] sm:scale-100"
+            >
+              {loading ? <Loading /> : "Pick Winners"}
+            </button>
+          )}
         </div>
       </div>
 

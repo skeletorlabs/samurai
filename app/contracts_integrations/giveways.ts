@@ -2,7 +2,10 @@ import { ethers, formatEther, Signer } from "ethers";
 import { GIVEWAYS_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
 import { notificateTx } from "@/app/utils/notificateTx";
-import { GIVEAWAYS_LIST } from "../utils/constants/sanka";
+import {
+  BLACKLISTED_ADDRESSES,
+  GIVEAWAYS_LIST,
+} from "../utils/constants/sanka";
 import { GIVEAWAYS } from "../utils/constants";
 import { getUnixTime } from "date-fns";
 
@@ -93,6 +96,7 @@ export async function checkIsPaused() {
 export async function generalInfo() {
   try {
     const contract = await getContract();
+    const owner = await contract?.owner();
     let ids = await contract?.getIDs();
     let giveaways: GiveawayType[] = [];
 
@@ -116,6 +120,7 @@ export async function generalInfo() {
     }
 
     return {
+      owner,
       ids,
       giveaways,
     };
@@ -208,62 +213,97 @@ export async function pickWinners(id: number) {
       (giveaway) => giveaway.id === id
     );
 
-    const maxWinnerTickets = currentGiveaway?.ticketsToDraw || 0;
-    const amountPerRandomChoice =
-      (currentGiveaway?.prizeValue || 0) /
-      (currentGiveaway?.ticketsToDraw || 0);
-    const maxSingleWalletCanWin = 25;
+    const prizeValue = currentGiveaway?.prizeValue || 0;
+    const ticketsToDrawConfig = currentGiveaway?.ticketsToDraw || 0;
+    const maxSingleWalletCanWinGlobal = 25;
     const contract = await getContract();
     const participants = await contract?.participantsOf(id);
-    const candidates: { address: string; tickets: number }[] = [];
+    const eligibleParticipants = participants.filter(
+      (address: string) => !BLACKLISTED_ADDRESSES.includes(address)
+    );
+    const allCandidatesWithTickets: { address: string; tickets: number }[] = [];
+    const candidates: string[] = []; // Array to hold individual ticket entries
     let totalWinnersSelected = 0;
-    const winners: {
-      address: string;
-      tickets: number;
-      sortedWins: number;
-      winAmount: number;
-    }[] = [];
+    const winnersMap: Map<
+      string,
+      { wins: number; totalTickets: number; winAmount: number }
+    > = new Map();
 
-    for (let index = 0; index < participants.length; index++) {
-      const tickets = Number(
-        await contract?.participations(id, participants[index])
-      );
-
-      candidates.push({ address: participants[index], tickets: tickets });
+    // Create a pool of individual tickets and the list of all eligible candidates
+    for (let index = 0; index < eligibleParticipants.length; index++) {
+      const address = eligibleParticipants[index];
+      const tickets = Number(await contract?.participations(id, address));
+      allCandidatesWithTickets.push({ address, tickets });
+      for (let i = 0; i < tickets; i++) {
+        candidates.push(address);
+      }
     }
 
-    while (totalWinnersSelected < maxWinnerTickets) {
+    const totalAvailableTickets = candidates.length;
+    const numberOfTicketsToDraw = ticketsToDrawConfig; // Directly use ticketsToDrawConfig
+
+    const amountPerWin =
+      numberOfTicketsToDraw > 0 ? prizeValue / numberOfTicketsToDraw : 0;
+
+    while (
+      totalWinnersSelected < numberOfTicketsToDraw &&
+      candidates.length > 0
+    ) {
       const randomIndex = Math.floor(Math.random() * candidates.length);
-      const candidate = candidates[randomIndex];
-      const winnerIndex = winners.findIndex(
-        (winner) => winner.address === candidate.address
+      const winnerAddress = candidates.splice(randomIndex, 1)[0]; // Remove the selected ticket
+
+      const walletWins = winnersMap.get(winnerAddress)?.wins || 0;
+      const walletTotalTickets =
+        winnersMap.get(winnerAddress)?.totalTickets ||
+        Number(await contract?.participations(id, winnerAddress)) ||
+        0;
+      const maxWalletWins = Math.min(
+        maxSingleWalletCanWinGlobal,
+        walletTotalTickets
       );
 
-      // Avoid winners that won the maximum amount
-      if (
-        winnerIndex !== -1 &&
-        winners[winnerIndex]?.sortedWins === maxSingleWalletCanWin
-      ) {
-        continue;
-      }
-
-      if (winnerIndex !== -1) {
-        winners[winnerIndex].sortedWins++;
-        winners[winnerIndex].winAmount =
-          amountPerRandomChoice * winners[winnerIndex].sortedWins;
-      } else {
-        winners.push({
-          address: candidate.address,
-          tickets: candidate.tickets,
-          sortedWins: 1,
-          winAmount: amountPerRandomChoice,
+      if (walletWins < maxWalletWins) {
+        winnersMap.set(winnerAddress, {
+          wins: walletWins + 1,
+          totalTickets: walletTotalTickets,
+          winAmount:
+            (winnersMap.get(winnerAddress)?.winAmount || 0) + amountPerWin, // Accumulate win amount
         });
+        totalWinnersSelected++;
       }
-
-      totalWinnersSelected++;
+      // If the wallet has reached its maximum wins, we effectively ignore subsequent draws of its tickets
     }
 
-    return winners;
+    const winnersArray: {
+      address: string;
+      wins: number;
+      totalTickets: number;
+      winAmount: number;
+    }[] = Array.from(winnersMap.entries()).map(([address, data]) => ({
+      address,
+      wins: data.wins,
+      totalTickets: data.totalTickets,
+      winAmount: data.winAmount,
+    }));
+
+    const winnersAddresses = new Set(
+      winnersArray.map((winner) => winner.address)
+    );
+
+    const losers = allCandidatesWithTickets
+      .filter((candidate) => !winnersAddresses.has(candidate.address))
+      .map((loser) => ({ address: loser.address, tickets: loser.tickets }));
+
+    let totalDistributedAmount = winnersArray.reduce(
+      (sum, winner) => sum + winner.winAmount,
+      0
+    );
+    console.log("Total Distributed Amount:", totalDistributedAmount);
+    console.table(winnersArray);
+    console.log("\nLosers:");
+    console.table(losers);
+
+    return { winners: winnersArray, losers };
   } catch (e) {
     handleError({ e: e, notificate: true });
   }
