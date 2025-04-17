@@ -27,7 +27,7 @@ import ConnectButton from "./connectbutton";
 import Link from "next/link";
 import { discord, twitterX, youtube } from "../utils/svgs";
 import SocialModal from "./sanka/modal";
-import { TwitterEngagement } from "../api/twitter/route";
+// import { TwitterEngagement } from "../api/twitter/route";
 import { set } from "date-fns";
 const inter = Inter({
   subsets: ["latin"],
@@ -53,9 +53,9 @@ export default function GiveawayCard({
   const [userTickets, setUserTickets] = useState(0);
   const [winner, setWinner] = useState<Winner | null>(null);
   const [open, setOpen] = useState(false);
-  const [twitterData, setTwitterData] = useState<TwitterEngagement | null>(
-    null
-  );
+  // const [twitterData, setTwitterData] = useState<TwitterEngagement | null>(
+  //   null
+  // );
 
   const {
     prizes,
@@ -76,49 +76,49 @@ export default function GiveawayCard({
     DECREASE,
   }
 
-  const onCheckEngagement = useCallback(
-    async (username: string) => {
-      setLoading(true);
+  // const onCheckEngagement = useCallback(
+  //   async (username: string) => {
+  //     setLoading(true);
 
-      // Check if the user is already engaged and saved on storage
-      const storedEngagement = localStorage.getItem(
-        `twitter-engagement-${giveaway.id}-${username}-${account}`
-      );
+  //     // Check if the user is already engaged and saved on storage
+  //     const storedEngagement = localStorage.getItem(
+  //       `twitter-engagement-${giveaway.id}-${username}-${account}`
+  //     );
 
-      if (storedEngagement) {
-        console.log("engagement found");
-        const engagement = JSON.parse(storedEngagement);
-        setTwitterData(engagement);
-        setLoading(false);
-        if (engagement.engaged) setOpen(false);
-        return;
-      }
+  //     if (storedEngagement) {
+  //       console.log("engagement found");
+  //       const engagement = JSON.parse(storedEngagement);
+  //       setTwitterData(engagement);
+  //       setLoading(false);
+  //       if (engagement.engaged) setOpen(false);
+  //       return;
+  //     }
 
-      if (signer) {
-        console.log("checking engagement");
-        const response = await fetch(
-          `/api/twitter?tweetId=1910349054095278415&username=${encodeURIComponent(
-            username
-          )}`
-        );
-        const data = await response.json();
-        if (data) {
-          setTwitterData(data);
-          setLoading(false);
-        }
-        if (data.engaged) {
-          // Save the engagement on storage
-          localStorage.setItem(
-            `twitter-engagement-${giveaway.id}-${username}-${account}`,
-            JSON.stringify(data)
-          );
-          console.log("engagement saved");
-          setOpen(false);
-        }
-      }
-    },
-    [account, signer, setOpen, setLoading]
-  );
+  //     if (signer) {
+  //       console.log("checking engagement");
+  //       const response = await fetch(
+  //         `/api/twitter?tweetId=1910349054095278415&username=${encodeURIComponent(
+  //           username
+  //         )}`
+  //       );
+  //       const data = await response.json();
+  //       if (data) {
+  //         setTwitterData(data);
+  //         setLoading(false);
+  //       }
+  //       if (data.engaged) {
+  //         // Save the engagement on storage
+  //         localStorage.setItem(
+  //           `twitter-engagement-${giveaway.id}-${username}-${account}`,
+  //           JSON.stringify(data)
+  //         );
+  //         console.log("engagement saved");
+  //         setOpen(false);
+  //       }
+  //     }
+  //   },
+  //   [account, signer, setOpen, setLoading]
+  // );
 
   const onPickWinners = useCallback(async () => {
     setLoading(true);
