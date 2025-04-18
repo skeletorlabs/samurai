@@ -19,10 +19,6 @@ export type Giveaway = {
   winners?: Winner[];
 };
 
-export const BLACKLISTED_ADDRESSES = [
-  "0xcDe00Be56479F95b5e33De136AD820FfaE996009",
-];
-
 export const GIVEAWAYS_LIST: Giveaway[] = [
   {
     id: 0,

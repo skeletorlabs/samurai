@@ -389,11 +389,11 @@ export default function GiveawayCard({
                 />
                 <div className="flex flex-col">
                   <span className="text-xl md:text-2xl font-bold text-yellow-300 z-20 box-shadow-lg">
-                    You Win!
+                    You Won!
                   </span>
                   <span className="text-sm text-white/70 mt-[-5px]">
                     {winner?.sortedWins +
-                      " sorted tickets -> $" +
+                      " winning tickets -> $" +
                       winner?.winAmount.toLocaleString("en-us")}
                   </span>
                 </div>
@@ -409,7 +409,7 @@ export default function GiveawayCard({
                     You didn't win this time...
                   </span>
                   <span className="text-sm text-white/70 mt-[-5px]">
-                    Be aware of the next giveaway!
+                    The next giveaway is around the corner!
                   </span>
                 </div>
               </div>

@@ -2,10 +2,7 @@ import { ethers, formatEther, Signer } from "ethers";
 import { GIVEWAYS_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
 import { notificateTx } from "@/app/utils/notificateTx";
-import {
-  BLACKLISTED_ADDRESSES,
-  GIVEAWAYS_LIST,
-} from "../utils/constants/sanka";
+import { GIVEAWAYS_LIST } from "../utils/constants/sanka";
 import { GIVEAWAYS } from "../utils/constants";
 import { getUnixTime } from "date-fns";
 
@@ -218,9 +215,7 @@ export async function pickWinners(id: number) {
     const maxSingleWalletCanWinGlobal = 25;
     const contract = await getContract();
     const participants = await contract?.participantsOf(id);
-    const eligibleParticipants = participants.filter(
-      (address: string) => !BLACKLISTED_ADDRESSES.includes(address)
-    );
+
     const allCandidatesWithTickets: { address: string; tickets: number }[] = [];
     const candidates: string[] = []; // Array to hold individual ticket entries
     let totalWinnersSelected = 0;
@@ -230,8 +225,8 @@ export async function pickWinners(id: number) {
     > = new Map();
 
     // Create a pool of individual tickets and the list of all eligible candidates
-    for (let index = 0; index < eligibleParticipants.length; index++) {
-      const address = eligibleParticipants[index];
+    for (let index = 0; index < participants.length; index++) {
+      const address = participants[index];
       const tickets = Number(await contract?.participations(id, address));
       allCandidatesWithTickets.push({ address, tickets });
       for (let i = 0; i < tickets; i++) {
