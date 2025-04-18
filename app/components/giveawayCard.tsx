@@ -170,9 +170,9 @@ export default function GiveawayCard({
   };
 
   const checkIsWinner = useCallback(() => {
-    if (winners) {
+    if (signer && account && winners) {
       const winner = winners?.find((item) => item.address === account);
-      if (winner) setWinner(winner);
+      setWinner(winner ? winner : null);
     }
   }, [giveaway, account, setWinner]);
 
@@ -193,11 +193,11 @@ export default function GiveawayCard({
   useEffect(() => {
     getUserBalance();
     getUserTickets();
+    checkIsWinner();
   }, [signer]);
 
   useEffect(() => {
     getStatus();
-    checkIsWinner();
   }, [giveaway]);
 
   return (
@@ -310,7 +310,7 @@ export default function GiveawayCard({
         </div>
         <div className="w-full h-[1px] lg:w-[1px] lg:h-[300px]  bg-white/10" />
         <div className="flex flex-col justify-center items-center w-full">
-          {signer ? (
+          {signer && account ? (
             <div className=" flex flex-col justify-center items-center gap-4">
               <p
                 className={`text-4xl leading-[24px] lg:leading-[30px] text-center ${inter.className}`}
@@ -385,16 +385,19 @@ export default function GiveawayCard({
               <div className="flex items-center gap-1 text-yellow-300 relative bg-black md:bg-transparent py-2 lg:py-0 px-2 pr-3 md:px-0 rounded-full shadow-lg md:shadow-transparent z-20">
                 <TrophyIcon
                   width={30}
-                  className="w-[40px] md:w-[64px] bg-white/20 md:bg-black/50 p-2 rounded-full"
+                  className="w-[40px] md:w-[86px] bg-white/20 md:bg-black/50 p-2 rounded-full"
                 />
                 <div className="flex flex-col">
-                  <span className="text-xl md:text-2xl font-bold text-yellow-300 z-20 box-shadow-lg">
+                  <span className="text-xl md:text-3xl font-bold text-yellow-300 z-20 box-shadow-lg">
                     You Won!
                   </span>
-                  <span className="text-sm text-white/70 mt-[-5px]">
+                  <span className="text-[16px] text-white mt-[-2px]">
                     {winner?.sortedWins +
                       " winning tickets -> $" +
                       winner?.winAmount.toLocaleString("en-us")}
+                  </span>
+                  <span className="text-[11px] text-white/70 mt-[-5px]">
+                    *Claimable on Galxe after TGE
                   </span>
                 </div>
               </div>
