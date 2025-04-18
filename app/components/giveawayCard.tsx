@@ -379,7 +379,7 @@ export default function GiveawayCard({
       </div>
 
       <div className="flex flex-row justify-between items-center lg:items-start flex-wrap gap-2 absolute top-20 left-0 z-20 w-full px-10">
-        {winners && (
+        {winners && account && (
           <>
             {winner ? (
               <div className="flex items-center gap-1 text-yellow-300 relative bg-black md:bg-transparent py-2 lg:py-0 px-2 pr-3 md:px-0 rounded-full shadow-lg md:shadow-transparent z-20">
