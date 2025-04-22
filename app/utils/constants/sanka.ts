@@ -755,4 +755,20 @@ export const GIVEAWAYS_LIST: Giveaway[] = [
       },
     ],
   },
+  {
+    id: 3,
+    prizes: "1 Rare Gunzilla Validator Node",
+    prizeValue: 5000,
+    ticketsToDraw: 1,
+    image: "/giveaways/gunzilla-logo.jpg",
+    background: "/giveaways/gunzilla-bg.jpeg",
+
+    socials: [
+      {
+        svg: twitterX,
+        href: "https://twitter.com/GUNbyGUNZ",
+      },
+      { svg: discord, href: "https://discord.com/invite/gunbygunz" },
+    ],
+  },
 ];
