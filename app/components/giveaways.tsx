@@ -52,6 +52,7 @@ export default function Giveaways({
       {ids
         ? giveaways
             .filter((giveaway: GiveawayType) => ids.includes(giveaway.id))
+            .toReversed()
             .map((giveaway: GiveawayType, index) => (
               <GiveawayCard
                 key={index}

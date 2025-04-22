@@ -17,6 +17,7 @@ export type Giveaway = {
   background: string;
   socials?: SOCIAL[];
   winners?: Winner[];
+  disclaimer?: string;
 };
 
 export const GIVEAWAYS_LIST: Giveaway[] = [
@@ -754,5 +755,23 @@ export const GIVEAWAYS_LIST: Giveaway[] = [
         winAmount: 20,
       },
     ],
+  },
+  {
+    id: 3,
+    prizes: "1 Rare Gunzilla Validator Node",
+    prizeValue: 5000,
+    ticketsToDraw: 1,
+    image: "/giveaways/gunzilla-logo.jpg",
+    background: "/giveaways/gunzilla-bg.jpeg",
+
+    socials: [
+      {
+        svg: twitterX,
+        href: "https://twitter.com/GUNbyGUNZ",
+      },
+      { svg: discord, href: "https://discord.com/invite/gunbygunz" },
+    ],
+    disclaimer:
+      "*Disclaimer: This prize was paid for and provided by the Samurai Starter team and is not sponsored by Gunzilla or Off The Grid.",
   },
 ];

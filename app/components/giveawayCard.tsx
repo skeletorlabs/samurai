@@ -68,6 +68,7 @@ export default function GiveawayCard({
     background,
     socials,
     winners,
+    disclaimer,
   } =
     GIVEAWAYS_LIST.find((item) => item.id === giveaway.id) ||
     GIVEAWAYS_LIST[giveaway.id];
@@ -204,7 +205,7 @@ export default function GiveawayCard({
     <div
       className={`flex flex-col rounded-lg border-[0.5px] border-neutral-700 text-start ${
         type === "dark" ? "bg-black/50" : "bg-neutral-700"
-      }  w-full py-4 pb-5 shadow-xl px-4`}
+      }  w-full py-4 pb-5 shadow-xl px-4 relative`}
     >
       <div className="flex w-full mb-4 relative">
         <div className="flex w-full h-[560px] relative shadow-lg shadow-black/30">
@@ -272,7 +273,6 @@ export default function GiveawayCard({
           </div>
         </div>
       </div>
-
       <div className="flex flex-col lg:flex-row gap-10 items-center pb-5 lg:pb-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-2 text-center ">
           <div className="flex flex-col bg-black/50 py-4 px-6 text-sm border border-white/10">
@@ -377,8 +377,10 @@ export default function GiveawayCard({
           )}
         </div>
       </div>
-
-      <div className="flex flex-row justify-between items-center lg:items-start flex-wrap gap-2 absolute top-20 left-0 z-20 w-full px-10">
+      {disclaimer && (
+        <span className="text-xs text-white/60">{disclaimer}</span>
+      )}
+      <div className="flex flex-row justify-between items-center lg:items-start flex-wrap gap-2 absolute top-10 left-0 z-20 w-full px-10">
         {winners && account && (
           <>
             {winner ? (
@@ -429,7 +431,7 @@ export default function GiveawayCard({
               {giveawayStatus}
             </span>
           </div>
-          {owner && owner === account && (
+          {/* {owner && owner === account && (
             <button
               disabled={loading}
               onClick={onPickWinners}
@@ -437,10 +439,9 @@ export default function GiveawayCard({
             >
               {loading ? <Loading /> : "Pick Winners"}
             </button>
-          )}
+          )} */}
         </div>
       </div>
-
       {/* <SocialModal
         open={!twitterData || !twitterData?.engaged}
         setOpen={() => {}}
