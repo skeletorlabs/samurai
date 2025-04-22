@@ -60,7 +60,7 @@ export default function Sanka() {
               →
             </Link>
           </div>
-          <Giveaways ids={[2]} />
+          <Giveaways ids={[2, 3]} />
         </div>
       </div>
     </>

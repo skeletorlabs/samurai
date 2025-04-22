@@ -17,6 +17,7 @@ export type Giveaway = {
   background: string;
   socials?: SOCIAL[];
   winners?: Winner[];
+  disclaimer?: string;
 };
 
 export const GIVEAWAYS_LIST: Giveaway[] = [
@@ -770,5 +771,7 @@ export const GIVEAWAYS_LIST: Giveaway[] = [
       },
       { svg: discord, href: "https://discord.com/invite/gunbygunz" },
     ],
+    disclaimer:
+      "*Disclaimer: This prize was paid for and provided by the Samurai Starter team and is not sponsored by Gunzilla or Off The Grid.",
   },
 ];
