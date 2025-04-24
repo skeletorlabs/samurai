@@ -269,7 +269,7 @@ export async function claimPoints(signer: ethers.Signer) {
 
 // ADMIN ACTIONS
 
-export async function togglePause(index: number, signer: ethers.Signer) {
+export async function togglePause(signer: ethers.Signer) {
   const contract = await getContract(signer);
 
   try {
