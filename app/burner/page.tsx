@@ -81,9 +81,9 @@ export default function Burner() {
   const onGetUserInfo = useCallback(async () => {
     setLoading(true);
     if (signer && account && wallet) {
-      const dataPoints = await userInfoPoints(signer, wallet);
+      const dataPoints = await userInfoPoints(wallet);
       setUserInfoPointsData(dataPoints as UserPoints);
-      const dataChirppad = await userInfo(signer, wallet);
+      const dataChirppad = await userInfo(wallet);
       setUserInfoData(dataChirppad as UserInfo);
 
       const dataLpStaking = await userInfoLpStaking(signer, wallet);
