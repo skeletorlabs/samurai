@@ -268,7 +268,7 @@ export default function LockSamV3() {
                     Points
                   </p>
                 </div>
-                <div className="text-center md:text-start leading-none md:leading-normal">
+                {/* <div className="text-center md:text-start leading-none md:leading-normal">
                   <p className="text-white/40">Boosted Points to Claim</p>
                   <p className="text-lg">
                     {(userMissingPointsData?.claimable || 0).toLocaleString(
@@ -279,7 +279,7 @@ export default function LockSamV3() {
                     )}{" "}
                     Boosted Points
                   </p>
-                </div>
+                </div> */}
               </div>
             ) : (
               <ConnectButton />
@@ -324,7 +324,7 @@ export default function LockSamV3() {
                 >
                   CLAIM POINTS
                 </button>
-                <button
+                {/* <button
                   disabled={
                     loading ||
                     !signer ||
@@ -342,7 +342,7 @@ export default function LockSamV3() {
                   } rounded-full hover:enabled:bg-opacity-75`}
                 >
                   CLAIM BOOSTED POINTS
-                </button>
+                </button> */}
               </div>
             )}
           </div>
