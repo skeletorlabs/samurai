@@ -49,17 +49,12 @@ export type UserPoints = {
   pointsToMigrate: number;
 };
 
-export async function userInfo(signer: Signer, account?: string) {
+export async function userInfo(account: string) {
   try {
-    let signerAddress = await signer.getAddress();
-    const address = account || signerAddress;
+    const address = account;
     const contract = await getContract();
 
-    const network = await signer.provider?.getNetwork();
-    const chainId = Number(network?.chainId);
-
-    const rpc = chainId ? CHAIN_ID_TO_RPC_URL[chainId] : BASE_RPC_URL;
-    const provider = new JsonRpcProvider(rpc);
+    const provider = new JsonRpcProvider(BASE_RPC_URL);
     const balance = Number(
       formatEther(await balanceOf(ERC20_ABI, POINTS, address, provider))
     );
@@ -71,7 +66,7 @@ export async function userInfo(signer: Signer, account?: string) {
       formatEther(await lockV2Contract?.pointsMigrated(address))
     );
 
-    const pastUserInfos = await pastUserInfo(signer, address);
+    const pastUserInfos = await pastUserInfo(address);
     const pointsToMigrate = (pastUserInfos?.totalPoints || 0) - pointsMigrated;
 
     return { balance, boost, pointsMigrated, pointsToMigrate } as UserPoints;

@@ -203,16 +203,16 @@ export default function LockSamV2() {
   }, [account]);
 
   const onGetUserInfo = useCallback(async () => {
-    if (signer) {
-      const response = await userInfo(signer, account);
+    if (account) {
+      const response = await userInfo(account);
       setUserInfoData(response as UserInfo);
     }
-  }, [signer]);
+  }, [account]);
 
   useEffect(() => {
     onGetUserInfo();
     onGetUserMissingPoints();
-  }, [signer, account]);
+  }, [account]);
 
   const onGetGeneralInfo = useCallback(async () => {
     const response = await generalInfo();

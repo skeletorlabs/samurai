@@ -205,11 +205,11 @@ export default function LockSamV3() {
   }, [account]);
 
   const onGetUserInfo = useCallback(async () => {
-    if (signer) {
-      const response = await userInfo(signer, account);
+    if (account) {
+      const response = await userInfo(account);
       setUserInfoData(response as UserInfo);
     }
-  }, [signer]);
+  }, [account]);
 
   useEffect(() => {
     onGetUserInfo();

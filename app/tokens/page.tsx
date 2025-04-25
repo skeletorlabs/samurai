@@ -42,16 +42,16 @@ export default function Tokens() {
 
   const getUserInfo = useCallback(async () => {
     setLoading(true);
-    if (signer) {
-      const response = await userInfo(signer);
+    if (account) {
+      const response = await userInfo(account);
       setUserPoints(response as UserPoints);
     }
     setLoading(false);
-  }, [signer, setUserPoints, setLoading]);
+  }, [account, setUserPoints, setLoading]);
 
   useEffect(() => {
     getUserInfo();
-  }, [signer]);
+  }, [account]);
   return (
     <>
       <TopLayout background="bg-samurai-cyborg-fem bg-cover bg-top">
