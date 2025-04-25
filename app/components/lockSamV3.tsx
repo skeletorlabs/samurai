@@ -25,6 +25,12 @@ import ConnectButton from "./connectbutton";
 import LoadingBox from "./loadingBox";
 import LCarouselV2 from "./lcarouselV2";
 import CustomTooltip from "./customTooltip";
+import {
+  claim,
+  missingPointsInfos,
+  MissingPointsType,
+  MissingPointsVersion,
+} from "../contracts_integrations/missingPoints";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -44,6 +50,8 @@ export default function LockSamV3() {
   const [withdrawIsOpen, setWithdrawIsOpen] = useState(false);
   const [lockData, setLockData] = useState<any | null>(null);
   const [userInfoData, setUserInfoData] = useState<UserInfo | null>(null);
+  const [userMissingPointsData, setUserMissingPointsData] =
+    useState<MissingPointsType | null>(null);
   const [estimatedPoints, setEstimatedPoints] = useState(0);
   const [selectedLockIndex, setSelectedLockIndex] = useState(0);
   const [formattedCountdown, setFormattedCountdown] = useState("");
@@ -113,6 +121,17 @@ export default function LockSamV3() {
     setLoading(false);
   }, [signer, setLoading]);
 
+  const onClaimBoostedPoints = useCallback(async () => {
+    setLoading(true);
+    if (signer) {
+      await claim(MissingPointsVersion.v3, signer);
+      await onGetGeneralInfo();
+      await onGetUserInfo();
+      await onGetUserMissingPoints();
+    }
+    setLoading(false);
+  }, [signer, setLoading]);
+
   const checkCountdown = useCallback(async () => {
     if (userInfoData?.lastClaim === 0) {
       setClaimPeriodAllowed(true);
@@ -174,16 +193,28 @@ export default function LockSamV3() {
     }
   }, [lockData, userInfoData, claimPeriodAllowed]);
 
+  const onGetUserMissingPoints = useCallback(async () => {
+    if (account) {
+      const response = await missingPointsInfos(
+        MissingPointsVersion.v3,
+        account
+      );
+
+      setUserMissingPointsData(response as MissingPointsType);
+    }
+  }, [account]);
+
   const onGetUserInfo = useCallback(async () => {
-    if (signer) {
-      const response = await userInfo(signer);
+    if (account) {
+      const response = await userInfo(account);
       setUserInfoData(response as UserInfo);
     }
-  }, [signer]);
+  }, [account]);
 
   useEffect(() => {
     onGetUserInfo();
-  }, [signer]);
+    onGetUserMissingPoints();
+  }, [signer, account]);
 
   const onGetGeneralInfo = useCallback(async () => {
     const response = await generalInfo();
@@ -237,6 +268,18 @@ export default function LockSamV3() {
                     Points
                   </p>
                 </div>
+                {/* <div className="text-center md:text-start leading-none md:leading-normal">
+                  <p className="text-white/40">Boosted Points to Claim</p>
+                  <p className="text-lg">
+                    {(userMissingPointsData?.claimable || 0).toLocaleString(
+                      "en-us",
+                      {
+                        maximumFractionDigits: 2,
+                      }
+                    )}{" "}
+                    Boosted Points
+                  </p>
+                </div> */}
               </div>
             ) : (
               <ConnectButton />
@@ -281,6 +324,25 @@ export default function LockSamV3() {
                 >
                   CLAIM POINTS
                 </button>
+                {/* <button
+                  disabled={
+                    loading ||
+                    !signer ||
+                    !userMissingPointsData ||
+                    userMissingPointsData?.claimed
+                  }
+                  onClick={onClaimBoostedPoints}
+                  className={`flex w-full justify-center text-sm p-2 self-center mt-1 md:mt-0 ${
+                    loading ||
+                    !signer ||
+                    !userMissingPointsData ||
+                    userMissingPointsData?.claimed
+                      ? "bg-white/5 text-white/5"
+                      : "bg-samurai-red text-white"
+                  } rounded-full hover:enabled:bg-opacity-75`}
+                >
+                  CLAIM BOOSTED POINTS
+                </button> */}
               </div>
             )}
           </div>

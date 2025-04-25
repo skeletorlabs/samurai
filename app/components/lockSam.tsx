@@ -185,15 +185,15 @@ export default function LockSam() {
   }, [inputLock, period]);
 
   const onGetUserInfo = useCallback(async () => {
-    if (signer) {
-      const response = await userInfo(signer);
+    if (account) {
+      const response = await userInfo(account);
       setUserInfoData(response as UserInfo);
     }
-  }, [signer]);
+  }, [account]);
 
   useEffect(() => {
     onGetUserInfo();
-  }, [signer]);
+  }, [account]);
 
   useEffect(() => {
     if (generalLockData && generalLockData?.periods.length > 0) {

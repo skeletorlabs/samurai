@@ -111,12 +111,9 @@ export type UserInfo = {
   samBalance: number;
 };
 
-export async function userInfo(signer: ethers.Signer, account?: string) {
+export async function userInfo(account: string) {
   try {
-    let signerAddress = await signer.getAddress();
-
-    const address = account || signerAddress;
-
+    const address = account;
     const contract = await getContract();
     const userLocks = await contract?.getLockInfos(address);
 
