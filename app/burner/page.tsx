@@ -21,15 +21,11 @@ import {
 import { userInfo as userInfoVesting } from "../contracts_integrations/vesting";
 import LoadingBox from "../components/loadingBox";
 import { IDOs } from "../utils/constants";
+import { WALLETS_TO_BURN_POINTS } from "../utils/constants/burner";
 
 const inter = Inter({
   subsets: ["latin"],
 });
-
-const walletsToBurn = [
-  "0x194856b0d232821a75fd572c40f28905028b5613",
-  "0x69eed0DA450Ce194DCea4317f688315973Dcba31",
-];
 
 export default function Burner() {
   const [userInfoData, setUserInfoData] = useState<UserInfo | null>(null);
@@ -42,7 +38,7 @@ export default function Burner() {
   );
   const [pointsToBurn, setPointsToBurn] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [wallet, setWallet] = useState(walletsToBurn[0]);
+  const [wallet, setWallet] = useState(WALLETS_TO_BURN_POINTS[0]);
   const [isOwner, setIsOwner] = useState(false);
   const [isViewer, setIsViewer] = useState(false);
   const { signer, account } = useContext(StateContext);
@@ -160,7 +156,7 @@ export default function Burner() {
                     id="wallets"
                     onChange={(e) => setWallet(e.target.value)}
                   >
-                    {walletsToBurn.map((wallet) => (
+                    {WALLETS_TO_BURN_POINTS.map((wallet) => (
                       <option key={wallet} value={wallet}>
                         {wallet}
                       </option>

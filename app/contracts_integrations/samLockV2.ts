@@ -7,6 +7,7 @@ import { notificateTx } from "@/app/utils/notificateTx";
 import { POINTS, SAM_ADDRESS, SAM_LOCK_V2_ADDRESS } from "../utils/constants";
 
 import { userInfo as pastUserInfo } from "./samLock";
+import { WALLETS_TO_BURN_POINTS } from "../utils/constants/burner";
 
 const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
 
@@ -136,12 +137,7 @@ export async function userInfo(account: string) {
         formatEther(await contract?.previewClaimablePoints(address, i))
       );
 
-      if (
-        address === "0x194856b0d232821a75fd572c40f28905028b5613" ||
-        address === "0x69eed0DA450Ce194DCea4317f688315973Dcba31"
-      ) {
-        claimablePoints = 0;
-      }
+      if (WALLETS_TO_BURN_POINTS.includes(address)) claimablePoints = 0;
 
       const lock: LockInfo = {
         index: i,
@@ -155,12 +151,7 @@ export async function userInfo(account: string) {
       };
       locks.push(lock);
 
-      if (
-        address === "0x194856b0d232821a75fd572c40f28905028b5613" ||
-        address === "0x69eed0DA450Ce194DCea4317f688315973Dcba31"
-      ) {
-        locks[i].claimedPoints = locks[i].lockedAmount;
-      }
+      if (WALLETS_TO_BURN_POINTS.includes(address)) locks[i].claimedPoints = 0;
     }
 
     let totalLocked: Number = locks.reduce((acc, curr) => {

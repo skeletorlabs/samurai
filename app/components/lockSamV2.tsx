@@ -29,6 +29,7 @@ import {
   MissingPointsType,
   MissingPointsVersion,
 } from "../contracts_integrations/missingPoints";
+import { WALLETS_TO_BURN_POINTS } from "../utils/constants/burner";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -284,66 +285,71 @@ export default function LockSamV2() {
               <ConnectButton />
             )}
 
-            {signer && userInfoData && userInfoData?.locks.length > 0 && (
-              <div className="flex flex-col gap-8">
-                <button
-                  disabled={loading}
-                  onClick={() => {
-                    setWithdrawIsOpen(true);
-                    onGetUserInfo();
-                  }}
-                  className={`flex min-w-[200px] justify-center text-sm p-2 self-center mt-2 md:mt-0 ${
-                    loading
-                      ? "bg-white/10 text-white/10"
-                      : "bg-white/90 text-black"
-                  } rounded-full hover:opacity-75`}
-                >
-                  MANAGE LOCKS
-                </button>
-                <button
-                  disabled={
-                    loading ||
-                    !signer ||
-                    !userInfoData ||
-                    userInfoData?.locks?.length === 0 ||
-                    userInfoData?.availablePoints === 0 ||
-                    claimPeriodAllowed === false
-                  }
-                  onClick={onClaimPoints}
-                  className={`flex w-full justify-center text-sm p-2 self-center mt-1 md:mt-0 ${
-                    loading ||
-                    !signer ||
-                    !userInfoData ||
-                    userInfoData?.locks.length === 0 ||
-                    userInfoData?.availablePoints === 0 ||
-                    claimPeriodAllowed === false
-                      ? "bg-white/5 text-white/5"
-                      : "bg-samurai-red text-white"
-                  } rounded-full hover:enabled:bg-opacity-75`}
-                >
-                  CLAIM POINTS
-                </button>
-                <button
-                  disabled={
-                    loading ||
-                    !signer ||
-                    !userMissingPointsData ||
-                    userMissingPointsData?.claimed
-                  }
-                  onClick={onClaimBoostedPoints}
-                  className={`flex w-full justify-center text-sm p-2 self-center mt-1 md:mt-0 ${
-                    loading ||
-                    !signer ||
-                    !userMissingPointsData ||
-                    userMissingPointsData?.claimed
-                      ? "bg-white/5 text-white/5"
-                      : "bg-samurai-red text-white"
-                  } rounded-full hover:enabled:bg-opacity-75`}
-                >
-                  CLAIM BOOSTED POINTS
-                </button>
-              </div>
-            )}
+            {signer &&
+              account &&
+              userInfoData &&
+              userInfoData?.locks.length > 0 && (
+                <div className="flex flex-col gap-8">
+                  <button
+                    disabled={loading}
+                    onClick={() => {
+                      setWithdrawIsOpen(true);
+                      onGetUserInfo();
+                    }}
+                    className={`flex min-w-[200px] justify-center text-sm p-2 self-center mt-2 md:mt-0 ${
+                      loading
+                        ? "bg-white/10 text-white/10"
+                        : "bg-white/90 text-black"
+                    } rounded-full hover:opacity-75`}
+                  >
+                    MANAGE LOCKS
+                  </button>
+                  <button
+                    disabled={
+                      loading ||
+                      !signer ||
+                      !account ||
+                      !userInfoData ||
+                      userInfoData?.locks?.length === 0 ||
+                      userInfoData?.availablePoints === 0 ||
+                      claimPeriodAllowed === false
+                    }
+                    onClick={onClaimPoints}
+                    className={`flex w-full justify-center text-sm p-2 self-center mt-1 md:mt-0 ${
+                      loading ||
+                      !signer ||
+                      !account ||
+                      !userInfoData ||
+                      userInfoData?.locks.length === 0 ||
+                      userInfoData?.availablePoints === 0 ||
+                      claimPeriodAllowed === false
+                        ? "bg-white/5 text-white/5"
+                        : "bg-samurai-red text-white"
+                    } rounded-full hover:enabled:bg-opacity-75`}
+                  >
+                    CLAIM POINTS
+                  </button>
+                  <button
+                    disabled={
+                      loading ||
+                      !signer ||
+                      !userMissingPointsData ||
+                      userMissingPointsData?.claimed
+                    }
+                    onClick={onClaimBoostedPoints}
+                    className={`flex w-full justify-center text-sm p-2 self-center mt-1 md:mt-0 ${
+                      loading ||
+                      !signer ||
+                      !userMissingPointsData ||
+                      userMissingPointsData?.claimed
+                        ? "bg-white/5 text-white/5"
+                        : "bg-samurai-red text-white"
+                    } rounded-full hover:enabled:bg-opacity-75`}
+                  >
+                    CLAIM BOOSTED POINTS
+                  </button>
+                </div>
+              )}
           </div>
 
           <div className="flex items-center pt-4 sm:pt-8 text-sm leading-[20px] relative">
