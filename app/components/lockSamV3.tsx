@@ -206,7 +206,10 @@ export default function LockSamV3() {
 
   const onGetUserInfo = useCallback(async () => {
     if (account) {
-      const response = await userInfo(account);
+      // const response = await userInfo(account);
+      const response = await userInfo(
+        "0x194856b0d232821a75fd572c40f28905028b5613"
+      );
       setUserInfoData(response as UserInfo);
     }
   }, [account]);

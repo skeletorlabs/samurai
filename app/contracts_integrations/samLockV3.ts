@@ -140,13 +140,6 @@ export async function userInfo(account: string) {
         formatEther(await contract?.previewClaimablePoints(address, i))
       );
 
-      if (
-        address === "0x194856b0d232821a75fd572c40f28905028b5613" ||
-        address === "0x69eed0DA450Ce194DCea4317f688315973Dcba31"
-      ) {
-        claimablePoints = 0;
-      }
-
       const lock: LockInfo = {
         index: i,
         lockedAmount: Number(ethers.formatEther(userLock[0])),
@@ -158,13 +151,6 @@ export async function userInfo(account: string) {
         claimedPoints: Number(formatEther(userLock[5])),
       };
       locks.push(lock);
-
-      if (
-        address === "0x194856b0d232821a75fd572c40f28905028b5613" ||
-        address === "0x69eed0DA450Ce194DCea4317f688315973Dcba31"
-      ) {
-        locks[i].claimedPoints = locks[i].lockedAmount;
-      }
     }
 
     let totalLocked: Number = locks.reduce((acc, curr) => {

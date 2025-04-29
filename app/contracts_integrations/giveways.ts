@@ -1,4 +1,4 @@
-import { ethers, formatEther, Signer } from "ethers";
+import { ethers, formatEther, id, Signer } from "ethers";
 import { GIVEWAYS_ABI } from "./abis";
 import handleError from "@/app/utils/handleErrors";
 import { notificateTx } from "@/app/utils/notificateTx";
@@ -129,6 +129,7 @@ export async function generalInfo() {
 export type ParticipationType = {
   id: number;
   tickets: number;
+  pointsSpent?: number;
 };
 
 export async function userInfo(ids: number[], signer: Signer) {
@@ -318,6 +319,43 @@ export async function setWinners(
       const tx = await contract?.setWinner(id, winners);
       await notificateTx(tx, network);
     }
+  } catch (e) {
+    handleError({ e: e, notificate: true });
+  }
+}
+
+export async function pointsSpentInGiveaways(ids: number[], account: string) {
+  try {
+    const contract = await getContract();
+    const participations: ParticipationType[] = [];
+
+    console.log("ids", ids);
+    console.log("account", account);
+
+    for (let index = 0; index < ids.length; index++) {
+      const data = await generalInfo();
+      const tickets = Number(
+        await contract?.participations(ids[index], account)
+      );
+
+      if (data) {
+        const { giveaways } = data;
+        console.log(
+          id,
+          tickets,
+          giveaways[index].priceInPoints,
+          tickets * giveaways[index].priceInPoints
+        );
+        participations.push({
+          id: ids[index],
+          tickets: tickets,
+          pointsSpent: tickets * giveaways[index].priceInPoints,
+        });
+      }
+    }
+
+    console.log("Participations:", participations);
+    return { participations };
   } catch (e) {
     handleError({ e: e, notificate: true });
   }

@@ -123,7 +123,7 @@ export type UserInfo = {
   lastClaim: number;
 };
 
-export async function userInfo(account: string) {
+export async function userInfo(account: string, consulting?: boolean) {
   try {
     const address = account;
     const contract = await getContract();
@@ -137,7 +137,8 @@ export async function userInfo(account: string) {
         formatEther(await contract?.previewClaimablePoints(address, i))
       );
 
-      if (WALLETS_TO_BURN_POINTS.includes(address)) claimablePoints = 0;
+      if (WALLETS_TO_BURN_POINTS.includes(address) && !consulting)
+        claimablePoints = 0;
 
       const lock: LockInfo = {
         index: i,
@@ -149,9 +150,11 @@ export async function userInfo(account: string) {
         claimablePoints: claimablePoints,
         claimedPoints: Number(formatEther(userLock[5])),
       };
+
       locks.push(lock);
 
-      if (WALLETS_TO_BURN_POINTS.includes(address)) locks[i].claimedPoints = 0;
+      if (WALLETS_TO_BURN_POINTS.includes(address))
+        locks[i].claimedPoints = locks[i].lockedAmount;
     }
 
     let totalLocked: Number = locks.reduce((acc, curr) => {
@@ -162,7 +165,7 @@ export async function userInfo(account: string) {
       return acc + curr.claimedPoints;
     }, 0);
 
-    const availablePoints = locks.reduce((acc, curr) => {
+    let availablePoints = locks.reduce((acc, curr) => {
       return acc + curr.claimablePoints;
     }, 0);
 
