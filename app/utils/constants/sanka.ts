@@ -771,6 +771,14 @@ export const GIVEAWAYS_LIST: Giveaway[] = [
       },
       { svg: discord, href: "https://discord.com/invite/gunbygunz" },
     ],
+    winners: [
+      {
+        address: "0xb3E72703F98A30b22a15bE2cC439cC2E1f9B64Be",
+        tickets: 20,
+        sortedWins: 1,
+        winAmount: 5000,
+      },
+    ],
     disclaimer:
       "*Disclaimer: This prize was paid for and provided by the Samurai Starter team and is not sponsored by Gunzilla or Off The Grid.",
   },
