@@ -334,6 +334,7 @@ export default function LockSamV2() {
                       loading ||
                       !signer ||
                       !userMissingPointsData ||
+                      userMissingPointsData?.claimable === 0 ||
                       userMissingPointsData?.claimed
                     }
                     onClick={onClaimBoostedPoints}
@@ -341,6 +342,7 @@ export default function LockSamV2() {
                       loading ||
                       !signer ||
                       !userMissingPointsData ||
+                      userMissingPointsData?.claimable === 0 ||
                       userMissingPointsData?.claimed
                         ? "bg-white/5 text-white/5"
                         : "bg-samurai-red text-white"
