@@ -94,14 +94,35 @@ export default function Nav() {
           </div>
         )}
 
-        <SSButton
-          isLink
+        <Link
           target="blank"
           href="https://basescan.org/token/0xed1779845520339693CDBffec49a74246E7D671b"
-          mobile
+          className="bg-black flex justify-center gap-3 items-center transition-all z-20 hover:bg-black/60 text-blue-600 text-sm md:text-normal px-3 py-[5px] rounded-full"
         >
-          <span>CA: 0xe...71b</span>
-        </SSButton>
+          <Image
+            src="/chain-logos/BASE.svg"
+            alt=""
+            width={22}
+            height={22}
+            className="bg-white rounded-full p-[1px]"
+          />
+          <span>0xe...71b</span>
+        </Link>
+
+        <Link
+          target="blank"
+          href="https://sonicscan.org/token/0xCC5D9cc0d781d7F41F6809c0E8356C15942b775E"
+          className="bg-black flex justify-center gap-3 items-center transition-all z-20 hover:bg-black/60 text-orange-600 text-sm md:text-normal px-3 py-[5px] rounded-full"
+        >
+          <Image
+            src="/chain-logos/SONIC.png"
+            alt=""
+            width={22}
+            height={22}
+            className="bg-white rounded-full p-[1px]"
+          />
+          <span>0xC...75E</span>
+        </Link>
       </div>
     </div>
   );
