@@ -89,22 +89,11 @@ export default function Tokens() {
                 <span className="font-bold text-white">earn</span>.
               </p>
               <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-7 mt-12">
-                <SSButton
-                  isLink
-                  target="blank"
-                  href="https://aerodrome.finance/swap?from=0x4200000000000000000000000000000000000006&to=0xed1779845520339693CDBffec49a74246E7D671b"
-                  mobile
-                >
+                <SSButton isLink target="blank" href="#" mobile>
                   Buy $SAM on Shadow
                 </SSButton>
-                <SSButton
-                  secondary
-                  isLink
-                  href="https://aerodrome.finance/deposit?token0=0x4200000000000000000000000000000000000006&token1=0xed1779845520339693CDBffec49a74246E7D671b&type=-1"
-                  target="blank"
-                  mobile
-                >
-                  Provide S/SAM on Shadow
+                <SSButton secondary isLink href="#" target="blank" mobile>
+                  Provide S/SAM LP on Shadow
                 </SSButton>
                 <SSButton
                   isLink
