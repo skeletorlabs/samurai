@@ -17,7 +17,7 @@ export default function ConnectButton({ mobile = false }: ConnectButton) {
 
   return (
     <SSButton mobile={mobile} flexSize click={() => open()}>
-      {text}
+      <span className="w-max">{text}</span>
     </SSButton>
   );
 }
