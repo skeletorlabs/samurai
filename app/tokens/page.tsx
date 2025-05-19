@@ -58,12 +58,12 @@ export default function Tokens() {
         <>
           <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-16 pt-10 bg-transparent sm:bg-black/60 2xl:bg-transparent">
             {/* TOP CONTENT */}
-            <div className="relative md:mr-12 xl:max-w-[900px]">
+            <div className="relative md:mr-12 xl:max-w-[1300px]">
               <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
                 <span className="font-bold text-samurai-red">$SAM</span> TOKEN
               </h1>
               <p
-                className={`leading-normal lg:leading-relaxed pb-6 text-xl lg:text-2xl xl:max-w-[900px]  ${inter.className}`}
+                className={`leading-normal lg:leading-relaxed pb-6 text-xl lg:text-2xl  ${inter.className}`}
               >
                 Powering the{" "}
                 <span className="font-bold text-samurai-red">
@@ -72,7 +72,7 @@ export default function Tokens() {
                 ecosystem
               </p>
               <p
-                className={`leading-normal lg:leading-[40px] pb-6 text-lg lg:text-xl xl:max-w-[900px]  ${inter.className}`}
+                className={`leading-normal lg:leading-[40px] pb-6 text-lg lg:text-xl  ${inter.className}`}
               >
                 {">"} Participate in{" "}
                 <span className="font-bold text-white">
@@ -89,6 +89,23 @@ export default function Tokens() {
                 <span className="font-bold text-white">earn</span>.
               </p>
               <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-7 mt-12">
+                <SSButton
+                  isLink
+                  target="blank"
+                  href="https://aerodrome.finance/swap?from=0x4200000000000000000000000000000000000006&to=0xed1779845520339693CDBffec49a74246E7D671b"
+                  mobile
+                >
+                  Buy $SAM on Shadow
+                </SSButton>
+                <SSButton
+                  secondary
+                  isLink
+                  href="https://aerodrome.finance/deposit?token0=0x4200000000000000000000000000000000000006&token1=0xed1779845520339693CDBffec49a74246E7D671b&type=-1"
+                  target="blank"
+                  mobile
+                >
+                  Provide S/SAM on Shadow
+                </SSButton>
                 <SSButton
                   isLink
                   target="blank"
@@ -137,25 +154,23 @@ export default function Tokens() {
             </div>
 
             <div
-              className={`flex flex-row justify-center md:justify-start flex-wrap gap-5 text-lg pt-7 md:pt-4 text-white lg:pr-5 font-light xl:max-w-[1200px] ${inter.className}`}
+              className={`flex flex-row justify-center md:justify-start flex-wrap gap-5 text-lg pt-7 md:pt-4 text-white lg:pr-5 font-light ${inter.className}`}
             >
               <div className="bg-white/10 p-3">
                 <span className="text-yellow-400 font-bold">Total Supply:</span>{" "}
                 130,000,000 $SAM
               </div>
               <div className="bg-white/10 p-3">
-                <span className="text-yellow-400 font-bold">
-                  Token Standard:
-                </span>{" "}
+                <span className="text-yellow-400 font-bold">Standard:</span>{" "}
                 ERC-20
               </div>
               <div className="bg-white/10 p-3">
-                <span className="text-yellow-400 font-bold">Blockchain:</span>{" "}
-                Base
+                <span className="text-yellow-400 font-bold">Blockchains:</span>{" "}
+                Base/Sonic
               </div>
               <div className="bg-white/10 p-3">
                 <span className="text-yellow-400 font-bold">
-                  Token Contract:
+                  Base Contract:
                 </span>{" "}
                 <Link
                   href="https://basescan.org/token/0xed1779845520339693CDBffec49a74246E7D671b"
@@ -163,6 +178,18 @@ export default function Tokens() {
                   className="underline hover:text-samurai-red"
                 >
                   0xe...71b
+                </Link>
+              </div>
+              <div className="bg-white/10 p-3">
+                <span className="text-yellow-400 font-bold">
+                  Sonic Contract:
+                </span>{" "}
+                <Link
+                  href="https://sonicscan.org/token/0xCC5D9cc0d781d7F41F6809c0E8356C15942b775E"
+                  target="blank"
+                  className="underline hover:text-samurai-red"
+                >
+                  0xC...75E
                 </Link>
               </div>
             </div>
@@ -346,7 +373,7 @@ export default function Tokens() {
       </div>
 
       {/* LP STAKING */}
-      <div
+      {/* <div
         id="staking"
         className="flex flex-col pt-10 md:pt-20 pb-10  w-full bg-white/10 md:bg-white/10 border-t border-samurai-red/50 border-dotted relative"
       >
@@ -404,7 +431,7 @@ export default function Tokens() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
