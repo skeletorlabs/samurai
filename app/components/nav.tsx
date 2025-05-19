@@ -84,7 +84,7 @@ export default function Nav() {
 
         {/* <NavDropdown items={buyItems} title="Buy" /> */}
 
-        <div className="flex items-center w-full bg-black rounded-lg h-10">
+        <div className="flex items-center w-full bg-black rounded-lg h-10 border border-neutral-500">
           <Link
             target="blank"
             href="https://basescan.org/token/0xed1779845520339693CDBffec49a74246E7D671b"
@@ -99,12 +99,12 @@ export default function Nav() {
             />
             <span>0xe...71b</span>
           </Link>
-          <span className="h-full w-[2px] bg-white/15" />
+          <span className="h-full w-[1px] bg-neutral-500/50" />
 
           <Link
             target="blank"
             href="https://sonicscan.org/token/0xCC5D9cc0d781d7F41F6809c0E8356C15942b775E"
-            className="bg-black w-[120px] h-10 flex justify-center gap-3 items-center transition-all z-20 hover:bg-orange-400 text-orange-300 hover:text-orange-100 text-sm md:text-normal px-3 py-[5px] rounded-r-lg"
+            className="bg-transparent w-[120px] h-10 flex justify-center gap-3 items-center transition-all z-20 hover:bg-orange-400 text-orange-300 hover:text-orange-100 text-sm md:text-normal px-3 py-[5px] rounded-r-lg"
           >
             <Image
               src="/chain-logos/SONIC.png"
