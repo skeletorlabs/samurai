@@ -344,12 +344,12 @@ export default function Ido() {
                     <div className="flex items-center gap-2 bg-black/20 px-2 pl-3 py-1 rounded-full text-[14px] border border-white/20 w-max">
                       <span className="text-sm">Project Tokens</span>
                       <Image
-                        src={ido!.networkImageSrc || ""}
-                        alt={ido!.tokenNetwork.name || ""}
+                        src={ido?.networkImageSrc || ""}
+                        alt={ido?.tokenNetwork.name || ""}
                         width={22}
                         height={22}
                         className={`p-[1px] ${
-                          ido!.tokenNetwork.name === "BASE"
+                          ido?.tokenNetwork.name === "BASE"
                             ? "bg-white/80"
                             : "bg-black"
                         } rounded-full`}
