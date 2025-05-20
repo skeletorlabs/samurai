@@ -53,6 +53,7 @@ import {
   estatex,
   grizzy,
   samurai,
+  ai_telegraph,
 } from "@/public/IDOs/svgs";
 import {
   PARTICIPATOR_ABI,
@@ -161,75 +162,78 @@ export const INCOMING_IDOs: INCOMING[] = [
 ];
 
 export const IDOs: IDO_v3[] = [
-  // {
-  //   id: "samuraitest",
-  //   url: "launchpad-v3/samuraitest",
-  //   logo: samurai,
-  //   idoImageSrc: "/ido-sample.svg",
-  //   acceptedTokenSymbol: "USDC",
-  //   tokenNetwork: "BERACHAIN",
-  //   crowdsaleNetwork: "BASE",
-  //   networkImageSrc: "/chain-logos/BERACHAIN.png",
-  //   projectName: "SamuraiTest",
-  //   projectListDescription:
-  //     "A Berachain-native launchpad with five IDOs upcoming in March and April. Secure your launchpad tier by picking up a bag of $GRIZZY.",
-  //   projectDescription:
-  //     "We're taking our first strides into one of the most promising new DeFi-centric chains in crypto, by partnering with GrizzyFi: a brand new launchpad and project accelerator with backing from the Berachain Foundation. The $GRIZZY token is set to TGE just two days after our public round sale.",
-  //   projectTokenSymbol: "$BERASHIT",
-  //   projectBigDescription: `
-  //   <div style="display: flex; flex-direction: column; gap: 15px;">
-  //     <p>GrizzyFi will be one of the very first chain-exclusive launchpads to plant their flag on Berachain. Their mission is to “incubate the best projects on Berachain and give early price access to investors."</p>
-  //     <p>Already they've managed to secure support from the Berachain Foundation, gaining official recognition for everything they've been building on the chain and testnet. Along the way, they've also expanded their network to include more than 20 other Berachain-native tech and marketing partners.</p>
-  //     <p><b style="color: #FF284C">Platform Features</b><br />
-  //     In addition to participating in sales on the core launchpad, GrizzyFi users will also be able to benefit from DAO membership, platform revenue share features, a novel insurance protocol, and - in the near future - Berachain AI agent token raises (currently in beta testing).</p>
-  //     <p>Meanwhile, partner projects will gain access to a lineup of DAO and DeFi growth tools; GrizzyFi aims to be not just a launchpad, but a full-service incubator and growth engine for new projects launching on Berachain. These features include staking pools for IDO partner tokens and plug-and-play tools for community growth.</p>
-  //     <p><b style="color: #FF284C">IDOs and Launchpad Tiers</b><br />
-  //     Already GrizzyFi has three IDOs locked in for March and a further two lined up for April. These include a Berachain-native AI Agent platform, Berachain DEX, and a Web3 casino project. Each of these projects will launch with modest initial market caps below $500k!</p>
-  //     <p>$GRIZZY is the token powering the GrizzyFi platform, used for staking, gaining DAO membership, participating in revenue share features, and (of course) securing your launchpad tier. Here's a breakdown of GrizzyFi's three-tier system:
-  //     <br />
-  //     <b style="color: #FF284C">• Brown Tier:</b> 2,500 $GRIZZY required. ($325 at launch price)<br />
-  //     <b style="color: #FF284C">• Polar Tier:</b> 8,500 $GRIZZY required. ($1,105 at launch price)<br />
-  //     <b style="color: #FF284C">• Grizzy Tier:</b> 20,000 $GRIZZY required. ($2,600 at launch price)<br />
-  //     </p>
-  //     <p>One important thing to keep in mind is that tokens locked in vesting will also contribute to your tier level, provided that you stake your entire first unlock.</p>
-  //   </div>
-  // `,
-  //   price: 0.13,
-  //   tge: 50,
-  //   allocation: 25_000,
-  //   date: 1741089600,
-  //   fcfs: 1741132800,
-  //   end: 1741176000,
-  //   investmentRound: "Public",
-  //   fdv: 1_300_000,
-  //   exchangeListingPrice: 0.13,
-  //   marketCapAtTGE: 308_750,
-  //   socials: [
-  //     {
-  //       svg: globe,
-  //       href: "https://grizzyfi.com",
-  //     },
-  //     {
-  //       svg: twitterX,
-  //       href: "https://x.com/grizzyfi",
-  //     },
-  //     {
-  //       svg: discord,
-  //       href: "https://discord.gg/grizzyfi",
-  //     },
-  //   ],
-  //   contract: "0x6d05a9e6f0Ab89703Af13c4b38725A9D1f3AbF9f",
-  //   abi: LATEST_PARTICIPATOR_TOKENS_ABI,
+  {
+    id: "ai-telegraph",
+    url: "launchpad-v3/ai-telegraph",
+    logo: ai_telegraph,
+    idoImageSrc: "/IDOs/ai-telegraph.png",
+    acceptedTokenSymbol: "USDC",
+    tokenNetwork: bnb,
+    crowdsaleNetwork: "BASE",
+    networkImageSrc: "/chain-logos/BSC.png",
+    projectName: "AI Telegraph",
+    projectListDescription:
+      "An AI agent-powered platform combining market analysis, content curation, and DeFi investment solutions.",
+    projectDescription:
+      "AI Telegraph is a Web3 smart-investment platform powered by a lineup of proprietary AI agents. It's a business in two parts: an AI-powered crypto news and analysis outlet, plus a set of AI-driven DeFi solutions. Users can access curated content and analysis streams to help stay on top of the markets, and invest in AI-curated index funds to effortlessly optimize their portfolios.",
+    projectTokenSymbol: "$AITG",
+    projectBigDescription: `
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <p>AI Telegraph is a Web3 news and investment platform powered by a lineup of proprietary AI agents. Their mission is to streamline crypto investment for the average Web3 user, leveraging AI to make keeping on top of the markets, and on top of your portfolio, as effortless as possible.</p>
+      <p><b style="color: #FF284C"><u>AI Telegraph Index Funds</u></b></p>
+      <p>At the core of AI Telegraph are their AI-curated index funds. These are essentially baskets of tokens, created and managed by an AI agent. Just like with a traditional index fund, the value and performance of the underlying assets are represented in the fund's combined price.</p>
+      <p>Users of the platform can then buy and sell this unified index token to trade in the underlying assets, without the hassle of managing a complex portfolio. Whenever a user buys into a fund, the smart contract automatically executes purchases for all of the underlying assets, while minting index tokens to represent the new holder's share in the fund. Likewise, when the user exits their position — which can be done at any time for a 2.5% fee — their index tokens are burned and underlying assets offloaded.</p>
+      <p>These AI-powered Web3 index funds can contain anything from top-10 ranked tokens, to nano-caps with FDVs of just a few million. The AI agent which curates the funds draws from a range of price, on-chain, and social media data when building them. Some are themed by sector, while others are curated based on soft metrics such as Twitter KOL hype.</p>
+      <p><b style="color: #FF284C"><u>Web3 AI Media Hub</u></b></p>
+      <p>The other side of AI Telegraph's business model utilizes its market analysis features for an entirely different purpose: providing curated Web3 news content through a dedicated, AI-driven media outlet. This is a new, automated approach to Web3 content: think of it like a competitor to CoinDesk and CoinTelegraph, but powered entirely by AI.</p>
+      <p>AI Telegraph's agents analyse all of the unfolding news in crypto — from both traditional and social media — and presents a digest of the most significant stories and data of the day. These updates are delivered via the AI Telegraph site, socials, and also a 24/7 rolling news stream delivering breaking news in real-time.</p>
+      <p><b style="color: #FF284C"><u>The $AITG Token</u></b></p>
+      <p>$AITG is the native token of AI Telegraph, which will be included in all index funds offered on the platform, meaning the token itself benefits from the growth of the combined TVL in the funds. It will also feature a range of other utilities:</p>
+      <p>
+        •  Fees: $AITG is used for fee payments on both ends of the business: withdrawal fees from the index funds, and ad/promo fees on the media outlet.<br />
+        •  Staking.<br />
+        •  DAO voting rights.
+      </p>
 
-  //   register: true,
-  //   vestingDescription: "50% at TGE, 50% after one month",
-  //   vesting: "0xB8D0E922F32CE5F662e5701B3b31ba7c0EC3dDAc",
-  //   vestingChain: berachain,
-  //   vestingABI: VESTING_ABI_V3,
-  //   type: "v3",
-  //   linkedWallet: false,
-  //   ether: false,
-  // },
+      <p>The fees collected in $AITG will be used to create a deflationary model for the token, with 70% of all fees being outright burned. The remainder will split equally between liquidity and the treasury.</p>
+    </div>
+  `,
+    price: 0.002,
+    tge: 50,
+    allocation: 30_000,
+    date: 1748001600,
+    fcfs: 1748044800,
+    end: 1748131200,
+    investmentRound: "Private Round",
+    fdv: 2_500_000,
+    exchangeListingPrice: 0.0025,
+    marketCapAtTGE: 881_250,
+    socials: [
+      {
+        svg: globe,
+        href: "https://www.aitelegraph.xyz/",
+      },
+      {
+        svg: twitterX,
+        href: "https://x.com/AITG_Terminal",
+      },
+      {
+        svg: telegram,
+        href: "https://t.me/AITelegraphAnn",
+      },
+    ],
+    contract: "0x88aFf59AD311c2Ed375F28Db7a44E451a16ecD18",
+    abi: LATEST_PARTICIPATOR_TOKENS_ABI,
+
+    register: false,
+    vestingDescription: "50% at TGE, 50% after one month",
+    // vesting: "0x8C8Fa0152eFF48700c9e10b64aCa1B81f259F54B",
+    // vestingChain: base,
+    // vestingABI: VESTING_ABI_V2,
+    type: "v3",
+    linkedWallet: false,
+    ether: false,
+  },
   {
     id: "grizzy-private",
     url: "launchpad-v3/grizzy-private",
@@ -747,7 +751,7 @@ export const IDOs: IDO_v3[] = [
     projectBigDescription: `
     <div style="display: flex; flex-direction: column; gap: 15px;">
       <p>The team at DYOR Labs is raising the bar for on-chain user experience, on a mission to replace all of the many outdated, clunky, and expensive platforms which currently have a stranglehold on Web3.</p>
-      <p>To do this, they're building an integrated 'Web3 command centre' which brings all of the best aspects of centralized platforms (live customer support, advanced charting/analytics, limit orders, etc.) on chain. Not only that, they're also developing a whole suite of features geared towards developers, allowing them to launch, manage, and market their tokens all from within one unified dashboard.</p>
+      <p>To do this, they're building an integrated 'Web3 command centre' which brings all of the best aspects of centralized platforms (live customer support, advanced charting/analytics, limit orders, etc.) on chain. Not only that, they're also developing a whole suite of features geared towards developers, allowing them to launch, manage, and market their tokens all from within one unified dashboard.</p>
       <p>For traders, this means access to advanced charting and TA tools, with multi-chart layouts and custom presets. The DYOR DEX and DEX aggregator make use of enhanced features like limit orders and anti-honeypot scam prevention, all designed to make the on-chain trading experience as intuitive and secure as on the very best CEXs. All of this while executing cheaper and faster trades than UniSwap and 1inch.</p>
       <p>For developers, DYOR offers a unified dashboard for every aspect of token creation, liquidity provision, project operations, and community growth. These include enterprise-grade services such as audits, market making, and KOL matchmaking built into the platform, as well as a directory of carefully vetted third-party service providers for everything from copywriting to legal services.</p>
       <p>The 'public beta version of the platform' is already live, with more than 37,000 traders participating so far. Also on board is a veritable army of KOLs who have been brought on board to promote DYOR to the masses.</p>
@@ -924,7 +928,7 @@ export const IDO_LIST: IDO[] = [
       <div style="display: flex; flex-direction: column; gap: 15px;">
         <p>Next up on the Samurai Starter launchpad is a dual node and token offering in an exciting new Web3 rewards ecosystem, built by the fastest-growing US software company of 2023: Mode Mobile. EARN'M is their MobileFi rewards infrastructure which turns smartphones into EarnPhones. With it, users are able to earn hundreds of dollars a month just by completing everyday activities on their phone: listening to music, watching live streams, trading crypto, and more.</p>
 
-        <p>Meanwhile, companies in both Web2 and Web3 can incentivize engagement by integrating EARN'M rewards into their platform. Already EARN'M has secured a client base which includes some of the very top names in crypto: Binance, Coinbase, Crypto.com and RobinHood. Not to mention support from some top KOLs including PAID Network's Kyle Chasse. Now they're taking this rewards ecosystem on-chain.</p>
+        <p>Meanwhile, companies in both Web2 and Web3 can incentivize engagement by integrating EARN'M rewards into their platform. Already EARN'M has secured a client base which includes some of the very top names in crypto: Binance, Coinbase, Crypto.com and RobinHood. Not to mention support from some top KOLs including PAID Network's Kyle Chasse. Now they're taking this rewards ecosystem on-chain.</p>
 
         <p>It's the EARN'M SmartNodes which provide the infrastructure for the rewards platform, essentially functioning as a DePIN layer. A crucial part of the nodes' functionality is bridging the gap between Web2 engagement and Web3 rewards by first validating off-chain activity, then subsequently processing the issuance of on-chain rewards. In return, node buyers enjoy:</p>
         <p>
