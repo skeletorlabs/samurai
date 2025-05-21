@@ -162,78 +162,78 @@ export const INCOMING_IDOs: INCOMING[] = [
 ];
 
 export const IDOs: IDO_v3[] = [
-  {
-    id: "ai-telegraph",
-    url: "launchpad-v3/ai-telegraph",
-    logo: ai_telegraph,
-    idoImageSrc: "/IDOs/ai-telegraph.png",
-    acceptedTokenSymbol: "USDC",
-    tokenNetwork: bnb,
-    crowdsaleNetwork: "BASE",
-    networkImageSrc: "/chain-logos/BSC.png",
-    projectName: "AI Telegraph",
-    projectListDescription:
-      "An AI agent-powered platform combining market analysis, content curation, and DeFi investment solutions.",
-    projectDescription:
-      "AI Telegraph is a Web3 smart-investment platform powered by a lineup of proprietary AI agents. It's a business in two parts: an AI-powered crypto news and analysis outlet, plus a set of AI-driven DeFi solutions. Users can access curated content and analysis streams to help stay on top of the markets, and invest in AI-curated index funds to effortlessly optimize their portfolios.",
-    projectTokenSymbol: "$AITG",
-    projectBigDescription: `
-    <div style="display: flex; flex-direction: column; gap: 15px;">
-      <p>AI Telegraph is a Web3 news and investment platform powered by a lineup of proprietary AI agents. Their mission is to streamline crypto investment for the average Web3 user, leveraging AI to make keeping on top of the markets, and on top of your portfolio, as effortless as possible.</p>
-      <p><b style="color: #FF284C"><u>AI Telegraph Index Funds</u></b></p>
-      <p>At the core of AI Telegraph are their AI-curated index funds. These are essentially baskets of tokens, created and managed by an AI agent. Just like with a traditional index fund, the value and performance of the underlying assets are represented in the fund's combined price.</p>
-      <p>Users of the platform can then buy and sell this unified index token to trade in the underlying assets, without the hassle of managing a complex portfolio. Whenever a user buys into a fund, the smart contract automatically executes purchases for all of the underlying assets, while minting index tokens to represent the new holder's share in the fund. Likewise, when the user exits their position — which can be done at any time for a 2.5% fee — their index tokens are burned and underlying assets offloaded.</p>
-      <p>These AI-powered Web3 index funds can contain anything from top-10 ranked tokens, to nano-caps with FDVs of just a few million. The AI agent which curates the funds draws from a range of price, on-chain, and social media data when building them. Some are themed by sector, while others are curated based on soft metrics such as Twitter KOL hype.</p>
-      <p><b style="color: #FF284C"><u>Web3 AI Media Hub</u></b></p>
-      <p>The other side of AI Telegraph's business model utilizes its market analysis features for an entirely different purpose: providing curated Web3 news content through a dedicated, AI-driven media outlet. This is a new, automated approach to Web3 content: think of it like a competitor to CoinDesk and CoinTelegraph, but powered entirely by AI.</p>
-      <p>AI Telegraph's agents analyse all of the unfolding news in crypto — from both traditional and social media — and presents a digest of the most significant stories and data of the day. These updates are delivered via the AI Telegraph site, socials, and also a 24/7 rolling news stream delivering breaking news in real-time.</p>
-      <p><b style="color: #FF284C"><u>The $AITG Token</u></b></p>
-      <p>$AITG is the native token of AI Telegraph, which will be included in all index funds offered on the platform, meaning the token itself benefits from the growth of the combined TVL in the funds. It will also feature a range of other utilities:</p>
-      <p>
-        •  Fees: $AITG is used for fee payments on both ends of the business: withdrawal fees from the index funds, and ad/promo fees on the media outlet.<br />
-        •  Staking.<br />
-        •  DAO voting rights.
-      </p>
+  // {
+  //   id: "ai-telegraph",
+  //   url: "launchpad-v3/ai-telegraph",
+  //   logo: ai_telegraph,
+  //   idoImageSrc: "/IDOs/ai-telegraph.png",
+  //   acceptedTokenSymbol: "USDC",
+  //   tokenNetwork: bnb,
+  //   crowdsaleNetwork: "BASE",
+  //   networkImageSrc: "/chain-logos/BSC.png",
+  //   projectName: "AI Telegraph",
+  //   projectListDescription:
+  //     "An AI agent-powered platform combining market analysis, content curation, and DeFi investment solutions.",
+  //   projectDescription:
+  //     "AI Telegraph is a Web3 smart-investment platform powered by a lineup of proprietary AI agents. It's a business in two parts: an AI-powered crypto news and analysis outlet, plus a set of AI-driven DeFi solutions. Users can access curated content and analysis streams to help stay on top of the markets, and invest in AI-curated index funds to effortlessly optimize their portfolios.",
+  //   projectTokenSymbol: "$AITG",
+  //   projectBigDescription: `
+  //   <div style="display: flex; flex-direction: column; gap: 15px;">
+  //     <p>AI Telegraph is a Web3 news and investment platform powered by a lineup of proprietary AI agents. Their mission is to streamline crypto investment for the average Web3 user, leveraging AI to make keeping on top of the markets, and on top of your portfolio, as effortless as possible.</p>
+  //     <p><b style="color: #FF284C"><u>AI Telegraph Index Funds</u></b></p>
+  //     <p>At the core of AI Telegraph are their AI-curated index funds. These are essentially baskets of tokens, created and managed by an AI agent. Just like with a traditional index fund, the value and performance of the underlying assets are represented in the fund's combined price.</p>
+  //     <p>Users of the platform can then buy and sell this unified index token to trade in the underlying assets, without the hassle of managing a complex portfolio. Whenever a user buys into a fund, the smart contract automatically executes purchases for all of the underlying assets, while minting index tokens to represent the new holder's share in the fund. Likewise, when the user exits their position — which can be done at any time for a 2.5% fee — their index tokens are burned and underlying assets offloaded.</p>
+  //     <p>These AI-powered Web3 index funds can contain anything from top-10 ranked tokens, to nano-caps with FDVs of just a few million. The AI agent which curates the funds draws from a range of price, on-chain, and social media data when building them. Some are themed by sector, while others are curated based on soft metrics such as Twitter KOL hype.</p>
+  //     <p><b style="color: #FF284C"><u>Web3 AI Media Hub</u></b></p>
+  //     <p>The other side of AI Telegraph's business model utilizes its market analysis features for an entirely different purpose: providing curated Web3 news content through a dedicated, AI-driven media outlet. This is a new, automated approach to Web3 content: think of it like a competitor to CoinDesk and CoinTelegraph, but powered entirely by AI.</p>
+  //     <p>AI Telegraph's agents analyse all of the unfolding news in crypto — from both traditional and social media — and presents a digest of the most significant stories and data of the day. These updates are delivered via the AI Telegraph site, socials, and also a 24/7 rolling news stream delivering breaking news in real-time.</p>
+  //     <p><b style="color: #FF284C"><u>The $AITG Token</u></b></p>
+  //     <p>$AITG is the native token of AI Telegraph, which will be included in all index funds offered on the platform, meaning the token itself benefits from the growth of the combined TVL in the funds. It will also feature a range of other utilities:</p>
+  //     <p>
+  //       •  Fees: $AITG is used for fee payments on both ends of the business: withdrawal fees from the index funds, and ad/promo fees on the media outlet.<br />
+  //       •  Staking.<br />
+  //       •  DAO voting rights.
+  //     </p>
 
-      <p>The fees collected in $AITG will be used to create a deflationary model for the token, with 70% of all fees being outright burned. The remainder will split equally between liquidity and the treasury.</p>
-    </div>
-  `,
-    price: 0.002,
-    tge: 50,
-    allocation: 30_000,
-    date: 1748001600,
-    fcfs: 1748044800,
-    end: 1748131200,
-    investmentRound: "Private Round",
-    fdv: 2_500_000,
-    exchangeListingPrice: 0.0025,
-    marketCapAtTGE: 881_250,
-    socials: [
-      {
-        svg: globe,
-        href: "https://www.aitelegraph.xyz/",
-      },
-      {
-        svg: twitterX,
-        href: "https://x.com/AITG_Terminal",
-      },
-      {
-        svg: telegram,
-        href: "https://t.me/AITelegraphAnn",
-      },
-    ],
-    contract: "0x88aFf59AD311c2Ed375F28Db7a44E451a16ecD18",
-    abi: LATEST_PARTICIPATOR_TOKENS_ABI,
+  //     <p>The fees collected in $AITG will be used to create a deflationary model for the token, with 70% of all fees being outright burned. The remainder will split equally between liquidity and the treasury.</p>
+  //   </div>
+  // `,
+  //   price: 0.002,
+  //   tge: 50,
+  //   allocation: 30_000,
+  //   date: 1748001600,
+  //   fcfs: 1748044800,
+  //   end: 1748131200,
+  //   investmentRound: "Private Round",
+  //   fdv: 2_500_000,
+  //   exchangeListingPrice: 0.0025,
+  //   marketCapAtTGE: 881_250,
+  //   socials: [
+  //     {
+  //       svg: globe,
+  //       href: "https://www.aitelegraph.xyz/",
+  //     },
+  //     {
+  //       svg: twitterX,
+  //       href: "https://x.com/AITG_Terminal",
+  //     },
+  //     {
+  //       svg: telegram,
+  //       href: "https://t.me/AITelegraphAnn",
+  //     },
+  //   ],
+  //   contract: "0x88aFf59AD311c2Ed375F28Db7a44E451a16ecD18",
+  //   abi: LATEST_PARTICIPATOR_TOKENS_ABI,
 
-    register: false,
-    vestingDescription: "50% at TGE, 50% after one month",
-    // vesting: "0x8C8Fa0152eFF48700c9e10b64aCa1B81f259F54B",
-    // vestingChain: base,
-    // vestingABI: VESTING_ABI_V2,
-    type: "v3",
-    linkedWallet: false,
-    ether: false,
-  },
+  //   register: false,
+  //   vestingDescription: "50% at TGE, 50% after one month",
+  //   // vesting: "0x8C8Fa0152eFF48700c9e10b64aCa1B81f259F54B",
+  //   // vestingChain: base,
+  //   // vestingABI: VESTING_ABI_V2,
+  //   type: "v3",
+  //   linkedWallet: false,
+  //   ether: false,
+  // },
   {
     id: "grizzy-private",
     url: "launchpad-v3/grizzy-private",
