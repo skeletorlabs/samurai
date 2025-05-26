@@ -25,6 +25,8 @@ import {
   dashboard_menu,
   ventures_menu,
   nft_menu,
+  dexscreenerBase,
+  dexscreenerSonic,
 } from "@/app/utils/svgs";
 import { Page } from "./enums";
 import {
@@ -1937,11 +1939,11 @@ export const SOCIALS = [
     href: "https://www.linkedin.com/company/samurai-starter/",
     class: "scale-50",
   },
-  {
-    svg: coinmarketcap,
-    href: "#",
-    class: "",
-  },
+  // {
+  //   svg: coinmarketcap,
+  //   href: "#",
+  //   class: "",
+  // },
   {
     svg: coingecko,
     href: "https://www.coingecko.com/en/coins/samurai-starter",
@@ -1953,8 +1955,13 @@ export const SOCIALS = [
     class: "",
   },
   {
-    svg: dexscreener,
+    svg: dexscreenerBase,
     href: "https://dexscreener.com/base/0x598299fb3f3829f7ba08662948706cdff7ec2350",
+    class: "",
+  },
+  {
+    svg: dexscreenerSonic,
+    href: "https://dexscreener.com/sonic/0x8d4e0422c15e848254fc8a4f9502d1e10fe2ee83",
     class: "",
   },
 ];
