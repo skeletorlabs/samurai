@@ -88,7 +88,7 @@ export default function Tokens() {
                 <p
                   className={`text-lg lg:text-xl font-bold ${inter.className}`}
                 >
-                  $SAM on Sonic Network
+                  $SAM on Sonic
                 </p>
                 <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-7">
                   <SSButton
@@ -123,7 +123,7 @@ export default function Tokens() {
                 <p
                   className={`text-lg lg:text-xl font-bold ${inter.className}`}
                 >
-                  $SAM on Base Network
+                  $SAM on Base
                 </p>
                 <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-7">
                   <SSButton
