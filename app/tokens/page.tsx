@@ -108,15 +108,6 @@ export default function Tokens() {
                   >
                     Provide S/SAM LP on Shadow
                   </SSButton>
-                  <SSButton
-                    isLink
-                    target="blank"
-                    href="https://stargate.finance/bridge?srcChain=base&srcToken=0xed1779845520339693CDBffec49a74246E7D671b&dstChain=sonic&dstToken=0xCC5D9cc0d781d7F41F6809c0E8356C15942b775E"
-                    mobile
-                    isLinkFocus
-                  >
-                    Bridge $SAM from Base to Sonic
-                  </SSButton>
                 </div>
               </div>
               <div className="flex flex-col gap-5 mt-12">
@@ -142,6 +133,24 @@ export default function Tokens() {
                     mobile
                   >
                     Provide vAMM-WETH/SAM on Aerodrome
+                  </SSButton>
+                </div>
+              </div>
+              <div className="flex flex-col gap-5 mt-12">
+                <p
+                  className={`text-lg lg:text-xl font-bold ${inter.className}`}
+                >
+                  Bridge $SAM
+                </p>
+                <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-7">
+                  <SSButton
+                    isLink
+                    target="blank"
+                    href="https://stargate.finance/bridge?srcChain=base&srcToken=0xed1779845520339693CDBffec49a74246E7D671b&dstChain=sonic&dstToken=0xCC5D9cc0d781d7F41F6809c0E8356C15942b775E"
+                    mobile
+                    isLinkFocus
+                  >
+                    Bridge via Stargate Finance
                   </SSButton>
                 </div>
               </div>
