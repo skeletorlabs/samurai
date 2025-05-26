@@ -12,6 +12,7 @@ interface SSButton {
   secondary?: boolean;
   buttonType?: "button" | "submit" | "reset";
   mobile?: boolean;
+  isLinkFocus?: boolean;
 }
 export default function SSButton({
   children,
@@ -24,6 +25,7 @@ export default function SSButton({
   secondary = false,
   buttonType = "button",
   mobile = false,
+  isLinkFocus = false,
 }: SSButton) {
   return isLink ? (
     <Link
@@ -36,6 +38,8 @@ export default function SSButton({
         ${
           secondary
             ? "hover:bg-yellow-300 hover:text-white hover:border-yellow-300  border-yellow-300 text-yellow-300"
+            : isLinkFocus
+            ? "bg-samurai-red text-white hover:opacity-80 border-samurai-red"
             : "hover:bg-samurai-red hover:text-white hover:border-samurai-red border-samurai-red text-samurai-red"
         }
         ${

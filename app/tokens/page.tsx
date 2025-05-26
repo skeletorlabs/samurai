@@ -54,7 +54,7 @@ export default function Tokens() {
         <>
           <div className="flex flex-row justify-between items-center px-6 lg:px-8 xl:px-16 pt-10 bg-transparent sm:bg-black/60 2xl:bg-transparent">
             {/* TOP CONTENT */}
-            <div className="relative md:mr-12 xl:max-w-[1300px]">
+            <div className="relative md:mr-12">
               <h1 className="text-[48px] sm:text-[58px] lg:text-[90px] font-black leading-[58px] sm:leading-[68px] lg:leading-[98px] text-white">
                 <span className="font-bold text-samurai-red">$SAM</span> TOKEN
               </h1>
@@ -84,30 +84,66 @@ export default function Tokens() {
                 {">"} Participate in Samurai Sanka and{" "}
                 <span className="font-bold text-white">earn</span>.
               </p>
-              <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-7 mt-12">
-                <SSButton isLink target="blank" href="#" mobile>
-                  Buy $SAM on Shadow
-                </SSButton>
-                <SSButton secondary isLink href="#" target="blank" mobile>
-                  Provide S/SAM LP on Shadow
-                </SSButton>
-                <SSButton
-                  isLink
-                  target="blank"
-                  href="https://aerodrome.finance/swap?from=0x4200000000000000000000000000000000000006&to=0xed1779845520339693CDBffec49a74246E7D671b"
-                  mobile
+              <div className="flex flex-col gap-5 mt-12">
+                <p
+                  className={`text-lg lg:text-xl font-bold ${inter.className}`}
                 >
-                  Buy $SAM on Aerodrome
-                </SSButton>
-                <SSButton
-                  secondary
-                  isLink
-                  href="https://aerodrome.finance/deposit?token0=0x4200000000000000000000000000000000000006&token1=0xed1779845520339693CDBffec49a74246E7D671b&type=-1"
-                  target="blank"
-                  mobile
+                  $SAM on Sonic Network
+                </p>
+                <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-7">
+                  <SSButton
+                    isLink
+                    target="blank"
+                    href="https://www.shadow.so/trade?inputCurrency=0x0000000000000000000000000000000000000000&outputCurrency=0xCC5D9cc0d781d7F41F6809c0E8356C15942b775E"
+                    mobile
+                  >
+                    Buy $SAM on Shadow
+                  </SSButton>
+                  <SSButton
+                    secondary
+                    isLink
+                    href="https://www.shadow.so/liquidity/0x8d4e0422c15e848254fc8a4f9502d1e10fe2ee83"
+                    target="blank"
+                    mobile
+                  >
+                    Provide S/SAM LP on Shadow
+                  </SSButton>
+                  <SSButton
+                    isLink
+                    target="blank"
+                    href="https://stargate.finance/bridge?srcChain=base&srcToken=0xed1779845520339693CDBffec49a74246E7D671b&dstChain=sonic&dstToken=0xCC5D9cc0d781d7F41F6809c0E8356C15942b775E"
+                    mobile
+                    isLinkFocus
+                  >
+                    Bridge $SAM from Base to Sonic
+                  </SSButton>
+                </div>
+              </div>
+              <div className="flex flex-col gap-5 mt-12">
+                <p
+                  className={`text-lg lg:text-xl font-bold ${inter.className}`}
                 >
-                  Provide vAMM-WETH/SAM on Aerodrome
-                </SSButton>
+                  $SAM on Base Network
+                </p>
+                <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-7">
+                  <SSButton
+                    isLink
+                    target="blank"
+                    href="https://aerodrome.finance/swap?from=0x4200000000000000000000000000000000000006&to=0xed1779845520339693CDBffec49a74246E7D671b"
+                    mobile
+                  >
+                    Buy $SAM on Aerodrome
+                  </SSButton>
+                  <SSButton
+                    secondary
+                    isLink
+                    href="https://aerodrome.finance/deposit?token0=0x4200000000000000000000000000000000000006&token1=0xed1779845520339693CDBffec49a74246E7D671b&type=-1"
+                    target="blank"
+                    mobile
+                  >
+                    Provide vAMM-WETH/SAM on Aerodrome
+                  </SSButton>
+                </div>
               </div>
             </div>
           </div>
