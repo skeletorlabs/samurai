@@ -84,7 +84,7 @@ export default function Tokens() {
                 {">"} Participate in Samurai Sanka and{" "}
                 <span className="font-bold text-white">earn</span>.
               </p>
-              <div className="flex flex-col gap-5 mt-12">
+              <div className="flex flex-col gap-2 mt-10">
                 <p
                   className={`text-lg lg:text-xl font-bold ${inter.className}`}
                 >
@@ -110,7 +110,7 @@ export default function Tokens() {
                   </SSButton>
                 </div>
               </div>
-              <div className="flex flex-col gap-5 mt-12">
+              <div className="flex flex-col gap-2 mt-10">
                 <p
                   className={`text-lg lg:text-xl font-bold ${inter.className}`}
                 >
@@ -136,7 +136,7 @@ export default function Tokens() {
                   </SSButton>
                 </div>
               </div>
-              <div className="flex flex-col gap-5 mt-12">
+              <div className="flex flex-col gap-2 mt-10">
                 <p
                   className={`text-lg lg:text-xl font-bold ${inter.className}`}
                 >
