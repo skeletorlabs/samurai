@@ -17,6 +17,11 @@ import {
   UserPoints,
 } from "../contracts_integrations/points";
 import LoadingBox from "../components/loadingBox";
+import {
+  ArrowPathIcon,
+  CircleStackIcon,
+  PlusIcon,
+} from "@heroicons/react/24/solid";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -97,7 +102,10 @@ export default function Tokens() {
                     href="https://www.shadow.so/trade?inputCurrency=0x0000000000000000000000000000000000000000&outputCurrency=0xCC5D9cc0d781d7F41F6809c0E8356C15942b775E"
                     mobile
                   >
-                    Buy $SAM on Shadow
+                    <div className="flex items-center gap-2 ml-[-10px]">
+                      <PlusIcon width={16} height={16} />
+                      <span>Buy $SAM on Shadow</span>
+                    </div>
                   </SSButton>
                   <SSButton
                     secondary
@@ -106,7 +114,10 @@ export default function Tokens() {
                     target="blank"
                     mobile
                   >
-                    Provide S/SAM LP on Shadow
+                    <div className="flex items-center gap-2 ml-[-10px]">
+                      <CircleStackIcon width={16} height={16} />
+                      <span>Provide S/SAM LP on Shadow</span>
+                    </div>
                   </SSButton>
                 </div>
               </div>
@@ -123,7 +134,10 @@ export default function Tokens() {
                     href="https://aerodrome.finance/swap?from=0x4200000000000000000000000000000000000006&to=0xed1779845520339693CDBffec49a74246E7D671b"
                     mobile
                   >
-                    Buy $SAM on Aerodrome
+                    <div className="flex items-center gap-2 ml-[-10px]">
+                      <PlusIcon width={16} height={16} />
+                      <span>Buy $SAM on Aerodrome</span>
+                    </div>
                   </SSButton>
                   <SSButton
                     secondary
@@ -132,7 +146,10 @@ export default function Tokens() {
                     target="blank"
                     mobile
                   >
-                    Provide vAMM-WETH/SAM on Aerodrome
+                    <div className="flex items-center gap-2 ml-[-10px]">
+                      <CircleStackIcon width={16} height={16} />
+                      <span>Provide vAMM-WETH/SAM on Aerodrome</span>
+                    </div>
                   </SSButton>
                 </div>
               </div>
@@ -150,7 +167,10 @@ export default function Tokens() {
                     mobile
                     isLinkFocus
                   >
-                    Bridge via Stargate Finance
+                    <div className="flex items-center gap-2 ml-[-10px]">
+                      <ArrowPathIcon width={16} height={16} />
+                      <span>Bridge via Stargate Finance</span>
+                    </div>
                   </SSButton>
                 </div>
               </div>

@@ -335,7 +335,7 @@ export const dexscreenerSonic = (
         fill="url(#pattern1_513_19)"
       />
     </g>
-    <circle cx="262" cy="265" r="257" stroke="#183348" stroke-width="10" />
+    <circle cx="262" cy="265" r="257" stroke="#183348" strokeWidth="10" />
     <defs>
       <pattern
         id="pattern0_513_19"
