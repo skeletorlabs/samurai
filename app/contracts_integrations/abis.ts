@@ -10930,3 +10930,5 @@ export const MISSING_POINTS_ABI = [
   },
   { type: "error", name: "ReentrancyGuardReentrantCall", inputs: [] },
 ];
+
+export const SAM_LOCK_VS_ABI = [];
