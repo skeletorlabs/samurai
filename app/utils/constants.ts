@@ -382,7 +382,7 @@ export const IDOs: IDO_v3[] = [
     acceptedTokenSymbol: "USDC",
     tokenNetwork: base,
     crowdsaleNetwork: "BASE",
-    networkImageSrc: "/chain-logos/BSC.png",
+    networkImageSrc: "/chain-logos/BASE.svg",
     projectName: "EstateX",
     projectListDescription:
       "A disruptive RWA platform making tokenized real estate investments accessible to all, with backing from top industry firms.",
