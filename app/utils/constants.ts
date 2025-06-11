@@ -380,7 +380,7 @@ export const IDOs: IDO_v3[] = [
     logo: estatex,
     idoImageSrc: "/IDOs/estatex.png",
     acceptedTokenSymbol: "USDC",
-    tokenNetwork: bnb,
+    tokenNetwork: base,
     crowdsaleNetwork: "BASE",
     networkImageSrc: "/chain-logos/BSC.png",
     projectName: "EstateX",
@@ -426,7 +426,7 @@ export const IDOs: IDO_v3[] = [
     abi: LATEST_PARTICIPATOR_TOKENS_ABI,
 
     register: true,
-    vestingDescription: "5% at TGE, 4-month cliff, 9-month DAILY vesting",
+    vestingDescription: "5% at TGE, 3-month cliff, 9-month DAILY vesting",
     // vesting: "0x8C8Fa0152eFF48700c9e10b64aCa1B81f259F54B",
     // vestingChain: base,
     // vestingABI: VESTING_ABI_V2,
