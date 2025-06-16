@@ -89,7 +89,7 @@ export default function Tokens() {
                 {">"} Participate in Samurai Sanka and{" "}
                 <span className="font-bold text-white">earn</span>.
               </p>
-              <div className="flex flex-col gap-2 mt-10">
+              {/* <div className="flex flex-col gap-2 mt-10">
                 <p
                   className={`text-lg lg:text-xl font-bold ${inter.className}`}
                 >
@@ -120,7 +120,7 @@ export default function Tokens() {
                     </div>
                   </SSButton>
                 </div>
-              </div>
+              </div> */}
               <div className="flex flex-col gap-2 mt-10">
                 <p
                   className={`text-lg lg:text-xl font-bold ${inter.className}`}
@@ -153,7 +153,7 @@ export default function Tokens() {
                   </SSButton>
                 </div>
               </div>
-              <div className="flex flex-col gap-2 mt-10">
+              {/* <div className="flex flex-col gap-2 mt-10">
                 <p
                   className={`text-lg lg:text-xl font-bold ${inter.className}`}
                 >
@@ -173,7 +173,7 @@ export default function Tokens() {
                     </div>
                   </SSButton>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </>
@@ -216,7 +216,7 @@ export default function Tokens() {
               </div>
               <div className="bg-white/10 p-3">
                 <span className="text-yellow-400 font-bold">Blockchains:</span>{" "}
-                Base/Sonic
+                Base
               </div>
               <div className="bg-white/10 p-3">
                 <span className="text-yellow-400 font-bold">
@@ -230,7 +230,7 @@ export default function Tokens() {
                   0xe...71b
                 </Link>
               </div>
-              <div className="bg-white/10 p-3">
+              {/* <div className="bg-white/10 p-3">
                 <span className="text-yellow-400 font-bold">
                   Sonic Contract:
                 </span>{" "}
@@ -241,7 +241,7 @@ export default function Tokens() {
                 >
                   0xC...75E
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

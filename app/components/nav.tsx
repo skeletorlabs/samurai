@@ -101,7 +101,7 @@ export default function Nav() {
           </Link>
           <span className="h-full w-[1px] bg-neutral-500/50" />
 
-          <Link
+          {/* <Link
             target="blank"
             href="https://sonicscan.org/token/0xCC5D9cc0d781d7F41F6809c0E8356C15942b775E"
             className="bg-transparent w-[120px] h-10 flex justify-center gap-3 items-center transition-all z-20 hover:bg-orange-400 text-orange-300 hover:text-orange-100 text-sm md:text-normal px-3 py-[5px] rounded-r-lg"
@@ -114,7 +114,7 @@ export default function Nav() {
               className="bg-white rounded-full p-[1px]"
             />
             <span>0xC...75E</span>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>
