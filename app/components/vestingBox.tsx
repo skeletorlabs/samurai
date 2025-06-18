@@ -18,6 +18,7 @@ import { IDO_v3 } from "../utils/interfaces";
 import { StateContext } from "../context/StateContext";
 import { Tooltip } from "flowbite-react";
 import { HiOutlineInformationCircle } from "react-icons/hi2";
+import { VESTING_ABI_V4 } from "../contracts_integrations/abis";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -136,14 +137,14 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
           <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap">
             <span>Distribution</span>
             <div className="flex justify-between flex-wrap gap-3">
-              {account === general.owner && (
+              {/* {account === general.owner && (
                 <button
                   onClick={onFill}
                   className="text-md py-1 px-4 bg-black border border-samurai-red text-samurai-red disabled:text-white/20 disabled:border-white/20 hover:enabled:text-white hover:enabled:bg-samurai-red w-max rounded-full"
                 >
                   SEND {ido.projectTokenSymbol} TO CONTRACT
                 </button>
-              )}
+              )} */}
               {/* {account === general.owner && (
                 <button
                   onClick={onTogglePause}
@@ -332,7 +333,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
             </div>
           )}
 
-          {user && user?.purchased > 0 && (
+          {ido.vestingABI !== VESTING_ABI_V4 && user && user?.purchased > 0 && (
             <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap mt-10">
               <span>Samurai Points</span>
               <button
@@ -350,7 +351,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
             </div>
           )}
 
-          {user && user?.purchased > 0 && (
+          {ido.vestingABI !== VESTING_ABI_V4 && user && user?.purchased > 0 && (
             <div className="flex flex-col lg:flex-row lg:items-center gap-5 gap-x-14 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap mt-2">
               <div className="flex flex-col">
                 <p className={`${inter.className}`}>Points Earned</p>

@@ -7,18 +7,10 @@ import {
 } from "@/app/utils/constants";
 import checkApproval from "./check-approval";
 import { notificateTx } from "@/app/utils/notificateTx";
-import { VESTING_ABI_V3 } from "./abis";
-import {
-  addDays,
-  addMonths,
-  addWeeks,
-  fromUnixTime,
-  getUnixTime,
-} from "date-fns";
+import { VESTING_ABI_V3, VESTING_ABI_V4 } from "./abis";
+import { addDays, addMonths, addWeeks, getUnixTime } from "date-fns";
 import { MulticallProvider } from "@ethers-ext/provider-multicall";
 
-const BASE_RPC_URL = process.env.NEXT_PUBLIC_BASE_RPC_HTTPS as string;
-const BERA_RPC_URL = process.env.NEXT_PUBLIC_BERACHAIN_RPC_HTTPS as string;
 const now = getUnixTime(new Date());
 
 export type WalletRange = {
@@ -161,10 +153,19 @@ export async function generalInfo(
     let vestingPeriod = "";
     let rawPeriodType = 0;
 
-    if (ido.vestingABI === VESTING_ABI_V3) {
+    let isRefundable = true;
+
+    if (
+      ido.vestingABI === VESTING_ABI_V3 ||
+      ido.vestingABI === VESTING_ABI_V4
+    ) {
       rawPeriodType = Number(await contract?.vestingPeriodType());
       const periodType = VestingPeriodType[rawPeriodType];
       vestingPeriod = VestingPeriodTranslator[periodType];
+    }
+
+    if (ido.vestingABI === VESTING_ABI_V4) {
+      isRefundable = await contract?.isRefundable();
     }
 
     if (ido.id === "dyor") {
@@ -259,9 +260,14 @@ export async function userInfo(
     const claimedPoints = Number(
       formatEther(await contract?.pointsClaimed(address))
     );
-    let claimablePoints = Number(
-      formatEther(await contract?.previewClaimablePoints(address))
-    );
+    let claimablePoints = 0;
+
+    const ido = IDOs[index];
+    if (ido.vestingABI !== VESTING_ABI_V4) {
+      claimableTokens = Number(
+        formatEther(await contract?.previewClaimablePoints(address))
+      );
+    }
 
     const data = {
       purchased,

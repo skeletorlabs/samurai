@@ -70,6 +70,7 @@ import {
   VESTING_ABI,
   VESTING_ABI_V2,
   VESTING_ABI_V3,
+  VESTING_ABI_V4,
 } from "@/app/contracts_integrations/abis";
 
 import { base, berachain, bnb, solana } from "../utils/chains";
@@ -427,10 +428,10 @@ export const IDOs: IDO_v3[] = [
 
     register: true,
     vestingDescription: "5% at TGE, 3-month cliff, 9-month DAILY vesting",
-    // vesting: "0x8C8Fa0152eFF48700c9e10b64aCa1B81f259F54B",
-    // vestingChain: base,
-    // vestingABI: VESTING_ABI_V2,
-    type: "v3",
+    vesting: "0xf4BcD1E518C279Cd0aFdc62B10449f0D82039755",
+    vestingChain: base,
+    vestingABI: VESTING_ABI_V4,
+    type: "v3", // same as v4 but with external views instead of public methods
     linkedWallet: false,
     ether: false,
     // nftsToBlock: [
