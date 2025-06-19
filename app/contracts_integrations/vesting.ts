@@ -260,14 +260,10 @@ export async function userInfo(
     const claimedPoints = Number(
       formatEther(await contract?.pointsClaimed(address))
     );
-    let claimablePoints = 0;
 
-    const ido = IDOs[index];
-    if (ido.vestingABI !== VESTING_ABI_V4) {
-      claimableTokens = Number(
-        formatEther(await contract?.previewClaimablePoints(address))
-      );
-    }
+    const claimablePoints = Number(
+      formatEther(await contract?.previewClaimablePoints(address))
+    );
 
     const data = {
       purchased,

@@ -333,7 +333,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
             </div>
           )}
 
-          {ido.vestingABI !== VESTING_ABI_V4 && user && user?.purchased > 0 && (
+          {user && user?.purchased > 0 && (
             <div className="flex items-end justify-between border-b border-samurai-red pb-3 flex-wrap mt-10">
               <span>Samurai Points</span>
               <button
@@ -351,7 +351,7 @@ export default function VestingBox({ ido, idoIndex, setLoading }: VestingBox) {
             </div>
           )}
 
-          {ido.vestingABI !== VESTING_ABI_V4 && user && user?.purchased > 0 && (
+          {user && user?.purchased > 0 && (
             <div className="flex flex-col lg:flex-row lg:items-center gap-5 gap-x-14 bg-white/5 rounded-md text-sm px-6 py-4 lg:px-2 lg:py-2 flex-wrap mt-2">
               <div className="flex flex-col">
                 <p className={`${inter.className}`}>Points Earned</p>

@@ -428,7 +428,7 @@ export const IDOs: IDO_v3[] = [
 
     register: true,
     vestingDescription: "5% at TGE, 3-month cliff, 9-month DAILY vesting",
-    vesting: "0xf4BcD1E518C279Cd0aFdc62B10449f0D82039755",
+    vesting: "0xE294374C9C5AC65b951606Fa9d6fAA65e89c7790",
     vestingChain: base,
     vestingABI: VESTING_ABI_V4,
     type: "v3", // same as v4 but with external views instead of public methods
