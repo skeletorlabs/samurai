@@ -82,16 +82,15 @@ export async function userInfo(
     let signerAddress = await signer.getAddress();
     const address = account || signerAddress;
     const contract = await getContract(undefined, multicallProvider);
-
+    const tokens = await getTokens(signer);
     const locksCounter = Number(await contract?.locksCounter(address));
     const minPeriod = Number(await contract?.MIN_MONTHS_LOCKED());
 
-    const tokens = await getTokens(signer);
-
     let locks: NFTToken[] = [];
 
-    for (let index = 0; index < locksCounter; index++) {
+    for (let index = 0; index < locksCounter + 1; index++) {
       const lockedTokenId = Number(await contract?.getTokenId(address, index));
+      if (lockedTokenId === 0) continue;
       const lockedAt = fromUnixTime(
         Number(await contract?.locksAt(lockedTokenId))
       );
@@ -111,7 +110,7 @@ export async function userInfo(
       locks = tokens;
     }
 
-    return { locks, balance: locksCounter };
+    return { locks, balance: locks.length };
   } catch (e) {
     handleError({ e: e, notificate: true });
   }

@@ -282,7 +282,6 @@ export async function getNFTData(ipfsUrl: string, tokenUri: string) {
     ipfsUrl.substring(ipfsUrl.indexOf("ipfs://") + 7, ipfsUrl.length) +
     tokenUri;
 
-  // console.log(metadataUrl);
   const metadataResponse = await fetch(metadataUrl);
   const metadata: NFTMetadata = await metadataResponse.json();
 
