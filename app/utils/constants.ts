@@ -154,13 +154,13 @@ export const INCOMING_IDOs: INCOMING[] = [
     image: "/INCOMING/ai-telegraph.png",
   },
 
-  {
-    id: "solve3",
-    name: "Solve3",
-    description:
-      "Solve3 is the first MetaDEX on Solana, revolutionizing the decentralized exchange experience for its users.",
-    image: "/INCOMING/solve3.png",
-  },
+  // {
+  //   id: "solve3",
+  //   name: "Solve3",
+  //   description:
+  //     "Solve3 is the first MetaDEX on Solana, revolutionizing the decentralized exchange experience for its users.",
+  //   image: "/INCOMING/solve3.png",
+  // },
 ];
 
 export const IDOs: IDO_v3[] = [
